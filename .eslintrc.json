@@ -16,7 +16,8 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/return-await": "off"
   },
   "parser": "@typescript-eslint/parser",
   "root": true
