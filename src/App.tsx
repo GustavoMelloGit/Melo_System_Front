@@ -1,4 +1,7 @@
+import useAuth from './domain/auth/hooks/useAuth'
+
 function App(): JSX.Element {
+  const { signOut } = useAuth()
   return (
     <div className='App'>
       <header className='App-header'>
@@ -13,6 +16,7 @@ function App(): JSX.Element {
         >
           Learn Rea
         </a>
+        <button onClick={signOut}>Logout</button>
       </header>
     </div>
   )
