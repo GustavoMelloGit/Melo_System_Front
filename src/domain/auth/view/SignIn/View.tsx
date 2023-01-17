@@ -33,7 +33,7 @@ export default function SigninView(): JSX.Element {
                 errors={formState.errors}
                 autoComplete='current-password'
               />
-              <Button w='full' type='submit'>
+              <Button isLoading={formState.isSubmitting} w='full' type='submit'>
                 Login
               </Button>
             </VStack>

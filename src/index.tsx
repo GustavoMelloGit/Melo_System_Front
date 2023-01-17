@@ -15,7 +15,9 @@ root.render(
   <React.StrictMode>
     <ProviderComposer contexts={[<AuthProvider />]}>
       <ChakraProvider theme={theme}>
-        <RouterProvider router={router} />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <RouterProvider router={router} />
+        </React.Suspense>
       </ChakraProvider>
     </ProviderComposer>
     <Toaster />

@@ -1,21 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
-import SigninView from '../domain/auth/view/SignIn/View'
-import PageLayout from '../lib/components/layout'
-
-const RouteWithLayout = (element: JSX.Element): JSX.Element => {
-  return <PageLayout>{element}</PageLayout>
-}
+import { authRoutes } from '../domain/auth/routes'
+import { ProtectedRoute } from '../lib/components/Routers'
+import { Routes } from './routes'
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: RouteWithLayout(<App />),
+    path: Routes.home,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
   },
-  {
-    path: '/signin',
-    element: RouteWithLayout(<SigninView />),
-  },
+  ...authRoutes,
 ])
 
 export default router
