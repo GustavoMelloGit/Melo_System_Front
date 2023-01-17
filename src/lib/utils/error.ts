@@ -1,6 +1,9 @@
-export const errorHandler = (error: unknown): string => {
-    if (typeof error === 'string') return error
-    if (error instanceof Error) return error.message
-    if (error instanceof Object) return JSON.stringify(error)
-    return String(error)
+import { FirebaseError } from "firebase/app"
+import { firebaseErrors } from "../errors"
+import { DEFAULT_FIREBASE_ERROR_MESSAGE } from "../errors/firebase"
+
+export const errorHandler = (error: FirebaseError): string => {
+    const { code } = error
+    const errorMessage = firebaseErrors[code] || DEFAULT_FIREBASE_ERROR_MESSAGE
+    return errorMessage
 }

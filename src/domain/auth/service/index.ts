@@ -11,7 +11,7 @@ export async function signInService(values: SignInValues): Promise<SignInRespons
             data: user,
             error: null
         }
-    } catch (e) {
+    } catch (e: any) {
         return {
             error: errorHandler(e),
             data: null
