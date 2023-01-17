@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
 import { UnprotectedRoute } from '../../../lib/components/Routers'
-import { Routes } from '../../../router/routes'
+import { Routes } from '../../../lib/routes/routes'
 const SignInView = React.lazy(async () => import('../view/SignIn/View'))
 
 export const authRoutes: RouteObject[] = [

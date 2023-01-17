@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../App'
-import { authRoutes } from '../domain/auth/routes'
-import { ProtectedRoute } from '../lib/components/Routers'
+import App from '../../App'
+import { authRoutes } from '../../domain/auth/routes'
+import { ProtectedRoute } from '../components/Routers'
 import { Routes } from './routes'
 
 const router = createBrowserRouter([

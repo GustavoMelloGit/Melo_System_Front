@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { Navigate } from 'react-router-dom'
 import useAuth from '../../domain/auth/hooks/useAuth'
-import { Routes } from '../../router/routes'
+import { Routes } from '../routes/routes'
 import PageLayout from './layout'
 
 export const RouteWithLayout = ({ children }: PropsWithChildren): JSX.Element => {

@@ -6,9 +6,9 @@ import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './domain/auth/context/AuthContext'
 import ProviderComposer from './lib/components/ProviderComposer'
 import './lib/config/firebase'
+import router from './lib/routes'
 import theme from './lib/styles/theme'
 import reportWebVitals from './reportWebVitals'
-import router from './router'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
