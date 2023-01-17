@@ -9,15 +9,14 @@ import router from './lib/routes/router'
 import theme from './lib/styles/theme'
 import reportWebVitals from './reportWebVitals'
 import ProviderComposer from './shared/components/ProviderComposer'
+import Suspense from './shared/components/Suspense'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <ProviderComposer
-        contexts={[AuthProvider, <React.Suspense fallback={<div>Loading...</div>} />]}
-      >
+      <ProviderComposer contexts={[AuthProvider, Suspense]}>
         <RouterProvider router={router} />
       </ProviderComposer>
     </ChakraProvider>
