@@ -25,6 +25,7 @@ export default function SignInView(): JSX.Element {
                 errors={formState.errors}
                 type='email'
                 autoComplete='email'
+                placeholder='email@exemplo.com'
               />
               <RHFPasswordField<SignInValues>
                 register={register}
@@ -32,6 +33,7 @@ export default function SignInView(): JSX.Element {
                 label='Senha'
                 errors={formState.errors}
                 autoComplete='current-password'
+                placeholder='123456'
               />
               <Button isLoading={formState.isSubmitting} w='full' type='submit'>
                 Login
