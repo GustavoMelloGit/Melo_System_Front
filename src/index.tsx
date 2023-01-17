@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './domain/auth/context/AuthContext'
-import ProviderComposer from './lib/components/ProviderComposer'
 import './lib/config/firebase'
 import router from './lib/routes/router'
 import theme from './lib/styles/theme'
 import reportWebVitals from './reportWebVitals'
+import ProviderComposer from './shared/components/ProviderComposer'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -16,7 +16,7 @@ root.render(
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <ProviderComposer
-        contexts={[<AuthProvider />, <React.Suspense fallback={<div>Loading...</div>} />]}
+        contexts={[AuthProvider, <React.Suspense fallback={<div>Loading...</div>} />]}
       >
         <RouterProvider router={router} />
       </ProviderComposer>

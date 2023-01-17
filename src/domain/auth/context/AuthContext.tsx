@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { auth } from '../../../lib/config/firebase'
-import useLocalStorage from '../../../lib/hooks/useLocalStorage'
+import useLocalStorage from '../../../shared/hooks/useLocalStorage'
 import { signInService } from '../service'
 import { SignInValues } from '../types'
 import { AuthContextType } from '../types/context/auth'

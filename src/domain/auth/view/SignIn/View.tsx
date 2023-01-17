@@ -1,6 +1,6 @@
 import { Button, Card, CardBody, CardHeader, Center, Heading, VStack } from '@chakra-ui/react'
-import RHFField from '../../../../lib/components/inputs/RHFField'
-import RHFPasswordField from '../../../../lib/components/inputs/RHFPasswordField'
+import RHFField from '../../../../shared/components/inputs/RHFField'
+import RHFPasswordField from '../../../../shared/components/inputs/RHFPasswordField'
 import { SignInValues } from '../../types'
 import useSignInView from './useView'
 

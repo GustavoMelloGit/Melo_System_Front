@@ -1,5 +1,5 @@
 import { Box, Button, Center, Heading, Image, VStack } from '@chakra-ui/react'
-import PageLayout from '../../../../lib/components/layout'
+import PageLayout from '../../../../shared/components/layout'
 import ImageTest from '../../assets/lost-image.svg'
 import useNotFoundPage from './useView'
 
