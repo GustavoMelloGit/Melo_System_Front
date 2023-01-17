@@ -6,10 +6,18 @@ import { signInService } from '../service'
 import { SignInValues } from '../types'
 import { AuthContextType } from '../types/context/auth'
 
-export const AuthContext = createContext<AuthContextType | null>(null)
+const defaultValues: AuthContextType = {
+  user: {
+    isAuthenticated: false,
+  } as AuthContextType['user'],
+  signIn: async () => {},
+  signOut: async () => {},
+}
+
+export const AuthContext = createContext<AuthContextType>(defaultValues)
 
 export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
-  const [user, setUser] = useState<AuthContextType['user'] | null>(null)
+  const [user, setUser] = useState<AuthContextType['user']>(defaultValues.user)
   const { setValue, getValue, removeValue } = useLocalStorage('@melo-system:user')
 
   const signIn = useCallback(async (values: SignInValues): Promise<void> => {
@@ -34,7 +42,6 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   useEffect(() => {
     const user = getValue()
-    console.log(user)
     if (user) {
       setUser(user)
     }

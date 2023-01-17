@@ -10,7 +10,7 @@ export default function SignInView(): JSX.Element {
     handleSubmit,
   } = useSignInView()
   return (
-    <Center flex={1}>
+    <Center minW='100vw' minH='100vh'>
       <Card p={6}>
         <CardHeader>
           <Heading as='h1'>Login</Heading>

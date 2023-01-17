@@ -1,12 +1,30 @@
-import { Box, Container } from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
 import { PropsWithChildren } from 'react'
+import ContentWrapper from './Content'
+import Sidebar from './Sidebar'
 
 export default function PageLayout({ children }: PropsWithChildren): JSX.Element {
   return (
-    <Box as='main' minW='100vw' minH='100vh' display='flex' flexDir='column' position='relative'>
-      <Container maxW='container.lg' flex={1} display='flex' flexDir='column'>
-        {children}
-      </Container>
-    </Box>
+    <Grid
+      gridTemplateColumns={{
+        md: '20rem 1fr',
+        base: '1fr',
+      }}
+      minH='100vh'
+      minW='100vw'
+    >
+      <GridItem
+        display={{
+          md: 'block',
+          base: 'none',
+        }}
+        shadow='2xl'
+      >
+        <Sidebar />
+      </GridItem>
+      <GridItem>
+        <ContentWrapper>{children}</ContentWrapper>
+      </GridItem>
+    </Grid>
   )
 }

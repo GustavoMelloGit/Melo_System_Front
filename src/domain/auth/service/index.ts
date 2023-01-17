@@ -8,7 +8,10 @@ export async function signInService(values: SignInValues): Promise<SignInRespons
     try {
         const { user } = await signInWithEmailAndPassword(auth, values.email, values.password)
         return {
-            data: user,
+            data: {
+                ...user,
+                isAuthenticated: true
+            },
             error: null
         }
     } catch (e: any) {
