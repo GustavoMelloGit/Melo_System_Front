@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { AuthContext } from '../../context/AuthContext'
-import { AuthContextType } from '../../types/context/auth'
+import { render, screen, waitFor } from '@testing-library/react'
+import validationErrors from '../../../../lib/errors/validation'
 import SignInView from '../../view/SignIn/View'
+import MockSignInView from '../mock/view/SignIn'
 
-describe('SignInView', () => {
+describe('tests signIn View', () => {
   test('render signin view without context provider', () => {
     expect(() => render(<SignInView />)).toThrowError('useAuth must be used within a AuthProvider')
   })
@@ -13,19 +13,28 @@ describe('SignInView', () => {
   })
 
   test('render signin view with context provider and a value', () => {
-    const providerValue: AuthContextType = {
-      user: null,
-      signIn: jest.fn(),
-      signOut: jest.fn(),
-    }
-
-    render(
-      <AuthContext.Provider value={providerValue}>
-        <SignInView />
-      </AuthContext.Provider>,
-    )
+    render(<MockSignInView />)
     const loginText = screen.getByRole('heading', { name: /login/i })
 
     expect(loginText).toBeInTheDocument()
   })
+})
+
+describe('tests login form', () => {
+  test('submit form with empty values', async () => {
+    render(<MockSignInView />)
+
+    const submitButton = screen.getByRole('button', { name: /login/i })
+    submitButton.click()
+
+    await waitFor(() => {
+      const emailRequiredError = screen.getByText(validationErrors.emailIsRequired)
+      const passwordRequiredError = screen.getByText(validationErrors.passwordIsRequired)
+
+      expect(emailRequiredError).toBeInTheDocument()
+      expect(passwordRequiredError).toBeInTheDocument()
+    })
+  })
+
+  test('submit form with invalid email', async () => {})
 })
