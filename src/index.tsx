@@ -15,10 +15,10 @@ root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <ProviderComposer contexts={[<AuthProvider />]}>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <RouterProvider router={router} />
-        </React.Suspense>
+      <ProviderComposer
+        contexts={[<AuthProvider />, <React.Suspense fallback={<div>Loading...</div>} />]}
+      >
+        <RouterProvider router={router} />
       </ProviderComposer>
     </ChakraProvider>
     <Toaster />
