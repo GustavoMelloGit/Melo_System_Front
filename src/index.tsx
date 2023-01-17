@@ -6,7 +6,7 @@ import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './domain/auth/context/AuthContext'
 import ProviderComposer from './lib/components/ProviderComposer'
 import './lib/config/firebase'
-import router from './lib/routes'
+import router from './lib/routes/router'
 import theme from './lib/styles/theme'
 import reportWebVitals from './reportWebVitals'
 
