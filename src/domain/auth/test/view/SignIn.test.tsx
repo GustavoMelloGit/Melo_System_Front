@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import validationErrors from '../../../../lib/errors/validation'
 import SignInView from '../../view/SignIn/View'
 import MockSignInView from '../mock/view/SignIn'
@@ -36,5 +36,19 @@ describe('tests login form', () => {
     })
   })
 
-  test('submit form with invalid email', async () => {})
+  test('submit form with invalid email', async () => {
+    render(<MockSignInView />)
+
+    const emailInput = screen.getByRole('textbox', { name: /email/i })
+    const submitButton = screen.getByRole('button', { name: /login/i })
+
+    fireEvent.change(emailInput, { target: { value: 'invalid-email' } })
+    submitButton.click()
+
+    await waitFor(() => {
+      const invalidEmailError = screen.getByText(validationErrors.emailIsInvalid)
+
+      expect(invalidEmailError).toBeInTheDocument()
+    })
+  })
 })
