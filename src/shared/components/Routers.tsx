@@ -13,7 +13,7 @@ export const ProtectedRoute = ({ children }: PropsWithChildren): JSX.Element => 
 
 export const UnprotectedRoute = ({ children }: PropsWithChildren): JSX.Element => {
   const { user } = useAuth()
-  if (user) {
+  if (user?.isAuthenticated) {
     return <Navigate to={Routes.home} />
   }
   return <>{children}</>
