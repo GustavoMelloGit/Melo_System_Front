@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
@@ -13,13 +13,14 @@ import reportWebVitals from './reportWebVitals'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <ProviderComposer contexts={[<AuthProvider />]}>
-      <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <ProviderComposer contexts={[<AuthProvider />]}>
         <React.Suspense fallback={<div>Loading...</div>}>
           <RouterProvider router={router} />
         </React.Suspense>
-      </ChakraProvider>
-    </ProviderComposer>
+      </ProviderComposer>
+    </ChakraProvider>
     <Toaster />
   </React.StrictMode>,
 )
