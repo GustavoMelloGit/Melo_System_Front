@@ -1,14 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../../App'
 import { authRoutes } from '../../domain/auth/routes'
 import NotFoundPage from '../../domain/error/view/404'
+import HomePage from '../../domain/home'
+import { ProtectedRoute } from '../../shared/components/Routers'
 
 const router = createBrowserRouter([
+  ...authRoutes,
   {
     path: '/',
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
   },
-  ...authRoutes,
   {
     path: '*',
     element: <NotFoundPage />,
