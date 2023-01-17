@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../config/firebase";
+import { auth } from "../../../lib/config/firebase";
 import { errorHandler } from "../../../lib/utils/error";
 import { SignInValues } from "../types";
 import { SignInResponse } from "../types/service";
