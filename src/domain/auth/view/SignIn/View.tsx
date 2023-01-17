@@ -4,7 +4,7 @@ import RHFPasswordField from '../../../../lib/components/inputs/RHFPasswordField
 import { SignInValues } from '../../types'
 import useSignInView from './useView'
 
-export default function SigninView(): JSX.Element {
+export default function SignInView(): JSX.Element {
   const {
     form: { formState, register },
     handleSubmit,
