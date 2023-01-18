@@ -9,9 +9,7 @@ export const authRoutes: RouteObject[] = [
     path: Routes.login,
     element: (
       <UnprotectedRoute>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <SignInView />
-        </React.Suspense>
+        <SignInView />
       </UnprotectedRoute>
     ),
   },

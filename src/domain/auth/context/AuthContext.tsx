@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   const signIn = useCallback(async (values: SignInValues): Promise<void> => {
     const { data, error } = await signInService(values)
-    if (error) {
+    if (error ?? !data) {
       toast.error(error)
       return
     }
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
   const signOut = useCallback(async (): Promise<void> => {
     try {
       await auth.signOut()
-      setUser(null)
+      setUser(defaultValues.user)
       removeValue()
     } catch (e) {
       console.log(e)
@@ -44,10 +44,6 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
     const user = getValue()
     if (user) {
       setUser(user)
-    }
-
-    return () => {
-      setUser(null)
     }
   }, [])
 

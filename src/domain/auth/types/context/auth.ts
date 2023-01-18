@@ -3,7 +3,7 @@ import { UserModel } from "../model/user";
 
 
 export type AuthContextType = {
-    user: UserModel | null;
+    user: UserModel;
     signIn: AuthSignIn;
     signOut: AuthSignOut;
 }

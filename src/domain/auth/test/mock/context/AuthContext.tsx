@@ -4,7 +4,9 @@ import { AuthContextType } from '../../../types/context/auth'
 
 export default function MockAuthContextProvider({ children }: PropsWithChildren): JSX.Element {
   const providerValue: AuthContextType = {
-    user: null,
+    user: {
+      isAuthenticated: false,
+    } as AuthContextType['user'],
     signIn: jest.fn(),
     signOut: jest.fn(),
   }

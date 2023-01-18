@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { Routes } from '.'
 import { authRoutes } from '../../domain/auth/routes'
 import NotFoundPage from '../../domain/error/view/404'
 import HomePage from '../../domain/home'
@@ -7,7 +8,7 @@ import { ProtectedRoute } from '../../shared/components/Routers'
 const router = createBrowserRouter([
   ...authRoutes,
   {
-    path: '/',
+    path: Routes.home,
     element: (
       <ProtectedRoute>
         <HomePage />
