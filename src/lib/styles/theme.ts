@@ -1,5 +1,5 @@
 // 1. Import the extendTheme function
-import { extendTheme, ThemeConfig } from '@chakra-ui/react'
+import { createLocalStorageManager, extendTheme, ThemeConfig } from '@chakra-ui/react'
 import ThemeContainer from './components/Container'
 
 const config: ThemeConfig = {
@@ -13,5 +13,7 @@ const theme = extendTheme({
     },
     config
 })
+
+export const themeManager = createLocalStorageManager('@melo-system:theme')
 
 export default theme

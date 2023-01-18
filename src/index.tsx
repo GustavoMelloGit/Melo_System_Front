@@ -6,7 +6,7 @@ import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './domain/auth/context/AuthContext'
 import './lib/config/firebase'
 import router from './lib/routes/router'
-import theme from './lib/styles/theme'
+import theme, { themeManager } from './lib/styles/theme'
 import reportWebVitals from './reportWebVitals'
 import ProviderComposer from './shared/components/ProviderComposer'
 import Suspense from './shared/components/Suspense'
@@ -15,8 +15,11 @@ import LayoutProvider from './shared/contexts/LayoutContext'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <ChakraProvider theme={theme} colorModeManager={themeManager}>
+      <ColorModeScript
+        storageKey='@melo-system:theme'
+        initialColorMode={theme.config.initialColorMode}
+      />
       <ProviderComposer contexts={[AuthProvider, Suspense, LayoutProvider]}>
         <RouterProvider router={router} />
       </ProviderComposer>
