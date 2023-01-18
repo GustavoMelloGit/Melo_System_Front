@@ -1,10 +1,10 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import { PropsWithChildren } from 'react'
+import { Outlet } from 'react-router-dom'
 import useLayoutContext from '../../hooks/useLayoutContext'
 import ContentWrapper from './Content'
 import Sidebar from './Sidebar'
 
-export default function PageLayout({ children }: PropsWithChildren): JSX.Element {
+export default function PageLayout(): JSX.Element {
   const {
     sidebar: { isOpen },
   } = useLayoutContext()
@@ -17,7 +17,9 @@ export default function PageLayout({ children }: PropsWithChildren): JSX.Element
     >
       {isOpen && <GridItem as='aside'>{isOpen && <Sidebar />}</GridItem>}
       <GridItem as='main'>
-        <ContentWrapper>{children}</ContentWrapper>
+        <ContentWrapper>
+          <Outlet />
+        </ContentWrapper>
       </GridItem>
     </Grid>
   )
