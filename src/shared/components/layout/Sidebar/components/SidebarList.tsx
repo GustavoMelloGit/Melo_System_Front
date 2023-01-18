@@ -24,9 +24,9 @@ const listItem: Record<
 
 export default function SidebarList(): JSX.Element {
   return (
-    <Box as='body' minH={0} flex={1}>
+    <Box flex={1}>
       <List>
-        {protectedRoutes.map(
+        {protectedRoutes.children?.map(
           (route) =>
             route.path && (
               <SidebarListItem
