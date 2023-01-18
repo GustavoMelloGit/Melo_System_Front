@@ -1,5 +1,5 @@
 import { Box, Button, useColorMode } from '@chakra-ui/react'
-import PageLayout from '../../shared/components/layout'
+import PageLayout from '../../../shared/components/layout'
 
 export default function HomePage(): JSX.Element {
   const { toggleColorMode } = useColorMode()
