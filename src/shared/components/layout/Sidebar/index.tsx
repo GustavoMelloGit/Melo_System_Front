@@ -1,11 +1,10 @@
-import { Button, Divider, Slide, VStack } from '@chakra-ui/react'
-import { RxDoubleArrowLeft } from 'react-icons/rx'
+import { Divider, Slide, VStack } from '@chakra-ui/react'
 import useLayoutContext from '../../../hooks/useLayoutContext'
-import { SidebarHeader, SidebarList } from './components'
+import { SidebarFooter, SidebarHeader, SidebarList } from './components'
 
 export default function Sidebar(): JSX.Element {
   const {
-    sidebar: { isOpen, close },
+    sidebar: { isOpen },
   } = useLayoutContext()
   return (
     <Slide direction={'left'} in={isOpen}>
@@ -16,26 +15,15 @@ export default function Sidebar(): JSX.Element {
         maxW='20rem'
         align='stretch'
         gap={4}
-        py={8}
+        py={3}
         px={6}
         position='fixed'
       >
-        {isOpen && (
-          <Button
-            onClick={close}
-            variant='ghost'
-            w='max-content'
-            position='absolute'
-            top={4}
-            right={4}
-          >
-            <RxDoubleArrowLeft size={22} />
-          </Button>
-        )}
-
         <SidebarHeader />
         <Divider />
         <SidebarList />
+        <Divider />
+        <SidebarFooter />
       </VStack>
     </Slide>
   )

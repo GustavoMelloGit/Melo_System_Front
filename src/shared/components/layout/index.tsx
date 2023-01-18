@@ -15,8 +15,8 @@ export default function PageLayout({ children }: PropsWithChildren): JSX.Element
       minW='100vw'
       position='relative'
     >
-      {isOpen && <GridItem>{isOpen && <Sidebar />}</GridItem>}
-      <GridItem>
+      {isOpen && <GridItem as='aside'>{isOpen && <Sidebar />}</GridItem>}
+      <GridItem as='main'>
         <ContentWrapper>{children}</ContentWrapper>
       </GridItem>
     </Grid>
