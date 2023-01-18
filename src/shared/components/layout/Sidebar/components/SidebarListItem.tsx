@@ -20,6 +20,7 @@ export default function SidebarListItem({ to, label, icon }: SidebarListItemProp
         display='flex'
         alignItems={'center'}
         gap={2}
+        fontWeight={600}
       >
         {icon}
         {label}

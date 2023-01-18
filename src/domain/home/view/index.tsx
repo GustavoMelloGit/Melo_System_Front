@@ -7,6 +7,7 @@ export default function HomePage(): JSX.Element {
     <PageLayout>
       <Box>oi</Box>
       <Button onClick={toggleColorMode}>Toggle color</Button>
+      <Box />
     </PageLayout>
   )
 }

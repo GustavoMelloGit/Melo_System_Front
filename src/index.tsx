@@ -10,13 +10,14 @@ import theme from './lib/styles/theme'
 import reportWebVitals from './reportWebVitals'
 import ProviderComposer from './shared/components/ProviderComposer'
 import Suspense from './shared/components/Suspense'
+import LayoutProvider from './shared/contexts/LayoutContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <ProviderComposer contexts={[AuthProvider, Suspense]}>
+      <ProviderComposer contexts={[AuthProvider, Suspense, LayoutProvider]}>
         <RouterProvider router={router} />
       </ProviderComposer>
     </ChakraProvider>
