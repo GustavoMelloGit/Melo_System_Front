@@ -30,25 +30,31 @@ export default function ClientsListView(): JSX.Element {
             </Tr>
           </Thead>
           <Tbody>
-            {isLoading || !data ? (
+            {isLoading && (
               <Tr>
                 <Td colSpan={5} textAlign='center'>
                   <SpinLoader />
                 </Td>
               </Tr>
-            ) : (
-              data.map((client) => (
-                <Tr key={client.id}>
-                  <Td>
-                    <Avatar loading='lazy' src={client.profileImage} />
-                  </Td>
-                  <Td>{client.name}</Td>
-                  <Td>{client.nickname}</Td>
-                  <Td>{client.balance}</Td>
-                  <Td>{client.phone}</Td>
-                </Tr>
-              ))
             )}
+            {data?.length === 0 && (
+              <Tr>
+                <Td colSpan={5} textAlign='center'>
+                  Nenhum cliente encontrado
+                </Td>
+              </Tr>
+            )}
+            {data?.map((client) => (
+              <Tr key={client.id}>
+                <Td>
+                  <Avatar loading='lazy' src={client.profileImage} />
+                </Td>
+                <Td>{client.name}</Td>
+                <Td>{client.nickname}</Td>
+                <Td>{client.balance}</Td>
+                <Td>{client.phone}</Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </TableContainer>
