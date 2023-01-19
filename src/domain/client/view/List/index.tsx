@@ -56,10 +56,10 @@ export default function ClientsListView(): JSX.Element {
                 <Td>{client.phone}</Td>
               </Tr>
             ))}
-            <TablePagination dataLength={data?.length ?? 0} colSpan={5} />
           </Tbody>
         </Table>
       </TableContainer>
+      <TablePagination dataLength={data?.length ?? 0} colSpan={5} />
     </VStack>
   )
 }
