@@ -1,4 +1,4 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 import useLayoutContext from '../../hooks/useLayoutContext'
 import ContentWrapper from './Content'
@@ -9,18 +9,22 @@ export default function PageLayout(): JSX.Element {
     sidebar: { isOpen },
   } = useLayoutContext()
   return (
-    <Grid
-      gridTemplateColumns={isOpen ? '20rem 1fr' : '1fr'}
-      minH='100vh'
-      minW='100vw'
-      position='relative'
-    >
-      {isOpen && <GridItem as='aside'>{isOpen && <Sidebar />}</GridItem>}
-      <GridItem as='main'>
+    <Flex minH='100vh' minW='100vw' position='relative'>
+      {isOpen && (
+        <Box as='aside' position='fixed' top={0} w={['100vw', 80]} bottom={0} zIndex={10000}>
+          <Sidebar />
+        </Box>
+      )}
+      <Box
+        as='main'
+        ml={isOpen ? 80 : 0}
+        w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
+        display={isOpen ? ['none', 'flex'] : 'flex'}
+      >
         <ContentWrapper>
           <Outlet />
         </ContentWrapper>
-      </GridItem>
-    </Grid>
+      </Box>
+    </Flex>
   )
 }

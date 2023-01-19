@@ -1,30 +1,15 @@
-import { Divider, Slide, VStack } from '@chakra-ui/react'
-import useLayoutContext from '../../../hooks/useLayoutContext'
+import { Divider, useColorModeValue, VStack } from '@chakra-ui/react'
 import { SidebarFooter, SidebarHeader, SidebarList } from './components'
 
 export default function Sidebar(): JSX.Element {
-  const {
-    sidebar: { isOpen },
-  } = useLayoutContext()
+  const bg = useColorModeValue('white', 'gray.800')
   return (
-    <Slide direction={'left'} in={isOpen}>
-      <VStack
-        shadow='2xl'
-        h='full'
-        w='full'
-        maxW='20rem'
-        align='stretch'
-        gap={4}
-        py={3}
-        px={6}
-        position='fixed'
-      >
-        <SidebarHeader />
-        <Divider />
-        <SidebarList />
-        <Divider />
-        <SidebarFooter />
-      </VStack>
-    </Slide>
+    <VStack shadow='2xl' bg={bg} align='stretch' gap={4} py={3} px={6} h='full'>
+      <SidebarHeader />
+      <Divider />
+      <SidebarList />
+      <Divider />
+      <SidebarFooter />
+    </VStack>
   )
 }

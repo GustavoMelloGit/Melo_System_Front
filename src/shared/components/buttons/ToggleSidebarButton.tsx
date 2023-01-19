@@ -9,7 +9,7 @@ export default function ToggleSidebarButton(props: ButtonProps): JSX.Element {
 
   return (
     <Button onClick={toggle} w={14} h={14} variant='ghost' aria-label='close sidebar' {...props}>
-      {isOpen ? <RxDoubleArrowRight size={22} /> : <RxDoubleArrowLeft size={22} />}
+      {isOpen ? <RxDoubleArrowLeft size={22} /> : <RxDoubleArrowRight size={22} />}
     </Button>
   )
 }
