@@ -26,7 +26,6 @@ export function useSwrFirebase<T>(collectionName: string, ...queryConstraints: Q
         async () => firebaseFetcher(collectionName, ...queryConstraints)
     )
 
-    console.log(error)
     return {
         data: data as T | undefined,
         isLoading: !error && !data,

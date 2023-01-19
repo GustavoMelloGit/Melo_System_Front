@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
       setUser(defaultValues.user)
       removeValue()
     } catch (e) {
-      console.log(e)
+      toast.error('Erro ao sair da aplicação')
     }
   }, [])
 

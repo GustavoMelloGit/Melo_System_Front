@@ -11,6 +11,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import SpinLoader from '../../../../shared/components/SpinLoader'
+import TablePagination from '../../../../shared/components/table/Pagination'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
@@ -55,6 +56,7 @@ export default function ClientsListView(): JSX.Element {
                 <Td>{client.phone}</Td>
               </Tr>
             ))}
+            <TablePagination dataLength={data?.length ?? 0} colSpan={5} />
           </Tbody>
         </Table>
       </TableContainer>
