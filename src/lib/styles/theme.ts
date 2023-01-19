@@ -1,5 +1,6 @@
 // 1. Import the extendTheme function
 import { createLocalStorageManager, extendTheme, ThemeConfig } from '@chakra-ui/react'
+import breakpoints from './breakpoints'
 import ThemeContainer from './components/Container'
 
 const config: ThemeConfig = {
@@ -11,6 +12,7 @@ const theme = extendTheme({
     components: {
         Container: ThemeContainer
     },
+    breakpoints,
     config
 })
 
