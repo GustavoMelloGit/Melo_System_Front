@@ -1,12 +1,26 @@
-import { Box } from '@chakra-ui/react'
-import useAuth from './domain/auth/hooks/useAuth'
-
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
+import { Toaster } from 'react-hot-toast'
+import { RouterProvider } from 'react-router-dom'
+import { AuthProvider } from './domain/auth/context/AuthContext'
+import './lib/config/firebase'
+import router from './lib/routes/router'
+import theme, { themeManager } from './lib/styles/theme'
+import ProviderComposer from './shared/components/ProviderComposer'
+import LayoutProvider from './shared/contexts/LayoutContext'
 function App(): JSX.Element {
-  const { signOut } = useAuth()
   return (
-    <Box>
-      <button onClick={signOut}>Sign out</button>
-    </Box>
+    <>
+      <ChakraProvider theme={theme} colorModeManager={themeManager}>
+        <ColorModeScript
+          storageKey='@melo-system:theme'
+          initialColorMode={theme.config.initialColorMode}
+        />
+        <ProviderComposer contexts={[AuthProvider, LayoutProvider]}>
+          <RouterProvider router={router} />
+        </ProviderComposer>
+      </ChakraProvider>
+      <Toaster />
+    </>
   )
 }
 

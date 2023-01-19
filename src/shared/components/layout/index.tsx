@@ -1,6 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 import useLayoutContext from '../../hooks/useLayoutContext'
+import Suspense from '../Suspense'
 import ContentWrapper from './Content'
 import Sidebar from './Sidebar'
 
@@ -22,7 +23,9 @@ export default function PageLayout(): JSX.Element {
         display={isOpen ? ['none', 'flex'] : 'flex'}
       >
         <ContentWrapper>
-          <Outlet />
+          <Suspense>
+            <Outlet />
+          </Suspense>
         </ContentWrapper>
       </Box>
     </Flex>

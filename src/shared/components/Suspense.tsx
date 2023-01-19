@@ -1,14 +1,17 @@
-import { Center, Heading } from '@chakra-ui/react'
+import { Center } from '@chakra-ui/react'
 import React, { PropsWithChildren } from 'react'
+import SpinLoader from './SpinLoader'
 
 export default function Suspense({ children }: PropsWithChildren): JSX.Element {
   return <React.Suspense fallback={<SuspenseLoader />}>{children}</React.Suspense>
 }
 
-function SuspenseLoader(): JSX.Element {
+export function SuspenseLoader(): JSX.Element {
   return (
-    <Center minH='100vh' minW='100vw'>
-      <Heading as='h1'>Carregando...</Heading>
+    <Center flex={1}>
+      <Center boxSize={120} bg='gray.700' rounded={25} shadow='xl'>
+        <SpinLoader size='lg' />
+      </Center>
     </Center>
   )
 }
