@@ -15,7 +15,8 @@ import TablePagination from '../../../../shared/components/table/Pagination'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
-  const { data, isLoading } = useClientsListView()
+  const { data, isLoading, fetchNextPage, fetchPreviousPage, changeRowsPerPage } =
+    useClientsListView()
   return (
     <VStack align='stretch' spacing={10}>
       <Heading>Clientes</Heading>
@@ -59,7 +60,12 @@ export default function ClientsListView(): JSX.Element {
           </Tbody>
         </Table>
       </TableContainer>
-      <TablePagination dataLength={data?.length ?? 0} colSpan={5} />
+      <TablePagination
+        dataLength={data?.length ?? 0}
+        onNextPage={fetchNextPage}
+        onPreviousPage={fetchPreviousPage}
+        onRowsPerPageChange={changeRowsPerPage}
+      />
     </VStack>
   )
 }
