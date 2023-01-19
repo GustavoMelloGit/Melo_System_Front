@@ -15,7 +15,7 @@ export default function ContentWrapper({ children }: PropsWithChildren): JSX.Ele
         flex={1}
         display='flex'
         flexDir='column'
-        py={4}
+        py={10}
       >
         {!isOpen && <ToggleSidebarButton />}
         {children}

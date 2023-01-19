@@ -9,10 +9,10 @@ export async function firebaseFetcher(collectionName: string): Promise<DocumentD
     return data
 }
 
-export function useSwrFirebase(collectionName: string): UseSwrFirebase {
+export function useSwrFirebase<T>(collectionName: string): UseSwrFirebase<T> {
     const { data, error } = useSWR<DocumentData[], Error>(collectionName, firebaseFetcher)
     return {
-        data,
+        data: data as T | undefined,
         isLoading: !error && !data,
         error,
     }
