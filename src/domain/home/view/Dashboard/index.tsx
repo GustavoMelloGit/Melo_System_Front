@@ -75,6 +75,9 @@ export default function HomePage(): JSX.Element {
         },
       },
     },
+    tooltip: {
+      theme: tooltipTheme,
+    },
     legend: {
       labels: {
         colors: labelColors,
