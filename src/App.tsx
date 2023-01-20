@@ -6,6 +6,7 @@ import './lib/config/firebase'
 import router from './lib/routes/router'
 import theme, { themeManager } from './lib/styles/theme'
 import ProviderComposer from './shared/components/ProviderComposer'
+import Suspense from './shared/components/Suspense'
 import LayoutProvider from './shared/contexts/LayoutContext'
 function App(): JSX.Element {
   return (
@@ -15,7 +16,7 @@ function App(): JSX.Element {
           storageKey='@melo-system:theme'
           initialColorMode={theme.config.initialColorMode}
         />
-        <ProviderComposer contexts={[AuthProvider, LayoutProvider]}>
+        <ProviderComposer contexts={[AuthProvider, LayoutProvider, Suspense]}>
           <RouterProvider router={router} />
         </ProviderComposer>
       </ChakraProvider>
