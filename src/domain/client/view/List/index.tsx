@@ -1,6 +1,8 @@
 import {
   Avatar,
+  Flex,
   Heading,
+  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -10,16 +12,31 @@ import {
   Tr,
   VStack,
 } from '@chakra-ui/react'
+import { AiOutlineUserAdd } from 'react-icons/ai'
 import SpinLoader from '../../../../shared/components/SpinLoader'
 import TablePagination from '../../../../shared/components/table/Pagination'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
-  const { data, isLoading, fetchNextPage, fetchPreviousPage, changeRowsPerPage } =
-    useClientsListView()
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    fetchPreviousPage,
+    changeRowsPerPage,
+    handleCreateClient,
+  } = useClientsListView()
   return (
     <VStack align='stretch' spacing={10}>
-      <Heading>Clientes</Heading>
+      <Flex as='header' justify='space-between'>
+        <Heading>Clientes</Heading>
+        <IconButton
+          onClick={handleCreateClient}
+          aria-label='Criar cliente'
+          icon={<AiOutlineUserAdd />}
+          variant='outline'
+        />
+      </Flex>
       <TableContainer>
         <Table variant='simple'>
           <Thead>
@@ -46,8 +63,8 @@ export default function ClientsListView(): JSX.Element {
                 </Td>
               </Tr>
             )}
-            {data?.map((client) => (
-              <Tr key={client.id}>
+            {data?.map((client, index) => (
+              <Tr key={index}>
                 <Td>
                   <Avatar loading='lazy' src={client.profileImage} />
                 </Td>
