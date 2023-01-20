@@ -4,6 +4,8 @@ import { BiUser } from 'react-icons/bi'
 import { useLocation } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { protectedRoutes } from '../../../../../lib/routes/router'
+import useLayoutContext from '../../../../hooks/useLayoutContext'
+import usePageSize from '../../../../hooks/usePageSize'
 import SidebarListItem from './SidebarListItem'
 
 const listItem: Record<
@@ -25,10 +27,20 @@ const listItem: Record<
 
 export default function SidebarList(): JSX.Element {
   const currentPathname = useLocation().pathname
+  const {
+    sidebar: { close },
+  } = useLayoutContext()
+  const { width } = usePageSize()
+  const isMobile = width < 768
 
+  const handleCloseSideBar = (): void => {
+    if (isMobile) {
+      close()
+    }
+  }
   return (
     <Box flex={1}>
-      <List>
+      <List onClick={handleCloseSideBar}>
         {protectedRoutes.children?.map(
           (route) =>
             route.path &&
