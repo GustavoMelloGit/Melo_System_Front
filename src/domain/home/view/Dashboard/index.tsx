@@ -157,14 +157,14 @@ export default function HomePage(): JSX.Element {
       </Box>
 
       <Flex justify='space-between' flexWrap='wrap' align='center' gap={4}>
-        <Card pt={5} pr={5}>
-          <CardBody>
-            <Chart options={chartOptions} series={series} height={200} width={400} type='line' />
+        <Card pt={5} pr={5} flex={1} minW={250}>
+          <CardBody p={0}>
+            <Box as={Chart} options={chartOptions} series={series} width={'full'} type='line' />
           </CardBody>
         </Card>
-        <Card pt={5} pr={5}>
-          <CardBody>
-            <Chart options={chartOptions} series={series} height={200} width={400} type='line' />
+        <Card pt={5} pr={5} flex={1} minW={250}>
+          <CardBody p={0}>
+            <Box as={Chart} options={chartOptions} series={series} width={'full'} type='line' />
           </CardBody>
         </Card>
       </Flex>
