@@ -9,10 +9,10 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  VStack,
 } from '@chakra-ui/react'
 import { ApexOptions } from 'apexcharts'
 import Chart from 'react-apexcharts'
+import PageWrapper from '../../../../shared/components/layout/Content/PageWrapper'
 
 export default function HomePage(): JSX.Element {
   const tooltipTheme = useColorModeValue('light', 'dark')
@@ -117,7 +117,7 @@ export default function HomePage(): JSX.Element {
   ]
 
   return (
-    <VStack align='stretch' spacing={10}>
+    <PageWrapper>
       <Heading>Página inicial</Heading>
       <Grid w='full' gridTemplateColumns='repeat( auto-fit, minmax(200px, 1fr) )' gap={6}>
         <GridItem>
@@ -168,7 +168,7 @@ export default function HomePage(): JSX.Element {
           </CardBody>
         </Card>
       </Flex>
-    </VStack>
+    </PageWrapper>
   )
 }
 

@@ -1,10 +1,11 @@
-import { VStack } from '@chakra-ui/react'
 import { Routes } from '../../../../lib/routes'
+import PageWrapper from '../../../../shared/components/layout/Content/PageWrapper'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import ClientForm from '../../components/ClientForm/ClientForm'
 
 export default function CreateClientsView(): JSX.Element {
   return (
-    <VStack align='flex-start'>
+    <PageWrapper>
       <HeaderBreadcrumbs
         heading='Crie um novo cliente'
         links={[
@@ -17,6 +18,7 @@ export default function CreateClientsView(): JSX.Element {
           },
         ]}
       />
-    </VStack>
+      <ClientForm />
+    </PageWrapper>
   )
 }

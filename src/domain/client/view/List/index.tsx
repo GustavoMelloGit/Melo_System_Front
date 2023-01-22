@@ -10,9 +10,9 @@ import {
   Th,
   Thead,
   Tr,
-  VStack,
 } from '@chakra-ui/react'
 import { AiOutlineUserAdd } from 'react-icons/ai'
+import PageWrapper from '../../../../shared/components/layout/Content/PageWrapper'
 import SpinLoader from '../../../../shared/components/SpinLoader'
 import TablePagination from '../../../../shared/components/table/Pagination'
 import useClientsListView from './useView'
@@ -27,13 +27,14 @@ export default function ClientsListView(): JSX.Element {
     handleCreateClient,
   } = useClientsListView()
   return (
-    <VStack align='stretch' spacing={10}>
+    <PageWrapper>
       <Flex as='header' justify='space-between'>
         <Heading>Clientes</Heading>
         <IconButton
           onClick={handleCreateClient}
           aria-label='Criar cliente'
           icon={<AiOutlineUserAdd />}
+          colorScheme='blue'
           variant='outline'
         />
       </Flex>
@@ -83,6 +84,6 @@ export default function ClientsListView(): JSX.Element {
         onPreviousPage={fetchPreviousPage}
         onRowsPerPageChange={changeRowsPerPage}
       />
-    </VStack>
+    </PageWrapper>
   )
 }
