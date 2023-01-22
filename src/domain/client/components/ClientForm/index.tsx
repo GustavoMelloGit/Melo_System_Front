@@ -72,14 +72,14 @@ export default function ClientForm(): JSX.Element {
               </GridItem>
               <GridItem gridColumn='1/-1'>
                 <Accordion allowToggle index={formHasErrors ? 0 : undefined}>
-                  {watch('personType') === 'fisica' ? (
+                  {watch('personType') === 'juridica' ? (
+                    <LegalPersonFields register={register} formState={formState} />
+                  ) : (
                     <NaturalPersonFields
                       setValue={setValue}
                       register={register}
                       formState={formState}
                     />
-                  ) : (
-                    <LegalPersonFields register={register} formState={formState} />
                   )}
                 </Accordion>
               </GridItem>

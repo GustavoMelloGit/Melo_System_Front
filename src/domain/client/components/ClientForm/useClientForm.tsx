@@ -47,6 +47,9 @@ const validationSchema = yup.object().shape({
 export default function useClientForm(): UseClientForm {
   const form = useForm<ClientFormValues>({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      personType: 'fisica',
+    },
   })
 
   async function handleSubmit(values: ClientFormValues): Promise<void> {
