@@ -1,9 +1,24 @@
-import { Accordion, Button, Card, CardBody, Flex, Grid, GridItem, VStack } from '@chakra-ui/react'
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Button,
+  Card,
+  CardBody,
+  Flex,
+  Grid,
+  GridItem,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import AvatarDropzone from '../../../../shared/components/inputs/AvatarDropzone'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
 import RHFSelectField from '../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../shared/components/inputs/RHFTextField'
+import AddressFields from './Address'
 import LegalPersonFields from './LegalPerson'
 import NaturalPersonFields from './NaturalPerson'
 import { ClientFormValues } from './type'
@@ -14,6 +29,8 @@ export default function ClientForm(): JSX.Element {
     form: { register, setValue, formState, watch },
     handleSubmit,
   } = useClientForm()
+
+  const isLegalPerson = watch('personType.personType') === 'juridica'
 
   const formHasErrors = Object.keys(formState.errors).length > 0
   return (
@@ -26,7 +43,7 @@ export default function ClientForm(): JSX.Element {
             }}
           />
         </Flex>
-        <Card>
+        <Card boxShadow='2xl'>
           <CardBody>
             <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4}>
               <GridItem>
@@ -49,19 +66,19 @@ export default function ClientForm(): JSX.Element {
               <GridItem>
                 <RHFMaskInput<ClientFormValues>
                   register={register}
-                  name='phone'
+                  name='contact.phone'
                   label='Telefone'
                   placeholder='Telefone do cliente'
                   mask='(00) 00000-0000'
                   type='tel'
                   setValue={(value) => {
-                    setValue('phone', value.match(/\d/g)?.join('') ?? '')
+                    setValue('contact.phone', value.match(/\d/g)?.join('') ?? '')
                   }}
                 />
               </GridItem>
               <GridItem>
                 <RHFSelectField<ClientFormValues>
-                  name='personType'
+                  name='personType.personType'
                   label='Tipo de pessoa'
                   register={register}
                   options={[
@@ -71,18 +88,44 @@ export default function ClientForm(): JSX.Element {
                 />
               </GridItem>
               <GridItem gridColumn='1/-1'>
-                <Accordion allowToggle index={formHasErrors ? 0 : undefined}>
-                  {watch('personType') === 'juridica' ? (
-                    <LegalPersonFields register={register} formState={formState} />
-                  ) : (
-                    <NaturalPersonFields
-                      setValue={setValue}
-                      register={register}
-                      formState={formState}
-                    />
-                  )}
-                </Accordion>
+                <VStack align='stretch'>
+                  <Accordion allowToggle index={formHasErrors ? 0 : undefined}>
+                    <AccordionItem border='none'>
+                      <AccordionButton pl={0}>
+                        <AccordionIcon />
+                        <Text flex={1} fontWeight={700} textAlign='left'>
+                          Endereço
+                        </Text>
+                      </AccordionButton>
+                      <AccordionPanel>
+                        <AddressFields register={register} />
+                      </AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                  <Accordion allowToggle index={formHasErrors ? 0 : undefined}>
+                    <AccordionItem border='none'>
+                      <AccordionButton pl={0}>
+                        <AccordionIcon />
+                        <Text flex={1} fontWeight={700} textAlign='left'>
+                          {isLegalPerson ? 'Dados da empresa' : 'Dados pessoais'}
+                        </Text>
+                      </AccordionButton>
+                      <AccordionPanel>
+                        {isLegalPerson ? (
+                          <LegalPersonFields register={register} formState={formState} />
+                        ) : (
+                          <NaturalPersonFields
+                            setValue={setValue}
+                            register={register}
+                            formState={formState}
+                          />
+                        )}
+                      </AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </VStack>
               </GridItem>
+
               <GridItem gridColumn='1/-1'>
                 <RHFTextField<ClientFormValues>
                   register={register}

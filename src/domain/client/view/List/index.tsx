@@ -71,8 +71,13 @@ export default function ClientsListView(): JSX.Element {
                 </Td>
                 <Td>{client.name}</Td>
                 <Td>{client.nickname}</Td>
-                <Td>{client.balance}</Td>
-                <Td>{client.phone}</Td>
+                <Td>
+                  {Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(Math.random() * 1000)}
+                </Td>
+                <Td>(32) 99999-9999</Td>
               </Tr>
             ))}
           </Tbody>

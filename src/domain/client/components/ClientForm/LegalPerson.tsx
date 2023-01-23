@@ -1,10 +1,4 @@
-import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Text,
-} from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
 import { FormState, UseFormRegister } from 'react-hook-form'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
@@ -19,30 +13,26 @@ export default function LegalPersonFields({
   register,
 }: LegalPersonFieldsProps): JSX.Element {
   return (
-    <AccordionItem>
-      <AccordionButton>
-        <Text flex={1} textAlign='left'>
-          Pessoa Jurídica
-        </Text>
-        <AccordionIcon />
-      </AccordionButton>
-      <AccordionPanel>
+    <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4}>
+      <GridItem>
         <RHFMaskInput<ClientFormValues>
           register={register}
-          name='cnpj'
+          name='personType.cnpj'
           label='CNPJ'
           placeholder='CNPJ do cliente'
           mask='00.000.000/0000-00'
           errors={formState.errors}
         />
+      </GridItem>
+      <GridItem>
         <RHFField<ClientFormValues>
           register={register}
-          name='stateRegistration'
+          name='personType.stateRegistration'
           label='Inscrição estadual'
           placeholder='Inscrição estadual do cliente'
           errors={formState.errors}
         />
-      </AccordionPanel>
-    </AccordionItem>
+      </GridItem>
+    </Grid>
   )
 }
