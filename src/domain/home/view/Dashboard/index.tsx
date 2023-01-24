@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { ApexOptions } from 'apexcharts'
 import Chart from 'react-apexcharts'
-import PageWrapper from '../../../../shared/components/layout/Content/PageWrapper'
+import Page from '../../../../shared/components/Page'
 
 export default function HomePage(): JSX.Element {
   const tooltipTheme = useColorModeValue('light', 'dark')
@@ -117,7 +117,7 @@ export default function HomePage(): JSX.Element {
   ]
 
   return (
-    <PageWrapper>
+    <Page title='Página inicial'>
       <Heading>Página inicial</Heading>
       <Grid w='full' gridTemplateColumns='repeat( auto-fit, minmax(200px, 1fr) )' gap={6}>
         <GridItem>
@@ -168,7 +168,7 @@ export default function HomePage(): JSX.Element {
           </CardBody>
         </Card>
       </Flex>
-    </PageWrapper>
+    </Page>
   )
 }
 

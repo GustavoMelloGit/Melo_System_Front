@@ -1,4 +1,5 @@
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
+import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './domain/auth/context/AuthContext'
@@ -16,7 +17,7 @@ function App(): JSX.Element {
           storageKey='@melo-system:theme'
           initialColorMode={theme.config.initialColorMode}
         />
-        <ProviderComposer contexts={[AuthProvider, LayoutProvider, Suspense]}>
+        <ProviderComposer contexts={[AuthProvider, LayoutProvider, Suspense, HelmetProvider]}>
           <RouterProvider router={router} />
         </ProviderComposer>
       </ChakraProvider>

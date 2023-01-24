@@ -5,9 +5,14 @@ import { AiFillCamera } from 'react-icons/ai'
 
 type AvatarDropzoneProps = Omit<AvatarProps, 'onDrop'> & {
   onDrop?: (image: string) => void
+  currentSrc?: string
 }
-export default function AvatarDropzone({ onDrop, ...rest }: AvatarDropzoneProps): JSX.Element {
-  const [currentImage, setCurrentImage] = useState('')
+export default function AvatarDropzone({
+  onDrop,
+  currentSrc,
+  ...rest
+}: AvatarDropzoneProps): JSX.Element {
+  const [currentImage, setCurrentImage] = useState(currentSrc)
   const handleOnDrop = useCallback((files: File[]) => {
     const reader = new FileReader()
     reader.onload = () => {

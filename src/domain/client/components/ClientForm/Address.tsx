@@ -2,7 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { UseFormRegister } from 'react-hook-form'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
-import { ClientFormValues } from './type'
+import { ClientFormValues } from '../../types/components/ClientsForm'
 
 type AddressFieldsProps = {
   register: UseFormRegister<ClientFormValues>

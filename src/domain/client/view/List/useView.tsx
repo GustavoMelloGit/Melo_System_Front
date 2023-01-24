@@ -16,6 +16,10 @@ export default function useClientsListView(): ClientsListView {
     navigate(Routes.createClient)
   }
 
+  function handleUpdateClient(uuid: string): void {
+    navigate(Routes.updateClient(uuid))
+  }
+
   return {
     data,
     error,
@@ -24,5 +28,6 @@ export default function useClientsListView(): ClientsListView {
     fetchPreviousPage,
     changeRowsPerPage,
     handleCreateClient,
+    handleUpdateClient,
   }
 }

@@ -1,20 +1,7 @@
-import {
-  Avatar,
-  Flex,
-  Heading,
-  IconButton,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
+import { Flex, Heading, IconButton } from '@chakra-ui/react'
 import { AiOutlineUserAdd } from 'react-icons/ai'
-import PageWrapper from '../../../../shared/components/layout/Content/PageWrapper'
-import SpinLoader from '../../../../shared/components/SpinLoader'
-import TablePagination from '../../../../shared/components/table/Pagination'
+import Page from '../../../../shared/components/Page'
+import ClientsTable from '../../components/ClientsTable'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
@@ -25,9 +12,10 @@ export default function ClientsListView(): JSX.Element {
     fetchPreviousPage,
     changeRowsPerPage,
     handleCreateClient,
+    handleUpdateClient,
   } = useClientsListView()
   return (
-    <PageWrapper>
+    <Page title='Clientes'>
       <Flex as='header' justify='space-between'>
         <Heading>Clientes</Heading>
         <IconButton
@@ -38,57 +26,14 @@ export default function ClientsListView(): JSX.Element {
           variant='outline'
         />
       </Flex>
-      <TableContainer>
-        <Table variant='simple'>
-          <Thead>
-            <Tr>
-              <Th>Foto</Th>
-              <Th>Nome</Th>
-              <Th>Apelido</Th>
-              <Th>Saldo</Th>
-              <Th>Telefone</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {isLoading && (
-              <Tr>
-                <Td colSpan={5} textAlign='center'>
-                  <SpinLoader />
-                </Td>
-              </Tr>
-            )}
-            {data?.length === 0 && (
-              <Tr>
-                <Td colSpan={5} textAlign='center'>
-                  Nenhum cliente encontrado
-                </Td>
-              </Tr>
-            )}
-            {data?.map((client, index) => (
-              <Tr key={index}>
-                <Td>
-                  <Avatar loading='lazy' src={client.profileImage} />
-                </Td>
-                <Td>{client.name}</Td>
-                <Td>{client.nickname}</Td>
-                <Td>
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(Math.random() * 1000)}
-                </Td>
-                <Td>(32) 99999-9999</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        dataLength={data?.length ?? 0}
+      <ClientsTable
+        data={data}
         onNextPage={fetchNextPage}
         onPreviousPage={fetchPreviousPage}
-        onRowsPerPageChange={changeRowsPerPage}
+        onChangeRowsPerPage={changeRowsPerPage}
+        isLoading={isLoading}
+        onUpdateClient={handleUpdateClient}
       />
-    </PageWrapper>
+    </Page>
   )
 }

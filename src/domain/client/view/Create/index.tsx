@@ -1,11 +1,14 @@
 import { Routes } from '../../../../lib/routes'
-import PageWrapper from '../../../../shared/components/layout/Content/PageWrapper'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import Page from '../../../../shared/components/Page'
 import ClientForm from '../../components/ClientForm'
+import { ClientFormValues } from '../../types/components/ClientsForm'
+import useCreateClientView from './useView'
 
 export default function CreateClientsView(): JSX.Element {
+  const { handleCreateClient } = useCreateClientView()
   return (
-    <PageWrapper>
+    <Page title='Criar Cliente'>
       <HeaderBreadcrumbs
         heading='Crie um novo cliente'
         links={[
@@ -18,7 +21,17 @@ export default function CreateClientsView(): JSX.Element {
           },
         ]}
       />
-      <ClientForm />
-    </PageWrapper>
+      <ClientForm
+        defaultValues={
+          {
+            personType: {
+              personType: 'fisica',
+            },
+          } as ClientFormValues
+        }
+        onSubmit={handleCreateClient}
+        submitText='Criar'
+      />
+    </Page>
   )
 }

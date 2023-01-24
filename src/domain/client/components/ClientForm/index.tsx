@@ -18,29 +18,38 @@ import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
 import RHFSelectField from '../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../shared/components/inputs/RHFTextField'
+import { ClientFormValues } from '../../types/components/ClientsForm'
 import AddressFields from './Address'
 import LegalPersonFields from './LegalPerson'
 import NaturalPersonFields from './NaturalPerson'
-import { ClientFormValues } from './type'
 import useClientForm from './useClientForm'
 
-export default function ClientForm(): JSX.Element {
+type ClientFormProps = {
+  onSubmit: (values: ClientFormValues) => Promise<void>
+  submitText: string
+  defaultValues: ClientFormValues
+}
+export default function ClientForm({
+  onSubmit,
+  submitText,
+  defaultValues,
+}: ClientFormProps): JSX.Element {
   const {
-    form: { register, setValue, formState, watch },
-    handleSubmit,
-  } = useClientForm()
+    form: { register, setValue, formState, watch, handleSubmit },
+  } = useClientForm({ defaultValues })
 
   const isLegalPerson = watch('personType.personType') === 'juridica'
 
   const formHasErrors = Object.keys(formState.errors).length > 0
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <VStack align='stretch' spacing={10}>
         <Flex justify='center'>
           <AvatarDropzone
             onDrop={(image) => {
               setValue('profileImage', image)
             }}
+            currentSrc={watch('profileImage')}
           />
         </Flex>
         <Card boxShadow='2xl'>
@@ -137,7 +146,7 @@ export default function ClientForm(): JSX.Element {
           </CardBody>
         </Card>
         <Button type='submit' isLoading={formState.isSubmitting} colorScheme='blue'>
-          Criar cliente
+          {submitText}
         </Button>
       </VStack>
     </form>

@@ -8,4 +8,5 @@ export type ClientsListView = {
   fetchPreviousPage: () => Promise<void>
   changeRowsPerPage: (rowsPerPage: number) => Promise<void>
   handleCreateClient: () => void
+  handleUpdateClient: (uuid: string) => void
 }
