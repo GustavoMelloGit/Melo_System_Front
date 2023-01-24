@@ -14,6 +14,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFField<ClientFormValues>
           register={register}
           name='address.city'
+          label='Cidade'
           placeholder='Cidade do cliente'
         />
       </GridItem>
@@ -21,6 +22,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFMaskInput<ClientFormValues>
           register={register}
           name='address.zipCode'
+          label='CEP'
           placeholder='CEP do cliente'
           mask='00000-000'
         />
@@ -29,6 +31,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFField<ClientFormValues>
           register={register}
           name='address.street'
+          label='Rua'
           placeholder='Rua do cliente'
         />
       </GridItem>
@@ -36,6 +39,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFField<ClientFormValues>
           register={register}
           name='address.number'
+          label='Número'
           placeholder='Número da casa'
           type='number'
         />
@@ -44,6 +48,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFField<ClientFormValues>
           register={register}
           name='address.state'
+          label='Estado'
           placeholder='Estado do cliente'
         />
       </GridItem>
@@ -51,6 +56,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFField<ClientFormValues>
           register={register}
           name='address.neighborhood'
+          label='Bairro'
           placeholder='Bairro do cliente'
         />
       </GridItem>
@@ -58,6 +64,7 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
         <RHFField<ClientFormValues>
           register={register}
           name='address.brook'
+          label='Córrego'
           placeholder='Córrego do cliente'
         />
       </GridItem>
