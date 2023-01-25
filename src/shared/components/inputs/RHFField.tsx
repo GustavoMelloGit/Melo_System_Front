@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputProps,
+  InputRightElement,
 } from '@chakra-ui/react'
 import {
   DeepMap,
@@ -23,6 +24,7 @@ export type FormInputProps<TFormValues extends FieldValues> = {
   register: UseFormRegister<TFormValues>
   errors?: Partial<DeepMap<TFormValues, FieldError>>
   leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
   label?: string
 } & Omit<InputProps, 'name'>
 
@@ -32,6 +34,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
   register,
   errors,
   leftIcon,
+  rightIcon,
   label,
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element => {
@@ -41,7 +44,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
     <FormControl isInvalid={hasError}>
       {label && <FormLabel>{label}</FormLabel>}
       <InputGroup>
-        {leftIcon && <InputLeftElement pointerEvents='none'>{leftIcon}</InputLeftElement>}
+        {leftIcon && <InputLeftElement>{leftIcon}</InputLeftElement>}
         <Input
           variant='filled'
           rounded='xl'
@@ -49,6 +52,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
           {...register(name, rules)}
           {...rest}
         />
+        {rightIcon && <InputRightElement>{rightIcon}</InputRightElement>}
       </InputGroup>
       {errorMessages && <FormErrorMessage>{errorMessages.message}</FormErrorMessage>}
     </FormControl>
