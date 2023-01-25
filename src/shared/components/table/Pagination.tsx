@@ -1,14 +1,11 @@
 import { Flex, IconButton, Select, Text } from '@chakra-ui/react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
-import { DEFAULT_ROWS_PER_PAGE_OPTIONS } from '../../../lib/constants/pagination'
-import useTablePagination from '../../hooks/useTablePagination'
-
-type TablePaginationProps = {
-  dataLength: number
-  onNextPage?: () => void
-  onPreviousPage?: () => void
-  onRowsPerPageChange?: (rowsPerPage: number) => void
-}
+import {
+  DEFAULT_PAGINATION_LIMIT,
+  DEFAULT_ROWS_PER_PAGE_OPTIONS,
+} from '../../../lib/constants/pagination'
+import useParams from '../../hooks/useParams'
+import { TablePaginationProps } from './types'
 
 export default function TablePagination({
   dataLength,
@@ -16,23 +13,29 @@ export default function TablePagination({
   onPreviousPage,
   onRowsPerPageChange,
 }: TablePaginationProps): JSX.Element {
-  const { page, rowsPerPage, setPage, setRowsPerPage } = useTablePagination()
+  const { handleAddParam, getParam } = useParams()
+  const page = getParam('page') ? Number(getParam('page')) : 1
+  const rowsPerPage = getParam('rowsPerPage')
+    ? Number(getParam('rowsPerPage'))
+    : DEFAULT_PAGINATION_LIMIT
   const isFirstPage = page <= 1
   const isLastPage = dataLength < rowsPerPage
 
   const handleNextPage = (): void => {
-    setPage(page + 1)
+    const currentPage = getParam('page')
+    handleAddParam('page', currentPage ? Number(currentPage) + 1 : 2)
     onNextPage?.()
   }
 
   const handlePreviousPage = (): void => {
-    setPage(page - 1)
+    const currentPage = getParam('page')
+    handleAddParam('page', currentPage ? Number(currentPage) - 1 : 1)
     onPreviousPage?.()
   }
 
   const handleSetRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = Number(event.target.value)
-    setRowsPerPage(value)
+    handleAddParam('rowsPerPage', value)
     onRowsPerPageChange?.(value)
   }
 
