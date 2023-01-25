@@ -16,6 +16,10 @@ export default function useParams(): UseParams {
     setUrlSearchParams({ ...allSearchParams, [key]: value.toString() })
   }
 
+  function handleAddParams(params: Record<string, string>): void {
+    setUrlSearchParams({ ...allSearchParams, ...params })
+  }
+
   function handleRemoveParam(key: string): void {
     const { [key]: _, ...rest } = allSearchParams
     setUrlSearchParams(rest)
@@ -34,6 +38,7 @@ export default function useParams(): UseParams {
     handleRemoveParam,
     handleRemoveAllParams,
     getParam,
+    handleAddParams,
   }
 }
 
@@ -42,4 +47,5 @@ export type UseParams = {
   handleRemoveParam: (key: string) => void
   handleRemoveAllParams: () => void
   getParam: (key: string) => string | null
+  handleAddParams: (params: Record<string, string>) => void
 }
