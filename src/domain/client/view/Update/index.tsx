@@ -28,7 +28,7 @@ export default function UpdateClientView(): JSX.Element {
             city: '',
             complement: '',
             neighborhood: '',
-            number: 0,
+            number: '',
             state: '',
             street: '',
             zipCode: '',

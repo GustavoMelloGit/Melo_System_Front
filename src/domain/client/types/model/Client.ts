@@ -2,7 +2,7 @@ export type Address = {
   city?: string
   zipCode?: string
   street?: string
-  number?: number
+  number?: string
   state?: string
   neighborhood?: string
   brook?: string
