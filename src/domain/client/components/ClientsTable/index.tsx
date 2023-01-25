@@ -1,17 +1,6 @@
-import {
-  Avatar,
-  IconButton,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
+import { Avatar, IconButton, Td, Tr } from '@chakra-ui/react'
 import { TbPencil } from 'react-icons/tb'
-import SpinLoader from '../../../../shared/components/SpinLoader'
-import TablePagination from '../../../../shared/components/table/Pagination'
+import Table from '../../../../shared/components/table/Table'
 import { ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
@@ -31,70 +20,56 @@ export default function ClientsTable({
   onUpdateClient,
 }: ClientsTableProps): JSX.Element {
   return (
-    <>
-      <TableContainer>
-        <Table variant='simple'>
-          <Thead>
-            <Tr>
-              <Th>Foto</Th>
-              <Th>Nome</Th>
-              <Th>Apelido</Th>
-              <Th>Saldo</Th>
-              <Th>Telefone</Th>
-              <Th></Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {isLoading && (
-              <Tr>
-                <Td colSpan={5} textAlign='center'>
-                  <SpinLoader />
-                </Td>
-              </Tr>
-            )}
-            {data?.length === 0 && (
-              <Tr>
-                <Td colSpan={5} textAlign='center'>
-                  Nenhum cliente encontrado
-                </Td>
-              </Tr>
-            )}
-            {data?.map((client, index) => (
-              <Tr key={index}>
-                <Td>
-                  <Avatar loading='lazy' src={client.profileImage} />
-                </Td>
-                <Td>{client.name}</Td>
-                <Td>{client.nickname}</Td>
-                <Td>
-                  {Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(Math.random() * 1000)}
-                </Td>
-                <Td>(32) 99999-9999</Td>
-                <Td>
-                  <IconButton
-                    aria-label='Editar cliente'
-                    icon={<TbPencil />}
-                    colorScheme='blue'
-                    variant='ghost'
-                    onClick={() => {
-                      onUpdateClient(client.id)
-                    }}
-                  />
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        dataLength={data?.length ?? 0}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-        onRowsPerPageChange={onChangeRowsPerPage}
-      />
-    </>
+    <Table
+      header={{
+        columns: [
+          { id: 'photo', label: 'Foto' },
+          { id: 'name', label: 'Nome' },
+          { id: 'nickname', label: 'Apelido' },
+          { id: 'balance', label: 'Saldo' },
+          { id: 'phone', label: 'Telefone' },
+          { id: 'actions', label: '' },
+        ],
+      }}
+      rows={{
+        isLoading,
+        dataLength: data?.length ?? 0,
+        noDataMessage: 'Nenhum cliente encontrado',
+      }}
+      pagination={{
+        dataLength: data?.length ?? 0,
+        onNextPage,
+        onPreviousPage,
+        onRowsPerPageChange: onChangeRowsPerPage,
+      }}
+    >
+      {data?.map((client, index) => (
+        <Tr key={index}>
+          <Td>
+            <Avatar loading='lazy' src={client.profileImage} />
+          </Td>
+          <Td>{client.name}</Td>
+          <Td>{client.nickname}</Td>
+          <Td>
+            {Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(Math.random() * 1000)}
+          </Td>
+          <Td>(32) 99999-9999</Td>
+          <Td>
+            <IconButton
+              aria-label='Editar cliente'
+              icon={<TbPencil />}
+              colorScheme='blue'
+              variant='ghost'
+              onClick={() => {
+                onUpdateClient(client.id)
+              }}
+            />
+          </Td>
+        </Tr>
+      ))}
+    </Table>
   )
 }
