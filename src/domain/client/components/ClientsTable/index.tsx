@@ -1,6 +1,7 @@
 import { Avatar, IconButton, Td, Tr } from '@chakra-ui/react'
 import { TbPencil } from 'react-icons/tb'
 import Table from '../../../../shared/components/table/Table'
+import { SearchForOption, TableHeaderColumns } from '../../../../shared/components/table/types'
 import { ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
@@ -22,14 +23,7 @@ export default function ClientsTable({
   return (
     <Table
       header={{
-        columns: [
-          { id: 'photo', label: 'Foto' },
-          { id: 'name', label: 'Nome' },
-          { id: 'nickname', label: 'Apelido' },
-          { id: 'balance', label: 'Saldo' },
-          { id: 'phone', label: 'Telefone' },
-          { id: 'actions', label: '' },
-        ],
+        columns: headerColumns,
       }}
       rows={{
         isLoading,
@@ -41,6 +35,9 @@ export default function ClientsTable({
         onNextPage,
         onPreviousPage,
         onRowsPerPageChange: onChangeRowsPerPage,
+      }}
+      filter={{
+        searchForOptions,
       }}
     >
       {data?.map((client, index) => (
@@ -73,3 +70,30 @@ export default function ClientsTable({
     </Table>
   )
 }
+
+const headerColumns: TableHeaderColumns[] = [
+  { id: 'photo', label: 'Foto' },
+  { id: 'name', label: 'Nome' },
+  { id: 'nickname', label: 'Apelido' },
+  { id: 'balance', label: 'Saldo' },
+  { id: 'phone', label: 'Telefone' },
+  { id: 'actions', label: '' },
+]
+const searchForOptions: SearchForOption[] = [
+  {
+    label: 'Nome',
+    value: 'name',
+  },
+  {
+    label: 'Apelido',
+    value: 'nickname',
+  },
+  {
+    label: 'ID',
+    value: 'id',
+  },
+  {
+    label: 'Córrego',
+    value: 'address.brook',
+  },
+]
