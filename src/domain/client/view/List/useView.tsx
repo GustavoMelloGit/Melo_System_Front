@@ -1,14 +1,16 @@
 import { orderBy } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
+import { DEFAULT_PAGINATION_LIMIT } from '../../../../lib/constants/pagination'
 import { Routes } from '../../../../lib/routes'
 import { useSwrFirebasePaginated } from '../../../../lib/utils/firebase'
-import useTablePagination from '../../../../shared/hooks/useTablePagination'
+import useParams from '../../../../shared/hooks/useParams'
 import { ClientModel } from '../../types/model/Client'
 import { ClientsListView } from '../../types/view/List'
 
 export default function useClientsListView(): ClientsListView {
   const navigate = useNavigate()
-  const { rowsPerPage } = useTablePagination()
+  const { getParam } = useParams()
+  const rowsPerPage = Number(getParam('rowsPerPage') ?? DEFAULT_PAGINATION_LIMIT)
   const { data, error, fetchNextPage, fetchPreviousPage, changeRowsPerPage } =
     useSwrFirebasePaginated<ClientModel[]>('clients', rowsPerPage, orderBy('name'))
 
