@@ -5,10 +5,16 @@ import TablePagination from './Pagination'
 import TableRow from './Row'
 import { TableProps } from './types'
 
-export default function Table({ header, pagination, rows, children }: TableProps): JSX.Element {
+export default function Table({
+  header,
+  pagination,
+  rows,
+  children,
+  filter,
+}: TableProps): JSX.Element {
   return (
     <VStack spacing={2} align='stretch' w='full'>
-      <TableFilters />
+      <TableFilters {...filter} />
       <TableContainer>
         <ChakraTable variant='simple'>
           <TableHeader {...header} />

@@ -20,9 +20,18 @@ export type TablePaginationProps = {
   onRowsPerPageChange?: (rowsPerPage: number) => void
 }
 
+export type SearchForOption = {
+  label: string
+  value: string
+}
+export type TableFilterProps = {
+  searchForOptions: SearchForOption[]
+}
+
 export type TableProps = {
   header: TableHeaderProps
   rows: TableRowProps
   pagination: TablePaginationProps
+  filter: TableFilterProps
   children: React.ReactNode
 }
