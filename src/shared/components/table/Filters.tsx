@@ -1,9 +1,9 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Input } from '@chakra-ui/react'
 
 export default function TableFilters(): JSX.Element {
   return (
     <Box>
-      <p>Hello World</p>
+      <Input />
     </Box>
   )
 }
