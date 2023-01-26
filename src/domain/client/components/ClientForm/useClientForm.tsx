@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../lib/errors'
-import { ClientFormValues, UseClientForm } from '../../types/components/ClientsForm'
+import { type ClientFormValues, type UseClientForm } from '../../types/components/ClientsForm'
 
 const validationSchema = yup.object().shape({
   name: yup.string().required(validationErrors.nameIsRequired),

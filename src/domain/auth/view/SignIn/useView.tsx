@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import validationErrors from '../../../../lib/errors/validation'
 import useAuth from '../../hooks/useAuth'
-import { SignInValues } from '../../types'
-import { SignInView } from '../../types/view/SignIn/view'
+import { type SignInValues } from '../../types'
+import { type SignInView } from '../../types/view/SignIn/view'
 
 const validationSchema = yup.object().shape({
   email: yup

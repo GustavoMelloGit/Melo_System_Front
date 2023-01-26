@@ -5,7 +5,7 @@ import {
   DEFAULT_ROWS_PER_PAGE_OPTIONS,
 } from '../../../lib/constants/pagination'
 import useParams from '../../hooks/useParams'
-import { TablePaginationProps } from './types'
+import { type TablePaginationProps } from './types'
 
 export default function TablePagination({
   dataLength,

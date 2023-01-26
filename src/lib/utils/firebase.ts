@@ -1,16 +1,16 @@
 import {
   collection,
-  CollectionReference,
-  DocumentData,
+  type CollectionReference,
+  type DocumentData,
   endBefore,
   getDocs,
   limit,
   query,
-  QueryConstraint,
-  QueryDocumentSnapshot,
+  type QueryConstraint,
+  type QueryDocumentSnapshot,
   startAfter,
 } from 'firebase/firestore'
-import useSWR, { SWRResponse } from 'swr'
+import useSWR, { type SWRResponse } from 'swr'
 import { firestore } from '../config/firebase'
 
 type TestDoc = {

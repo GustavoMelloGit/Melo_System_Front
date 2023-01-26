@@ -1,8 +1,8 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../lib/config/firebase";
 import { errorHandler } from "../../../lib/utils/error";
-import { SignInValues } from "../types";
-import { SignInResponse } from "../types/service";
+import { type SignInValues } from "../types";
+import { type SignInResponse } from "../types/service";
 
 export async function signInService(values: SignInValues): Promise<SignInResponse> {
     try {

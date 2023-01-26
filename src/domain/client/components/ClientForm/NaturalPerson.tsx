@@ -1,8 +1,8 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import { FormState, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { type FormState, type UseFormRegister, type UseFormSetValue } from 'react-hook-form'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
-import { ClientFormValues } from '../../types/components/ClientsForm'
+import { type ClientFormValues } from '../../types/components/ClientsForm'
 
 type NaturalPersonFieldsProps = {
   formState: FormState<ClientFormValues>

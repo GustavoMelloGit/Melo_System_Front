@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
-import { AuthContextType } from '../../../types/context/auth'
+import { type AuthContextType } from '../../../types/context/auth'
 
 export default function MockAuthContextProvider({ children }: PropsWithChildren): JSX.Element {
   const providerValue: AuthContextType = {

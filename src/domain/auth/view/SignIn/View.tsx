@@ -2,7 +2,7 @@ import { Box, Button, Center, Flex, Heading, VStack } from '@chakra-ui/react'
 import AuthImage from '../../../../lib/assets/auth-image.jpg'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFPasswordField from '../../../../shared/components/inputs/RHFPasswordField'
-import { SignInValues } from '../../types'
+import { type SignInValues } from '../../types'
 import useSignInView from './useView'
 
 export default function SignInView(): JSX.Element {

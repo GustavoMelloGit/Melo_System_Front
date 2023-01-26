@@ -1,8 +1,8 @@
 import { Avatar, IconButton, Td, Tr } from '@chakra-ui/react'
 import { TbPencil } from 'react-icons/tb'
 import Table from '../../../../shared/components/table/Table'
-import { SearchForOption, TableHeaderColumns } from '../../../../shared/components/table/types'
-import { ClientModel } from '../../types/model/Client'
+import { type SearchForOption, type TableHeaderColumns } from '../../../../shared/components/table/types'
+import { type ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
   data: ClientModel[] | undefined

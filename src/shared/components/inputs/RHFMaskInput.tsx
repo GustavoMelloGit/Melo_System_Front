@@ -5,16 +5,16 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  InputProps,
+  type InputProps,
 } from '@chakra-ui/react'
 import {
-  DeepMap,
-  FieldError,
-  FieldValues,
+  type DeepMap,
+  type FieldError,
+  type FieldValues,
   get,
-  Path,
-  RegisterOptions,
-  UseFormRegister,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
 } from 'react-hook-form'
 import { IMaskInput } from 'react-imask'
 

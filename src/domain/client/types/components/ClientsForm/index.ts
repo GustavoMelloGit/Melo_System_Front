@@ -1,5 +1,5 @@
-import { UseFormReturn } from 'react-hook-form'
-import { ClientModel } from '../../model/Client'
+import { type UseFormReturn } from 'react-hook-form'
+import { type ClientModel } from '../../model/Client'
 
 export type ClientFormValues = ClientModel
 

@@ -1,5 +1,5 @@
-import { UseFormReturn } from "react-hook-form";
-import { SignInValues } from "../..";
+import { type UseFormReturn } from "react-hook-form";
+import { type SignInValues } from "../..";
 
 export type SignInView = {
     form: UseFormReturn<SignInValues, any>;

@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@chakra-ui/react'
+import { Button, type ButtonProps } from '@chakra-ui/react'
 import { RxDoubleArrowLeft, RxDoubleArrowRight } from 'react-icons/rx'
 import useLayoutContext from '../../hooks/useLayoutContext'
 

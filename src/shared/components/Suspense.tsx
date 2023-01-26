@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react'
-import React, { PropsWithChildren } from 'react'
+import React, { type PropsWithChildren } from 'react'
 import SpinLoader from './SpinLoader'
 
 export default function Suspense({ children }: PropsWithChildren): JSX.Element {

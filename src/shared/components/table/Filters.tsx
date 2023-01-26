@@ -4,7 +4,7 @@ import { BiFilter, BiSearchAlt } from 'react-icons/bi'
 import useParams from '../../hooks/useParams'
 import RHFField from '../inputs/RHFField'
 import RHFSelectField from '../inputs/RHFSelectField'
-import { TableFilterProps } from './types'
+import { type TableFilterProps } from './types'
 
 export default function TableFilters({ searchForOptions }: TableFilterProps): JSX.Element {
   const { handleSubmit, register } = useForm<FilterFormValues>()

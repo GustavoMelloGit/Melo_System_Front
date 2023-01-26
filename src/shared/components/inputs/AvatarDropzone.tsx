@@ -1,4 +1,4 @@
-import { Avatar, AvatarProps, Button } from '@chakra-ui/react'
+import { Avatar, type AvatarProps, Button } from '@chakra-ui/react'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { AiFillCamera } from 'react-icons/ai'

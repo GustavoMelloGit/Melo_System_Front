@@ -1,4 +1,4 @@
-import { FirebaseError } from "firebase/app"
+import { type FirebaseError } from "firebase/app"
 import { firebaseErrors } from "../errors"
 import { DEFAULT_FIREBASE_ERROR_MESSAGE } from "../errors/firebase"
 

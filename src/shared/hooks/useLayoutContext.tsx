@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { LayoutContext } from '../contexts/LayoutContext'
-import { LayoutContextType } from '../types/contexts/LayoutContext'
+import { type LayoutContextType } from '../types/contexts/LayoutContext'
 
 export default function useLayoutContext(): LayoutContextType {
   const context = useContext(LayoutContext)

@@ -10,7 +10,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { ApexOptions } from 'apexcharts'
+import { type ApexOptions } from 'apexcharts'
 import Chart from 'react-apexcharts'
 import Page from '../../../../shared/components/Page'
 

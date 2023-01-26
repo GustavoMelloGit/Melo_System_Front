@@ -1,5 +1,5 @@
 import { Th, Thead, Tr } from '@chakra-ui/react'
-import { TableHeaderProps } from './types'
+import { type TableHeaderProps } from './types'
 
 export default function TableHeader({ columns }: TableHeaderProps): JSX.Element {
   return (

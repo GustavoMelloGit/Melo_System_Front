@@ -3,7 +3,7 @@ import TableFilters from './Filters'
 import TableHeader from './Header'
 import TablePagination from './Pagination'
 import TableRow from './Row'
-import { TableProps } from './types'
+import { type TableProps } from './types'
 
 export default function Table({
   header,
