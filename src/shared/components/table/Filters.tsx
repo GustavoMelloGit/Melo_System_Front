@@ -8,9 +8,13 @@ import { type TableFilterProps } from './types'
 
 export default function TableFilters({ searchForOptions }: TableFilterProps): JSX.Element {
   const { handleSubmit, register } = useForm<FilterFormValues>()
-  const { handleAddParams } = useParams()
+  const { handleAddParams, handleRemoveParams } = useParams()
 
   function handleSubmitFilter({ query, searchFor }: FilterFormValues): void {
+    if (!query) {
+      handleRemoveParams(['query', 'searchFor'])
+      return
+    }
     handleAddParams({
       query,
       searchFor,
