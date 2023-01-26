@@ -1,4 +1,10 @@
-import { Table as ChakraTable, TableContainer, Tbody, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Table as ChakraTable,
+  TableContainer,
+  Tbody,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import TableFilters from './Filters'
 import TableHeader from './Header'
 import TablePagination from './Pagination'
@@ -12,10 +18,22 @@ export default function Table({
   children,
   filter,
 }: TableProps): JSX.Element {
+  const trHoverColor = useColorModeValue('gray.50', 'gray.700')
   return (
-    <VStack spacing={2} align='stretch' w='full'>
+    <Box w='full'>
       <TableFilters {...filter} />
-      <TableContainer>
+      <TableContainer
+        sx={{
+          '& td': {
+            py: 2.5,
+          },
+          '& tbody tr': {
+            _hover: {
+              bg: trHoverColor,
+            },
+          },
+        }}
+      >
         <ChakraTable variant='simple'>
           <TableHeader {...header} />
           <Tbody>
@@ -24,6 +42,6 @@ export default function Table({
         </ChakraTable>
       </TableContainer>
       <TablePagination {...pagination} />
-    </VStack>
+    </Box>
   )
 }

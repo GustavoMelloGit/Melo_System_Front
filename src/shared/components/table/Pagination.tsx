@@ -40,7 +40,7 @@ export default function TablePagination({
   }
 
   return (
-    <Flex align='center' w='full' justify='flex-end' gap={3}>
+    <Flex align='center' w='full' justify='flex-end' gap={3} mt={2}>
       <Text>
         {dataLength} {dataLength === 1 ? 'Item' : 'Items'}
       </Text>
