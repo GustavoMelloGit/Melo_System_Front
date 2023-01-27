@@ -1,12 +1,47 @@
-import { Th, Thead, Tr } from '@chakra-ui/react'
-import { TableHeaderProps } from './types'
+import { IconButton, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import useParams from '../../hooks/useParams'
+import { type TableHeaderProps } from './types'
 
 export default function TableHeader({ columns }: TableHeaderProps): JSX.Element {
+  const bg = useColorModeValue('gray.300', 'gray.700')
+  const { getParam, handleAddParams } = useParams()
+  const sortOrder = getParam('order')
+  const sortBy = getParam('sortBy')
+
+  const handleSort = (columnId: string, order: 'asc' | 'desc'): void => {
+    handleAddParams({
+      sortBy: columnId,
+      order,
+    })
+  }
+
   return (
-    <Thead>
+    <Thead bg={bg}>
       <Tr>
         {columns.map((column) => (
-          <Th key={column.id}>{column.label}</Th>
+          <Th key={column.id}>
+            {column.label}
+            {column.isSortable && (
+              <IconButton
+                ml={1}
+                aria-label={`sort by ${column.label}`}
+                icon={
+                  sortBy === column.id && sortOrder === 'asc' ? (
+                    <IoMdArrowDropup size={20} />
+                  ) : (
+                    <IoMdArrowDropdown size={20} />
+                  )
+                }
+                variant='unstyled'
+                onClick={() => {
+                  handleSort(column.id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
+                }}
+                opacity={sortBy === column.id ? 1 : 0.2}
+                _hover={{ opacity: 1 }}
+              />
+            )}
+          </Th>
         ))}
       </Tr>
     </Thead>

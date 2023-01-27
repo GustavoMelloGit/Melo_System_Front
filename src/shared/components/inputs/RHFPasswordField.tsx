@@ -5,18 +5,18 @@ import {
   IconButton,
   Input,
   InputGroup,
-  InputProps,
+  type InputProps,
   InputRightElement,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import {
-  DeepMap,
-  FieldError,
-  FieldValues,
+  type DeepMap,
+  type FieldError,
+  type FieldValues,
   get,
-  Path,
-  RegisterOptions,
-  UseFormRegister,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
 } from 'react-hook-form'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 

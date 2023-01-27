@@ -19,8 +19,6 @@ export type ClientContact = {
   phone?: string
 }
 
-export type ClientDocument = {}
-
 export type LegalPerson = {
   personType?: 'juridica'
   cnpj?: string

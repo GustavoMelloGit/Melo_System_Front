@@ -2,7 +2,7 @@ import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import ClientForm from '../../components/ClientForm'
-import { ClientFormValues } from '../../types/components/ClientsForm'
+import { type ClientFormValues } from '../../types/components/ClientsForm'
 import useCreateClientView from './useView'
 
 export default function CreateClientsView(): JSX.Element {

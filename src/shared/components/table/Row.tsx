@@ -1,6 +1,6 @@
 import { Td, Tr } from '@chakra-ui/react'
 import SpinLoader from '../SpinLoader'
-import { TableRowProps } from './types'
+import { type TableRowProps } from './types'
 
 export default function TableRow({
   children,

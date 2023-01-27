@@ -1,5 +1,5 @@
 // 1. Import the extendTheme function
-import { createLocalStorageManager, extendTheme, ThemeConfig } from '@chakra-ui/react'
+import { createLocalStorageManager, extendTheme, type ThemeConfig } from '@chakra-ui/react'
 import breakpoints from './breakpoints'
 import ThemeContainer from './components/Container'
 

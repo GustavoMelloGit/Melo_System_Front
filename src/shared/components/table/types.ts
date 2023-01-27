@@ -8,6 +8,7 @@ export type TableRowProps = {
 export type TableHeaderColumns = {
   id: string
   label: string
+  isSortable?: boolean
 }
 export type TableHeaderProps = {
   columns: TableHeaderColumns[]

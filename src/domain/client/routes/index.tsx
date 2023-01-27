@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouteObject } from 'react-router-dom'
+import { type RouteObject } from 'react-router-dom'
 import { Routes } from '../../../lib/routes'
 const ClientsListView = React.lazy(async () => import('../view/List'))
 const CreateClientsView = React.lazy(async () => import('../view/Create'))

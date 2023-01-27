@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom'
+import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
 import { Routes } from '.'
 import { authRoutes } from '../../domain/auth/routes'
 import clientsRoutes from '../../domain/client/routes'

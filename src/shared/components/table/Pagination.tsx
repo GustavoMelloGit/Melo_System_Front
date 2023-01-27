@@ -5,7 +5,7 @@ import {
   DEFAULT_ROWS_PER_PAGE_OPTIONS,
 } from '../../../lib/constants/pagination'
 import useParams from '../../hooks/useParams'
-import { TablePaginationProps } from './types'
+import { type TablePaginationProps } from './types'
 
 export default function TablePagination({
   dataLength,
@@ -40,7 +40,7 @@ export default function TablePagination({
   }
 
   return (
-    <Flex align='center' w='full' justify='flex-end' gap={3}>
+    <Flex align='center' w='full' justify='flex-end' gap={3} mt={2}>
       <Text>
         {dataLength} {dataLength === 1 ? 'Item' : 'Items'}
       </Text>

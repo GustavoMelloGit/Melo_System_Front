@@ -5,16 +5,16 @@ import {
   InputGroup,
   InputLeftElement,
   Select,
-  SelectProps,
+  type SelectProps,
 } from '@chakra-ui/react'
 import {
-  DeepMap,
-  FieldError,
-  FieldValues,
+  type DeepMap,
+  type FieldError,
+  type FieldValues,
   get,
-  Path,
-  RegisterOptions,
-  UseFormRegister,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
 } from 'react-hook-form'
 
 export type RHFSelectFieldProps<TFormValues extends FieldValues> = {

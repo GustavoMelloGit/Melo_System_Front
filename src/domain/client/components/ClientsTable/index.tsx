@@ -1,8 +1,11 @@
 import { Avatar, IconButton, Td, Tr } from '@chakra-ui/react'
 import { TbPencil } from 'react-icons/tb'
 import Table from '../../../../shared/components/table/Table'
-import { SearchForOption, TableHeaderColumns } from '../../../../shared/components/table/types'
-import { ClientModel } from '../../types/model/Client'
+import {
+  type SearchForOption,
+  type TableHeaderColumns,
+} from '../../../../shared/components/table/types'
+import { type ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
   data: ClientModel[] | undefined
@@ -58,7 +61,6 @@ export default function ClientsTable({
             <IconButton
               aria-label='Editar cliente'
               icon={<TbPencil />}
-              colorScheme='blue'
               variant='ghost'
               onClick={() => {
                 onUpdateClient(client.id)
@@ -73,9 +75,9 @@ export default function ClientsTable({
 
 const headerColumns: TableHeaderColumns[] = [
   { id: 'photo', label: 'Foto' },
-  { id: 'name', label: 'Nome' },
-  { id: 'nickname', label: 'Apelido' },
-  { id: 'balance', label: 'Saldo' },
+  { id: 'name', label: 'Nome', isSortable: true },
+  { id: 'nickname', label: 'Apelido', isSortable: true },
+  { id: 'balance', label: 'Saldo', isSortable: true },
   { id: 'phone', label: 'Telefone' },
   { id: 'actions', label: '' },
 ]

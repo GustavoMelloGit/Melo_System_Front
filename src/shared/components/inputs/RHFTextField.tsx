@@ -5,16 +5,16 @@ import {
   InputGroup,
   InputLeftElement,
   Textarea,
-  TextareaProps,
+  type TextareaProps,
 } from '@chakra-ui/react'
 import {
-  DeepMap,
-  FieldError,
-  FieldValues,
+  type DeepMap,
+  type FieldError,
+  type FieldValues,
   get,
-  Path,
-  RegisterOptions,
-  UseFormRegister,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
 } from 'react-hook-form'
 
 export type RHFTextFieldProps<TFormValues extends FieldValues> = {

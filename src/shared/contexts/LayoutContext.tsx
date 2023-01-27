@@ -1,6 +1,6 @@
-import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react'
+import { createContext, type PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react'
 import usePageSize from '../hooks/usePageSize'
-import { LayoutContextType } from '../types/contexts/LayoutContext'
+import { type LayoutContextType } from '../types/contexts/LayoutContext'
 
 export const LayoutContext = createContext<LayoutContextType>({
   sidebar: {

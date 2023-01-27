@@ -1,5 +1,5 @@
-import { StackProps, VStack } from '@chakra-ui/react'
-import { forwardRef, ReactNode } from 'react'
+import { VStack, type StackProps } from '@chakra-ui/react'
+import { forwardRef, type ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 type Props = StackProps & {
