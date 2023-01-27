@@ -7,12 +7,7 @@ import {
 import useParams from '../../hooks/useParams'
 import { type TablePaginationProps } from './types'
 
-export default function TablePagination({
-  dataLength,
-  onNextPage,
-  onPreviousPage,
-  onRowsPerPageChange,
-}: TablePaginationProps): JSX.Element {
+export default function TablePagination({ dataLength }: TablePaginationProps): JSX.Element {
   const { handleAddParam, getParam } = useParams()
   const page = getParam('page') ? Number(getParam('page')) : 1
   const rowsPerPage = getParam('rowsPerPage')
@@ -24,19 +19,16 @@ export default function TablePagination({
   const handleNextPage = (): void => {
     const currentPage = getParam('page')
     handleAddParam('page', currentPage ? Number(currentPage) + 1 : 2)
-    onNextPage?.()
   }
 
   const handlePreviousPage = (): void => {
     const currentPage = getParam('page')
     handleAddParam('page', currentPage ? Number(currentPage) - 1 : 1)
-    onPreviousPage?.()
   }
 
   const handleSetRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = Number(event.target.value)
     handleAddParam('rowsPerPage', value)
-    onRowsPerPageChange?.(value)
   }
 
   return (

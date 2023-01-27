@@ -1,7 +1,3 @@
-import firebaseErrors from "./firebase";
-import validationErrors from "./validation";
+import validationErrors from './validation'
 
-export {
-    validationErrors,
-    firebaseErrors
-};
+export { validationErrors }

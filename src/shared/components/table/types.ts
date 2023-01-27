@@ -16,9 +16,6 @@ export type TableHeaderProps = {
 
 export type TablePaginationProps = {
   dataLength: number
-  onNextPage?: () => void
-  onPreviousPage?: () => void
-  onRowsPerPageChange?: (rowsPerPage: number) => void
 }
 
 export type SearchForOption = {

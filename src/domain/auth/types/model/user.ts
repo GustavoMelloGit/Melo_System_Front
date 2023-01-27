@@ -1,5 +1,3 @@
-import { type User } from "firebase/auth";
-
-export type UserModel = User & {
-    isAuthenticated: boolean;
+export type UserModel = {
+  isAuthenticated: boolean
 }
