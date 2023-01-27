@@ -7,7 +7,6 @@ import {
   type PropsWithChildren,
 } from 'react'
 import { toast } from 'react-hot-toast'
-import { auth } from '../../../lib/config/firebase'
 import useLocalStorage from '../../../shared/hooks/useLocalStorage'
 import { signInService } from '../service'
 import { type SignInValues } from '../types'
@@ -31,6 +30,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   const signIn = useCallback(async (values: SignInValues): Promise<void> => {
     const { data, error } = await signInService(values)
+    setAppInitialized(true)
     if (error ?? !data) {
       toast.error(error)
       return
@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   const signOut = useCallback(async (): Promise<void> => {
     try {
-      await auth.signOut()
       setUser(defaultValues.user)
       removeValue()
     } catch (e) {
@@ -51,9 +50,9 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   useEffect(() => {
     const user = getValue()
+    setAppInitialized(true)
     if (user) {
       setUser(user)
-      setAppInitialized(true)
     }
   }, [])
 

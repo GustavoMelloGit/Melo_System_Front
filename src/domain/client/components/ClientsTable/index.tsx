@@ -3,24 +3,18 @@ import { TbPencil } from 'react-icons/tb'
 import Table from '../../../../shared/components/table/Table'
 import {
   type SearchForOption,
-  type TableHeaderColumns,
+  type TableHeaderColumns
 } from '../../../../shared/components/table/types'
 import { type ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
   data: ClientModel[] | undefined
-  onNextPage: () => void
-  onPreviousPage: () => void
-  onChangeRowsPerPage: (rowsPerPage: number) => void
   isLoading: boolean
   onUpdateClient: (uuid: string) => void
 }
 export default function ClientsTable({
   data,
-  onNextPage,
-  onPreviousPage,
   isLoading,
-  onChangeRowsPerPage,
   onUpdateClient,
 }: ClientsTableProps): JSX.Element {
   return (
@@ -35,9 +29,6 @@ export default function ClientsTable({
       }}
       pagination={{
         dataLength: data?.length ?? 0,
-        onNextPage,
-        onPreviousPage,
-        onRowsPerPageChange: onChangeRowsPerPage,
       }}
       filter={{
         searchForOptions,

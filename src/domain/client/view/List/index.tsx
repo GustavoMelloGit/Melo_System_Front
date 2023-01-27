@@ -5,15 +5,7 @@ import ClientsTable from '../../components/ClientsTable'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
-  const {
-    data,
-    isLoading,
-    fetchNextPage,
-    fetchPreviousPage,
-    changeRowsPerPage,
-    handleCreateClient,
-    handleUpdateClient,
-  } = useClientsListView()
+  const { data, isLoading, handleCreateClient, handleUpdateClient } = useClientsListView()
   return (
     <Page title='Clientes'>
       <Flex as='header' justify='space-between'>
@@ -26,14 +18,7 @@ export default function ClientsListView(): JSX.Element {
           variant='outline'
         />
       </Flex>
-      <ClientsTable
-        data={data}
-        onNextPage={fetchNextPage}
-        onPreviousPage={fetchPreviousPage}
-        onChangeRowsPerPage={changeRowsPerPage}
-        isLoading={isLoading}
-        onUpdateClient={handleUpdateClient}
-      />
+      <ClientsTable data={data} isLoading={isLoading} onUpdateClient={handleUpdateClient} />
     </Page>
   )
 }
