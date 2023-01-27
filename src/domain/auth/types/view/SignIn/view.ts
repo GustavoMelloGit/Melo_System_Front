@@ -1,7 +1,5 @@
-import { type UseFormReturn } from "react-hook-form";
-import { type SignInValues } from "../..";
+import { type AuthSignIn } from '../../context/auth'
 
 export type SignInView = {
-    form: UseFormReturn<SignInValues, any>;
-    handleSubmit: () => Promise<void>
+  signIn: AuthSignIn
 }
