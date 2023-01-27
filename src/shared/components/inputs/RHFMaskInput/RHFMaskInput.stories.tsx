@@ -1,11 +1,12 @@
 import { type ComponentMeta, type StoryObj } from '@storybook/react'
-import RHFField from '.'
+import RHFMaskInput from '.'
 export default {
-  title: 'Inputs/RHFField',
-  component: RHFField,
+  title: 'Inputs/RHFMaskInput',
+  component: RHFMaskInput,
   args: {
     register: Function as any,
+    mask: 'aaa-000-aaa',
   },
-} as ComponentMeta<typeof RHFField>
+} as ComponentMeta<typeof RHFMaskInput>
 
 export const Default: StoryObj = {}
