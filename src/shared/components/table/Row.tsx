@@ -19,7 +19,7 @@ export default function TableRow({
       )}
       {!isLoading && dataLength === 0 ? (
         <Tr>
-          <Td colSpan={100} textAlign='center'>
+          <Td id='no-data-cell' colSpan={100} textAlign='center'>
             {noDataMessage}
           </Td>
         </Tr>

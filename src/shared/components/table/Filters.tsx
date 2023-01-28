@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, IconButton, useColorModeValue } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Hide, IconButton, Show, useColorModeValue } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { BiFilter, BiSearchAlt } from 'react-icons/bi'
 import useParams from '../../hooks/useParams'
@@ -29,24 +29,31 @@ export default function TableFilters({ searchForOptions }: TableFilterProps): JS
     })
   }
   return (
-    <Box bg={bg} px={4} pt={4} roundedTop={16}>
-      <form onSubmit={handleSubmit(handleSubmitFilter)}>
-        <Grid templateColumns='1fr 3fr 40px' gap={1}>
-          <GridItem>
+    <form onSubmit={handleSubmit(handleSubmitFilter)}>
+      <Box bg={bg} px={4} pt={4} roundedTop={16}>
+        <Grid templateColumns={['1fr', '1fr 3fr']} templateRows={['1fr 1fr', 'auto']} gap={1}>
+          <GridItem display='flex' alignItems='center' gap={1}>
             <RHFSelectField<FilterFormValues>
               name='searchFor'
               register={register}
               options={searchForOptions}
               roundedLeft='md'
-              roundedRight='none'
+              roundedRight={['md', 'none']}
             />
+            <Show below='sm'>
+              <IconButton
+                aria-label='open filter modal'
+                variant='ghost'
+                icon={<BiFilter size={28} />}
+              />
+            </Show>
           </GridItem>
-          <GridItem>
+          <GridItem display='flex' alignItems='center' gap={1}>
             <RHFField<FilterFormValues>
               name='query'
               register={register}
               rounded='md'
-              roundedLeft='none'
+              roundedLeft={['md', 'none']}
               placeholder='Pesquisar'
               rightIcon={
                 <IconButton
@@ -57,17 +64,17 @@ export default function TableFilters({ searchForOptions }: TableFilterProps): JS
                 />
               }
             />
-          </GridItem>
-          <GridItem>
-            <IconButton
-              aria-label='open filter modal'
-              variant='ghost'
-              icon={<BiFilter size={28} />}
-            />
+            <Hide below='sm'>
+              <IconButton
+                aria-label='open filter modal'
+                variant='ghost'
+                icon={<BiFilter size={28} />}
+              />
+            </Hide>
           </GridItem>
         </Grid>
-      </form>
-    </Box>
+      </Box>
+    </form>
   )
 }
 
