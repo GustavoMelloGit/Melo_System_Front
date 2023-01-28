@@ -5,6 +5,7 @@ import { type TableHeaderProps } from './types'
 
 export default function TableHeader({ columns }: TableHeaderProps): JSX.Element {
   const bg = useColorModeValue('gray.300', 'gray.700')
+  const textColor = useColorModeValue('black', 'white')
   const { getParam, handleAddParams } = useParams()
   const sortOrder = getParam('order')
   const sortBy = getParam('sortBy')
@@ -20,7 +21,7 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
     <Thead bg={bg}>
       <Tr>
         {columns.map((column) => (
-          <Th key={column.id}>
+          <Th key={column.id} color={textColor}>
             {column.label}
             {column.isSortable && (
               <IconButton

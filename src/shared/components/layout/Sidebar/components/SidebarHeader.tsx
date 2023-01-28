@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, VStack } from '@chakra-ui/react'
+import { Avatar, Button, Flex, Heading, VStack } from '@chakra-ui/react'
 import { GoSignOut } from 'react-icons/go'
 import useAuth from '../../../../../domain/auth/hooks/useAuth'
 import useLayoutContext from '../../../../hooks/useLayoutContext'
@@ -13,6 +13,7 @@ export default function SidebarHeader(): JSX.Element {
     <VStack align='stretch' as='header'>
       {isOpen && <ToggleSidebarButton alignSelf='flex-end' />}
       <Flex align='center' gap={4}>
+        <Avatar name='Test' />
         <VStack align='flex-start' w='full'>
           <Heading noOfLines={1} as='h1' fontSize='md'>
             test@test.com

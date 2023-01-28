@@ -27,6 +27,9 @@ export default function Table({
           '& td': {
             py: 2.5,
           },
+          '& #no-data-cell': {
+            py: 10,
+          },
           '& tbody tr': {
             _hover: {
               bg: trHoverColor,
