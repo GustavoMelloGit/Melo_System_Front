@@ -1,4 +1,4 @@
-import { Box, List } from '@chakra-ui/react'
+import { Box, List, VStack } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
 import { useLocation } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { protectedRoutes } from '../../../../../lib/routes/router'
 import useLayoutContext from '../../../../hooks/useLayoutContext'
 import usePageSize from '../../../../hooks/usePageSize'
 import SidebarListItem from './SidebarListItem'
+import { TbPlant } from 'react-icons/tb'
 
 const listItem: Record<
   string,
@@ -22,6 +23,10 @@ const listItem: Record<
   [Routes.clients]: {
     label: 'Clientes',
     icon: <BiUser />,
+  },
+  [Routes.fertilizers]: {
+    label: 'Adubos',
+    icon: <TbPlant />,
   },
 }
 
@@ -40,7 +45,7 @@ export default function SidebarList(): JSX.Element {
   }
   return (
     <Box flex={1}>
-      <List onClick={handleCloseSideBar}>
+      <VStack as={List} gap={0.25} align='stretch' onClick={handleCloseSideBar}>
         {protectedRoutes.children?.map(
           (route) =>
             route.path &&
@@ -54,7 +59,7 @@ export default function SidebarList(): JSX.Element {
               />
             ),
         )}
-      </List>
+      </VStack>
     </Box>
   )
 }
