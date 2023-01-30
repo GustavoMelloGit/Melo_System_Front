@@ -3,7 +3,7 @@ import { TbPencil } from 'react-icons/tb'
 import Table from '../../../../shared/components/table/Table'
 import {
   type SearchForOption,
-  type TableHeaderColumns
+  type TableHeaderColumns,
 } from '../../../../shared/components/table/types'
 import { type ClientModel } from '../../types/model/Client'
 
@@ -70,7 +70,7 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'nickname', label: 'Apelido', isSortable: true },
   { id: 'balance', label: 'Saldo', isSortable: true },
   { id: 'phone', label: 'Telefone' },
-  { id: 'actions', label: '' },
+  { id: 'actions', label: 'Ações' },
 ]
 const searchForOptions: SearchForOption[] = [
   {
