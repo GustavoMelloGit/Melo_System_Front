@@ -6,7 +6,10 @@ import RHFField from '../inputs/RHFField'
 import RHFSelectField from '../inputs/RHFSelectField'
 import { type TableFilterProps } from './types'
 
-export default function TableFilters({ searchForOptions }: TableFilterProps): JSX.Element {
+export default function TableFilters({
+  searchForOptions,
+  hasMoreFilters = false,
+}: TableFilterProps): JSX.Element {
   const { getParam } = useParams()
   const bg = useColorModeValue('gray.300', 'gray.700')
   const queryParam = getParam('query')
@@ -40,13 +43,15 @@ export default function TableFilters({ searchForOptions }: TableFilterProps): JS
               roundedLeft='md'
               roundedRight={['md', 'none']}
             />
-            <Show below='sm'>
-              <IconButton
-                aria-label='open filter modal'
-                variant='ghost'
-                icon={<BiFilter size={28} />}
-              />
-            </Show>
+            {hasMoreFilters && (
+              <Show below='sm'>
+                <IconButton
+                  aria-label='open filter modal'
+                  variant='ghost'
+                  icon={<BiFilter size={28} />}
+                />
+              </Show>
+            )}
           </GridItem>
           <GridItem display='flex' alignItems='center' gap={1}>
             <RHFField<FilterFormValues>
@@ -64,13 +69,15 @@ export default function TableFilters({ searchForOptions }: TableFilterProps): JS
                 />
               }
             />
-            <Hide below='sm'>
-              <IconButton
-                aria-label='open filter modal'
-                variant='ghost'
-                icon={<BiFilter size={28} />}
-              />
-            </Hide>
+            {hasMoreFilters && (
+              <Hide below='sm'>
+                <IconButton
+                  aria-label='open filter modal'
+                  variant='ghost'
+                  icon={<BiFilter size={28} />}
+                />
+              </Hide>
+            )}
           </GridItem>
         </Grid>
       </Box>

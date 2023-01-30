@@ -24,6 +24,7 @@ export type SearchForOption = {
 }
 export type TableFilterProps = {
   searchForOptions: SearchForOption[]
+  hasMoreFilters?: boolean
 }
 
 export type TableProps = {
