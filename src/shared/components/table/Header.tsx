@@ -19,7 +19,7 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
 
   return (
     <Thead bg={bg}>
-      <Tr>
+      <Tr h={16}>
         {columns.map((column) => (
           <Th key={column.id} color={textColor}>
             {column.label}
