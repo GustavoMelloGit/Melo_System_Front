@@ -9,12 +9,14 @@ import { type ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
   data: ClientModel[] | undefined
+  totalClients: number
   isLoading: boolean
   onUpdateClient: (uuid: string) => void
 }
 export default function ClientsTable({
   data,
   isLoading,
+  totalClients,
   onUpdateClient,
 }: ClientsTableProps): JSX.Element {
   return (
@@ -29,6 +31,7 @@ export default function ClientsTable({
       }}
       pagination={{
         dataLength: data?.length ?? 0,
+        totalLength: totalClients,
       }}
       filter={{
         searchForOptions,

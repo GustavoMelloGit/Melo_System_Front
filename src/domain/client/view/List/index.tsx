@@ -5,7 +5,8 @@ import ClientsTable from '../../components/ClientsTable'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
-  const { data, isLoading, handleCreateClient, handleUpdateClient } = useClientsListView()
+  const { data, isLoading, handleCreateClient, handleUpdateClient, total } = useClientsListView()
+  console.log(data)
   return (
     <Page title='Clientes'>
       <Flex as='header' justify='space-between'>
@@ -18,7 +19,12 @@ export default function ClientsListView(): JSX.Element {
           variant='outline'
         />
       </Flex>
-      <ClientsTable data={data} isLoading={isLoading} onUpdateClient={handleUpdateClient} />
+      <ClientsTable
+        totalClients={total}
+        data={data}
+        isLoading={isLoading}
+        onUpdateClient={handleUpdateClient}
+      />
     </Page>
   )
 }
