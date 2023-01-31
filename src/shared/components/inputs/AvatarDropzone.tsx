@@ -1,4 +1,4 @@
-import { Avatar, type AvatarProps, Button } from '@chakra-ui/react'
+import { Avatar, Center, type AvatarProps } from '@chakra-ui/react'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { AiFillCamera } from 'react-icons/ai'
@@ -24,7 +24,7 @@ export default function AvatarDropzone({
     }
     reader.readAsDataURL(files[0])
   }, [])
-  const { open } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
     accept: {
       'image/jpeg': ['.jpg', '.jpeg'],
@@ -36,30 +36,28 @@ export default function AvatarDropzone({
       size='2xl'
       pos='relative'
       overflow={'hidden'}
-      _hover={{
-        '& .upload-avatar': {
-          opacity: 1,
-        },
-      }}
       src={currentImage}
+      cursor='pointer'
       {...rest}
     >
-      <Button
-        className='upload-avatar'
-        pos='absolute'
-        inset={0}
-        opacity={0}
-        bg='rgba(0,0,0,0.5)'
-        onClick={open}
-        h='full'
-        rounded={'full'}
-        zIndex={1}
-        _hover={{
-          opacity: 1,
-        }}
-      >
-        <AiFillCamera size={28} color='white' />
-      </Button>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <Center
+          pos='absolute'
+          inset={0}
+          opacity={isDragActive ? 1 : 0}
+          bg='rgba(0,0,0,0.5)'
+          h='full'
+          rounded={'full'}
+          zIndex={1}
+          _hover={{
+            opacity: 1,
+          }}
+          transition='opacity ease 0.2s'
+        >
+          <AiFillCamera size={28} color='white' />
+        </Center>
+      </div>
     </Avatar>
   )
 }
