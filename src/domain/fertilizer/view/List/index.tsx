@@ -15,13 +15,7 @@ export default function FertilizerListView(): JSX.Element {
           variant='outline'
         />
       </Flex>
-      <FertilizersTable
-        data={[]}
-        isLoading={false}
-        onUpdateAction={(value) => {
-          console.log(value)
-        }}
-      />
+      <FertilizersTable data={[]} isLoading={false} onUpdateAction={() => {}} />
     </Page>
   )
 }

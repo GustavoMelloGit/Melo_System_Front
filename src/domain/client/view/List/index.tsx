@@ -6,7 +6,6 @@ import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
   const { data, isLoading, handleCreateClient, handleUpdateClient, total } = useClientsListView()
-  console.log(data)
   return (
     <Page title='Clientes'>
       <Flex as='header' justify='space-between'>
