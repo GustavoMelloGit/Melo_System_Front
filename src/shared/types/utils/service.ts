@@ -12,5 +12,5 @@ export type GetServiceResponse<T> = {
   data?: T
   error?: string
   isLoading: boolean
-  total: number
+  total?: number
 }

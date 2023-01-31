@@ -3,8 +3,9 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import {
   DEFAULT_PAGINATION_LIMIT,
   DEFAULT_ROWS_PER_PAGE_OPTIONS,
+  PaginationParams,
 } from '../../../lib/constants/pagination'
-import useParams from '../../hooks/useParams'
+import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TablePaginationProps } from './types'
 
 export default function TablePagination({
@@ -12,25 +13,25 @@ export default function TablePagination({
   totalLength,
 }: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.300', 'gray.700')
-  const { handleAddParam, getParam } = useParams()
-  const page = getParam('page') ? Number(getParam('page')) : 1
-  const limit = getParam('limit') ? Number(getParam('limit')) : DEFAULT_PAGINATION_LIMIT
+  const { handleAddParam, getParam } = useURLSearchParams()
+  const page = getParam(PaginationParams.page) ? Number(getParam(PaginationParams.page)) : 0
+  const limit = getParam(PaginationParams.rowsPerPage)
+    ? Number(getParam(PaginationParams.rowsPerPage))
+    : DEFAULT_PAGINATION_LIMIT
   const isFirstPage = page <= 1
   const isLastPage = dataLength < limit
 
   const handleNextPage = (): void => {
-    const currentPage = getParam('page')
-    handleAddParam('skip', currentPage ? Number(currentPage) + 1 : 2)
+    handleAddParam(PaginationParams.page, page ? Number(page) + 1 : 2)
   }
 
   const handlePreviousPage = (): void => {
-    const currentPage = getParam('page')
-    handleAddParam('skip', currentPage ? Number(currentPage) - 1 : 1)
+    handleAddParam(PaginationParams.page, page ? Number(page) - 1 : 1)
   }
 
   const handleSetRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = Number(event.target.value)
-    handleAddParam('limit', value)
+    handleAddParam(PaginationParams.rowsPerPage, value)
   }
 
   return (
@@ -64,7 +65,7 @@ export default function TablePagination({
           onClick={handlePreviousPage}
           isDisabled={isFirstPage}
         />
-        <Text>{page}</Text>
+        <Text>{page + 1}</Text>
         <IconButton
           size={['sm', 'md']}
           variant='ghost'
