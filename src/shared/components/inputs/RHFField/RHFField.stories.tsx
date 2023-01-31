@@ -1,7 +1,7 @@
 import { type ComponentMeta, type StoryObj } from '@storybook/react'
 import RHFField from '.'
 export default {
-  title: 'Inputs/RHFField',
+  title: 'components/inputs/RHFField',
   component: RHFField,
   args: {
     register: Function as any,
@@ -9,3 +9,4 @@ export default {
 } as ComponentMeta<typeof RHFField>
 
 export const Default: StoryObj = {}
+Default.args = {}
