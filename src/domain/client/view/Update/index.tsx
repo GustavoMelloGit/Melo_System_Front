@@ -1,11 +1,12 @@
 import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
+import SpinLoader from '../../../../shared/components/SpinLoader'
 import ClientForm from '../../components/ClientForm'
 import useUpdateClientView from './useView'
 
 export default function UpdateClientView(): JSX.Element {
-  const { handleUpdateClient } = useUpdateClientView()
+  const { handleUpdateClient, initialValues, isLoading } = useUpdateClientView()
   return (
     <Page title='Atualizar Cliente'>
       <HeaderBreadcrumbs
@@ -20,30 +21,15 @@ export default function UpdateClientView(): JSX.Element {
           },
         ]}
       />
-      <ClientForm
-        onSubmit={handleUpdateClient}
-        defaultValues={{
-          address: {
-            brook: '',
-            city: '',
-            complement: '',
-            neighborhood: '',
-            number: '',
-            state: '',
-            street: '',
-            zipCode: '',
-          },
-          contact: {
-            fatherName: '',
-            motherName: '',
-            phone: '',
-          },
-          profileImage: ' ',
-          id: '',
-          name: '',
-        }}
-        submitText='Salvar'
-      />
+      {isLoading ? (
+        <SpinLoader />
+      ) : (
+        <ClientForm
+          onSubmit={handleUpdateClient}
+          defaultValues={initialValues}
+          submitText='Salvar'
+        />
+      )}
     </Page>
   )
 }

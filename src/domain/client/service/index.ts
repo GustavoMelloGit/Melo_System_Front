@@ -8,14 +8,24 @@ import {
 import { type ClientFormValues } from '../types/components/ClientsForm'
 import { type ClientModel } from '../types/model/Client'
 
-export function listClientsService(): GetServiceResponse<ClientModel[]> {
-  const { data, error, isLoading } = useFetch('/clients')
+export function listClientsService(params?: string): GetServiceResponse<ClientModel[]> {
+  const { data, error, isLoading } = useFetch(`/clients?${params ?? ''}`)
 
   return {
     data: data?.data,
     error: errorHandler(error),
     isLoading,
     total: data?.total ?? 0,
+  }
+}
+
+export function getClientService(id: string): GetServiceResponse<ClientModel> {
+  const { data, error, isLoading } = useFetch(`/clients/${id}`)
+
+  return {
+    data,
+    error: errorHandler(error),
+    isLoading,
   }
 }
 

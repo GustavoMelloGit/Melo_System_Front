@@ -48,9 +48,9 @@ export default function ClientsTable({
             {Intl.NumberFormat('pt-BR', {
               style: 'currency',
               currency: 'BRL',
-            }).format(Math.random() * 1000)}
+            }).format(client?.balance ?? 0)}
           </Td>
-          <Td>(32) 99999-9999</Td>
+          <Td>{client?.contact?.phone}</Td>
           <Td>
             <IconButton
               aria-label='Editar cliente'
