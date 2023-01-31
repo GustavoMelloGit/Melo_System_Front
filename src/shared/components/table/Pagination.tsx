@@ -14,7 +14,7 @@ export default function TablePagination({
 }: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.300', 'gray.700')
   const { handleAddParam, getParam } = useURLSearchParams()
-  const page = getParam(PaginationParams.page) ? Number(getParam(PaginationParams.page)) : 0
+  const page = getParam(PaginationParams.page) ? Number(getParam(PaginationParams.page)) : 1
   const limit = getParam(PaginationParams.rowsPerPage)
     ? Number(getParam(PaginationParams.rowsPerPage))
     : DEFAULT_PAGINATION_LIMIT
@@ -65,7 +65,7 @@ export default function TablePagination({
           onClick={handlePreviousPage}
           isDisabled={isFirstPage}
         />
-        <Text>{page + 1}</Text>
+        <Text>{page}</Text>
         <IconButton
           size={['sm', 'md']}
           variant='ghost'
