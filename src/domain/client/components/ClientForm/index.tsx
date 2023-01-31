@@ -37,9 +37,7 @@ export default function ClientForm({
   const {
     form: { register, setValue, formState, watch, handleSubmit },
   } = useClientForm({ defaultValues })
-
   const isLegalPerson = watch('personType.personType') === 'juridica'
-
   const formHasErrors = Object.keys(formState.errors).length > 0
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,12 +1,12 @@
 import { IconButton, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
-import useParams from '../../hooks/useParams'
+import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TableHeaderProps } from './types'
 
 export default function TableHeader({ columns }: TableHeaderProps): JSX.Element {
   const bg = useColorModeValue('gray.300', 'gray.700')
   const textColor = useColorModeValue('black', 'white')
-  const { getParam, handleAddParams } = useParams()
+  const { getParam, handleAddParams } = useURLSearchParams()
   const sortOrder = getParam('order')
   const sortBy = getParam('sortBy')
 

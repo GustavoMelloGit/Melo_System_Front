@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-export default function useParams(): UseParams {
+export default function useURLSearchParams(): UseParams {
   const [urlSearchParams, setUrlSearchParams] = useSearchParams()
   const allSearchParams: Record<string, string> = useMemo(
     () =>
@@ -48,6 +48,7 @@ export default function useParams(): UseParams {
     getParam,
     handleAddParams,
     handleRemoveParams,
+    allSearchParams,
   }
 }
 
@@ -58,4 +59,5 @@ export type UseParams = {
   getParam: (key: string) => string | null
   handleAddParams: (params: Record<string, string>) => void
   handleRemoveParams: (keys: string[]) => void
+  allSearchParams: Record<string, string>
 }
