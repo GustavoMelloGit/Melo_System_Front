@@ -1,4 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { withRouter } from "storybook-addon-react-router-v6";
 import theme, { themeManager } from '../src/lib/styles/theme';
 
 export const parameters = {
@@ -9,6 +10,14 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  parameters: {
+    reactRouter: {
+      routePath: '/users/:userId',
+      routeParams: { userId: '42' },
+      searchParams: { tab: 'activityLog' },
+      routeState: { fromPage: 'homePage' },
+    }
+  }
 
 }
 
@@ -17,5 +26,6 @@ export const decorators = [
     <ChakraProvider theme={theme} colorModeManager={themeManager}>
       <Story />
     </ChakraProvider>
-  )
+  ),
+  withRouter
 ]
