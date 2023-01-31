@@ -5,19 +5,16 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../shared/components/table/types'
-import { type ClientModel } from '../../types/model/Client'
 
 type ClientsTableProps = {
-  data: ClientModel[] | undefined
-  totalClients: number
+  data: any[] | undefined
   isLoading: boolean
-  onUpdateClient: (uuid: string) => void
+  onUpdateAction: (uuid: string) => void
 }
-export default function ClientsTable({
+export default function FertilizersTable({
   data,
   isLoading,
-  totalClients,
-  onUpdateClient,
+  onUpdateAction,
 }: ClientsTableProps): JSX.Element {
   return (
     <Table
@@ -27,11 +24,11 @@ export default function ClientsTable({
       rows={{
         isLoading,
         dataLength: data?.length ?? 0,
-        noDataMessage: 'Nenhum cliente encontrado',
+        noDataMessage: 'Nenhum adubo encontrado',
       }}
       pagination={{
         dataLength: data?.length ?? 0,
-        totalLength: totalClients,
+        totalLength: 0,
       }}
       filter={{
         searchForOptions,
@@ -57,7 +54,7 @@ export default function ClientsTable({
               icon={<TbPencil />}
               variant='ghost'
               onClick={() => {
-                onUpdateClient(client.id)
+                onUpdateAction(client.id)
               }}
             />
           </Td>
@@ -68,28 +65,13 @@ export default function ClientsTable({
 }
 
 const headerColumns: TableHeaderColumns[] = [
-  { id: 'photo', label: 'Foto' },
-  { id: 'name', label: 'Nome', isSortable: true },
-  { id: 'nickname', label: 'Apelido', isSortable: true },
-  { id: 'balance', label: 'Saldo', isSortable: true },
-  { id: 'phone', label: 'Telefone' },
+  { id: 'brand', label: 'Marca' },
+  { id: 'chemistry', label: 'Fórmula' },
   { id: 'actions', label: 'Ações' },
 ]
 const searchForOptions: SearchForOption[] = [
   {
-    label: 'Nome',
-    value: 'name',
-  },
-  {
-    label: 'Apelido',
-    value: 'nickname',
-  },
-  {
-    label: 'ID',
-    value: 'id',
-  },
-  {
-    label: 'Córrego',
-    value: 'address.brook',
+    label: 'Marca',
+    value: 'brand',
   },
 ]

@@ -7,7 +7,10 @@ import {
 import useParams from '../../hooks/useParams'
 import { type TablePaginationProps } from './types'
 
-export default function TablePagination({ dataLength }: TablePaginationProps): JSX.Element {
+export default function TablePagination({
+  dataLength,
+  totalLength,
+}: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.300', 'gray.700')
   const { handleAddParam, getParam } = useParams()
   const page = getParam('page') ? Number(getParam('page')) : 1
@@ -42,7 +45,7 @@ export default function TablePagination({ dataLength }: TablePaginationProps): J
     >
       <Show above='sm'>
         <Text>
-          {dataLength} {dataLength === 1 ? 'Item' : 'Items'}
+          {totalLength} {totalLength === 1 ? 'Item' : 'Items'}
         </Text>
       </Show>
       <Select w={'fit-content'} onChange={handleSetRowsPerPage} value={limit}>

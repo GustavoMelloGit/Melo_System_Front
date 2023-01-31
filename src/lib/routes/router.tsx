@@ -3,6 +3,7 @@ import { Routes } from '.'
 import { authRoutes } from '../../domain/auth/routes'
 import clientsRoutes from '../../domain/client/routes'
 import NotFoundPage from '../../domain/error/view/404'
+import fertilizersRoutes from '../../domain/fertilizer/routes'
 import homeRoutes from '../../domain/home/routes'
 import PageLayout from '../../shared/components/layout'
 import { ProtectedRoute } from '../../shared/components/Routers'
@@ -22,6 +23,7 @@ export const protectedRoutes: RouteObject = {
     },
     ...homeRoutes,
     ...clientsRoutes,
+    ...fertilizersRoutes,
   ],
 }
 

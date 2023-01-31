@@ -16,6 +16,7 @@ export type TableHeaderProps = {
 
 export type TablePaginationProps = {
   dataLength: number
+  totalLength: number
 }
 
 export type SearchForOption = {
@@ -24,6 +25,7 @@ export type SearchForOption = {
 }
 export type TableFilterProps = {
   searchForOptions: SearchForOption[]
+  hasMoreFilters?: boolean
 }
 
 export type TableProps = {

@@ -5,4 +5,5 @@ export const Routes = {
   clients: '/clients',
   createClient: '/clients/create',
   updateClient: (uuid: string) => `/clients/update/${uuid}`,
+  fertilizers: '/fertilizers',
 } as const

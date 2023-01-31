@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
-import useParams from '../../../../shared/hooks/useParams'
+import { listClientsService } from '../../service'
 import { type ClientsListView } from '../../types/view/List'
 
 export default function useClientsListView(): ClientsListView {
   const navigate = useNavigate()
-  const { getParam } = useParams()
+  const { data, error, isLoading, total } = listClientsService()
 
   function handleCreateClient(): void {
     navigate(Routes.createClient)
@@ -16,10 +16,11 @@ export default function useClientsListView(): ClientsListView {
   }
 
   return {
-    data: [],
-    error: undefined,
-    isLoading: false,
+    data,
+    error,
+    isLoading,
     handleCreateClient,
     handleUpdateClient,
+    total,
   }
 }
