@@ -28,6 +28,7 @@ export default function FertilizersTable({
       }}
       pagination={{
         dataLength: data?.length ?? 0,
+        totalLength: 0,
       }}
       filter={{
         searchForOptions,
