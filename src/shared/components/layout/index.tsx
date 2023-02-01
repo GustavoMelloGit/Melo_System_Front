@@ -12,13 +12,19 @@ export default function PageLayout(): JSX.Element {
   return (
     <Flex minH='100vh' position='relative'>
       {isOpen && (
-        <Box as='aside' position='fixed' top={0} w={['100vw', '20rem']} bottom={0} zIndex={10000}>
+        <Box
+          as='aside'
+          position={['fixed', 'initial']}
+          top={0}
+          w={['100vw', '20rem']}
+          bottom={0}
+          zIndex={10000}
+        >
           <Sidebar />
         </Box>
       )}
       <Box
         as='main'
-        ml={isOpen ? '20rem' : 0}
         w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
         display={isOpen ? ['none', 'flex'] : 'flex'}
       >
