@@ -1,20 +1,23 @@
-import { Flex, Heading, IconButton } from '@chakra-ui/react'
-import { AiOutlineUserAdd } from 'react-icons/ai'
+import { IconButton } from '@chakra-ui/react'
+import { IoAddOutline } from 'react-icons/io5'
+import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import FertilizersTable from '../../components/FertilizersTable'
 
 export default function FertilizerListView(): JSX.Element {
   return (
     <Page title='Adubos'>
-      <Flex as='header' justify='space-between'>
-        <Heading>Adubos</Heading>
-        <IconButton
-          aria-label='Adicionar adubo'
-          icon={<AiOutlineUserAdd />}
-          colorScheme='blue'
-          variant='outline'
-        />
-      </Flex>
+      <HeaderBreadcrumbs
+        heading='Adubos'
+        actions={
+          <IconButton
+            aria-label='Criar cliente'
+            icon={<IoAddOutline size={22} />}
+            colorScheme='blue'
+            variant='outline'
+          />
+        }
+      />
       <FertilizersTable data={[]} isLoading={false} onUpdateAction={() => {}} />
     </Page>
   )
