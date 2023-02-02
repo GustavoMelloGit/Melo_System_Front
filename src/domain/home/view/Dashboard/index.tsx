@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { type ApexOptions } from 'apexcharts'
 import Chart from 'react-apexcharts'
+import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 
 export default function HomePage(): JSX.Element {
@@ -118,7 +119,7 @@ export default function HomePage(): JSX.Element {
 
   return (
     <Page title='Página inicial'>
-      <Heading>Página inicial</Heading>
+      <HeaderBreadcrumbs heading='Página inicial' />
       <Grid w='full' gridTemplateColumns='repeat( auto-fit, minmax(200px, 1fr) )' gap={6}>
         <GridItem>
           <InfoCard

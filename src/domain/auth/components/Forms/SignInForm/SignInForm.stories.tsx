@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react'
-import { type ComponentMeta, type StoryObj } from '@storybook/react'
+import { type ComponentMeta, type ComponentStory } from '@storybook/react'
 import { userEvent, within } from '@storybook/testing-library'
 import SignInForm from '.'
 
@@ -15,9 +15,11 @@ export default {
   ],
 } as ComponentMeta<typeof SignInForm>
 
-export const Default: StoryObj = {}
+const Template: ComponentStory<typeof SignInForm> = (args) => <SignInForm {...args} />
 
-export const Filled: StoryObj = {}
+export const Default = Template.bind({})
+
+export const Filled = Template.bind({})
 Filled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
 
@@ -38,7 +40,7 @@ Filled.play = async ({ canvasElement }) => {
   userEvent.click(button)
 }
 
-export const FilledError: StoryObj = {}
+export const FilledError = Template.bind({})
 FilledError.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
 
