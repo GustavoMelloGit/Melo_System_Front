@@ -7,7 +7,7 @@ import {
   type PropsWithChildren,
 } from 'react'
 import { toast } from 'react-hot-toast'
-import { setAuthToken } from '../../../lib/service/api'
+import { setAuthToken } from '../../../lib/config/api'
 import useLocalStorage from '../../../shared/hooks/useLocalStorage'
 import { signInService } from '../service'
 import { type SignInValues } from '../types'

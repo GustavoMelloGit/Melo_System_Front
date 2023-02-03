@@ -1,4 +1,5 @@
-import api from '../../../lib/service/api'
+import api from '../../../lib/config/api'
+import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import useFetch from '../../../shared/hooks/useFetch'
 import {
@@ -35,7 +36,15 @@ export async function createClientService(
   values: ClientFormValues,
 ): Promise<PostServiceResponse<ClientModel>> {
   try {
-    const { data } = await api.post('/clients', values)
+    let profileImage = values.profileImage
+    if (profileImage) {
+      profileImage = await uploadImage(profileImage, values.name)
+    }
+
+    const { data } = await api.post('/clients', {
+      ...values,
+      profileImage,
+    })
 
     return {
       data,
