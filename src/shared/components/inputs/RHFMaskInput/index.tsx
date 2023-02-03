@@ -9,8 +9,6 @@ import {
 } from '@chakra-ui/react'
 import {
   get,
-  type DeepMap,
-  type FieldError,
   type FieldValues,
   type Path,
   type RegisterOptions,
@@ -22,7 +20,7 @@ export type RHFMaskInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
   rules?: RegisterOptions
   register: UseFormRegister<TFormValues>
-  errors?: Partial<DeepMap<TFormValues, FieldError>>
+  errors?: unknown
   leftIcon?: React.ReactNode
   label?: string
   mask?: any
