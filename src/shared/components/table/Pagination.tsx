@@ -43,6 +43,7 @@ export default function TablePagination({
       bgColor={bg}
       roundedBottom={16}
       py={1}
+      px={[3, 1]}
     >
       <Show above='sm'>
         <Text>
