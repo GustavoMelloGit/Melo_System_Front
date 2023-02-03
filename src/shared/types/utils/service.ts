@@ -1,4 +1,16 @@
+import { type KeyedMutator } from 'swr'
+
 export type PostServiceResponse<T> =
+  | {
+      data: T
+      error: null
+    }
+  | {
+      data: null
+      error: string
+    }
+
+export type PutServiceResponse<T> =
   | {
       data: T
       error: null
@@ -13,4 +25,5 @@ export type GetServiceResponse<T> = {
   error?: string
   isLoading: boolean
   total?: number
+  mutate?: KeyedMutator<T>
 }
