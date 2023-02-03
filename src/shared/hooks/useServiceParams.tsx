@@ -21,5 +21,13 @@ export default function useServiceParams(): any {
     params.append(searchForParam, queryParam)
   }
 
+  const orderBy = getParam('field')
+  const order = getParam('order')
+
+  if (orderBy && order) {
+    params.append('field', orderBy)
+    params.append('order', order)
+  }
+
   return params.toString()
 }

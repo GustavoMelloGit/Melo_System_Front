@@ -8,11 +8,11 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
   const textColor = useColorModeValue('black', 'white')
   const { getParam, handleAddParams } = useURLSearchParams()
   const sortOrder = getParam('order')
-  const sortBy = getParam('sortBy')
+  const sortBy = getParam('field')
 
   const handleSort = (columnId: string, order: 'asc' | 'desc'): void => {
     handleAddParams({
-      sortBy: columnId,
+      field: columnId,
       order,
     })
   }
