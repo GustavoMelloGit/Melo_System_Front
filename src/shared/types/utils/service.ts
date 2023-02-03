@@ -10,6 +10,16 @@ export type PostServiceResponse<T> =
       error: string
     }
 
+export type PutServiceResponse<T> =
+  | {
+      data: T
+      error: null
+    }
+  | {
+      data: null
+      error: string
+    }
+
 export type GetServiceResponse<T> = {
   data?: T
   error?: string

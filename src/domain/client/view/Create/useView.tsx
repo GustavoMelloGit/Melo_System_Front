@@ -7,6 +7,7 @@ import { type UseCreateClientView } from '../../types/view/Create'
 
 export default function useCreateClientView(): UseCreateClientView {
   const navigate = useNavigate()
+
   async function handleCreateClient(values: ClientFormValues): Promise<void> {
     const cleanValues = removeEmptyProperties(values) as ClientFormValues
     const { error } = await createClientService(cleanValues)
@@ -14,7 +15,7 @@ export default function useCreateClientView(): UseCreateClientView {
       toast.error(error)
       return
     }
-    toast.success('Client created successfully')
+    toast.success('Cliente criado com sucesso!')
     navigate(-1)
   }
 
