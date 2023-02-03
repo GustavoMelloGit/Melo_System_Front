@@ -1,14 +1,26 @@
-import { useParams } from 'react-router-dom'
-import { getClientService } from '../../service'
+import { toast } from 'react-hot-toast'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getClientService, updateClientService } from '../../service'
 import { type ClientFormValues } from '../../types/components/ClientsForm'
 import { type UseUpdateClientView } from '../../types/view/Update'
 
 export default function useUpdateClientView(): UseUpdateClientView {
   const { uuid } = useParams()
-
-  const { data, isLoading } = getClientService(uuid ?? '')
+  const navigate = useNavigate()
+  const { data, isLoading, mutate } = getClientService(uuid ?? '')
   async function handleUpdateClient(values: ClientFormValues): Promise<void> {
-    console.log(values)
+    if (!uuid) {
+      navigate(-1)
+      return
+    }
+    const { error } = await updateClientService(uuid, values)
+    if (error) {
+      toast.error(error)
+      return
+    }
+    toast.success('Cliente atualizado com sucesso!')
+    navigate(-1)
+    await mutate?.()
   }
   return {
     handleUpdateClient,
