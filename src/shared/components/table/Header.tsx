@@ -22,7 +22,7 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
     <Thead bg={bg}>
       <Tr h={16}>
         {columns.map((column) => (
-          <Th key={column.id} color={textColor}>
+          <Th key={column.id} color={textColor} textAlign={column.align}>
             {column.label}
             {column.isSortable && (
               <IconButton

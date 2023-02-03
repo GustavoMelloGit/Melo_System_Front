@@ -9,6 +9,7 @@ export type TableHeaderColumns = {
   id: string
   label: string
   isSortable?: boolean
+  align?: 'left' | 'right' | 'center'
 }
 export type TableHeaderProps = {
   columns: TableHeaderColumns[]
