@@ -1,4 +1,4 @@
-import api from '../../../lib/service/api'
+import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/error'
 import { type SignInValues } from '../types'
 import { type SignInResponse } from '../types/service'
