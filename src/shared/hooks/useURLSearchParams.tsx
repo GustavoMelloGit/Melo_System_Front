@@ -13,28 +13,31 @@ export default function useURLSearchParams(): UseParams {
   )
 
   function handleAddParam(key: string, value: string | number): void {
-    setUrlSearchParams({ ...allSearchParams, [key]: value.toString() })
+    urlSearchParams.set(key, String(value))
+    setUrlSearchParams(urlSearchParams)
   }
 
   function handleAddParams(params: Record<string, string>): void {
-    setUrlSearchParams({ ...allSearchParams, ...params })
+    Object.keys(params).forEach((key) => {
+      urlSearchParams.set(key, params[key])
+    })
+    setUrlSearchParams(urlSearchParams)
   }
 
   function handleRemoveParam(key: string): void {
-    const { [key]: _, ...rest } = allSearchParams
-    setUrlSearchParams(rest)
+    urlSearchParams.delete(key)
+    setUrlSearchParams(urlSearchParams)
   }
 
   function handleRemoveParams(keys: string[]): void {
-    const newParams = keys.reduce((acc, val) => {
-      const { [val]: _, ...rest } = acc
-      return rest
-    }, allSearchParams)
-    setUrlSearchParams(newParams)
+    keys.forEach((key) => {
+      urlSearchParams.delete(key)
+    })
+    setUrlSearchParams(urlSearchParams)
   }
 
   function handleRemoveAllParams(): void {
-    setUrlSearchParams({})
+    setUrlSearchParams(new URLSearchParams())
   }
 
   function getParam(key: string): string | null {
