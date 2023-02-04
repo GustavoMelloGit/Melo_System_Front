@@ -10,7 +10,7 @@ export default function PageLayout(): JSX.Element {
     sidebar: { isOpen },
   } = useLayoutContext()
   return (
-    <Flex h='100vh' position='relative' overflow='hidden'>
+    <Flex h='100vh' position='relative'>
       {isOpen && (
         <Box
           as='aside'
@@ -28,7 +28,7 @@ export default function PageLayout(): JSX.Element {
         as='main'
         w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
         display={isOpen ? ['none', 'flex'] : 'flex'}
-        overflowY='auto'
+        overflowY={['unset', 'auto']}
       >
         <ContentWrapper>
           <Suspense>
