@@ -13,24 +13,25 @@ export default function TablePagination({
   totalLength,
 }: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.300', 'gray.700')
-  const { handleAddParam, getParam } = useURLSearchParams()
-  const page = getParam(PaginationParams.page) ? Number(getParam(PaginationParams.page)) : 1
-  const limit = getParam(PaginationParams.rowsPerPage)
-    ? Number(getParam(PaginationParams.rowsPerPage))
-    : DEFAULT_PAGINATION_LIMIT
-  const isFirstPage = page <= 1
-  const isLastPage = dataLength < limit
+  const { handleAddParam, getParam, handleRemoveParam } = useURLSearchParams()
+  const pageParam = getParam(PaginationParams.page)
+  const currentPage = pageParam ? Number(pageParam) : 1
+  const limitParam = getParam(PaginationParams.rowsPerPage)
+  const rowsPerPage = limitParam ? Number(limitParam) : DEFAULT_PAGINATION_LIMIT
+  const isFirstPage = currentPage <= 1
+  const isLastPage = dataLength < rowsPerPage
 
   const handleNextPage = (): void => {
-    handleAddParam(PaginationParams.page, page ? Number(page) + 1 : 2)
+    handleAddParam(PaginationParams.page, pageParam ? Number(pageParam) + 1 : 2)
   }
 
   const handlePreviousPage = (): void => {
-    handleAddParam(PaginationParams.page, page ? Number(page) - 1 : 1)
+    handleAddParam(PaginationParams.page, pageParam ? Number(pageParam) - 1 : 1)
   }
 
   const handleSetRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = Number(event.target.value)
+    handleRemoveParam(PaginationParams.page)
     handleAddParam(PaginationParams.rowsPerPage, value)
   }
 
@@ -43,13 +44,14 @@ export default function TablePagination({
       bgColor={bg}
       roundedBottom={16}
       py={1}
+      px={[3, 1]}
     >
       <Show above='sm'>
         <Text>
           {totalLength} {totalLength === 1 ? 'Item' : 'Items'}
         </Text>
       </Show>
-      <Select w={'fit-content'} onChange={handleSetRowsPerPage} value={limit}>
+      <Select w={'fit-content'} onChange={handleSetRowsPerPage} value={rowsPerPage}>
         {DEFAULT_ROWS_PER_PAGE_OPTIONS.map((rowsPerPage) => (
           <option key={rowsPerPage} value={rowsPerPage}>
             {rowsPerPage} {rowsPerPage === 1 ? 'Item' : 'Items'}
@@ -65,7 +67,7 @@ export default function TablePagination({
           onClick={handlePreviousPage}
           isDisabled={isFirstPage}
         />
-        <Text>{page}</Text>
+        <Text>{currentPage}</Text>
         <IconButton
           size={['sm', 'md']}
           variant='ghost'

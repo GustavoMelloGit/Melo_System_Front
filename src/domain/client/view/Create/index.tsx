@@ -25,7 +25,7 @@ export default function CreateClientsView(): JSX.Element {
         defaultValues={
           {
             personType: {
-              personType: 'fisica',
+              type: 'fisica',
             },
           } as ClientFormValues
         }

@@ -40,10 +40,18 @@ export default function ClientsTable({
       {data?.map((client, index) => (
         <Tr key={index}>
           <Td>
-            <Avatar loading='lazy' src={client.profileImage} />
+            <Avatar loading='lazy' src={client.profileImage} name={client.name} />
           </Td>
-          <Td>{client.name}</Td>
-          <Td>{client.nickname}</Td>
+          <Td
+            title={client.name}
+            maxW={40}
+            whiteSpace='nowrap'
+            textOverflow='ellipsis'
+            overflow='hidden'
+          >
+            {client.name}
+          </Td>
+          <Td title={client.nickname}>{client.nickname}</Td>
           <Td>
             {Intl.NumberFormat('pt-BR', {
               style: 'currency',
@@ -51,7 +59,7 @@ export default function ClientsTable({
             }).format(client?.balance ?? 0)}
           </Td>
           <Td>{client?.contact?.phone}</Td>
-          <Td>
+          <Td textAlign='center'>
             <IconButton
               aria-label='Editar cliente'
               icon={<TbPencil />}
@@ -73,7 +81,7 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'nickname', label: 'Apelido', isSortable: true },
   { id: 'balance', label: 'Saldo', isSortable: true },
   { id: 'phone', label: 'Telefone' },
-  { id: 'actions', label: 'Ações' },
+  { id: 'actions', label: 'Ações', align: 'center' },
 ]
 const searchForOptions: SearchForOption[] = [
   {

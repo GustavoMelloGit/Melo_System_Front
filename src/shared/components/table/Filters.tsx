@@ -1,6 +1,7 @@
 import { Box, Grid, GridItem, Hide, IconButton, Show, useColorModeValue } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { BiFilter, BiSearchAlt } from 'react-icons/bi'
+import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import RHFField from '../inputs/RHFField'
 import RHFSelectField from '../inputs/RHFSelectField'
@@ -12,18 +13,18 @@ export default function TableFilters({
 }: TableFilterProps): JSX.Element {
   const { getParam } = useURLSearchParams()
   const bg = useColorModeValue('gray.300', 'gray.700')
-  const queryParam = getParam('query')
+  const queryParam = getParam(PaginationParams.searchBy)
   const { handleSubmit, register } = useForm<FilterFormValues>({
     defaultValues: {
       query: queryParam ?? '',
-      searchFor: getParam('searchFor') ?? searchForOptions[0].value,
+      searchFor: getParam(PaginationParams.searchFor) ?? searchForOptions[0].value,
     },
   })
   const { handleAddParams, handleRemoveParams } = useURLSearchParams()
 
   function handleSubmitFilter({ query, searchFor }: FilterFormValues): void {
     if (!query) {
-      handleRemoveParams(['query', 'searchFor'])
+      handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
       return
     }
     handleAddParams({

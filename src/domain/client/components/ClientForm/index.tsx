@@ -37,7 +37,7 @@ export default function ClientForm({
   const {
     form: { register, setValue, formState, watch, handleSubmit },
   } = useClientForm({ defaultValues })
-  const isLegalPerson = watch('personType.personType') === 'juridica'
+  const isLegalPerson = watch('personType.type') === 'juridica'
   const formHasErrors = Object.keys(formState.errors).length > 0
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +85,7 @@ export default function ClientForm({
               </GridItem>
               <GridItem>
                 <RHFSelectField<ClientFormValues>
-                  name='personType.personType'
+                  name='personType.type'
                   label='Tipo de pessoa'
                   register={register}
                   options={[
@@ -105,7 +105,7 @@ export default function ClientForm({
                         </Text>
                       </AccordionButton>
                       <AccordionPanel>
-                        <AddressFields register={register} />
+                        <AddressFields setValue={setValue} register={register} />
                       </AccordionPanel>
                     </AccordionItem>
                   </Accordion>

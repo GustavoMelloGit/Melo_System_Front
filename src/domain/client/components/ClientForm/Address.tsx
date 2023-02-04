@@ -1,13 +1,14 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import { type UseFormRegister } from 'react-hook-form'
+import { type UseFormRegister, type UseFormSetValue } from 'react-hook-form'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
 import { type ClientFormValues } from '../../types/components/ClientsForm'
 
 type AddressFieldsProps = {
   register: UseFormRegister<ClientFormValues>
+  setValue: UseFormSetValue<ClientFormValues>
 }
-export default function AddressFields({ register }: AddressFieldsProps): JSX.Element {
+export default function AddressFields({ register, setValue }: AddressFieldsProps): JSX.Element {
   return (
     <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4}>
       <GridItem>
@@ -25,6 +26,9 @@ export default function AddressFields({ register }: AddressFieldsProps): JSX.Ele
           label='CEP'
           placeholder='CEP do cliente'
           mask='00000-000'
+          setValue={(value) => {
+            setValue('address.zipCode', value.match(/\d/g)?.join('') ?? '')
+          }}
         />
       </GridItem>
       <GridItem>

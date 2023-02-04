@@ -5,14 +5,12 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  type InputProps,
   InputRightElement,
+  type InputProps,
 } from '@chakra-ui/react'
 import {
-  type DeepMap,
-  type FieldError,
-  type FieldValues,
   get,
+  type FieldValues,
   type Path,
   type RegisterOptions,
   type UseFormRegister,
@@ -22,7 +20,7 @@ export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
   rules?: RegisterOptions
   register: UseFormRegister<TFormValues>
-  errors?: Partial<DeepMap<TFormValues, FieldError>>
+  errors?: unknown
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   label?: string

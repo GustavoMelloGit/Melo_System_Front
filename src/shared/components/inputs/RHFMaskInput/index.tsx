@@ -8,10 +8,8 @@ import {
   type InputProps,
 } from '@chakra-ui/react'
 import {
-  type DeepMap,
-  type FieldError,
-  type FieldValues,
   get,
+  type FieldValues,
   type Path,
   type RegisterOptions,
   type UseFormRegister,
@@ -22,7 +20,7 @@ export type RHFMaskInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
   rules?: RegisterOptions
   register: UseFormRegister<TFormValues>
-  errors?: Partial<DeepMap<TFormValues, FieldError>>
+  errors?: unknown
   leftIcon?: React.ReactNode
   label?: string
   mask?: any
@@ -52,6 +50,7 @@ export default function RHFMaskInput<TFormValues extends Record<string, unknown>
           rounded='xl'
           fontWeight={500}
           {...register(name, rules)}
+          inputRef={register(name, rules).ref}
           onAccept={(value: string) => {
             setValue?.(value)
           }}

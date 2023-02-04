@@ -14,11 +14,19 @@ export default function useServiceParams(): any {
   if (limit) {
     params.append(PaginationParams.rowsPerPage, limit)
   }
-  const queryParam = getParam('query')
-  const searchForParam = getParam('searchFor')
+  const queryParam = getParam(PaginationParams.searchBy)
+  const searchForParam = getParam(PaginationParams.searchFor)
 
   if (queryParam && searchForParam) {
     params.append(searchForParam, queryParam)
+  }
+
+  const orderBy = getParam(PaginationParams.sortBy)
+  const order = getParam(PaginationParams.sortOrder)
+
+  if (orderBy && order) {
+    params.append(PaginationParams.sortBy, orderBy)
+    params.append(PaginationParams.sortOrder, order)
   }
 
   return params.toString()
