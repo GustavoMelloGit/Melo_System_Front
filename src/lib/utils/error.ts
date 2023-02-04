@@ -3,13 +3,13 @@ import { type AxiosErrorResponse } from '../../shared/types/utils/error'
 
 export function errorHandler(error: unknown): string {
   if (isAxiosError<AxiosErrorResponse>(error)) {
-    return error.response?.data.message ?? 'Unknown error'
+    return error.response?.data.message ?? 'Um erro desconhecido ocorreu'
   }
   if (error instanceof Error) {
     return error.message
   }
 
-  return 'Unknown error'
+  return 'Um erro desconhecido ocorreu'
 }
 
 export function isAxiosError<ResponseType>(error: unknown): error is AxiosError<ResponseType> {
