@@ -17,8 +17,8 @@ export default function AvatarDropzone({
   const handleOnDrop = useCallback((files: File[]) => {
     new Compressor(files[0], {
       quality: 0.6,
-      width: 300,
-      height: 300,
+      maxWidth: 300,
+      maxHeight: 300,
       success(result) {
         const reader = new FileReader()
         reader.onload = () => {
@@ -29,9 +29,6 @@ export default function AvatarDropzone({
           }
         }
         reader.readAsDataURL(result)
-      },
-      error(err) {
-        console.log(err.message)
       },
     })
   }, [])
