@@ -6,5 +6,4 @@ export type ClientsListView = {
   isLoading: boolean
   total: number
   handleCreateClient: () => void
-  handleUpdateClient: (uuid: string) => void
 }

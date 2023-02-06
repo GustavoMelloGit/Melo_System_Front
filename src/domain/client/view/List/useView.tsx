@@ -13,16 +13,11 @@ export default function useClientsListView(): ClientsListView {
     navigate(Routes.createClient)
   }
 
-  function handleUpdateClient(uuid: string): void {
-    navigate(Routes.updateClient(uuid))
-  }
-
   return {
     data,
     error,
     isLoading,
     handleCreateClient,
-    handleUpdateClient,
     total: total ?? 0,
   }
 }

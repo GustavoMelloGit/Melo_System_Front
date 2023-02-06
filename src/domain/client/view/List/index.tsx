@@ -6,7 +6,7 @@ import ClientsTable from '../../components/ClientsTable'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
-  const { data, isLoading, handleCreateClient, handleUpdateClient, total } = useClientsListView()
+  const { data, isLoading, handleCreateClient, total } = useClientsListView()
   return (
     <Page title='Clientes'>
       <HeaderBreadcrumbs
@@ -21,12 +21,7 @@ export default function ClientsListView(): JSX.Element {
           />
         }
       />
-      <ClientsTable
-        totalClients={total}
-        data={data}
-        isLoading={isLoading}
-        onUpdateClient={handleUpdateClient}
-      />
+      <ClientsTable totalClients={total} data={data} isLoading={isLoading} />
     </Page>
   )
 }

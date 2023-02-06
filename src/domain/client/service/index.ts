@@ -63,7 +63,14 @@ export async function updateClientService(
   values: ClientFormValues,
 ): Promise<PutServiceResponse<ClientModel>> {
   try {
-    const { data } = await api.put(`/clients/${id}`, values)
+    let profileImage = values.profileImage
+    if (profileImage) {
+      profileImage = await uploadImage(profileImage, values.name)
+    }
+    const { data } = await api.put(`/clients/${id}`, {
+      ...values,
+      profileImage,
+    })
 
     return {
       data,

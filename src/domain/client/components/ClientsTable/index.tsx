@@ -1,23 +1,20 @@
-import { Avatar, IconButton, Td, Tr } from '@chakra-ui/react'
-import { TbPencil } from 'react-icons/tb'
 import Table from '../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../shared/components/table/types'
 import { type ClientModel } from '../../types/model/Client'
+import ClientsTableRow from './Row'
 
 type ClientsTableProps = {
   data: ClientModel[] | undefined
   totalClients: number
   isLoading: boolean
-  onUpdateClient: (uuid: string) => void
 }
 export default function ClientsTable({
   data,
   isLoading,
   totalClients,
-  onUpdateClient,
 }: ClientsTableProps): JSX.Element {
   return (
     <Table
@@ -38,38 +35,7 @@ export default function ClientsTable({
       }}
     >
       {data?.map((client, index) => (
-        <Tr key={index}>
-          <Td>
-            <Avatar loading='lazy' src={client.profileImage} name={client.name} />
-          </Td>
-          <Td
-            title={client.name}
-            maxW={40}
-            whiteSpace='nowrap'
-            textOverflow='ellipsis'
-            overflow='hidden'
-          >
-            {client.name}
-          </Td>
-          <Td title={client.nickname}>{client.nickname}</Td>
-          <Td>
-            {Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(client?.balance ?? 0)}
-          </Td>
-          <Td>{client?.contact?.phone}</Td>
-          <Td textAlign='center'>
-            <IconButton
-              aria-label='Editar cliente'
-              icon={<TbPencil />}
-              variant='ghost'
-              onClick={() => {
-                onUpdateClient(client.id)
-              }}
-            />
-          </Td>
-        </Tr>
+        <ClientsTableRow key={index} client={client} />
       ))}
     </Table>
   )
