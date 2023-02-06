@@ -1,4 +1,5 @@
 import { Avatar, Center, type AvatarProps } from '@chakra-ui/react'
+import Compressor from 'compressorjs'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { AiFillCamera } from 'react-icons/ai'
@@ -14,15 +15,25 @@ export default function AvatarDropzone({
 }: AvatarDropzoneProps): JSX.Element {
   const [currentImage, setCurrentImage] = useState(currentSrc)
   const handleOnDrop = useCallback((files: File[]) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      if (reader.result) {
-        const result = typeof reader.result === 'string' ? reader.result : ''
-        setCurrentImage(result)
-        onDrop?.(result)
-      }
-    }
-    reader.readAsDataURL(files[0])
+    new Compressor(files[0], {
+      quality: 0.6,
+      width: 300,
+      height: 300,
+      success(result) {
+        const reader = new FileReader()
+        reader.onload = () => {
+          if (reader.result) {
+            const result = typeof reader.result === 'string' ? reader.result : ''
+            setCurrentImage(result)
+            onDrop?.(result)
+          }
+        }
+        reader.readAsDataURL(result)
+      },
+      error(err) {
+        console.log(err.message)
+      },
+    })
   }, [])
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
