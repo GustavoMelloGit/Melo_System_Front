@@ -27,6 +27,9 @@ export default function CreateClientsView(): JSX.Element {
             personType: {
               type: 'fisica',
             },
+            address: {
+              state: 'MG',
+            },
           } as ClientFormValues
         }
         onSubmit={handleCreateClient}
