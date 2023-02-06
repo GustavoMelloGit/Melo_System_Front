@@ -1,20 +1,28 @@
-import { Avatar, IconButton, Td, Tr } from '@chakra-ui/react'
+import { Avatar, HStack, IconButton, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
+import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
 import { TbPencil } from 'react-icons/tb'
+import { useNavigate } from 'react-router-dom'
+import { Routes } from '../../../../lib/routes'
+import { formatCurrency } from '../../../../lib/utils/utils'
 import { type ClientModel } from '../../types/model/Client'
 
 export type ClientsTableRowProps = {
   client: ClientModel
-  onUpdateClient: (uuid: string) => void
 }
-export default function ClientsTableRow({
-  client,
-  onUpdateClient,
-}: ClientsTableRowProps): JSX.Element {
+export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.Element {
+  const navigate = useNavigate()
   const [showBalance, setShowBalance] = useState<boolean>(false)
 
-  const handleToggleBalance = (): void => {
+  function handleToggleBalance(): void {
     setShowBalance((prev) => !prev)
+  }
+
+  function handleNavigateToClient(): void {
+    navigate(Routes.clientPage(client.id))
+  }
+  function handleUpdateClient(): void {
+    navigate(Routes.updateClient(client.id))
   }
   return (
     <Tr>
@@ -32,23 +40,24 @@ export default function ClientsTableRow({
       </Td>
       <Td title={client.nickname}>{client.nickname}</Td>
       <Td onClick={handleToggleBalance} cursor='pointer'>
-        {showBalance
-          ? Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(client?.balance ?? 0)
-          : 'R$ ----'}
+        {showBalance ? formatCurrency(client.balance ?? 0) : 'R$ ----'}
       </Td>
       <Td>{client?.contact?.phone}</Td>
       <Td textAlign='center'>
-        <IconButton
-          aria-label='Editar cliente'
-          icon={<TbPencil />}
-          variant='ghost'
-          onClick={() => {
-            onUpdateClient(client.id)
-          }}
-        />
+        <HStack w='full' justify='center'>
+          <IconButton
+            aria-label='Editar cliente'
+            icon={<TbPencil size={20} />}
+            variant='ghost'
+            onClick={handleUpdateClient}
+          />
+          <IconButton
+            aria-label='Ver cliente'
+            icon={<HiArrowTopRightOnSquare size={20} />}
+            variant='ghost'
+            onClick={handleNavigateToClient}
+          />
+        </HStack>
       </Td>
     </Tr>
   )

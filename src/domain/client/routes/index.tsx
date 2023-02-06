@@ -4,6 +4,7 @@ import { Routes } from '../../../lib/routes'
 const ClientsListView = React.lazy(async () => import('../view/List'))
 const CreateClientsView = React.lazy(async () => import('../view/Create'))
 const UpdateClientsView = React.lazy(async () => import('../view/Update'))
+const ClientDetailsView = React.lazy(async () => import('../view/Details'))
 
 const clientsRoutes: RouteObject[] = [
   {
@@ -17,6 +18,10 @@ const clientsRoutes: RouteObject[] = [
   {
     path: Routes.updateClient(':uuid'),
     element: <UpdateClientsView />,
+  },
+  {
+    path: Routes.clientPage(':uuid'),
+    element: <ClientDetailsView />,
   },
 ]
 

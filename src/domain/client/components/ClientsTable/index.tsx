@@ -10,13 +10,11 @@ type ClientsTableProps = {
   data: ClientModel[] | undefined
   totalClients: number
   isLoading: boolean
-  onUpdateClient: (uuid: string) => void
 }
 export default function ClientsTable({
   data,
   isLoading,
   totalClients,
-  onUpdateClient,
 }: ClientsTableProps): JSX.Element {
   return (
     <Table
@@ -37,7 +35,7 @@ export default function ClientsTable({
       }}
     >
       {data?.map((client, index) => (
-        <ClientsTableRow key={index} client={client} onUpdateClient={onUpdateClient} />
+        <ClientsTableRow key={index} client={client} />
       ))}
     </Table>
   )

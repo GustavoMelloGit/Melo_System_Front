@@ -3,6 +3,7 @@ export const Routes = {
   home: '/home',
   login: '/login',
   clients: '/clients',
+  clientPage: (uuid: string) => `/clients/${uuid}`,
   createClient: '/clients/create',
   updateClient: (uuid: string) => `/clients/update/${uuid}`,
   fertilizers: '/fertilizers',
