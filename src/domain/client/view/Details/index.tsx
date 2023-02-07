@@ -21,10 +21,11 @@ import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
+import { GeneralInfo } from './Tabs'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
-  const { client, isLoading } = useClientDetailsView()
+  const { client, isLoading, handleChangeTab, currentTab } = useClientDetailsView()
 
   if (isLoading || !client) return <SpinLoader />
   return (
@@ -57,7 +58,7 @@ export default function ClientDetails(): JSX.Element {
         </CardHeader>
         <CardBody pt={0}>
           <Flex justify='center'>
-            <Tabs isLazy w='full'>
+            <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
               <Box overflow='auto'>
                 <TabList justifyContent='center' minW='max-content' w='full'>
                   <Tab>Conta Corrente</Tab>
@@ -85,7 +86,7 @@ export default function ClientDetails(): JSX.Element {
                   <InDevelopmentTag />
                 </TabPanel>
                 <TabPanel>
-                  <InDevelopmentTag />
+                  <GeneralInfo />
                 </TabPanel>
               </TabPanels>
             </Tabs>
