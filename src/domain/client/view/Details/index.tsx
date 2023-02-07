@@ -21,7 +21,6 @@ import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
-import { GeneralInfo } from './Tabs'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
@@ -86,7 +85,7 @@ export default function ClientDetails(): JSX.Element {
                   <InDevelopmentTag />
                 </TabPanel>
                 <TabPanel>
-                  <GeneralInfo />
+                  <InDevelopmentTag />
                 </TabPanel>
               </TabPanels>
             </Tabs>
