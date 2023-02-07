@@ -37,7 +37,8 @@ export async function createClientService(
 ): Promise<PostServiceResponse<ClientModel>> {
   try {
     let profileImage = values.profileImage
-    if (profileImage) {
+    const profileImageIsBase64 = profileImage?.includes('data:image')
+    if (profileImage && profileImageIsBase64) {
       profileImage = await uploadImage(profileImage, values.name)
     }
 
@@ -64,7 +65,8 @@ export async function updateClientService(
 ): Promise<PutServiceResponse<ClientModel>> {
   try {
     let profileImage = values.profileImage
-    if (profileImage) {
+    const profileImageIsBase64 = profileImage?.includes('data:image')
+    if (profileImage && profileImageIsBase64) {
       profileImage = await uploadImage(profileImage, values.name)
     }
     const { data } = await api.put(`/clients/${id}`, {

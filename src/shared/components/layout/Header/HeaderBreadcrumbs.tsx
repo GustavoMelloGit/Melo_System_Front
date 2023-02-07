@@ -27,7 +27,7 @@ export default function HeaderBreadcrumbs({
                 {link.label}
               </Link>
             ) : (
-              <Text key={index} opacity={0.6}>
+              <Text noOfLines={1} key={index} opacity={0.6}>
                 {link.label}
               </Text>
             ),
