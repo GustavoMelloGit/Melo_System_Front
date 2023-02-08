@@ -48,57 +48,61 @@ export default function ClientDetails(): JSX.Element {
           },
         ]}
       />
-      <Card rounded={22}>
-        <CardHeader>
-          <Stack flexDir={['column', 'row']} align={'center'} gap={8}>
-            <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
-            <Box textAlign={['center', 'left']}>
-              <Heading as='h1' fontSize={['xl', '4xl']}>
-                {client.name}
-              </Heading>
-              <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
-                ({client.nickname ?? 'Sem apelido'})
-              </Heading>
-            </Box>
-          </Stack>
-        </CardHeader>
-        <CardBody pt={0}>
-          <Flex justify='center'>
-            <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
-              <Box overflow='auto'>
-                <TabList justifyContent='center' minW='max-content' w='full'>
-                  <Tab>Conta Corrente</Tab>
-                  <Tab>Conta Café</Tab>
-                  <Tab>Conta Escolha</Tab>
-                  <Tab>Conta Colheita</Tab>
-                  <Tab>Conta Sacaria</Tab>
-                  <Tab>Informações Gerais</Tab>
-                </TabList>
+      <Box>
+        <Card roundedBottom={0}>
+          <CardHeader pb={0}>
+            <Stack flexDir={['column', 'row']} align={'center'} gap={8}>
+              <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
+              <Box textAlign={['center', 'left']}>
+                <Heading as='h1' fontSize={['xl', '4xl']}>
+                  {client.name}
+                </Heading>
+                <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
+                  ({client.nickname ?? 'Sem apelido'})
+                </Heading>
               </Box>
-              <TabPanels>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <GeneralInfo client={client} />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Flex>
-        </CardBody>
-      </Card>
+            </Stack>
+          </CardHeader>
+        </Card>
+        <Flex justify='center'>
+          <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
+            <Card overflow='auto' p={4} roundedTop={0}>
+              <TabList justifyContent='center' minW='max-content' w='full'>
+                <Tab>Conta Corrente</Tab>
+                <Tab>Conta Café</Tab>
+                <Tab>Conta Escolha</Tab>
+                <Tab>Conta Colheita</Tab>
+                <Tab>Conta Sacaria</Tab>
+                <Tab>Informações Gerais</Tab>
+              </TabList>
+            </Card>
+            <Card mt={10}>
+              <CardBody pt={0}>
+                <TabPanels>
+                  <TabPanel>
+                    <InDevelopmentTag />
+                  </TabPanel>
+                  <TabPanel>
+                    <InDevelopmentTag />
+                  </TabPanel>
+                  <TabPanel>
+                    <InDevelopmentTag />
+                  </TabPanel>
+                  <TabPanel>
+                    <InDevelopmentTag />
+                  </TabPanel>
+                  <TabPanel>
+                    <InDevelopmentTag />
+                  </TabPanel>
+                  <TabPanel>
+                    <GeneralInfo client={client} />
+                  </TabPanel>
+                </TabPanels>
+              </CardBody>
+            </Card>
+          </Tabs>
+        </Flex>
+      </Box>
     </Page>
   )
 }
