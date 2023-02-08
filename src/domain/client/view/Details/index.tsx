@@ -16,17 +16,24 @@ import {
   Tag,
   TagLeftIcon,
 } from '@chakra-ui/react'
+import { toast } from 'react-hot-toast'
 import { IoWarningOutline } from 'react-icons/io5'
+import { Navigate } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
+import { GeneralInfo } from './Tabs'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
   const { client, isLoading, handleChangeTab, currentTab } = useClientDetailsView()
 
-  if (isLoading || !client) return <SpinLoader />
+  if (isLoading) return <SpinLoader />
+  if (!client) {
+    toast.error('Cliente não encontrado')
+    return <Navigate to={Routes.clients} />
+  }
   return (
     <Page title={client.name}>
       <HeaderBreadcrumbs
@@ -41,7 +48,7 @@ export default function ClientDetails(): JSX.Element {
           },
         ]}
       />
-      <Card>
+      <Card rounded={22}>
         <CardHeader>
           <Stack flexDir={['column', 'row']} align={'center'} gap={8}>
             <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
@@ -85,7 +92,7 @@ export default function ClientDetails(): JSX.Element {
                   <InDevelopmentTag />
                 </TabPanel>
                 <TabPanel>
-                  <InDevelopmentTag />
+                  <GeneralInfo client={client} />
                 </TabPanel>
               </TabPanels>
             </Tabs>
