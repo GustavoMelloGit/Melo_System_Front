@@ -26,12 +26,6 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           label: 'Telefone',
           value: client.contact?.phone ?? defaultEmptyValue,
         },
-
-        {
-          label: 'Descrição',
-          value: client.description ?? defaultEmptyValue,
-        },
-
         {
           label: 'Tipo de pessoa',
           value: client.personType?.type,
@@ -43,6 +37,10 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         {
           label: 'Atualizado em',
           value: new Date(client.updatedAt).toLocaleDateString('pt-BR'),
+        },
+        {
+          label: 'Descrição',
+          value: client.description ?? defaultEmptyValue,
         },
       ],
       address: [
@@ -151,7 +149,7 @@ function DisplayInfoBox({ data, title }: { data: ClientInfo; title?: string }): 
           <Divider />
         </VStack>
       )}
-      <Grid gridTemplateColumns='repeat(auto-fit, minmax(200px, 1fr))' w='full' gap={4}>
+      <Grid gridTemplateColumns='repeat(auto-fit, minmax(200px, 1fr))' w='full' gap={6}>
         {data.map(({ label, value }) => (
           <GridItem key={label}>
             <Box textAlign={['center', 'start']}>
