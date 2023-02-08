@@ -19,7 +19,7 @@ export default function NaturalPersonFields({
       <GridItem>
         <RHFField<ClientFormValues>
           register={register}
-          name='contact.fatherName'
+          name='personType.fatherName'
           label='Nome do pai'
           placeholder='Nome do pai do cliente'
           errors={formState.errors}
@@ -28,7 +28,7 @@ export default function NaturalPersonFields({
       <GridItem>
         <RHFField<ClientFormValues>
           register={register}
-          name='contact.motherName'
+          name='personType.motherName'
           label='Nome da mãe'
           placeholder='Nome da mãe do cliente'
           errors={formState.errors}
@@ -37,7 +37,7 @@ export default function NaturalPersonFields({
       <GridItem>
         <RHFField<ClientFormValues>
           register={register}
-          name='birthDate'
+          name='personType.birthDate'
           label='Data de nascimento'
           placeholder='Data de nascimento do cliente'
           type={'date'}
