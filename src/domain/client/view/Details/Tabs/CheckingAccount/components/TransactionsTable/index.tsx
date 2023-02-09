@@ -50,8 +50,4 @@ const searchForOptions: SearchForOption[] = [
     label: 'Descrição',
     value: 'description',
   },
-  {
-    label: 'Valor',
-    value: 'value',
-  },
 ]
