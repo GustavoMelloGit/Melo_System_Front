@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Card,
-  CardBody,
   CardHeader,
   Center,
   Flex,
@@ -23,7 +22,7 @@ import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
-import { GeneralInfo } from './Tabs'
+import { CheckingAccount, GeneralInfo } from './Tabs'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
@@ -76,30 +75,26 @@ export default function ClientDetails(): JSX.Element {
                 <Tab>Informações Gerais</Tab>
               </TabList>
             </Card>
-            <Card mt={10}>
-              <CardBody pt={0}>
-                <TabPanels>
-                  <TabPanel>
-                    <InDevelopmentTag />
-                  </TabPanel>
-                  <TabPanel>
-                    <InDevelopmentTag />
-                  </TabPanel>
-                  <TabPanel>
-                    <InDevelopmentTag />
-                  </TabPanel>
-                  <TabPanel>
-                    <InDevelopmentTag />
-                  </TabPanel>
-                  <TabPanel>
-                    <InDevelopmentTag />
-                  </TabPanel>
-                  <TabPanel>
-                    <GeneralInfo client={client} />
-                  </TabPanel>
-                </TabPanels>
-              </CardBody>
-            </Card>
+            <TabPanels>
+              <TabPanel>
+                <CheckingAccount />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <GeneralInfo client={client} />
+              </TabPanel>
+            </TabPanels>
           </Tabs>
         </Flex>
       </Box>

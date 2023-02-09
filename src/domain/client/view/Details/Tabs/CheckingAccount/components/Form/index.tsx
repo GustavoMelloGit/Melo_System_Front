@@ -1,0 +1,85 @@
+import { Button, Grid, GridItem, VStack } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { validationErrors } from '../../../../../../../../lib/errors'
+import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
+import RHFTextField from '../../../../../../../../shared/components/inputs/RHFTextField'
+import { type CheckingAccountFormValues } from '../../../../../../types/view/Details'
+
+type CheckingAccountFormProps = {
+  onSubmit: (values: CheckingAccountFormValues) => Promise<void>
+  initialValues?: CheckingAccountFormValues
+  submitText: string
+}
+export default function CheckingAccountForm({
+  onSubmit,
+  initialValues,
+  submitText,
+}: CheckingAccountFormProps): JSX.Element {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<CheckingAccountFormValues>({
+    defaultValues: initialValues,
+    resolver: yupResolver(validationSchema),
+  })
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <VStack align='stretch' gap={4}>
+        <Grid gridTemplateColumns='repeat(2, 1fr)' gap={3}>
+          <GridItem>
+            <RHFField<CheckingAccountFormValues>
+              name='date'
+              label='Data'
+              type='date'
+              register={register}
+              errors={errors}
+            />
+          </GridItem>
+          <GridItem>
+            <RHFField<CheckingAccountFormValues>
+              name='value'
+              label='Valor'
+              type='number'
+              register={register}
+              errors={errors}
+              leftIcon='R$'
+              step='0.01'
+            />
+          </GridItem>
+          <GridItem colSpan={2}>
+            <RHFTextField<CheckingAccountFormValues>
+              name='description'
+              label='Descrição'
+              register={register}
+              errors={errors}
+            />
+          </GridItem>
+        </Grid>
+        <Button isLoading={isSubmitting} type='submit'>
+          {submitText}
+        </Button>
+      </VStack>
+    </form>
+  )
+}
+
+const validationSchema = yup.object().shape({
+  date: yup.string().required(validationErrors.dateIsRequired),
+  value: yup
+    .string()
+    .required()
+    .test('hasTwoDecimals', validationErrors.valueIsInvalid, (value) => {
+      if (!value) return false
+      const valueString = value.toString()
+      const decimalPart = valueString.split('.')[1]
+      return decimalPart ? decimalPart.length === 2 : true
+    }),
+  description: yup
+    .string()
+    .required(validationErrors.descriptionIsRequired)
+    .max(255, 'Máximo de 255 caracteres'),
+})
