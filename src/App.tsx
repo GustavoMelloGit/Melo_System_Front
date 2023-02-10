@@ -6,6 +6,7 @@ import { AuthProvider } from './domain/auth/context/AuthContext'
 import './lib/config/firebase'
 import router from './lib/routes/router'
 import theme, { themeManager } from './lib/styles/theme'
+import ModalManager from './shared/components/ModalManager'
 import ProviderComposer from './shared/components/ProviderComposer'
 import Suspense from './shared/components/Suspense'
 import LayoutProvider from './shared/contexts/LayoutContext'
@@ -18,7 +19,10 @@ function App(): JSX.Element {
         initialColorMode={theme.config.initialColorMode}
       />
       <ProviderComposer contexts={[LayoutProvider, Suspense, HelmetProvider, AuthProvider]}>
-        <RouterProvider router={router} />
+        <>
+          <RouterProvider router={router} />
+          <ModalManager />
+        </>
       </ProviderComposer>
       <Toaster />
     </ChakraProvider>

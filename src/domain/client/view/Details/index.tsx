@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Card,
-  CardBody,
   CardHeader,
   Center,
   Flex,
@@ -16,17 +15,24 @@ import {
   Tag,
   TagLeftIcon,
 } from '@chakra-ui/react'
+import { toast } from 'react-hot-toast'
 import { IoWarningOutline } from 'react-icons/io5'
+import { Navigate } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
+import { CheckingAccount, GeneralInfo } from './Tabs'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
   const { client, isLoading, handleChangeTab, currentTab } = useClientDetailsView()
 
-  if (isLoading || !client) return <SpinLoader />
+  if (isLoading) return <SpinLoader />
+  if (!client) {
+    toast.error('Cliente não encontrado')
+    return <Navigate to={Routes.clients} />
+  }
   return (
     <Page title={client.name}>
       <HeaderBreadcrumbs
@@ -41,57 +47,57 @@ export default function ClientDetails(): JSX.Element {
           },
         ]}
       />
-      <Card>
-        <CardHeader>
-          <Stack flexDir={['column', 'row']} align={'center'} gap={8}>
-            <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
-            <Box textAlign={['center', 'left']}>
-              <Heading as='h1' fontSize={['xl', '4xl']}>
-                {client.name}
-              </Heading>
-              <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
-                ({client.nickname ?? 'Sem apelido'})
-              </Heading>
-            </Box>
-          </Stack>
-        </CardHeader>
-        <CardBody pt={0}>
-          <Flex justify='center'>
-            <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
-              <Box overflow='auto'>
-                <TabList justifyContent='center' minW='max-content' w='full'>
-                  <Tab>Conta Corrente</Tab>
-                  <Tab>Conta Café</Tab>
-                  <Tab>Conta Escolha</Tab>
-                  <Tab>Conta Colheita</Tab>
-                  <Tab>Conta Sacaria</Tab>
-                  <Tab>Informações Gerais</Tab>
-                </TabList>
+      <Box>
+        <Card roundedBottom={0}>
+          <CardHeader pb={0}>
+            <Stack flexDir={['column', 'row']} align={'center'} gap={8}>
+              <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
+              <Box textAlign={['center', 'left']}>
+                <Heading as='h1' fontSize={['xl', '4xl']}>
+                  {client.name}
+                </Heading>
+                <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
+                  ({client.nickname ?? 'Sem apelido'})
+                </Heading>
               </Box>
-              <TabPanels>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-                <TabPanel>
-                  <InDevelopmentTag />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Flex>
-        </CardBody>
-      </Card>
+            </Stack>
+          </CardHeader>
+        </Card>
+        <Flex justify='center'>
+          <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
+            <Card overflow='auto' p={4} roundedTop={0}>
+              <TabList justifyContent='center' minW='max-content' w='full'>
+                <Tab>Conta Corrente</Tab>
+                <Tab>Conta Café</Tab>
+                <Tab>Conta Escolha</Tab>
+                <Tab>Conta Colheita</Tab>
+                <Tab>Conta Sacaria</Tab>
+                <Tab>Informações Gerais</Tab>
+              </TabList>
+            </Card>
+            <TabPanels>
+              <TabPanel>
+                <CheckingAccount />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <InDevelopmentTag />
+              </TabPanel>
+              <TabPanel>
+                <GeneralInfo client={client} />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Flex>
+      </Box>
     </Page>
   )
 }

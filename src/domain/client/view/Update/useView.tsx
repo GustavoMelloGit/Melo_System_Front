@@ -44,11 +44,11 @@ const emptyClient: ClientFormValues = {
     zipCode: '',
   },
   contact: {
-    fatherName: '',
-    motherName: '',
     phone: '',
   },
   profileImage: ' ',
   id: '',
   name: '',
+  createdAt: '',
+  updatedAt: '',
 }

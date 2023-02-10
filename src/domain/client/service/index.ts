@@ -9,6 +9,8 @@ import {
 } from '../../../shared/types/utils/service'
 import { type ClientFormValues } from '../types/components/ClientsForm'
 import { type ClientModel } from '../types/model/Client'
+import { type TransactionModel } from '../types/model/Transaction'
+import { type CheckingAccountFormValues } from '../types/view/Details'
 
 export function listClientsService(params?: string): GetServiceResponse<ClientModel[]> {
   const { data, error, isLoading } = useFetch(`/clients?${params ?? ''}`)
@@ -83,5 +85,42 @@ export async function updateClientService(
       data: null,
       error: errorHandler(e),
     }
+  }
+}
+
+export async function createTransactionService(
+  values: CheckingAccountFormValues,
+  clientId: string,
+): Promise<PostServiceResponse<TransactionModel>> {
+  try {
+    const { data } = await api.post(`/transactions/${clientId}`, {
+      value: Number(values.value),
+      description: values.description,
+    })
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
+}
+
+export function getTransactionsService(
+  clientId: string,
+  params?: string,
+): GetServiceResponse<TransactionModel[]> {
+  const { data, error, isLoading, mutate } = useFetch(`/transactions/${clientId}?${params ?? ''}`)
+
+  return {
+    data: data?.data ?? [],
+    error: errorHandler(error),
+    isLoading,
+    total: data?.total ?? 0,
+    mutate,
   }
 }

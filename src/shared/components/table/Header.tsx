@@ -13,8 +13,8 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
 
   const handleSort = (columnId: string, order: 'asc' | 'desc'): void => {
     handleAddParams({
-      field: columnId,
-      order,
+      [PaginationParams.sortBy]: columnId,
+      [PaginationParams.sortOrder]: order,
     })
   }
 

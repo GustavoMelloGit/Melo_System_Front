@@ -14,8 +14,6 @@ export type Address = {
 }
 
 export type ClientContact = {
-  fatherName?: string
-  motherName?: string
   phone?: string
 }
 
@@ -31,6 +29,9 @@ export type NaturalPerson = {
   rg?: string
   rgEmissionDate?: string
   producerRegistration?: string
+  birthDate?: string
+  fatherName?: string
+  motherName?: string
 }
 
 export type ClientModel = {
@@ -40,11 +41,11 @@ export type ClientModel = {
   nickname?: string
   balance?: number
   personType?: LegalPerson | NaturalPerson
-  birthDate?: Date
+
   address: Address
   contact: ClientContact
   description?: string
-  createdAt?: Date
-  updatedAt?: Date
-  deletedAt?: Date
+  createdAt: string
+  updatedAt: string
+  deletedAt?: string
 }

@@ -1,10 +1,10 @@
-import { Avatar, HStack, IconButton, Td, Tr } from '@chakra-ui/react'
+import { Avatar, HStack, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
-import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
-import { TbPencil } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import { formatCurrency } from '../../../../lib/utils/utils'
+import TableEditButton from '../../../../shared/components/table/Buttons/Edit'
+import TableLinkToButton from '../../../../shared/components/table/Buttons/LinkTo'
 import { type ClientModel } from '../../types/model/Client'
 
 export type ClientsTableRowProps = {
@@ -45,18 +45,8 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       <Td>{client?.contact?.phone}</Td>
       <Td textAlign='center'>
         <HStack w='full' justify='center'>
-          <IconButton
-            aria-label='Editar cliente'
-            icon={<TbPencil size={20} />}
-            variant='ghost'
-            onClick={handleUpdateClient}
-          />
-          <IconButton
-            aria-label='Ver cliente'
-            icon={<HiArrowTopRightOnSquare size={20} />}
-            variant='ghost'
-            onClick={handleNavigateToClient}
-          />
+          <TableEditButton aria-label='Editar cliente' onClick={handleUpdateClient} />
+          <TableLinkToButton aria-label='Ver cliente' onClick={handleNavigateToClient} />
         </HStack>
       </Td>
     </Tr>

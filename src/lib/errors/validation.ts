@@ -15,6 +15,10 @@ const validationErrors = {
   cnpjIsRequired: 'Por favor, informe um CNPJ',
   cnpjIsInvalid: 'Por favor, informe um CNPJ válido',
   stateRegistrationIsRequired: 'Por favor, informe o número de registro estadual',
+  valueIsRequired: 'Por favor, informe um valor',
+  valueIsInvalid: 'Por favor, informe um valor válido',
+  dateIsRequired: 'Por favor, informe uma data',
+  descriptionIsRequired: 'Por favor, informe uma descrição',
 }
 
 export default validationErrors
