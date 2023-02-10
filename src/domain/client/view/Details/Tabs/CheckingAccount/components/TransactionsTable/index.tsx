@@ -44,6 +44,7 @@ export default function TransactionsTable({
 const headerColumns: TableHeaderColumns[] = [
   { id: 'description', label: 'Descrição' },
   { id: 'value', label: 'Valor', isSortable: true },
+  { id: 'actions', label: 'Ações' },
 ]
 const searchForOptions: SearchForOption[] = [
   {
