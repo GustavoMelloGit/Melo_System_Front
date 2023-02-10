@@ -1,6 +1,6 @@
 import { Avatar, HStack, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import { formatCurrency } from '../../../../lib/utils/utils'
 import TableEditButton from '../../../../shared/components/table/Buttons/Edit'
@@ -11,18 +11,10 @@ export type ClientsTableRowProps = {
   client: ClientModel
 }
 export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.Element {
-  const navigate = useNavigate()
   const [showBalance, setShowBalance] = useState<boolean>(false)
 
   function handleToggleBalance(): void {
     setShowBalance((prev) => !prev)
-  }
-
-  function handleNavigateToClient(): void {
-    navigate(Routes.clientPage(client.id))
-  }
-  function handleUpdateClient(): void {
-    navigate(Routes.updateClient(client.id))
   }
   return (
     <Tr>
@@ -45,8 +37,12 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       <Td>{client?.contact?.phone}</Td>
       <Td textAlign='center'>
         <HStack w='full' justify='center'>
-          <TableEditButton aria-label='Editar cliente' onClick={handleUpdateClient} />
-          <TableLinkToButton aria-label='Ver cliente' onClick={handleNavigateToClient} />
+          <Link to={Routes.updateClient(client.id)}>
+            <TableEditButton aria-label='Editar cliente' />
+          </Link>
+          <Link to={Routes.clientPage(client.id)}>
+            <TableLinkToButton as='span' aria-label='Ver cliente' />
+          </Link>
         </HStack>
       </Td>
     </Tr>
