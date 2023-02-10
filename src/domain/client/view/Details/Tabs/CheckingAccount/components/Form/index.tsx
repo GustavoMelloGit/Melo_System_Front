@@ -29,7 +29,7 @@ export default function CheckingAccountForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <VStack align='stretch' gap={4}>
-        <Grid gridTemplateColumns='repeat(2, 1fr)' gap={3}>
+        <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)']} gap={3}>
           <GridItem>
             <RHFField<CheckingAccountFormValues>
               name='date'
@@ -50,7 +50,7 @@ export default function CheckingAccountForm({
               step='0.01'
             />
           </GridItem>
-          <GridItem colSpan={2}>
+          <GridItem colSpan={[1, 2]}>
             <RHFTextField<CheckingAccountFormValues>
               name='description'
               label='Descrição'
