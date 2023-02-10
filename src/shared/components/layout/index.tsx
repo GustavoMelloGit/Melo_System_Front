@@ -19,7 +19,7 @@ export default function PageLayout(): JSX.Element {
           w={['100vw', '20rem']}
           h='100vh'
           bottom={0}
-          zIndex={10000}
+          zIndex={100}
         >
           <Sidebar />
         </Box>
