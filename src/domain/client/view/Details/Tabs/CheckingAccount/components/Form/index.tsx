@@ -71,7 +71,7 @@ const validationSchema = yup.object().shape({
   date: yup.string().required(validationErrors.dateIsRequired),
   value: yup
     .string()
-    .required()
+    .required(validationErrors.valueIsRequired)
     .test('hasTwoDecimals', validationErrors.valueIsInvalid, (value) => {
       if (!value) return false
       const valueString = value.toString()
