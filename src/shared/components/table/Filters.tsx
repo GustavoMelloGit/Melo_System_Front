@@ -1,16 +1,13 @@
 import { Box, Grid, GridItem, Hide, IconButton, Show, useColorModeValue } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { BiFilter, BiSearchAlt } from 'react-icons/bi'
+import { BiSearchAlt } from 'react-icons/bi'
 import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import RHFField from '../inputs/RHFField'
 import RHFSelectField from '../inputs/RHFSelectField'
 import { type TableFilterProps } from './types'
 
-export default function TableFilters({
-  searchForOptions,
-  hasMoreFilters = false,
-}: TableFilterProps): JSX.Element {
+export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
   const { getParam } = useURLSearchParams()
   const bg = useColorModeValue('gray.300', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
@@ -44,15 +41,7 @@ export default function TableFilters({
               roundedLeft='md'
               roundedRight={['md', 'none']}
             />
-            {hasMoreFilters && (
-              <Show below='sm'>
-                <IconButton
-                  aria-label='open filter modal'
-                  variant='ghost'
-                  icon={<BiFilter size={28} />}
-                />
-              </Show>
-            )}
+            {actions && <Show below='sm'>{actions}</Show>}
           </GridItem>
           <GridItem display='flex' alignItems='center' gap={1}>
             <RHFField<FilterFormValues>
@@ -70,15 +59,7 @@ export default function TableFilters({
                 />
               }
             />
-            {hasMoreFilters && (
-              <Hide below='sm'>
-                <IconButton
-                  aria-label='open filter modal'
-                  variant='ghost'
-                  icon={<BiFilter size={28} />}
-                />
-              </Hide>
-            )}
+            {actions && <Hide below='sm'>{actions}</Hide>}
           </GridItem>
         </Grid>
       </Box>

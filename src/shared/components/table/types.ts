@@ -26,7 +26,7 @@ export type SearchForOption = {
 }
 export type TableFilterProps = {
   searchForOptions: SearchForOption[]
-  hasMoreFilters?: boolean
+  actions?: React.ReactNode
 }
 
 export type TableProps = {
