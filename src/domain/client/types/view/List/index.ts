@@ -5,5 +5,4 @@ export type ClientsListView = {
   error: string | undefined
   isLoading: boolean
   total: number
-  handleCreateClient: () => void
 }

@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 
 type UseModal = {
   modal: JSX.Element | null
