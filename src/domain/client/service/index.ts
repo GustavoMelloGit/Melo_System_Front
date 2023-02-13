@@ -94,8 +94,8 @@ export async function createTransactionService(
 ): Promise<PostServiceResponse<TransactionModel>> {
   try {
     const { data } = await api.post(`/transactions/${clientId}`, {
+      ...values,
       value: Number(values.value),
-      description: values.description,
     })
 
     return {

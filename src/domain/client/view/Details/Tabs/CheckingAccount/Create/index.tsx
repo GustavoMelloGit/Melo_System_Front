@@ -46,7 +46,7 @@ export default function CreateTransactionView({
             initialValues={{
               date: format(new Date(), 'yyyy-MM-dd'),
               description: '',
-              value: 0.01,
+              value: 0,
             }}
           />
         </ModalBody>
