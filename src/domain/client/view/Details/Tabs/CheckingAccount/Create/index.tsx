@@ -6,17 +6,16 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
+import { format } from 'date-fns'
 import { toast } from 'react-hot-toast'
-import { type KeyedMutator } from 'swr'
 import { useModal } from '../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../service'
-import { type TransactionModel } from '../../../../../types/model/Transaction'
 import { type CheckingAccountFormValues } from '../../../../../types/view/Details'
 import CheckingAccountForm from '../components/Form'
 
 type CreateTransactionViewProps = {
   uuid: string
-  refetch: KeyedMutator<TransactionModel[]> | undefined
+  refetch: () => void
 }
 export default function CreateTransactionView({
   uuid,
@@ -30,7 +29,7 @@ export default function CreateTransactionView({
       toast.error(error)
     }
     closeModal()
-    void refetch?.()
+    refetch()
   }
 
   return (
@@ -41,7 +40,15 @@ export default function CreateTransactionView({
           <Heading fontSize='3xl'>Novo lançamento</Heading>
         </ModalHeader>
         <ModalBody>
-          <CheckingAccountForm onSubmit={handleCreateTransaction} submitText='Salvar' />
+          <CheckingAccountForm
+            onSubmit={handleCreateTransaction}
+            submitText='Salvar'
+            initialValues={{
+              date: format(new Date(), 'yyyy-MM-dd'),
+              description: '',
+              value: 0,
+            }}
+          />
         </ModalBody>
       </ModalContent>
     </Modal>

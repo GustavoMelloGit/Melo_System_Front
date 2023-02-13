@@ -1,3 +1,5 @@
+import { type InputProps } from '@chakra-ui/react'
+
 export type TableRowProps = {
   isLoading: boolean
   children?: React.ReactNode
@@ -20,12 +22,15 @@ export type TablePaginationProps = {
   totalLength: number
 }
 
-export type SearchForOption = {
-  label: string
-  value: string
-}
+export type SearchForOption = Record<
+  string,
+  {
+    label: string
+    inputProps?: InputProps
+  }
+>
 export type TableFilterProps = {
-  searchForOptions: SearchForOption[]
+  searchForOptions: SearchForOption
   actions?: React.ReactNode
 }
 
@@ -35,4 +40,8 @@ export type TableProps = {
   pagination: TablePaginationProps
   filter: TableFilterProps
   children: React.ReactNode
+}
+export type FilterFormValues = {
+  query: string
+  searchFor: string
 }

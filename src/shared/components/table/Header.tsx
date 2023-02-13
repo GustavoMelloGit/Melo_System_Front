@@ -1,5 +1,5 @@
 import { IconButton, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
 import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TableHeaderProps } from './types'
@@ -30,9 +30,9 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
                 aria-label={`sort by ${column.label}`}
                 icon={
                   sortBy === column.id && sortOrder === 'asc' ? (
-                    <IoMdArrowDropup size={20} />
+                    <BsArrowUpShort size={20} />
                   ) : (
-                    <IoMdArrowDropdown size={20} />
+                    <BsArrowDownShort size={20} />
                   )
                 }
                 variant='unstyled'

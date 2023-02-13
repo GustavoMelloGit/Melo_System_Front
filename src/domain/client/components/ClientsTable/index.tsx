@@ -49,21 +49,10 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'phone', label: 'Telefone' },
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
-const searchForOptions: SearchForOption[] = [
-  {
-    label: 'Nome',
-    value: 'name',
-  },
-  {
-    label: 'Apelido',
-    value: 'nickname',
-  },
-  {
-    label: 'ID',
-    value: 'id',
-  },
-  {
-    label: 'Córrego',
-    value: 'address.brook',
-  },
-]
+
+const searchForOptions: SearchForOption = {
+  name: { label: 'Nome' },
+  nickname: { label: 'Apelido' },
+  id: { label: 'ID' },
+  'address.brook': { label: 'Córrego' },
+}
