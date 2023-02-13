@@ -51,6 +51,7 @@ export default function TransactionsTable({
 }
 
 const headerColumns: TableHeaderColumns[] = [
+  { id: 'date', label: 'Data', isSortable: true },
   { id: 'description', label: 'Descrição' },
   { id: 'value', label: 'Valor', isSortable: true },
 ]

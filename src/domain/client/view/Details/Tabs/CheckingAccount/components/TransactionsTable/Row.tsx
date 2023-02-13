@@ -10,6 +10,7 @@ export default function TransactionsListRow({
 }: TransactionsListRowProps): JSX.Element {
   return (
     <Tr>
+      <Td>{new Date(transaction.date).toLocaleDateString()}</Td>
       <Td>{transaction.description}</Td>
       <Td>{formatCurrency(transaction.value)}</Td>
     </Tr>
