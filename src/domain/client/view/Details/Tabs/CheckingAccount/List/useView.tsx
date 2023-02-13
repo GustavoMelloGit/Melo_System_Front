@@ -12,8 +12,12 @@ export default function useListTransactionsView(): UseListTransactionsView {
   const params = useServiceParams()
   const { data, isLoading, total, mutate } = getTransactionsService(uuid ?? '', params)
 
+  function refetchData(): void {
+    void mutate?.()
+  }
+
   function handleAddTransaction(): void {
-    openModal(<CreateTransactionView refetch={mutate} uuid={uuid ?? ''} />)
+    openModal(<CreateTransactionView refetch={refetchData} uuid={uuid ?? ''} />)
   }
 
   return {

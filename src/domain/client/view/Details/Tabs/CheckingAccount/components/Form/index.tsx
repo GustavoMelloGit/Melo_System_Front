@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
+import RHFMaskInput from '../../../../../../../../shared/components/inputs/RHFMaskInput'
 import RHFTextField from '../../../../../../../../shared/components/inputs/RHFTextField'
 import { type CheckingAccountFormValues } from '../../../../../../types/view/Details'
 
@@ -40,7 +41,7 @@ export default function CheckingAccountForm({
             />
           </GridItem>
           <GridItem>
-            <RHFField<CheckingAccountFormValues>
+            <RHFMaskInput<CheckingAccountFormValues>
               name='value'
               label='Valor'
               type='number'
@@ -48,6 +49,7 @@ export default function CheckingAccountForm({
               errors={errors}
               leftIcon='R$'
               step='0.01'
+              mask={/\d/}
             />
           </GridItem>
           <GridItem colSpan={[1, 2]}>
