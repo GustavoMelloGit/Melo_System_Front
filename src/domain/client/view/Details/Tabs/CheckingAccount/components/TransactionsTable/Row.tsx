@@ -1,6 +1,6 @@
-import { Td, Tooltip, Tr } from '@chakra-ui/react'
-import { AiOutlineInfoCircle } from 'react-icons/ai'
+import { Td, Tr } from '@chakra-ui/react'
 import { formatCurrency } from '../../../../../../../../lib/utils/utils'
+import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
 
 type TransactionsListRowProps = {
@@ -15,13 +15,9 @@ export default function TransactionsListRow({
       <Td>{transaction.description}</Td>
       <Td>{formatCurrency(transaction.value)}</Td>
       <Td textAlign='center'>
-        <Tooltip
-          shouldWrapChildren
-          hasArrow
+        <MoreInfoTooltip
           label={`${transaction.userId}, ${new Date(transaction.createdAt).toLocaleDateString()}`}
-        >
-          <AiOutlineInfoCircle size={22} />
-        </Tooltip>
+        />
       </Td>
     </Tr>
   )
