@@ -5,19 +5,20 @@ import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import RHFField from '../inputs/RHFField'
 import RHFSelectField from '../inputs/RHFSelectField'
-import { type TableFilterProps } from './types'
+import { type FilterFormValues, type TableFilterProps } from './types'
 
 export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
   const { getParam } = useURLSearchParams()
+  const { handleAddParams, handleRemoveParams } = useURLSearchParams()
   const bg = useColorModeValue('gray.300', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
-  const { handleSubmit, register } = useForm<FilterFormValues>({
+  const { handleSubmit, register, watch } = useForm<FilterFormValues>({
     defaultValues: {
       query: queryParam ?? '',
-      searchFor: getParam(PaginationParams.searchFor) ?? searchForOptions[0].value,
+      searchFor: getParam(PaginationParams.searchFor) ?? Object.keys(searchForOptions)[0],
     },
   })
-  const { handleAddParams, handleRemoveParams } = useURLSearchParams()
+  const currentSearchForOption = searchForOptions[watch('searchFor')]
 
   function handleSubmitFilter({ query, searchFor }: FilterFormValues): void {
     if (!query) {
@@ -29,6 +30,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
       searchFor,
     })
   }
+
   return (
     <form onSubmit={handleSubmit(handleSubmitFilter)}>
       <Box bg={bg} px={4} pt={4} roundedTop={16}>
@@ -37,7 +39,10 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             <RHFSelectField<FilterFormValues>
               name='searchFor'
               register={register}
-              options={searchForOptions}
+              options={Object.entries(searchForOptions).map(([value, { label }]) => ({
+                value,
+                label,
+              }))}
               roundedLeft='md'
               roundedRight={['md', 'none']}
             />
@@ -45,7 +50,6 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
           </GridItem>
           <GridItem display='flex' alignItems='center' gap={1}>
             <RHFField<FilterFormValues>
-              name='query'
               register={register}
               rounded='md'
               roundedLeft={['md', 'none']}
@@ -58,6 +62,8 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                   icon={<BiSearchAlt size={24} />}
                 />
               }
+              {...(currentSearchForOption?.inputProps ?? {})}
+              name='query'
             />
             {actions && <Hide below='sm'>{actions}</Hide>}
           </GridItem>
@@ -65,9 +71,4 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
       </Box>
     </form>
   )
-}
-
-type FilterFormValues = {
-  query: string
-  searchFor: string
 }
