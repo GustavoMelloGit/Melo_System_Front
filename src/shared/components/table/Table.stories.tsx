@@ -13,16 +13,14 @@ const mockColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
 ]
-const mockSearchForOptions: SearchForOption[] = [
-  {
-    value: 'id',
+const mockSearchForOptions: SearchForOption = {
+  id: {
     label: 'ID',
   },
-  {
-    value: 'name',
+  name: {
     label: 'Name',
   },
-]
+}
 
 export default {
   title: 'components/Table',
