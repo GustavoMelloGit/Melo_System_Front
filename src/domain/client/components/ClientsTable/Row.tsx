@@ -38,10 +38,10 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       <Td textAlign='center'>
         <HStack w='full' justify='center'>
           <Link to={Routes.updateClient(client.id)}>
-            <TableEditButton aria-label='Editar cliente' />
+            <TableEditButton as='span' aria-label='Editar cliente' />
           </Link>
           <Link to={Routes.clientPage(client.id)}>
-            <TableLinkToButton as='span' aria-label='Ver cliente' />
+            <TableLinkToButton aria-label='Ver cliente' />
           </Link>
         </HStack>
       </Td>
