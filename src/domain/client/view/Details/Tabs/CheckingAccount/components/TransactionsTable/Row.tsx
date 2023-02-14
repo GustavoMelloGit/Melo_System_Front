@@ -12,7 +12,15 @@ export default function TransactionsListRow({
   return (
     <Tr>
       <Td>{new Date(transaction.date).toLocaleDateString()}</Td>
-      <Td>{transaction.description}</Td>
+      <Td
+        title={transaction.description}
+        maxW={80}
+        whiteSpace='nowrap'
+        textOverflow='ellipsis'
+        overflow='hidden'
+      >
+        {transaction.description}
+      </Td>
       <Td>{formatCurrency(transaction.value)}</Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
