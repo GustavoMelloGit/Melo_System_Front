@@ -1,7 +1,11 @@
-import { Td, Tr } from '@chakra-ui/react'
+import { HStack, Td, Tr } from '@chakra-ui/react'
+import { format } from 'date-fns'
 import { formatCurrency } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
+import TableEditButton from '../../../../../../../../shared/components/table/buttons/Edit'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import UpdateTransactionView from '../../Update'
 
 type TransactionsListRowProps = {
   transaction: TransactionModel
@@ -9,9 +13,14 @@ type TransactionsListRowProps = {
 export default function TransactionsListRow({
   transaction,
 }: TransactionsListRowProps): JSX.Element {
+  const openModal = useModal((state) => state.openModal)
+
+  const handleUpdate = (): void => {
+    openModal(<UpdateTransactionView transaction={transaction} />)
+  }
   return (
     <Tr>
-      <Td>{new Date(transaction.date).toLocaleDateString()}</Td>
+      <Td>{format(new Date(transaction.date), 'dd/MM/yyyy')}</Td>
       <Td
         title={transaction.description}
         maxW={80}
@@ -22,10 +31,13 @@ export default function TransactionsListRow({
         {transaction.description}
       </Td>
       <Td>{formatCurrency(transaction.value)}</Td>
-      <Td textAlign='center'>
-        <MoreInfoTooltip
-          label={`${transaction.userId}, ${new Date(transaction.createdAt).toLocaleDateString()}`}
-        />
+      <Td>
+        <HStack w='full' justify='center'>
+          <MoreInfoTooltip
+            label={`${transaction.userId}, ${new Date(transaction.createdAt).toLocaleDateString()}`}
+          />
+          <TableEditButton aria-label='Editar transação' onClick={handleUpdate} />
+        </HStack>
       </Td>
     </Tr>
   )
