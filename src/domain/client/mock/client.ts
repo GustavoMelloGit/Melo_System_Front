@@ -1,6 +1,10 @@
 import { faker } from '@faker-js/faker'
 import { type ClientModel } from '../types/model/Client'
 
+/**
+ * Create a mock client
+ * @returns {ClientModel} Mocked client
+ */
 function createMockUser(): ClientModel {
   return {
     id: faker.datatype.uuid(),
@@ -35,6 +39,15 @@ function createMockUser(): ClientModel {
     createdAt: faker.date.past().toString(),
     updatedAt: faker.date.past().toString(),
   }
+}
+
+/**
+ * Create a list of mock clients
+ * @param amount Number of clients to be mocked
+ * @returns {ClientModel[]} Array of mocked clients
+ */
+export function createMockListUser(amount?: number): ClientModel[] {
+  return Array.from({ length: amount ?? 10 }, () => createMockUser())
 }
 
 export default createMockUser
