@@ -1,0 +1,40 @@
+import { faker } from '@faker-js/faker'
+import { type ClientModel } from '../types/model/Client'
+
+function createMockUser(): ClientModel {
+  return {
+    id: faker.datatype.uuid(),
+    name: faker.name.firstName(),
+    address: {
+      brook: faker.address.streetName(),
+      city: faker.address.city(),
+      complement: faker.address.secondaryAddress(),
+      neighborhood: faker.address.county(),
+      number: String(faker.datatype.number()),
+      state: faker.address.state(),
+      street: faker.address.streetName(),
+      zipCode: faker.address.zipCode(),
+    },
+    balance: faker.datatype.number(),
+    description: faker.lorem.paragraph(),
+    nickname: faker.name.firstName(),
+    personType: {
+      type: 'fisica',
+      birthDate: faker.date.past().toString(),
+      cpf: String(faker.datatype.number()),
+      rg: String(faker.datatype.number()),
+      fatherName: faker.name.firstName(),
+      motherName: faker.name.firstName(),
+      producerRegistration: String(faker.datatype.number()),
+      rgEmissionDate: faker.date.past().toString(),
+    },
+    profileImage: faker.image.avatar(),
+    contact: {
+      phone: faker.phone.phoneNumber(),
+    },
+    createdAt: faker.date.past().toString(),
+    updatedAt: faker.date.past().toString(),
+  }
+}
+
+export default createMockUser
