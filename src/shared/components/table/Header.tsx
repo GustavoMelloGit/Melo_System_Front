@@ -1,5 +1,5 @@
-import { IconButton, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
-import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
+import { Box, IconButton, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
+import { BsArrowUpShort } from 'react-icons/bs'
 import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TableHeaderProps } from './types'
@@ -29,11 +29,18 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
                 ml={1}
                 aria-label={`sort by ${column.label}`}
                 icon={
-                  sortBy === column.id && sortOrder === 'asc' ? (
+                  <Box
+                    w='fit-content'
+                    h='fit-content'
+                    transform={
+                      sortBy === column.id && sortOrder === 'asc'
+                        ? 'rotate(180deg)'
+                        : 'rotate(0deg)'
+                    }
+                    transition='transform 0.2s'
+                  >
                     <BsArrowUpShort size={20} />
-                  ) : (
-                    <BsArrowDownShort size={20} />
-                  )
+                  </Box>
                 }
                 variant='unstyled'
                 onClick={() => {
