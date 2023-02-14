@@ -1,5 +1,5 @@
 import { HStack } from '@chakra-ui/react'
-import TableAddButton from '../../../../../../../../shared/components/table/Buttons/Add'
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type SearchForOption,

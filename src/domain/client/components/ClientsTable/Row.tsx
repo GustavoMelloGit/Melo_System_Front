@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import { formatCurrency } from '../../../../lib/utils/utils'
-import TableEditButton from '../../../../shared/components/table/Buttons/Edit'
-import TableLinkToButton from '../../../../shared/components/table/Buttons/LinkTo'
+import TableEditButton from '../../../../shared/components/table/buttons/Edit'
+import TableLinkToButton from '../../../../shared/components/table/buttons/LinkTo'
 import { type ClientModel } from '../../types/model/Client'
 
 export type ClientsTableRowProps = {
