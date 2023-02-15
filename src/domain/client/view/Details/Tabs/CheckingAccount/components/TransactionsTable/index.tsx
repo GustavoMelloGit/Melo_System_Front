@@ -54,6 +54,7 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'date', label: 'Data', isSortable: true },
   { id: 'description', label: 'Descrição' },
   { id: 'value', label: 'Valor', isSortable: true },
+  { id: 'clientBalance', label: 'Saldo', isSortable: true },
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
 const searchForOptions: SearchForOption = {

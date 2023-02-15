@@ -1,4 +1,4 @@
-import { HStack, Td, Tr } from '@chakra-ui/react'
+import { Center, HStack, Td, Tr } from '@chakra-ui/react'
 import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import TableEditButton from '../../../../../../../../shared/components/table/buttons/Edit'
@@ -29,11 +29,14 @@ export default function TransactionsListRow({
         {transaction.description}
       </Td>
       <Td>{formatCurrency(transaction.value)}</Td>
+      <Td>{formatCurrency(transaction.clientBalance)}</Td>
       <Td>
         <HStack w='full' justify='center'>
-          <MoreInfoTooltip
-            label={`${transaction.userId}, ${new Date(transaction.createdAt).toLocaleDateString()}`}
-          />
+          <Center w={10} h={10}>
+            <MoreInfoTooltip
+              label={`${transaction.user.name}, ${formatDate(transaction.createdAt, 'dd/MM/yyyy')}`}
+            />
+          </Center>
           <TableEditButton aria-label='Editar transação' onClick={handleUpdate} />
         </HStack>
       </Td>
