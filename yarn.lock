@@ -2305,6 +2305,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@faker-js/faker@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.6.0.tgz#9ea331766084288634a9247fcd8b84f16ff4ba07"
+  integrity sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==
+
 "@firebase/analytics-compat@0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-compat/-/analytics-compat-0.2.2.tgz#33286c12cf8d65ee5bd7e1c07d15c72a0a151844"

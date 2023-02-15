@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { type KeyedMutator } from 'swr'
 import { useModal } from '../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../service'
@@ -10,7 +9,7 @@ export default function useListTransactionsView(): UseListTransactionsView {
   const openModal = useModal((state) => state.openModal)
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { data, isLoading, total, mutate } = getTransactionsService(uuid ?? '', params)
+  const { isLoading, mutate, data, total } = getTransactionsService(uuid ?? '', params)
 
   function refetchData(): void {
     void mutate?.()
@@ -25,7 +24,7 @@ export default function useListTransactionsView(): UseListTransactionsView {
     isLoading,
     total: total ?? 0,
     handleAddTransaction,
-    mutate,
+    refetchData,
   }
 }
 
@@ -34,5 +33,5 @@ type UseListTransactionsView = {
   isLoading: boolean
   total: number
   handleAddTransaction: () => void
-  mutate: KeyedMutator<TransactionModel[]> | undefined
+  refetchData: () => void
 }

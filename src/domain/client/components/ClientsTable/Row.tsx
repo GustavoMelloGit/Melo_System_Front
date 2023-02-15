@@ -2,9 +2,9 @@ import { Avatar, HStack, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
-import { formatCurrency } from '../../../../lib/utils/utils'
-import TableEditButton from '../../../../shared/components/table/Buttons/Edit'
-import TableLinkToButton from '../../../../shared/components/table/Buttons/LinkTo'
+import { formatCurrency } from '../../../../lib/utils/formatters'
+import TableEditButton from '../../../../shared/components/table/buttons/Edit'
+import TableLinkToButton from '../../../../shared/components/table/buttons/LinkTo'
 import { type ClientModel } from '../../types/model/Client'
 
 export type ClientsTableRowProps = {
@@ -38,10 +38,10 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       <Td textAlign='center'>
         <HStack w='full' justify='center'>
           <Link to={Routes.updateClient(client.id)}>
-            <TableEditButton aria-label='Editar cliente' />
+            <TableEditButton as='span' aria-label='Editar cliente' />
           </Link>
           <Link to={Routes.clientPage(client.id)}>
-            <TableLinkToButton as='span' aria-label='Ver cliente' />
+            <TableLinkToButton aria-label='Ver cliente' />
           </Link>
         </HStack>
       </Td>

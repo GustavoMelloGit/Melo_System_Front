@@ -1,5 +1,5 @@
 import { HStack } from '@chakra-ui/react'
-import TableAddButton from '../../../../../../../../shared/components/table/Buttons/Add'
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
@@ -54,6 +54,7 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'date', label: 'Data', isSortable: true },
   { id: 'description', label: 'Descrição' },
   { id: 'value', label: 'Valor', isSortable: true },
+  { id: 'clientBalance', label: 'Saldo', isSortable: true },
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
 const searchForOptions: SearchForOption = {
