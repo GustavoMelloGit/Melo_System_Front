@@ -12,7 +12,7 @@ import { type ClientModel } from '../types/model/Client'
 import { type TransactionModel } from '../types/model/Transaction'
 import { type CheckingAccountFormValues } from '../types/view/Details'
 
-export function listClientsService(params?: string): GetServiceResponse<ClientModel[]> {
+export function getClientsService(params?: string): GetServiceResponse<ClientModel[]> {
   const { data, error, isLoading } = useFetch(`/clients?${params ?? ''}`)
 
   return {
