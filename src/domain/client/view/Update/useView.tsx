@@ -43,6 +43,7 @@ const emptyClient: ClientFormValues = {
     street: '',
     zipCode: '',
   },
+  balance: 0,
   contact: {
     phone: '',
   },
