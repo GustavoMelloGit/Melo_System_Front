@@ -1,11 +1,12 @@
 import { faker } from '@faker-js/faker'
-import { type TransactionModel } from '../types/model/Transaction'
+import { type TransactionModel } from '../../domain/client/types/model/Transaction'
+import { createMockUser } from './user'
 
 /**
  * Create a mock transaction
  * @returns {TransactionModel} Mocked transaction
  */
-function createMockTransaction(): TransactionModel {
+export function createMockTransaction(): TransactionModel {
   return {
     id: faker.datatype.uuid(),
     value: faker.datatype.number(),
@@ -15,6 +16,8 @@ function createMockTransaction(): TransactionModel {
     clientId: faker.datatype.uuid(),
     date: faker.date.past().toString(),
     userId: faker.datatype.uuid(),
+    clientBalance: faker.datatype.number(),
+    user: createMockUser(),
   }
 }
 
@@ -26,5 +29,3 @@ function createMockTransaction(): TransactionModel {
 export function createMockListTransaction(amount?: number): TransactionModel[] {
   return Array.from({ length: amount ?? 10 }, () => createMockTransaction())
 }
-
-export default createMockTransaction

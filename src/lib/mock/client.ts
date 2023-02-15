@@ -1,11 +1,11 @@
 import { faker } from '@faker-js/faker'
-import { type ClientModel } from '../types/model/Client'
+import { type ClientModel } from '../../domain/client/types/model/Client'
 
 /**
  * Create a mock client
  * @returns {ClientModel} Mocked client
  */
-function createMockUser(): ClientModel {
+export function createMockClient(): ClientModel {
   return {
     id: faker.datatype.uuid(),
     name: faker.name.firstName(),
@@ -46,8 +46,6 @@ function createMockUser(): ClientModel {
  * @param amount Number of clients to be mocked
  * @returns {ClientModel[]} Array of mocked clients
  */
-export function createMockListUser(amount?: number): ClientModel[] {
-  return Array.from({ length: amount ?? 10 }, () => createMockUser())
+export function createMockListClient(amount?: number): ClientModel[] {
+  return Array.from({ length: amount ?? 10 }, () => createMockClient())
 }
-
-export default createMockUser
