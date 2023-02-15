@@ -39,9 +39,8 @@ export type ClientModel = {
   profileImage?: string
   name: string
   nickname?: string
-  balance?: number
+  balance: number
   personType?: LegalPerson | NaturalPerson
-
   address: Address
   contact: ClientContact
   description?: string
