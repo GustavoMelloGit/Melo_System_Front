@@ -1,6 +1,5 @@
 import { HStack, Td, Tr } from '@chakra-ui/react'
-import { format } from 'date-fns'
-import { formatCurrency } from '../../../../../../../../lib/utils/utils'
+import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import TableEditButton from '../../../../../../../../shared/components/table/buttons/Edit'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
@@ -14,13 +13,12 @@ export default function TransactionsListRow({
   transaction,
 }: TransactionsListRowProps): JSX.Element {
   const openModal = useModal((state) => state.openModal)
-
   const handleUpdate = (): void => {
     openModal(<UpdateTransactionView transaction={transaction} />)
   }
   return (
     <Tr>
-      <Td>{format(new Date(transaction.date), 'dd/MM/yyyy')}</Td>
+      <Td>{formatDate(transaction.date, 'dd/MM/yyyy')}</Td>
       <Td
         title={transaction.description}
         maxW={80}

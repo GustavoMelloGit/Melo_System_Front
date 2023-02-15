@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import { format } from 'date-fns'
+import { formatDate } from '../../../../../../../lib/utils/formatters'
 import { type TransactionModel } from '../../../../../types/model/Transaction'
 import CheckingAccountForm from '../components/Form'
 import useUpdateTransactionView from './useView'
@@ -30,7 +30,7 @@ export default function UpdateTransactionView({
             onSubmit={handleUpdate}
             submitText='Salvar'
             initialValues={{
-              date: format(new Date(transaction.date), 'yyyy-MM-dd'),
+              date: formatDate(transaction.date, 'yyyy-MM-dd'),
               description: transaction.description,
               value: transaction.value,
             }}
