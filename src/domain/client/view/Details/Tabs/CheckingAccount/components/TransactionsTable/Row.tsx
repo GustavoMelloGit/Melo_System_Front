@@ -1,5 +1,6 @@
 import { Center, HStack, Td, Tr } from '@chakra-ui/react'
 import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
 
@@ -21,10 +22,8 @@ export default function TransactionsListRow({
       >
         {transaction.description}
       </Td>
-      <Td color={transaction.value >= 0 ? 'green.500' : 'red.400'}>
-        {formatCurrency(transaction.value)}
-      </Td>
-      <Td color={transaction.clientBalance >= 0 ? 'green.500' : 'red.400'}>
+      <Td color={getColorByValue(transaction.value)}>{formatCurrency(transaction.value)}</Td>
+      <Td color={getColorByValue(transaction.clientBalance)}>
         {formatCurrency(transaction.clientBalance)}
       </Td>
       <Td>
