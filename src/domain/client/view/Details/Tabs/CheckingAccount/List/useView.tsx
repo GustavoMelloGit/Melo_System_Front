@@ -4,6 +4,7 @@ import { useModal } from '../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../service'
 import { type TransactionModel } from '../../../../../types/model/Transaction'
+import FeeModal from '../components/FeeModal'
 import CreateTransactionView from '../Create'
 
 export default function useListTransactionsView(): UseListTransactionsView {
@@ -23,12 +24,17 @@ export default function useListTransactionsView(): UseListTransactionsView {
     openModal(<CreateTransactionView refetch={refetchData} uuid={uuid ?? ''} />)
   }
 
+  function handleCalculateFee(): void {
+    openModal(<FeeModal />)
+  }
+
   return {
     data: data ?? [],
     isLoading,
     total: total ?? 0,
     handleAddTransaction,
     refetchData,
+    handleCalculateFee,
   }
 }
 
@@ -38,4 +44,5 @@ type UseListTransactionsView = {
   total: number
   handleAddTransaction: () => void
   refetchData: () => void
+  handleCalculateFee: () => void
 }
