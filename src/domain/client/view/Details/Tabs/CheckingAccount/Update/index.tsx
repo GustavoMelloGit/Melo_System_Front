@@ -33,7 +33,6 @@ export default function UpdateTransactionView({
               date: formatDate(transaction.date, 'yyyy-MM-dd'),
               description: transaction.description,
               value: transaction.value,
-              isDebit: transaction.value < 0,
             }}
           />
         </ModalBody>

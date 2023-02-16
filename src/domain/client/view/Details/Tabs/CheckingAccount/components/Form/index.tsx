@@ -1,6 +1,7 @@
 import { Button, FormControl, FormLabel, Grid, GridItem, Switch, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Controller, useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
@@ -17,11 +18,10 @@ export default function CheckingAccountForm({
   initialValues,
   submitText,
 }: CheckingAccountFormProps): JSX.Element {
+  const [isDebit, setIsDebit] = useState(true)
   const {
     handleSubmit,
     register,
-    control,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<CheckingAccountFormValues>({
     defaultValues: initialValues,
@@ -35,19 +35,12 @@ export default function CheckingAccountForm({
           <GridItem colSpan={[1, 2]}>
             <FormControl>
               <FormLabel htmlFor='isDebit'>Débito?</FormLabel>
-              <Controller
-                control={control}
-                name='isDebit'
-                render={({ field: { onChange, value, ...rest } }) => (
-                  <Switch
-                    id='isDebit'
-                    isChecked={value}
-                    onChange={(value) => {
-                      onChange(value)
-                    }}
-                    {...rest}
-                  />
-                )}
+              <Switch
+                id='isDebit'
+                isChecked={isDebit}
+                onChange={() => {
+                  setIsDebit((prev) => !prev)
+                }}
               />
             </FormControl>
           </GridItem>
@@ -70,7 +63,7 @@ export default function CheckingAccountForm({
               leftIcon='R$'
               step='0.01'
               inputGroupProps={{
-                color: watch('isDebit') ? 'red.500' : 'green.500',
+                color: isDebit ? 'red.400' : 'green.500',
               }}
             />
           </GridItem>

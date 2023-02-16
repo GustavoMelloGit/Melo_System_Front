@@ -47,7 +47,6 @@ export default function CreateTransactionView({
               date: format(new Date(), 'yyyy-MM-dd'),
               description: '',
               value: 0,
-              isDebit: true,
             }}
           />
         </ModalBody>
