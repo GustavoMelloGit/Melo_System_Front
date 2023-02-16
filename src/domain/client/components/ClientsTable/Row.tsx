@@ -31,8 +31,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       </Td>
       <Td title={client.nickname}>{client.nickname}</Td>
       <Td onClick={handleToggleBalance} cursor='pointer'>
-        {showBalance ? formatCurrency(client.balance / 100 ?? 0) : 'R$ ----'}
-        {/* TODO: Remover o / 100 quando atualizar o back */}
+        {showBalance ? formatCurrency(client.balance) : 'R$ ----'}
       </Td>
       <Td>{client?.contact?.phone}</Td>
       <Td textAlign='center'>

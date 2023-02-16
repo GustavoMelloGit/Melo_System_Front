@@ -20,6 +20,8 @@ export function formatDate(unformattedDate: string, pattern: string): string {
  * @param {number} value The value to be formatted.
  * @returns {string} a string with the value formatted to BRL currency.
  */
-export function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
+export function formatCurrency(value: number | undefined): string {
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
+    value ? value / 100 : 0,
+  )
 }
