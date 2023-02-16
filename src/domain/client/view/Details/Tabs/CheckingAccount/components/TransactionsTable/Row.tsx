@@ -1,4 +1,4 @@
-import { Center, HStack, Td, Tr } from '@chakra-ui/react'
+import { HStack, Td, Tr } from '@chakra-ui/react'
 import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
@@ -28,11 +28,9 @@ export default function TransactionsListRow({
       </Td>
       <Td>
         <HStack w='full' justify='center'>
-          <Center w={10} h={10}>
-            <MoreInfoTooltip
-              label={`${transaction.user.name}, ${formatDate(transaction.createdAt)}`}
-            />
-          </Center>
+          <MoreInfoTooltip
+            label={`${transaction.user.name}, ${formatDate(transaction.createdAt)}`}
+          />
         </HStack>
       </Td>
     </Tr>

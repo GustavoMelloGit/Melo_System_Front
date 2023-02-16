@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { PaginationParams } from '../../../../../../../lib/constants/pagination'
 import { useModal } from '../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../service'
@@ -8,7 +9,10 @@ import CreateTransactionView from '../Create'
 export default function useListTransactionsView(): UseListTransactionsView {
   const openModal = useModal((state) => state.openModal)
   const { uuid } = useParams()
-  const params = useServiceParams()
+  const params = useServiceParams({
+    [PaginationParams.sortBy]: 'date',
+    [PaginationParams.sortOrder]: 'desc',
+  })
   const { isLoading, mutate, data, total } = getTransactionsService(uuid ?? '', params)
 
   function refetchData(): void {
