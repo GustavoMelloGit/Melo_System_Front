@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  type InputGroupProps,
   type InputProps,
 } from '@chakra-ui/react'
 import {
@@ -24,6 +25,7 @@ export type FormInputProps<TFormValues extends FieldValues> = {
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   label?: string
+  inputGroupProps?: InputGroupProps
 } & Omit<InputProps, 'name'>
 
 const RHFField = <TFormValues extends Record<string, unknown>>({
@@ -34,6 +36,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
   leftIcon,
   rightIcon,
   label,
+  inputGroupProps,
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element => {
   const errorMessages = get(errors, name)
@@ -41,7 +44,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
   return (
     <FormControl isInvalid={hasError}>
       {label && <FormLabel>{label}</FormLabel>}
-      <InputGroup>
+      <InputGroup {...inputGroupProps}>
         {leftIcon && <InputLeftElement>{leftIcon}</InputLeftElement>}
         <Input
           variant='filled'

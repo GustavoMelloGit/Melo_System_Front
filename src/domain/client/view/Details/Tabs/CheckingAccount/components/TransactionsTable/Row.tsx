@@ -1,10 +1,8 @@
 import { Center, HStack, Td, Tr } from '@chakra-ui/react'
 import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import TableEditButton from '../../../../../../../../shared/components/table/buttons/Edit'
-import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
-import UpdateTransactionView from '../../Update'
 
 type TransactionsListRowProps = {
   transaction: TransactionModel
@@ -12,13 +10,9 @@ type TransactionsListRowProps = {
 export default function TransactionsListRow({
   transaction,
 }: TransactionsListRowProps): JSX.Element {
-  const openModal = useModal((state) => state.openModal)
-  const handleUpdate = (): void => {
-    openModal(<UpdateTransactionView transaction={transaction} />)
-  }
   return (
     <Tr>
-      <Td>{formatDate(transaction.date, 'dd/MM/yyyy')}</Td>
+      <Td>{formatDate(transaction.date)}</Td>
       <Td
         title={transaction.description}
         maxW={80}
@@ -28,16 +22,17 @@ export default function TransactionsListRow({
       >
         {transaction.description}
       </Td>
-      <Td>{formatCurrency(transaction.value)}</Td>
-      <Td>{formatCurrency(transaction.clientBalance)}</Td>
+      <Td color={getColorByValue(transaction.value)}>{formatCurrency(transaction.value)}</Td>
+      <Td color={getColorByValue(transaction.clientBalance)}>
+        {formatCurrency(transaction.clientBalance)}
+      </Td>
       <Td>
         <HStack w='full' justify='center'>
           <Center w={10} h={10}>
             <MoreInfoTooltip
-              label={`${transaction.user.name}, ${formatDate(transaction.createdAt, 'dd/MM/yyyy')}`}
+              label={`${transaction.user.name}, ${formatDate(transaction.createdAt)}`}
             />
           </Center>
-          <TableEditButton aria-label='Editar transação' onClick={handleUpdate} />
         </HStack>
       </Td>
     </Tr>

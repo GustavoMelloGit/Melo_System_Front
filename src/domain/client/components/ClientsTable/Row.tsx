@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import { formatCurrency } from '../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../lib/utils/styles'
 import TableEditButton from '../../../../shared/components/table/buttons/Edit'
 import TableLinkToButton from '../../../../shared/components/table/buttons/LinkTo'
 import { type ClientModel } from '../../types/model/Client'
@@ -30,9 +31,12 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         {client.name}
       </Td>
       <Td title={client.nickname}>{client.nickname}</Td>
-      <Td onClick={handleToggleBalance} cursor='pointer'>
-        {showBalance ? formatCurrency(client.balance / 100 ?? 0) : 'R$ ----'}
-        {/* TODO: Remover o / 100 quando atualizar o back */}
+      <Td
+        onClick={handleToggleBalance}
+        cursor='pointer'
+        color={showBalance ? getColorByValue(client.balance) : 'inherit'}
+      >
+        {showBalance ? formatCurrency(client.balance) : 'R$ ----'}
       </Td>
       <Td>{client?.contact?.phone}</Td>
       <Td textAlign='center'>
