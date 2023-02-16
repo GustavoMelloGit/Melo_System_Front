@@ -71,6 +71,7 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
             <Input
               variant='filled'
               rounded='xl'
+              inputMode='numeric'
               fontWeight={500}
               value={formatCurrency((inputValue * 100).toString())}
               onChange={async (event) => {
