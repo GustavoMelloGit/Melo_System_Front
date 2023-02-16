@@ -34,8 +34,8 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
                     h='fit-content'
                     transform={
                       sortBy === column.id && sortOrder === 'asc'
-                        ? 'rotate(180deg)'
-                        : 'rotate(0deg)'
+                        ? 'rotate(0deg)'
+                        : 'rotate(180deg)'
                     }
                     transition='transform 0.2s'
                   >
