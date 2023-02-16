@@ -11,7 +11,7 @@ export default function TransactionsListRow({
 }: TransactionsListRowProps): JSX.Element {
   return (
     <Tr>
-      <Td>{formatDate(transaction.date, 'dd/MM/yyyy')}</Td>
+      <Td>{formatDate(transaction.date)}</Td>
       <Td
         title={transaction.description}
         maxW={80}
@@ -24,17 +24,14 @@ export default function TransactionsListRow({
       <Td color={transaction.value >= 0 ? 'green.500' : 'red.400'}>
         {formatCurrency(transaction.value)}
       </Td>
-      <Td color={transaction.value >= 0 ? 'green.500' : 'red.400'}>
+      <Td color={transaction.clientBalance >= 0 ? 'green.500' : 'red.400'}>
         {formatCurrency(transaction.clientBalance)}
       </Td>
       <Td>
         <HStack w='full' justify='center'>
           <Center w={10} h={10}>
             <MoreInfoTooltip
-              label={`${transaction.user.name}, ${formatDate(
-                transaction.createdAt,
-                'dd/MM/yyyy HH:mm',
-              )}`}
+              label={`${transaction.user.name}, ${formatDate(transaction.createdAt)}`}
             />
           </Center>
         </HStack>

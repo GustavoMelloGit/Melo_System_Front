@@ -29,7 +29,13 @@ export default function CheckingAccountForm({
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(async ({ value, ...values }) => {
+        const valueInCents = value * 100
+        const convertedValue = isDebit ? -valueInCents : valueInCents
+        await onSubmit({ ...values, value: convertedValue })
+      })}
+    >
       <VStack align='stretch' gap={4}>
         <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)']} gap={3}>
           <GridItem colSpan={[1, 2]}>

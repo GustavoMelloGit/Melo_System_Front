@@ -30,7 +30,7 @@ export default function UpdateTransactionView({
             onSubmit={handleUpdate}
             submitText='Salvar'
             initialValues={{
-              date: formatDate(transaction.date, 'yyyy-MM-dd'),
+              date: formatDate(transaction.date),
               description: transaction.description,
               value: transaction.value,
             }}
