@@ -9,9 +9,10 @@ import { format } from 'date-fns'
  * formatISODate('2021-01-01T00:00:00.000Z', 'dd/MM/yyyy') // '01/01/2021'
  */
 export function formatDate(unformattedDate: string, pattern: string): string {
-  const [date] = unformattedDate.split('T')
+  const [date, time] = unformattedDate.split('T')
   const [year, month, day] = date.split('-').map(Number)
-  const dateObject = new Date(year, month, day)
+  const [hour, minute] = time.split(':').map(Number)
+  const dateObject = new Date(year, month, day, hour, minute)
   return format(dateObject, pattern)
 }
 
