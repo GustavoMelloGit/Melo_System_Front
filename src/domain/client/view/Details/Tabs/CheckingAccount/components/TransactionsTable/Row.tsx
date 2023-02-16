@@ -28,8 +28,12 @@ export default function TransactionsListRow({
       >
         {transaction.description}
       </Td>
-      <Td>{formatCurrency(transaction.value)}</Td>
-      <Td>{formatCurrency(transaction.clientBalance)}</Td>
+      <Td color={transaction.value >= 0 ? 'green.500' : 'red.400'}>
+        {formatCurrency(transaction.value)}
+      </Td>
+      <Td color={transaction.value >= 0 ? 'green.500' : 'red.400'}>
+        {formatCurrency(transaction.clientBalance)}
+      </Td>
       <Td>
         <HStack w='full' justify='center'>
           <Center w={10} h={10}>

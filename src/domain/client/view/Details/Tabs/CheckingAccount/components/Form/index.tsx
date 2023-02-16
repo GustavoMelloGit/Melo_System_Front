@@ -1,6 +1,6 @@
-import { Button, Grid, GridItem, VStack } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, Grid, GridItem, Switch, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
@@ -20,6 +20,8 @@ export default function CheckingAccountForm({
   const {
     handleSubmit,
     register,
+    control,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<CheckingAccountFormValues>({
     defaultValues: initialValues,
@@ -30,6 +32,25 @@ export default function CheckingAccountForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <VStack align='stretch' gap={4}>
         <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)']} gap={3}>
+          <GridItem colSpan={[1, 2]}>
+            <FormControl>
+              <FormLabel htmlFor='isDebit'>Débito?</FormLabel>
+              <Controller
+                control={control}
+                name='isDebit'
+                render={({ field: { onChange, value, ...rest } }) => (
+                  <Switch
+                    id='isDebit'
+                    isChecked={value}
+                    onChange={(value) => {
+                      onChange(value)
+                    }}
+                    {...rest}
+                  />
+                )}
+              />
+            </FormControl>
+          </GridItem>
           <GridItem>
             <RHFField<CheckingAccountFormValues>
               name='date'
@@ -48,6 +69,9 @@ export default function CheckingAccountForm({
               errors={errors}
               leftIcon='R$'
               step='0.01'
+              inputGroupProps={{
+                color: watch('isDebit') ? 'red.500' : 'green.500',
+              }}
             />
           </GridItem>
           <GridItem colSpan={[1, 2]}>
