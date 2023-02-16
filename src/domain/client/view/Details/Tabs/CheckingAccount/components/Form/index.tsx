@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
 import RHFTextField from '../../../../../../../../shared/components/inputs/RHFTextField'
 import { type CheckingAccountFormValues } from '../../../../../../types/view/Details'
@@ -23,6 +24,7 @@ export default function CheckingAccountForm({
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    control,
   } = useForm<CheckingAccountFormValues>({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
@@ -60,14 +62,12 @@ export default function CheckingAccountForm({
             />
           </GridItem>
           <GridItem>
-            <RHFField<CheckingAccountFormValues>
+            <RHFCurrencyInput<CheckingAccountFormValues>
               name='value'
               label='Valor'
-              type='number'
-              register={register}
+              control={control}
               errors={errors}
               leftIcon='R$'
-              step='0.01'
               inputGroupProps={{
                 color: isDebit ? 'red.400' : 'green.500',
               }}
