@@ -8,11 +8,19 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { useFeeStore } from '../../stores/useFeeStore'
 
 export default function FeeModal(): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
+  const setSelectedFees = useFeeStore((state) => state.setSelectedFees)
+
+  function handleCloseModal(): void {
+    setSelectedFees([])
+    closeModal()
+  }
+
   return (
-    <Modal isOpen isCentered onClose={closeModal}>
+    <Modal isOpen isCentered onClose={handleCloseModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton />
