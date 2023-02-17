@@ -2,6 +2,7 @@ import {
   Heading,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
@@ -22,6 +23,7 @@ export default function UpdateTransactionView({
     <Modal isOpen onClose={closeModal} isCentered>
       <ModalOverlay />
       <ModalContent p={8} rounded={20}>
+        <ModalCloseButton />
         <ModalHeader>
           <Heading fontSize='3xl'>Atualizar lançamento</Heading>
         </ModalHeader>
