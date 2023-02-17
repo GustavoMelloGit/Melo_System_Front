@@ -12,6 +12,7 @@ export type TableHeaderColumns = {
   label: string
   isSortable?: boolean
   align?: 'left' | 'right' | 'center'
+  defaultSort?: 'asc' | 'desc'
 }
 export type TableHeaderProps = {
   columns: TableHeaderColumns[]

@@ -8,6 +8,7 @@ import {
 } from '../../../../../../../../shared/components/table/types'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
 import TransactionsListRow from './Row'
+import useTransactionTable from './useView'
 
 type TransactionsTableProps = {
   data: TransactionModel[]
@@ -23,6 +24,7 @@ export default function TransactionsTable({
   onClickAdd,
   onClickFee,
 }: TransactionsTableProps): JSX.Element {
+  const { selectionMode, onSelectFee } = useTransactionTable()
   return (
     <Table
       header={{
@@ -42,20 +44,24 @@ export default function TransactionsTable({
         actions: (
           <HStack spacing={0.5}>
             <TableAddButton onClick={onClickAdd} aria-label='adicionar transação' />
-            <TableFeeButton onClick={onClickFee} aria-label='calcular juros' />
+            <TableFeeButton
+              onClick={onClickFee}
+              aria-label='calcular juros'
+              colorScheme={selectionMode ? 'blue' : undefined}
+            />
           </HStack>
         ),
       }}
     >
       {data?.map((transaction, index) => (
-        <TransactionsListRow key={index} transaction={transaction} />
+        <TransactionsListRow onSelectFee={onSelectFee} key={index} transaction={transaction} />
       ))}
     </Table>
   )
 }
 
 const headerColumns: TableHeaderColumns[] = [
-  { id: 'date', label: 'Data', isSortable: true },
+  { id: 'date', label: 'Data', isSortable: true, defaultSort: 'desc' },
   { id: 'description', label: 'Descrição' },
   { id: 'value', label: 'Valor', isSortable: true },
   { id: 'clientBalance', label: 'Saldo', isSortable: true },

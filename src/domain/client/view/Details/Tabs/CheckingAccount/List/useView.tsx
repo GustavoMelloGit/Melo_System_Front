@@ -1,19 +1,21 @@
 import { useParams } from 'react-router-dom'
-import { PaginationParams } from '../../../../../../../lib/constants/pagination'
+import { shallow } from 'zustand/shallow'
 import { useModal } from '../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../service'
 import { type TransactionModel } from '../../../../../types/model/Transaction'
 import FeeModal from '../components/FeeModal'
 import CreateTransactionView from '../Create'
+import { useFeeStore } from '../stores/useFeeStore'
 
 export default function useListTransactionsView(): UseListTransactionsView {
   const openModal = useModal((state) => state.openModal)
+  const [selectionMode, setSelectionMode] = useFeeStore(
+    (state) => [state.selectionMode, state.setSelectionMode],
+    shallow,
+  )
   const { uuid } = useParams()
-  const params = useServiceParams({
-    [PaginationParams.sortBy]: 'date',
-    [PaginationParams.sortOrder]: 'desc',
-  })
+  const params = useServiceParams()
   const { isLoading, mutate, data, total } = getTransactionsService(uuid ?? '', params)
 
   function refetchData(): void {
@@ -25,7 +27,10 @@ export default function useListTransactionsView(): UseListTransactionsView {
   }
 
   function handleCalculateFee(): void {
-    openModal(<FeeModal />)
+    if (selectionMode) {
+      openModal(<FeeModal />)
+      setSelectionMode(false)
+    } else setSelectionMode(true)
   }
 
   return {

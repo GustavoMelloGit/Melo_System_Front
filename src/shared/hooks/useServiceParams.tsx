@@ -1,11 +1,9 @@
 import { PaginationParams } from '../../lib/constants/pagination'
 import useURLSearchParams from './useURLSearchParams'
 
-export default function useServiceParams(defaultParams?: Record<string, string>): string {
+export default function useServiceParams(): string {
   const { getParam } = useURLSearchParams()
-  const params = new URLSearchParams(
-    defaultParams ? Object.entries(defaultParams).map(([key, value]) => [key, value]) : [],
-  )
+  const params = new URLSearchParams()
 
   const skip = getParam(PaginationParams.page)
   const limit = getParam(PaginationParams.rowsPerPage)
