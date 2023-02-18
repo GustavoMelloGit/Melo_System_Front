@@ -1,4 +1,5 @@
 import { HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-ui/react'
+import { useMemo } from 'react'
 import { shallow } from 'zustand/shallow'
 import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
@@ -20,7 +21,10 @@ export default function TransactionsListRow({
     (state) => [state.selectionMode, state.selectedFees],
     shallow,
   )
-  const transactionSelected = selectedFees.find((fee) => fee.id === transaction.id)
+  const transactionSelected = useMemo(
+    () => selectedFees.find((fee) => fee.id === transaction.id),
+    [transaction.id, selectedFees],
+  )
   const valueSelected = transactionSelected?.amount
 
   const handleSelectFee = (amount: number): void => {
