@@ -1,5 +1,5 @@
 /**
- * Format date values to dd/mm/yyyy or dd/mm/yyyy hh:mm format.
+ * Format date values from yyyy-MM-dd to dd/mm/yyyy or dd/mm/yyyy hh:mm format.
  * @param {string} unformattedDate The date to be formatted.
  * @returns {string} a string with the date formatted.
  * @example

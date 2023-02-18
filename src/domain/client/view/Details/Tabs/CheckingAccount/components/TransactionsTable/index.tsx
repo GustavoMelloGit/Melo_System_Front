@@ -1,5 +1,6 @@
 import { HStack } from '@chakra-ui/react'
 import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
+import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
@@ -7,6 +8,7 @@ import {
 } from '../../../../../../../../shared/components/table/types'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
 import TransactionsListRow from './Row'
+import useTransactionTable from './useView'
 
 type TransactionsTableProps = {
   data: TransactionModel[]
@@ -20,6 +22,7 @@ export default function TransactionsTable({
   total,
   onClickAdd,
 }: TransactionsTableProps): JSX.Element {
+  const { selectionMode, onSelectFee, handleClickFee } = useTransactionTable()
   return (
     <Table
       header={{
@@ -37,21 +40,27 @@ export default function TransactionsTable({
       filter={{
         searchForOptions,
         actions: (
-          <HStack>
+          <HStack spacing={0.5}>
             <TableAddButton onClick={onClickAdd} aria-label='adicionar transação' />
+
+            <TableFeeButton
+              onClick={handleClickFee}
+              aria-label='calcular juros'
+              colorScheme={selectionMode ? 'blue' : undefined}
+            />
           </HStack>
         ),
       }}
     >
       {data?.map((transaction, index) => (
-        <TransactionsListRow key={index} transaction={transaction} />
+        <TransactionsListRow onSelectFee={onSelectFee} key={index} transaction={transaction} />
       ))}
     </Table>
   )
 }
 
 const headerColumns: TableHeaderColumns[] = [
-  { id: 'date', label: 'Data', isSortable: true },
+  { id: 'date', label: 'Data', isSortable: true, defaultSort: 'desc' },
   { id: 'description', label: 'Descrição' },
   { id: 'value', label: 'Valor', isSortable: true },
   { id: 'clientBalance', label: 'Saldo', isSortable: true },
