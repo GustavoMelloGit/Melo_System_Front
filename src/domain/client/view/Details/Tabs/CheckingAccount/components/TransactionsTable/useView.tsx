@@ -1,19 +1,17 @@
-import { shallow } from 'zustand/shallow'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore, type FeeSelection } from '../../stores/useFeeStore'
+import FeeModal from '../FeeModal'
 
 export default function useTransactionTable(): UseTransactionTable {
-  const { addSelectedFee, removeSelectedFee, selectionMode, selectedFees, updateSelectedFee } =
-    useFeeStore(
-      (state) => ({
-        addSelectedFee: state.addSelectedFee,
-        removeSelectedFee: state.removeSelectedFee,
-        updateSelectedFee: state.updateSelectedFee,
-        selectionMode: state.selectionMode,
-        selectedFees: state.selectedFees,
-      }),
-      shallow,
-    )
-  console.log('selectedFees', selectedFees)
+  const openModal = useModal((state) => state.openModal)
+  const {
+    addSelectedFee,
+    removeSelectedFee,
+    selectionMode,
+    selectedFees,
+    updateSelectedFee,
+    setSelectionMode,
+  } = useFeeStore()
 
   const onSelectFee = (fee: FeeSelection): void => {
     const feeAlreadySelected = selectedFees.find((fees) => fees.id === fee.id)
@@ -29,9 +27,20 @@ export default function useTransactionTable(): UseTransactionTable {
     }
   }
 
+  function handleClickFee(): void {
+    const hasSelectedFees = selectedFees.length > 0
+    if (!selectionMode) setSelectionMode(true)
+    else if (selectionMode && !hasSelectedFees) setSelectionMode(false)
+    else {
+      openModal(<FeeModal />)
+      setSelectionMode(false)
+    }
+  }
+
   return {
     onSelectFee,
     selectionMode,
+    handleClickFee,
   }
 }
 
@@ -39,4 +48,5 @@ export type OnSelectFee = (fee: FeeSelection) => void
 export type UseTransactionTable = {
   onSelectFee: OnSelectFee
   selectionMode: boolean
+  handleClickFee: () => void
 }

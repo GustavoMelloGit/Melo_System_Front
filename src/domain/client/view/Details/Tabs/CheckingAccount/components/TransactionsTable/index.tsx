@@ -15,16 +15,14 @@ type TransactionsTableProps = {
   total: number
   isLoading: boolean
   onClickAdd: () => void
-  onClickFee: () => void
 }
 export default function TransactionsTable({
   data,
   isLoading,
   total,
   onClickAdd,
-  onClickFee,
 }: TransactionsTableProps): JSX.Element {
-  const { selectionMode, onSelectFee } = useTransactionTable()
+  const { selectionMode, onSelectFee, handleClickFee } = useTransactionTable()
   return (
     <Table
       header={{
@@ -44,8 +42,9 @@ export default function TransactionsTable({
         actions: (
           <HStack spacing={0.5}>
             <TableAddButton onClick={onClickAdd} aria-label='adicionar transação' />
+
             <TableFeeButton
-              onClick={onClickFee}
+              onClick={handleClickFee}
               aria-label='calcular juros'
               colorScheme={selectionMode ? 'blue' : undefined}
             />
