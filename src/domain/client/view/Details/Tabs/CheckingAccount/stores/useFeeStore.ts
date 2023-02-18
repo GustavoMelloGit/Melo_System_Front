@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type FeeSelection = {
+export type TransactionSelected = {
   id: string
   date: string
   amount: number
@@ -9,11 +9,11 @@ export type FeeSelection = {
 type FeeStore = {
   selectionMode: boolean
   setSelectionMode: (selectionMode: boolean) => void
-  selectedFees: FeeSelection[]
-  setSelectedFees: (selectedFees: FeeSelection[]) => void
-  addSelectedFee: (fee: FeeSelection) => void
-  removeSelectedFee: (fee: FeeSelection) => void
-  updateSelectedFee: (fee: FeeSelection) => void
+  selectedTransactions: TransactionSelected[]
+  setSelectedTransactions: (selectedFees: TransactionSelected[]) => void
+  addSelectedTransaction: (fee: TransactionSelected) => void
+  removeSelectedTransaction: (fee: TransactionSelected) => void
+  updateSelectedTransaction: (fee: TransactionSelected) => void
 }
 
 export const useFeeStore = create<FeeStore>((set) => ({
@@ -21,19 +21,21 @@ export const useFeeStore = create<FeeStore>((set) => ({
   setSelectionMode: (selectionMode) => {
     set({ selectionMode })
   },
-  selectedFees: [],
-  setSelectedFees: (selectedFees) => {
-    set({ selectedFees })
+  selectedTransactions: [],
+  setSelectedTransactions: (selectedTransactions) => {
+    set({ selectedTransactions })
   },
-  addSelectedFee: (fee) => {
-    set((state) => ({ selectedFees: [...state.selectedFees, fee] }))
+  addSelectedTransaction: (fee) => {
+    set((state) => ({ selectedTransactions: [...state.selectedTransactions, fee] }))
   },
-  removeSelectedFee: (fee) => {
-    set((state) => ({ selectedFees: state.selectedFees.filter((f) => f.id !== fee.id) }))
-  },
-  updateSelectedFee: (fee) => {
+  removeSelectedTransaction: (fee) => {
     set((state) => ({
-      selectedFees: state.selectedFees.map((f) => (f.id === fee.id ? fee : f)),
+      selectedTransactions: state.selectedTransactions.filter((f) => f.id !== fee.id),
+    }))
+  },
+  updateSelectedTransaction: (fee) => {
+    set((state) => ({
+      selectedTransactions: state.selectedTransactions.map((f) => (f.id === fee.id ? fee : f)),
     }))
   },
 }))

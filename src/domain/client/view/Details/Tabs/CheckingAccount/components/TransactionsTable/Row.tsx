@@ -5,7 +5,7 @@ import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/fo
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
-import { useFeeStore, type FeeSelection } from '../../stores/useFeeStore'
+import { useFeeStore, type TransactionSelected } from '../../stores/useFeeStore'
 import { type OnSelectFee } from './useView'
 
 type TransactionsListRowProps = {
@@ -17,19 +17,19 @@ export default function TransactionsListRow({
   onSelectFee,
 }: TransactionsListRowProps): JSX.Element {
   const activeColor = useColorModeValue('blue.500', 'blue.200')
-  const [selectionMode, selectedFees] = useFeeStore(
-    (state) => [state.selectionMode, state.selectedFees],
+  const [selectionMode, selectedTransactions] = useFeeStore(
+    (state) => [state.selectionMode, state.selectedTransactions],
     shallow,
   )
   const transactionSelected = useMemo(
-    () => selectedFees.find((fee) => fee.id === transaction.id),
-    [transaction.id, selectedFees],
+    () => selectedTransactions.find((fee) => fee.id === transaction.id),
+    [transaction.id, selectedTransactions],
   )
   const valueSelected = transactionSelected?.amount
 
   const handleSelectFee = (amount: number): void => {
     if (!selectionMode) return
-    const selectionFee: FeeSelection = {
+    const selectionFee: TransactionSelected = {
       id: transaction.id,
       amount,
       date: transaction.date,
