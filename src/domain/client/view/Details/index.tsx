@@ -65,7 +65,7 @@ export default function ClientDetails(): JSX.Element {
         </Card>
         <Flex justify='center'>
           <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
-            <Card overflow='auto' p={4} roundedTop={0}>
+            <Card overflow='auto' p={4} roundedTop={0} borderColor='inherit'>
               <TabList justifyContent='center' minW='max-content' w='full'>
                 <Tab>Conta Corrente</Tab>
                 <Tab>Conta Café</Tab>
