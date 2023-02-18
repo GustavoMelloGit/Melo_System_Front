@@ -16,20 +16,21 @@ export default function SidebarListItem({
   const bg = useColorModeValue('gray.100', 'gray.700')
 
   return (
-    <Link to={to}>
-      <ListItem
-        {...(isActive && { bg })}
-        py={2}
-        px={4}
-        rounded={5}
-        display='flex'
-        alignItems={'center'}
-        gap={2}
-        fontWeight={600}
+    <ListItem {...(isActive && { bg })} rounded={5} fontWeight={600}>
+      <Link
+        to={to}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+          width: '100%',
+          height: '100%',
+          padding: '.5rem 1rem',
+        }}
       >
         {icon}
         {label}
-      </ListItem>
-    </Link>
+      </Link>
+    </ListItem>
   )
 }
