@@ -10,7 +10,7 @@ import { type FilterFormValues, type TableFilterProps } from './types'
 export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
   const { getParam } = useURLSearchParams()
   const { handleAddParams, handleRemoveParams } = useURLSearchParams()
-  const bg = useColorModeValue('gray.300', 'gray.700')
+  const bg = useColorModeValue('gray.200', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
   const { handleSubmit, register, watch } = useForm<FilterFormValues>({
     defaultValues: {

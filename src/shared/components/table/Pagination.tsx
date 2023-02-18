@@ -12,7 +12,7 @@ export default function TablePagination({
   dataLength,
   totalLength,
 }: TablePaginationProps): JSX.Element {
-  const bg = useColorModeValue('gray.300', 'gray.700')
+  const bg = useColorModeValue('gray.200', 'gray.700')
   const { handleAddParam, getParam, handleRemoveParam } = useURLSearchParams()
   const pageParam = getParam(PaginationParams.page)
   const currentPage = pageParam ? Number(pageParam) : 1

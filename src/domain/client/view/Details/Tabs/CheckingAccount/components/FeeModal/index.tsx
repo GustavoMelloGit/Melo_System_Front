@@ -1,6 +1,5 @@
 import {
-  Divider,
-  GridItem,
+  Box,
   Heading,
   Modal,
   ModalBody,
@@ -12,21 +11,35 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Tfoot,
   Th,
   Thead,
   Tr,
+  useColorModeValue,
   VStack,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import { calculateMonthlyCompoundInterest } from '../../../../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { useFeeStore, type TransactionSelected } from '../../stores/useFeeStore'
+import { useFeeStore } from '../../stores/useFeeStore'
+
+function calculateInterest(date: string, amount: number, interestRate: number): number {
+  const month = date.split('-')[1]
+  const year = date.split('-')[0]
+  const today = new Date()
+  const todayMonth = today.getMonth() + 1
+  const todayYear = today.getFullYear()
+  const months = (todayYear - Number(year)) * 12 + (todayMonth - Number(month))
+  return calculateMonthlyCompoundInterest(months, amount, interestRate)
+}
 
 export default function FeeModal(): JSX.Element {
   const [interestRate, setInterestRate] = useState(3)
   const closeModal = useModal((state) => state.closeModal)
+  const borderColor = useColorModeValue('gray.200', 'gray.600')
   const [selectedTransactions, setSelectedFees] = useFeeStore((state) => [
     state.selectedTransactions,
     state.setSelectedTransactions,
@@ -37,21 +50,18 @@ export default function FeeModal(): JSX.Element {
     closeModal()
   }
 
-  function calculateMonthlyCompoundInterest(date: string, amount: number): number {
-    if (!interestRate) return 0
-    const month = date.split('-')[1]
-    const year = date.split('-')[0]
-    const today = new Date()
-    const todayMonth = today.getMonth() + 1
-    const todayYear = today.getFullYear()
-    const months = (todayYear - Number(year)) * 12 + (todayMonth - Number(month))
-    return amount * (1 + interestRate / 100) ** months
-  }
-  const interestByIndex = selectedTransactions.map((transaction) => {
-    return calculateMonthlyCompoundInterest(transaction.date, transaction.amount)
-  })
-
-  const totalAmountWithInterest = interestByIndex.reduce((acc, curr) => acc + curr, 0)
+  let totalWithouInterest = 0
+  let totalAmountWithInterest = 0
+  const interestByIndex = useMemo(
+    () =>
+      selectedTransactions.map((transaction) => {
+        const interest = calculateInterest(transaction.date, transaction.amount, interestRate)
+        totalWithouInterest += transaction.amount
+        totalAmountWithInterest += interest
+        return interest
+      }),
+    [interestRate, selectedTransactions],
+  )
 
   return (
     <Modal isOpen isCentered onClose={handleCloseModal} size='xl'>
@@ -69,59 +79,64 @@ export default function FeeModal(): JSX.Element {
               setValue={setInterestRate}
               value={interestRate}
             />
-            <TableContainer
-              sx={{
-                '& td': {
-                  borderTop: '1px solid white',
-                  borderBottom: 'none',
-                },
-              }}
-            >
-              <Table>
-                <Thead>
-                  <Tr>
-                    <Th>Data</Th>
-                    <Th>Valor</Th>
-                    <Th>Juros</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {selectedTransactions.map((transaction, index) => (
-                    <Tr key={transaction.id}>
-                      <FeeArea transaction={transaction} fee={interestByIndex[index]} />
-                      <GridItem colSpan={3}>
-                        <Divider />
-                      </GridItem>
+
+            <Box maxH={[300, 400]} overflowY='auto'>
+              <TableContainer
+                sx={{
+                  '& td': {
+                    borderBottom: '1px solid',
+                    borderColor,
+                  },
+                }}
+              >
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Data</Th>
+                      <Th>Valor</Th>
+                      <Th>Juros</Th>
                     </Tr>
-                  ))}
-                  <Tr>
-                    <Td colSpan={2} fontWeight={600}>
-                      Total
-                    </Td>
-                    <Td fontWeight={700} color={getColorByValue(totalAmountWithInterest)}>
-                      {formatCurrency(totalAmountWithInterest)}
-                    </Td>
-                  </Tr>
-                </Tbody>
-              </Table>
-            </TableContainer>
+                  </Thead>
+                  <Tbody>
+                    {selectedTransactions.map((transaction, index) => (
+                      <Tr key={transaction.id}>
+                        <Td>{formatDate(transaction.date)}</Td>
+                        <Td color={getColorByValue(transaction.amount)}>
+                          {formatCurrency(transaction.amount)}
+                        </Td>
+                        <Td color={getColorByValue(interestByIndex[index])}>
+                          {formatCurrency(interestByIndex[index])}
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                  <Tfoot>
+                    <Tr>
+                      <Th fontSize='md' fontWeight={600}>
+                        Total
+                      </Th>
+                      <Th
+                        fontSize='md'
+                        fontWeight={700}
+                        color={getColorByValue(totalWithouInterest)}
+                      >
+                        {formatCurrency(totalWithouInterest)}
+                      </Th>
+                      <Th
+                        fontSize='md'
+                        fontWeight={700}
+                        color={getColorByValue(totalAmountWithInterest)}
+                      >
+                        {formatCurrency(totalAmountWithInterest)}
+                      </Th>
+                    </Tr>
+                  </Tfoot>
+                </Table>
+              </TableContainer>
+            </Box>
           </VStack>
         </ModalBody>
       </ModalContent>
     </Modal>
-  )
-}
-
-type FeeAreaProps = {
-  transaction: TransactionSelected
-  fee: number
-}
-function FeeArea({ fee, transaction }: FeeAreaProps): JSX.Element {
-  return (
-    <>
-      <Td>{formatDate(transaction.date)}</Td>
-      <Td color={getColorByValue(transaction.amount)}>{formatCurrency(transaction.amount)}</Td>
-      <Td color={getColorByValue(fee)}>{formatCurrency(fee)}</Td>
-    </>
   )
 }
