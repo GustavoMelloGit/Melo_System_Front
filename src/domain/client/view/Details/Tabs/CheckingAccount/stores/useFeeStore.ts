@@ -14,6 +14,7 @@ type FeeStore = {
   addSelectedTransaction: (fee: TransactionSelected) => void
   removeSelectedTransaction: (fee: TransactionSelected) => void
   updateSelectedTransaction: (fee: TransactionSelected) => void
+  resetStore: () => void
 }
 
 export const useFeeStore = create<FeeStore>((set) => ({
@@ -37,5 +38,11 @@ export const useFeeStore = create<FeeStore>((set) => ({
     set((state) => ({
       selectedTransactions: state.selectedTransactions.map((f) => (f.id === fee.id ? fee : f)),
     }))
+  },
+  resetStore: () => {
+    set({
+      selectionMode: false,
+      selectedTransactions: [],
+    })
   },
 }))
