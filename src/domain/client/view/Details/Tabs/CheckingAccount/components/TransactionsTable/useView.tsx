@@ -1,9 +1,12 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore, type TransactionSelected } from '../../stores/useFeeStore'
 import FeeModal from '../FeeModal'
 
 export default function useTransactionTable(): UseTransactionTable {
   const openModal = useModal((state) => state.openModal)
+  const location = useLocation()
   const {
     addSelectedTransaction: addSelectedFee,
     removeSelectedTransaction: removeSelectedFee,
@@ -11,6 +14,7 @@ export default function useTransactionTable(): UseTransactionTable {
     selectedTransactions,
     updateSelectedTransaction: updateSelectedFee,
     setSelectionMode,
+    resetStore,
   } = useFeeStore()
 
   const onSelectFee = (fee: TransactionSelected): void => {
@@ -29,13 +33,18 @@ export default function useTransactionTable(): UseTransactionTable {
 
   function handleClickFee(): void {
     const hasSelectedFees = selectedTransactions.length > 0
-    if (!selectionMode) setSelectionMode(true)
-    else if (selectionMode && !hasSelectedFees) setSelectionMode(false)
+    if (!selectionMode) {
+      setSelectionMode(true)
+    } else if (selectionMode && !hasSelectedFees) setSelectionMode(false)
     else {
       openModal(<FeeModal />)
       setSelectionMode(false)
     }
   }
+
+  useEffect(() => {
+    if (selectionMode) resetStore()
+  }, [location])
 
   return {
     onSelectFee,
