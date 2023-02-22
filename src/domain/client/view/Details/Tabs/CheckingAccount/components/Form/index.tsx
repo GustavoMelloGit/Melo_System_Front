@@ -92,15 +92,7 @@ export default function CheckingAccountForm({
 
 const validationSchema = yup.object().shape({
   date: yup.string().required(validationErrors.dateIsRequired),
-  value: yup
-    .string()
-    .required(validationErrors.valueIsRequired)
-    .test('hasTwoDecimals', validationErrors.valueIsInvalid, (value) => {
-      if (!value) return false
-      const valueString = value.toString()
-      const decimalPart = valueString.split('.')[1]
-      return decimalPart ? decimalPart.length === 2 : true
-    }),
+  value: yup.string().required(validationErrors.valueIsRequired),
   description: yup
     .string()
     .required(validationErrors.descriptionIsRequired)
