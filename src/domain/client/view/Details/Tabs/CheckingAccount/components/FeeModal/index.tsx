@@ -18,8 +18,9 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react'
+import { format } from 'date-fns'
 import { useMemo, useState } from 'react'
-import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateMonthlyCompoundInterest } from '../../../../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
@@ -100,7 +101,7 @@ export default function FeeModal(): JSX.Element {
                   <Tbody>
                     {selectedTransactions.map((transaction, index) => (
                       <Tr key={transaction.id}>
-                        <Td>{formatDate(transaction.date)}</Td>
+                        <Td>{format(new Date(transaction.date), 'dd/MM/yyyy')}</Td>
                         <Td color={getColorByValue(transaction.amount)}>
                           {formatCurrency(transaction.amount)}
                         </Td>
