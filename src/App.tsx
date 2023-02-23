@@ -24,7 +24,11 @@ function App(): JSX.Element {
           <ModalManager />
         </>
       </ProviderComposer>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: 'toaster',
+        }}
+      />
     </ChakraProvider>
   )
 }
