@@ -35,3 +35,15 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('dataCy', (value) => {
+  return cy.get(`[data-cy="${value}"]`)
+})
+
+Cypress.Commands.add('expectPathname', (value) => {
+  return cy.location('pathname').should('eq', value)
+})
+
+Cypress.Commands.add('expectPathnameNot', (value) => {
+  return cy.location('pathname').should('not.eq', value)
+})
