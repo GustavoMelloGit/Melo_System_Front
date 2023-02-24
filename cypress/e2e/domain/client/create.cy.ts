@@ -1,9 +1,9 @@
-import { faker } from '@faker-js/faker'
 import { Routes } from '../../../../src/lib/routes'
 import {
   fillClientFormCommonFields,
   fillClientFormLegalPersonFields,
   fillClientFormNaturalPersonFields,
+  fillClientFormRequiredFields,
 } from './functions'
 
 describe('Client Domain - Create View', () => {
@@ -22,7 +22,7 @@ describe('Client Domain - Create View', () => {
   })
   it('should allow to submit with only required fields', () => {
     cy.visit(Routes.createClient)
-    cy.dataCy('client-name-input').type(faker.name.fullName())
+    fillClientFormRequiredFields()
     cy.dataCy('submit-button').click()
     cy.expectPathnameNot(Routes.createClient)
   })

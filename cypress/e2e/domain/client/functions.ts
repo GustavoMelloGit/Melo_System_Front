@@ -1,5 +1,19 @@
 import { faker } from '@faker-js/faker'
+import { validationErrors } from '../../../../src/lib/errors'
 
+export const clientFormRequiredFields = [
+  {
+    name: 'client-name-input',
+    value: faker.name.fullName(),
+    validationMessage: validationErrors.nameIsRequired,
+  },
+]
+
+export function fillClientFormRequiredFields() {
+  clientFormRequiredFields.forEach((field) => {
+    cy.dataCy(field.name).type(field.value)
+  })
+}
 export function fillClientFormCommonFields() {
   cy.dataCy('client-name-input').type(faker.name.fullName())
   cy.dataCy('client-nickname-input').type(faker.name.firstName())
