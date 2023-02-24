@@ -60,6 +60,7 @@ export default function ClientForm({
                   name='name'
                   label='Nome'
                   placeholder='Nome do cliente'
+                  data-cy='client-name-input'
                 />
               </GridItem>
               <GridItem>
@@ -143,7 +144,12 @@ export default function ClientForm({
             </Grid>
           </CardBody>
         </Card>
-        <Button type='submit' isLoading={formState.isSubmitting} colorScheme='blue'>
+        <Button
+          type='submit'
+          isLoading={formState.isSubmitting}
+          colorScheme='blue'
+          data-cy='submit-button'
+        >
           {submitText}
         </Button>
       </VStack>
