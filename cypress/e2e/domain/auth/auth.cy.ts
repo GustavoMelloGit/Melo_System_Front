@@ -37,7 +37,7 @@ describe('Auth domain', () => {
     cy.contains(validationErrors.emailIsRequired).should('exist')
     cy.contains(validationErrors.passwordIsRequired).should('exist')
   })
-  it.only('should be able to logout', () => {
+  it('should be able to logout', () => {
     cy.login()
     cy.visit(Routes.home)
     cy.dataCy('logout-button').click()
