@@ -18,5 +18,11 @@ declare namespace Cypress {
      * @example cy.location('pathname').should('not.eq', Routes.login) -> cy.expectPathnameNot(Routes.login)
      */
     expectPathnameNot(value: string): Chainable<string>
+
+    /**
+     * Custom command to authenticate user.
+     * @example cy.login()
+     */
+    login(): Chainable<string>
   }
 }

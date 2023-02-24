@@ -47,3 +47,21 @@ Cypress.Commands.add('expectPathname', (value) => {
 Cypress.Commands.add('expectPathnameNot', (value) => {
   return cy.location('pathname').should('not.eq', value)
 })
+
+Cypress.Commands.add('login', () => {
+  const options = {
+    method: 'POST',
+    url: `${Cypress.env('api_base')}/login`,
+    body: {
+      email: Cypress.env('auth_email'),
+      password: Cypress.env('auth_password'),
+    },
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  cy.request(options).then((response: any) => {
+    window.localStorage.setItem('@melo-system:token', JSON.stringify(response.body.token))
+    window.localStorage.setItem('@melo-system:user', JSON.stringify(response.body.user))
+  })
+})
