@@ -22,6 +22,7 @@ export default function LegalPersonFields({
           placeholder='CNPJ do cliente'
           mask='00.000.000/0000-00'
           errors={formState.errors}
+          data-cy='client-cnpj-input'
         />
       </GridItem>
       <GridItem>
@@ -31,6 +32,7 @@ export default function LegalPersonFields({
           label='Inscrição estadual'
           placeholder='Inscrição estadual do cliente'
           errors={formState.errors}
+          data-cy='client-state-registration-input'
         />
       </GridItem>
     </Grid>

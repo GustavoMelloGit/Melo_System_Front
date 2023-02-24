@@ -69,6 +69,7 @@ export default function ClientForm({
                   name='nickname'
                   label='Apelido'
                   placeholder='Apelido do cliente'
+                  data-cy='client-nickname-input'
                 />
               </GridItem>
               <GridItem>
@@ -82,6 +83,7 @@ export default function ClientForm({
                   setValue={(value) => {
                     setValue('contact.phone', value.match(/\d/g)?.join('') ?? '')
                   }}
+                  data-cy='client-phone-input'
                 />
               </GridItem>
               <GridItem>
@@ -93,13 +95,14 @@ export default function ClientForm({
                     { value: 'fisica', label: 'Física' },
                     { value: 'juridica', label: 'Jurídica' },
                   ]}
+                  data-cy='client-person-type-input'
                 />
               </GridItem>
               <GridItem gridColumn='1/-1'>
                 <VStack align='stretch'>
                   <Accordion allowToggle index={formHasErrors ? 0 : undefined}>
                     <AccordionItem border='none'>
-                      <AccordionButton pl={0}>
+                      <AccordionButton data-cy='address-accordion' pl={0}>
                         <AccordionIcon />
                         <Text flex={1} fontWeight={700} textAlign='left'>
                           Endereço
@@ -112,7 +115,7 @@ export default function ClientForm({
                   </Accordion>
                   <Accordion allowToggle index={formHasErrors ? 0 : undefined}>
                     <AccordionItem border='none'>
-                      <AccordionButton pl={0}>
+                      <AccordionButton pl={0} data-cy='client-personType-accordion'>
                         <AccordionIcon />
                         <Text flex={1} fontWeight={700} textAlign='left'>
                           {isLegalPerson ? 'Dados da empresa' : 'Dados pessoais'}
@@ -139,6 +142,7 @@ export default function ClientForm({
                   register={register}
                   name='description'
                   placeholder='Descrição do cliente'
+                  data-cy='client-description-input'
                 />
               </GridItem>
             </Grid>

@@ -23,6 +23,7 @@ export default function NaturalPersonFields({
           label='Nome do pai'
           placeholder='Nome do pai do cliente'
           errors={formState.errors}
+          data-cy='client-father-name-input'
         />
       </GridItem>
       <GridItem>
@@ -32,6 +33,7 @@ export default function NaturalPersonFields({
           label='Nome da mãe'
           placeholder='Nome da mãe do cliente'
           errors={formState.errors}
+          data-cy='client-mother-name-input'
         />
       </GridItem>
       <GridItem>
@@ -42,6 +44,7 @@ export default function NaturalPersonFields({
           placeholder='Data de nascimento do cliente'
           type={'date'}
           errors={formState.errors}
+          data-cy='client-birth-date-input'
         />
       </GridItem>
       <GridItem>
@@ -55,6 +58,7 @@ export default function NaturalPersonFields({
           setValue={(value) => {
             setValue('personType.cpf', value.match(/\d/g)?.join('') ?? '')
           }}
+          data-cy='client-cpf-input'
         />
       </GridItem>
       <GridItem>
@@ -64,6 +68,7 @@ export default function NaturalPersonFields({
           label='RG'
           placeholder='RG do cliente'
           errors={formState.errors}
+          data-cy='client-rg-input'
         />
       </GridItem>
       <GridItem>
@@ -74,6 +79,7 @@ export default function NaturalPersonFields({
           placeholder='Data de emissão do RG do cliente'
           type='date'
           errors={formState.errors}
+          data-cy='client-rg-emission-date-input'
         />
       </GridItem>
       <GridItem>
@@ -83,6 +89,7 @@ export default function NaturalPersonFields({
           label='Inscrição de produtor'
           placeholder='Inscrição de produtor do cliente'
           errors={formState.errors}
+          data-cy='client-producer-registration-input'
         />
       </GridItem>
     </Grid>
