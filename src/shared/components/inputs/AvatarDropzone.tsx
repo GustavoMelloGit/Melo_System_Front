@@ -2,7 +2,9 @@ import { Avatar, Center, type AvatarProps } from '@chakra-ui/react'
 import Compressor from 'compressorjs'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { toast } from 'react-hot-toast'
 import { AiFillCamera } from 'react-icons/ai'
+import { validationErrors } from '../../../lib/errors'
 
 type AvatarDropzoneProps = Omit<AvatarProps, 'onDrop'> & {
   onDrop?: (image: string) => void
@@ -37,6 +39,9 @@ export default function AvatarDropzone({
     accept: {
       'image/jpeg': ['.jpg', '.jpeg'],
       'image/png': ['.png'],
+    },
+    onError() {
+      toast.error(`${validationErrors.fileFormatIsInvalid} (.jpg, .jpeg, .png)`)
     },
   })
   return (

@@ -1,5 +1,12 @@
 import { Routes } from '../../../../src/lib/routes'
-import { clientFormRequiredFields, fillClientFormRequiredFields } from './functions'
+import {
+  clearClientFormRequiredFields,
+  clientFormRequiredFields,
+  clientFormRequiredFieldsErrors,
+  fillClientFormLegalPersonAllFields,
+  fillClientFormNaturalPersonAllFields,
+  fillClientFormRequiredFields,
+} from './helpers'
 
 describe('Client Domain - Update View', () => {
   beforeEach(() => {
@@ -20,17 +27,45 @@ describe('Client Domain - Update View', () => {
     cy.expectPathname(Routes.clients)
   })
   it('should allow save only changing required fields', () => {
-    fillClientFormRequiredFields()
+    clearClientFormRequiredFields()
+    const values = fillClientFormRequiredFields()
     cy.dataCy('submit-button').click()
     cy.expectPathname(Routes.clients)
+    cy.dataCy('table-linkTo-button').first().click() // Most recent client (for being updated)
+    cy.dataCy('info-tab').click()
+    values.forEach((value) => {
+      cy.contains(value).should('exist')
+    })
+  })
+  it('should allow change all fields - Natural Person', () => {
+    const values = fillClientFormNaturalPersonAllFields()
+    cy.dataCy('submit-button').click()
+    cy.expectPathname(Routes.clients)
+    cy.dataCy('table-linkTo-button').first().click() // Most recent client (for being updated)
+    cy.dataCy('info-tab').click()
+    values.forEach((value) => {
+      cy.contains(value).should('exist')
+    })
+  })
+  it.only('should allow change all fields - Legal Person', () => {
+    const values = fillClientFormLegalPersonAllFields()
+    cy.dataCy('submit-button').click()
+    cy.expectPathname(Routes.clients)
+    cy.dataCy('table-linkTo-button').first().click() // Most recent client (for being updated)
+    cy.dataCy('info-tab').click()
+    values.forEach((value) => {
+      cy.contains(value).should('exist')
+    })
   })
   it('should not allow save without required fields', () => {
-    clientFormRequiredFields.forEach((field) => {
-      cy.dataCy(field.name).clear()
-    })
+    clearClientFormRequiredFields()
     cy.dataCy('submit-button').click()
     clientFormRequiredFields.forEach((field) => {
-      cy.contains(field.validationMessage).should('exist')
+      cy.contains(clientFormRequiredFieldsErrors.get(field)).should('exist')
     })
+  })
+  it('should allow go back without saving', () => {
+    cy.dataCy('breadcrumb-/clients').click()
+    cy.expectPathname(Routes.clients)
   })
 })
