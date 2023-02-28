@@ -38,10 +38,11 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
           name='email'
           label='Email'
           errors={errors}
-          type='email'
+          inputMode='email'
           autoComplete='email'
           placeholder='email@exemplo.com'
           variant='outline'
+          data-cy='email-input'
         />
         <RHFPasswordField<SignInValues>
           register={register}
@@ -51,8 +52,9 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
           autoComplete='current-password'
           placeholder='123456'
           variant='outline'
+          data-cy='password-input'
         />
-        <Button isLoading={isSubmitting} w='full' type='submit'>
+        <Button isLoading={isSubmitting} w='full' type='submit' data-cy='submit'>
           Login
         </Button>
       </VStack>

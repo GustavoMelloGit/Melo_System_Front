@@ -23,7 +23,7 @@ export default function HeaderBreadcrumbs({
         <HStack spacing={2} divider={<BsDot />}>
           {links?.map((link, index) =>
             link.to ? (
-              <Link as={ReactLink} to={link.to} key={index}>
+              <Link as={ReactLink} to={link.to} key={index} data-cy={`breadcrumb-${link.to}`}>
                 {link.label}
               </Link>
             ) : (

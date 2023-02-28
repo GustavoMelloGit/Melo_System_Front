@@ -67,12 +67,12 @@ export default function ClientDetails(): JSX.Element {
           <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
             <Card overflow='auto' p={4} roundedTop={0} borderColor='inherit'>
               <TabList justifyContent='center' minW='max-content' w='full'>
-                <Tab>Conta Corrente</Tab>
-                <Tab>Conta Café</Tab>
-                <Tab>Conta Escolha</Tab>
-                <Tab>Conta Colheita</Tab>
-                <Tab>Conta Sacaria</Tab>
-                <Tab>Informações Gerais</Tab>
+                <Tab data-cy='checkingAccount-tab'>Conta Corrente</Tab>
+                <Tab data-cy='coffe-tab'>Conta Café</Tab>
+                <Tab data-cy='choice-tab'>Conta Escolha</Tab>
+                <Tab data-cy='harvest-tab'>Conta Colheita</Tab>
+                <Tab data-cy='sack-tab'>Conta Sacaria</Tab>
+                <Tab data-cy='info-tab'>Informações Gerais</Tab>
               </TabList>
             </Card>
             <TabPanels>

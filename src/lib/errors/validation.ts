@@ -19,6 +19,7 @@ const validationErrors = {
   valueIsInvalid: 'Por favor, informe um valor válido',
   dateIsRequired: 'Por favor, informe uma data',
   descriptionIsRequired: 'Por favor, informe uma descrição',
+  fileFormatIsInvalid: 'Formato de arquivo inválido, os formatos válidos são:',
 }
 
 export default validationErrors

@@ -8,7 +8,7 @@ import useCreateClientView from './useView'
 export default function CreateClientsView(): JSX.Element {
   const { handleCreateClient } = useCreateClientView()
   return (
-    <Page title='Criar Cliente'>
+    <Page title='Criar Cliente' data-cy='create-client-page'>
       <HeaderBreadcrumbs
         heading='Crie um novo cliente'
         links={[

@@ -18,7 +18,14 @@ export default function SidebarHeader(): JSX.Element {
           <Heading noOfLines={1} as='h1' fontSize='md'>
             {user.email}
           </Heading>
-          <Button variant='outline' size='sm' onClick={signOut} gap={2} lineHeight={0.5}>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={signOut}
+            gap={2}
+            lineHeight={0.5}
+            data-cy='logout-button'
+          >
             <GoSignOut />
             Sair
           </Button>

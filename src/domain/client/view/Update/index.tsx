@@ -8,7 +8,7 @@ import useUpdateClientView from './useView'
 export default function UpdateClientView(): JSX.Element {
   const { handleUpdateClient, initialValues, isLoading } = useUpdateClientView()
   return (
-    <Page title='Atualizar Cliente'>
+    <Page title='Atualizar Cliente' data-cy='update-client-page'>
       <HeaderBreadcrumbs
         heading='Atualize o cliente'
         links={[

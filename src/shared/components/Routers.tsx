@@ -3,10 +3,13 @@ import { type PropsWithChildren } from 'react'
 import { Navigate } from 'react-router-dom'
 import useAuth from '../../domain/auth/hooks/useAuth'
 import { Routes } from '../../lib/routes'
+import useLocalStorage from '../hooks/useLocalStorage'
 import { SuspenseLoader } from './Suspense'
 
 export const ProtectedRoute = ({ children }: PropsWithChildren): JSX.Element => {
-  const { user, appInitialized } = useAuth()
+  const { appInitialized } = useAuth()
+  const { getValue } = useLocalStorage('@melo-system:token')
+  const token = getValue()
   if (!appInitialized) {
     return (
       <Flex minH='100vh' minW='100vw'>
@@ -14,15 +17,18 @@ export const ProtectedRoute = ({ children }: PropsWithChildren): JSX.Element => 
       </Flex>
     )
   }
-  if (!user?.isAuthenticated) {
+  if (!token) {
     return <Navigate to={Routes.login} />
   }
   return <>{children}</>
 }
 
 export const UnprotectedRoute = ({ children }: PropsWithChildren): JSX.Element => {
-  const { user } = useAuth()
-  if (user?.isAuthenticated) {
+  const { appInitialized } = useAuth()
+  const { getValue } = useLocalStorage('@melo-system:token')
+  const token = getValue()
+
+  if (appInitialized && token) {
     return <Navigate to={Routes.home} />
   }
   return <>{children}</>

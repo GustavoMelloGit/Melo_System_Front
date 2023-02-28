@@ -55,7 +55,9 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
         />
         {rightIcon && <InputRightElement>{rightIcon}</InputRightElement>}
       </InputGroup>
-      {errorMessages && <FormErrorMessage>{errorMessages.message}</FormErrorMessage>}
+      {errorMessages && (
+        <FormErrorMessage data-cy='validation-message'>{errorMessages.message}</FormErrorMessage>
+      )}
     </FormControl>
   )
 }

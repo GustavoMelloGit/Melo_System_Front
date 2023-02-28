@@ -21,6 +21,7 @@
     "@typescript-eslint/consistent-type-assertions": "off",
     "no-new": "off"
   },
+  "ignorePatterns": ["cypress"],
   "parser": "@typescript-eslint/parser",
   "root": true
 }

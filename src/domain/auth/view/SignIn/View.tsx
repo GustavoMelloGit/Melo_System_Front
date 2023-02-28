@@ -6,7 +6,7 @@ import useSignInView from './useView'
 export default function SignInView(): JSX.Element {
   const { signIn } = useSignInView()
   return (
-    <Flex minW='100vw' minH='100vh' flexDir={['column', 'row']}>
+    <Flex minW='100vw' minH='100vh' flexDir={['column', 'row']} data-cy='login-page'>
       <Center flex={1}>
         <VStack spacing={6} px={8} align='stretch' w={['full', '400px']}>
           <VStack>

@@ -19,6 +19,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           name='address.city'
           label='Cidade'
           placeholder='Cidade do cliente'
+          data-cy='client-city-input'
         />
       </GridItem>
       <GridItem>
@@ -31,6 +32,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           setValue={(value) => {
             setValue('address.zipCode', value.match(/\d/g)?.join('') ?? '')
           }}
+          data-cy='client-zipcode-input'
         />
       </GridItem>
       <GridItem>
@@ -39,6 +41,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           name='address.street'
           label='Rua'
           placeholder='Rua do cliente'
+          data-cy='client-street-input'
         />
       </GridItem>
       <GridItem>
@@ -48,6 +51,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           label='Número'
           placeholder='Número da casa'
           type='number'
+          data-cy='client-address-number-input'
         />
       </GridItem>
       <GridItem>
@@ -57,6 +61,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           label='Estado'
           placeholder='Estado do cliente'
           options={allStates.UF.map((state) => ({ value: state.sigla, label: state.nome }))}
+          data-cy='client-state-input'
         />
       </GridItem>
       <GridItem>
@@ -65,6 +70,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           name='address.neighborhood'
           label='Bairro'
           placeholder='Bairro do cliente'
+          data-cy='client-neighborhood-input'
         />
       </GridItem>
       <GridItem>
@@ -73,6 +79,7 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           name='address.brook'
           label='Córrego'
           placeholder='Córrego do cliente'
+          data-cy='client-brook-input'
         />
       </GridItem>
     </Grid>
