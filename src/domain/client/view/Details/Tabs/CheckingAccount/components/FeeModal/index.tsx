@@ -19,11 +19,13 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { format } from 'date-fns'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateMonthlyCompoundInterest } from '../../../../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
+import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore } from '../../stores/useFeeStore'
 
@@ -38,7 +40,12 @@ function calculateInterest(date: string, amount: number, interestRate: number): 
 }
 
 export default function FeeModal(): JSX.Element {
-  const [interestRate, setInterestRate] = useState(3)
+  const { control, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      interestRate: DEFAULT_INITIAL_INTEREST,
+    },
+  })
+  const [interestRate, setInterestRate] = useState(DEFAULT_INITIAL_INTEREST)
   const closeModal = useModal((state) => state.closeModal)
   const borderColor = useColorModeValue('gray.200', 'gray.600')
   const [selectedTransactions, setSelectedFees] = useFeeStore((state) => [
@@ -50,19 +57,18 @@ export default function FeeModal(): JSX.Element {
     setSelectedFees([])
     closeModal()
   }
+  function handleCalculateFee(values: FormValues): void {
+    setInterestRate(values.interestRate)
+  }
 
-  let totalWithouInterest = 0
+  let totalWithoutInterest = 0
   let totalAmountWithInterest = 0
-  const interestByIndex = useMemo(
-    () =>
-      selectedTransactions.map((transaction) => {
-        const interest = calculateInterest(transaction.date, transaction.amount, interestRate)
-        totalWithouInterest += transaction.amount
-        totalAmountWithInterest += interest
-        return interest
-      }),
-    [interestRate, selectedTransactions],
-  )
+  const interestByIndex = selectedTransactions.map((transaction) => {
+    const interest = calculateInterest(transaction.date, transaction.amount, interestRate)
+    totalWithoutInterest += transaction.amount
+    totalAmountWithInterest += interest
+    return interest
+  })
 
   return (
     <Modal isOpen isCentered onClose={handleCloseModal} size='xl'>
@@ -74,12 +80,22 @@ export default function FeeModal(): JSX.Element {
         </ModalHeader>
         <ModalBody>
           <VStack align='stretch' spacing={4}>
-            <CurrencyInput
-              leftIcon='%'
-              label='Taxa de juros'
-              setValue={setInterestRate}
-              value={interestRate}
-            />
+            <form onSubmit={handleSubmit(handleCalculateFee)}>
+              <Controller
+                control={control}
+                name='interestRate'
+                render={({ field: { onChange, value, ...rest } }) => (
+                  <CurrencyInput
+                    leftIcon='%'
+                    label='Taxa de juros'
+                    initialValue={3}
+                    rightIcon={<TableFeeButton aria-label='calcular juros' type='submit' />}
+                    setValue={onChange}
+                    {...rest}
+                  />
+                )}
+              />
+            </form>
 
             <Box maxH={[300, 400]} overflowY='auto'>
               <TableContainer
@@ -119,9 +135,9 @@ export default function FeeModal(): JSX.Element {
                       <Th
                         fontSize='md'
                         fontWeight={700}
-                        color={getColorByValue(totalWithouInterest)}
+                        color={getColorByValue(totalWithoutInterest)}
                       >
-                        {formatCurrency(totalWithouInterest)}
+                        {formatCurrency(totalWithoutInterest)}
                       </Th>
                       <Th
                         fontSize='md'
@@ -140,4 +156,9 @@ export default function FeeModal(): JSX.Element {
       </ModalContent>
     </Modal>
   )
+}
+
+const DEFAULT_INITIAL_INTEREST = 3
+type FormValues = {
+  interestRate: number
 }
