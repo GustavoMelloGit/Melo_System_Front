@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { validationErrors } from '../../../../src/lib/errors'
+import { validationErrors } from '../../../src/lib/errors'
 
 export const clientFormRequiredFields = ['client-name-input'] as const
 export const clientFormRequiredFieldsValues = new Map([

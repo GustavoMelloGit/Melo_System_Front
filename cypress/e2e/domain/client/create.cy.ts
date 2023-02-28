@@ -4,7 +4,7 @@ import {
   fillClientFormLegalPersonFields,
   fillClientFormNaturalPersonFields,
   fillClientFormRequiredFields,
-} from './helpers'
+} from '../../../support/helpers/client'
 
 describe('Client Domain - Create View', () => {
   beforeEach(() => {

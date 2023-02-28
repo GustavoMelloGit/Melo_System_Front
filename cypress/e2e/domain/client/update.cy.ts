@@ -6,7 +6,7 @@ import {
   fillClientFormLegalPersonAllFields,
   fillClientFormNaturalPersonAllFields,
   fillClientFormRequiredFields,
-} from './helpers'
+} from '../../../support/helpers/client'
 
 describe('Client Domain - Update View', () => {
   beforeEach(() => {
@@ -18,6 +18,11 @@ describe('Client Domain - Update View', () => {
     }).as('getClients')
     cy.wait('@getClients')
     cy.dataCy('table-edit-button').first().click()
+    cy.intercept({
+      method: 'GET',
+      url: '/clients/*',
+    }).as('getClient')
+    cy.wait('@getClient')
   })
   it('should render page', () => {
     cy.dataCy('update-client-page').should('exist')
@@ -47,7 +52,7 @@ describe('Client Domain - Update View', () => {
       cy.contains(value).should('exist')
     })
   })
-  it.only('should allow change all fields - Legal Person', () => {
+  it('should allow change all fields - Legal Person', () => {
     const values = fillClientFormLegalPersonAllFields()
     cy.dataCy('submit-button').click()
     cy.expectPathname(Routes.clients)
