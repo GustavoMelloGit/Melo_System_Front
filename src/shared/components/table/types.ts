@@ -1,4 +1,4 @@
-import { type InputProps } from '@chakra-ui/react'
+import { type InputProps, type TableColumnHeaderProps } from '@chakra-ui/react'
 
 export type TableRowProps = {
   isLoading: boolean
@@ -7,7 +7,7 @@ export type TableRowProps = {
   noDataMessage?: string
 }
 
-export type TableHeaderColumns = {
+export type TableHeaderColumns = TableColumnHeaderProps & {
   id: string
   label: string
   isSortable?: boolean

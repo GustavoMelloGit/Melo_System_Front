@@ -18,7 +18,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
   }
   return (
     <Tr>
-      <Td>
+      <Td textAlign='center'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
       <Td
@@ -27,6 +27,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         whiteSpace='nowrap'
         textOverflow='ellipsis'
         overflow='hidden'
+        data-cy='table-row-client-name'
       >
         {client.name}
       </Td>

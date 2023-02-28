@@ -1,4 +1,4 @@
-import { Routes } from '../../../../src/lib/routes'
+import { Routes } from '../../../../../src/lib/routes'
 import {
   clearClientFormRequiredFields,
   clientFormRequiredFields,
@@ -6,7 +6,7 @@ import {
   fillClientFormLegalPersonAllFields,
   fillClientFormNaturalPersonAllFields,
   fillClientFormRequiredFields,
-} from '../../../support/helpers/client'
+} from '../../../../support/helpers/client'
 
 describe('Client Domain - Update View', () => {
   beforeEach(() => {

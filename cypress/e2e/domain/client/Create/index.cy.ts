@@ -1,10 +1,10 @@
-import { Routes } from '../../../../src/lib/routes'
+import { Routes } from '../../../../../src/lib/routes'
 import {
   fillClientFormCommonFields,
   fillClientFormLegalPersonFields,
   fillClientFormNaturalPersonFields,
   fillClientFormRequiredFields,
-} from '../../../support/helpers/client'
+} from '../../../../support/helpers/client'
 
 describe('Client Domain - Create View', () => {
   beforeEach(() => {
