@@ -42,4 +42,5 @@ describe('Client Domain - List View', () => {
       expect(namesArray).to.deep.equal(sortedNames)
     })
   })
+  // TODO: Finish this test
 })
