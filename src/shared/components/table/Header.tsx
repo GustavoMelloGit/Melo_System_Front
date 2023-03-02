@@ -28,21 +28,20 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
   return (
     <Thead bg={bg}>
       <Tr h={16}>
-        {columns.map((column) => (
-          <Th key={column.id} color={textColor} textAlign={column.align}>
-            {column.label}
-            {column.isSortable && (
+        {columns.map(({ align, label, isSortable, id, ...rest }) => (
+          <Th key={id} color={textColor} textAlign={align} data-cy={`table-header-${id}`} {...rest}>
+            {label}
+            {isSortable && (
               <IconButton
                 ml={1}
-                aria-label={`sort by ${column.label}`}
+                aria-label={`sort by ${label}`}
+                data-cy='table-sort-button'
                 icon={
                   <Box
                     w='fit-content'
                     h='fit-content'
                     transform={
-                      sortBy === column.id && sortOrder === 'asc'
-                        ? 'rotate(0deg)'
-                        : 'rotate(180deg)'
+                      sortBy === id && sortOrder === 'asc' ? 'rotate(0deg)' : 'rotate(180deg)'
                     }
                     transition='transform 0.2s'
                   >
@@ -51,9 +50,9 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
                 }
                 variant='unstyled'
                 onClick={() => {
-                  handleSort(column.id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
+                  handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
                 }}
-                opacity={sortBy === column.id ? 1 : 0.2}
+                opacity={sortBy === id ? 1 : 0.2}
                 _hover={{ opacity: 1 }}
               />
             )}

@@ -45,6 +45,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
               }))}
               roundedLeft='md'
               roundedRight={['md', 'none']}
+              data-cy='table-searchFor-select'
             />
             {actions && <Show below='sm'>{actions}</Show>}
           </GridItem>
@@ -60,10 +61,12 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                   variant='ghost'
                   aria-label='Search'
                   icon={<BiSearchAlt size={24} />}
+                  data-cy='table-submit-search-button'
                 />
               }
               {...(currentSearchForOption?.inputProps ?? {})}
               name='query'
+              data-cy='table-search-input'
             />
             {actions && <Hide below='sm'>{actions}</Hide>}
           </GridItem>

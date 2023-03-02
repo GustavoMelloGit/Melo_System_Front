@@ -10,7 +10,7 @@ import useClientsListView from './useView'
 export default function ClientsListView(): JSX.Element {
   const { data, isLoading, total } = useClientsListView()
   return (
-    <Page title='Clientes'>
+    <Page title='Clientes' data-cy='list-clients-page'>
       <HeaderBreadcrumbs
         heading='Clientes'
         actions={
@@ -21,6 +21,7 @@ export default function ClientsListView(): JSX.Element {
               icon={<IoAddOutline size={22} />}
               colorScheme='blue'
               variant='outline'
+              data-cy='create-client-button'
             />
           </Link>
         }

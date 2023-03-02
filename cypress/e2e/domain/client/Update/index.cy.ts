@@ -1,12 +1,15 @@
-import { Routes } from '../../../../src/lib/routes'
+import { Routes } from '../../../../../src/lib/routes'
+import { formatDate } from '../../../../../src/lib/utils/formatters'
 import {
-  clearClientFormRequiredFields,
   clientFormRequiredFields,
   clientFormRequiredFieldsErrors,
+} from '../../../../support/constants/client'
+import {
+  clearClientFormRequiredFields,
   fillClientFormLegalPersonAllFields,
   fillClientFormNaturalPersonAllFields,
   fillClientFormRequiredFields,
-} from './helpers'
+} from '../../../../support/helpers/client'
 
 describe('Client Domain - Update View', () => {
   beforeEach(() => {
@@ -18,6 +21,11 @@ describe('Client Domain - Update View', () => {
     }).as('getClients')
     cy.wait('@getClients')
     cy.dataCy('table-edit-button').first().click()
+    cy.intercept({
+      method: 'GET',
+      url: '/clients/*',
+    }).as('getClient')
+    cy.wait('@getClient')
   })
   it('should render page', () => {
     cy.dataCy('update-client-page').should('exist')
@@ -27,35 +35,19 @@ describe('Client Domain - Update View', () => {
     cy.expectPathname(Routes.clients)
   })
   it('should allow save only changing required fields', () => {
-    clearClientFormRequiredFields()
-    const values = fillClientFormRequiredFields()
+    fillClientFormRequiredFields()
     cy.dataCy('submit-button').click()
     cy.expectPathname(Routes.clients)
-    cy.dataCy('table-linkTo-button').first().click() // Most recent client (for being updated)
-    cy.dataCy('info-tab').click()
-    values.forEach((value) => {
-      cy.contains(value).should('exist')
-    })
   })
   it('should allow change all fields - Natural Person', () => {
-    const values = fillClientFormNaturalPersonAllFields()
+    fillClientFormNaturalPersonAllFields()
     cy.dataCy('submit-button').click()
     cy.expectPathname(Routes.clients)
-    cy.dataCy('table-linkTo-button').first().click() // Most recent client (for being updated)
-    cy.dataCy('info-tab').click()
-    values.forEach((value) => {
-      cy.contains(value).should('exist')
-    })
   })
-  it.only('should allow change all fields - Legal Person', () => {
-    const values = fillClientFormLegalPersonAllFields()
+  it('should allow change all fields - Legal Person', () => {
+    fillClientFormLegalPersonAllFields()
     cy.dataCy('submit-button').click()
     cy.expectPathname(Routes.clients)
-    cy.dataCy('table-linkTo-button').first().click() // Most recent client (for being updated)
-    cy.dataCy('info-tab').click()
-    values.forEach((value) => {
-      cy.contains(value).should('exist')
-    })
   })
   it('should not allow save without required fields', () => {
     clearClientFormRequiredFields()
@@ -67,5 +59,24 @@ describe('Client Domain - Update View', () => {
   it('should allow go back without saving', () => {
     cy.dataCy('breadcrumb-/clients').click()
     cy.expectPathname(Routes.clients)
+  })
+  it('should show updated values on client page', () => {
+    cy.url().then((url) => {
+      const id = url.split('/').pop()
+      const values = fillClientFormNaturalPersonAllFields()
+      cy.dataCy('submit-button').click()
+      cy.expectPathname(Routes.clients)
+      cy.visit(Routes.clientPage(id))
+      cy.dataCy('info-tab').click()
+      values.forEach((value) => {
+        const isDate = value.split('-').length === 3
+        if (isDate) {
+          const date = formatDate(value)
+          cy.contains(date).should('exist')
+        } else {
+          cy.contains(value).should('exist')
+        }
+      })
+    })
   })
 })

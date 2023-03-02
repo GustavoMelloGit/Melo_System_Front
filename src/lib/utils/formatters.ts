@@ -8,7 +8,7 @@
  */
 export function formatDate(unformattedDate: string): string {
   const [date, time] = unformattedDate.split('T')
-  const [year, month, day] = date.split('-').map(Number)
+  const [year, month, day] = date.split('-')
   const dateString = `${day}/${month}/${year}`
   if (time) {
     const [hour, minute] = time.split(':').map(Number)
