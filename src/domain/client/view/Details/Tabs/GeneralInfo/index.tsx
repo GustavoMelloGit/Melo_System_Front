@@ -1,5 +1,6 @@
 import { Box, Divider, Grid, GridItem, Heading, Text, VStack } from '@chakra-ui/react'
 import { useMemo } from 'react'
+import { formatDate } from '../../../../../../lib/utils/formatters'
 import { type ClientModel } from '../../../../types/model/Client'
 
 type ClientInfo = Array<{ label: string; value: React.ReactNode }>
@@ -20,11 +21,11 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         },
         {
           label: 'Apelido',
-          value: client.nickname ?? defaultEmptyValue,
+          value: client.nickname,
         },
         {
           label: 'Telefone',
-          value: client.contact?.phone ?? defaultEmptyValue,
+          value: client.contact?.phone,
         },
         {
           label: 'Tipo de pessoa',
@@ -40,52 +41,52 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         },
         {
           label: 'Descrição',
-          value: client.description ?? defaultEmptyValue,
+          value: client.description,
         },
       ],
       address: [
         {
           label: 'CEP',
-          value: client.address?.zipCode ?? defaultEmptyValue,
+          value: client.address?.zipCode,
         },
         {
           label: 'Logradouro',
-          value: client.address?.street ?? defaultEmptyValue,
+          value: client.address?.street,
         },
         {
           label: 'Número',
-          value: client.address?.number ?? defaultEmptyValue,
+          value: client.address?.number,
         },
         {
           label: 'Complemento',
-          value: client.address?.complement ?? defaultEmptyValue,
+          value: client.address?.complement,
         },
         {
           label: 'Bairro',
-          value: client.address?.neighborhood ?? defaultEmptyValue,
+          value: client.address?.neighborhood,
         },
         {
           label: 'Cidade',
-          value: client.address?.city ?? defaultEmptyValue,
+          value: client.address?.city,
         },
         {
           label: 'Estado',
-          value: client.address?.state ?? defaultEmptyValue,
+          value: client.address?.state,
         },
         {
           label: 'Córrego',
-          value: client.address?.brook ?? defaultEmptyValue,
+          value: client.address?.brook,
         },
       ],
       ...(client.personType?.type === 'juridica' && {
         legalPerson: [
           {
             label: 'CNPJ',
-            value: client.personType.cnpj ?? defaultEmptyValue,
+            value: client.personType.cnpj,
           },
           {
             label: 'Inscrição estadual',
-            value: client.personType.stateRegistration ?? defaultEmptyValue,
+            value: client.personType.stateRegistration,
           },
         ],
       }),
@@ -93,27 +94,35 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         naturalPerson: [
           {
             label: 'CPF',
-            value: client.personType.cpf ?? defaultEmptyValue,
+            value: client.personType.cpf,
           },
           {
             label: 'RG',
-            value: client.personType.rg ?? defaultEmptyValue,
+            value: client.personType.rg,
           },
           {
             label: 'Data de emissão do RG',
             value: client.personType.rgEmissionDate
-              ? new Date(client.personType.rgEmissionDate).toLocaleDateString('pt-BR')
+              ? formatDate(client.personType.rgEmissionDate)
               : defaultEmptyValue,
           },
           {
             label: 'Inscrição de produtor',
-            value: client.personType.producerRegistration ?? defaultEmptyValue,
+            value: client.personType.producerRegistration,
           },
           {
             label: 'Data de nascimento',
             value: client.personType.birthDate
-              ? new Date(client.personType.birthDate).toLocaleDateString('pt-BR')
+              ? formatDate(client.personType.birthDate)
               : defaultEmptyValue,
+          },
+          {
+            label: 'Nome do pai',
+            value: client.personType.fatherName,
+          },
+          {
+            label: 'Nome da mãe',
+            value: client.personType.motherName,
           },
         ],
       }),
@@ -156,7 +165,7 @@ function DisplayInfoBox({ data, title }: { data: ClientInfo; title?: string }): 
               <Heading as='h3' fontSize='lg'>
                 {label}
               </Heading>
-              <Text>{value}</Text>
+              <Text>{value ?? defaultEmptyValue}</Text>
             </Box>
           </GridItem>
         ))}
