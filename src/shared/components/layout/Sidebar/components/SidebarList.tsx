@@ -1,13 +1,14 @@
 import { Box, List, VStack } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
+import { BsTruck } from 'react-icons/bs'
+import { TbPlant } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { protectedRoutes } from '../../../../../lib/routes/router'
 import useLayoutContext from '../../../../hooks/useLayoutContext'
 import usePageSize from '../../../../hooks/usePageSize'
 import SidebarListItem from './SidebarListItem'
-import { TbPlant } from 'react-icons/tb'
 
 const listItem: Record<
   string,
@@ -27,6 +28,10 @@ const listItem: Record<
   [Routes.fertilizers]: {
     label: 'Adubos',
     icon: <TbPlant />,
+  },
+  [Routes.coffeePickups]: {
+    label: 'Cafés a buscar',
+    icon: <BsTruck />,
   },
 }
 
