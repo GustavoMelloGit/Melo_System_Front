@@ -1,6 +1,8 @@
 import { PaginationParams } from '../../../../../src/lib/constants/pagination'
 import { Routes } from '../../../../../src/lib/routes'
 
+const defaultHiddenBalance = 'R$ ----'
+
 describe('Client Domain - List View', () => {
   beforeEach(() => {
     cy.login()
@@ -23,6 +25,17 @@ describe('Client Domain - List View', () => {
     cy.dataCy('table-edit-button').first().click()
     cy.location('pathname').should('include', Routes.updateClient(''))
   })
+  it('client balance should be hidden by default', () => {
+    cy.dataCy('table-cell-client-balance').each((cell) => {
+      expect(cell.text()).to.equal(defaultHiddenBalance)
+    })
+  })
+  it('should be able to hide and show client balance', () => {
+    cy.dataCy('table-cell-client-balance').first().click()
+    cy.dataCy('table-cell-client-balance').first().should('not.have.text', defaultHiddenBalance)
+    cy.dataCy('table-cell-client-balance').first().click()
+    cy.dataCy('table-cell-client-balance').first().should('have.text', defaultHiddenBalance)
+  })
   it('should be able to sort by name', () => {
     cy.dataCy('table-header-name').within(() => {
       cy.dataCy('table-sort-button').click()
@@ -32,15 +45,55 @@ describe('Client Domain - List View', () => {
         `${PaginationParams.sortBy}=name&${PaginationParams.sortOrder}=`,
       )
     })
-    const clientNames = cy.dataCy('table-row-client-name')
-
-    clientNames.then((names) => {
-      const namesJqArray = names.map((_, name) => name.textContent)
-      const namesArray = Array.from(namesJqArray).sort()
-      const sortedNames = namesArray.sort()
-
-      expect(namesArray).to.deep.equal(sortedNames)
+    cy.intercept({
+      method: 'GET',
+      url: '/clients?*',
+    }).as('getClients')
+    cy.wait('@getClients').then((interception) => {
+      const clients = interception.response.body.data
+      const clientsName = clients.map((client) => client.name).filter(Boolean) as string[]
+      const sortedClientsName = [...clientsName].sort().reverse()
+      expect(clientsName).to.deep.equal(sortedClientsName)
     })
   })
-  // TODO: Finish this test
+  it('should be able to sort by nickname', () => {
+    cy.dataCy('table-header-nickname').within(() => {
+      cy.dataCy('table-sort-button').click()
+    })
+    cy.location().should((loc) => {
+      expect(loc.search).to.include(
+        `${PaginationParams.sortBy}=nickname&${PaginationParams.sortOrder}=desc`,
+      )
+    })
+    cy.intercept({
+      method: 'GET',
+      url: '/clients?*',
+    }).as('getClients')
+    cy.wait('@getClients').then((interception) => {
+      const clients = interception.response.body.data
+      const clientsNickname = clients.map((client) => client.nickname).filter(Boolean) as string[]
+      const sortedClientsNickname = [...clientsNickname].sort().reverse()
+      expect(clientsNickname).to.deep.equal(sortedClientsNickname)
+    })
+  })
+  it('should be able to sort by balance', () => {
+    cy.dataCy('table-header-balance').within(() => {
+      cy.dataCy('table-sort-button').click()
+    })
+    cy.location().should((loc) => {
+      expect(loc.search).to.include(
+        `${PaginationParams.sortBy}=balance&${PaginationParams.sortOrder}=desc`,
+      )
+    })
+    cy.intercept({
+      method: 'GET',
+      url: '/clients?*',
+    }).as('getClients')
+    cy.wait('@getClients').then((interception) => {
+      const clients = interception.response.body.data
+      const clientsBalance = clients.map((client) => client.balance).filter(Boolean) as number[]
+      const sortedClientsBalance = [...clientsBalance].sort().reverse()
+      expect(clientsBalance).to.deep.equal(sortedClientsBalance)
+    })
+  })
 })

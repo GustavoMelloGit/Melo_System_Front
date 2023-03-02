@@ -18,7 +18,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
   }
   return (
     <Tr>
-      <Td textAlign='center'>
+      <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
       <Td
@@ -27,20 +27,25 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         whiteSpace='nowrap'
         textOverflow='ellipsis'
         overflow='hidden'
-        data-cy='table-row-client-name'
+        data-cy='table-cell-client-name'
       >
         {client.name}
       </Td>
-      <Td title={client.nickname}>{client.nickname}</Td>
+      <Td title={client.nickname} data-cy='table-cell-client-nickname'>
+        {client.nickname}
+      </Td>
       <Td
         onClick={handleToggleBalance}
         cursor='pointer'
         color={showBalance ? getColorByValue(client.balance) : 'inherit'}
+        data-cy='table-cell-client-balance'
       >
         {showBalance ? formatCurrency(client.balance) : 'R$ ----'}
       </Td>
-      <Td>{client?.contact?.phone}</Td>
-      <Td textAlign='center'>
+      <Td title={client?.contact?.phone} data-cy='table-cell-client-phone'>
+        {client?.contact?.phone}
+      </Td>
+      <Td textAlign='center' data-cy='table-cell-client-actions'>
         <HStack w='full' justify='center'>
           <Link to={Routes.updateClient(client.id)}>
             <TableEditButton as='span' aria-label='Editar cliente' />
