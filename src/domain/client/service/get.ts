@@ -30,7 +30,9 @@ export function getTransactionsService(
   clientId: string,
   params?: string,
 ): GetServiceResponse<TransactionModel[]> {
-  const { data, error, isLoading, mutate } = useFetch(`/transactions/${clientId}?${params ?? ''}`)
+  const { data, error, isLoading, mutate } = useFetch(
+    `/transactions/currency/${clientId}?${params ?? ''}`,
+  )
 
   return {
     data: data?.data ?? [],
