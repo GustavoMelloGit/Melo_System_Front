@@ -1,3 +1,4 @@
+import InDevelopmentTag from '../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 
@@ -12,7 +13,7 @@ export default function CoffeePickup(): JSX.Element {
           },
         ]}
       />
-      <p>Hello World</p>
+      <InDevelopmentTag />
     </Page>
   )
 }

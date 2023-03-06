@@ -60,7 +60,9 @@ export default function TransactionsListRow({
       >
         {transaction.description}
       </Td>
-      <Td {...selectableColumnsProps(transaction.value)}>{formatCurrency(transaction.value)}</Td>
+      <Td {...selectableColumnsProps(transaction.type.value)}>
+        {formatCurrency(transaction.type.value)}
+      </Td>
       <Td {...selectableColumnsProps(transaction.clientBalance)}>
         {formatCurrency(transaction.clientBalance)}
       </Td>

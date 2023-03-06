@@ -9,6 +9,10 @@ export type TransactionModel = {
   updatedAt: string
   userId: string
   user: UserModel
-  value: number
+  type: TransactionType
   id: string
+}
+export type TransactionType = {
+  name: string
+  value: number
 }
