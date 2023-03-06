@@ -5,7 +5,7 @@ import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TableHeaderProps } from './types'
 
-export default function TableHeader({ columns }: TableHeaderProps): JSX.Element {
+export default function TableHeader({ columns, hasFilter }: TableHeaderProps): JSX.Element {
   const bg = useColorModeValue('gray.200', 'gray.700')
   const textColor = useColorModeValue('black', 'white')
   const { getParam, handleAddParams } = useURLSearchParams()
