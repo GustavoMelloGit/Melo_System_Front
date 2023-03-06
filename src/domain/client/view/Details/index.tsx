@@ -3,7 +3,6 @@ import {
   Box,
   Card,
   CardHeader,
-  Center,
   Flex,
   Heading,
   Stack,
@@ -12,13 +11,11 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-  Tag,
-  TagLeftIcon,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { IoWarningOutline } from 'react-icons/io5'
 import { Navigate } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
+import InDevelopmentTag from '../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
@@ -99,19 +96,5 @@ export default function ClientDetails(): JSX.Element {
         </Flex>
       </Box>
     </Page>
-  )
-}
-
-// TODO - Remove this component once the tabs are implemented
-function InDevelopmentTag(): JSX.Element {
-  return (
-    <Center>
-      <Tag colorScheme='yellow'>
-        <TagLeftIcon>
-          <IoWarningOutline size={26} />
-        </TagLeftIcon>
-        Em desenvolvimento
-      </Tag>
-    </Center>
   )
 }
