@@ -21,7 +21,7 @@ export default function Table({
   const trHoverColor = useColorModeValue('gray.50', 'gray.700')
   return (
     <Box w='full'>
-      <TableFilters {...filter} />
+      {filter && <TableFilters {...filter} />}
       <TableContainer
         sx={{
           '& td': {
@@ -35,6 +35,8 @@ export default function Table({
               bg: trHoverColor,
             },
           },
+          borderCollapse: 'separate',
+          roundedTop: filter ? 0 : 16,
         }}
       >
         <ChakraTable variant='simple'>

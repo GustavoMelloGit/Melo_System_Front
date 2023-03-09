@@ -37,7 +37,7 @@ export async function createClientService(
 export async function createTransactionService(
   values: CheckingAccountFormValues,
   clientId: string,
-): Promise<PostServiceResponse<TransactionModel>> {
+): PostServiceResponse<TransactionModel> {
   try {
     const { data } = await api.post(`/transactions/currency/${clientId}`, {
       ...values,

@@ -39,7 +39,7 @@ export type TableProps = {
   header: TableHeaderProps
   rows: TableRowProps
   pagination: TablePaginationProps
-  filter: TableFilterProps
+  filter?: TableFilterProps
   children: React.ReactNode
 }
 export type FilterFormValues = {
