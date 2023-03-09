@@ -6,7 +6,7 @@ import PickupTable from '../../components/Pickup/Table'
 import usePickupView from './useView'
 
 export default function CoffeePickup(): JSX.Element {
-  const { order, handleOpenForm, handleOpenUpdateForm } = usePickupView()
+  const { order, handleOpenForm, handleOpenUpdateForm, handleCheckPickup } = usePickupView()
   const { isLoading, data, total } = order
 
   return (
@@ -34,6 +34,7 @@ export default function CoffeePickup(): JSX.Element {
         isLoading={isLoading}
         totalPickups={total ?? 0}
         onClickUpdate={handleOpenUpdateForm}
+        onClickCheck={handleCheckPickup}
       />
     </Page>
   )

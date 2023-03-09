@@ -48,7 +48,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       <Td textAlign='center' data-cy='table-cell-client-actions'>
         <HStack w='full' justify='center'>
           <Link to={Routes.updateClient(client.id)}>
-            <TableEditButton as='span' aria-label='Editar cliente' />
+            <TableEditButton colorScheme='blue' as='span' aria-label='Editar cliente' />
           </Link>
           <Link to={Routes.clientPage(client.id)}>
             <TableLinkToButton aria-label='Ver cliente' />

@@ -8,12 +8,14 @@ type Props = {
   isLoading: boolean
   totalPickups: number
   onClickUpdate: (pickup: PickupCoffee) => Promise<void>
+  onClickCheck: (pickup: PickupCoffee) => Promise<void>
 }
 export default function PickupTable({
   data,
   isLoading,
   totalPickups,
   onClickUpdate,
+  onClickCheck,
 }: Props): JSX.Element {
   return (
     <Table
@@ -31,7 +33,12 @@ export default function PickupTable({
       }}
     >
       {data?.map((pickup, index) => (
-        <PickupTableRow key={index} pickup={pickup} onClickUpdate={onClickUpdate} />
+        <PickupTableRow
+          key={index}
+          pickup={pickup}
+          onClickUpdate={onClickUpdate}
+          onClickCheck={onClickCheck}
+        />
       ))}
     </Table>
   )

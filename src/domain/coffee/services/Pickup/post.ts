@@ -7,10 +7,7 @@ export async function createPickupService(
   values: PickupFormValues,
 ): PostServiceResponse<PickupCoffee> {
   try {
-    const { data } = await api.post('/orders', {
-      ...values,
-      bags: Number(values.bags),
-    })
+    const { data } = await api.post('/orders', values)
 
     return {
       data,

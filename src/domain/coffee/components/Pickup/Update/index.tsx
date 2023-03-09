@@ -11,7 +11,10 @@ type Props = {
 export default function UpdateCoffeePickup({ pickup, onSuccess }: Props): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
   async function handleUpdateCoffeePickup(values: PickupFormValues): Promise<void> {
-    const { error } = await updatePickupService(pickup?.id, values)
+    const { error } = await updatePickupService(pickup?.id, {
+      ...values,
+      bags: Number(values.bags),
+    })
     if (error) {
       toast.error(error)
       return
