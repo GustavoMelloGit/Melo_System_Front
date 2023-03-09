@@ -4,3 +4,9 @@ export type PickupCoffee = {
   address: string
   bags: number
 }
+
+export type PickupFormValues = {
+  clientName: string
+  bags: number
+  address: string
+}

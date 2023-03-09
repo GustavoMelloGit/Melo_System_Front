@@ -3,8 +3,11 @@ import { IoAddOutline } from 'react-icons/io5'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import PickupTable from '../../components/Pickup/Table'
+import usePickupView from './useView'
 
 export default function CoffeePickup(): JSX.Element {
+  const { order, handleOpenForm } = usePickupView()
+  const { isLoading, data, total } = order
   return (
     <Page title='Buscar café' data-cy='coffee-pickup-page'>
       <HeaderBreadcrumbs
@@ -20,11 +23,12 @@ export default function CoffeePickup(): JSX.Element {
             icon={<IoAddOutline size={22} />}
             colorScheme='blue'
             variant='outline'
+            onClick={handleOpenForm}
             data-cy='add-pickupCoffee-button'
           />
         }
       />
-      <PickupTable data={[]} isLoading={false} totalPickups={0} />
+      <PickupTable data={data} isLoading={isLoading} totalPickups={total ?? 0} />
     </Page>
   )
 }
