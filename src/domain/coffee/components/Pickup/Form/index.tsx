@@ -9,20 +9,20 @@ import {
   ModalOverlay,
   VStack,
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
-import { useModal } from '../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../client/service'
-import { type PickupFormValues } from '../../../types/pickup'
+import { type PickupFormValues } from '../../../types/model/pickup'
+import usePickupForm from './usePickupForm'
 
 export type Props = {
   onSubmit: (values: PickupFormValues) => Promise<void>
+  initialValues?: PickupFormValues
 }
-export default function CoffeePickupForm({ onSubmit }: Props): JSX.Element {
-  const { register, handleSubmit } = useForm<PickupFormValues>()
-  const closeModal = useModal((state) => state.closeModal)
-  const { data, isLoading } = getClientsService()
+
+export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JSX.Element {
+  const { closeModal, register, handleSubmit, isLoading, clients, isSubmitting } = usePickupForm({
+    initialValues,
+  })
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
@@ -38,16 +38,18 @@ export default function CoffeePickupForm({ onSubmit }: Props): JSX.Element {
                   register={register}
                   list='client-list'
                   {...(isLoading && {
-                    leftIcon: <SpinLoader />,
+                    rightIcon: <SpinLoader />,
                   })}
                 />
-                <datalist id='client-list'>
-                  {data?.map((client) => (
-                    <option key={client.id} value={client.name}>
-                      {client.name} {client.nickname && `(${client.nickname})`}
-                    </option>
-                  ))}
-                </datalist>
+                {clients?.length !== 0 && (
+                  <datalist id='client-list'>
+                    {clients?.map((client) => (
+                      <option key={client.id} value={client.name}>
+                        {client.name} {client.nickname && `(${client.nickname})`}
+                      </option>
+                    ))}
+                  </datalist>
+                )}
               </GridItem>
               <GridItem>
                 <RHFField
@@ -63,7 +65,7 @@ export default function CoffeePickupForm({ onSubmit }: Props): JSX.Element {
                 <RHFField name='address' label='Endereço' register={register} />
               </GridItem>
             </Grid>
-            <Button type='submit' w='full'>
+            <Button isLoading={isSubmitting} type='submit' w='full'>
               Salvar
             </Button>
           </VStack>

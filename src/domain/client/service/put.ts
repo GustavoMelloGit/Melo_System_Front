@@ -8,7 +8,7 @@ import { type ClientModel } from '../types/model/Client'
 export async function updateClientService(
   id: string,
   values: ClientFormValues,
-): Promise<PutServiceResponse<ClientModel>> {
+): PutServiceResponse<ClientModel> {
   try {
     let profileImage = values.profileImage
     const profileImageIsBase64 = profileImage?.includes('data:image')

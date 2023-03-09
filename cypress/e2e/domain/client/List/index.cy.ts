@@ -48,7 +48,6 @@ describe('Client Domain - List View', () => {
       const clients = interception.response.body.data as ClientModel[]
       const clientsName = clients.map((client) => client.name).filter(Boolean) as string[]
       const sortedClientsName = [...clientsName].sort().reverse()
-      console.log(clientsName, sortedClientsName)
       expect(clientsName).to.deep.equal(sortedClientsName)
     })
   })

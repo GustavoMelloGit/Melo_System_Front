@@ -1,14 +1,20 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type PickupCoffee } from '../../../types/pickup'
+import { type PickupCoffee } from '../../../types/model/pickup'
 import PickupTableRow from './Row'
 
 type Props = {
   data: PickupCoffee[] | undefined
   isLoading: boolean
   totalPickups: number
+  onClickUpdate: (pickup: PickupCoffee) => Promise<void>
 }
-export default function PickupTable({ data, isLoading, totalPickups }: Props): JSX.Element {
+export default function PickupTable({
+  data,
+  isLoading,
+  totalPickups,
+  onClickUpdate,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -25,7 +31,7 @@ export default function PickupTable({ data, isLoading, totalPickups }: Props): J
       }}
     >
       {data?.map((pickup, index) => (
-        <PickupTableRow key={index} pickup={pickup} />
+        <PickupTableRow key={index} pickup={pickup} onClickUpdate={onClickUpdate} />
       ))}
     </Table>
   )
