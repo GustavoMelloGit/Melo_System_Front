@@ -1,4 +1,4 @@
-export type PickupCoffee = {
+export type PickupCoffeeModel = {
   id: string
   clientName: string
   address: string

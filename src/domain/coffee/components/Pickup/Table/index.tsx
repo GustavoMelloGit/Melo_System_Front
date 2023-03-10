@@ -1,14 +1,14 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type PickupCoffee } from '../../../types/model/pickup'
+import { type PickupCoffeeModel } from '../../../types/model/pickup'
 import PickupTableRow from './Row'
 
 type Props = {
-  data: PickupCoffee[] | undefined
+  data: PickupCoffeeModel[] | undefined
   isLoading: boolean
   totalPickups: number
-  onClickUpdate: (pickup: PickupCoffee) => Promise<void>
-  onClickCheck: (pickup: PickupCoffee) => Promise<void>
+  onClickUpdate: (pickup: PickupCoffeeModel) => Promise<void>
+  onClickCheck: (pickup: PickupCoffeeModel) => Promise<void>
 }
 export default function PickupTable({
   data,
@@ -30,6 +30,9 @@ export default function PickupTable({
       pagination={{
         dataLength: data?.length ?? 0,
         totalLength: totalPickups,
+      }}
+      table={{
+        'data-cy': 'pickupCoffee-table',
       }}
     >
       {data?.map((pickup, index) => (

@@ -3,14 +3,14 @@ import { errorHandler } from '../../../../lib/utils/error'
 import { type PutServiceResponse } from '../../../../shared/types/utils/service'
 import {
   PickupCoffeeStatuses,
-  type PickupCoffee,
+  type PickupCoffeeModel,
   type PickupFormValues,
 } from '../../types/model/pickup'
 
 export async function updatePickupService(
   id: string,
   values: Partial<PickupFormValues>,
-): Promise<PutServiceResponse<PickupCoffee>> {
+): Promise<PutServiceResponse<PickupCoffeeModel>> {
   try {
     const { data } = await api.put(`/orders/${id}`, values)
 
@@ -28,7 +28,7 @@ export async function updatePickupService(
 
 export async function pickupCoffeeDoneService(
   id: string,
-): Promise<PutServiceResponse<PickupCoffee>> {
+): Promise<PutServiceResponse<PickupCoffeeModel>> {
   try {
     const { data } = await api.put(`/orders/${id}`, {
       status: PickupCoffeeStatuses.COMPLETED,

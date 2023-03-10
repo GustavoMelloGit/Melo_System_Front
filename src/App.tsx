@@ -27,6 +27,9 @@ function App(): JSX.Element {
       <Toaster
         toastOptions={{
           className: 'toaster',
+          success: {
+            className: 'toaster-success',
+          },
         }}
       />
     </ChakraProvider>

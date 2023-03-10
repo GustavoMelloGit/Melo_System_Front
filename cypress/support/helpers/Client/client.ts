@@ -7,7 +7,7 @@ import {
   clientFormNaturalPersonFieldsValues,
   clientFormRequiredFields,
   clientFormRequiredFieldsValues,
-} from '../constants/client'
+} from '../../constants/Client/client'
 
 // Common Fields
 export function fillClientFormRequiredFields(): string[] {

@@ -1,11 +1,11 @@
 import api from '../../../../lib/config/api'
 import { errorHandler } from '../../../../lib/utils/error'
 import { type PostServiceResponse } from '../../../../shared/types/utils/service'
-import { type PickupCoffee, type PickupFormValues } from '../../types/model/pickup'
+import { type PickupCoffeeModel, type PickupFormValues } from '../../types/model/pickup'
 
 export async function createPickupService(
   values: PickupFormValues,
-): PostServiceResponse<PickupCoffee> {
+): PostServiceResponse<PickupCoffeeModel> {
   try {
     const { data } = await api.post('/orders', values)
 

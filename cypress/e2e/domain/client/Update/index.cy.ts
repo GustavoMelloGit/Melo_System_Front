@@ -3,13 +3,13 @@ import { formatDate } from '../../../../../src/lib/utils/formatters'
 import {
   clientFormRequiredFields,
   clientFormRequiredFieldsErrors,
-} from '../../../../support/constants/client'
+} from '../../../../support/constants/Client/client'
 import {
   clearClientFormRequiredFields,
   fillClientFormLegalPersonAllFields,
   fillClientFormNaturalPersonAllFields,
   fillClientFormRequiredFields,
-} from '../../../../support/helpers/client'
+} from '../../../../support/helpers/Client/client'
 
 describe('Client Domain - Update View', () => {
   beforeEach(() => {

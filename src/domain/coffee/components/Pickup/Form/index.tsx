@@ -35,7 +35,12 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
       <ModalContent p={2} pb={4}>
         <ModalHeader>Buscar café</ModalHeader>
         <ModalBody>
-          <VStack as='form' spacing={6} onSubmit={handleSubmit(onSubmit)}>
+          <VStack
+            as='form'
+            spacing={6}
+            onSubmit={handleSubmit(onSubmit)}
+            data-cy='pickupCoffee-form'
+          >
             <Grid templateColumns={['1fr', 'repeat(2, 1fr)']} gap={2}>
               <GridItem>
                 <RHFField
@@ -44,6 +49,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   register={register}
                   list='client-list'
                   errors={errors}
+                  data-cy='clientName-input'
                   {...(isLoading && {
                     rightIcon: <SpinLoader />,
                   })}
@@ -67,13 +73,25 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   min={1}
                   inputMode='numeric'
                   errors={errors}
+                  data-cy='bags-input'
                 />
               </GridItem>
               <GridItem colSpan={[1, 2]}>
-                <RHFField name='address' label='Endereço' errors={errors} register={register} />
+                <RHFField
+                  name='address'
+                  label='Endereço'
+                  errors={errors}
+                  register={register}
+                  data-cy='address-input'
+                />
               </GridItem>
             </Grid>
-            <Button isLoading={isSubmitting} type='submit' w='full'>
+            <Button
+              isLoading={isSubmitting}
+              type='submit'
+              w='full'
+              data-cy='submit-pickupCoffee-button'
+            >
               Salvar
             </Button>
           </VStack>

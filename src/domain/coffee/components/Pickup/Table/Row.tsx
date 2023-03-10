@@ -1,12 +1,12 @@
 import { Td, Tr } from '@chakra-ui/react'
 import TableCheckButton from '../../../../../shared/components/table/buttons/Check'
 import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
-import { type PickupCoffee } from '../../../types/model/pickup'
+import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
 type Props = {
-  pickup: PickupCoffee
-  onClickUpdate: (pickup: PickupCoffee) => Promise<void>
-  onClickCheck: (pickup: PickupCoffee) => Promise<void>
+  pickup: PickupCoffeeModel
+  onClickUpdate: (pickup: PickupCoffeeModel) => Promise<void>
+  onClickCheck: (pickup: PickupCoffeeModel) => Promise<void>
 }
 export default function PickupTableRow({
   pickup,
@@ -15,9 +15,9 @@ export default function PickupTableRow({
 }: Props): JSX.Element {
   return (
     <Tr>
-      <Td>{pickup.clientName}</Td>
-      <Td>{pickup.bags}</Td>
-      <Td>{pickup.address}</Td>
+      <Td data-cy='pickupCoffee-table-clientName'>{pickup.clientName}</Td>
+      <Td data-cy='pickupCoffee-table-bags'>{pickup.bags}</Td>
+      <Td data-cy='pickupCoffee-table-address'>{pickup.address}</Td>
       <Td textAlign='center'>
         <TableEditButton
           aria-label='Editar pedido de coleta'

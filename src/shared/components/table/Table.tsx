@@ -17,6 +17,7 @@ export default function Table({
   rows,
   children,
   filter,
+  table,
 }: TableProps): JSX.Element {
   const trHoverColor = useColorModeValue('gray.50', 'gray.700')
   return (
@@ -39,7 +40,7 @@ export default function Table({
           roundedTop: filter ? 0 : 16,
         }}
       >
-        <ChakraTable variant='simple'>
+        <ChakraTable variant='simple' {...table}>
           <TableHeader {...header} />
           <Tbody>
             <TableRow {...rows}>{children}</TableRow>
