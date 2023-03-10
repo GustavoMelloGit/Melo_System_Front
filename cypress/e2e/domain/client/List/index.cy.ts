@@ -35,38 +35,64 @@ describe('Client Domain - List View', () => {
     cy.dataCy('table-cell-client-balance').first().click()
     cy.dataCy('table-cell-client-balance').first().should('have.text', defaultHiddenBalance)
   })
-  it.only('should be able to sort by name', () => {
+  it('should be able to sort descending by name', () => {
     cy.wait('@getClients')
     cy.dataCy('table-header-name').within(() => {
       cy.dataCy('table-sort-button').click()
     })
-    cy.intercept({
-      method: 'GET',
-      url: '/clients?*',
-    }).as('sortedGetClients')
-    cy.wait('@sortedGetClients').then((interception) => {
-      const clients = interception.response.body.data as ClientModel[]
-      const clientsName = clients.map((client) => client.name).filter(Boolean) as string[]
-      const sortedClientsName = [...clientsName].sort().reverse()
-      expect(clientsName).to.deep.equal(sortedClientsName)
-    })
+    cy.dataCy('table-cell-client-name')
+      .then((el) => {
+        return Cypress.$.makeArray(el).map((e) => e.innerText)
+      })
+      .then((clientNames) => {
+        const sorted = [...clientNames].sort().reverse()
+        expect(clientNames).to.deep.equal(sorted)
+      })
   })
-  it('should be able to sort by nickname', () => {
+  it('should be able to sort ascending by name', () => {
+    cy.wait('@getClients')
+    cy.dataCy('table-header-name').within(() => {
+      cy.dataCy('table-sort-button').click()
+      cy.dataCy('table-sort-button').click()
+    })
+    cy.dataCy('table-cell-client-name')
+      .then((el) => {
+        return Cypress.$.makeArray(el).map((e) => e.innerText)
+      })
+      .then((clientNames) => {
+        const sorted = [...clientNames].sort()
+        expect(clientNames).to.deep.equal(sorted)
+      })
+  })
+  it('should be able to sort descending by nickname', () => {
     cy.dataCy('table-header-nickname').within(() => {
       cy.dataCy('table-sort-button').click()
     })
-    cy.intercept({
-      method: 'GET',
-      url: '/clients?*',
-    }).as('getClients')
-    cy.wait('@getClients').then((interception) => {
-      const clients = interception.response.body.data
-      const clientsNickname = clients.map((client) => client.nickname).filter(Boolean) as string[]
-      const sortedClientsNickname = [...clientsNickname].sort().reverse()
-      expect(clientsNickname).to.deep.equal(sortedClientsNickname)
-    })
+    cy.dataCy('table-cell-client-nickname')
+      .then((el) => {
+        return Cypress.$.makeArray(el).map((e) => e.innerText)
+      })
+      .then((clientNicknames) => {
+        const sorted = [...clientNicknames].sort().reverse()
+        expect(clientNicknames).to.deep.equal(sorted)
+      })
   })
-  it('should be able to sort by balance', () => {
+  it('should be able to sort ascending by nickname', () => {
+    cy.dataCy('table-header-nickname').within(() => {
+      cy.dataCy('table-sort-button').click()
+      cy.dataCy('table-sort-button').click()
+    })
+    cy.dataCy('table-cell-client-nickname')
+
+      .then((el) => {
+        return Cypress.$.makeArray(el).map((e) => e.innerText)
+      })
+      .then((clientNicknames) => {
+        const sorted = [...clientNicknames].sort()
+        expect(clientNicknames).to.deep.equal(sorted)
+      })
+  })
+  it.only('should be able to sort descending by balance', () => {
     cy.dataCy('table-header-balance').within(() => {
       cy.dataCy('table-sort-button').click()
     })
