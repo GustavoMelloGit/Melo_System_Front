@@ -21,6 +21,7 @@ export default function PickupTableRow({
       <Td textAlign='center'>
         <TableEditButton
           aria-label='Editar pedido de coleta'
+          title='Editar pedido de coleta'
           colorScheme='blue'
           onClick={() => {
             void onClickUpdate(pickup)
@@ -28,6 +29,7 @@ export default function PickupTableRow({
         />
         <TableCheckButton
           aria-label='Finalizar pedido de coleta'
+          title='Finalizar pedido de coleta'
           colorScheme='green'
           onClick={() => {
             void onClickCheck(pickup)
