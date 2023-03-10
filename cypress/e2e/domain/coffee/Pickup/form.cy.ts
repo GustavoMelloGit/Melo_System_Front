@@ -26,4 +26,8 @@ describe('Pickup Coffee - Form', () => {
       cy.dataCy(field).should('have.attr', 'aria-invalid', 'true')
     })
   })
+  it('should be able to cancel form', () => {
+    cy.dataCy('close-modal-button').click()
+    cy.dataCy('pickupCoffee-form').should('not.exist')
+  })
 })
