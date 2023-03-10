@@ -4,7 +4,7 @@ import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
 import { getPickupOrders } from '../../services/Pickup/get'
 import { pickupCoffeeDoneService } from '../../services/Pickup/put'
-import { PickupCoffeeStatuses, type PickupCoffee } from '../../types/model/pickup'
+import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
 
 export default function usePickupView(): UsePickupView {
   const params = useServiceParams()
@@ -26,7 +26,7 @@ export default function usePickupView(): UsePickupView {
     }
   }
 
-  async function handleOpenUpdateForm(pickup: PickupCoffee): Promise<void> {
+  async function handleOpenUpdateForm(pickup: PickupCoffeeModel): Promise<void> {
     try {
       const UpdateCoffeePickup = (await import('../../components/Pickup/Update')).default
       openModal(
@@ -42,7 +42,7 @@ export default function usePickupView(): UsePickupView {
     }
   }
 
-  async function handleCheckPickup(pickup: PickupCoffee): Promise<void> {
+  async function handleCheckPickup(pickup: PickupCoffeeModel): Promise<void> {
     const { error } = await pickupCoffeeDoneService(pickup.id)
     if (error) {
       toast.error('Não foi possível finalizar o pedido de coleta')
@@ -61,8 +61,8 @@ export default function usePickupView(): UsePickupView {
 }
 
 type UsePickupView = {
-  order: GetServiceResponse<PickupCoffee[]>
+  order: GetServiceResponse<PickupCoffeeModel[]>
   handleOpenForm: () => Promise<void>
-  handleOpenUpdateForm: (pickup: PickupCoffee) => Promise<void>
-  handleCheckPickup: (pickup: PickupCoffee) => Promise<void>
+  handleOpenUpdateForm: (pickup: PickupCoffeeModel) => Promise<void>
+  handleCheckPickup: (pickup: PickupCoffeeModel) => Promise<void>
 }

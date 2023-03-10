@@ -20,16 +20,27 @@ export type Props = {
 }
 
 export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JSX.Element {
-  const { closeModal, register, handleSubmit, isLoading, clients, isSubmitting } = usePickupForm({
+  const { closeModal, form, isLoading, clients } = usePickupForm({
     initialValues,
   })
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting, errors },
+  } = form
+
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
       <ModalContent p={2} pb={4}>
         <ModalHeader>Buscar café</ModalHeader>
         <ModalBody>
-          <VStack as='form' spacing={6} onSubmit={handleSubmit(onSubmit)}>
+          <VStack
+            as='form'
+            spacing={6}
+            onSubmit={handleSubmit(onSubmit)}
+            data-cy='pickupCoffee-form'
+          >
             <Grid templateColumns={['1fr', 'repeat(2, 1fr)']} gap={2}>
               <GridItem>
                 <RHFField
@@ -37,6 +48,8 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   label='Cliente'
                   register={register}
                   list='client-list'
+                  errors={errors}
+                  data-cy='clientName-input'
                   {...(isLoading && {
                     rightIcon: <SpinLoader />,
                   })}
@@ -59,13 +72,26 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   register={register}
                   min={1}
                   inputMode='numeric'
+                  errors={errors}
+                  data-cy='bags-input'
                 />
               </GridItem>
               <GridItem colSpan={[1, 2]}>
-                <RHFField name='address' label='Endereço' register={register} />
+                <RHFField
+                  name='address'
+                  label='Endereço'
+                  errors={errors}
+                  register={register}
+                  data-cy='address-input'
+                />
               </GridItem>
             </Grid>
-            <Button isLoading={isSubmitting} type='submit' w='full'>
+            <Button
+              isLoading={isSubmitting}
+              type='submit'
+              w='full'
+              data-cy='submit-pickupCoffee-button'
+            >
               Salvar
             </Button>
           </VStack>

@@ -1,9 +1,9 @@
 import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
-import { type PickupCoffee } from '../../types/model/pickup'
+import { type PickupCoffeeModel } from '../../types/model/pickup'
 
-export function getPickupOrders(params?: string): GetServiceResponse<PickupCoffee[]> {
+export function getPickupOrders(params?: string): GetServiceResponse<PickupCoffeeModel[]> {
   const { data, error, isLoading, mutate } = useFetch(`/orders?${params ?? ''}`)
 
   return {

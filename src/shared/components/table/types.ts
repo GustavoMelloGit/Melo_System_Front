@@ -1,4 +1,8 @@
-import { type InputProps, type TableColumnHeaderProps } from '@chakra-ui/react'
+import {
+  type InputProps,
+  type TableColumnHeaderProps,
+  type TableProps as ChakraTableProps,
+} from '@chakra-ui/react'
 
 export type TableRowProps = {
   isLoading: boolean
@@ -41,6 +45,7 @@ export type TableProps = {
   pagination: TablePaginationProps
   filter?: TableFilterProps
   children: React.ReactNode
+  table?: ChakraTableProps & Record<`data-${string}`, string>
 }
 export type FilterFormValues = {
   query: string
