@@ -20,9 +20,15 @@ export type Props = {
 }
 
 export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JSX.Element {
-  const { closeModal, register, handleSubmit, isLoading, clients, isSubmitting } = usePickupForm({
+  const { closeModal, form, isLoading, clients } = usePickupForm({
     initialValues,
   })
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting, errors },
+  } = form
+
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
@@ -37,6 +43,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   label='Cliente'
                   register={register}
                   list='client-list'
+                  errors={errors}
                   {...(isLoading && {
                     rightIcon: <SpinLoader />,
                   })}
@@ -59,10 +66,11 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   register={register}
                   min={1}
                   inputMode='numeric'
+                  errors={errors}
                 />
               </GridItem>
               <GridItem colSpan={[1, 2]}>
-                <RHFField name='address' label='Endereço' register={register} />
+                <RHFField name='address' label='Endereço' errors={errors} register={register} />
               </GridItem>
             </Grid>
             <Button isLoading={isSubmitting} type='submit' w='full'>

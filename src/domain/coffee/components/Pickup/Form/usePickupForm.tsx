@@ -1,4 +1,7 @@
-import { useForm, type UseFormHandleSubmit, type UseFormRegister } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm, type UseFormReturn } from 'react-hook-form'
+import * as yup from 'yup'
+import { validationErrors } from '../../../../../lib/errors'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../client/service'
 import { type ClientModel } from '../../../../client/types/model/Client'
@@ -8,32 +11,30 @@ type Props = {
   initialValues?: PickupFormValues
 }
 export default function usePickupForm({ initialValues }: Props): UsePickupForm {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { isSubmitting },
-  } = useForm<PickupFormValues>({
+  const form = useForm<PickupFormValues>({
     defaultValues: initialValues,
+    resolver: yupResolver(validationSchema),
   })
-  const { data: clients, isLoading } = getClientsService(`name=${watch('clientName')}`)
+  const { data: clients, isLoading } = getClientsService(`name=${form.watch('clientName')}`)
   const closeModal = useModal((state) => state.closeModal)
 
   return {
-    register,
-    handleSubmit,
     clients,
     isLoading,
     closeModal,
-    isSubmitting,
+    form,
   }
 }
 
+const validationSchema = yup.object().shape({
+  clientName: yup.string().required(validationErrors.clientNameIsRequired),
+  bags: yup.string().required(validationErrors.bagsIsRequired),
+  address: yup.string().required(validationErrors.addressIsRequired),
+})
+
 type UsePickupForm = {
-  register: UseFormRegister<PickupFormValues>
-  handleSubmit: UseFormHandleSubmit<PickupFormValues>
   clients: ClientModel[] | undefined
   isLoading: boolean
   closeModal: () => void
-  isSubmitting: boolean
+  form: UseFormReturn<PickupFormValues, any>
 }
