@@ -15,7 +15,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          start: yarn start
+          start: yarn dev
           wait-on: 'http://127.0.0.1:5173'
           browser: chrome
           env: api_base=https://api.melosystem.online,auth_email=admin@admin.com,auth_password=123456
