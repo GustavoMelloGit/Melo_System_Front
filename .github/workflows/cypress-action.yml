@@ -8,8 +8,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm install
+        run: yarn
         env:
-          npm_config_cache: '${{ github.workspace }}/.npm'
+          npm_config_cache: '${{ github.workspace }}/.yarn-cache'
       - name: Cypress run
         uses: cypress-io/github-action@v5
