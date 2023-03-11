@@ -1,7 +1,7 @@
 import { Routes } from '../../../../../src/lib/routes'
 
 describe('Pickup Coffee - List', () => {
-  let formData
+  let formData: { clientName: string; bags: string; address: string }
   beforeEach(() => {
     cy.login()
     cy.visit(Routes.coffeePickups)

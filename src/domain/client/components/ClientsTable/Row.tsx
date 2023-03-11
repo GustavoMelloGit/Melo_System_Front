@@ -39,6 +39,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         cursor='pointer'
         color={showBalance ? getColorByValue(client.balance) : 'inherit'}
         data-cy='table-cell-client-balance'
+        data-balance={client.balance}
       >
         {showBalance ? formatCurrency(client.balance) : 'R$ ----'}
       </Td>

@@ -4,6 +4,7 @@ import {
   GridItem,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
@@ -33,6 +34,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
       <ModalContent p={2} pb={4}>
+        <ModalCloseButton data-cy='close-modal-button' />
         <ModalHeader>Buscar café</ModalHeader>
         <ModalBody>
           <VStack

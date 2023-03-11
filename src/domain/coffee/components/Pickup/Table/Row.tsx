@@ -26,6 +26,7 @@ export default function PickupTableRow({
           onClick={() => {
             void onClickUpdate(pickup)
           }}
+          data-cy='pickupCoffee-edit'
         />
         <TableCheckButton
           aria-label='Finalizar pedido de coleta'
@@ -34,6 +35,7 @@ export default function PickupTableRow({
           onClick={() => {
             void onClickCheck(pickup)
           }}
+          data-cy='pickupCoffee-check'
         />
       </Td>
     </Tr>
