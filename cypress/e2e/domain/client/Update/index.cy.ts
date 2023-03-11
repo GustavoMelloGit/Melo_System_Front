@@ -21,11 +21,6 @@ describe('Client Domain - Update View', () => {
     }).as('getClients')
     cy.wait('@getClients')
     cy.dataCy('table-edit-button').first().click()
-    cy.intercept({
-      method: 'GET',
-      url: '/clients/*',
-    }).as('getClient')
-    cy.wait('@getClient')
   })
   it('should render page', () => {
     cy.dataCy('update-client-page').should('exist')

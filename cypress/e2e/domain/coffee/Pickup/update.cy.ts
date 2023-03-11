@@ -15,7 +15,16 @@ describe('Pickup Coffee - Update', () => {
       formData = form
     })
   })
+  it('should allow save without changes', () => {
+    cy.dataCy('submit-pickupCoffee-button').click()
+    cy.dataCy('pickupCoffee-form').should('not.exist')
+    cy.dataCy('pickupCoffee-table').should('exist')
+    cy.get('.toaster-success').should('exist')
+  })
   it('should show validation errors when required fields are empty', () => {
+    pickupFormRequiredFields.forEach((field) => {
+      cy.dataCy(field).clear()
+    })
     cy.dataCy('submit-pickupCoffee-button').click()
     pickupFormRequiredFields.forEach((field) => {
       cy.dataCy(field).should('have.attr', 'aria-invalid', 'true')
