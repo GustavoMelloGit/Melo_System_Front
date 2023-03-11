@@ -15,7 +15,12 @@ describe('Pickup Coffee - Update', () => {
       formData = form
     })
   })
-
+  it('should show validation errors when required fields are empty', () => {
+    cy.dataCy('submit-pickupCoffee-button').click()
+    pickupFormRequiredFields.forEach((field) => {
+      cy.dataCy(field).should('have.attr', 'aria-invalid', 'true')
+    })
+  })
   it('should be able to update a pickup', () => {
     cy.dataCy('pickupCoffee-form').within(() => {
       pickupFormRequiredFields.forEach((field) => {
