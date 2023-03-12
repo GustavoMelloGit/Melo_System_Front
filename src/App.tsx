@@ -1,4 +1,5 @@
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
+import { Fragment } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 import { RouterProvider } from 'react-router-dom'
@@ -19,16 +20,19 @@ function App(): JSX.Element {
         initialColorMode={theme.config.initialColorMode}
       />
       <ProviderComposer contexts={[LayoutProvider, Suspense, HelmetProvider, AuthProvider]}>
-        <>
+        <Fragment>
           <RouterProvider router={router} />
           <ModalManager />
-        </>
+        </Fragment>
       </ProviderComposer>
       <Toaster
         toastOptions={{
           className: 'toaster',
           success: {
             className: 'toaster-success',
+          },
+          error: {
+            className: 'toaster-error',
           },
         }}
       />
