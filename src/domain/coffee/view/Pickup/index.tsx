@@ -1,12 +1,21 @@
-import { IconButton } from '@chakra-ui/react'
+import { Flex, IconButton, VStack } from '@chakra-ui/react'
 import { IoAddOutline } from 'react-icons/io5'
+import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import PickupTable from '../../components/Pickup/Table'
+import { PickupCoffeeStatuses } from '../../types/model/pickup'
 import usePickupView from './useView'
 
 export default function CoffeePickup(): JSX.Element {
-  const { order, handleOpenForm, handleOpenUpdateForm, handleCheckPickup } = usePickupView()
+  const {
+    order,
+    handleOpenForm,
+    handleOpenUpdateForm,
+    handleCheckPickup,
+    handleChangeStatus,
+    currentStatus,
+  } = usePickupView()
   const { isLoading, data, total } = order
 
   return (
@@ -29,13 +38,27 @@ export default function CoffeePickup(): JSX.Element {
           />
         }
       />
-      <PickupTable
-        data={data}
-        isLoading={isLoading}
-        totalPickups={total ?? 0}
-        onClickUpdate={handleOpenUpdateForm}
-        onClickCheck={handleCheckPickup}
-      />
+      <VStack>
+        <Flex justify='center'>
+          <SwitchLabeled
+            rightValue={PickupCoffeeStatuses.COMPLETED}
+            leftValue={PickupCoffeeStatuses.PENDING}
+            onChange={(value) => {
+              handleChangeStatus(value as PickupCoffeeStatuses)
+            }}
+            leftLabel='Pendentes'
+            rightLabel='Finalizados'
+            defaultActive={currentStatus === PickupCoffeeStatuses.COMPLETED ? 1 : 0}
+          />
+        </Flex>
+        <PickupTable
+          data={data}
+          isLoading={isLoading}
+          totalPickups={total ?? 0}
+          onClickUpdate={handleOpenUpdateForm}
+          onClickCheck={handleCheckPickup}
+        />
+      </VStack>
     </Page>
   )
 }
