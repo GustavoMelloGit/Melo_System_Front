@@ -95,13 +95,13 @@ describe('Pickup Coffee - List', () => {
     cy.location().should((loc) => {
       expect(loc.search).to.eq(`?status=${PickupCoffeeStatuses.COMPLETED}`)
     })
-    cy.dataCy('pending-status-button').should('have.attr', 'data-active', 'true')
-    cy.dataCy('completed-status-button').should('have.attr', 'data-active', 'false')
+    cy.dataCy('pending-status-button').should('have.attr', 'data-current', 'true')
+    cy.dataCy('completed-status-button').should('have.attr', 'data-current', 'false')
     cy.dataCy('completed-status-button').click()
     cy.location().should((loc) => {
       expect(loc.search).to.eq(`?status=${PickupCoffeeStatuses.PENDING}`)
     })
-    cy.dataCy('pending-status-button').should('have.attr', 'data-active', 'false')
-    cy.dataCy('completed-status-button').should('have.attr', 'data-active', 'true')
+    cy.dataCy('pending-status-button').should('have.attr', 'data-current', 'false')
+    cy.dataCy('completed-status-button').should('have.attr', 'data-current', 'true')
   })
 })

@@ -43,7 +43,7 @@ export default function SwitchLabeled({
         onClick={handleLeftClick}
         rounded={0}
         roundedLeft={4}
-        data-active={currentActive === 0}
+        data-current={currentActive === 0}
         {...rightButtonProps}
       >
         {leftLabel}
@@ -53,7 +53,7 @@ export default function SwitchLabeled({
         variant={currentActive === 1 ? 'solid' : 'outline'}
         rounded={0}
         roundedRight={4}
-        data-active={currentActive === 1}
+        data-current={currentActive === 1}
         {...leftButtonProps}
       >
         {rightLabel}
