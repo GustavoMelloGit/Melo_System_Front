@@ -6,7 +6,7 @@ export default function TableCheckButton(props: IconButtonProps): JSX.Element {
     <IconButton
       icon={<BsCheckCircle size={20} />}
       variant='ghost'
-      data-cy='table-edit-button'
+      data-cy='table-check-button'
       {...props}
     />
   )

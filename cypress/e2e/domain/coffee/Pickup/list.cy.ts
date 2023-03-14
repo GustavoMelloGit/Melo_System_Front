@@ -1,3 +1,4 @@
+import { PickupCoffeeStatuses } from '../../../../../src/domain/coffee/types/model/pickup'
 import { Routes } from '../../../../../src/lib/routes'
 
 describe('Pickup Coffee - List', () => {
@@ -84,5 +85,23 @@ describe('Pickup Coffee - List', () => {
         const sorted = [...bags].sort((a, b) => a - b)
         expect(bags).to.deep.equal(sorted)
       })
+  })
+
+  it.only('should be able to change status', () => {
+    cy.dataCy('pickupCoffee-table').should('exist')
+    cy.dataCy('pending-status-button').should('exist')
+    cy.dataCy('completed-status-button').should('exist')
+    cy.dataCy('pending-status-button').click()
+    cy.location().should((loc) => {
+      expect(loc.search).to.eq(`?status=${PickupCoffeeStatuses.COMPLETED}`)
+    })
+    cy.dataCy('pending-status-button').should('have.attr', 'data-current', 'true')
+    cy.dataCy('completed-status-button').should('have.attr', 'data-current', 'false')
+    cy.dataCy('completed-status-button').click()
+    cy.location().should((loc) => {
+      expect(loc.search).to.eq(`?status=${PickupCoffeeStatuses.PENDING}`)
+    })
+    cy.dataCy('pending-status-button').should('have.attr', 'data-current', 'false')
+    cy.dataCy('completed-status-button').should('have.attr', 'data-current', 'true')
   })
 })

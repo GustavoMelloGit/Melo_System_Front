@@ -45,3 +45,23 @@ export async function pickupCoffeeDoneService(
     }
   }
 }
+
+export async function pickupCoffeePendingService(
+  id: string,
+): Promise<PutServiceResponse<PickupCoffeeModel>> {
+  try {
+    const { data } = await api.put(`/orders/${id}`, {
+      status: PickupCoffeeStatuses.PENDING,
+    })
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      error: errorHandler(e),
+      data: null,
+    }
+  }
+}

@@ -9,6 +9,8 @@ type Props = {
   totalPickups: number
   onClickUpdate: (pickup: PickupCoffeeModel) => Promise<void>
   onClickCheck: (pickup: PickupCoffeeModel) => Promise<void>
+  onClickUncheck: (pickup: PickupCoffeeModel) => Promise<void>
+  variant?: 'completed' | 'pending'
 }
 export default function PickupTable({
   data,
@@ -16,6 +18,8 @@ export default function PickupTable({
   totalPickups,
   onClickUpdate,
   onClickCheck,
+  onClickUncheck,
+  variant = 'pending',
 }: Props): JSX.Element {
   return (
     <Table
@@ -41,6 +45,8 @@ export default function PickupTable({
           pickup={pickup}
           onClickUpdate={onClickUpdate}
           onClickCheck={onClickCheck}
+          onClickUncheck={onClickUncheck}
+          variant={variant}
         />
       ))}
     </Table>

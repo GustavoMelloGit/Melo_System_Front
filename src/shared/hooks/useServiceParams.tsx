@@ -29,5 +29,8 @@ export default function useServiceParams(): string {
     params.append(PaginationParams.sortOrder, order)
   }
 
+  const status = getParam('status')
+  if (status) params.append('status', status)
+
   return params.toString()
 }
