@@ -15,6 +15,7 @@ export default function CoffeePickup(): JSX.Element {
     handleCheckPickup,
     handleChangeStatus,
     currentStatus,
+    handleUncheckPickup,
   } = usePickupView()
   const { isLoading, data, total } = order
 
@@ -63,6 +64,8 @@ export default function CoffeePickup(): JSX.Element {
           totalPickups={total ?? 0}
           onClickUpdate={handleOpenUpdateForm}
           onClickCheck={handleCheckPickup}
+          onClickUncheck={handleUncheckPickup}
+          variant={currentStatus === PickupCoffeeStatuses.COMPLETED ? 'completed' : 'pending'}
         />
       </VStack>
     </Page>

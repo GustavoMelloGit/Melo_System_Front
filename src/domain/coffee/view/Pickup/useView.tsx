@@ -4,7 +4,7 @@ import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
 import { getPickupOrders } from '../../services/Pickup/get'
-import { pickupCoffeeDoneService } from '../../services/Pickup/put'
+import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../services/Pickup/put'
 import { type PickupCoffeeModel, type PickupCoffeeStatuses } from '../../types/model/pickup'
 
 export default function usePickupView(): UsePickupView {
@@ -55,6 +55,16 @@ export default function usePickupView(): UsePickupView {
     void order.mutate?.()
   }
 
+  async function handleUncheckPickup(pickup: PickupCoffeeModel): Promise<void> {
+    const { error } = await pickupCoffeePendingService(pickup.id)
+    if (error) {
+      toast.error('Não foi possível desmarcar o pedido de coleta')
+      return
+    }
+    toast.success('Pedido de coleta desmarcado com sucesso')
+    void order.mutate?.()
+  }
+
   function handleChangeStatus(status: PickupCoffeeStatuses): void {
     handleAddParam('status', status)
   }
@@ -66,6 +76,7 @@ export default function usePickupView(): UsePickupView {
     handleCheckPickup,
     handleChangeStatus,
     currentStatus,
+    handleUncheckPickup,
   }
 }
 
@@ -74,6 +85,7 @@ type UsePickupView = {
   handleOpenForm: () => Promise<void>
   handleOpenUpdateForm: (pickup: PickupCoffeeModel) => Promise<void>
   handleCheckPickup: (pickup: PickupCoffeeModel) => Promise<void>
+  handleUncheckPickup: (pickup: PickupCoffeeModel) => Promise<void>
   handleChangeStatus: (status: PickupCoffeeStatuses) => void
   currentStatus: PickupCoffeeStatuses | null
 }
