@@ -8,8 +8,8 @@ type Props<T = unknown> = {
   defaultActive?: number
   leftValue?: T
   rightValue?: T
-  leftButtonProps?: ButtonProps
-  rightButtonProps?: ButtonProps
+  leftButtonProps?: ButtonProps & Record<string, string>
+  rightButtonProps?: ButtonProps & Record<string, string>
   wrapperProps?: FlexProps
 }
 export default function SwitchLabeled({
@@ -43,6 +43,7 @@ export default function SwitchLabeled({
         onClick={handleLeftClick}
         rounded={0}
         roundedLeft={4}
+        data-active={currentActive === 0}
         {...rightButtonProps}
       >
         {leftLabel}
@@ -52,6 +53,7 @@ export default function SwitchLabeled({
         variant={currentActive === 1 ? 'solid' : 'outline'}
         rounded={0}
         roundedRight={4}
+        data-active={currentActive === 1}
         {...leftButtonProps}
       >
         {rightLabel}

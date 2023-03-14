@@ -49,6 +49,12 @@ export default function CoffeePickup(): JSX.Element {
             leftLabel='Pendentes'
             rightLabel='Finalizados'
             defaultActive={currentStatus === PickupCoffeeStatuses.COMPLETED ? 1 : 0}
+            leftButtonProps={{
+              'data-cy': 'pending-status-button',
+            }}
+            rightButtonProps={{
+              'data-cy': 'completed-status-button',
+            }}
           />
         </Flex>
         <PickupTable
