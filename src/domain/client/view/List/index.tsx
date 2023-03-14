@@ -13,6 +13,11 @@ export default function ClientsListView(): JSX.Element {
     <Page title='Clientes' data-cy='list-clients-page'>
       <HeaderBreadcrumbs
         heading='Clientes'
+        links={[
+          {
+            label: 'Lista de clientes',
+          },
+        ]}
         actions={
           <Link to={Routes.createClient}>
             <IconButton
