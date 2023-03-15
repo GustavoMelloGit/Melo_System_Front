@@ -1,9 +1,10 @@
+import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
-import { getPickupOrders } from '../../services/Pickup/get'
+import { getPickupOrders, getPickupPdf } from '../../services/Pickup/get'
 import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../services/Pickup/put'
 import { type PickupCoffeeModel, type PickupCoffeeStatuses } from '../../types/model/pickup'
 
@@ -13,6 +14,7 @@ export default function usePickupView(): UsePickupView {
   const order = getPickupOrders(`${params}`)
   const openModal = useModal((state) => state.openModal)
   const currentStatus = getParam('status') as PickupCoffeeStatuses | null
+  const test = useRef<HTMLButtonElement>(null)
 
   async function handleOpenForm(): Promise<void> {
     try {
@@ -65,6 +67,10 @@ export default function usePickupView(): UsePickupView {
     void order.mutate?.()
   }
 
+  async function handleDownloadList(): Promise<void> {
+    await getPickupPdf()
+  }
+
   function handleChangeStatus(status: PickupCoffeeStatuses): void {
     handleAddParam('status', status)
   }
@@ -77,6 +83,8 @@ export default function usePickupView(): UsePickupView {
     handleChangeStatus,
     currentStatus,
     handleUncheckPickup,
+    handleDownloadList,
+    test,
   }
 }
 
@@ -87,5 +95,7 @@ type UsePickupView = {
   handleCheckPickup: (pickup: PickupCoffeeModel) => Promise<void>
   handleUncheckPickup: (pickup: PickupCoffeeModel) => Promise<void>
   handleChangeStatus: (status: PickupCoffeeStatuses) => void
+  handleDownloadList: () => Promise<void>
   currentStatus: PickupCoffeeStatuses | null
+  test: React.RefObject<HTMLButtonElement>
 }

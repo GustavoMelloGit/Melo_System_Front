@@ -1,4 +1,4 @@
-import { Button, Flex, type ButtonProps, type FlexProps } from '@chakra-ui/react'
+import { Button, Flex, useColorModeValue, type ButtonProps, type FlexProps } from '@chakra-ui/react'
 import { useState } from 'react'
 
 type Props<T = unknown> = {
@@ -23,6 +23,7 @@ export default function SwitchLabeled({
   rightButtonProps,
   wrapperProps,
 }: Props): JSX.Element {
+  const wrapperBg = useColorModeValue('gray.300', 'gray.700')
   const [currentActive, setCurrentActive] = useState<number>(defaultActive)
 
   function handleLeftClick(): void {
@@ -37,23 +38,25 @@ export default function SwitchLabeled({
     onChange(rightValue ?? true)
   }
   return (
-    <Flex {...wrapperProps}>
+    <Flex p={1} gap={1} bg={wrapperBg} rounded={8} {...wrapperProps}>
       <Button
-        variant={currentActive === 0 ? 'solid' : 'outline'}
+        variant={currentActive === 0 ? 'solid' : 'ghost'}
         onClick={handleLeftClick}
-        rounded={0}
-        roundedLeft={4}
+        rounded={4}
         data-current={currentActive === 0}
+        px={10}
+        size='sm'
         {...rightButtonProps}
       >
         {leftLabel}
       </Button>
       <Button
         onClick={handleRightClick}
-        variant={currentActive === 1 ? 'solid' : 'outline'}
-        rounded={0}
-        roundedRight={4}
+        variant={currentActive === 1 ? 'solid' : 'ghost'}
+        rounded={4}
         data-current={currentActive === 1}
+        px={10}
+        size='sm'
         {...leftButtonProps}
       >
         {rightLabel}
