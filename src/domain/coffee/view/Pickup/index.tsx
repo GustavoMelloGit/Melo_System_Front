@@ -1,5 +1,7 @@
 import { Flex, IconButton, VStack } from '@chakra-ui/react'
+import { AiOutlinePrinter } from 'react-icons/ai'
 import { IoAddOutline } from 'react-icons/io5'
+import PromiseIconButton from '../../../../shared/components/buttons/PromiseIconButton'
 import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
@@ -16,6 +18,7 @@ export default function CoffeePickup(): JSX.Element {
     handleChangeStatus,
     currentStatus,
     handleUncheckPickup,
+    handleDownloadList,
   } = usePickupView()
   const { isLoading, data, total } = order
 
@@ -29,14 +32,26 @@ export default function CoffeePickup(): JSX.Element {
           },
         ]}
         actions={
-          <IconButton
-            aria-label='Adicionar café a buscar'
-            icon={<IoAddOutline size={22} />}
-            colorScheme='blue'
-            variant='outline'
-            onClick={handleOpenForm}
-            data-cy='add-pickupCoffee-button'
-          />
+          <Flex gap={3}>
+            <PromiseIconButton
+              icon={<AiOutlinePrinter size={22} />}
+              aria-label='Baixar lista de cafés a buscar'
+              service={handleDownloadList}
+              colorScheme='blue'
+              variant='outline'
+              data-cy='download-pickupCoffee-button'
+              title='Baixar lista de cafés a buscar'
+            />
+            <IconButton
+              aria-label='Adicionar café a buscar'
+              icon={<IoAddOutline size={22} />}
+              colorScheme='blue'
+              variant='outline'
+              onClick={handleOpenForm}
+              data-cy='add-pickupCoffee-button'
+              title='Adicionar café a buscar'
+            />
+          </Flex>
         }
       />
       <VStack>
