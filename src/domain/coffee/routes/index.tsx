@@ -2,7 +2,8 @@ import React from 'react'
 import { type RouteObject } from 'react-router-dom'
 import { Routes } from '../../../lib/routes'
 const CoffeePickupView = React.lazy(async () => import('../view/Pickup'))
-const CoffeeEntryView = React.lazy(async () => import('../view/Entry'))
+const CoffeeBookListView = React.lazy(async () => import('../view/Book/List'))
+const CoffeeBookDetailsView = React.lazy(async () => import('../view/Book/Details'))
 
 const coffeeRoutes: RouteObject[] = [
   {
@@ -10,8 +11,12 @@ const coffeeRoutes: RouteObject[] = [
     element: <CoffeePickupView />,
   },
   {
-    path: Routes.coffeeEntry,
-    element: <CoffeeEntryView />,
+    path: Routes.books,
+    element: <CoffeeBookListView />,
+  },
+  {
+    path: Routes.bookPage(':number'),
+    element: <CoffeeBookDetailsView />,
   },
 ]
 

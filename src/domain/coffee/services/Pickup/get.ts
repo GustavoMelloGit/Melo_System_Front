@@ -3,9 +3,10 @@ import api from '../../../../lib/config/api'
 import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
+import { type BookModel } from '../../types/model/book'
 import { type PickupCoffeeModel } from '../../types/model/pickup'
 
-export function getPickupOrders(params?: string): GetServiceResponse<PickupCoffeeModel[]> {
+export function getPickupOrdersService(params?: string): GetServiceResponse<PickupCoffeeModel[]> {
   const { data, error, isLoading, mutate } = useFetch(`/orders?${params ?? ''}`)
 
   return {
@@ -26,5 +27,17 @@ export async function getPickupPdf(): Promise<void> {
     window.open(url, '_blank')
   } catch (error) {
     console.error(error)
+  }
+}
+
+export function getBooksService(params?: string): GetServiceResponse<BookModel[]> {
+  const { data, error, isLoading, mutate } = useFetch(`/books?${params ?? ''}`)
+
+  return {
+    data: data?.data,
+    error: errorHandler(error),
+    isLoading,
+    total: data?.total,
+    mutate,
   }
 }

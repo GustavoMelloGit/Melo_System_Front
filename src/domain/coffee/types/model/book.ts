@@ -22,3 +22,7 @@ export type BookModel = {
   sheets: Array<WithId<SheetModel>>
 } & Timestamp &
   Responsible
+
+export type BookFormValues = {
+  number: string
+}

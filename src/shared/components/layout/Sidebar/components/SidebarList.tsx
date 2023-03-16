@@ -33,7 +33,7 @@ const listItem: Record<
     label: 'Cafés a buscar',
     icon: <BsTruck />,
   },
-  [Routes.coffeeEntry]: {
+  [Routes.books]: {
     label: 'Lançamento',
     icon: <BsCoin />,
   },

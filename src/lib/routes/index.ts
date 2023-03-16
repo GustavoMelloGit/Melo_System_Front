@@ -8,5 +8,6 @@ export const Routes = {
   updateClient: (uuid: string) => `/clients/update/${uuid}`,
   fertilizers: '/fertilizers',
   coffeePickups: '/coffee-pickups',
-  coffeeEntry: '/coffee-entry',
+  books: '/books',
+  bookPage: (number: string | number) => `/books/${number}`,
 } as const
