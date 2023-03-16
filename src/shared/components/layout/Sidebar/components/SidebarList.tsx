@@ -33,6 +33,10 @@ const listItem: Record<
     label: 'Cafés a buscar',
     icon: <BsTruck />,
   },
+  [Routes.coffeeEntry]: {
+    label: 'Lançamento',
+    icon: <BsTruck />,
+  },
 }
 
 export default function SidebarList(): JSX.Element {
