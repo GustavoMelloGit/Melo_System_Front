@@ -1,5 +1,6 @@
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
+import CoffeeBookTable from '../../components/Entry/Table'
 
 export default function CoffeeEntry(): JSX.Element {
   return (
@@ -12,7 +13,7 @@ export default function CoffeeEntry(): JSX.Element {
           },
         ]}
       />
-      <p>Hello World</p>
+      <CoffeeBookTable />
     </Page>
   )
 }
