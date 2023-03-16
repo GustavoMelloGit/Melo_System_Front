@@ -24,7 +24,7 @@ export default function SwitchLabeled({
   wrapperProps,
 }: Props): JSX.Element {
   const wrapperBg = useColorModeValue('gray.300', 'gray.700')
-  const afterColor = useColorModeValue('gray.700', 'gray.300')
+  const afterColor = useColorModeValue('gray.700', 'gray.100')
   const [currentActive, setCurrentActive] = useState<number>(defaultActive)
 
   function handleLeftClick(): void {
