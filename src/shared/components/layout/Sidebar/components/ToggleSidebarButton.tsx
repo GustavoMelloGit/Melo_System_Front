@@ -1,6 +1,6 @@
 import { Button, type ButtonProps } from '@chakra-ui/react'
 import { RxDoubleArrowLeft, RxDoubleArrowRight } from 'react-icons/rx'
-import useLayoutContext from '../../hooks/useLayoutContext'
+import useLayoutContext from '../../../../hooks/useLayoutContext'
 
 export default function ToggleSidebarButton(props: ButtonProps): JSX.Element {
   const {

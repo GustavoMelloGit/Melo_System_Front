@@ -2,7 +2,7 @@ import { Avatar, Button, Flex, Heading, VStack } from '@chakra-ui/react'
 import { GoSignOut } from 'react-icons/go'
 import useAuth from '../../../../../domain/auth/hooks/useAuth'
 import useLayoutContext from '../../../../hooks/useLayoutContext'
-import ToggleSidebarButton from '../../../buttons/ToggleSidebarButton'
+import ToggleSidebarButton from './ToggleSidebarButton'
 
 export default function SidebarHeader(): JSX.Element {
   const { signOut, user } = useAuth()
