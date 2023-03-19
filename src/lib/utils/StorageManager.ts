@@ -1,17 +1,18 @@
 const DEFAULT_KEY = '@melo-system:'
 
 export default function StorageManager(key: string): UseLocalStorage {
+  const storageKey = `${DEFAULT_KEY}${key}`
   const getValue = (): any => {
-    const value = localStorage.getItem(key)
+    const value = localStorage.getItem(storageKey)
     return value ? JSON.parse(value) : null
   }
 
   const setValue = (value: any): void => {
-    localStorage.setItem(`${DEFAULT_KEY}${key}`, JSON.stringify(value))
+    localStorage.setItem(storageKey, JSON.stringify(value))
   }
 
   const removeValue = (): void => {
-    localStorage.removeItem(key)
+    localStorage.removeItem(storageKey)
   }
 
   return {
