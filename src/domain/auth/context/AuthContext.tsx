@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { toast } from 'react-hot-toast'
 import { setAuthToken } from '../../../lib/config/api'
-import useLocalStorage from '../../../shared/hooks/useLocalStorage'
+import StorageManager from '../../../lib/utils/StorageManager'
 import { signInService } from '../service'
 import { type SignInValues } from '../types'
 import { type AuthContextType } from '../types/context/auth'
@@ -25,12 +25,12 @@ export const AuthContext = createContext<AuthContextType>(defaultValues)
 export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
   const [user, setUser] = useState<AuthContextType['user']>(defaultValues.user)
   const [appInitialized, setAppInitialized] = useState(false)
-  const { setValue, getValue, removeValue: removeUser } = useLocalStorage('@melo-system:user')
+  const { setValue, getValue, removeValue: removeUser } = StorageManager('user')
   const {
     setValue: setToken,
     getValue: getToken,
     removeValue: removeToken,
-  } = useLocalStorage('@melo-system:token')
+  } = StorageManager('token')
 
   const signIn = useCallback(async (values: SignInValues): Promise<void> => {
     const { data, error } = await signInService(values)
