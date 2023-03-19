@@ -24,5 +24,5 @@ export type BookModel = {
   Responsible
 
 export type BookFormValues = {
-  number: string
+  number: number
 }

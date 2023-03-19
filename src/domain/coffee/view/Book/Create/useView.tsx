@@ -10,9 +10,7 @@ export default function useCreateBookView({ refetch }: Props): UseCreateBookView
   const closeModal = useModal((state) => state.closeModal)
 
   async function handleCreateBook(values: BookFormValues): Promise<void> {
-    const { error } = await createBookService({
-      number: String(values.number),
-    })
+    const { error } = await createBookService(values)
     if (error) {
       toast.error(error)
       return
