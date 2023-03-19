@@ -1,0 +1,20 @@
+import api from '../../../../lib/config/api'
+import { errorHandler } from '../../../../lib/utils/error'
+import { type PostServiceResponse } from '../../../../shared/types/utils/service'
+import { type BookFormValues, type BookModel } from '../../types/model/book'
+
+export async function createBookService(values: BookFormValues): PostServiceResponse<BookModel> {
+  try {
+    const { data } = await api.post('/books', values)
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      error: errorHandler(e),
+      data: null,
+    }
+  }
+}

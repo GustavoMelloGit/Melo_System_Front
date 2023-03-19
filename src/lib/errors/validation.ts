@@ -23,6 +23,8 @@ const validationErrors = {
   clientNameIsRequired: 'Por favor, informe o nome do cliente',
   bagsIsRequired: 'Por favor, informe a quantidade de sacas',
   addressIsRequired: 'Por favor, informe o endereço',
+  bookNumberIsRequired: 'Por favor, informe o número do talão',
+  bookNumberIsInvalid: 'Por favor, informe um número de talão válido',
 }
 
 export default validationErrors
