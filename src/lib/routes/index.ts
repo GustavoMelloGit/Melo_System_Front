@@ -10,4 +10,5 @@ export const Routes = {
   coffeePickups: '/coffee-pickups',
   books: '/books',
   bookPage: (number: string | number) => `/books/${number}`,
+  createSheet: (bookNumber: string | number) => `/books/${bookNumber}/create`,
 } as const

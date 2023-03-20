@@ -2,13 +2,12 @@ import { useParams } from 'react-router-dom'
 import { type KeyedMutator } from 'swr'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import { getSheetsService } from '../../../services/Sheets/get'
-import { type SheetModel } from '../../../types/model/book'
+import { type SheetModel } from '../../../types/model/sheet'
 
 export default function useBookDetailsView(): UseBookDetailsView {
   const { number } = useParams<{ number: string }>()
   const params = useServiceParams()
   const { data, isLoading, error, mutate, total } = getSheetsService(number, params)
-
   return {
     data,
     isLoading,
