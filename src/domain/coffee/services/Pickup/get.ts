@@ -1,3 +1,5 @@
+import { type AxiosResponse } from 'axios'
+import api from '../../../../lib/config/api'
 import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
@@ -12,5 +14,17 @@ export function getPickupOrders(params?: string): GetServiceResponse<PickupCoffe
     isLoading,
     total: data?.total,
     mutate,
+  }
+}
+
+export async function getPickupPdf(): Promise<void> {
+  try {
+    const response: AxiosResponse<Blob> = await api.get('/orders/pdf', {
+      responseType: 'blob',
+    })
+    const url = URL.createObjectURL(response.data)
+    window.open(url, '_blank')
+  } catch (error) {
+    console.error(error)
   }
 }
