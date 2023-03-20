@@ -1,4 +1,4 @@
-import { Avatar, HStack, Td, Tr } from '@chakra-ui/react'
+import { Avatar, HStack, Link as StyledLink, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
@@ -29,7 +29,9 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         overflow='hidden'
         data-cy='table-cell-client-name'
       >
-        {client.name}
+        <StyledLink as={Link} to={Routes.clientPage(client.id)}>
+          {client.name}
+        </StyledLink>
       </Td>
       <Td title={client.nickname} data-cy='table-cell-client-nickname'>
         {client.nickname}
