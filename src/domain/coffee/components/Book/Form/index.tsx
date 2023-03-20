@@ -8,6 +8,7 @@ import {
   ModalOverlay,
   Stack,
 } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import { type BookFormValues } from '../../../types/model/book'
 import useBookForm from './useBookForm'
@@ -18,7 +19,14 @@ type Props = {
 }
 export default function BookForm({ initialValues, onSubmit }: Props): JSX.Element {
   const { form, closeModal } = useBookForm({ initialValues })
-  const { handleSubmit, formState } = form
+  const { handleSubmit, formState, reset } = form
+
+  useEffect(() => {
+    if (initialValues) {
+      reset(initialValues) // Need to reset the form when initialValues change
+    }
+  }, [initialValues, reset])
+
   return (
     <Modal isCentered isOpen onClose={closeModal}>
       <ModalOverlay />

@@ -5,12 +5,12 @@ type Props = {
   refetch: () => void
 }
 export default function CreateBookView({ refetch }: Props): JSX.Element {
-  const { handleCreateBook } = useCreateBookView({ refetch })
+  const { handleCreateBook, lastBookNumber } = useCreateBookView({ refetch })
   return (
     <BookForm
       onSubmit={handleCreateBook}
       initialValues={{
-        number: 12, // TODO: get last number from API
+        number: lastBookNumber + 1,
       }}
     />
   )
