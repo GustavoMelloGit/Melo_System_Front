@@ -2,6 +2,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
+import SheetsTable from '../../../components/Sheets/List'
 
 export default function BookDetailsView(): JSX.Element {
   const { number } = useParams<{ number: string }>()
@@ -21,6 +22,7 @@ export default function BookDetailsView(): JSX.Element {
           },
         ]}
       />
+      <SheetsTable data={[]} isLoading={false} totalBooks={0} />
     </Page>
   )
 }

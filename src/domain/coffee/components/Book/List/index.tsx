@@ -18,7 +18,7 @@ export default function CoffeeBookTable({ data, isLoading, totalBooks }: Props):
         columns: headerColumns,
       }}
       rows={{
-        isLoading: false,
+        isLoading,
         dataLength: data?.length ?? 0,
         noDataMessage: 'Nenhum talão encontrado',
       }}
