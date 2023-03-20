@@ -3,7 +3,7 @@ import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 
-export default function CoffeeBookView(): JSX.Element {
+export default function BookDetailsView(): JSX.Element {
   const { number } = useParams<{ number: string }>()
   if (!number) return <Navigate to={Routes.books} />
 

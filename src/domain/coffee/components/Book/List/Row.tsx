@@ -1,9 +1,9 @@
 import { HStack, Td, Tr } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import { Routes } from '../../../../../../lib/routes'
-import { dateToFormat } from '../../../../../../lib/utils/formatters'
-import TableLinkToButton from '../../../../../../shared/components/table/buttons/LinkTo'
-import { type BookModel } from '../../../../types/model/book'
+import { Routes } from '../../../../../lib/routes'
+import { dateToFormat } from '../../../../../lib/utils/formatters'
+import TableLinkToButton from '../../../../../shared/components/table/buttons/LinkTo'
+import { type BookModel } from '../../../types/model/book'
 
 export type Props = {
   book: BookModel

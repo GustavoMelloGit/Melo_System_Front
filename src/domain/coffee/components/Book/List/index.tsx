@@ -1,9 +1,9 @@
-import Table from '../../../../../../shared/components/table/Table'
+import Table from '../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
-} from '../../../../../../shared/components/table/types'
-import { type BookModel } from '../../../../types/model/book'
+} from '../../../../../shared/components/table/types'
+import { type BookModel } from '../../../types/model/book'
 import BookTableRow from './Row'
 
 type Props = {
