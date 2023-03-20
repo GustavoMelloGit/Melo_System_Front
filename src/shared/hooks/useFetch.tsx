@@ -1,7 +1,9 @@
 import useSWR, { type KeyedMutator } from 'swr'
 import api from '../../lib/config/api'
 
-export default function useFetch<Data = any, Error = any>(url: string): UseFetch<Data, Error> {
+export default function useFetch<Data = any, Error = any>(
+  url: string | null,
+): UseFetch<Data, Error> {
   const { data, error, isLoading, mutate } = useSWR<Data, Error>(url, async (url) => {
     const response = await api.get(url)
 

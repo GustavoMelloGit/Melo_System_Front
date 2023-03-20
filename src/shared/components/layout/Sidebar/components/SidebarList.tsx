@@ -1,7 +1,7 @@
 import { Box, List, VStack } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
-import { BsTruck } from 'react-icons/bs'
+import { BsCoin, BsTruck } from 'react-icons/bs'
 import { TbPlant } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
@@ -32,6 +32,10 @@ const listItem: Record<
   [Routes.coffeePickups]: {
     label: 'Cafés a buscar',
     icon: <BsTruck />,
+  },
+  [Routes.books]: {
+    label: 'Lançamento',
+    icon: <BsCoin />,
   },
 }
 

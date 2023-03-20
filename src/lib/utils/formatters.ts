@@ -1,3 +1,5 @@
+import { format } from 'date-fns'
+
 /**
  * Format date values from yyyy-MM-dd to dd/mm/yyyy or dd/mm/yyyy hh:mm format.
  * @param {string} unformattedDate The date to be formatted.
@@ -27,4 +29,13 @@ export function formatCurrency(value: number | undefined): string {
   return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
     value ? value / 100 : 0,
   )
+}
+
+/**
+ * Format ISO date string to desired format.
+ * @param {string} date The date to be formatted.
+ * @param {string} outFormat The desired format.
+ */
+export function dateToFormat(date: string, outFormat: string): string {
+  return format(new Date(date), outFormat)
 }

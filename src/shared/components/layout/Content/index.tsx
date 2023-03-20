@@ -1,7 +1,7 @@
 import { Box, Container } from '@chakra-ui/react'
 import { type PropsWithChildren } from 'react'
 import useLayoutContext from '../../../hooks/useLayoutContext'
-import ToggleSidebarButton from '../../buttons/ToggleSidebarButton'
+import ToggleSidebarButton from '../Sidebar/components/ToggleSidebarButton'
 
 export default function ContentWrapper({ children }: PropsWithChildren): JSX.Element {
   const {

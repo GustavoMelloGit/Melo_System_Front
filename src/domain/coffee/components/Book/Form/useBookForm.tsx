@@ -23,12 +23,13 @@ export default function useBookForm({ initialValues }: Props): UseBookForm {
 
 const validationSchema = yup.object().shape({
   number: yup
-    .string()
-    .required(validationErrors.bookNumberIsRequired)
+    .number()
+    .typeError(validationErrors.bookNumberIsInvalid)
+    .required(validationErrors.bookNumberIsInvalid)
     .test({
       name: 'number',
-      message: validationErrors.numberMustBeInteger,
-      test: (value) => Number.isInteger(value),
+      message: validationErrors.bookNumberIsInvalid,
+      test: (value) => Number.isSafeInteger(value),
     }),
 })
 

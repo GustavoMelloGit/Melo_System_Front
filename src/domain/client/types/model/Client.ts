@@ -1,3 +1,5 @@
+import { type Timestamp } from '../../../../shared/types/utils/model'
+
 export type Address = {
   city?: string
   zipCode?: string
@@ -44,7 +46,4 @@ export type ClientModel = {
   address: Address
   contact: ClientContact
   description?: string
-  createdAt: string
-  updatedAt: string
-  deletedAt?: string
-}
+} & Timestamp
