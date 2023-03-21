@@ -8,10 +8,8 @@ import {
   type TextareaProps,
 } from '@chakra-ui/react'
 import {
-  type DeepMap,
-  type FieldError,
-  type FieldValues,
   get,
+  type FieldValues,
   type Path,
   type RegisterOptions,
   type UseFormRegister,
@@ -21,7 +19,7 @@ export type RHFTextFieldProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
   rules?: RegisterOptions
   register: UseFormRegister<TFormValues>
-  errors?: Partial<DeepMap<TFormValues, FieldError>>
+  errors?: unknown
   leftIcon?: React.ReactNode
   label?: string
 } & Omit<TextareaProps, 'name'>

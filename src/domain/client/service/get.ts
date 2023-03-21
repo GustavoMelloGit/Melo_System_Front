@@ -1,11 +1,15 @@
+import { type SWRConfiguration } from 'swr'
 import { errorHandler } from '../../../lib/utils/error'
 import useFetch from '../../../shared/hooks/useFetch'
 import { type GetServiceResponse } from '../../../shared/types/utils/service'
 import { type ClientModel } from '../types/model/Client'
 import { type TransactionModel } from '../types/model/Transaction'
 
-export function getClientsService(params?: string): GetServiceResponse<ClientModel[]> {
-  const { data, error, isLoading } = useFetch(`/clients?${params ?? ''}`)
+export function getClientsService(
+  params?: string,
+  config?: SWRConfiguration,
+): GetServiceResponse<ClientModel[]> {
+  const { data, error, isLoading } = useFetch(`/clients?${params ?? ''}`, config)
 
   return {
     data: data?.data,

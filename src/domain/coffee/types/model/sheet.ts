@@ -18,13 +18,12 @@ export type SheetModel = {
   Responsible
 
 export type SheetFormValues = {
+  isDraft: boolean
   weighingDate: string
   number: number
   courier: string
-  coffeeDetails: {
-    type: string
-    moisture: number
-  }
+  coffeeDetails: CoffeeDetails
+  clientId: string
   lines: Array<{
     weight: number
     bags: number

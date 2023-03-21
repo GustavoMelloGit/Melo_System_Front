@@ -1,0 +1,90 @@
+import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
+import { type UseFormRegister } from 'react-hook-form'
+import RHFField from '../../../../../shared/components/inputs/RHFField'
+import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
+import { type SheetFormValues } from '../../../types/model/sheet'
+
+type Props = {
+  register: UseFormRegister<SheetFormValues>
+  errors: unknown
+}
+export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX.Element {
+  return (
+    <Stack spacing={4}>
+      <Heading as='h2' size='lg'>
+        Resultado de prova
+      </Heading>
+      <Divider />
+      <Grid templateColumns='repeat(auto-fit, minmax(130px, 1fr))' gap={4} mb={4}>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.moisture'
+            register={register}
+            label='Umidade'
+            placeholder='Ex.: 12'
+            type='number'
+            inputMode='numeric'
+            errors={errors}
+            rightIcon='%'
+          />
+        </GridItem>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.sieve'
+            register={register}
+            label='Peneira 17 / 18'
+            placeholder='Ex.: 10'
+            type='number'
+            inputMode='numeric'
+            errors={errors}
+            rightIcon='%'
+          />
+        </GridItem>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.picking'
+            register={register}
+            label='Cata'
+            placeholder='Ex.: 25'
+            type='number'
+            inputMode='numeric'
+            errors={errors}
+            rightIcon='%'
+          />
+        </GridItem>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.foulness'
+            register={register}
+            label='Impureza'
+            placeholder='Ex.: 5'
+            type='number'
+            inputMode='numeric'
+            errors={errors}
+            rightIcon='%'
+          />
+        </GridItem>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.drilled'
+            register={register}
+            label='Broca'
+            placeholder='Ex.: 5'
+            type='number'
+            inputMode='numeric'
+            errors={errors}
+            rightIcon='%'
+          />
+        </GridItem>
+      </Grid>
+
+      <RHFTextField<SheetFormValues>
+        name='coffeeDetails.description'
+        register={register}
+        label='Descrição'
+        placeholder='Ex.: Café de excelente qualidade'
+        errors={errors}
+      />
+    </Stack>
+  )
+}

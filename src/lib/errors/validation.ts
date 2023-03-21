@@ -25,6 +25,10 @@ const validationErrors = {
   addressIsRequired: 'Por favor, informe o endereço',
   bookNumberIsRequired: 'Por favor, informe o número do talão',
   bookNumberIsInvalid: 'Por favor, informe um número de talão válido',
+  sheetNumberIsRequired: 'Por favor, informe o número da folha',
+  sheetNumberIsInvalid: 'Por favor, informe um número de folha válido',
+  courierIsRequired: 'Por favor, informe o nome do transportador',
+  clientIsRequired: 'Por favor, informe o nome do cliente',
 }
 
 export default validationErrors
