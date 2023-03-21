@@ -25,14 +25,8 @@ export type SheetFormValues = {
     type: string
     moisture: number
   }
-  lines: [
-    {
-      weight: number
-      bags: number
-    },
-    {
-      weight: number
-      bags: number
-    },
-  ]
+  lines: Array<{
+    weight: number
+    bags: number
+  }>
 }

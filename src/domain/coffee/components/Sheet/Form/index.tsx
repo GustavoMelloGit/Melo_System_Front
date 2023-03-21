@@ -27,14 +27,20 @@ export default function SheetForm({ initialValues, onSubmit }: Props): JSX.Eleme
         <RHFField<SheetFormValues>
           name='weighingDate'
           register={register}
-          label='Número da folha'
-          placeholder='Ex.: 12'
+          label='Data da pesagem'
           type='date'
           inputMode='numeric'
           errors={formState.errors}
         />
+        <RHFField<SheetFormValues>
+          name='courier'
+          register={register}
+          label='Nome do motorista'
+          placeholder='Ex.: João da Silva'
+          errors={formState.errors}
+        />
         <Button type='submit' isLoading={formState.isSubmitting}>
-          Salvar
+          Criar
         </Button>
       </Stack>
     </form>
