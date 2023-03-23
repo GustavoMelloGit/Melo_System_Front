@@ -5,9 +5,11 @@ import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SheetsTable from '../../../components/Sheet/List'
+import useBookDetailsView from './useView'
 
 export default function BookDetailsView(): JSX.Element {
   const { number } = useParams<{ number: string }>()
+  const { data, isLoading, total } = useBookDetailsView()
   if (!number) return <Navigate to={Routes.books} />
 
   return (
@@ -27,16 +29,17 @@ export default function BookDetailsView(): JSX.Element {
           <Link to={Routes.createSheet(number)} data-cy='create-sheet-link'>
             <IconButton
               as='span'
-              aria-label='Criar talão'
+              aria-label='Criar folha'
+              title='Criar folha'
               icon={<IoAddOutline size={22} />}
               colorScheme='blue'
               variant='outline'
-              data-cy='create-book-button'
+              data-cy='create-sheet-button'
             />
           </Link>
         }
       />
-      <SheetsTable data={[]} isLoading={false} totalBooks={0} />
+      <SheetsTable data={data} isLoading={isLoading} totalBooks={total} />
     </Page>
   )
 }

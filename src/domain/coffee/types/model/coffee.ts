@@ -19,3 +19,16 @@ export type CoffeeTypes =
   | 'duro'
   | 'despolpado'
   | 'escolha'
+
+export enum CoffeeTypesEnum {
+  rio_velho = 'Rio Velho',
+  rio_zona = 'Rio Zona',
+  rio = 'Rio',
+  riado_rio = 'Riado Rio',
+  riado = 'Riado',
+  duro_riado_rio = 'Duro Riado Rio',
+  duro_riado = 'Duro Riado',
+  duro = 'Duro',
+  despolpado = 'Despolpado',
+  escolha = 'Escolha',
+}

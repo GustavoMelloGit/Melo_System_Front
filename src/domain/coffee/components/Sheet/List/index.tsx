@@ -3,7 +3,7 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
-import { type SheetModel } from '../../../types/model/book'
+import { type SheetModel } from '../../../types/model/sheet'
 import SheetsTableRow from './Row'
 
 type Props = {
@@ -47,8 +47,17 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
   {
-    id: 'createdAt',
-    label: 'Data de criação',
+    id: 'clientName',
+    label: 'Cliente',
+  },
+  {
+    id: 'courier',
+    label: 'Motorista',
+    isSortable: true,
+  },
+  {
+    id: 'weighingDate',
+    label: 'Data de pesagem',
     isSortable: true,
   },
   {

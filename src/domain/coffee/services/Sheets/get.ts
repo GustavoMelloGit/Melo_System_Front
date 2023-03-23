@@ -1,7 +1,7 @@
 import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
-import { type SheetModel } from '../../types/model/book'
+import { type SheetModel } from '../../types/model/sheet'
 
 export function getSheetsService(
   bookNumber: string | number | undefined,

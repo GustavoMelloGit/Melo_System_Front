@@ -1,5 +1,4 @@
 import { Divider, Grid, GridItem, Heading, IconButton, Stack } from '@chakra-ui/react'
-import { useEffect } from 'react'
 import { useFieldArray, type Control, type UseFormRegister } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import { IoMdAdd, IoMdClose } from 'react-icons/io'
@@ -12,7 +11,7 @@ type Props = {
   errors: unknown
 }
 export default function SheetFormLines({ control, register, errors }: Props): JSX.Element {
-  const { fields, append, remove, insert } = useFieldArray({
+  const { fields, remove, insert } = useFieldArray({
     control,
     name: 'lines',
   })
@@ -25,12 +24,6 @@ export default function SheetFormLines({ control, register, errors }: Props): JS
   function handleAddField(index: number): void {
     insert(index + 1, { weight: 0, bags: 0 })
   }
-
-  useEffect(() => {
-    if (fields.length === 0) {
-      append({ weight: 0, bags: 0 })
-    }
-  }, [])
 
   return (
     <Stack spacing={4}>

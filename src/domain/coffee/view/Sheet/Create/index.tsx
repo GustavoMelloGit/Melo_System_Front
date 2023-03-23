@@ -38,7 +38,23 @@ export default function CreateSheetView(): JSX.Element {
           },
         ]}
       />
-      <SheetForm onSubmit={handleCreateSheet} />
+      <SheetForm
+        onSubmit={handleCreateSheet}
+        initialValues={
+          {
+            weighingDate: new Date().toISOString().split('T')[0],
+            coffeeDetails: {
+              weight: 0,
+              picking: 0,
+              foulness: 0,
+              drilled: 0,
+              moisture: 0,
+              sieve: 0,
+            },
+            lines: [{ bags: 0, weight: 0 }],
+          } as SheetFormValues
+        }
+      />
     </Page>
   )
 }

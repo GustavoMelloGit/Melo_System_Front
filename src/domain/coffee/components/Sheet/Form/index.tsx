@@ -71,19 +71,20 @@ const validationSchema = yup.object().shape({
   weighingDate: yup.string().required(validationErrors.dateIsRequired),
   courier: yup.string().required(validationErrors.courierIsRequired),
   clientId: yup.string().required(validationErrors.clientIsRequired),
-  // coffeeDetails: yup.object().shape({
-  //   moisture: yup.number(),
-  //   sieve: yup.number(),
-  //   picking: yup.number(),
-  //   foulness: yup.number(),
-  //   drilled: yup.number(),
-  //   description: yup.string(),
-  //   weight: yup.number(),
-  // }),
+  coffeeType: yup.string().required(validationErrors.coffeeTypeIsRequired),
   lines: yup.array().of(
     yup.object().shape({
       weight: yup.number().required(),
       bags: yup.number().required(),
     }),
   ),
+  // coffeeDetails: yup.object().shape({
+  //   moisture: yup.number(),
+  //   foulness: yup.number(),
+  //   sieve: yup.number(),
+  //   picking: yup.number(),
+  //   drilled: yup.number(),
+  //   description: yup.string(),
+  //   weight: yup.number(),
+  // }),
 })

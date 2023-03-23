@@ -1,7 +1,10 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
+import { capitalCase } from 'change-case'
 import { type UseFormRegister } from 'react-hook-form'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
+import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
+import { CoffeeTypesEnum } from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
@@ -15,7 +18,18 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
         Resultado de prova
       </Heading>
       <Divider />
-      <Grid templateColumns='repeat(auto-fit, minmax(130px, 1fr))' gap={4} mb={4}>
+      <Grid templateColumns='repeat(auto-fit, minmax(160px, 1fr))' gap={4} mb={4}>
+        <GridItem>
+          <RHFSelectField<SheetFormValues>
+            name='coffeeType'
+            register={register}
+            label='Bebida'
+            options={Object.keys(CoffeeTypesEnum).map((value) => ({
+              value,
+              label: capitalCase(value),
+            }))}
+          />
+        </GridItem>
         <GridItem>
           <RHFField<SheetFormValues>
             name='coffeeDetails.moisture'

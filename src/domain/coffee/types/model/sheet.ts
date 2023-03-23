@@ -9,7 +9,7 @@ export type LineModel = {
 
 export type SheetModel = {
   number: number
-  weighingDate: Date
+  weighingDate: string
   clientId: string
   coffeeDetails: CoffeeDetails
   courier: string
@@ -23,6 +23,7 @@ export type SheetFormValues = {
   number: number
   courier: string
   coffeeDetails: CoffeeDetails
+  coffeeType: string
   clientId: string
   lines: Array<{
     weight: number

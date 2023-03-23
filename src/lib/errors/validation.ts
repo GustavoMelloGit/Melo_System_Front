@@ -29,6 +29,7 @@ const validationErrors = {
   sheetNumberIsInvalid: 'Por favor, informe um número de folha válido',
   courierIsRequired: 'Por favor, informe o nome do transportador',
   clientIsRequired: 'Por favor, informe o nome do cliente',
+  coffeeTypeIsRequired: 'Por favor, informe o tipo de café',
 }
 
 export default validationErrors
