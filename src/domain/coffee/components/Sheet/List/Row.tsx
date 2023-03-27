@@ -1,4 +1,6 @@
 import { Badge, Flex, Td, Tr } from '@chakra-ui/react'
+import { Link, Navigate, useParams } from 'react-router-dom'
+import { Routes } from '../../../../../lib/routes'
 import { formatDate } from '../../../../../lib/utils/formatters'
 import TableButton from '../../../../../shared/components/table/buttons'
 import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
@@ -9,6 +11,9 @@ export type Props = {
   onClickDelete?: () => Promise<void> | void
 }
 export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Element {
+  const { number } = useParams<{ number: string }>()
+  if (!number) return <Navigate to={Routes.books} replace />
+
   return (
     <Tr>
       <Td>{sheet.number}</Td>
@@ -23,7 +28,9 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
       <Td>
         {sheet.isDraft && (
           <Flex>
-            <TableEditButton aria-label='Editar folha' colorScheme='blue' />
+            <Link to={Routes.updateSheet(number, sheet.number)}>
+              <TableEditButton as='span' aria-label='Editar folha' colorScheme='blue' />
+            </Link>
             <TableButton
               aria-label='Excluir folha'
               onClick={onClickDelete}
