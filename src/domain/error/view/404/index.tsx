@@ -3,7 +3,7 @@ import ImageTest from '../../assets/lost-image.svg'
 import useNotFoundPage from './useView'
 
 export default function NotFoundPage(): JSX.Element {
-  const { handleGoHome } = useNotFoundPage()
+  const { handleGoBack } = useNotFoundPage()
   return (
     <Flex minW='100vw' minH='100vh'>
       <Center flex={1}>
@@ -14,7 +14,7 @@ export default function NotFoundPage(): JSX.Element {
               Página não encontrada
             </Heading>
           </Box>
-          <Button w='full' onClick={handleGoHome}>
+          <Button w='full' onClick={handleGoBack}>
             Voltar
           </Button>
         </VStack>

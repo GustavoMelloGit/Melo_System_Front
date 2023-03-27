@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom'
-import { Routes } from '../../../../lib/routes'
-import { type NotFoundView } from '../../types/view/404'
 
-export default function useNotFoundPage(): NotFoundView {
+export default function useNotFoundPage(): UseNotFoundPage {
   const navigate = useNavigate()
 
-  const handleGoHome = (): void => {
-    navigate(Routes.home)
+  const handleGoBack = (): void => {
+    navigate(-1)
   }
 
   return {
-    handleGoHome,
+    handleGoBack,
   }
+}
+
+type UseNotFoundPage = {
+  handleGoBack: () => void
 }
