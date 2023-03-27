@@ -9,13 +9,13 @@ import useBookDetailsView from './useView'
 
 export default function BookDetailsView(): JSX.Element {
   const { number } = useParams<{ number: string }>()
-  const { data, isLoading, total } = useBookDetailsView()
+  const { data, isLoading, total, handleDeleteSheet } = useBookDetailsView()
   if (!number) return <Navigate to={Routes.books} />
 
   return (
     <Page title={`Talão ${number}`} data-cy='coffee-entry-page'>
       <HeaderBreadcrumbs
-        heading='Criar lançamento'
+        heading='Lista de folhas'
         links={[
           {
             label: 'Talões',
@@ -39,7 +39,12 @@ export default function BookDetailsView(): JSX.Element {
           </Link>
         }
       />
-      <SheetsTable data={data} isLoading={isLoading} totalBooks={total} />
+      <SheetsTable
+        onDeleteSheet={handleDeleteSheet}
+        data={data}
+        isLoading={isLoading}
+        totalBooks={total}
+      />
     </Page>
   )
 }

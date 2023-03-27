@@ -1,5 +1,6 @@
 import { Button, Card, CardBody, CardFooter, Flex, Stack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
@@ -11,19 +12,37 @@ import SheetFormSheetDetails from './SheetDetails'
 type Props = {
   initialValues?: SheetFormValues
   onSubmit: (values: SheetFormValues) => Promise<void>
+  variant?: 'create' | 'edit'
 }
-export default function SheetForm({ initialValues, onSubmit }: Props): JSX.Element {
-  const { register, handleSubmit, formState, control, setValue } = useForm<SheetFormValues>({
-    defaultValues: initialValues,
+export default function SheetForm({
+  initialValues,
+  onSubmit,
+  variant = 'create',
+}: Props): JSX.Element {
+  const { register, handleSubmit, formState, control, setValue, reset } = useForm<SheetFormValues>({
     resolver: yupResolver(validationSchema),
   })
 
+  const submitFormHandler = handleSubmit(async (values) => {
+    try {
+      await onSubmit(values)
+      reset()
+    } catch {}
+  })
+
+  useEffect(() => {
+    if (initialValues) {
+      reset(initialValues)
+    }
+  }, [initialValues])
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={submitFormHandler}>
       <Card>
         <CardBody>
           <Stack spacing={12}>
             <SheetFormSheetDetails
+              variant={variant}
               control={control}
               register={register}
               errors={formState.errors}
@@ -54,7 +73,7 @@ export default function SheetForm({ initialValues, onSubmit }: Props): JSX.Eleme
               flex={1}
               isLoading={formState.isSubmitting}
             >
-              Criar e creditar
+              Salvar e Creditar
             </Button>
           </Flex>
         </CardFooter>

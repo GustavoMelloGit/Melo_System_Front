@@ -16,10 +16,11 @@ export default function CreateSheetView(): JSX.Element {
     const { error } = await createSheetService(values, clientId, bookNumber)
     if (error) {
       toast.error(error)
-      return
+      throw new Error(error)
     }
     toast.success('Folha criada com sucesso')
   }
+
   return (
     <Page title='Adicionar Folha' data-cy='create-sheet-page'>
       <HeaderBreadcrumbs

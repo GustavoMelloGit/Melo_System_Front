@@ -10,8 +10,14 @@ type Props = {
   data: SheetModel[] | undefined
   totalBooks: number
   isLoading: boolean
+  onDeleteSheet: (sheet: SheetModel) => Promise<void>
 }
-export default function SheetsTable({ data, isLoading, totalBooks }: Props): JSX.Element {
+export default function SheetsTable({
+  data,
+  isLoading,
+  totalBooks,
+  onDeleteSheet,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -34,7 +40,11 @@ export default function SheetsTable({ data, isLoading, totalBooks }: Props): JSX
       }}
     >
       {data?.map((sheet) => (
-        <SheetsTableRow key={sheet.number} sheet={sheet} />
+        <SheetsTableRow
+          key={sheet.number}
+          sheet={sheet}
+          onClickDelete={onDeleteSheet.bind(null, sheet)}
+        />
       ))}
     </Table>
   )
@@ -45,6 +55,7 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'number',
     label: 'Número',
     isSortable: true,
+    maxW: 100,
   },
   {
     id: 'clientName',
@@ -59,6 +70,11 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'weighingDate',
     label: 'Data de pesagem',
     isSortable: true,
+  },
+  {
+    id: 'isDraft',
+    label: 'Status',
+    align: 'center',
   },
   {
     id: 'actions',

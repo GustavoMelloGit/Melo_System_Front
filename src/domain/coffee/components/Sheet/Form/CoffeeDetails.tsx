@@ -39,6 +39,9 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             type='number'
             inputMode='numeric'
             errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
             rightIcon='%'
           />
         </GridItem>
@@ -51,6 +54,9 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             type='number'
             inputMode='numeric'
             errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
             rightIcon='%'
           />
         </GridItem>
@@ -63,6 +69,9 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             type='number'
             inputMode='numeric'
             errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
             rightIcon='%'
           />
         </GridItem>
@@ -75,6 +84,9 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             type='number'
             inputMode='numeric'
             errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
             rightIcon='%'
           />
         </GridItem>
@@ -87,6 +99,9 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             type='number'
             inputMode='numeric'
             errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
             rightIcon='%'
           />
         </GridItem>

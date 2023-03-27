@@ -11,7 +11,7 @@ export default function ContentWrapper({ children }: PropsWithChildren): JSX.Ele
     <Box display='flex' flexDir='column' w='full' flex={1}>
       <Container
         position='relative'
-        maxW='container.lg'
+        maxW={isOpen ? 'container.lg' : 'container.xl'}
         flex={1}
         display='flex'
         flexDir='column'

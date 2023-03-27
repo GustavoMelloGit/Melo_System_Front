@@ -10,8 +10,14 @@ type Props = {
   register: UseFormRegister<SheetFormValues>
   control: Control<SheetFormValues>
   errors: unknown
+  variant: 'create' | 'edit'
 }
-export default function SheetFormSheetDetails({ register, errors, control }: Props): JSX.Element {
+export default function SheetFormSheetDetails({
+  register,
+  errors,
+  control,
+  variant,
+}: Props): JSX.Element {
   const clientName = useWatch({
     control,
     name: 'clientId',
@@ -40,6 +46,7 @@ export default function SheetFormSheetDetails({ register, errors, control }: Pro
             placeholder='Nome do cliente'
             errors={errors}
             data-cy='clientName-input'
+            isDisabled={variant === 'edit'}
             {...(isLoading && {
               rightIcon: <SpinLoader />,
             })}
@@ -63,6 +70,7 @@ export default function SheetFormSheetDetails({ register, errors, control }: Pro
             type='number'
             inputMode='numeric'
             errors={errors}
+            isDisabled={variant === 'edit'}
           />
         </GridItem>
         <GridItem>

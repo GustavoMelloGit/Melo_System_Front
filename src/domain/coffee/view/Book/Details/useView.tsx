@@ -1,19 +1,34 @@
+import { toast } from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
-import { type KeyedMutator } from 'swr'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
+import { deleteSheetService } from '../../../services/Sheets/delete'
 import { getSheetsService } from '../../../services/Sheets/get'
 import { type SheetModel } from '../../../types/model/sheet'
 
 export default function useBookDetailsView(): UseBookDetailsView {
   const { number } = useParams<{ number: string }>()
+
   const params = useServiceParams()
-  const { data, isLoading, error, mutate, total } = getSheetsService(number, params)
+  const { data, isLoading, error, total, mutate } = getSheetsService(number, params)
+
+  async function handleDeleteSheet(sheet: SheetModel): Promise<void> {
+    const { error } = await deleteSheetService(sheet.id)
+
+    if (error) {
+      toast.error(error)
+      return
+    }
+
+    await mutate()
+    toast.success('Folha excluída com sucesso!')
+  }
+
   return {
     data,
     isLoading,
     error,
-    mutate,
     total: total ?? 0,
+    handleDeleteSheet,
   }
 }
 
@@ -21,6 +36,6 @@ type UseBookDetailsView = {
   data: SheetModel[] | undefined
   isLoading: boolean
   error: string | undefined
-  mutate: KeyedMutator<SheetModel[]> | undefined
   total: number
+  handleDeleteSheet: (sheet: SheetModel) => Promise<void>
 }
