@@ -41,6 +41,8 @@ const listItem: Record<
 
 export default function SidebarList(): JSX.Element {
   const currentPathname = useLocation().pathname
+  const basePath = currentPathname.split('/')[1]
+
   const {
     sidebar: { close },
   } = useLayoutContext()
@@ -64,7 +66,7 @@ export default function SidebarList(): JSX.Element {
                 to={route.path}
                 label={listItem[route.path].label}
                 icon={listItem[route.path].icon}
-                isActive={currentPathname === route.path}
+                isActive={route.path.split('/')[1] === basePath}
               />
             ),
         )}

@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^2.9.10",
     "apexcharts": "^3.36.3",
     "axios": "^1.2.6",
+    "change-case": "^4.1.2",
     "compressorjs": "^1.1.1",
     "date-fns": "^2.29.3",
     "firebase": "^9.17.0",

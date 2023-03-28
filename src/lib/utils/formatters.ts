@@ -8,11 +8,11 @@ import { format } from 'date-fns'
  * formatDate('2021-01-01') // '01/01/2021'
  * formatDate('2021-01-01T12:00:00') // '01/01/2021 12:00'
  */
-export function formatDate(unformattedDate: string): string {
+export function formatDate(unformattedDate: string, showTime: boolean = true): string {
   const [date, time] = unformattedDate.split('T')
   const [year, month, day] = date.split('-')
   const dateString = `${day}/${month}/${year}`
-  if (time) {
+  if (time && showTime) {
     const [hour, minute] = time.split(':').map(Number)
     return `${dateString} ${hour}:${minute}`
   }
@@ -36,6 +36,6 @@ export function formatCurrency(value: number | undefined): string {
  * @param {string} date The date to be formatted.
  * @param {string} outFormat The desired format.
  */
-export function dateToFormat(date: string, outFormat: string): string {
+export function dateToFormat(date: string, outFormat: string = 'dd/MM/yyyy'): string {
   return format(new Date(date), outFormat)
 }

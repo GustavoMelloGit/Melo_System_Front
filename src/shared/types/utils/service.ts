@@ -22,10 +22,17 @@ export type PutServiceResponse<T> = Promise<
     }
 >
 
+export type DeleteServiceResponse = Promise<{
+  error: string | null
+}>
+
 export type GetServiceResponse<T> = {
   data?: T
   error?: string
   isLoading: boolean
   total?: number
-  mutate?: KeyedMutator<T>
+}
+
+export type GetServiceSwrResponse<T> = GetServiceResponse<T> & {
+  mutate: KeyedMutator<T>
 }

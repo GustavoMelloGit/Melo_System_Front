@@ -4,6 +4,7 @@ import { Routes } from '../../../lib/routes'
 const CoffeePickupView = React.lazy(async () => import('../view/Pickup'))
 const CoffeeBookListView = React.lazy(async () => import('../view/Book/List'))
 const CoffeeBookDetailsView = React.lazy(async () => import('../view/Book/Details'))
+const CreateSheetView = React.lazy(async () => import('../view/Sheet/Create'))
 
 const coffeeRoutes: RouteObject[] = [
   {
@@ -17,6 +18,10 @@ const coffeeRoutes: RouteObject[] = [
   {
     path: Routes.bookPage(':number'),
     element: <CoffeeBookDetailsView />,
+  },
+  {
+    path: Routes.createSheet(':bookNumber'),
+    element: <CreateSheetView />,
   },
 ]
 
