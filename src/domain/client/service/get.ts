@@ -1,7 +1,10 @@
 import { type SWRConfiguration } from 'swr'
 import { errorHandler } from '../../../lib/utils/error'
 import useFetch from '../../../shared/hooks/useFetch'
-import { type GetServiceResponse } from '../../../shared/types/utils/service'
+import {
+  type GetServiceResponse,
+  type GetServiceSwrResponse,
+} from '../../../shared/types/utils/service'
 import { type ClientModel } from '../types/model/Client'
 import { type TransactionModel } from '../types/model/Transaction'
 
@@ -19,7 +22,7 @@ export function getClientsService(
   }
 }
 
-export function getClientService(id: string): GetServiceResponse<ClientModel> {
+export function getClientService(id: string): GetServiceSwrResponse<ClientModel> {
   const { data, error, isLoading, mutate } = useFetch(`/clients/${id}`)
 
   return {
@@ -33,7 +36,7 @@ export function getClientService(id: string): GetServiceResponse<ClientModel> {
 export function getTransactionsService(
   clientId: string,
   params?: string,
-): GetServiceResponse<TransactionModel[]> {
+): GetServiceSwrResponse<TransactionModel[]> {
   const { data, error, isLoading, mutate } = useFetch(
     `/transactions/currency/${clientId}?${params ?? ''}`,
   )

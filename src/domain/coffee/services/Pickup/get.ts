@@ -2,10 +2,12 @@ import { type AxiosResponse } from 'axios'
 import api from '../../../../lib/config/api'
 import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
-import { type GetServiceResponse } from '../../../../shared/types/utils/service'
+import { type GetServiceSwrResponse } from '../../../../shared/types/utils/service'
 import { type PickupCoffeeModel } from '../../types/model/pickup'
 
-export function getPickupOrdersService(params?: string): GetServiceResponse<PickupCoffeeModel[]> {
+export function getPickupOrdersService(
+  params?: string,
+): GetServiceSwrResponse<PickupCoffeeModel[]> {
   const { data, error, isLoading, mutate } = useFetch(`/orders?${params ?? ''}`)
 
   return {
