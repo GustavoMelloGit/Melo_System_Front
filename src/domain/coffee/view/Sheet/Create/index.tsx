@@ -1,25 +1,14 @@
-import { toast } from 'react-hot-toast'
 import { Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SheetForm from '../../../components/Sheet/Form'
-import { createSheetService } from '../../../services/Sheets'
-import { type SheetFormValues } from '../../../types/model/sheet'
+import useCreateSheetView from './useView'
 
 export default function CreateSheetView(): JSX.Element {
   const { bookNumber } = useParams<{ bookNumber: string }>()
+  const { createSheet, initialValues } = useCreateSheetView({ bookNumber })
   if (!bookNumber) return <Navigate to={Routes.books} />
-
-  async function handleCreateSheet({ clientId, ...values }: SheetFormValues): Promise<void> {
-    if (!bookNumber) return
-    const { error } = await createSheetService(values, clientId, bookNumber)
-    if (error) {
-      toast.error(error)
-      throw new Error(error)
-    }
-    toast.success('Folha criada com sucesso')
-  }
 
   return (
     <Page title='Adicionar Folha' data-cy='create-sheet-page'>
@@ -39,23 +28,7 @@ export default function CreateSheetView(): JSX.Element {
           },
         ]}
       />
-      <SheetForm
-        onSubmit={handleCreateSheet}
-        initialValues={
-          {
-            weighingDate: new Date().toISOString().split('T')[0],
-            coffeeDetails: {
-              weight: 0,
-              picking: 0,
-              foulness: 0,
-              drilled: 0,
-              moisture: 0,
-              sieve: 0,
-            },
-            lines: [{ bags: 0, weight: 0 }],
-          } as SheetFormValues
-        }
-      />
+      <SheetForm onSubmit={createSheet} initialValues={initialValues} />
     </Page>
   )
 }
