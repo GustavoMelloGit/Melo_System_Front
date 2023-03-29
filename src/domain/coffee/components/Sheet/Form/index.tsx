@@ -97,13 +97,27 @@ const validationSchema = yup.object().shape({
       bags: yup.number().required(),
     }),
   ),
-  // coffeeDetails: yup.object().shape({
-  //   moisture: yup.number(),
-  //   foulness: yup.number(),
-  //   sieve: yup.number(),
-  //   picking: yup.number(),
-  //   drilled: yup.number(),
-  //   description: yup.string(),
-  //   weight: yup.number(),
-  // }),
+  coffeeDetails: yup.object().shape({
+    moisture: yup
+      .string()
+      .min(0, validationErrors.minIsInvalid(0))
+      .max(100, validationErrors.maxIsInvalid(100)),
+    foulness: yup
+      .string()
+      .min(0, validationErrors.minIsInvalid(0))
+      .max(100, validationErrors.maxIsInvalid(100)),
+    sieve: yup
+      .string()
+      .min(0, validationErrors.minIsInvalid(0))
+      .max(100, validationErrors.maxIsInvalid(100)),
+    picking: yup
+      .string()
+      .min(0, validationErrors.minIsInvalid(0))
+      .max(100, validationErrors.maxIsInvalid(100)),
+    drilled: yup
+      .string()
+      .min(0, validationErrors.minIsInvalid(0))
+      .max(100, validationErrors.maxIsInvalid(100)),
+    description: yup.string(),
+  }),
 })
