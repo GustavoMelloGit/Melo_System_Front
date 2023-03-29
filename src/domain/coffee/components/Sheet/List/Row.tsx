@@ -15,7 +15,7 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
   if (!number) return <Navigate to={Routes.books} replace />
 
   return (
-    <Tr>
+    <Tr h={61}>
       <Td>{sheet.number}</Td>
       <Td>{sheet.client.name}</Td>
       <Td>{sheet.courier}</Td>
