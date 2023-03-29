@@ -40,7 +40,7 @@ export default function SheetForm({
     <form onSubmit={submitFormHandler}>
       <Card>
         <CardBody>
-          <Stack spacing={12}>
+          <Stack spacing={5}>
             <SheetFormSheetDetails
               variant={variant}
               control={control}

@@ -38,6 +38,7 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             placeholder='Ex.: 12'
             type='number'
             inputMode='numeric'
+            step={0.1}
             errors={errors}
             rules={{
               valueAsNumber: true,
@@ -53,6 +54,7 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             placeholder='Ex.: 10'
             type='number'
             inputMode='numeric'
+            step={0.1}
             errors={errors}
             rules={{
               valueAsNumber: true,
@@ -68,6 +70,7 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             placeholder='Ex.: 25'
             type='number'
             inputMode='numeric'
+            step={0.1}
             errors={errors}
             rules={{
               valueAsNumber: true,
@@ -83,6 +86,7 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             placeholder='Ex.: 5'
             type='number'
             inputMode='numeric'
+            step={0.1}
             errors={errors}
             rules={{
               valueAsNumber: true,
@@ -98,6 +102,7 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
             placeholder='Ex.: 5'
             type='number'
             inputMode='numeric'
+            step={0.1}
             errors={errors}
             rules={{
               valueAsNumber: true,

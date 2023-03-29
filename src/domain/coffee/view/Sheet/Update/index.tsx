@@ -3,13 +3,12 @@ import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SheetForm from '../../../components/Sheet/Form'
-import useCreateSheetView from './useView'
+import useUpdateSheetView from './useView'
 
-export default function CreateSheetView(): JSX.Element {
-  const { bookNumber } = useParams<{ bookNumber: string }>()
-  const { createSheet, initialValues } = useCreateSheetView({ bookNumber })
+export default function UpdateSheetView(): JSX.Element {
+  const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
+  const { updateSheet, initialValues } = useUpdateSheetView({ bookNumber, sheetNumber })
   if (!bookNumber) return <Navigate to={Routes.books} />
-
   return (
     <Page title='Adicionar Folha' data-cy='create-sheet-page'>
       <HeaderBreadcrumbs
@@ -28,7 +27,7 @@ export default function CreateSheetView(): JSX.Element {
           },
         ]}
       />
-      <SheetForm onSubmit={createSheet} initialValues={initialValues} />
+      <SheetForm onSubmit={updateSheet} initialValues={initialValues} />
     </Page>
   )
 }

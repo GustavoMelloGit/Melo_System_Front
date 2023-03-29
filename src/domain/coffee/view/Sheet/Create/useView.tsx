@@ -1,0 +1,49 @@
+import { toast } from 'react-hot-toast'
+import { PaginationParams } from '../../../../../lib/constants/pagination'
+import { createSheetService, getSheetsService } from '../../../services/Sheets'
+import { type SheetFormValues } from '../../../types/model/sheet'
+
+type Props = {
+  bookNumber: string | number | undefined
+}
+export default function useCreateSheetView({ bookNumber }: Props): UseCreateSheetView {
+  const { data: lastLine, mutate: refetchLastLine } = getSheetsService(
+    bookNumber,
+    `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&limit=1`,
+  )
+
+  async function handleCreateSheet({ clientId, ...values }: SheetFormValues): Promise<void> {
+    if (!bookNumber) return
+    const { error } = await createSheetService(values, clientId, bookNumber)
+    if (error) {
+      toast.error(error)
+      throw new Error(error)
+    }
+    await refetchLastLine()
+    toast.success('Folha criada com sucesso')
+  }
+
+  const initialValues: Partial<SheetFormValues> = {
+    number: (lastLine?.[0]?.number ?? 0) + 1,
+    weighingDate: new Date().toISOString().split('T')[0],
+    coffeeDetails: {
+      weight: 0,
+      picking: 0,
+      foulness: 0,
+      drilled: 0,
+      moisture: 0,
+      sieve: 0,
+    },
+    lines: [{ bags: 0, weight: 0 }],
+  }
+
+  return {
+    initialValues: initialValues as SheetFormValues,
+    createSheet: handleCreateSheet,
+  }
+}
+
+type UseCreateSheetView = {
+  initialValues: SheetFormValues
+  createSheet: (values: SheetFormValues) => Promise<void>
+}
