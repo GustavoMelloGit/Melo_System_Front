@@ -5,7 +5,7 @@ import { type SheetFormValues, type SheetModel } from '../../types/model/sheet'
 
 export async function updateSheetService(
   sheetNumber: string | number,
-  values: SheetFormValues,
+  values: Partial<SheetFormValues>,
 ): PutServiceResponse<SheetModel> {
   try {
     const { data } = await api.put(`/sheets/${sheetNumber}`, values)

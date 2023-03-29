@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 import { getSheetService, updateSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
@@ -8,20 +9,26 @@ type Props = {
   sheetNumber: string | undefined
 }
 export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateSheetView {
+  const navigate = useNavigate()
   const { data } = getSheetService(sheetNumber)
 
   async function handleUpdateSheet(values: SheetFormValues): Promise<void> {
     if (!sheetNumber) return
+    values.coffeeDetails = formatCoffeeDetails(values.coffeeDetails)
 
-    const formattedCoffeeDetails = formatCoffeeDetails(values.coffeeDetails)
-    values.coffeeDetails = formattedCoffeeDetails
+    const { number, ...rest } = values
 
-    const { error } = await updateSheetService(sheetNumber, values)
+    const { error } = await updateSheetService(sheetNumber, {
+      ...rest,
+      ...(values.number !== Number(sheetNumber) && { number: values.number }),
+    })
+
     if (error) {
       toast.error(error)
       throw new Error(error)
     }
     toast.success('Folha atualizada com sucesso')
+    navigate(-1)
   }
 
   const initialValues: SheetFormValues = data
