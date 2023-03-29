@@ -30,6 +30,8 @@ const validationErrors = {
   courierIsRequired: 'Por favor, informe o nome do transportador',
   clientIsRequired: 'Por favor, informe o nome do cliente',
   coffeeTypeIsRequired: 'Por favor, informe o tipo de café',
+  minIsInvalid: (min: number | string) => `Por favor, informe um valor maior ou igual a ${min}`,
+  maxIsInvalid: (max: number | string) => `Por favor, informe um valor menor ou igual a ${max}`,
 }
 
 export default validationErrors
