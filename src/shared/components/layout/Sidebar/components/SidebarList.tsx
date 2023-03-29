@@ -56,7 +56,7 @@ export default function SidebarList(): JSX.Element {
     }
   }
   return (
-    <Box flex={1}>
+    <Box as='nav' flexGrow={1}>
       <VStack as={List} align='stretch' onClick={handleCloseSideBar}>
         {protectedRoutes.children?.map(
           (route) =>
