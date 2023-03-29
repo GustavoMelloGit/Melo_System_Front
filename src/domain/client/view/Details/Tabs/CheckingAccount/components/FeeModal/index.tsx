@@ -18,11 +18,13 @@ import {
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react'
-import { format } from 'date-fns'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
-import { calculateMonthlyCompoundInterest } from '../../../../../../../../lib/utils/math'
+import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import {
+  calculateCompoundInterest,
+  convertMonthlyInterestRateToDaily,
+} from '../../../../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
 import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
@@ -30,13 +32,9 @@ import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore } from '../../stores/useFeeStore'
 
 function calculateInterest(date: string, amount: number, interestRate: number): number {
-  const month = date.split('-')[1]
-  const year = date.split('-')[0]
-  const today = new Date()
-  const todayMonth = today.getMonth() + 1
-  const todayYear = today.getFullYear()
-  const months = (todayYear - Number(year)) * 12 + (todayMonth - Number(month))
-  return calculateMonthlyCompoundInterest(months, amount, interestRate)
+  const days = Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24))
+  const dailyInterestRate = convertMonthlyInterestRateToDaily(interestRate)
+  return calculateCompoundInterest(days, amount, dailyInterestRate)
 }
 
 export default function FeeModal(): JSX.Element {
@@ -117,7 +115,7 @@ export default function FeeModal(): JSX.Element {
                   <Tbody>
                     {selectedTransactions.map((transaction, index) => (
                       <Tr key={transaction.id}>
-                        <Td>{format(new Date(transaction.date), 'dd/MM/yyyy')}</Td>
+                        <Td>{formatDate(transaction.date, false)}</Td>
                         <Td color={getColorByValue(transaction.amount)}>
                           {formatCurrency(transaction.amount)}
                         </Td>
