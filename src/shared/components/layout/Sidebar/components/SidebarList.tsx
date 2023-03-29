@@ -1,7 +1,8 @@
 import { Box, List, VStack } from '@chakra-ui/react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
-import { BsCoin, BsTruck } from 'react-icons/bs'
+import { BsTruck } from 'react-icons/bs'
+import { MdOutlineMonitorWeight } from 'react-icons/md'
 import { TbPlant } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
@@ -34,8 +35,8 @@ const listItem: Record<
     icon: <BsTruck />,
   },
   [Routes.books]: {
-    label: 'Lançamento',
-    icon: <BsCoin />,
+    label: 'Pesagem',
+    icon: <MdOutlineMonitorWeight size={20} />,
   },
 }
 
