@@ -63,7 +63,6 @@ export default function FeeModal(): JSX.Element {
   let totalAmountWithInterest = 0
   const interestByIndex = selectedTransactions.map((transaction) => {
     const interest = calculateInterest(transaction.date, transaction.amount, interestRate)
-    console.log('interest', interest)
     totalWithoutInterest += transaction.amount
     totalAmountWithInterest += interest
     return interest
