@@ -70,7 +70,6 @@ export default function SheetFormSheetDetails({
             type='number'
             inputMode='numeric'
             errors={errors}
-            isDisabled={variant === 'edit'}
           />
         </GridItem>
         <GridItem>

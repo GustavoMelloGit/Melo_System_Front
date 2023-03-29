@@ -7,12 +7,12 @@ import useUpdateSheetView from './useView'
 
 export default function UpdateSheetView(): JSX.Element {
   const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
-  const { updateSheet, initialValues } = useUpdateSheetView({ bookNumber, sheetNumber })
-  if (!bookNumber) return <Navigate to={Routes.books} />
+  const { updateSheet, initialValues } = useUpdateSheetView({ sheetNumber })
+  if (!bookNumber || !sheetNumber) return <Navigate to={Routes.books} />
   return (
     <Page title='Adicionar Folha' data-cy='create-sheet-page'>
       <HeaderBreadcrumbs
-        heading='Crie uma nova folha'
+        heading={`Editar folha ${sheetNumber}`}
         links={[
           {
             label: 'Talões',
@@ -23,11 +23,11 @@ export default function UpdateSheetView(): JSX.Element {
             to: Routes.bookPage(bookNumber),
           },
           {
-            label: 'Adicionar Folha',
+            label: 'Editar folha',
           },
         ]}
       />
-      <SheetForm onSubmit={updateSheet} initialValues={initialValues} />
+      <SheetForm onSubmit={updateSheet} variant='edit' initialValues={initialValues} />
     </Page>
   )
 }

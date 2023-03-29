@@ -10,10 +10,13 @@ export type LineModel = {
 
 export type SheetModel = WithId<
   {
+    clientId: string
+    bookId: string
     number: number
     weighingDate: string
     client: Pick<ClientModel, 'name'>
     coffeeDetails: CoffeeDetails
+    coffeeType: string
     courier: string
     lines: Array<WithId<LineModel>>
     isDraft: boolean

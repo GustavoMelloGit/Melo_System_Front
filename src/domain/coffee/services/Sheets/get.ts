@@ -19,3 +19,16 @@ export function getSheetsService(
     mutate,
   }
 }
+
+export function getSheetService(
+  sheetNumber: string | number | undefined,
+): GetServiceSwrResponse<SheetModel> {
+  const { data, error, isLoading, mutate } = useFetch(sheetNumber ? `/sheet/${sheetNumber}` : null)
+
+  return {
+    data,
+    error: errorHandler(error),
+    isLoading,
+    mutate,
+  }
+}
