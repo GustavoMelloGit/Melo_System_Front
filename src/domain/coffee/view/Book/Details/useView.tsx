@@ -12,7 +12,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
   const { data, isLoading, error, total, mutate } = getSheetsService(number, params)
 
   async function handleDeleteSheet(sheet: SheetModel): Promise<void> {
-    const { error } = await deleteSheetService(sheet.id)
+    const { error } = await deleteSheetService(sheet.number)
 
     if (error) {
       toast.error(error)
