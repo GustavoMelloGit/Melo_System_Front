@@ -1,8 +1,7 @@
 import { HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-ui/react'
-import { format } from 'date-fns'
 import { useMemo } from 'react'
 import { shallow } from 'zustand/shallow'
-import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
@@ -50,7 +49,7 @@ export default function TransactionsListRow({
 
   return (
     <Tr>
-      <Td>{formatDate(transaction.date, false)}</Td>
+      <Td>{dateToFormat(transaction.date, 'dd/MM/yyyy')}</Td>
       <Td
         title={transaction.description}
         maxW={80}
@@ -69,8 +68,8 @@ export default function TransactionsListRow({
       <Td>
         <HStack w='full' justify='center'>
           <MoreInfoTooltip
-            label={`${transaction.user.name}, ${format(
-              new Date(transaction.createdAt),
+            label={`${transaction.user.name}, ${dateToFormat(
+              transaction.createdAt,
               'dd/MM/yyyy kk:mm',
             )}`}
           />

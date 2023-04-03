@@ -35,7 +35,7 @@ export default function ClientForm({
   defaultValues,
 }: ClientFormProps): JSX.Element {
   const {
-    form: { register, setValue, formState, watch, handleSubmit },
+    form: { register, setValue, formState, watch, handleSubmit, control },
   } = useClientForm({ defaultValues })
   const isLegalPerson = watch('personType.type') === 'juridica'
   const formHasErrors = Object.keys(formState.errors).length > 0
@@ -126,6 +126,7 @@ export default function ClientForm({
                           <LegalPersonFields register={register} formState={formState} />
                         ) : (
                           <NaturalPersonFields
+                            control={control}
                             setValue={setValue}
                             register={register}
                             formState={formState}
