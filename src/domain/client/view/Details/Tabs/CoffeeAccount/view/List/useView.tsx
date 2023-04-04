@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import { getCoffeeAccountService } from '../../service/get'
 
 export default function useCoffeeAccountView(): UseCoffeeAccountView {
@@ -13,7 +13,7 @@ export default function useCoffeeAccountView(): UseCoffeeAccountView {
 }
 
 type UseCoffeeAccountView = {
-  data: TransactionModel[]
+  data: CoffeeTransactionModel[]
   isLoading: boolean
   total: number
 }

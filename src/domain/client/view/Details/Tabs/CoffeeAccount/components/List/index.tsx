@@ -3,10 +3,10 @@ import {
   type CustomTableComponentProps,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<TransactionModel[]>
+type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
 
 export default function CoffeeAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
   return (

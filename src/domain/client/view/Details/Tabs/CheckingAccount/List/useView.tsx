@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useModal } from '../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../service'
-import { type TransactionModel } from '../../../../../types/model/Transaction'
+import { type CurrencyTransactionModel } from '../../../../../types/model/Transaction'
 import CreateTransactionView from '../Create'
 
 export default function useListTransactionsView(): UseListTransactionsView {
@@ -29,7 +29,7 @@ export default function useListTransactionsView(): UseListTransactionsView {
 }
 
 type UseListTransactionsView = {
-  data: TransactionModel[]
+  data: CurrencyTransactionModel[]
   isLoading: boolean
   total: number
   handleAddTransaction: () => void

@@ -6,7 +6,7 @@ import {
   type GetServiceSwrResponse,
 } from '../../../shared/types/utils/service'
 import { type ClientModel } from '../types/model/Client'
-import { type TransactionModel } from '../types/model/Transaction'
+import { type CurrencyTransactionModel } from '../types/model/Transaction'
 
 export function getClientsService(
   params?: string,
@@ -36,7 +36,7 @@ export function getClientService(id: string): GetServiceSwrResponse<ClientModel>
 export function getTransactionsService(
   clientId: string,
   params?: string,
-): GetServiceSwrResponse<TransactionModel[]> {
+): GetServiceSwrResponse<CurrencyTransactionModel[]> {
   const { data, error, isLoading, mutate } = useFetch(
     `/transactions/currency/${clientId}?${params ?? ''}`,
   )

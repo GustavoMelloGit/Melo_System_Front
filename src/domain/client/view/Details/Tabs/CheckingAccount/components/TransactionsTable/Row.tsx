@@ -4,12 +4,12 @@ import { shallow } from 'zustand/shallow'
 import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
 import { useFeeStore, type TransactionSelected } from '../../stores/useFeeStore'
 import { type OnSelectFee } from './useView'
 
 type TransactionsListRowProps = {
-  transaction: TransactionModel
+  transaction: CurrencyTransactionModel
   onSelectFee: OnSelectFee
 }
 export default function TransactionsListRow({

@@ -6,12 +6,12 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
 import TransactionsListRow from './Row'
 import useTransactionTable from './useView'
 
 type TransactionsTableProps = {
-  data: TransactionModel[]
+  data: CurrencyTransactionModel[]
   total: number
   isLoading: boolean
   onClickAdd: () => void

@@ -1,9 +1,9 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
-  transaction: TransactionModel
+  transaction: CoffeeTransactionModel
 }
 export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
   return (
