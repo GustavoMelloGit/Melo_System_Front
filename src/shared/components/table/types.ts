@@ -16,8 +16,8 @@ export type TableRowProps = {
   noDataMessage?: string
 }
 
-export type TableHeaderColumns = TableColumnHeaderProps & {
-  id: string
+export type TableHeaderColumns<T = string> = Omit<TableColumnHeaderProps, 'id'> & {
+  id: T extends Record<string, unknown> ? keyof T : T
   label: string
   isSortable?: boolean
   align?: 'left' | 'right' | 'center'
