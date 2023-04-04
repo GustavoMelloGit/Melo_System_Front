@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { formatCurrency, formatDate } from '../../../../../../../../lib/utils/formatters'
+import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import {
   calculateCompoundInterest,
   convertMonthlyInterestRateToDaily,
@@ -115,7 +115,7 @@ export default function FeeModal(): JSX.Element {
                   <Tbody>
                     {selectedTransactions.map((transaction, index) => (
                       <Tr key={transaction.id}>
-                        <Td>{formatDate(transaction.date, false)}</Td>
+                        <Td>{dateToFormat(transaction.date, 'dd/MM/yyyy')}</Td>
                         <Td color={getColorByValue(transaction.amount)}>
                           {formatCurrency(transaction.amount)}
                         </Td>
