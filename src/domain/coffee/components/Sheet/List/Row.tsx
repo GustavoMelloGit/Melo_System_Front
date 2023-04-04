@@ -1,7 +1,7 @@
 import { Badge, Flex, Td, Tr } from '@chakra-ui/react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
-import { formatDate } from '../../../../../lib/utils/formatters'
+import { dateToFormat } from '../../../../../lib/utils/formatters'
 import TableButton from '../../../../../shared/components/table/buttons'
 import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
 import { type SheetModel } from '../../../types/model/sheet'
@@ -19,7 +19,7 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
       <Td>{sheet.number}</Td>
       <Td>{sheet.client.name}</Td>
       <Td>{sheet.courier}</Td>
-      <Td>{formatDate(sheet.weighingDate, false)}</Td>
+      <Td>{dateToFormat(sheet.weighingDate, 'dd/MM/yyyy')}</Td>
       <Td textAlign='center'>
         <Badge colorScheme={sheet.isDraft ? 'blue' : 'green'}>
           {sheet.isDraft ? 'Rascunho' : 'Creditado'}
@@ -27,7 +27,7 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
       </Td>
       <Td>
         {sheet.isDraft && (
-          <Flex>
+          <Flex justify='center'>
             <Link to={Routes.updateSheet(number, sheet.number)}>
               <TableEditButton as='span' aria-label='Editar folha' colorScheme='blue' />
             </Link>

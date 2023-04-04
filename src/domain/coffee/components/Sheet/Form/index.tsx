@@ -23,9 +23,13 @@ export default function SheetForm({
     resolver: yupResolver(validationSchema),
   })
 
-  const submitFormHandler = handleSubmit(async (values) => {
+  const submitFormHandler = handleSubmit(async ({ weighingDate, ...values }) => {
     try {
-      await onSubmit(values)
+      console.log(values)
+      await onSubmit({
+        ...values,
+        weighingDate: +weighingDate,
+      })
       reset()
     } catch {}
   })

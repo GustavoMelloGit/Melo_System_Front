@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { getSheetService, updateSheetService } from '../../../services/Sheets'
@@ -37,20 +36,21 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
         coffeeDetails: data.coffeeDetails,
         coffeeType: data.coffeeType,
         courier: data.courier,
-        weighingDate: format(new Date(data.weighingDate), 'yyyy-MM-dd'),
+        weighingDate: data.weighingDate,
         isDraft: data.isDraft,
         lines: data.lines,
         number: data.number,
       }
     : ({
         number: 0,
-        weighingDate: new Date().toISOString().split('T')[0],
+        weighingDate: new Date().getTime(),
         coffeeDetails: {
           picking: 0,
           foulness: 0,
           drilled: 0,
           moisture: 0,
           sieve: 0,
+          type: 'duro',
         },
         lines: [{ bags: 0, weight: 0 }],
       } as SheetFormValues)

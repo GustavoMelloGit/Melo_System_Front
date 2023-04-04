@@ -33,9 +33,9 @@ export function formatCurrency(value: number | undefined): string {
 
 /**
  * Format ISO date string to desired format.
- * @param {string} date The date to be formatted.
+ * @param {string | number} date The date to be formatted.
  * @param {string} outFormat The desired format.
  */
-export function dateToFormat(date: string, outFormat: string = 'dd/MM/yyyy'): string {
+export function dateToFormat(date: string | number, outFormat: string = 'dd/MM/yyyy'): string {
   return format(new Date(date), outFormat)
 }

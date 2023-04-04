@@ -4,7 +4,7 @@ import { type UseFormRegister } from 'react-hook-form'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
-import { CoffeeTypesEnum } from '../../../types/model/coffee'
+import { CoffeeDetailsTypesEnum, CoffeeTypesEnum } from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
@@ -23,10 +23,21 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
           <RHFSelectField<SheetFormValues>
             name='coffeeType'
             register={register}
-            label='Bebida'
+            label='Tipo de café'
             options={Object.keys(CoffeeTypesEnum).map((value) => ({
               value,
               label: capitalCase(value),
+            }))}
+          />
+        </GridItem>
+        <GridItem>
+          <RHFSelectField<SheetFormValues>
+            register={register}
+            name='coffeeDetails.type'
+            label='Bebida'
+            options={Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => ({
+              value,
+              label,
             }))}
           />
         </GridItem>

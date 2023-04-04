@@ -30,13 +30,14 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
 
   const initialValues: Partial<SheetFormValues> = {
     number: (lastLine?.[0]?.number ?? 0) + 1,
-    weighingDate: new Date().toISOString().split('T')[0],
+    weighingDate: new Date().getTime(),
     coffeeDetails: {
       picking: 0,
       foulness: 0,
       drilled: 0,
       moisture: 0,
       sieve: 0,
+      type: 'duro',
     },
     lines: [{ bags: 0, weight: 0 }],
   }
