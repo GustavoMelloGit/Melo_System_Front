@@ -4,11 +4,11 @@ import { type GetServiceSwrResponse } from '../../../../../../../shared/types/ut
 import { type TransactionModel } from '../../../../../types/model/Transaction'
 
 export function getCoffeeAccountService(
-  clientId: string,
+  clientId: string | undefined,
   params?: string,
 ): GetServiceSwrResponse<TransactionModel[]> {
   const { data, error, isLoading, mutate } = useFetch(
-    `/transactions/currency/${clientId}?${params ?? ''}`,
+    clientId ? `/transactions/coffee/${clientId}?${params ?? ''}` : null,
   )
 
   return {
