@@ -1,21 +1,19 @@
 import Table from '../../../../../shared/components/table/Table'
 import {
+  type CustomTableComponentProps,
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
 import { type SheetModel } from '../../../types/model/sheet'
 import SheetsTableRow from './Row'
 
-type Props = {
-  data: SheetModel[] | undefined
-  totalBooks: number
-  isLoading: boolean
+type Props = CustomTableComponentProps<SheetModel[]> & {
   onDeleteSheet: (sheet: SheetModel) => Promise<void>
 }
 export default function SheetsTable({
   data,
   isLoading,
-  totalBooks,
+  totalLength,
   onDeleteSheet,
 }: Props): JSX.Element {
   return (
@@ -30,7 +28,7 @@ export default function SheetsTable({
       }}
       pagination={{
         dataLength: data?.length ?? 0,
-        totalLength: totalBooks,
+        totalLength,
       }}
       filter={{
         searchForOptions,

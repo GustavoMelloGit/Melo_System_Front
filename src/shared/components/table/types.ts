@@ -4,6 +4,11 @@ import {
   type TableProps as ChakraTableProps,
 } from '@chakra-ui/react'
 
+export type CustomTableComponentProps<TData> = {
+  data: TData
+  isLoading: boolean
+  totalLength: number
+}
 export type TableRowProps = {
   isLoading: boolean
   children?: React.ReactNode
