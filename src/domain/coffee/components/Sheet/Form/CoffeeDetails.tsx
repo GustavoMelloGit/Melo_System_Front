@@ -1,17 +1,23 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
-import { type UseFormRegister } from 'react-hook-form'
+import { type UseFormRegister, type UseFormWatch } from 'react-hook-form'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
-import { CoffeeTypesEnum } from '../../../types/model/coffee'
+import {
+  CoffeeDetailsTypesEnum,
+  CoffeeTypesEnum,
+  type CoffeeTypes,
+} from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
   register: UseFormRegister<SheetFormValues>
   errors: unknown
+  watch: UseFormWatch<SheetFormValues>
 }
-export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX.Element {
+export default function SheetFormCoffeeDetails({ register, errors, watch }: Props): JSX.Element {
+  const hasCoffeeDetailsType: CoffeeTypes[] = ['bica_corrida', 'conilon']
   return (
     <Stack spacing={4}>
       <Heading as='h2' size='lg'>
@@ -23,13 +29,26 @@ export default function SheetFormCoffeeDetails({ register, errors }: Props): JSX
           <RHFSelectField<SheetFormValues>
             name='coffeeType'
             register={register}
-            label='Bebida'
+            label='Tipo de café'
             options={Object.keys(CoffeeTypesEnum).map((value) => ({
               value,
               label: capitalCase(value),
             }))}
           />
         </GridItem>
+        {hasCoffeeDetailsType.includes(watch('coffeeType') as CoffeeTypes) && (
+          <GridItem>
+            <RHFSelectField<SheetFormValues>
+              register={register}
+              name='coffeeDetails.type'
+              label='Bebida'
+              options={Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => ({
+                value,
+                label,
+              }))}
+            />
+          </GridItem>
+        )}
         <GridItem>
           <RHFField<SheetFormValues>
             name='coffeeDetails.moisture'

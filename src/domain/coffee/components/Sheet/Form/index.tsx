@@ -19,13 +19,18 @@ export default function SheetForm({
   onSubmit,
   variant = 'create',
 }: Props): JSX.Element {
-  const { register, handleSubmit, formState, control, setValue, reset } = useForm<SheetFormValues>({
-    resolver: yupResolver(validationSchema),
-  })
+  const { register, handleSubmit, formState, control, setValue, reset, watch } =
+    useForm<SheetFormValues>({
+      resolver: yupResolver(validationSchema),
+    })
 
-  const submitFormHandler = handleSubmit(async (values) => {
+  const submitFormHandler = handleSubmit(async ({ weighingDate, ...values }) => {
     try {
-      await onSubmit(values)
+      console.log(values)
+      await onSubmit({
+        ...values,
+        weighingDate: +weighingDate,
+      })
       reset()
     } catch {}
   })
@@ -47,7 +52,7 @@ export default function SheetForm({
               register={register}
               errors={formState.errors}
             />
-            <SheetFormCoffeeDetails register={register} errors={formState.errors} />
+            <SheetFormCoffeeDetails watch={watch} register={register} errors={formState.errors} />
             <SheetFormLines control={control} register={register} errors={formState.errors} />
           </Stack>
         </CardBody>

@@ -19,7 +19,7 @@ import InDevelopmentTag from '../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import SpinLoader from '../../../../shared/components/SpinLoader'
-import { CheckingAccount, GeneralInfo } from './Tabs'
+import { CheckingAccount, CoffeeAccount, GeneralInfo } from './Tabs'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
@@ -77,7 +77,7 @@ export default function ClientDetails(): JSX.Element {
                 <CheckingAccount />
               </TabPanel>
               <TabPanel>
-                <InDevelopmentTag />
+                <CoffeeAccount />
               </TabPanel>
               <TabPanel>
                 <InDevelopmentTag />

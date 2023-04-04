@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
-import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
+import RHFDateInput from '../../../../../../../../shared/components/inputs/RHFDateInput'
 import RHFTextField from '../../../../../../../../shared/components/inputs/RHFTextField'
 import { type CheckingAccountFormValues } from '../../../../../../types/view/Details'
 
@@ -32,10 +32,10 @@ export default function CheckingAccountForm({
 
   return (
     <form
-      onSubmit={handleSubmit(async ({ value, ...values }) => {
+      onSubmit={handleSubmit(async ({ value, date, ...values }) => {
         const valueInCents = value * 100
         const convertedValue = isDebit ? -valueInCents : valueInCents
-        await onSubmit({ ...values, value: convertedValue })
+        await onSubmit({ ...values, value: convertedValue, date: Number(date) })
       })}
     >
       <VStack align='stretch' gap={4}>
@@ -53,13 +53,7 @@ export default function CheckingAccountForm({
             </FormControl>
           </GridItem>
           <GridItem>
-            <RHFField<CheckingAccountFormValues>
-              name='date'
-              label='Data'
-              type='date'
-              register={register}
-              errors={errors}
-            />
+            <RHFDateInput<CheckingAccountFormValues> name='date' label='Data' control={control} />
           </GridItem>
           <GridItem>
             <RHFCurrencyInput<CheckingAccountFormValues>

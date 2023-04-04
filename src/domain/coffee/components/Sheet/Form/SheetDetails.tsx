@@ -1,5 +1,6 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
 import { useWatch, type Control, type UseFormRegister } from 'react-hook-form'
+import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
@@ -73,13 +74,12 @@ export default function SheetFormSheetDetails({
           />
         </GridItem>
         <GridItem>
-          <RHFField<SheetFormValues>
+          <RHFDateInput<SheetFormValues>
             name='weighingDate'
-            register={register}
+            control={control}
             label='Data da pesagem'
             type='date'
             inputMode='numeric'
-            errors={errors}
           />
         </GridItem>
         <GridItem>

@@ -13,7 +13,7 @@ export type SheetModel = WithId<
     clientId: string
     bookId: string
     number: number
-    weighingDate: string
+    weighingDate: number
     client: Pick<ClientModel, 'name'>
     coffeeDetails: CoffeeDetails
     coffeeType: string
@@ -26,7 +26,7 @@ export type SheetModel = WithId<
 
 export type SheetFormValues = {
   isDraft: boolean
-  weighingDate: string
+  weighingDate: number
   number: number
   courier: string
   coffeeDetails: CoffeeDetails

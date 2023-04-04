@@ -7,7 +7,6 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import { format } from 'date-fns'
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../service'
@@ -28,6 +27,7 @@ export default function CreateTransactionView({
     const { error } = await createTransactionService(values, uuid)
     if (error) {
       toast.error(error)
+      return
     }
     closeModal()
     refetch()
@@ -46,7 +46,7 @@ export default function CreateTransactionView({
             onSubmit={handleCreateTransaction}
             submitText='Salvar'
             initialValues={{
-              date: format(new Date(), 'yyyy-MM-dd'),
+              date: new Date().getTime(),
               description: '',
               value: 0,
             }}

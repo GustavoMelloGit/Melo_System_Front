@@ -1,16 +1,24 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import { type FormState, type UseFormRegister, type UseFormSetValue } from 'react-hook-form'
+import {
+  type Control,
+  type FormState,
+  type UseFormRegister,
+  type UseFormSetValue,
+} from 'react-hook-form'
+import RHFDateInput from '../../../../shared/components/inputs/RHFDateInput'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
 import { type ClientFormValues } from '../../types/components/ClientsForm'
 
 type NaturalPersonFieldsProps = {
   formState: FormState<ClientFormValues>
+  control: Control<ClientFormValues>
   register: UseFormRegister<ClientFormValues>
   setValue: UseFormSetValue<ClientFormValues>
 }
 export default function NaturalPersonFields({
   formState,
+  control,
   register,
   setValue,
 }: NaturalPersonFieldsProps): JSX.Element {
@@ -37,13 +45,12 @@ export default function NaturalPersonFields({
         />
       </GridItem>
       <GridItem>
-        <RHFField<ClientFormValues>
-          register={register}
+        <RHFDateInput<ClientFormValues>
+          control={control}
           name='personType.birthDate'
           label='Data de nascimento'
           placeholder='Data de nascimento do cliente'
           type={'date'}
-          errors={formState.errors}
           data-cy='client-birth-date-input'
         />
       </GridItem>
@@ -72,13 +79,11 @@ export default function NaturalPersonFields({
         />
       </GridItem>
       <GridItem>
-        <RHFField<ClientFormValues>
-          register={register}
+        <RHFDateInput<ClientFormValues>
+          control={control}
           name='personType.rgEmissionDate'
           label='Data de emissão do RG'
           placeholder='Data de emissão do RG do cliente'
-          type='date'
-          errors={formState.errors}
           data-cy='client-rg-emission-date-input'
         />
       </GridItem>

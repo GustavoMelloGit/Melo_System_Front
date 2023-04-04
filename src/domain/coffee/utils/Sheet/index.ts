@@ -1,7 +1,7 @@
 import { type CoffeeDetails } from '../../types/model/coffee'
 
 export function formatCoffeeDetails(values: CoffeeDetails): CoffeeDetails {
-  const { description, ...rest } = values
+  const { description, type, ...rest } = values
   const formattedRest = Object.keys(rest).reduce((acc, key) => {
     return {
       ...acc,
@@ -11,5 +11,6 @@ export function formatCoffeeDetails(values: CoffeeDetails): CoffeeDetails {
   return {
     ...formattedRest,
     description,
+    type,
   }
 }
