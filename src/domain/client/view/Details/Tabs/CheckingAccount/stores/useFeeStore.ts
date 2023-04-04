@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 export type TransactionSelected = {
   id: string
-  date: string
+  date: number
   amount: number
 }
 

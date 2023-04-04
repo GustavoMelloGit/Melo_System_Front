@@ -1,9 +1,9 @@
 import { type UserModel } from '../../../domain/auth/types/model/user'
 
 export type Timestamp = {
-  createdAt: string
-  updatedAt: string
-  deletedAt?: string
+  createdAt: number
+  updatedAt: number
+  deletedAt?: number
 }
 
 export type Responsible = {

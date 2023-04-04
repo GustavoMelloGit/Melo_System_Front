@@ -50,6 +50,6 @@ const emptyClient: ClientFormValues = {
   profileImage: ' ',
   id: '',
   name: '',
-  createdAt: '',
-  updatedAt: '',
+  createdAt: 0,
+  updatedAt: 0,
 }

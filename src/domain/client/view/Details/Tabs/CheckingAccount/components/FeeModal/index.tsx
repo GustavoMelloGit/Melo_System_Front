@@ -31,8 +31,8 @@ import TableFeeButton from '../../../../../../../../shared/components/table/butt
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore } from '../../stores/useFeeStore'
 
-function calculateInterest(date: string, amount: number, interestRate: number): number {
-  const days = Math.floor((new Date().getTime() - new Date(date).getTime()) / (1000 * 3600 * 24))
+function calculateInterest(date: number, amount: number, interestRate: number): number {
+  const days = Math.floor((new Date().getTime() - date) / (1000 * 3600 * 24))
   const dailyInterestRate = convertMonthlyInterestRateToDaily(interestRate)
   return calculateCompoundInterest(days, amount, dailyInterestRate)
 }
