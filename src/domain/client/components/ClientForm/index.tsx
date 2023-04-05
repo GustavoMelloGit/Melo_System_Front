@@ -18,11 +18,10 @@ import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
 import RHFSelectField from '../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../shared/components/inputs/RHFTextField'
-import { type ClientFormValues } from '../../types/components/ClientsForm'
 import AddressFields from './Address'
 import LegalPersonFields from './LegalPerson'
 import NaturalPersonFields from './NaturalPerson'
-import useClientForm from './useClientForm'
+import useClientForm, { type ClientFormValues } from './useClientForm'
 
 type ClientFormProps = {
   onSubmit: (values: ClientFormValues) => Promise<void>

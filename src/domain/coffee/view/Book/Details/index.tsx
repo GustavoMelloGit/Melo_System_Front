@@ -43,7 +43,7 @@ export default function BookDetailsView(): JSX.Element {
         onDeleteSheet={handleDeleteSheet}
         data={data}
         isLoading={isLoading}
-        totalBooks={total}
+        totalLength={total}
       />
     </Page>
   )

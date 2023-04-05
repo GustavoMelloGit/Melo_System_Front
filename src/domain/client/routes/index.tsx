@@ -1,10 +1,10 @@
 import React from 'react'
 import { type RouteObject } from 'react-router-dom'
 import { Routes } from '../../../lib/routes'
-const ClientsListView = React.lazy(async () => import('../view/List'))
-const CreateClientsView = React.lazy(async () => import('../view/Create'))
-const UpdateClientsView = React.lazy(async () => import('../view/Update'))
-const ClientDetailsView = React.lazy(async () => import('../view/Details'))
+const ClientsListView = React.lazy(async () => import('../view/Clients/List'))
+const CreateClientsView = React.lazy(async () => import('../view/Clients/Create'))
+const UpdateClientsView = React.lazy(async () => import('../view/Clients/Update'))
+const ClientDetailsView = React.lazy(async () => import('../view/Client/Details'))
 
 const clientsRoutes: RouteObject[] = [
   {

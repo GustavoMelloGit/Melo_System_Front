@@ -2,7 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { type FormState, type UseFormRegister } from 'react-hook-form'
 import RHFField from '../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
-import { type ClientFormValues } from '../../types/components/ClientsForm'
+import { type ClientFormValues } from './useClientForm'
 
 type LegalPersonFieldsProps = {
   formState: FormState<ClientFormValues>

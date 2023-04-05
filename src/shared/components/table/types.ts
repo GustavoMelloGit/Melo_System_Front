@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react'
 
 export type CustomTableComponentProps<TData> = {
-  data: TData
+  data: TData | undefined
   isLoading: boolean
   totalLength: number
 }

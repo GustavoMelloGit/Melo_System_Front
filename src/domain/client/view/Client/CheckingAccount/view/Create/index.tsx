@@ -1,0 +1,58 @@
+import {
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from '@chakra-ui/react'
+import { toast } from 'react-hot-toast'
+import { useModal } from '../../../../../../../shared/hooks/useModal'
+import { createTransactionService } from '../../../../../service'
+import { type CheckingAccountFormValues } from '../../../../../types/model/CheckinhAccount'
+import CheckingAccountForm from '../../components/Form'
+
+type CreateTransactionViewProps = {
+  uuid: string
+  refetch: () => void
+}
+export default function CreateTransactionView({
+  uuid,
+  refetch,
+}: CreateTransactionViewProps): JSX.Element {
+  const closeModal = useModal((state) => state.closeModal)
+
+  async function handleCreateTransaction(values: CheckingAccountFormValues): Promise<void> {
+    const { error } = await createTransactionService(values, uuid)
+    if (error) {
+      toast.error(error)
+      return
+    }
+    closeModal()
+    refetch()
+  }
+
+  return (
+    <Modal isOpen onClose={closeModal} isCentered>
+      <ModalOverlay />
+      <ModalContent p={8} rounded={20}>
+        <ModalCloseButton />
+        <ModalHeader>
+          <Heading fontSize='3xl'>Novo lançamento</Heading>
+        </ModalHeader>
+        <ModalBody>
+          <CheckingAccountForm
+            onSubmit={handleCreateTransaction}
+            submitText='Salvar'
+            initialValues={{
+              date: new Date().getTime(),
+              description: '',
+              value: 0,
+            }}
+          />
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  )
+}
