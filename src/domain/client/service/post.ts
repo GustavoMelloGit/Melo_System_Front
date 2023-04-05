@@ -2,10 +2,10 @@ import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PostServiceResponse } from '../../../shared/types/utils/service'
-import { type ClientFormValues } from '../types/components/ClientsForm'
+import { type ClientFormValues } from '../components/ClientForm/useClientForm'
+import { type CheckingAccountFormValues } from '../types/model/CheckinhAccount'
 import { type ClientModel } from '../types/model/Client'
-import { type TransactionModel } from '../types/model/Transaction'
-import { type CheckingAccountFormValues } from '../types/view/Details'
+import { type CurrencyTransactionModel } from '../types/model/Transaction'
 
 export async function createClientService(
   values: ClientFormValues,
@@ -37,7 +37,7 @@ export async function createClientService(
 export async function createTransactionService(
   values: CheckingAccountFormValues,
   clientId: string,
-): PostServiceResponse<TransactionModel> {
+): PostServiceResponse<CurrencyTransactionModel> {
   try {
     const { data } = await api.post(`/transactions/currency/${clientId}`, {
       ...values,

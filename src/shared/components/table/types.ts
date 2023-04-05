@@ -4,6 +4,11 @@ import {
   type TableProps as ChakraTableProps,
 } from '@chakra-ui/react'
 
+export type CustomTableComponentProps<TData> = {
+  data: TData | undefined
+  isLoading: boolean
+  totalLength: number
+}
 export type TableRowProps = {
   isLoading: boolean
   children?: React.ReactNode
@@ -11,8 +16,8 @@ export type TableRowProps = {
   noDataMessage?: string
 }
 
-export type TableHeaderColumns = TableColumnHeaderProps & {
-  id: string
+export type TableHeaderColumns<T = string> = Omit<TableColumnHeaderProps, 'id'> & {
+  id: T extends Record<string, unknown> ? keyof T : T
   label: string
   isSortable?: boolean
   align?: 'left' | 'right' | 'center'

@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
+import { useForm, type UseFormReturn } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../lib/errors'
-import { type ClientFormValues, type UseClientForm } from '../../types/components/ClientsForm'
+import { type ClientModel } from '../../types/model/Client'
 
 const validationSchema = yup.object().shape({
   name: yup.string().required(validationErrors.nameIsRequired),
@@ -20,4 +20,9 @@ export default function useClientForm({ defaultValues }: UseClientFormProps): Us
   return {
     form,
   }
+}
+export type ClientFormValues = ClientModel
+
+export type UseClientForm = {
+  form: UseFormReturn<ClientFormValues, any>
 }

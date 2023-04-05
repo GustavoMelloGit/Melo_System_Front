@@ -2,7 +2,7 @@ import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PutServiceResponse } from '../../../shared/types/utils/service'
-import { type ClientFormValues } from '../types/components/ClientsForm'
+import { type ClientFormValues } from '../components/ClientForm/useClientForm'
 import { type ClientModel } from '../types/model/Client'
 
 export async function updateClientService(
