@@ -33,13 +33,19 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
 
 const headerColumns: TableHeaderColumns[] = [
   {
-    id: 'clientBalance',
-    label: 'KG',
+    id: 'bags',
+    label: 'Sacos',
+  },
+  {
+    id: 'details.type',
+    label: 'Bebida',
+    isSortable: true,
   },
   {
     id: 'createdAt',
     label: 'Data',
     isSortable: true,
+    defaultSort: 'desc',
   },
   {
     id: 'actions',

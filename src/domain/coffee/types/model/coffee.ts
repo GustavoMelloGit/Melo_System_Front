@@ -5,7 +5,7 @@ export type CoffeeDetails = {
   drilled?: number
   foulness?: number
   description?: string
-  type?: CoffeeDetailsTypes
+  type: CoffeeDetailsTypes
 }
 
 export type CoffeeTypes = 'bica_corrida' | 'despolpado' | 'conilon' | 'escolha'
