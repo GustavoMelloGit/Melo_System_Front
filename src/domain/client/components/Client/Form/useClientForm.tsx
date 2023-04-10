@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import * as yup from 'yup'
-import { validationErrors } from '../../../../lib/errors'
-import { type ClientModel } from '../../types/model/Client'
+import { validationErrors } from '../../../../../lib/errors'
+import { type ClientModel } from '../../../types/model/Client'
 
 const validationSchema = yup.object().shape({
   name: yup.string().required(validationErrors.nameIsRequired),

@@ -56,7 +56,6 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             label='Umidade'
             placeholder='Ex.: 12'
             type='number'
-            inputMode='numeric'
             step={0.1}
             errors={errors}
             rules={{
@@ -72,7 +71,6 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             label='Peneira 17 / 18'
             placeholder='Ex.: 10'
             type='number'
-            inputMode='numeric'
             step={0.1}
             errors={errors}
             rules={{
@@ -88,7 +86,6 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             label='Cata'
             placeholder='Ex.: 25'
             type='number'
-            inputMode='numeric'
             step={0.1}
             errors={errors}
             rules={{
@@ -104,7 +101,6 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             label='Impureza'
             placeholder='Ex.: 5'
             type='number'
-            inputMode='numeric'
             step={0.1}
             errors={errors}
             rules={{
@@ -120,7 +116,6 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             label='Broca'
             placeholder='Ex.: 5'
             type='number'
-            inputMode='numeric'
             step={0.1}
             errors={errors}
             rules={{

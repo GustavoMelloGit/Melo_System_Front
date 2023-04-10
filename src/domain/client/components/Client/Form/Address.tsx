@@ -1,9 +1,9 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import { type UseFormRegister, type UseFormSetValue } from 'react-hook-form'
-import allStates from '../../../../lib/constants/states.json'
-import RHFField from '../../../../shared/components/inputs/RHFField'
-import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
-import RHFSelectField from '../../../../shared/components/inputs/RHFSelectField'
+import allStates from '../../../../../lib/constants/states.json'
+import RHFField from '../../../../../shared/components/inputs/RHFField'
+import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
+import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import { type ClientFormValues } from './useClientForm'
 
 type AddressFieldsProps = {

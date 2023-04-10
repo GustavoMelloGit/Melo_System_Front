@@ -20,6 +20,7 @@ export type SheetModel = WithId<
     courier: string
     lines: Array<WithId<LineModel>>
     isDraft: boolean
+    weightPerBag: number
   } & Timestamp &
     Responsible
 >
@@ -27,6 +28,7 @@ export type SheetModel = WithId<
 export type SheetFormValues = {
   isDraft: boolean
   weighingDate: number
+  weightPerBag: number
   number: number
   courier: string
   coffeeDetails: CoffeeDetails

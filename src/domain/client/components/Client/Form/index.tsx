@@ -13,11 +13,11 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import AvatarDropzone from '../../../../shared/components/inputs/AvatarDropzone'
-import RHFField from '../../../../shared/components/inputs/RHFField'
-import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
-import RHFSelectField from '../../../../shared/components/inputs/RHFSelectField'
-import RHFTextField from '../../../../shared/components/inputs/RHFTextField'
+import AvatarDropzone from '../../../../../shared/components/inputs/AvatarDropzone'
+import RHFField from '../../../../../shared/components/inputs/RHFField'
+import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
+import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
+import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
 import AddressFields from './Address'
 import LegalPersonFields from './LegalPerson'
 import NaturalPersonFields from './NaturalPerson'

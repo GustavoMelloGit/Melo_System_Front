@@ -2,7 +2,7 @@ import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
-import ClientForm from '../../../components/ClientForm'
+import ClientForm from '../../../components/Client/Form'
 import useUpdateClientView from './useView'
 
 export default function UpdateClientView(): JSX.Element {

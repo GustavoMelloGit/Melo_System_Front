@@ -91,6 +91,16 @@ export default function SheetFormSheetDetails({
             errors={errors}
           />
         </GridItem>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='weightPerBag'
+            register={register}
+            label='Kg por saca'
+            placeholder='Ex.: 61'
+            type='number'
+            errors={errors}
+          />
+        </GridItem>
       </Grid>
     </Stack>
   )

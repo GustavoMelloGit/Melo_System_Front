@@ -1,12 +1,12 @@
 import { Avatar, HStack, Link as StyledLink, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Routes } from '../../../../lib/routes'
-import { formatCurrency } from '../../../../lib/utils/formatters'
-import { getColorByValue } from '../../../../lib/utils/styles'
-import TableEditButton from '../../../../shared/components/table/buttons/Edit'
-import TableLinkToButton from '../../../../shared/components/table/buttons/LinkTo'
-import { type ClientModel } from '../../types/model/Client'
+import { Routes } from '../../../../../lib/routes'
+import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../lib/utils/styles'
+import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
+import TableLinkToButton from '../../../../../shared/components/table/buttons/LinkTo'
+import { type ClientModel } from '../../../types/model/Client'
 
 export type ClientsTableRowProps = {
   client: ClientModel

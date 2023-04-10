@@ -9,14 +9,14 @@ import {
 import { toast } from 'react-hot-toast'
 import { setAuthToken } from '../../../lib/config/api'
 import StorageManager from '../../../lib/utils/StorageManager'
-import { signInService } from '../service'
+import { signInService, verifyTokenService } from '../service'
 import { type SignInValues } from '../types'
 import { type AuthContextType } from '../types/context/auth'
 
 const defaultValues: AuthContextType = {
   user: {} as AuthContextType['user'],
   signIn: async () => {},
-  signOut: async () => {},
+  signOut: () => {},
   appInitialized: false,
 }
 
@@ -57,16 +57,33 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
     }
   }, [])
 
-  useEffect(() => {
-    const user = getValue()
+  const tokenIsValid = useCallback(async (): Promise<boolean> => {
+    const { error, data } = await verifyTokenService()
+    console.log(error, data)
+    if (error) {
+      return false
+    }
+    return true
+  }, [])
+
+  const persistUser = useCallback(async (): Promise<void> => {
     const token = getToken()
-    setAppInitialized(true)
-    if (token) {
-      setAuthToken(token)
+    setAuthToken(token)
+    const isValidToken = await tokenIsValid()
+    if (!isValidToken) {
+      await signOut()
+    } else {
+      const user = getValue()
+      if (user && token) {
+        setUser(user)
+      }
     }
-    if (user) {
-      setUser(user)
-    }
+  }, [])
+
+  useEffect(() => {
+    persistUser().finally(() => {
+      setAppInitialized(true)
+    })
   }, [])
 
   const values = useMemo(
