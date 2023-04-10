@@ -1,26 +1,14 @@
 import { type KeyedMutator } from 'swr'
 
-export type PostServiceResponse<T> = Promise<
-  | {
-      data: T
-      error: null
-    }
-  | {
-      data: null
-      error: string
-    }
->
+export type PostServiceResponse<T> = Promise<{
+  data: T | null
+  error: string | null
+}>
 
-export type PutServiceResponse<T> = Promise<
-  | {
-      data: T
-      error: null
-    }
-  | {
-      data: null
-      error: string
-    }
->
+export type PutServiceResponse<T> = Promise<{
+  data: T | null
+  error: string | null
+}>
 
 export type DeleteServiceResponse = Promise<{
   error: string | null
