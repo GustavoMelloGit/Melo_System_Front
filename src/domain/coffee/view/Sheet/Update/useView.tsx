@@ -1,5 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { DEFAULT_WIGHT_PER_BAG } from '../../../constants/coffee'
 import { getSheetService, updateSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
@@ -40,10 +41,12 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
         isDraft: data.isDraft,
         lines: data.lines,
         number: data.number,
+        weightPerBag: data.weightPerBag,
       }
     : ({
         number: 0,
         weighingDate: new Date().getTime(),
+        weightPerBag: DEFAULT_WIGHT_PER_BAG,
         coffeeDetails: {
           picking: 0,
           foulness: 0,

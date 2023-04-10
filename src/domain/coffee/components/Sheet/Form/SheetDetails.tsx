@@ -93,7 +93,7 @@ export default function SheetFormSheetDetails({
         </GridItem>
         <GridItem>
           <RHFField<SheetFormValues>
-            name='courier'
+            name='weightPerBag'
             register={register}
             label='Kg por saca'
             placeholder='Ex.: 61'
