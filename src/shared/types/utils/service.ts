@@ -14,6 +14,11 @@ export type DeleteServiceResponse = Promise<{
   error: string | null
 }>
 
+export type GetResponse<T> = Promise<{
+  data?: T
+  error?: string
+}>
+
 export type GetServiceResponse<T> = {
   data?: T
   error?: string

@@ -9,4 +9,4 @@ export type AuthContextType = {
 }
 
 export type AuthSignIn = (values: SignInValues) => Promise<void>
-export type AuthSignOut = () => Promise<void>
+export type AuthSignOut = () => void
