@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
-import { type ClientFormValues } from '../../../components/ClientForm/useClientForm'
+import { type ClientFormValues } from '../../../components/Client/Form/useClientForm'
 import { getClientService, updateClientService } from '../../../service'
 
 export default function useUpdateClientView(): UseUpdateClientView {

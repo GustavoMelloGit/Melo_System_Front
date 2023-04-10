@@ -5,9 +5,9 @@ import {
   type UseFormRegister,
   type UseFormSetValue,
 } from 'react-hook-form'
-import RHFDateInput from '../../../../shared/components/inputs/RHFDateInput'
-import RHFField from '../../../../shared/components/inputs/RHFField'
-import RHFMaskInput from '../../../../shared/components/inputs/RHFMaskInput'
+import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
+import RHFField from '../../../../../shared/components/inputs/RHFField'
+import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
 import { type ClientFormValues } from './useClientForm'
 
 type NaturalPersonFieldsProps = {

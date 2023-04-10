@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
-import ClientsTable from '../../../components/ClientsTable'
+import ClientsTable from '../../../components/Clients/Table'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {

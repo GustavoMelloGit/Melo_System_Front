@@ -1,9 +1,9 @@
-import Table from '../../../../shared/components/table/Table'
+import Table from '../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
-} from '../../../../shared/components/table/types'
-import { type ClientModel } from '../../types/model/Client'
+} from '../../../../../shared/components/table/types'
+import { type ClientModel } from '../../../types/model/Client'
 import ClientsTableRow from './Row'
 
 type ClientsTableProps = {
