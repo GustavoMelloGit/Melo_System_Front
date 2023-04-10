@@ -25,7 +25,7 @@ export async function createSheetService(
 
 export async function undraftSheetService(sheetId: string | number): PostServiceResponse<void> {
   try {
-    await api.post(`/sheets/${sheetId}/undraft`)
+    await api.post(`/sheet/${sheetId}/undraft`)
 
     return {
       data: null,
