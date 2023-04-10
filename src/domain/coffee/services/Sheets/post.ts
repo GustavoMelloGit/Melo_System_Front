@@ -22,3 +22,19 @@ export async function createSheetService(
     }
   }
 }
+
+export async function undraftSheetService(sheetId: string | number): PostServiceResponse<void> {
+  try {
+    await api.post(`/sheets/${sheetId}`)
+
+    return {
+      data: null,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
+}

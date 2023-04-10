@@ -2,8 +2,12 @@ import { Button, Card, CardBody, CardFooter, Flex, Stack } from '@chakra-ui/reac
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { Routes } from '../../../../../lib/routes'
+import { undraftSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import SheetFormCoffeeDetails from './CoffeeDetails'
 import SheetFormLines from './Lines'
@@ -19,14 +23,31 @@ export default function SheetForm({
   onSubmit,
   variant = 'create',
 }: Props): JSX.Element {
+  const navigate = useNavigate()
+  const { bookNumber } = useParams<{ bookNumber: string }>()
   const { register, handleSubmit, formState, control, setValue, reset, watch } =
     useForm<SheetFormValues>({
       resolver: yupResolver(validationSchema),
     })
 
+  const handleUndraftSheet = async (): Promise<void> => {
+    if (!initialValues || !bookNumber) return
+    const { error } = await undraftSheetService(initialValues.number)
+
+    if (error) {
+      toast.error(error)
+      return
+    }
+    toast.success('Folha creditada com sucesso')
+    navigate(Routes.createSheet(bookNumber))
+  }
+
   const submitFormHandler = handleSubmit(async ({ weighingDate, ...values }) => {
+    if (!formState.isDirty && variant === 'edit') {
+      await handleUndraftSheet()
+      return
+    }
     try {
-      console.log(values)
       await onSubmit({
         ...values,
         weighingDate: +weighingDate,
