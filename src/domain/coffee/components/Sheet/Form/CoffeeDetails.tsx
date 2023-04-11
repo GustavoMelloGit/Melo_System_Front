@@ -36,7 +36,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             }))}
           />
         </GridItem>
-        {hasCoffeeDetailsType.includes(watch('coffeeType') as CoffeeTypes) && (
+        {hasCoffeeDetailsType.includes(watch('coffeeType')) && (
           <GridItem>
             <RHFSelectField<SheetFormValues>
               register={register}
