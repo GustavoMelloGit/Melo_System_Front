@@ -1,12 +1,12 @@
 import { HStack } from '@chakra-ui/react'
-import TableAddButton from '../../../../../../../shared/components/table/buttons/Add'
-import TableFeeButton from '../../../../../../../shared/components/table/buttons/Fee'
-import Table from '../../../../../../../shared/components/table/Table'
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
+import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
+import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
-} from '../../../../../../../shared/components/table/types'
-import { type CurrencyTransactionModel } from '../../../../../types/model/Transaction'
+} from '../../../../../../../../shared/components/table/types'
+import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
 import TransactionsListRow from './Row'
 import useTransactionTable from './useView'
 

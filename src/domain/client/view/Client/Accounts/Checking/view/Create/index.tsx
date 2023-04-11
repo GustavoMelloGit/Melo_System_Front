@@ -8,9 +8,9 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { useModal } from '../../../../../../../shared/hooks/useModal'
-import { createTransactionService } from '../../../../../service'
-import { type CheckingAccountFormValues } from '../../../../../types/model/CheckinhAccount'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { createTransactionService } from '../../../../../../service'
+import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckinhAccount'
 import CheckingAccountForm from '../../components/Form'
 
 type CreateTransactionViewProps = {

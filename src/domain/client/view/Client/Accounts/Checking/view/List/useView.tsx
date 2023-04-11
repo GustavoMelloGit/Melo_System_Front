@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { useModal } from '../../../../../../../shared/hooks/useModal'
-import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
-import { getTransactionsService } from '../../../../../service'
-import { type CurrencyTransactionModel } from '../../../../../types/model/Transaction'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
+import { getTransactionsService } from '../../../../../../service'
+import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
 import CreateTransactionView from '../Create'
 
 export default function useListTransactionsView(): UseListTransactionsView {

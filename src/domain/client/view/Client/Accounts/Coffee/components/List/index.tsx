@@ -1,9 +1,9 @@
-import Table from '../../../../../../../shared/components/table/Table'
+import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
   type TableHeaderColumns,
-} from '../../../../../../../shared/components/table/types'
-import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'
+} from '../../../../../../../../shared/components/table/types'
+import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<CoffeeTransactionModel[]>

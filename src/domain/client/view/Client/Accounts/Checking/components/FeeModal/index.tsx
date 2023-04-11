@@ -20,15 +20,15 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { dateToFormat, formatCurrency } from '../../../../../../../lib/utils/formatters'
+import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import {
   calculateCompoundInterest,
   convertMonthlyInterestRateToDaily,
-} from '../../../../../../../lib/utils/math'
-import { getColorByValue } from '../../../../../../../lib/utils/styles'
-import CurrencyInput from '../../../../../../../shared/components/inputs/CurrencyInput'
-import TableFeeButton from '../../../../../../../shared/components/table/buttons/Fee'
-import { useModal } from '../../../../../../../shared/hooks/useModal'
+} from '../../../../../../../../lib/utils/math'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
+import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
+import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore } from '../../stores/useFeeStore'
 
 function calculateInterest(date: number, amount: number, interestRate: number): number {

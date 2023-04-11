@@ -1,9 +1,9 @@
 import { Td, Tr } from '@chakra-ui/react'
-import { dateToFormat } from '../../../../../../../lib/utils/formatters'
-import MoreInfoTooltip from '../../../../../../../shared/components/MoreInfoTooltip'
-import { CoffeeDetailsTypesEnum } from '../../../../../../coffee/types/model/coffee'
-import { getNumberOfBags } from '../../../../../../coffee/utils/Coffee'
-import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'
+import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
+import { CoffeeDetailsTypesEnum } from '../../../../../../../coffee/types/model/coffee'
+import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
+import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
   transaction: CoffeeTransactionModel

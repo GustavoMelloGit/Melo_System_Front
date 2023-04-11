@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
-import useServiceParams from '../../../../../../../shared/hooks/useServiceParams'
-import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'
+import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
+import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import { getCoffeeAccountService } from '../../service/get'
 
 export default function useCoffeeAccountView(): UseCoffeeAccountView {

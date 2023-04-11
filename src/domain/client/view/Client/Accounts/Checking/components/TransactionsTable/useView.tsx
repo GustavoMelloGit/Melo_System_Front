@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useModal } from '../../../../../../../shared/hooks/useModal'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore, type TransactionSelected } from '../../stores/useFeeStore'
 import FeeModal from '../FeeModal'
 
