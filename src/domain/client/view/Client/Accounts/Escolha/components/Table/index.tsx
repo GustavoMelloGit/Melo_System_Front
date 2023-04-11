@@ -5,11 +5,11 @@ import {
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
-import CoffeeAccountTableRow from './Row'
+import EscolhaAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
 
-export default function CoffeeAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
+export default function EscolhaAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -29,7 +29,7 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
       }}
     >
       {data?.map((transaction) => (
-        <CoffeeAccountTableRow key={transaction.id} transaction={transaction} />
+        <EscolhaAccountTableRow key={transaction.id} transaction={transaction} />
       ))}
     </Table>
   )
