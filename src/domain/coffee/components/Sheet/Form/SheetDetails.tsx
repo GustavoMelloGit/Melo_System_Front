@@ -1,8 +1,8 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
-import { useWatch, type Control, type UseFormRegister } from 'react-hook-form'
+import { Controller, useWatch, type Control, type UseFormRegister } from 'react-hook-form'
+import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
-import SpinLoader from '../../../../../shared/components/SpinLoader'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { getClientsService } from '../../../../client/service'
 import { type SheetFormValues } from '../../../types/model/sheet'
@@ -39,28 +39,23 @@ export default function SheetFormSheetDetails({
       <Divider />
       <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4} mb={4}>
         <GridItem>
-          <RHFField<SheetFormValues>
+          <Controller
             name='clientId'
-            label='ID do Cliente'
-            register={register}
-            list='client-list'
-            placeholder='Nome do cliente'
-            errors={errors}
-            data-cy='clientName-input'
-            isDisabled={variant === 'edit'}
-            {...(isLoading && {
-              rightIcon: <SpinLoader />,
-            })}
+            control={control}
+            render={({ field: { onChange, ...field } }) => (
+              <AutocompleteInput
+                label='Cliente'
+                options={clients?.map((client) => ({
+                  label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
+                  value: client.id,
+                }))}
+                isLoading={isLoading}
+                handleChange={onChange}
+                isDisabled={variant === 'edit'}
+                {...field}
+              />
+            )}
           />
-          {clients?.length !== 0 && (
-            <datalist id='client-list'>
-              {clients?.map((client) => (
-                <option key={client.id} value={client.id}>
-                  {client.name} {client.nickname && `(${client.nickname})`}
-                </option>
-              ))}
-            </datalist>
-          )}
         </GridItem>
         <GridItem>
           <RHFField<SheetFormValues>
