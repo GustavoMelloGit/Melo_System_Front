@@ -32,8 +32,15 @@ export default function AutocompleteInput({
   ...rest
 }: Props): JSX.Element {
   const ref = useRef<HTMLDivElement>(null)
-  const { setInputValue, setShowOptions, selectOption, inputValue, resetState } =
-    useAutocompleteStore()
+  const {
+    setInputValue,
+    setShowOptions,
+    selectOption,
+    inputValue,
+    resetState,
+    setOptions,
+    options: storedOptions,
+  } = useAutocompleteStore()
   useOutsideClick({
     ref,
     handler: () => {
@@ -69,13 +76,18 @@ export default function AutocompleteInput({
   }, [])
 
   useEffect(() => {
-    const option = options?.find((option) => option.value === value)
+    const option = storedOptions?.find((option) => option.value === value)
     if (option) {
       setInputValue(String(option.label))
     } else {
       setInputValue(String(value))
     }
   }, [value, options])
+
+  useEffect(() => {
+    if (!options) return
+    setOptions([...storedOptions, ...options])
+  }, [options])
 
   return (
     <FormControl position='relative' ref={ref}>

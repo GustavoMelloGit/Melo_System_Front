@@ -1,16 +1,17 @@
 import { type ReactNode } from 'react'
 import { create } from 'zustand'
+import { type Option } from './types'
 
 type State = {
   inputValue: string
-  options: string[]
+  options: Option[]
   selectedOption: ReactNode
   showOptions: boolean
 }
 
 type Actions = {
   setInputValue: (inputValue: string) => void
-  setOptions: (options: string[]) => void
+  setOptions: (options: Option[]) => void
   selectOption: (option: ReactNode) => void
   setShowOptions: (showOptions: boolean) => void
   resetState: () => void
