@@ -31,7 +31,7 @@ export type SheetFormValues = {
   weightPerBag: number
   number: number
   courier: string
-  coffeeDetails: CoffeeDetails
+  coffeeDetails: Partial<CoffeeDetails>
   coffeeType: CoffeeTypes
   clientId: string
   lines: Array<{
