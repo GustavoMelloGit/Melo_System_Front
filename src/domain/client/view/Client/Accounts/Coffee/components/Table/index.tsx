@@ -56,6 +56,36 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
   {
+    id: 'details.moisture',
+    label: 'Umidade',
+    isSortable: true,
+    textAlign: 'center',
+  },
+  {
+    id: 'details.picking',
+    label: 'Cata',
+    isSortable: true,
+    textAlign: 'center',
+  },
+  {
+    id: 'details.sieve',
+    label: '17 / 18',
+    isSortable: true,
+    textAlign: 'center',
+  },
+  {
+    id: 'details.drilled',
+    label: 'Broca',
+    isSortable: true,
+    textAlign: 'center',
+  },
+  {
+    id: 'details.foulness',
+    label: 'Impureza',
+    isSortable: true,
+    textAlign: 'center',
+  },
+  {
     id: 'createdAt',
     label: 'Data',
     isSortable: true,
