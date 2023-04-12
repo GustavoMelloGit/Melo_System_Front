@@ -5,7 +5,6 @@ import { type Option } from './types'
 type State = {
   inputValue: string
   options: Option[]
-  cacheOptions: Option[]
   selectedOption: ReactNode
   showOptions: boolean
 }
@@ -16,7 +15,6 @@ type Actions = {
   selectOption: (option: ReactNode) => void
   setShowOptions: (showOptions: boolean) => void
   resetState: () => void
-  setCacheOptions: (cacheOptions: Option[]) => void
 }
 
 const initialState: State = {
@@ -24,7 +22,6 @@ const initialState: State = {
   options: [],
   selectedOption: null,
   showOptions: false,
-  cacheOptions: [],
 }
 
 export const useAutocompleteStore = create<State & Actions>((set) => ({
@@ -43,8 +40,5 @@ export const useAutocompleteStore = create<State & Actions>((set) => ({
   },
   resetState: () => {
     set((state) => ({ ...state, ...initialState }))
-  },
-  setCacheOptions: (cacheOptions) => {
-    set((state) => ({ ...state, cacheOptions }))
   },
 }))
