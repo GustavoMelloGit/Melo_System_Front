@@ -46,7 +46,7 @@ export default function SheetFormSheetDetails({
               <AutocompleteInput
                 label='Cliente'
                 options={clients?.map((client) => ({
-                  label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
+                  label: `${client.name}${client.nickname ? ` (${client.nickname})` : ''}`,
                   value: client.id,
                 }))}
                 isLoading={isLoading}
