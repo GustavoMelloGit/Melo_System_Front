@@ -30,6 +30,7 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
   }
 
   const initialValues: Partial<SheetFormValues> = {
+    clientId: '',
     number: (lastLine?.[0]?.number ?? 0) + 1,
     weighingDate: new Date().getTime(),
     weightPerBag: DEFAULT_WIGHT_PER_BAG,

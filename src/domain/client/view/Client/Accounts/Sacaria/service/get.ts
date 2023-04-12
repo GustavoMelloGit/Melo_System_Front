@@ -8,7 +8,7 @@ export function getSacariaAccountService(
   params?: string,
 ): GetServiceSwrResponse<CoffeeTransactionModel[]> {
   const { data, error, isLoading, mutate } = useFetch(
-    clientId ? `/transactions/sacaria/${clientId}?${params ?? ''}` : null,
+    clientId ? `/transactions/bags/${clientId}?${params ?? ''}` : null,
   )
 
   return {

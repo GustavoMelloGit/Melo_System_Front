@@ -32,11 +32,14 @@ export type TablePaginationProps = {
   totalLength: number
 }
 
+export type FilterInputProps = InputProps & {
+  valueGetter?: (value: string) => string
+}
 export type SearchForOption = Record<
   string,
   {
     label: string
-    inputProps?: InputProps
+    inputProps?: FilterInputProps
   }
 >
 export type TableFilterProps = {

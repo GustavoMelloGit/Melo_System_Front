@@ -50,11 +50,6 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Sacos',
   },
   {
-    id: 'details.type',
-    label: 'Bebida',
-    isSortable: true,
-  },
-  {
     id: 'createdAt',
     label: 'Data',
     isSortable: true,

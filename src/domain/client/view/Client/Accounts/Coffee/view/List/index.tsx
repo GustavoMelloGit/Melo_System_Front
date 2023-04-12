@@ -1,4 +1,4 @@
-import CoffeeAccountTable from '../../components/List'
+import CoffeeAccountTable from '../../components/Table'
 import useCoffeeAccountView from './useView'
 
 export default function CoffeeAccountView(): JSX.Element {
