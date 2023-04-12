@@ -70,12 +70,14 @@ export default function AutocompleteInput({
   }
 
   useEffect(() => {
+    // Reset state when component unmounts
     return () => {
       resetState()
     }
   }, [])
 
   useEffect(() => {
+    // Set input value when value prop changes
     const option = storedOptions?.find((option) => option.value === value)
     if (option) {
       setInputValue(String(option.label))
@@ -85,6 +87,7 @@ export default function AutocompleteInput({
   }, [value, options])
 
   useEffect(() => {
+    // Set options when options prop changes and persist them in the store
     if (!options) return
     setOptions([...storedOptions, ...options])
   }, [options])
