@@ -58,8 +58,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
   }, [])
 
   const tokenIsValid = useCallback(async (): Promise<boolean> => {
-    const { error, data } = await verifyTokenService()
-    console.log(error, data)
+    const { error } = await verifyTokenService()
     if (error) {
       return false
     }
