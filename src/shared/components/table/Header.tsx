@@ -29,13 +29,35 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
     <Thead bg={bg}>
       <Tr h={16}>
         {columns.map(({ align, label, isSortable, id, defaultSort, ...rest }) => (
-          <Th key={id} color={textColor} textAlign={align} data-cy={`table-header-${id}`} {...rest}>
+          <Th
+            key={id}
+            color={textColor}
+            textAlign={align}
+            data-cy={`table-header-${id}`}
+            position='relative'
+            onClick={() => {
+              handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
+            }}
+            cursor={isSortable ? 'pointer' : 'default'}
+            _hover={{
+              '& > button': {
+                opacity: 1,
+              },
+            }}
+            userSelect={isSortable ? 'none' : 'auto'}
+            {...rest}
+          >
             {label}
             {isSortable && (
               <IconButton
-                ml={1}
                 aria-label={`sort by ${label}`}
                 data-cy='table-sort-button'
+                minW={0}
+                minH={0}
+                position='absolute'
+                top='50%'
+                right={0}
+                transform='translateY(-50%)'
                 icon={
                   <Box
                     w='fit-content'
@@ -45,15 +67,14 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
                     }
                     transition='transform 0.2s'
                   >
-                    <BsArrowUpShort size={20} />
+                    <BsArrowUpShort size={22} />
                   </Box>
                 }
                 variant='unstyled'
                 onClick={() => {
                   handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
                 }}
-                opacity={sortBy === id ? 1 : 0.2}
-                _hover={{ opacity: 1 }}
+                opacity={sortBy === id ? 1 : 0.4}
               />
             )}
           </Th>
