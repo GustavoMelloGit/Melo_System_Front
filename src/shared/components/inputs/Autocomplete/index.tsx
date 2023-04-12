@@ -40,6 +40,8 @@ export default function AutocompleteInput({
     resetState,
     setOptions,
     options: storedOptions,
+    cacheOptions,
+    setCacheOptions,
   } = useAutocompleteStore()
   useOutsideClick({
     ref,
@@ -87,10 +89,23 @@ export default function AutocompleteInput({
   }, [value, options])
 
   useEffect(() => {
-    // Set options when options prop changes and persist them in the store
+    // Cache options when options prop changes
     if (!options) return
-    setOptions([...storedOptions, ...options])
+    const newOptions = options.filter((option) => !options?.find((o) => o.value === option.value))
+    setCacheOptions([...cacheOptions, ...newOptions])
   }, [options])
+
+  useEffect(() => {
+    // Set options when input value changes
+    if (inputValue) {
+      const newOptions = cacheOptions.filter((option) =>
+        String(option.label).toLowerCase().includes(inputValue.toLowerCase()),
+      )
+      setOptions(newOptions)
+    } else {
+      setOptions([])
+    }
+  }, [inputValue])
 
   return (
     <FormControl position='relative' ref={ref}>
@@ -116,7 +131,7 @@ export default function AutocompleteInput({
           </Button>
         </InputRightElement>
       </InputGroup>
-      {options && options.length > 0 && <OptionsBox options={options} onSelect={handleOnSelect} />}
+      {storedOptions && storedOptions.length > 0 && <OptionsBox onSelect={handleOnSelect} />}
     </FormControl>
   )
 }

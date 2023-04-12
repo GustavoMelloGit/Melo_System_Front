@@ -1,15 +1,20 @@
 import { Button, Flex, useColorModeValue } from '@chakra-ui/react'
+import { shallow } from 'zustand/shallow'
 import { type Option } from './types'
 import { useAutocompleteStore } from './useAutocomplete'
 
 type Props = {
-  options: Option[]
   onSelect?: (option: Option) => void
 }
-export default function OptionsBox({ options, onSelect }: Props): JSX.Element {
+export default function OptionsBox({ onSelect }: Props): JSX.Element {
   const bgColor = useColorModeValue('gray.100', 'gray.700')
-  const { showOptions } = useAutocompleteStore()
-
+  const { showOptions, options } = useAutocompleteStore(
+    (state) => ({
+      showOptions: state.showOptions,
+      options: state.options,
+    }),
+    shallow,
+  )
   function handleOnClick(option: Option): void {
     if (onSelect) onSelect(option)
   }
