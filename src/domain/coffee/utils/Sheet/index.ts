@@ -1,6 +1,6 @@
 import { type CoffeeDetails } from '../../types/model/coffee'
 
-export function formatCoffeeDetails(values: CoffeeDetails): CoffeeDetails {
+export function formatCoffeeDetails(values: Partial<CoffeeDetails>): Partial<CoffeeDetails> {
   const { description, type, ...rest } = values
   const formattedRest = Object.keys(rest).reduce((acc, key) => {
     return {

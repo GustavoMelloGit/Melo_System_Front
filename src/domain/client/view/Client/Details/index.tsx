@@ -19,8 +19,10 @@ import InDevelopmentTag from '../../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
-import ListTransactionsView from '../CheckingAccount/view/List'
-import CoffeeAccountView from '../CoffeeAccount/view/List'
+import ListTransactionsView from '../Accounts/Checking/view/List'
+import CoffeeAccountView from '../Accounts/Coffee/view/List'
+import EscolhaAccountView from '../Accounts/Escolha/view/List'
+import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import GeneralInfo from '../GeneralInfo'
 
 import useClientDetailsView from './useView'
@@ -83,13 +85,13 @@ export default function ClientDetails(): JSX.Element {
                 <CoffeeAccountView />
               </TabPanel>
               <TabPanel>
-                <InDevelopmentTag />
+                <EscolhaAccountView />
               </TabPanel>
               <TabPanel>
                 <InDevelopmentTag />
               </TabPanel>
               <TabPanel>
-                <InDevelopmentTag />
+                <SacariaAccountView />
               </TabPanel>
               <TabPanel>
                 <GeneralInfo client={client} />

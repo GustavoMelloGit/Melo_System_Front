@@ -10,6 +10,7 @@
  */
 export const getNumberOfBags = (amount: number, KgPerBag: number = 61): string => {
   const numberOfBags = Math.floor(amount / KgPerBag)
+  if (numberOfBags === 0) return `${amount} Kg`
   const remainder = Math.round(((amount % KgPerBag) + Number.EPSILON) * 100) / 100
   const numberOfBagsString = numberOfBags > 0 ? `${numberOfBags} Sc` : ''
   const remainderString = remainder > 0 ? `${remainder} Kg` : ''

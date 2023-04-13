@@ -25,6 +25,10 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
       handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
       return
     }
+    if (currentSearchForOption.inputProps?.valueGetter) {
+      query = currentSearchForOption.inputProps.valueGetter(query)
+    }
+
     handleAddParams({
       query,
       searchFor,
