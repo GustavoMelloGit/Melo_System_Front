@@ -34,7 +34,6 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
             color={textColor}
             textAlign={align}
             data-cy={`table-header-${id}`}
-            position='relative'
             onClick={() => {
               handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
             }}
@@ -54,10 +53,7 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
                 data-cy='table-sort-button'
                 minW={0}
                 minH={0}
-                position='absolute'
-                top='50%'
-                right={0}
-                transform='translateY(-50%)'
+                ml={1}
                 icon={
                   <Box
                     w='fit-content'
