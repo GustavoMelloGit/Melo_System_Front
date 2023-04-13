@@ -6,12 +6,14 @@ import ToggleSidebarButton from '../Sidebar/components/ToggleSidebarButton'
 export default function ContentWrapper({ children }: PropsWithChildren): JSX.Element {
   const {
     sidebar: { isOpen },
+    layout: { size },
   } = useLayoutContext()
+  console.log(size)
   return (
     <Box display='flex' flexDir='column' w='full' flex={1}>
       <Container
         position='relative'
-        maxW={isOpen ? 'container.lg' : 'container.xl'}
+        maxW={`container.${size}`}
         flex={1}
         display='flex'
         flexDir='column'

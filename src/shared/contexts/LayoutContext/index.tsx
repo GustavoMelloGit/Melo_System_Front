@@ -1,6 +1,14 @@
-import { createContext, type PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react'
-import usePageSize from '../hooks/usePageSize'
-import { type LayoutContextType } from '../types/contexts/LayoutContext'
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type PropsWithChildren,
+} from 'react'
+import StorageManager from '../../../lib/utils/StorageManager'
+import usePageSize from '../../hooks/usePageSize'
+import { type LayoutContextType, type LayoutSizes } from './types'
 
 export const LayoutContext = createContext<LayoutContextType>({
   sidebar: {
@@ -9,11 +17,17 @@ export const LayoutContext = createContext<LayoutContextType>({
     close: () => {},
     open: () => {},
   },
+  layout: {
+    size: 'lg',
+    setSize: () => {},
+  },
 })
 
 export default function LayoutProvider({ children }: PropsWithChildren): JSX.Element {
   const { width } = usePageSize()
+  const { getValue, setValue } = StorageManager('layout.size')
   const [sideBarIsOpen, setSideBarIsOpen] = useState(width > 768)
+  const [layoutSize, setLayoutSize] = useState<LayoutSizes>(getValue() ?? 'lg')
 
   const toggleSideBar = useCallback(() => {
     setSideBarIsOpen((prev) => !prev)
@@ -26,6 +40,11 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
   const openSideBar = useCallback(() => {
     setSideBarIsOpen(true)
   }, [sideBarIsOpen])
+
+  const setSize = useCallback((size: LayoutSizes) => {
+    setLayoutSize(size)
+    setValue(size)
+  }, [])
 
   useEffect(() => {
     if (width > 768) {
@@ -43,8 +62,12 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
         close: closeSideBar,
         open: openSideBar,
       },
+      layout: {
+        size: layoutSize,
+        setSize,
+      },
     }),
-    [sideBarIsOpen, toggleSideBar],
+    [sideBarIsOpen, toggleSideBar, closeSideBar, openSideBar, layoutSize, setSize],
   )
 
   return <LayoutContext.Provider value={values}>{children}</LayoutContext.Provider>
