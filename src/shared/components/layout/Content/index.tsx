@@ -8,7 +8,6 @@ export default function ContentWrapper({ children }: PropsWithChildren): JSX.Ele
     sidebar: { isOpen },
     layout: { size },
   } = useLayoutContext()
-  console.log(size)
   return (
     <Box display='flex' flexDir='column' w='full' flex={1}>
       <Container
