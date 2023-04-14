@@ -40,6 +40,10 @@ const listItem: Record<
   },
 }
 
+const customPaths: Record<string, string> = {
+  [Routes.books]: `${Routes.books}?latest=true`,
+}
+
 export default function SidebarList(): JSX.Element {
   const currentPathname = useLocation().pathname
   const basePath = currentPathname.split('/')[1]
@@ -64,7 +68,7 @@ export default function SidebarList(): JSX.Element {
             listItem[route.path] && (
               <SidebarListItem
                 key={route.path}
-                to={route.path}
+                to={customPaths[route.path] || route.path}
                 label={listItem[route.path].label}
                 icon={listItem[route.path].icon}
                 isActive={route.path.split('/')[1] === basePath}

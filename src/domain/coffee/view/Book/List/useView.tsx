@@ -1,9 +1,15 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Routes } from '../../../../../lib/routes'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
+import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { getBooksService } from '../../../services/Book/get'
 import { type BookModel } from '../../../types/model/book'
 
 export default function useCoffeeBookView(): UseCoffeeBookView {
+  const navigate = useNavigate()
+  const { allSearchParams } = useURLSearchParams()
   const params = useServiceParams()
   const { data, isLoading, error, total, mutate } = getBooksService(params)
   const openModal = useModal((state) => state.openModal)
@@ -12,6 +18,14 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
     const CreateBookView = (await import('../Create')).default
     openModal(<CreateBookView refetch={mutate} />)
   }
+
+  useEffect(() => {
+    const latest = allSearchParams.latest
+    if (latest === 'true' && data?.length) {
+      const latestBook = data[0]
+      navigate(Routes.bookPage(latestBook.number))
+    }
+  }, [allSearchParams, data])
 
   return {
     data,
