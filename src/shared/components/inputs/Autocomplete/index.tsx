@@ -101,6 +101,7 @@ export default function AutocompleteInput({
           onFocus={handleOnFocus}
           onChange={handleOnChange}
           value={inputValue}
+          autoComplete='off'
           {...rest}
         />
         <InputRightElement>

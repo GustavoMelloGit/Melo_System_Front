@@ -5,6 +5,7 @@ export type CoffeeDetails = {
   drilled: number
   foulness: number
   description: string
+  utilization: number
   type: CoffeeDetailsTypes
 }
 
