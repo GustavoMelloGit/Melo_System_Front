@@ -10,7 +10,7 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
 
   async function openCreateBookModal(): Promise<void> {
     const CreateBookView = (await import('../Create')).default
-    openModal(<CreateBookView refetch={() => mutate?.()} />)
+    openModal(<CreateBookView refetch={mutate} />)
   }
 
   return {
