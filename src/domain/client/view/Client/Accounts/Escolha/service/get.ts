@@ -1,12 +1,12 @@
 import { errorHandler } from '../../../../../../../lib/utils/error'
 import useFetch from '../../../../../../../shared/hooks/useFetch'
 import { type GetServiceSwrResponse } from '../../../../../../../shared/types/utils/service'
-import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'
+import { type EscolhaTransactionModel } from '../../../../../types/model/Transaction'
 
 export function getEscolhaAccountService(
   clientId: string | undefined,
   params?: string,
-): GetServiceSwrResponse<CoffeeTransactionModel[]> {
+): GetServiceSwrResponse<EscolhaTransactionModel[]> {
   const { data, error, isLoading, mutate } = useFetch(
     clientId ? `/transactions/escolha/${clientId}?${params ?? ''}` : null,
   )

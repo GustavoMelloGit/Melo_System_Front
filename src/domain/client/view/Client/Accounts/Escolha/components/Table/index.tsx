@@ -4,10 +4,10 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import EscolhaAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
+type Props = CustomTableComponentProps<EscolhaTransactionModel[]>
 
 export default function EscolhaAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
   return (
@@ -50,12 +50,12 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Sacos',
   },
   {
-    id: 'impurity',
-    label: 'Impureza',
-  },
-  {
     id: 'utilization',
     label: 'Aproveitamento',
+  },
+  {
+    id: 'impurity',
+    label: 'Impureza',
   },
   {
     id: 'createdAt',
