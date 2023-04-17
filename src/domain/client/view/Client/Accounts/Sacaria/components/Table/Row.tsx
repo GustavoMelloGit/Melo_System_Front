@@ -1,5 +1,6 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { pluralize } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { type TransactionModel } from '../../../../../../types/model/Transaction'
 
@@ -7,11 +8,13 @@ type Props = {
   transaction: TransactionModel
 }
 export default function SacariaAccountTableRow({ transaction }: Props): JSX.Element {
+  const { type } = transaction
+  const { value } = type
   return (
     <Tr>
       <Td>{transaction.clientBalance}</Td>
       <Td>
-        {transaction.type.value} Sacos, {transaction.description}
+        {value} {pluralize('Saco', value)}, {transaction.description}
       </Td>
       <Td>{dateToFormat(transaction.createdAt)}</Td>
       <Td textAlign='center'>
