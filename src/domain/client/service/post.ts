@@ -3,7 +3,7 @@ import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PostServiceResponse } from '../../../shared/types/utils/service'
 import { type ClientFormValues } from '../components/Client/Form/useClientForm'
-import { type CheckingAccountFormValues } from '../types/model/CheckinhAccount'
+import { type CheckingAccountFormValues } from '../types/model/CheckingAccount'
 import { type ClientModel } from '../types/model/Client'
 import { type CurrencyTransactionModel } from '../types/model/Transaction'
 

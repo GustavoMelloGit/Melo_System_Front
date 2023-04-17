@@ -50,6 +50,14 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Sacos',
   },
   {
+    id: 'impurity',
+    label: 'Impureza',
+  },
+  {
+    id: 'utilization',
+    label: 'Aproveitamento',
+  },
+  {
     id: 'createdAt',
     label: 'Data',
     isSortable: true,

@@ -15,6 +15,10 @@ export type TransactionModel = WithId<{
 
 export type CurrencyTransactionModel = TransactionModel
 
+export type EscolhaTransactionModel = TransactionModel & {
+  details: CoffeeDetails
+}
+
 export type TransactionType = {
   name: string
   value: number

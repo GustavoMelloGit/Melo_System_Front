@@ -12,6 +12,8 @@ export default function EscolhaAccountTableRow({ transaction }: Props): JSX.Elem
     <Tr>
       <Td>{getNumberOfBags(transaction.type.value)}</Td>
       <Td>{dateToFormat(transaction.createdAt)}</Td>
+      <Td>{transaction.details.foulness}</Td>
+      <Td>{dateToFormat(transaction.createdAt)}</Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(
