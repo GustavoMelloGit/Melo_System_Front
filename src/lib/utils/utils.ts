@@ -23,3 +23,14 @@ export function removeEmptyObjects(obj: Record<string, any>): Record<string, any
     Object.entries(obj).filter(([_, v]) => v !== Object(v) || Object.keys(v).length > 0),
   )
 }
+
+/**
+ * Pluralize a word given a number.
+ * @param word The word to pluralize.
+ * @param count The number to use to pluralize the word.
+ * @param suffix The suffix to use when pluralizing the word.
+ * @returns the pluralized word.
+ */
+export function pluralize(word: string, count: number, suffix = 's'): string {
+  return count === 1 ? word : `${word}${suffix}`
+}

@@ -54,6 +54,7 @@ export default function SheetFormSheetDetails({
                 isLoading={isLoading}
                 handleChange={onChange}
                 isDisabled={variant === 'edit'}
+                placeholder='Ex.: João da Silva'
                 {...field}
               />
             )}

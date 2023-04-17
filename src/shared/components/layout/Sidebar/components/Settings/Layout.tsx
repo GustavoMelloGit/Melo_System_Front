@@ -12,7 +12,7 @@ export default function SettingsLayoutMenuItem(): JSX.Element {
     setSize(size)
   }
   return (
-    <MenuItem>
+    <MenuItem as='span'>
       <Menu placement='right'>
         <MenuButton
           as={Button}

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
-import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import { getEscolhaAccountService } from '../../service/get'
 
 export default function useEscolhaAccountView(): UseEscolhaAccountView {
@@ -16,7 +16,7 @@ export default function useEscolhaAccountView(): UseEscolhaAccountView {
 }
 
 type UseEscolhaAccountView = {
-  data: CoffeeTransactionModel[]
+  data: EscolhaTransactionModel[]
   isLoading: boolean
   total: number
 }

@@ -41,6 +41,7 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
       drilled: 0,
       moisture: 0,
       sieve: 0,
+      utilization: 0,
       type: 'duro',
     },
     lines: [{ bags: 0, weight: 0 }],

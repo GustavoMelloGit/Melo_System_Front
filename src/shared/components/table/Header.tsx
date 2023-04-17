@@ -35,6 +35,7 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
             textAlign={align}
             data-cy={`table-header-${id}`}
             onClick={() => {
+              if (!isSortable) return
               handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
             }}
             cursor={isSortable ? 'pointer' : 'default'}

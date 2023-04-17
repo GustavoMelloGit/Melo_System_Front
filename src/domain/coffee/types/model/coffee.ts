@@ -8,6 +8,12 @@ export type CoffeeDetails = {
   type: CoffeeDetailsTypes
 }
 
+export type EscolhaDetails = Omit<CoffeeDetails, 'type'> & {
+  utilization: number
+}
+
+export type DespolpadoDetails = Omit<CoffeeDetails, 'type'>
+
 export type CoffeeTypes = 'bica_corrida' | 'despolpado' | 'conilon' | 'escolha'
 
 export const CoffeeTypesEnum: Record<CoffeeTypes, string> = {
@@ -26,7 +32,6 @@ export type CoffeeDetailsTypes =
   | 'duro_riado_rio'
   | 'duro_riado'
   | 'duro'
-  | 'despolpado'
 
 export const CoffeeDetailsTypesEnum: Record<CoffeeDetailsTypes, string> = {
   rio_velho: 'Rio Velho',
@@ -37,5 +42,4 @@ export const CoffeeDetailsTypesEnum: Record<CoffeeDetailsTypes, string> = {
   duro_riado_rio: 'Duro Riado Rio',
   duro_riado: 'Duro Riado',
   duro: 'Duro',
-  despolpado: 'Despolpado',
 }

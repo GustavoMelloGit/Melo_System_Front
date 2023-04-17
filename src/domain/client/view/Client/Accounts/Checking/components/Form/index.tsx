@@ -7,7 +7,7 @@ import { validationErrors } from '../../../../../../../../lib/errors'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import RHFDateInput from '../../../../../../../../shared/components/inputs/RHFDateInput'
 import RHFTextField from '../../../../../../../../shared/components/inputs/RHFTextField'
-import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckinhAccount'
+import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 
 type CheckingAccountFormProps = {
   onSubmit: (values: CheckingAccountFormValues) => Promise<void>

@@ -10,7 +10,7 @@ import {
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../../service'
-import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckinhAccount'
+import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 import CheckingAccountForm from '../../components/Form'
 
 type CreateTransactionViewProps = {

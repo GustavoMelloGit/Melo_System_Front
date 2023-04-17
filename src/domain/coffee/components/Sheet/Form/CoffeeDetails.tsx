@@ -18,6 +18,7 @@ type Props = {
 }
 export default function SheetFormCoffeeDetails({ register, errors, watch }: Props): JSX.Element {
   const hasCoffeeDetailsType: CoffeeTypes[] = ['bica_corrida', 'conilon']
+  const hasUtilizationType: CoffeeTypes[] = ['escolha']
   return (
     <Stack spacing={4}>
       <Heading as='h2' size='lg'>
@@ -46,6 +47,23 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
                 value,
                 label,
               }))}
+            />
+          </GridItem>
+        )}
+        {hasUtilizationType.includes(watch('coffeeType')) && (
+          <GridItem>
+            <RHFField<SheetFormValues>
+              name='coffeeDetails.utilization'
+              register={register}
+              label='Aproveitamento'
+              placeholder='Ex.: 12'
+              type='number'
+              step={0.1}
+              errors={errors}
+              rules={{
+                valueAsNumber: true,
+              }}
+              rightIcon='%'
             />
           </GridItem>
         )}

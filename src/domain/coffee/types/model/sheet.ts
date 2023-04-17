@@ -1,6 +1,11 @@
 import { type Responsible, type Timestamp, type WithId } from '../../../../shared/types/utils/model'
 import { type ClientModel } from '../../../client/types/model/Client'
-import { type CoffeeDetails, type CoffeeTypes } from './coffee'
+import {
+  type CoffeeDetails,
+  type CoffeeTypes,
+  type DespolpadoDetails,
+  type EscolhaDetails,
+} from './coffee'
 
 export type LineModel = {
   weight: number
@@ -31,7 +36,7 @@ export type SheetFormValues = {
   weightPerBag: number
   number: number
   courier: string
-  coffeeDetails: Partial<CoffeeDetails>
+  coffeeDetails: Partial<CoffeeDetails | DespolpadoDetails | EscolhaDetails>
   coffeeType: CoffeeTypes
   clientId: string
   lines: Array<{

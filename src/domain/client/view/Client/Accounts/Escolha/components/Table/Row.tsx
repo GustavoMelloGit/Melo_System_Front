@@ -2,15 +2,17 @@ import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
-import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
-  transaction: CoffeeTransactionModel
+  transaction: EscolhaTransactionModel
 }
 export default function EscolhaAccountTableRow({ transaction }: Props): JSX.Element {
   return (
     <Tr>
       <Td>{getNumberOfBags(transaction.type.value)}</Td>
+      <Td>{transaction.details.utilization ?? 0}</Td>
+      <Td>{transaction.details.foulness ?? 0}</Td>
       <Td>{dateToFormat(transaction.createdAt)}</Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
