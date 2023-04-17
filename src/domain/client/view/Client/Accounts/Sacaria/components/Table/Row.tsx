@@ -10,7 +10,9 @@ export default function SacariaAccountTableRow({ transaction }: Props): JSX.Elem
   return (
     <Tr>
       <Td>{transaction.clientBalance}</Td>
-      <Td>{transaction.description}</Td>
+      <Td>
+        {transaction.type.value} Sacos, {transaction.description}
+      </Td>
       <Td>{dateToFormat(transaction.createdAt)}</Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
