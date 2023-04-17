@@ -19,14 +19,17 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
     },
   })
   const currentSearchForOption = searchForOptions[watch('searchFor')]
+  const { inputProps } = currentSearchForOption
+  const DOMProperties = { ...inputProps }
+  delete DOMProperties?.valueGetter
 
   function handleSubmitFilter({ query, searchFor }: FilterFormValues): void {
     if (!query) {
       handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
       return
     }
-    if (currentSearchForOption.inputProps?.valueGetter) {
-      query = currentSearchForOption.inputProps.valueGetter(query)
+    if (inputProps?.valueGetter) {
+      query = inputProps.valueGetter(query)
     }
 
     handleAddParams({
@@ -68,7 +71,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                   data-cy='table-submit-search-button'
                 />
               }
-              {...(currentSearchForOption?.inputProps ?? {})}
+              {...(DOMProperties ?? {})}
               name='query'
               data-cy='table-search-input'
             />
