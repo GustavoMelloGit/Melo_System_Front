@@ -9,7 +9,8 @@ type Props = {
 export default function SacariaAccountTableRow({ transaction }: Props): JSX.Element {
   return (
     <Tr>
-      <Td>{transaction.type.value}</Td>
+      <Td>{transaction.clientBalance}</Td>
+      <Td>{transaction.description}</Td>
       <Td>{dateToFormat(transaction.createdAt)}</Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
