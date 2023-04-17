@@ -52,10 +52,12 @@ const headerColumns: TableHeaderColumns[] = [
   {
     id: 'utilization',
     label: 'Aproveitamento',
+    isSortable: true,
   },
   {
     id: 'impurity',
     label: 'Impureza',
+    isSortable: true,
   },
   {
     id: 'createdAt',
