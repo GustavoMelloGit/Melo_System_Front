@@ -4,7 +4,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 export default function SettingsThemeMenuItem(): JSX.Element {
   const { setColorMode } = useColorMode()
   return (
-    <MenuItem>
+    <MenuItem as='span'>
       <Menu placement='right'>
         <MenuButton
           as={Button}

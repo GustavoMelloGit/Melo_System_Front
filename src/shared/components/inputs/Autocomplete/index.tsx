@@ -8,7 +8,7 @@ import {
   useOutsideClick,
   type InputProps,
 } from '@chakra-ui/react'
-import { useEffect, useRef, type ChangeEvent } from 'react'
+import { forwardRef, useEffect, useRef, type ChangeEvent } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 import OptionsBox from './Options'
 import { type Option } from './types'
@@ -22,15 +22,10 @@ type Props = InputProps & {
   handleBlur?: () => void
   handleFocus?: () => void
 }
-export default function AutocompleteInput({
-  label,
-  options,
-  isLoading,
-  handleChange,
-  handleFocus,
-  value,
-  ...rest
-}: Props): JSX.Element {
+export default forwardRef<HTMLInputElement, Props>(function AutocompleteInput(
+  { label, options, isLoading, handleChange, handleFocus, value, ...rest },
+  forwardRef,
+): JSX.Element {
   const ref = useRef<HTMLDivElement>(null)
   const {
     setInputValue,
@@ -102,6 +97,7 @@ export default function AutocompleteInput({
           onChange={handleOnChange}
           value={inputValue}
           autoComplete='off'
+          ref={forwardRef}
           {...rest}
         />
         <InputRightElement>
@@ -119,4 +115,4 @@ export default function AutocompleteInput({
       {storedOptions && storedOptions.length > 0 && <OptionsBox onSelect={handleOnSelect} />}
     </FormControl>
   )
-}
+})
