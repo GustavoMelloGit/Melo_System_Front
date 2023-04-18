@@ -1,5 +1,11 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
-import { Controller, useWatch, type Control, type UseFormRegister } from 'react-hook-form'
+import {
+  Controller,
+  useWatch,
+  type Control,
+  type Path,
+  type UseFormRegister,
+} from 'react-hook-form'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
@@ -11,13 +17,13 @@ type Props = {
   register: UseFormRegister<SheetFormValues>
   control: Control<SheetFormValues>
   errors: unknown
-  variant: 'create' | 'edit'
+  isDisabled: (fieldName: Path<SheetFormValues>) => boolean
 }
 export default function SheetFormSheetDetails({
   register,
   errors,
   control,
-  variant,
+  isDisabled,
 }: Props): JSX.Element {
   const clientName = useWatch({
     control,
@@ -53,7 +59,7 @@ export default function SheetFormSheetDetails({
                 }))}
                 isLoading={isLoading}
                 handleChange={onChange}
-                isDisabled={variant === 'edit'}
+                isDisabled={isDisabled('clientId')}
                 placeholder='Ex.: João da Silva'
                 {...field}
               />
@@ -69,6 +75,7 @@ export default function SheetFormSheetDetails({
             type='number'
             inputMode='numeric'
             errors={errors}
+            isDisabled={isDisabled('number')}
           />
         </GridItem>
         <GridItem>
@@ -77,7 +84,7 @@ export default function SheetFormSheetDetails({
             control={control}
             label='Data da pesagem'
             type='date'
-            inputMode='numeric'
+            isDisabled={isDisabled('weighingDate')}
           />
         </GridItem>
         <GridItem>
@@ -87,6 +94,7 @@ export default function SheetFormSheetDetails({
             label='Nome do motorista'
             placeholder='Ex.: João da Silva'
             errors={errors}
+            isDisabled={isDisabled('courier')}
           />
         </GridItem>
         <GridItem>
@@ -97,6 +105,7 @@ export default function SheetFormSheetDetails({
             placeholder='Ex.: 61'
             type='number'
             errors={errors}
+            isDisabled={isDisabled('weightPerBag')}
           />
         </GridItem>
       </Grid>
