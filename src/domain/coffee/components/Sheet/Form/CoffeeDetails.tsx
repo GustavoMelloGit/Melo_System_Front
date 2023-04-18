@@ -115,6 +115,7 @@ export default function SheetFormCoffeeDetails({
             label='Cata'
             placeholder='Ex.: 25'
             type='number'
+            inputMode='decimal'
             step={0.1}
             errors={errors}
             rules={{
