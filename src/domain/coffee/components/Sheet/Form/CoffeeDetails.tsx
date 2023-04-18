@@ -66,6 +66,7 @@ export default function SheetFormCoffeeDetails({
               label='Aproveitamento'
               placeholder='Ex.: 12'
               type='number'
+              inputMode='decimal'
               step={0.1}
               errors={errors}
               rules={{
@@ -83,6 +84,7 @@ export default function SheetFormCoffeeDetails({
             label='Umidade'
             placeholder='Ex.: 12'
             type='number'
+            inputMode='decimal'
             step={0.1}
             errors={errors}
             rules={{
@@ -99,6 +101,7 @@ export default function SheetFormCoffeeDetails({
             label='Peneira 17 / 18'
             placeholder='Ex.: 10'
             type='number'
+            inputMode='decimal'
             step={0.1}
             errors={errors}
             rules={{
@@ -132,6 +135,7 @@ export default function SheetFormCoffeeDetails({
             label='Impureza'
             placeholder='Ex.: 5'
             type='number'
+            inputMode='decimal'
             step={0.1}
             errors={errors}
             rules={{
@@ -148,6 +152,7 @@ export default function SheetFormCoffeeDetails({
             label='Broca'
             placeholder='Ex.: 5'
             type='number'
+            inputMode='decimal'
             step={0.1}
             errors={errors}
             rules={{
