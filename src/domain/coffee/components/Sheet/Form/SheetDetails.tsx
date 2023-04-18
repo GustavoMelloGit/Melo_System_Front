@@ -106,6 +106,9 @@ export default function SheetFormSheetDetails({
             type='number'
             errors={errors}
             isDisabled={isDisabled('weightPerBag')}
+            rules={{
+              valueAsNumber: true,
+            }}
           />
         </GridItem>
       </Grid>
