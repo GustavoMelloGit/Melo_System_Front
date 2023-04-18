@@ -1,5 +1,5 @@
 import { Divider, Grid, GridItem, Heading, IconButton, Stack } from '@chakra-ui/react'
-import { useFieldArray, type Control, type UseFormRegister } from 'react-hook-form'
+import { useFieldArray, type Control, type Path, type UseFormRegister } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import { IoMdAdd, IoMdClose } from 'react-icons/io'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
@@ -9,8 +9,14 @@ type Props = {
   control: Control<SheetFormValues, any>
   register: UseFormRegister<SheetFormValues>
   errors: unknown
+  isDisabled: (fieldName: Path<SheetFormValues>) => boolean
 }
-export default function SheetFormLines({ control, register, errors }: Props): JSX.Element {
+export default function SheetFormLines({
+  control,
+  register,
+  errors,
+  isDisabled,
+}: Props): JSX.Element {
   const { fields, remove, insert } = useFieldArray({
     control,
     name: 'lines',
@@ -43,6 +49,7 @@ export default function SheetFormLines({ control, register, errors }: Props): JS
               inputMode='numeric'
               errors={errors}
               rightIcon='Kg'
+              isDisabled={isDisabled(`lines.${index}.weight`)}
             />
           </GridItem>
           <GridItem>
@@ -55,6 +62,7 @@ export default function SheetFormLines({ control, register, errors }: Props): JS
               inputMode='numeric'
               errors={errors}
               rightIcon={<GiChipsBag />}
+              isDisabled={isDisabled(`lines.${index}.bags`)}
             />
           </GridItem>
           <GridItem>
@@ -66,6 +74,7 @@ export default function SheetFormLines({ control, register, errors }: Props): JS
               onClick={() => {
                 handleRemoveField(index)
               }}
+              isDisabled={isDisabled(`lines.${index}.weight`)}
             />
           </GridItem>
           <GridItem>
@@ -77,6 +86,7 @@ export default function SheetFormLines({ control, register, errors }: Props): JS
               onClick={() => {
                 handleAddField(index)
               }}
+              isDisabled={isDisabled(`lines.${index}.weight`)}
             />
           </GridItem>
         </Grid>

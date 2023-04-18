@@ -13,4 +13,6 @@ export const Routes = {
   createSheet: (bookNumber: string | number) => `/books/${bookNumber}/create`,
   updateSheet: (bookNumber: string | number, sheetNumber: string | number) =>
     `/books/${bookNumber}/update/${sheetNumber}`,
+  sheetDetails: (bookNumber: string | number, sheetNumber: string | number) =>
+    `/books/${bookNumber}/details/${sheetNumber}`,
 } as const

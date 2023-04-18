@@ -12,7 +12,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   const { details } = transaction
   return (
     <Tr>
-      <Td>{getNumberOfBags(transaction.type.value)}</Td>
+      <Td>{getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}</Td>
       <Td>{CoffeeDetailsTypesEnum[details.type]}</Td>
       <Td textAlign='center'>{details.moisture}</Td>
       <Td textAlign='center'>{details.picking}</Td>

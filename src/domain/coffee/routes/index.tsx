@@ -6,6 +6,7 @@ const CoffeeBookListView = React.lazy(async () => import('../view/Book/List'))
 const CoffeeBookDetailsView = React.lazy(async () => import('../view/Book/Details'))
 const CreateSheetView = React.lazy(async () => import('../view/Sheet/Create'))
 const UpdateSheetView = React.lazy(async () => import('../view/Sheet/Update'))
+const SheetDetailsView = React.lazy(async () => import('../view/Sheet/Details'))
 
 const coffeeRoutes: RouteObject[] = [
   {
@@ -27,6 +28,10 @@ const coffeeRoutes: RouteObject[] = [
   {
     path: Routes.updateSheet(':bookNumber', ':sheetNumber'),
     element: <UpdateSheetView />,
+  },
+  {
+    path: Routes.sheetDetails(':bookNumber', ':sheetNumber'),
+    element: <SheetDetailsView />,
   },
 ]
 

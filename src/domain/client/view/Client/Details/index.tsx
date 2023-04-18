@@ -13,7 +13,7 @@ import {
   Tabs,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import InDevelopmentTag from '../../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
@@ -28,7 +28,7 @@ import GeneralInfo from '../GeneralInfo'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
-  const { client, isLoading, handleChangeTab, currentTab } = useClientDetailsView()
+  const { client, isLoading, currentTab } = useClientDetailsView()
 
   if (isLoading) return <SpinLoader />
   if (!client) {
@@ -66,15 +66,39 @@ export default function ClientDetails(): JSX.Element {
           </CardHeader>
         </Card>
         <Flex justify='center'>
-          <Tabs isLazy w='full' onChange={handleChangeTab} index={currentTab}>
+          <Tabs isLazy w='full' index={currentTab}>
             <Card overflow='auto' p={4} roundedTop={0} borderColor='inherit'>
               <TabList justifyContent='center' minW='max-content' w='full'>
-                <Tab data-cy='checkingAccount-tab'>Conta Corrente</Tab>
-                <Tab data-cy='coffe-tab'>Conta Café</Tab>
-                <Tab data-cy='choice-tab'>Conta Escolha</Tab>
-                <Tab data-cy='harvest-tab'>Conta Colheita</Tab>
-                <Tab data-cy='sack-tab'>Conta Sacaria</Tab>
-                <Tab data-cy='info-tab'>Informações Gerais</Tab>
+                <Link to='?tab=0' draggable={false}>
+                  <Tab as='span' data-cy='checkingAccount-tab'>
+                    Conta Corrente
+                  </Tab>
+                </Link>
+                <Link to='?tab=1' draggable={false}>
+                  <Tab as='span' data-cy='coffe-tab'>
+                    Conta Café
+                  </Tab>
+                </Link>
+                <Link to='?tab=2' draggable={false}>
+                  <Tab as='span' data-cy='choice-tab'>
+                    Conta Escolha
+                  </Tab>
+                </Link>
+                <Link to='?tab=3' draggable={false}>
+                  <Tab as='span' data-cy='harvest-tab'>
+                    Conta Colheita
+                  </Tab>
+                </Link>
+                <Link to='?tab=4' draggable={false}>
+                  <Tab as='span' data-cy='sack-tab'>
+                    Conta Sacaria
+                  </Tab>
+                </Link>
+                <Link to='?tab=5' draggable={false}>
+                  <Tab as='span' data-cy='info-tab'>
+                    Informações Gerais
+                  </Tab>
+                </Link>
               </TabList>
             </Card>
             <TabPanels>

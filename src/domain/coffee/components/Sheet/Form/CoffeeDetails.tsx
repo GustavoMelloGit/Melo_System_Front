@@ -1,6 +1,6 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
-import { type UseFormRegister, type UseFormWatch } from 'react-hook-form'
+import { type Path, type UseFormRegister, type UseFormWatch } from 'react-hook-form'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
@@ -15,8 +15,14 @@ type Props = {
   register: UseFormRegister<SheetFormValues>
   errors: unknown
   watch: UseFormWatch<SheetFormValues>
+  isDisabled: (fieldName: Path<SheetFormValues>) => boolean
 }
-export default function SheetFormCoffeeDetails({ register, errors, watch }: Props): JSX.Element {
+export default function SheetFormCoffeeDetails({
+  register,
+  errors,
+  watch,
+  isDisabled,
+}: Props): JSX.Element {
   const hasCoffeeDetailsType: CoffeeTypes[] = ['bica_corrida', 'conilon']
   const hasUtilizationType: CoffeeTypes[] = ['escolha']
   return (
@@ -35,6 +41,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
               value,
               label: capitalCase(value),
             }))}
+            isDisabled={isDisabled('coffeeType')}
           />
         </GridItem>
         {hasCoffeeDetailsType.includes(watch('coffeeType')) && (
@@ -47,6 +54,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
                 value,
                 label,
               }))}
+              isDisabled={isDisabled('coffeeDetails.type')}
             />
           </GridItem>
         )}
@@ -64,6 +72,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
                 valueAsNumber: true,
               }}
               rightIcon='%'
+              isDisabled={isDisabled('coffeeDetails.utilization')}
             />
           </GridItem>
         )}
@@ -80,6 +89,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
               valueAsNumber: true,
             }}
             rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.moisture')}
           />
         </GridItem>
         <GridItem>
@@ -95,6 +105,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
               valueAsNumber: true,
             }}
             rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.sieve')}
           />
         </GridItem>
         <GridItem>
@@ -104,12 +115,14 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
             label='Cata'
             placeholder='Ex.: 25'
             type='number'
+            inputMode='decimal'
             step={0.1}
             errors={errors}
             rules={{
               valueAsNumber: true,
             }}
             rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.picking')}
           />
         </GridItem>
         <GridItem>
@@ -125,6 +138,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
               valueAsNumber: true,
             }}
             rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.foulness')}
           />
         </GridItem>
         <GridItem>
@@ -140,6 +154,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
               valueAsNumber: true,
             }}
             rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.drilled')}
           />
         </GridItem>
       </Grid>
@@ -150,6 +165,7 @@ export default function SheetFormCoffeeDetails({ register, errors, watch }: Prop
         label='Descrição'
         placeholder='Ex.: Café de excelente qualidade'
         errors={errors}
+        isDisabled={isDisabled('coffeeDetails.description')}
       />
     </Stack>
   )

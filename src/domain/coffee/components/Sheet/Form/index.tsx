@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, CardFooter, Flex, Stack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, type Path } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
 import { type SheetFormValues } from '../../../types/model/sheet'
@@ -11,8 +11,8 @@ import SheetFormSheetDetails from './SheetDetails'
 
 type Props = {
   initialValues?: SheetFormValues
-  onSubmit: (values: SheetFormValues) => Promise<void>
-  variant?: 'create' | 'edit'
+  onSubmit?: (values: SheetFormValues) => Promise<void>
+  variant?: 'create' | 'edit' | 'view'
 }
 export default function SheetForm({
   initialValues,
@@ -24,9 +24,21 @@ export default function SheetForm({
       resolver: yupResolver(validationSchema),
     })
 
+  function isDisabled(fieldName: Path<SheetFormValues>): boolean {
+    let disabledFields: Array<Path<SheetFormValues>>
+    if (variant === 'edit') {
+      disabledFields = ['clientId']
+      return disabledFields.includes(fieldName)
+    }
+    if (variant === 'view') {
+      return true
+    }
+    return false
+  }
+
   const submitFormHandler = handleSubmit(async ({ weighingDate, ...values }) => {
     try {
-      await onSubmit({
+      await onSubmit?.({
         ...values,
         weighingDate: +weighingDate,
       })
@@ -46,13 +58,23 @@ export default function SheetForm({
         <CardBody>
           <Stack spacing={5}>
             <SheetFormSheetDetails
-              variant={variant}
+              isDisabled={isDisabled}
               control={control}
               register={register}
               errors={formState.errors}
             />
-            <SheetFormCoffeeDetails watch={watch} register={register} errors={formState.errors} />
-            <SheetFormLines control={control} register={register} errors={formState.errors} />
+            <SheetFormCoffeeDetails
+              isDisabled={isDisabled}
+              watch={watch}
+              register={register}
+              errors={formState.errors}
+            />
+            <SheetFormLines
+              isDisabled={isDisabled}
+              control={control}
+              register={register}
+              errors={formState.errors}
+            />
           </Stack>
         </CardBody>
         <CardFooter>
@@ -65,6 +87,7 @@ export default function SheetForm({
                 setValue('isDraft', true)
               }}
               isLoading={formState.isSubmitting}
+              isDisabled={variant === 'view'}
             >
               Salvar rascunho
             </Button>
@@ -76,6 +99,7 @@ export default function SheetForm({
               type='submit'
               flex={1}
               isLoading={formState.isSubmitting}
+              isDisabled={variant === 'view'}
             >
               Salvar e Creditar
             </Button>
