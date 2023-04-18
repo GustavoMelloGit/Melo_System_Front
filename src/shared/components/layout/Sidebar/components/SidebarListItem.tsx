@@ -27,6 +27,7 @@ export default function SidebarListItem({
           height: '100%',
           padding: '.5rem 1rem',
         }}
+        draggable={false}
       >
         {icon}
         {label}
