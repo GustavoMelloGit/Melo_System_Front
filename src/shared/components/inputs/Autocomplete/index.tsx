@@ -22,97 +22,101 @@ type Props = InputProps & {
   handleBlur?: () => void
   handleFocus?: () => void
 }
-export default forwardRef<HTMLInputElement, Props>(function AutocompleteInput(
-  { label, options, isLoading, handleChange, handleFocus, value, ...rest },
-  forwardRef,
-): JSX.Element {
-  const ref = useRef<HTMLDivElement>(null)
-  const {
-    setInputValue,
-    setShowOptions,
-    selectOption,
-    inputValue,
-    resetState,
-    setOptions,
-    options: storedOptions,
-  } = useAutocompleteStore()
-  useOutsideClick({
-    ref,
-    handler: () => {
-      setShowOptions(false)
-    },
-  })
+const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
+  (
+    { label, options, isLoading, handleChange, handleFocus, value, ...rest },
+    forwardRef,
+  ): JSX.Element => {
+    const ref = useRef<HTMLDivElement>(null)
+    const {
+      setInputValue,
+      setShowOptions,
+      selectOption,
+      inputValue,
+      resetState,
+      setOptions,
+      options: storedOptions,
+    } = useAutocompleteStore()
+    useOutsideClick({
+      ref,
+      handler: () => {
+        setShowOptions(false)
+      },
+    })
 
-  function handleShowOptions(): void {
-    setShowOptions(true)
-  }
-
-  function handleOnFocus(): void {
-    handleShowOptions()
-    if (handleFocus) handleFocus()
-  }
-
-  function handleOnChange(e: ChangeEvent<HTMLInputElement>): void {
-    setInputValue(e.target.value)
-    if (handleChange) handleChange(e.target.value)
-  }
-
-  function handleOnSelect(option: Option): void {
-    selectOption(option.value)
-    setInputValue(String(option.label))
-    setShowOptions(false)
-    if (handleChange) handleChange(String(option.value))
-  }
-
-  useEffect(() => {
-    // Reset state when component unmounts
-    return () => {
-      resetState()
+    function handleShowOptions(): void {
+      setShowOptions(true)
     }
-  }, [])
 
-  useEffect(() => {
-    // Set input value when value prop changes
-    const option = storedOptions?.find((option) => option.value === value)
-    if (option) {
+    function handleOnFocus(): void {
+      handleShowOptions()
+      if (handleFocus) handleFocus()
+    }
+
+    function handleOnChange(e: ChangeEvent<HTMLInputElement>): void {
+      setInputValue(e.target.value)
+      if (handleChange) handleChange(e.target.value)
+    }
+
+    function handleOnSelect(option: Option): void {
+      selectOption(option.value)
       setInputValue(String(option.label))
-    } else {
-      setInputValue(String(value))
+      setShowOptions(false)
+      if (handleChange) handleChange(String(option.value))
     }
-  }, [value, options])
 
-  useEffect(() => {
-    if (!options) return
-    setOptions(options)
-  }, [options])
+    useEffect(() => {
+      // Reset state when component unmounts
+      return () => {
+        resetState()
+      }
+    }, [])
 
-  return (
-    <FormControl position='relative' ref={ref}>
-      {label && <FormLabel>{label}</FormLabel>}
-      <InputGroup>
-        <Input
-          variant='filled'
-          rounded='xl'
-          onFocus={handleOnFocus}
-          onChange={handleOnChange}
-          value={inputValue}
-          autoComplete='off'
-          ref={forwardRef}
-          {...rest}
-        />
-        <InputRightElement>
-          <Button
-            variant='ghost'
-            p={0}
+    useEffect(() => {
+      // Set input value when value prop changes
+      const option = storedOptions?.find((option) => option.value === value)
+      if (option) {
+        setInputValue(String(option.label))
+      } else {
+        setInputValue(String(value))
+      }
+    }, [value, options])
+
+    useEffect(() => {
+      if (!options) return
+      setOptions(options)
+    }, [options])
+
+    return (
+      <FormControl position='relative' ref={ref}>
+        {label && <FormLabel>{label}</FormLabel>}
+        <InputGroup>
+          <Input
+            variant='filled'
             rounded='xl'
-            onClick={handleShowOptions}
-            isLoading={isLoading}
-          >
-            <IoIosArrowDown />
-          </Button>
-        </InputRightElement>
-      </InputGroup>
-      {storedOptions && storedOptions.length > 0 && <OptionsBox onSelect={handleOnSelect} />}
-    </FormControl>
-  )
-})
+            onFocus={handleOnFocus}
+            onChange={handleOnChange}
+            value={inputValue}
+            autoComplete='off'
+            ref={forwardRef}
+            {...rest}
+          />
+          <InputRightElement>
+            <Button
+              variant='ghost'
+              p={0}
+              rounded='xl'
+              onClick={handleShowOptions}
+              isLoading={isLoading}
+            >
+              <IoIosArrowDown />
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+        {storedOptions && storedOptions.length > 0 && <OptionsBox onSelect={handleOnSelect} />}
+      </FormControl>
+    )
+  },
+)
+
+export default AutocompleteInput
