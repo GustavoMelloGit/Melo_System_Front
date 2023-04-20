@@ -34,17 +34,20 @@ export default function OptionsBox({ onSelect }: Props): JSX.Element {
       overflow='hidden'
       borderWidth={2}
       borderColor='blue.500'
+      py={1}
     >
       {options.map((option) => (
         <Button
           key={String(option.value)}
           data-value={option.value}
           variant='ghost'
-          p={0}
           rounded={0}
           onClick={() => {
             handleOnClick(option)
           }}
+          wordBreak='break-all'
+          whiteSpace='normal'
+          p={4}
         >
           {option.label}
         </Button>

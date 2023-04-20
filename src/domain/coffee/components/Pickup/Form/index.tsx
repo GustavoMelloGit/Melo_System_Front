@@ -10,8 +10,9 @@ import {
   ModalOverlay,
   VStack,
 } from '@chakra-ui/react'
+import { Controller } from 'react-hook-form'
+import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
-import SpinLoader from '../../../../../shared/components/SpinLoader'
 import { type PickupFormValues } from '../../../types/model/pickup'
 import usePickupForm from './usePickupForm'
 
@@ -28,6 +29,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
     handleSubmit,
     register,
     formState: { isSubmitting, errors },
+    control,
   } = form
 
   return (
@@ -45,7 +47,26 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
           >
             <Grid templateColumns={['1fr', 'repeat(2, 1fr)']} gap={2}>
               <GridItem>
-                <RHFField
+                <Controller
+                  name='clientName'
+                  control={control}
+                  render={({ field: { onChange, ...field } }) => (
+                    <AutocompleteInput
+                      label='Cliente'
+                      options={clients?.map((client) => ({
+                        label: `${
+                          client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
+                        }`,
+                        value: client.name,
+                      }))}
+                      isLoading={isLoading}
+                      handleChange={onChange}
+                      placeholder='Ex.: João da Silva'
+                      {...field}
+                    />
+                  )}
+                />
+                {/* <RHFField
                   name='clientName'
                   label='Cliente'
                   register={register}
@@ -64,7 +85,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                       </option>
                     ))}
                   </datalist>
-                )}
+                )} */}
               </GridItem>
               <GridItem>
                 <RHFField

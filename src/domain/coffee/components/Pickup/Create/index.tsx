@@ -24,5 +24,14 @@ export default function CreateCoffeePickup({ onSuccess }: Props): JSX.Element {
     closeModal()
   }
 
-  return <CoffeePickupForm onSubmit={handleCreateCoffeePickup} />
+  return (
+    <CoffeePickupForm
+      onSubmit={handleCreateCoffeePickup}
+      initialValues={{
+        address: '',
+        bags: 0,
+        clientName: '',
+      }}
+    />
+  )
 }
