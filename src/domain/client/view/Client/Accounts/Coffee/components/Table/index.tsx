@@ -49,51 +49,30 @@ const headerColumns: TableHeaderColumns[] = [
   {
     id: 'bags',
     label: 'Sacos',
+    px: 3,
   },
   {
     id: 'details.type',
     label: 'Bebida',
     isSortable: true,
+    px: 3,
   },
   {
-    id: 'details.moisture',
-    label: 'Umidade',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.picking',
-    label: 'Cata',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.sieve',
-    label: '17 / 18',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.drilled',
-    label: 'Broca',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.foulness',
-    label: 'Impureza',
-    isSortable: true,
-    textAlign: 'center',
+    id: 'description',
+    label: 'Descrição',
+    px: 3,
   },
   {
     id: 'createdAt',
     label: 'Data',
     isSortable: true,
     defaultSort: 'desc',
+    px: 3,
   },
   {
     id: 'actions',
     label: 'Ações',
     textAlign: 'center',
+    px: 3,
   },
 ]

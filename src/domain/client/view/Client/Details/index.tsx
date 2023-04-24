@@ -105,7 +105,7 @@ export default function ClientDetails(): JSX.Element {
               <TabPanel>
                 <ListTransactionsView />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <CoffeeAccountView />
               </TabPanel>
               <TabPanel>
