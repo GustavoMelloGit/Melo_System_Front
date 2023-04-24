@@ -79,40 +79,6 @@ export default function SheetFormCoffeeDetails({
         )}
         <GridItem>
           <RHFField<SheetFormValues>
-            name='coffeeDetails.moisture'
-            register={register}
-            label='Umidade'
-            placeholder='Ex.: 12'
-            type='number'
-            inputMode='decimal'
-            step={0.1}
-            errors={errors}
-            rules={{
-              valueAsNumber: true,
-            }}
-            rightIcon='%'
-            isDisabled={isDisabled('coffeeDetails.moisture')}
-          />
-        </GridItem>
-        <GridItem>
-          <RHFField<SheetFormValues>
-            name='coffeeDetails.sieve'
-            register={register}
-            label='Peneira 17 / 18'
-            placeholder='Ex.: 10'
-            type='number'
-            inputMode='decimal'
-            step={0.1}
-            errors={errors}
-            rules={{
-              valueAsNumber: true,
-            }}
-            rightIcon='%'
-            isDisabled={isDisabled('coffeeDetails.sieve')}
-          />
-        </GridItem>
-        <GridItem>
-          <RHFField<SheetFormValues>
             name='coffeeDetails.picking'
             register={register}
             label='Cata'
@@ -130,10 +96,10 @@ export default function SheetFormCoffeeDetails({
         </GridItem>
         <GridItem>
           <RHFField<SheetFormValues>
-            name='coffeeDetails.foulness'
+            name='coffeeDetails.sieve'
             register={register}
-            label='Impureza'
-            placeholder='Ex.: 5'
+            label='17 / 18'
+            placeholder='Ex.: 10'
             type='number'
             inputMode='decimal'
             step={0.1}
@@ -142,7 +108,24 @@ export default function SheetFormCoffeeDetails({
               valueAsNumber: true,
             }}
             rightIcon='%'
-            isDisabled={isDisabled('coffeeDetails.foulness')}
+            isDisabled={isDisabled('coffeeDetails.sieve')}
+          />
+        </GridItem>
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.moisture'
+            register={register}
+            label='Umidade'
+            placeholder='Ex.: 12'
+            type='number'
+            inputMode='decimal'
+            step={0.1}
+            errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
+            rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.moisture')}
           />
         </GridItem>
         <GridItem>
@@ -160,6 +143,24 @@ export default function SheetFormCoffeeDetails({
             }}
             rightIcon='%'
             isDisabled={isDisabled('coffeeDetails.drilled')}
+          />
+        </GridItem>
+
+        <GridItem>
+          <RHFField<SheetFormValues>
+            name='coffeeDetails.foulness'
+            register={register}
+            label='Impureza'
+            placeholder='Ex.: 5'
+            type='number'
+            inputMode='decimal'
+            step={0.1}
+            errors={errors}
+            rules={{
+              valueAsNumber: true,
+            }}
+            rightIcon='%'
+            isDisabled={isDisabled('coffeeDetails.foulness')}
           />
         </GridItem>
       </Grid>

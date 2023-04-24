@@ -41,19 +41,6 @@ export default function SheetFormLines({
         <Grid key={field.id} templateColumns='1fr 1fr 40px 40px' gap={4} alignItems='end'>
           <GridItem>
             <RHFField<SheetFormValues>
-              name={`lines.${index}.weight`}
-              register={register}
-              label='Peso'
-              placeholder='Ex.: 12'
-              type='number'
-              inputMode='numeric'
-              errors={errors}
-              rightIcon='Kg'
-              isDisabled={isDisabled(`lines.${index}.weight`)}
-            />
-          </GridItem>
-          <GridItem>
-            <RHFField<SheetFormValues>
               name={`lines.${index}.bags`}
               register={register}
               label='Sacos'
@@ -65,6 +52,20 @@ export default function SheetFormLines({
               isDisabled={isDisabled(`lines.${index}.bags`)}
             />
           </GridItem>
+          <GridItem>
+            <RHFField<SheetFormValues>
+              name={`lines.${index}.weight`}
+              register={register}
+              label='Peso'
+              placeholder='Ex.: 12'
+              type='number'
+              inputMode='numeric'
+              errors={errors}
+              rightIcon='Kg'
+              isDisabled={isDisabled(`lines.${index}.weight`)}
+            />
+          </GridItem>
+
           <GridItem>
             <IconButton
               aria-label='Remover linha'
