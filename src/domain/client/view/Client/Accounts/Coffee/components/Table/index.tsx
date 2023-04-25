@@ -42,7 +42,6 @@ const searchForOptions: SearchForOption = {
     label: 'Data',
     inputProps: {
       type: 'date',
-      valueGetter: (value) => String(new Date(value).getTime()),
     },
   },
   'details.type': {

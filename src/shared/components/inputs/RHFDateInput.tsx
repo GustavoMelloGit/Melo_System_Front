@@ -18,7 +18,7 @@ export default function RHFDateInput<TFormValues extends FieldValues>({
       <Controller
         control={control}
         name={name}
-        render={({ field: { onChange, value, ...field } }) => {
+        render={({ field: { value, ...field } }) => {
           let inputValue = ''
 
           const valueIsNumber = typeof value === 'number' && !isNaN(value)
@@ -34,10 +34,6 @@ export default function RHFDateInput<TFormValues extends FieldValues>({
               fontWeight={500}
               type='date'
               inputMode='numeric'
-              onChange={(e) => {
-                const value = e.target.value
-                onChange(new Date(value).getTime())
-              }}
               value={inputValue}
               {...rest}
               {...field}
