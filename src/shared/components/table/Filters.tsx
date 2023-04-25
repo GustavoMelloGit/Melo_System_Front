@@ -20,7 +20,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
     },
   })
   const currentSearchForOption = searchForOptions[watch('searchFor')]
-  const { inputProps } = currentSearchForOption
+  const { inputProps, Input } = currentSearchForOption
   const DOMProperties = { ...inputProps }
   delete DOMProperties?.valueGetter
 
@@ -58,12 +58,12 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             {actions && <Show below='sm'>{actions}</Show>}
           </GridItem>
           <GridItem display='flex' alignItems='center' gap={1}>
-            {currentSearchForOption.Input ? (
+            {Input ? (
               <Controller
                 name='query'
                 control={control}
                 render={({ field }) =>
-                  cloneElement(currentSearchForOption.Input, {
+                  cloneElement(Input, {
                     register,
                     ...DOMProperties,
                     ...field,
