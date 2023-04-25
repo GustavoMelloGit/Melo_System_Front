@@ -46,8 +46,14 @@ const searchForOptions: SearchForOption = {
 
 const headerColumns: TableHeaderColumns[] = [
   {
-    id: 'bags',
+    id: 'clientBalance',
+    label: 'Saldo',
+    isSortable: true,
+  },
+  {
+    id: 'type.value',
     label: 'Sacos',
+    isSortable: true,
   },
   {
     id: 'description',
