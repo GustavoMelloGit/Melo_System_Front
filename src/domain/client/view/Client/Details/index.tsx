@@ -53,9 +53,9 @@ export default function ClientDetails(): JSX.Element {
       <Box>
         <Card roundedBottom={0}>
           <CardHeader pb={0}>
-            <Stack flexDir={['column', 'row']} align={'center'} gap={8}>
+            <Stack flexDir='row' align={'center'} gap={[4, 8]} flexWrap='wrap'>
               <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
-              <Box textAlign={['center', 'left']}>
+              <Box>
                 <Heading as='h1' fontSize={['xl', '4xl']}>
                   {client.name}
                 </Heading>

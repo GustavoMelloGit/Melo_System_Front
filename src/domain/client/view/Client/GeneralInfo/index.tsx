@@ -149,9 +149,16 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
   return (
     <Modal isCentered isOpen onClose={closeModal}>
       <ModalOverlay />
-      <ModalContent w='full' maxW={1200}>
+      <ModalContent
+        w='full'
+        maxW={1200}
+        maxH={{
+          base: 'calc(100vh - 4rem)',
+          md: 'calc(100vh - 8rem)',
+        }}
+      >
         <ModalCloseButton />
-        <ModalBody pt={2} pb={8} px={5}>
+        <ModalBody pt={2} pb={8} px={5} overflowY='auto'>
           <Stack align='flex-start' spacing={10} mt={6} id='screenshot-content'>
             <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 
