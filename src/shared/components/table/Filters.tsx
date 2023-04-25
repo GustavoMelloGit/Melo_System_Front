@@ -1,5 +1,6 @@
 import { Box, Grid, GridItem, Hide, IconButton, Show, useColorModeValue } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
+import { cloneElement } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { BiSearchAlt } from 'react-icons/bi'
 import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
@@ -12,14 +13,14 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
   const { handleAddParams, handleRemoveParams } = useURLSearchParams()
   const bg = useColorModeValue('gray.200', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
-  const { handleSubmit, register, watch } = useForm<FilterFormValues>({
+  const { handleSubmit, register, watch, control } = useForm<FilterFormValues>({
     defaultValues: {
       query: queryParam ?? '',
       searchFor: getParam(PaginationParams.searchFor) ?? Object.keys(searchForOptions)[0],
     },
   })
   const currentSearchForOption = searchForOptions[watch('searchFor')]
-  const { inputProps } = currentSearchForOption
+  const { inputProps, Input } = currentSearchForOption
   const DOMProperties = { ...inputProps }
   delete DOMProperties?.valueGetter
 
@@ -57,23 +58,35 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             {actions && <Show below='sm'>{actions}</Show>}
           </GridItem>
           <GridItem display='flex' alignItems='center' gap={1}>
-            <RHFField<FilterFormValues>
-              register={register}
-              rounded='md'
-              roundedLeft={['md', 'none']}
-              placeholder='Pesquisar'
-              rightIcon={
-                <IconButton
-                  type='submit'
-                  variant='ghost'
-                  aria-label='Search'
-                  icon={<BiSearchAlt size={24} />}
-                  data-cy='table-submit-search-button'
-                />
-              }
-              {...(DOMProperties ?? {})}
-              name='query'
-              data-cy='table-search-input'
+            {Input ? (
+              <Controller
+                name='query'
+                control={control}
+                render={({ field }) =>
+                  cloneElement(Input, {
+                    register,
+                    ...DOMProperties,
+                    ...field,
+                  })
+                }
+              />
+            ) : (
+              <RHFField<FilterFormValues>
+                register={register}
+                rounded='md'
+                roundedLeft={['md', 'none']}
+                placeholder='Pesquisar'
+                {...(DOMProperties ?? {})}
+                name='query'
+                data-cy='table-search-input'
+              />
+            )}
+            <IconButton
+              type='submit'
+              variant='ghost'
+              aria-label='Search'
+              icon={<BiSearchAlt size={24} />}
+              data-cy='table-submit-search-button'
             />
             {actions && <Hide below='sm'>{actions}</Hide>}
           </GridItem>

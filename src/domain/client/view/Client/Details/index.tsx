@@ -5,6 +5,7 @@ import {
   CardHeader,
   Flex,
   Heading,
+  IconButton,
   Stack,
   Tab,
   TabList,
@@ -13,6 +14,7 @@ import {
   Tabs,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
+import { IoDocumentTextOutline } from 'react-icons/io5'
 import { Link, Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import InDevelopmentTag from '../../../../../shared/components/InDevelopmentTag'
@@ -23,12 +25,11 @@ import ListTransactionsView from '../Accounts/Checking/view/List'
 import CoffeeAccountView from '../Accounts/Coffee/view/List'
 import EscolhaAccountView from '../Accounts/Escolha/view/List'
 import SacariaAccountView from '../Accounts/Sacaria/view/List'
-import GeneralInfo from '../GeneralInfo'
 
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
-  const { client, isLoading, currentTab } = useClientDetailsView()
+  const { client, isLoading, currentTab, openClientInfoModal } = useClientDetailsView()
 
   if (isLoading) return <SpinLoader />
   if (!client) {
@@ -58,9 +59,18 @@ export default function ClientDetails(): JSX.Element {
                 <Heading as='h1' fontSize={['xl', '4xl']}>
                   {client.name}
                 </Heading>
-                <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
-                  ({client.nickname ?? 'Sem apelido'})
-                </Heading>
+                <Flex align='center' gap={1}>
+                  <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
+                    ({client.nickname ?? 'Sem apelido'})
+                  </Heading>
+                  <IconButton
+                    onClick={openClientInfoModal}
+                    variant='ghost'
+                    title='Informações gerais do cliente'
+                    aria-label='Informações gerais do cliente'
+                    icon={<IoDocumentTextOutline size={20} />}
+                  />
+                </Flex>
               </Box>
             </Stack>
           </CardHeader>
@@ -94,18 +104,13 @@ export default function ClientDetails(): JSX.Element {
                     Conta Sacaria
                   </Tab>
                 </Link>
-                <Link to='?tab=5' draggable={false}>
-                  <Tab as='span' data-cy='info-tab'>
-                    Informações Gerais
-                  </Tab>
-                </Link>
               </TabList>
             </Card>
             <TabPanels>
               <TabPanel>
                 <ListTransactionsView />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <CoffeeAccountView />
               </TabPanel>
               <TabPanel>
@@ -116,9 +121,6 @@ export default function ClientDetails(): JSX.Element {
               </TabPanel>
               <TabPanel>
                 <SacariaAccountView />
-              </TabPanel>
-              <TabPanel>
-                <GeneralInfo client={client} />
               </TabPanel>
             </TabPanels>
           </Tabs>

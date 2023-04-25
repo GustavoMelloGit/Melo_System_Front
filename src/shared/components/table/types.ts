@@ -3,6 +3,7 @@ import {
   type TableColumnHeaderProps,
   type TableProps as ChakraTableProps,
 } from '@chakra-ui/react'
+import { type ReactElement } from 'react'
 
 export type CustomTableComponentProps<TData> = {
   data: TData | undefined
@@ -40,6 +41,7 @@ export type SearchForOption = Record<
   {
     label: string
     inputProps?: FilterInputProps
+    Input?: ReactElement
   }
 >
 export type TableFilterProps = {

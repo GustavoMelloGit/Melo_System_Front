@@ -24,14 +24,14 @@ export default function SettingsThemeMenuItem(): JSX.Element {
               setColorMode('light')
             }}
           >
-            Light
+            Claro
           </MenuItem>
           <MenuItem
             onClick={() => {
               setColorMode('dark')
             }}
           >
-            Dark
+            Escuro
           </MenuItem>
         </MenuList>
       </Menu>

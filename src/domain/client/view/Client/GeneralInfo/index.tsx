@@ -1,6 +1,21 @@
-import { Box, Divider, Grid, GridItem, Heading, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Divider,
+  Grid,
+  GridItem,
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
+import { useModal } from '../../../../../shared/hooks/useModal'
 import { type ClientModel } from '../../../types/model/Client'
 
 type ClientInfo = Array<{ label: string; value: React.ReactNode }>
@@ -10,6 +25,7 @@ type GeneralInfoProps = {
 
 const defaultEmptyValue = '--'
 export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
+  const closeModal = useModal((state) => state.closeModal)
   const isLegalPerson = client.personType?.type === 'juridica'
 
   const clientInfo = useMemo(
@@ -131,19 +147,27 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
   )
 
   return (
-    <VStack align='flex-start' spacing={10} mt={6} id='screenshot-content'>
-      <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
+    <Modal isCentered isOpen onClose={closeModal}>
+      <ModalOverlay />
+      <ModalContent w='full' maxW={1200}>
+        <ModalCloseButton />
+        <ModalBody pt={2} pb={8} px={5}>
+          <Stack align='flex-start' spacing={10} mt={6} id='screenshot-content'>
+            <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 
-      {!isLegalPerson && (
-        <DisplayInfoBox title='Pessoa Física' data={clientInfo.naturalPerson ?? []} />
-      )}
+            {!isLegalPerson && (
+              <DisplayInfoBox title='Pessoa Física' data={clientInfo.naturalPerson ?? []} />
+            )}
 
-      {isLegalPerson && (
-        <DisplayInfoBox title='Pessoa Jurídica' data={clientInfo.legalPerson ?? []} />
-      )}
+            {isLegalPerson && (
+              <DisplayInfoBox title='Pessoa Jurídica' data={clientInfo.legalPerson ?? []} />
+            )}
 
-      <DisplayInfoBox title='Endereço' data={clientInfo.address} />
-    </VStack>
+            <DisplayInfoBox title='Endereço' data={clientInfo.address} />
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }
 

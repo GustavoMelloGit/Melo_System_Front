@@ -1,9 +1,11 @@
+import { Select } from '@chakra-ui/react'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
+import { CoffeeDetailsTypesEnum } from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
@@ -40,8 +42,19 @@ const searchForOptions: SearchForOption = {
     label: 'Data',
     inputProps: {
       type: 'date',
-      valueGetter: (value) => String(new Date(value).getTime()),
     },
+  },
+  'details.type': {
+    label: 'Tipo',
+    Input: (
+      <Select variant='filled' roundedLeft={0} flexGrow={1}>
+        {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    ),
   },
 }
 
@@ -49,51 +62,30 @@ const headerColumns: TableHeaderColumns[] = [
   {
     id: 'bags',
     label: 'Sacos',
+    px: 3,
   },
   {
     id: 'details.type',
     label: 'Bebida',
     isSortable: true,
+    px: 3,
   },
   {
-    id: 'details.moisture',
-    label: 'Umidade',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.picking',
-    label: 'Cata',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.sieve',
-    label: '17 / 18',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.drilled',
-    label: 'Broca',
-    isSortable: true,
-    textAlign: 'center',
-  },
-  {
-    id: 'details.foulness',
-    label: 'Impureza',
-    isSortable: true,
-    textAlign: 'center',
+    id: 'description',
+    label: 'Descrição',
+    px: 3,
   },
   {
     id: 'createdAt',
     label: 'Data',
     isSortable: true,
     defaultSort: 'desc',
+    px: 3,
   },
   {
     id: 'actions',
     label: 'Ações',
     textAlign: 'center',
+    px: 3,
   },
 ]

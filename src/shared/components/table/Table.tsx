@@ -19,7 +19,7 @@ export default function Table({
   filter,
   table,
 }: TableProps): JSX.Element {
-  const trHoverColor = useColorModeValue('gray.50', 'gray.700')
+  const trHoverColor = useColorModeValue('gray.300', 'gray.600')
   return (
     <Box w='full'>
       {filter && <TableFilters {...filter} />}
