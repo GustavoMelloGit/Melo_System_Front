@@ -1,9 +1,11 @@
+import { Select } from '@chakra-ui/react'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
+import { CoffeeDetailsTypesEnum } from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
@@ -42,6 +44,18 @@ const searchForOptions: SearchForOption = {
       type: 'date',
       valueGetter: (value) => String(new Date(value).getTime()),
     },
+  },
+  'details.type': {
+    label: 'Tipo',
+    Input: (
+      <Select variant='filled' roundedLeft={0} flexGrow={1}>
+        {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    ),
   },
 }
 
