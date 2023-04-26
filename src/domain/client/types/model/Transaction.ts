@@ -1,6 +1,10 @@
 import { type Timestamp, type WithId } from '../../../../shared/types/utils/model'
 import { type UserModel } from '../../../auth/types/model/user'
-import { type CoffeeDetails, type EscolhaDetails } from '../../../coffee/types/model/coffee'
+import {
+  type CoffeeDetails,
+  type CoffeeTypes,
+  type EscolhaDetails,
+} from '../../../coffee/types/model/coffee'
 
 export type TransactionModel = WithId<{
   clientBalance: number
@@ -19,11 +23,12 @@ export type EscolhaTransactionModel = TransactionModel & {
   details: EscolhaDetails
 }
 
-export type TransactionType = {
-  name: string
+export type TransactionType<TName = string> = {
+  name: TName
   value: number
 }
 
 export type CoffeeTransactionModel = TransactionModel & {
   details: CoffeeDetails
+  type: TransactionType<CoffeeTypes>
 }

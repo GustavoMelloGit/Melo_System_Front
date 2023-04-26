@@ -38,13 +38,25 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
 }
 
 const searchForOptions: SearchForOption = {
-  date: {
+  oneDayInterval: {
     label: 'Data',
     inputProps: {
       type: 'date',
     },
   },
   'details.type': {
+    label: 'Bebida',
+    Input: (
+      <Select variant='filled' roundedLeft={0} flexGrow={1}>
+        {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    ),
+  },
+  'type.name': {
     label: 'Tipo',
     Input: (
       <Select variant='filled' roundedLeft={0} flexGrow={1}>
@@ -63,6 +75,12 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'bags',
     label: 'Sacos',
     px: 3,
+  },
+  {
+    id: 'type.name',
+    label: 'Tipo',
+    px: 3,
+    isSortable: true,
   },
   {
     id: 'details.type',

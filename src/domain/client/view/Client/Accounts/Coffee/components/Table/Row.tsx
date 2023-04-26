@@ -1,9 +1,11 @@
 import { Td, Tr } from '@chakra-ui/react'
+import { capitalCase } from 'change-case'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
   CoffeeDetailsTypesEnum,
   type CoffeeDetails,
+  type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
@@ -24,6 +26,12 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     type: '',
     weightPerBag: '',
   }
+  const labelByTypeName: Record<CoffeeTypes, string> = {
+    bica_corrida: 'BC',
+    conilon: 'CON',
+    despolpado: 'DESP',
+    escolha: 'ESC',
+  }
   const fullDescription = Object.entries(details).reduce((acc, [key, value]) => {
     const messageValue = messageByDetail[key as keyof CoffeeDetails]
     const isNumber = typeof value === 'number'
@@ -36,6 +44,9 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     <Tr>
       <Td px={padding}>
         {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}
+      </Td>
+      <Td px={padding} title={capitalCase(transaction.type.name)}>
+        {labelByTypeName[transaction.type.name]}
       </Td>
       <Td px={padding}>{CoffeeDetailsTypesEnum[details.type]}</Td>
       <Td px={padding} title={fullDescription}>
