@@ -29,7 +29,8 @@ import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
-  const { client, isLoading, currentTab, openClientInfoModal } = useClientDetailsView()
+  const { client, isLoading, currentTab, openClientInfoModal, openClientBalancesModal } =
+    useClientDetailsView()
 
   if (isLoading) return <SpinLoader />
   if (!client) {
@@ -73,7 +74,7 @@ export default function ClientDetails(): JSX.Element {
                     icon={<IoDocumentTextOutline size={20} />}
                   />
                   <IconButton
-                    onClick={openClientInfoModal}
+                    onClick={openClientBalancesModal}
                     variant='outline'
                     title='Saldos do cliente'
                     aria-label='Saldos do cliente'
