@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   IconButton,
-  Stack,
   Tab,
   TabList,
   TabPanel,
@@ -14,6 +13,7 @@ import {
   Tabs,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
+import { BiDollarCircle } from 'react-icons/bi'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { Link, Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
@@ -53,26 +53,35 @@ export default function ClientDetails(): JSX.Element {
       <Box>
         <Card roundedBottom={0}>
           <CardHeader pb={0}>
-            <Stack flexDir='row' align={'center'} gap={[4, 8]} flexWrap='wrap'>
+            <Flex align={'center'} gap={[4, 8]} flexWrap='wrap'>
               <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
-              <Box>
-                <Heading as='h1' fontSize={['xl', '4xl']}>
-                  {client.name}
-                </Heading>
-                <Flex align='center' gap={1}>
+              <Flex justify='space-between' flex={1}>
+                <Box>
+                  <Heading as='h1' fontSize={['xl', '4xl']}>
+                    {client.name}
+                  </Heading>
                   <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
                     ({client.nickname ?? 'Sem apelido'})
                   </Heading>
+                </Box>
+                <Flex gap={2}>
                   <IconButton
                     onClick={openClientInfoModal}
-                    variant='ghost'
+                    variant='outline'
                     title='Informações gerais do cliente'
                     aria-label='Informações gerais do cliente'
                     icon={<IoDocumentTextOutline size={20} />}
                   />
+                  <IconButton
+                    onClick={openClientInfoModal}
+                    variant='outline'
+                    title='Saldos do cliente'
+                    aria-label='Saldos do cliente'
+                    icon={<BiDollarCircle size={20} />}
+                  />
                 </Flex>
-              </Box>
-            </Stack>
+              </Flex>
+            </Flex>
           </CardHeader>
         </Card>
         <Flex justify='center'>

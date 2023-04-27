@@ -41,11 +41,16 @@ export default function TransactionsTable({
         searchForOptions,
         actions: (
           <HStack spacing={0.5}>
-            <TableAddButton onClick={onClickAdd} aria-label='adicionar transação' />
+            <TableAddButton
+              onClick={onClickAdd}
+              aria-label='adicionar transação'
+              title='Fazer lançamento'
+            />
 
             <TableFeeButton
               onClick={handleClickFee}
               aria-label='calcular juros'
+              title='Calcular juros'
               colorScheme={selectionMode ? 'blue' : undefined}
             />
           </HStack>
