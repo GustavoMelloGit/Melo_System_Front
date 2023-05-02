@@ -5,7 +5,10 @@ import { type PostServiceResponse } from '../../../shared/types/utils/service'
 import { type ClientFormValues } from '../components/Client/Form/useClientForm'
 import { type CheckingAccountFormValues } from '../types/model/CheckingAccount'
 import { type ClientModel } from '../types/model/Client'
-import { type CurrencyTransactionModel } from '../types/model/Transaction'
+import {
+  type CurrencyTransactionModel,
+  type SacariaTransactionModel,
+} from '../types/model/Transaction'
 
 export async function createClientService(
   values: ClientFormValues,
@@ -43,6 +46,28 @@ export async function createTransactionService(
       ...values,
       value: Number(values.value),
       type: 'currency',
+    })
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
+}
+
+export async function createSacariaService(
+  values: any,
+  clientId: string,
+): PostServiceResponse<SacariaTransactionModel> {
+  try {
+    const { data } = await api.post(`/transactions/${clientId}`, {
+      ...values,
+      type: 'sacaria',
     })
 
     return {

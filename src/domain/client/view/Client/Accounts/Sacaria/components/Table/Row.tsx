@@ -1,10 +1,10 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
-  transaction: TransactionModel
+  transaction: SacariaTransactionModel
 }
 export default function SacariaAccountTableRow({ transaction }: Props): JSX.Element {
   return (

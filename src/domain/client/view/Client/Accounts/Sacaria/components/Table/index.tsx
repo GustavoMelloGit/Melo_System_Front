@@ -1,15 +1,24 @@
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 import SacariaAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
+type Props = CustomTableComponentProps<SacariaTransactionModel[]>
 
 export default function SacariaAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
+  const openModal = useModal((state) => state.openModal)
+
+  async function handleOpenCreate(): Promise<void> {
+    const CreateSacariaView = (await import('../../view/Create')).default
+    openModal(<CreateSacariaView />)
+  }
+
   return (
     <Table
       header={{
@@ -26,6 +35,13 @@ export default function SacariaAccountTable({ data, isLoading, totalLength }: Pr
       }}
       filter={{
         searchForOptions,
+        actions: (
+          <TableAddButton
+            onClick={handleOpenCreate}
+            aria-label='adicionar sacaria'
+            title='Fazer lançamento'
+          />
+        ),
       }}
     >
       {data?.map((transaction) => (

@@ -27,3 +27,7 @@ export type TransactionType<TName = string> = {
 export type CoffeeTransactionModel = TransactionModel & {
   details: CoffeeDetails
 }
+
+export type SacariaTransactionModel = TransactionModel & {
+  type: TransactionType<'bags'>
+}
