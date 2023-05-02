@@ -1,6 +1,8 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
+import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { pluralize } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
   CoffeeDetailsTypesEnum,
@@ -15,6 +17,7 @@ type Props = {
   transaction: CoffeeTransactionModel
 }
 export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
+  const [showText, setShowText] = useState(false)
   const { details } = transaction
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
     moisture: `${details.moisture} de umidade`,
@@ -42,17 +45,34 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
 
   return (
     <Tr>
-      <Td px={padding}>
-        {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}
+      <Td px={padding} w='120px'>
+        {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
       </Td>
-      <Td px={padding} title={capitalCase(transaction.type.name)}>
+      <Td px={padding} title={capitalCase(transaction.type.name)} w='120px'>
         {labelByTypeName[transaction.type.name]}
       </Td>
-      <Td px={padding}>{CoffeeDetailsTypesEnum[details.type]}</Td>
-      <Td px={padding} title={fullDescription}>
+      <Td px={padding} w='150px'>
+        {CoffeeDetailsTypesEnum[details.type]}
+      </Td>
+      <Td
+        px={padding}
+        title={fullDescription}
+        cursor='pointer'
+        onClick={() => {
+          setShowText((prev) => !prev)
+        }}
+        overflow='hidden'
+        maxW={200}
+        wordBreak='break-word'
+        whiteSpace={showText ? 'pre-wrap' : 'nowrap'}
+        textOverflow={showText ? 'unset' : 'ellipsis'}
+      >
+        {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}{' '}
         {fullDescription}
       </Td>
-      <Td px={padding}>{dateToFormat(transaction.createdAt)}</Td>
+      <Td px={padding} w={120}>
+        {dateToFormat(transaction.createdAt)}
+      </Td>
       <Td px={padding} textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(

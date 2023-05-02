@@ -72,8 +72,10 @@ const searchForOptions: SearchForOption = {
 
 const headerColumns: TableHeaderColumns[] = [
   {
-    id: 'bags',
-    label: 'Sacos',
+    id: 'clientBalance',
+    label: 'Saldo',
+    isSortable: true,
+    w: '120px',
     px: 3,
   },
   {
@@ -81,12 +83,14 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Tipo',
     px: 3,
     isSortable: true,
+    w: '120px',
   },
   {
     id: 'details.type',
     label: 'Bebida',
     isSortable: true,
     px: 3,
+    w: '150px',
   },
   {
     id: 'description',
@@ -99,6 +103,7 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
     defaultSort: 'desc',
     px: 3,
+    w: 120,
   },
   {
     id: 'actions',
