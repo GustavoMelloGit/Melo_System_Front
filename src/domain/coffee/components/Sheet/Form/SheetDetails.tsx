@@ -104,6 +104,8 @@ export default function SheetFormSheetDetails({
             label='Kg por saca'
             placeholder='Ex.: 61'
             type='number'
+            inputMode='decimal'
+            step={0.1}
             errors={errors}
             isDisabled={isDisabled('weightPerBag')}
             rules={{
