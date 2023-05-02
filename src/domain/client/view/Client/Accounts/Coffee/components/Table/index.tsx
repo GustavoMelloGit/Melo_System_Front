@@ -5,7 +5,10 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { CoffeeDetailsTypesEnum } from '../../../../../../../coffee/types/model/coffee'
+import {
+  CoffeeDetailsTypesEnum,
+  CoffeeTypesEnum,
+} from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
@@ -44,7 +47,7 @@ const searchForOptions: SearchForOption = {
       type: 'date',
     },
   },
-  'details.type': {
+  'type.name': {
     label: 'Bebida',
     Input: (
       <Select variant='filled' roundedLeft={0} flexGrow={1}>
@@ -56,11 +59,11 @@ const searchForOptions: SearchForOption = {
       </Select>
     ),
   },
-  'type.name': {
+  'details.coffeeType': {
     label: 'Tipo',
     Input: (
       <Select variant='filled' roundedLeft={0} flexGrow={1}>
-        {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+        {Object.entries(CoffeeTypesEnum).map(([value, label]) => (
           <option key={value} value={value}>
             {label}
           </option>
@@ -79,14 +82,14 @@ const headerColumns: TableHeaderColumns[] = [
     px: 3,
   },
   {
-    id: 'type.name',
+    id: 'details.coffeeType',
     label: 'Tipo',
     px: 3,
     isSortable: true,
     w: '120px',
   },
   {
-    id: 'details.type',
+    id: 'details.bebida',
     label: 'Bebida',
     isSortable: true,
     px: 3,

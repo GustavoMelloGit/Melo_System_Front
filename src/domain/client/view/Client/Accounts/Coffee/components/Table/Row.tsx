@@ -26,8 +26,9 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     drilled: `${details.drilled} de broca`,
     foulness: `${details.foulness} de impureza`,
     description: details.description,
-    type: '',
+    bebida: '',
     weightPerBag: '',
+    coffeeType: '',
   }
   const labelByTypeName: Record<CoffeeTypes, string> = {
     bica_corrida: 'BC',
@@ -49,10 +50,10 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
       </Td>
       <Td px={padding} title={capitalCase(transaction.type.name)} w='120px'>
-        {labelByTypeName[transaction.type.name]}
+        {labelByTypeName[transaction.details.coffeeType]}
       </Td>
       <Td px={padding} w='150px'>
-        {CoffeeDetailsTypesEnum[details.type]}
+        {CoffeeDetailsTypesEnum[details.bebida]}
       </Td>
       <Td
         px={padding}

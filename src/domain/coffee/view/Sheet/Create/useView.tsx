@@ -34,15 +34,15 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
     number: (lastLine?.[0]?.number ?? 0) + 1,
     weighingDate: new Date().getTime(),
     weightPerBag: DEFAULT_WIGHT_PER_BAG,
-    coffeeType: 'bica_corrida',
     coffeeDetails: {
+      coffeeType: 'bica_corrida',
       picking: 0,
       foulness: 0,
       drilled: 0,
       moisture: 0,
       sieve: 0,
       utilization: 0,
-      type: 'duro',
+      bebida: 'duro',
     },
     lines: [{ bags: 0, weight: 0 }],
   }
