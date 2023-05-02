@@ -35,7 +35,6 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
     ? {
         clientId: data.clientId,
         coffeeDetails: data.coffeeDetails,
-        coffeeType: data.coffeeType,
         courier: data.courier,
         weighingDate: data.weighingDate,
         isDraft: data.isDraft,
@@ -53,7 +52,8 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
           drilled: 0,
           moisture: 0,
           sieve: 0,
-          type: 'duro',
+          bebida: 'duro',
+          coffeeType: 'bica_corrida',
         },
         lines: [{ bags: 0, weight: 0 }],
       } as SheetFormValues)
