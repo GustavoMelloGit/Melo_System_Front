@@ -73,11 +73,13 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'type.value',
     label: 'Sacos',
     isSortable: true,
+    textAlign: 'center',
   },
   {
     id: 'clientBalance',
     label: 'Saldo',
     isSortable: true,
+    textAlign: 'center',
   },
   {
     id: 'actions',

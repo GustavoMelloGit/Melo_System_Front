@@ -12,10 +12,12 @@ export default function SacariaAccountTableRow({ transaction }: Props): JSX.Elem
     <Tr>
       <Td>{dateToFormat(transaction.date)}</Td>
       <Td>{transaction.description}</Td>
-      <Td color={getColorByValue(transaction.type.value)}>
+      <Td color={getColorByValue(transaction.type.value)} textAlign='center'>
         {transaction.type.value > 0 ? `+${transaction.type.value}` : transaction.type.value}
       </Td>
-      <Td color={getColorByValue(transaction.clientBalance)}>{transaction.clientBalance}</Td>
+      <Td color={getColorByValue(transaction.clientBalance)} textAlign='center'>
+        {transaction.clientBalance}
+      </Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(
