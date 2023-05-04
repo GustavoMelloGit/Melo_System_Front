@@ -7,7 +7,7 @@ import {
   type UseFormRegister,
 } from 'react-hook-form'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
-import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { getClientsService } from '../../../../client/service'
@@ -79,11 +79,11 @@ export default function SheetFormSheetDetails({
           />
         </GridItem>
         <GridItem>
-          <RHFDateInput<SheetFormValues>
+          <ControllerField<SheetFormValues>
             name='weighingDate'
-            control={control}
             label='Data da pesagem'
             type='date'
+            control={control}
             isDisabled={isDisabled('weighingDate')}
           />
         </GridItem>

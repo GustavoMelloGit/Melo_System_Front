@@ -32,7 +32,7 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
   const initialValues: Partial<SheetFormValues> = {
     clientId: '',
     number: (lastLine?.[0]?.number ?? 0) + 1,
-    weighingDate: new Date().getTime(),
+    weighingDate: new Date().toISOString().split('T')[0],
     weightPerBag: DEFAULT_WIGHT_PER_BAG,
     coffeeDetails: {
       coffeeType: 'bica_corrida',
