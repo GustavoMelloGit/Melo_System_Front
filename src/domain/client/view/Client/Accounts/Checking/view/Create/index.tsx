@@ -29,6 +29,7 @@ export default function CreateTransactionView({
       toast.error(error)
       return
     }
+    toast.success('Lançamento criado com sucesso!')
     closeModal()
     refetch()
   }
