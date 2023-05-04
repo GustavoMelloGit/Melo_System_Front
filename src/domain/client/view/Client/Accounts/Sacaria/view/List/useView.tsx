@@ -1,22 +1,32 @@
 import { useParams } from 'react-router-dom'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
-import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 import { getSacariaAccountService } from '../../service/get'
 
 export default function useSacariaAccountView(): UseSacariaAccountView {
   const { uuid } = useParams()
+  const openModal = useModal((state) => state.openModal)
   const params = useServiceParams()
-  const { data, isLoading, total } = getSacariaAccountService(uuid, params)
+  const { data, isLoading, total, mutate } = getSacariaAccountService(uuid, params)
+
+  async function handleOpenCreate(): Promise<void> {
+    if (!uuid) return
+    const CreateSacariaView = (await import('../../view/Create')).default
+    openModal(<CreateSacariaView clientUuid={uuid} refetch={mutate} />)
+  }
 
   return {
     data: data ?? [],
     isLoading,
     total: total ?? 0,
+    handleCreate: handleOpenCreate,
   }
 }
 
 type UseSacariaAccountView = {
-  data: CoffeeTransactionModel[]
+  data: SacariaTransactionModel[]
   isLoading: boolean
   total: number
+  handleCreate: () => void
 }

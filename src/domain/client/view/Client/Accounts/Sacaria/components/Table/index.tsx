@@ -5,20 +5,19 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 import SacariaAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<SacariaTransactionModel[]>
+type Props = CustomTableComponentProps<SacariaTransactionModel[]> & {
+  onClickAdd: () => void
+}
 
-export default function SacariaAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
-  const openModal = useModal((state) => state.openModal)
-
-  async function handleOpenCreate(): Promise<void> {
-    const CreateSacariaView = (await import('../../view/Create')).default
-    openModal(<CreateSacariaView />)
-  }
-
+export default function SacariaAccountTable({
+  data,
+  isLoading,
+  totalLength,
+  onClickAdd,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -37,7 +36,7 @@ export default function SacariaAccountTable({ data, isLoading, totalLength }: Pr
         searchForOptions,
         actions: (
           <TableAddButton
-            onClick={handleOpenCreate}
+            onClick={onClickAdd}
             aria-label='adicionar sacaria'
             title='Fazer lançamento'
           />

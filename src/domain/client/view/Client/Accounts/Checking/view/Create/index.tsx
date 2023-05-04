@@ -36,7 +36,7 @@ export default function CreateTransactionView({
   return (
     <Modal isOpen onClose={closeModal} isCentered>
       <ModalOverlay />
-      <ModalContent p={8} rounded={20}>
+      <ModalContent pb={8} rounded={20}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading fontSize='3xl'>Novo lançamento</Heading>

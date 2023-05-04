@@ -11,26 +11,37 @@ import {
   ModalOverlay,
   Stack,
 } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import RHFDateInput from '../../../../../../../../shared/components/inputs/RHFDateInput'
-import RHFField from '../../../../../../../../shared/components/inputs/RHFField'
+import * as yup from 'yup'
+import { validationErrors } from '../../../../../../../../lib/errors'
+import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { type SacariaFormValues } from '../../types/sacaria'
 
-type SacariaFormValues = {
-  value: number
-  date: string
-}
+const validationSchema = yup.object().shape({
+  value: yup
+    .number()
+    .required(validationErrors.valueIsRequired)
+    .typeError(validationErrors.valueIsRequired)
+    .min(1, validationErrors.valueIsInvalid),
+  date: yup.string().required(validationErrors.dateIsRequired),
+})
+
 type Props = {
-  onSubmit: (values: any) => void
+  onSubmit: (values: SacariaFormValues) => void
+  initialValues: Partial<SacariaFormValues>
 }
-const SacariaFormView = ({ onSubmit }: Props): JSX.Element => {
+const SacariaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const closeModal = useModal((state) => state.closeModal)
   const {
     handleSubmit,
-    register,
     control,
     formState: { isSubmitting },
-  } = useForm<SacariaFormValues>()
+  } = useForm<SacariaFormValues>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: initialValues,
+  })
   return (
     <Modal isCentered onClose={closeModal} isOpen>
       <ModalOverlay />
@@ -44,16 +55,22 @@ const SacariaFormView = ({ onSubmit }: Props): JSX.Element => {
             <Stack spacing={6}>
               <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' gap={2}>
                 <GridItem>
-                  <RHFField
+                  <ControllerField<SacariaFormValues>
                     name='value'
                     label='Número de sacas'
                     type='number'
-                    register={register}
+                    inputMode='numeric'
+                    control={control}
                     placeholder='Ex.: 10'
                   />
                 </GridItem>
                 <GridItem>
-                  <RHFDateInput control={control} name='date' label='Data' />
+                  <ControllerField<SacariaFormValues>
+                    name='date'
+                    label='Data'
+                    type='date'
+                    control={control}
+                  />
                 </GridItem>
               </Grid>
 

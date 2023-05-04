@@ -76,7 +76,7 @@ export default function CheckingAccountForm({
             />
           </GridItem>
         </Grid>
-        <Button isLoading={isSubmitting} type='submit'>
+        <Button colorScheme='green' isLoading={isSubmitting} type='submit'>
           {submitText}
         </Button>
       </VStack>
