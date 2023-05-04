@@ -50,7 +50,9 @@ export default function CreateTransactionView({
       <ModalContent pb={8} rounded={20}>
         <ModalCloseButton />
         <ModalHeader>
-          <Heading fontSize='3xl'>Novo lançamento</Heading>
+          <Heading as='h1' fontSize='3xl'>
+            Novo lançamento
+          </Heading>
         </ModalHeader>
         <ModalBody>
           <CheckingAccountForm

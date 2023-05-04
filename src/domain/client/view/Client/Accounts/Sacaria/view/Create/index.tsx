@@ -1,3 +1,12 @@
+import {
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import { formatInputDateToApiDate } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
@@ -28,10 +37,23 @@ const CreateSacariaView = ({ clientUuid, refetch }: Props): JSX.Element => {
     closeModal()
   }
   return (
-    <SacariaFormView
-      onSubmit={handleCreateSacaria}
-      initialValues={{ date: new Date().toISOString().split('T')[0], value: 0 }}
-    />
+    <Modal isCentered onClose={closeModal} isOpen>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton />
+        <ModalHeader>
+          <Heading as='h1' fontSize='3xl'>
+            Creditar sacaria
+          </Heading>
+        </ModalHeader>
+        <ModalBody pb={8}>
+          <SacariaFormView
+            onSubmit={handleCreateSacaria}
+            initialValues={{ date: new Date().toISOString().split('T')[0], value: 0 }}
+          />
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }
 export default CreateSacariaView

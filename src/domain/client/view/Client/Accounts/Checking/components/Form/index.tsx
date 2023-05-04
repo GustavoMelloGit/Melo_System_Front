@@ -1,12 +1,21 @@
-import { Button, FormControl, FormLabel, Grid, GridItem, Switch, VStack } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+  Switch,
+  Textarea,
+  VStack,
+  type TextareaProps,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
-import RHFDateInput from '../../../../../../../../shared/components/inputs/RHFDateInput'
-import RHFTextField from '../../../../../../../../shared/components/inputs/RHFTextField'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 
 type CheckingAccountFormProps = {
@@ -22,7 +31,6 @@ export default function CheckingAccountForm({
   const [isDebit, setIsDebit] = useState(true)
   const {
     handleSubmit,
-    register,
     formState: { errors, isSubmitting },
     control,
   } = useForm<CheckingAccountFormValues>({
@@ -53,7 +61,13 @@ export default function CheckingAccountForm({
             </FormControl>
           </GridItem>
           <GridItem>
-            <RHFDateInput<CheckingAccountFormValues> name='date' label='Data' control={control} />
+            <ControllerField<CheckingAccountFormValues>
+              name='date'
+              label='Data'
+              type='date'
+              control={control}
+              required
+            />
           </GridItem>
           <GridItem>
             <RHFCurrencyInput<CheckingAccountFormValues>
@@ -62,17 +76,20 @@ export default function CheckingAccountForm({
               control={control}
               errors={errors}
               leftIcon='R$'
+              isRequired
               inputGroupProps={{
                 color: isDebit ? 'red.400' : 'green.500',
               }}
             />
           </GridItem>
+
           <GridItem colSpan={[1, 2]}>
-            <RHFTextField<CheckingAccountFormValues>
+            <ControllerField<CheckingAccountFormValues, TextareaProps>
               name='description'
               label='Descrição'
-              register={register}
-              errors={errors}
+              control={control}
+              CustomInput={<Textarea />}
+              required
             />
           </GridItem>
         </Grid>

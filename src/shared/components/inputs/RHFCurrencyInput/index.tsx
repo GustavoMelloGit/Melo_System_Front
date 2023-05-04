@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Text,
   type InputGroupProps,
   type InputProps,
 } from '@chakra-ui/react'
@@ -39,6 +40,7 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
   rightIcon,
   label,
   inputGroupProps,
+  isRequired,
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element {
   const [inputValue, setInputValue] = useState<number>(0)
@@ -65,7 +67,16 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
       rules={rules}
       render={({ field: { onChange, value, ...field } }) => (
         <FormControl isInvalid={hasError}>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && (
+            <FormLabel>
+              {label}
+              {isRequired && (
+                <Text as='span' color='red.500' ml={1}>
+                  *
+                </Text>
+              )}
+            </FormLabel>
+          )}
           <InputGroup {...inputGroupProps}>
             {leftIcon && <InputLeftElement>{leftIcon}</InputLeftElement>}
             <Input
