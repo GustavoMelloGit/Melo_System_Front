@@ -23,7 +23,6 @@ export default function CoffeeBookTable({ data, isLoading, totalBooks }: Props):
         noDataMessage: 'Nenhum talão encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength: totalBooks,
       }}
       filter={{

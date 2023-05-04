@@ -21,7 +21,6 @@ export default function EscolhaAccountTable({ data, isLoading, totalLength }: Pr
         noDataMessage: 'Nenhum registro encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{

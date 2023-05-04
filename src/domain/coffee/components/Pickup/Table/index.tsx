@@ -32,7 +32,6 @@ export default function PickupTable({
         noDataMessage: 'Nenhum café encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength: totalPickups,
       }}
       table={{

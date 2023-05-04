@@ -8,10 +8,7 @@ import {
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TablePaginationProps } from './types'
 
-export default function TablePagination({
-  dataLength,
-  totalLength,
-}: TablePaginationProps): JSX.Element {
+export default function TablePagination({ totalLength }: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.200', 'gray.700')
   const { handleAddParam, getParam, handleRemoveParam } = useURLSearchParams()
   const pageParam = getParam(PaginationParams.page)
@@ -19,7 +16,7 @@ export default function TablePagination({
   const limitParam = getParam(PaginationParams.rowsPerPage)
   const rowsPerPage = limitParam ? Number(limitParam) : DEFAULT_PAGINATION_LIMIT
   const isFirstPage = currentPage <= 1
-  const isLastPage = dataLength < rowsPerPage
+  const isLastPage = currentPage >= Math.ceil(totalLength / rowsPerPage)
 
   const handleNextPage = (): void => {
     handleAddParam(PaginationParams.page, pageParam ? Number(pageParam) + 1 : 2)

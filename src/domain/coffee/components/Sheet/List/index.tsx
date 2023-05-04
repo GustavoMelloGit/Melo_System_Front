@@ -27,7 +27,6 @@ export default function SheetsTable({
         noDataMessage: 'Nenhum talão encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{

@@ -26,7 +26,6 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
         noDataMessage: 'Nenhum registro encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{

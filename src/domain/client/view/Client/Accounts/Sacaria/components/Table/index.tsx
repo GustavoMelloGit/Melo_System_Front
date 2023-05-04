@@ -29,7 +29,6 @@ export default function SacariaAccountTable({
         noDataMessage: 'Nenhum registro encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{

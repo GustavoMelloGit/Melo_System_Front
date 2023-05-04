@@ -34,7 +34,6 @@ export default function TransactionsTable({
         noDataMessage: 'Nenhuma transação encontrada',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength: total,
       }}
       filter={{
