@@ -59,10 +59,10 @@ export default function TransactionsListRow({
       >
         {transaction.description}
       </Td>
-      <Td {...selectableColumnsProps(transaction.type.value)}>
+      <Td {...selectableColumnsProps(transaction.type.value)} textAlign='center'>
         {formatCurrency(transaction.type.value)}
       </Td>
-      <Td {...selectableColumnsProps(transaction.clientBalance)}>
+      <Td {...selectableColumnsProps(transaction.clientBalance)} textAlign='center'>
         {formatCurrency(transaction.clientBalance)}
       </Td>
       <Td>

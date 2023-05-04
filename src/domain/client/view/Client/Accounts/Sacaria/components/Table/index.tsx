@@ -1,15 +1,23 @@
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 import SacariaAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
+type Props = CustomTableComponentProps<SacariaTransactionModel[]> & {
+  onClickAdd: () => void
+}
 
-export default function SacariaAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
+export default function SacariaAccountTable({
+  data,
+  isLoading,
+  totalLength,
+  onClickAdd,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -21,11 +29,17 @@ export default function SacariaAccountTable({ data, isLoading, totalLength }: Pr
         noDataMessage: 'Nenhum registro encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{
         searchForOptions,
+        actions: (
+          <TableAddButton
+            onClick={onClickAdd}
+            aria-label='adicionar sacaria'
+            title='Fazer lançamento'
+          />
+        ),
       }}
     >
       {data?.map((transaction) => (
@@ -46,24 +60,26 @@ const searchForOptions: SearchForOption = {
 
 const headerColumns: TableHeaderColumns[] = [
   {
-    id: 'clientBalance',
-    label: 'Saldo',
+    id: 'date',
+    label: 'Data',
     isSortable: true,
-  },
-  {
-    id: 'type.value',
-    label: 'Sacos',
-    isSortable: true,
+    defaultSort: 'desc',
   },
   {
     id: 'description',
     label: 'Descrição',
   },
   {
-    id: 'createdAt',
-    label: 'Data',
+    id: 'type.value',
+    label: 'Sacos',
     isSortable: true,
-    defaultSort: 'desc',
+    textAlign: 'center',
+  },
+  {
+    id: 'clientBalance',
+    label: 'Saldo',
+    isSortable: true,
+    textAlign: 'center',
   },
   {
     id: 'actions',

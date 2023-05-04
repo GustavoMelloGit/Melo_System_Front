@@ -1,9 +1,14 @@
 import { Td, Tr } from '@chakra-ui/react'
+import { capitalCase } from 'change-case'
+import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
+import { pluralize } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
   CoffeeDetailsTypesEnum,
   type CoffeeDetails,
+  type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
@@ -13,6 +18,7 @@ type Props = {
   transaction: CoffeeTransactionModel
 }
 export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
+  const [showText, setShowText] = useState(false)
   const { details } = transaction
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
     moisture: `${details.moisture} de umidade`,
@@ -21,8 +27,15 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     drilled: `${details.drilled} de broca`,
     foulness: `${details.foulness} de impureza`,
     description: details.description,
-    type: '',
+    bebida: '',
     weightPerBag: '',
+    coffeeType: '',
+  }
+  const labelByTypeName: Record<CoffeeTypes, string> = {
+    bica_corrida: 'BC',
+    conilon: 'CON',
+    despolpado: 'DESP',
+    escolha: 'ESC',
   }
   const fullDescription = Object.entries(details).reduce((acc, [key, value]) => {
     const messageValue = messageByDetail[key as keyof CoffeeDetails]
@@ -34,14 +47,35 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
 
   return (
     <Tr>
-      <Td px={padding}>
-        {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}
+      <Td px={padding} w={120}>
+        {dateToFormat(transaction.date)}
       </Td>
-      <Td px={padding}>{CoffeeDetailsTypesEnum[details.type]}</Td>
-      <Td px={padding} title={fullDescription}>
+      <Td
+        px={padding}
+        title={fullDescription}
+        cursor='pointer'
+        onClick={() => {
+          setShowText((prev) => !prev)
+        }}
+        overflow='hidden'
+        maxW={200}
+        wordBreak='break-word'
+        whiteSpace={showText ? 'pre-wrap' : 'nowrap'}
+        textOverflow={showText ? 'unset' : 'ellipsis'}
+      >
+        {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}{' '}
         {fullDescription}
       </Td>
-      <Td px={padding}>{dateToFormat(transaction.createdAt)}</Td>
+      <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
+        {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
+      </Td>
+      <Td px={padding} title={capitalCase(transaction.type.name)} w='120px'>
+        {labelByTypeName[transaction.details.coffeeType]}
+      </Td>
+      <Td px={padding} w='150px'>
+        {CoffeeDetailsTypesEnum[details.bebida]}
+      </Td>
+
       <Td px={padding} textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(

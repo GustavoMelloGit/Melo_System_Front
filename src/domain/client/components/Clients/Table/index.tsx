@@ -27,7 +27,6 @@ export default function ClientsTable({
         noDataMessage: 'Nenhum cliente encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength: totalClients,
       }}
       filter={{

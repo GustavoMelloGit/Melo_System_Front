@@ -1,5 +1,5 @@
 export type CheckingAccountFormValues = {
-  date: number
+  date: string
   value: number
   description: string
 }

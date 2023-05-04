@@ -23,6 +23,7 @@ export default function SheetFormCoffeeDetails({
   watch,
   isDisabled,
 }: Props): JSX.Element {
+  const currentCoffeeType = watch('coffeeDetails.coffeeType')
   const hasCoffeeDetailsType: CoffeeTypes[] = ['bica_corrida', 'conilon']
   const hasUtilizationType: CoffeeTypes[] = ['escolha']
   return (
@@ -34,31 +35,31 @@ export default function SheetFormCoffeeDetails({
       <Grid templateColumns='repeat(auto-fit, minmax(160px, 1fr))' gap={4} mb={4}>
         <GridItem>
           <RHFSelectField<SheetFormValues>
-            name='coffeeType'
+            name='coffeeDetails.coffeeType'
             register={register}
             label='Tipo de café'
             options={Object.keys(CoffeeTypesEnum).map((value) => ({
               value,
               label: capitalCase(value),
             }))}
-            isDisabled={isDisabled('coffeeType')}
+            isDisabled={isDisabled('coffeeDetails.coffeeType')}
           />
         </GridItem>
-        {hasCoffeeDetailsType.includes(watch('coffeeType')) && (
+        {currentCoffeeType && hasCoffeeDetailsType.includes(currentCoffeeType) && (
           <GridItem>
             <RHFSelectField<SheetFormValues>
               register={register}
-              name='coffeeDetails.type'
+              name='coffeeDetails.bebida'
               label='Bebida'
               options={Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => ({
                 value,
                 label,
               }))}
-              isDisabled={isDisabled('coffeeDetails.type')}
+              isDisabled={isDisabled('coffeeDetails.bebida')}
             />
           </GridItem>
         )}
-        {hasUtilizationType.includes(watch('coffeeType')) && (
+        {currentCoffeeType && hasUtilizationType.includes(currentCoffeeType) && (
           <GridItem>
             <RHFField<SheetFormValues>
               name='coffeeDetails.utilization'

@@ -39,9 +39,10 @@ export async function createTransactionService(
   clientId: string,
 ): PostServiceResponse<CurrencyTransactionModel> {
   try {
-    const { data } = await api.post(`/transactions/currency/${clientId}`, {
+    const { data } = await api.post(`/transactions/${clientId}`, {
       ...values,
       value: Number(values.value),
+      type: 'currency',
     })
 
     return {

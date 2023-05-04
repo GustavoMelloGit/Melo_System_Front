@@ -18,14 +18,14 @@ export default function RHFDateInput<TFormValues extends FieldValues>({
       <Controller
         control={control}
         name={name}
-        render={({ field: { value, ...field } }) => {
-          let inputValue = ''
+        render={({ field }) => {
+          // let inputValue = ''
 
-          const valueIsNumber = typeof value === 'number' && !isNaN(value)
-          if (valueIsNumber) {
-            const date = new Date(value)
-            inputValue = date.toISOString().split('T')[0]
-          }
+          // const valueIsNumber = typeof value === 'number' && !isNaN(value)
+          // if (valueIsNumber) {
+          //   const date = new Date(value)
+          //   inputValue = date.toISOString().split('T')[0]
+          // }
 
           return (
             <Input
@@ -34,7 +34,6 @@ export default function RHFDateInput<TFormValues extends FieldValues>({
               fontWeight={500}
               type='date'
               inputMode='numeric'
-              value={inputValue}
               {...rest}
               {...field}
             />

@@ -35,9 +35,8 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
     ? {
         clientId: data.clientId,
         coffeeDetails: data.coffeeDetails,
-        coffeeType: data.coffeeType,
         courier: data.courier,
-        weighingDate: data.weighingDate,
+        weighingDate: new Date(data.weighingDate).toISOString().split('T')[0],
         isDraft: data.isDraft,
         lines: data.lines,
         number: data.number,
@@ -45,7 +44,7 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
       }
     : ({
         number: 0,
-        weighingDate: new Date().getTime(),
+        weighingDate: new Date().toISOString().split('T')[0],
         weightPerBag: DEFAULT_WIGHT_PER_BAG,
         coffeeDetails: {
           picking: 0,
@@ -53,7 +52,8 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
           drilled: 0,
           moisture: 0,
           sieve: 0,
-          type: 'duro',
+          bebida: 'duro',
+          coffeeType: 'bica_corrida',
         },
         lines: [{ bags: 0, weight: 0 }],
       } as SheetFormValues)

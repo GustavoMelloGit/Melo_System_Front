@@ -18,12 +18,18 @@ export default function useClientDetailsView(): UseClientDetailsView {
     openModal(<GeneralInfo client={data} />)
   }
 
+  async function openClientBalancesModal(): Promise<void> {
+    const Balances = (await import('../Balances')).default
+    openModal(<Balances />)
+  }
+
   return {
     client: data,
     isLoading,
     mutate,
     currentTab,
     openClientInfoModal,
+    openClientBalancesModal,
   }
 }
 
@@ -33,4 +39,5 @@ type UseClientDetailsView = {
   mutate: KeyedMutator<ClientModel> | undefined
   currentTab: number
   openClientInfoModal: () => void
+  openClientBalancesModal: () => void
 }

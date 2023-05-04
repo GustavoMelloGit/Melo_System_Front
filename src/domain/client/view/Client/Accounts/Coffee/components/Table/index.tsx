@@ -5,7 +5,10 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { CoffeeDetailsTypesEnum } from '../../../../../../../coffee/types/model/coffee'
+import {
+  CoffeeDetailsTypesEnum,
+  CoffeeTypesEnum,
+} from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
@@ -23,7 +26,6 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
         noDataMessage: 'Nenhum registro encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{
@@ -38,17 +40,29 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
 }
 
 const searchForOptions: SearchForOption = {
-  date: {
+  oneDayInterval: {
     label: 'Data',
     inputProps: {
       type: 'date',
     },
   },
-  'details.type': {
-    label: 'Tipo',
+  'type.name': {
+    label: 'Bebida',
     Input: (
       <Select variant='filled' roundedLeft={0} flexGrow={1}>
         {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    ),
+  },
+  'details.coffeeType': {
+    label: 'Tipo',
+    Input: (
+      <Select variant='filled' roundedLeft={0} flexGrow={1}>
+        {Object.entries(CoffeeTypesEnum).map(([value, label]) => (
           <option key={value} value={value}>
             {label}
           </option>
@@ -60,15 +74,12 @@ const searchForOptions: SearchForOption = {
 
 const headerColumns: TableHeaderColumns[] = [
   {
-    id: 'bags',
-    label: 'Sacos',
-    px: 3,
-  },
-  {
-    id: 'details.type',
-    label: 'Bebida',
+    id: 'date',
+    label: 'Data',
     isSortable: true,
+    defaultSort: 'desc',
     px: 3,
+    w: 120,
   },
   {
     id: 'description',
@@ -76,11 +87,25 @@ const headerColumns: TableHeaderColumns[] = [
     px: 3,
   },
   {
-    id: 'createdAt',
-    label: 'Data',
+    id: 'clientBalance',
+    label: 'Saldo',
     isSortable: true,
-    defaultSort: 'desc',
+    w: '120px',
     px: 3,
+  },
+  {
+    id: 'details.coffeeType',
+    label: 'Tipo',
+    px: 3,
+    isSortable: true,
+    w: '120px',
+  },
+  {
+    id: 'details.bebida',
+    label: 'Bebida',
+    isSortable: true,
+    px: 3,
+    w: '150px',
   },
   {
     id: 'actions',

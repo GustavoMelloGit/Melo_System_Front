@@ -34,18 +34,22 @@ export default function TransactionsTable({
         noDataMessage: 'Nenhuma transação encontrada',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength: total,
       }}
       filter={{
         searchForOptions,
         actions: (
           <HStack spacing={0.5}>
-            <TableAddButton onClick={onClickAdd} aria-label='adicionar transação' />
+            <TableAddButton
+              onClick={onClickAdd}
+              aria-label='adicionar transação'
+              title='Fazer lançamento'
+            />
 
             <TableFeeButton
               onClick={handleClickFee}
               aria-label='calcular juros'
+              title='Calcular juros'
               colorScheme={selectionMode ? 'blue' : undefined}
             />
           </HStack>
@@ -62,8 +66,8 @@ export default function TransactionsTable({
 const headerColumns: TableHeaderColumns[] = [
   { id: 'date', label: 'Data', isSortable: true, defaultSort: 'desc' },
   { id: 'description', label: 'Descrição' },
-  { id: 'type.value', label: 'Valor', isSortable: true },
-  { id: 'clientBalance', label: 'Saldo', isSortable: true },
+  { id: 'type.value', label: 'Valor', isSortable: true, textAlign: 'center' },
+  { id: 'clientBalance', label: 'Saldo', isSortable: true, textAlign: 'center' },
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
 const searchForOptions: SearchForOption = {

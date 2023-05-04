@@ -21,7 +21,6 @@ export default function EscolhaAccountTable({ data, isLoading, totalLength }: Pr
         noDataMessage: 'Nenhum registro encontrado',
       }}
       pagination={{
-        dataLength: data?.length ?? 0,
         totalLength,
       }}
       filter={{
@@ -46,6 +45,12 @@ const searchForOptions: SearchForOption = {
 
 const headerColumns: TableHeaderColumns[] = [
   {
+    id: 'date',
+    label: 'Data',
+    isSortable: true,
+    defaultSort: 'desc',
+  },
+  {
     id: 'bags',
     label: 'Sacos',
   },
@@ -58,12 +63,6 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'impurity',
     label: 'Impureza',
     isSortable: true,
-  },
-  {
-    id: 'createdAt',
-    label: 'Data',
-    isSortable: true,
-    defaultSort: 'desc',
   },
   {
     id: 'actions',

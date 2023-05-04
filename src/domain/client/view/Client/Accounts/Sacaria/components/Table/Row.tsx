@@ -1,18 +1,23 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import { type TransactionModel } from '../../../../../../types/model/Transaction'
+import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
-  transaction: TransactionModel
+  transaction: SacariaTransactionModel
 }
 export default function SacariaAccountTableRow({ transaction }: Props): JSX.Element {
   return (
     <Tr>
-      <Td>{transaction.clientBalance}</Td>
-      <Td>{transaction.type.value}</Td>
+      <Td>{dateToFormat(transaction.date)}</Td>
       <Td>{transaction.description}</Td>
-      <Td>{dateToFormat(transaction.createdAt)}</Td>
+      <Td color={getColorByValue(transaction.type.value)} textAlign='center'>
+        {transaction.type.value > 0 ? `+${transaction.type.value}` : transaction.type.value}
+      </Td>
+      <Td color={getColorByValue(transaction.clientBalance)} textAlign='center'>
+        {transaction.clientBalance}
+      </Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(

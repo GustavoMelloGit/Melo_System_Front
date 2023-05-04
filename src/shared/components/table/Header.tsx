@@ -1,4 +1,4 @@
-import { Box, IconButton, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
+import { Box, IconButton, Text, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { BsArrowUpShort } from 'react-icons/bs'
 import { PaginationParams } from '../../../lib/constants/pagination'
@@ -47,33 +47,39 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
             userSelect={isSortable ? 'none' : 'auto'}
             {...rest}
           >
-            {label}
-            {isSortable && (
-              <IconButton
-                aria-label={`sort by ${label}`}
-                data-cy='table-sort-button'
-                minW={0}
-                minH={0}
-                ml={1}
-                icon={
-                  <Box
-                    w='fit-content'
-                    h='fit-content'
-                    transform={
-                      sortBy === id && sortOrder === 'asc' ? 'rotate(0deg)' : 'rotate(180deg)'
-                    }
-                    transition='transform 0.2s'
-                  >
-                    <BsArrowUpShort size={22} />
-                  </Box>
-                }
-                variant='unstyled'
-                onClick={() => {
-                  handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
-                }}
-                opacity={sortBy === id ? 1 : 0.4}
-              />
-            )}
+            <Text as='span' pos='relative'>
+              {label}
+              {isSortable && (
+                <IconButton
+                  aria-label={`sort by ${label}`}
+                  data-cy='table-sort-button'
+                  minW={0}
+                  minH={0}
+                  ml={1}
+                  pos='absolute'
+                  left='100%'
+                  top='50%'
+                  transform='translateY(-50%)'
+                  icon={
+                    <Box
+                      w='fit-content'
+                      h='fit-content'
+                      transform={
+                        sortBy === id && sortOrder === 'asc' ? 'rotate(0deg)' : 'rotate(180deg)'
+                      }
+                      transition='transform 0.2s'
+                    >
+                      <BsArrowUpShort size={22} />
+                    </Box>
+                  }
+                  variant='unstyled'
+                  onClick={() => {
+                    handleSort(id, sortOrder === 'asc' || !sortOrder ? 'desc' : 'asc')
+                  }}
+                  opacity={sortBy === id ? 1 : 0.4}
+                />
+              )}
+            </Text>
           </Th>
         ))}
       </Tr>

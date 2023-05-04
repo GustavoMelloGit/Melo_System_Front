@@ -19,11 +19,15 @@ export type EscolhaTransactionModel = TransactionModel & {
   details: EscolhaDetails
 }
 
-export type TransactionType = {
-  name: string
+export type TransactionType<TName = string> = {
+  name: TName
   value: number
 }
 
 export type CoffeeTransactionModel = TransactionModel & {
   details: CoffeeDetails
+}
+
+export type SacariaTransactionModel = TransactionModel & {
+  type: TransactionType<'bags'>
 }

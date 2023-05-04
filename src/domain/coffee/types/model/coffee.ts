@@ -6,7 +6,8 @@ export type CoffeeDetails = {
   foulness: number
   description: string
   weightPerBag: number
-  type: CoffeeDetailsTypes
+  bebida: CoffeeDetailsTypes
+  coffeeType: CoffeeTypes
 }
 
 export type EscolhaDetails = Omit<CoffeeDetails, 'type'> & {

@@ -84,7 +84,8 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             <IconButton
               type='submit'
               variant='ghost'
-              aria-label='Search'
+              aria-label='Pesquisar'
+              title='Pesquisar'
               icon={<BiSearchAlt size={24} />}
               data-cy='table-submit-search-button'
             />

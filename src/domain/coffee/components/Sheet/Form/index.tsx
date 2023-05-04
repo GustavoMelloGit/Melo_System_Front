@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useForm, type Path } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { formatInputDateToApiDate } from '../../../../../lib/utils/date'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import SheetFormCoffeeDetails from './CoffeeDetails'
 import SheetFormLines from './Lines'
@@ -40,7 +41,7 @@ export default function SheetForm({
     try {
       await onSubmit?.({
         ...values,
-        weighingDate: +weighingDate,
+        weighingDate: formatInputDateToApiDate(weighingDate),
       })
       reset()
     } catch {}
@@ -118,7 +119,6 @@ const validationSchema = yup.object().shape({
   weighingDate: yup.string().required(validationErrors.dateIsRequired),
   courier: yup.string().required(validationErrors.courierIsRequired),
   clientId: yup.string().required(validationErrors.clientIsRequired),
-  coffeeType: yup.string().required(validationErrors.coffeeTypeIsRequired),
   lines: yup.array().of(
     yup.object().shape({
       weight: yup.number().required(),
@@ -126,6 +126,7 @@ const validationSchema = yup.object().shape({
     }),
   ),
   coffeeDetails: yup.object().shape({
+    coffeeType: yup.string().required(validationErrors.coffeeTypeIsRequired),
     moisture: yup
       .string()
       .min(0, validationErrors.minIsInvalid(0))
