@@ -2,6 +2,7 @@ import { Td, Tr } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import { pluralize } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
@@ -46,14 +47,8 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
 
   return (
     <Tr>
-      <Td px={padding} w='120px'>
-        {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
-      </Td>
-      <Td px={padding} title={capitalCase(transaction.type.name)} w='120px'>
-        {labelByTypeName[transaction.details.coffeeType]}
-      </Td>
-      <Td px={padding} w='150px'>
-        {CoffeeDetailsTypesEnum[details.bebida]}
+      <Td px={padding} w={120}>
+        {dateToFormat(transaction.date)}
       </Td>
       <Td
         px={padding}
@@ -71,9 +66,16 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}{' '}
         {fullDescription}
       </Td>
-      <Td px={padding} w={120}>
-        {dateToFormat(transaction.createdAt)}
+      <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
+        {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
       </Td>
+      <Td px={padding} title={capitalCase(transaction.type.name)} w='120px'>
+        {labelByTypeName[transaction.details.coffeeType]}
+      </Td>
+      <Td px={padding} w='150px'>
+        {CoffeeDetailsTypesEnum[details.bebida]}
+      </Td>
+
       <Td px={padding} textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(

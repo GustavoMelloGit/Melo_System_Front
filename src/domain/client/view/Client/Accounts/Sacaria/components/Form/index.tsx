@@ -23,8 +23,7 @@ const validationSchema = yup.object().shape({
   value: yup
     .number()
     .required(validationErrors.valueIsRequired)
-    .typeError(validationErrors.valueIsRequired)
-    .min(1, validationErrors.valueIsInvalid),
+    .typeError(validationErrors.valueIsRequired),
   date: yup.string().required(validationErrors.dateIsRequired),
 })
 

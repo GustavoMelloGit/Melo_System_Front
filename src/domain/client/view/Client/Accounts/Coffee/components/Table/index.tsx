@@ -75,6 +75,19 @@ const searchForOptions: SearchForOption = {
 
 const headerColumns: TableHeaderColumns[] = [
   {
+    id: 'date',
+    label: 'Data',
+    isSortable: true,
+    defaultSort: 'desc',
+    px: 3,
+    w: 120,
+  },
+  {
+    id: 'description',
+    label: 'Descrição',
+    px: 3,
+  },
+  {
     id: 'clientBalance',
     label: 'Saldo',
     isSortable: true,
@@ -94,19 +107,6 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
     px: 3,
     w: '150px',
-  },
-  {
-    id: 'description',
-    label: 'Descrição',
-    px: 3,
-  },
-  {
-    id: 'createdAt',
-    label: 'Data',
-    isSortable: true,
-    defaultSort: 'desc',
-    px: 3,
-    w: 120,
   },
   {
     id: 'actions',

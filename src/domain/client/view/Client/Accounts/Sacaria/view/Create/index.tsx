@@ -1,4 +1,5 @@
 import { toast } from 'react-hot-toast'
+import { formatInputDateToApiDate } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import SacariaFormView from '../../components/Form'
 import { createSacariaService } from '../../service/post'
@@ -10,8 +11,14 @@ type Props = {
 }
 const CreateSacariaView = ({ clientUuid, refetch }: Props): JSX.Element => {
   const closeModal = useModal((state) => state.closeModal)
-  async function handleCreateSacaria(values: SacariaFormValues): Promise<void> {
-    const { error } = await createSacariaService(values, clientUuid)
+  async function handleCreateSacaria({ date, ...values }: SacariaFormValues): Promise<void> {
+    const { error } = await createSacariaService(
+      {
+        ...values,
+        date: formatInputDateToApiDate(date),
+      },
+      clientUuid,
+    )
     if (error) {
       toast.error(error)
       return
