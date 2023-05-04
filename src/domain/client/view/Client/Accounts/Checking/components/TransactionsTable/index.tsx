@@ -66,8 +66,8 @@ export default function TransactionsTable({
 const headerColumns: TableHeaderColumns[] = [
   { id: 'date', label: 'Data', isSortable: true, defaultSort: 'desc' },
   { id: 'description', label: 'Descrição' },
-  { id: 'type.value', label: 'Valor', isSortable: true },
-  { id: 'clientBalance', label: 'Saldo', isSortable: true },
+  { id: 'type.value', label: 'Valor', isSortable: true, textAlign: 'center' },
+  { id: 'clientBalance', label: 'Saldo', isSortable: true, textAlign: 'center' },
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
 const searchForOptions: SearchForOption = {
