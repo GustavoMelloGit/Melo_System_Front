@@ -20,7 +20,7 @@ export default function useClientDetailsView(): UseClientDetailsView {
 
   async function openClientBalancesModal(): Promise<void> {
     const Balances = (await import('../Balances')).default
-    openModal(<Balances />)
+    openModal(<Balances clientUuid={uuid} />)
   }
 
   return {

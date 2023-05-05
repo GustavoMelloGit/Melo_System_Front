@@ -86,13 +86,7 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Descrição',
     px: 3,
   },
-  {
-    id: 'clientBalance',
-    label: 'Saldo',
-    isSortable: true,
-    w: '120px',
-    px: 3,
-  },
+
   {
     id: 'details.coffeeType',
     label: 'Tipo',
@@ -106,6 +100,13 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
     px: 3,
     w: '150px',
+  },
+  {
+    id: 'clientBalance',
+    label: 'Saldo',
+    isSortable: true,
+    w: '120px',
+    px: 3,
   },
   {
     id: 'actions',

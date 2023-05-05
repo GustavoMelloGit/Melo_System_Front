@@ -7,35 +7,29 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
+import { Skeleton } from '@chakra-ui/react'
 import { Fragment, type ReactNode } from 'react'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
-import { randomBetween } from '../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { type ClientBalanceModel } from '../../../types/model/Client'
+import { getClientBalancesService } from '../../../service'
+import { type ClientBalance } from '../../../types/model/Client'
 
-const ClientBalancesView = (): JSX.Element => {
+type Props = {
+  clientUuid: string | undefined
+}
+const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
+  const { data } = getClientBalancesService(clientUuid)
   const closeModal = useModal((state) => state.closeModal)
-  const data: ClientBalanceModel = {
-    bags: randomBetween(-100, 200),
-    checkingAccount: randomBetween(-12000, 200),
-    duro: randomBetween(-100, 200),
-    duro_riado: randomBetween(-100, 200),
-    duro_riado_rio: randomBetween(-100, 200),
-    riado: randomBetween(-100, 200),
-    riado_rio: randomBetween(-100, 200),
-    rio: randomBetween(-100, 200),
-    rio_velho: randomBetween(-100, 200),
-    rio_zona: randomBetween(-100, 200),
-  }
 
-  const displayData: {
-    [key in keyof ClientBalanceModel]?: {
+  const displayData: Record<
+    ClientBalance['type'],
+    {
       label: string
       displayType: 'currency' | 'weight' | 'bag'
     }
-  } = {
-    checkingAccount: {
+  > = {
+    currency: {
       label: 'Conta Corrente',
       displayType: 'currency',
     },
@@ -83,43 +77,48 @@ const ClientBalancesView = (): JSX.Element => {
       <ModalContent>
         <ModalCloseButton />
         <ModalHeader>
-          <Heading
-            as='h1'
-            fontSize={{
-              base: 'xl',
-              md: '4xl',
-            }}
-          >
+          <Heading as='h1' fontSize='3xl'>
             Saldos
           </Heading>
         </ModalHeader>
         <ModalBody pb={4}>
           <Stack>
-            {Object.entries(displayData).map(([key, { label, displayType }]) => {
-              const value = data[key as keyof ClientBalanceModel]
-              let formattedValue: ReactNode = value
-              switch (displayType) {
-                case 'currency':
-                  formattedValue = formatCurrency(value)
-                  break
-                case 'weight':
-                  formattedValue = `${value} Kgs`
-                  break
-                case 'bag':
-                  formattedValue = `${value} Sacas`
-                  break
-              }
+            {data
+              ? data.balances.map((balance) => {
+                  const { type, value } = balance
+                  const { label, displayType } = displayData[type]
+                  let formattedValue: ReactNode = value
+                  switch (displayType) {
+                    case 'currency':
+                      formattedValue = formatCurrency(value)
+                      break
+                    case 'weight':
+                      formattedValue = `${value} Kgs`
+                      break
+                    case 'bag':
+                      formattedValue = `${value} Sacas`
+                      break
+                  }
 
-              return (
-                <Fragment key={label}>
-                  <Flex gap={2} justify='space-between' px={2}>
-                    <Text fontWeight={700}>{label}</Text>
-                    <Text color={getColorByValue(value)}>{formattedValue}</Text>
-                  </Flex>
-                  <Divider />
-                </Fragment>
-              )
-            })}
+                  return (
+                    <Fragment key={label}>
+                      <Flex gap={2} justify='space-between' px={2}>
+                        <Text fontWeight={700}>{label}</Text>
+                        <Text color={getColorByValue(value)}>{formattedValue}</Text>
+                      </Flex>
+                      <Divider />
+                    </Fragment>
+                  )
+                })
+              : Array.from({ length: 5 }).map((_, index) => (
+                  <Fragment key={index}>
+                    <Flex justify='space-between'>
+                      <Skeleton h={5} w={32} rounded={5} />
+                      <Skeleton h={5} w={32} rounded={5} />
+                    </Flex>
+                    <Divider />
+                  </Fragment>
+                ))}
           </Stack>
         </ModalBody>
       </ModalContent>

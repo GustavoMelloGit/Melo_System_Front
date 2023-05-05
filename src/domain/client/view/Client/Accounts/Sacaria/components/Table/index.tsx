@@ -71,7 +71,7 @@ const headerColumns: TableHeaderColumns[] = [
   },
   {
     id: 'type.value',
-    label: 'Sacos',
+    label: 'Valor',
     isSortable: true,
     textAlign: 'center',
   },
