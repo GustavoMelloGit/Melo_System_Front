@@ -5,7 +5,7 @@ import {
   type GetServiceResponse,
   type GetServiceSwrResponse,
 } from '../../../shared/types/utils/service'
-import { type ClientModel } from '../types/model/Client'
+import { type ClientBalancesModel, type ClientModel } from '../types/model/Client'
 import { type CurrencyTransactionModel } from '../types/model/Transaction'
 
 export function getClientsService(
@@ -46,6 +46,21 @@ export function getTransactionsService(
     error: errorHandler(error),
     isLoading,
     total: data?.total ?? 0,
+    mutate,
+  }
+}
+
+export function getClientBalancesService(
+  clientId: string | undefined,
+): GetServiceSwrResponse<ClientBalancesModel> {
+  const { data, error, isLoading, mutate } = useFetch(
+    clientId ? `/clients/${clientId}/balances` : null,
+  )
+
+  return {
+    data,
+    error: errorHandler(error),
+    isLoading,
     mutate,
   }
 }

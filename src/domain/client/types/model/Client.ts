@@ -49,10 +49,11 @@ export type ClientModel = {
   description?: string
 } & Timestamp
 
-export type ClientCoffeeDetailsBalanceModel = {
-  [key in CoffeeDetailsTypes]: number
+export type ClientBalance = {
+  type: CoffeeDetailsTypes | 'bags' | 'currency'
+  value: number
 }
-export type ClientBalanceModel = ClientCoffeeDetailsBalanceModel & {
-  bags: number
-  checkingAccount: number
+
+export type ClientBalancesModel = ClientModel & {
+  balances: ClientBalance[]
 }
