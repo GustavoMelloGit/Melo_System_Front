@@ -97,22 +97,6 @@ export default function SheetFormSheetDetails({
             isDisabled={isDisabled('courier')}
           />
         </GridItem>
-        <GridItem>
-          <RHFField<SheetFormValues>
-            name='weightPerBag'
-            register={register}
-            label='Kg por saca'
-            placeholder='Ex.: 61'
-            type='number'
-            inputMode='decimal'
-            step={0.1}
-            errors={errors}
-            isDisabled={isDisabled('weightPerBag')}
-            rules={{
-              valueAsNumber: true,
-            }}
-          />
-        </GridItem>
       </Grid>
     </Stack>
   )

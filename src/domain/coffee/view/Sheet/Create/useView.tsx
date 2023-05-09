@@ -1,6 +1,5 @@
 import { toast } from 'react-hot-toast'
 import { PaginationParams } from '../../../../../lib/constants/pagination'
-import { DEFAULT_WIGHT_PER_BAG } from '../../../constants/coffee'
 import { createSheetService, getSheetsService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
@@ -33,7 +32,6 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
     clientId: '',
     number: (lastLine?.[0]?.number ?? 0) + 1,
     weighingDate: new Date().toISOString().split('T')[0],
-    weightPerBag: DEFAULT_WIGHT_PER_BAG,
     coffeeDetails: {
       coffeeType: 'bica_corrida',
       picking: 0,

@@ -33,11 +33,11 @@ export type SheetModel = WithId<
 export type SheetFormValues = {
   isDraft: boolean
   weighingDate: string
-  weightPerBag: number
   number: number
   courier: string
   coffeeDetails: Partial<CoffeeDetails | DespolpadoDetails | EscolhaDetails>
   clientId: string
+  bookNumber: number
   lines: Array<{
     weight: number
     bags: number

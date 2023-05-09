@@ -28,7 +28,6 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     foulness: `${details.foulness} de impureza`,
     description: details.description,
     bebida: '',
-    weightPerBag: '',
     coffeeType: '',
   }
   const labelByTypeName: Record<CoffeeTypes, string> = {
@@ -63,8 +62,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         whiteSpace={showText ? 'pre-wrap' : 'nowrap'}
         textOverflow={showText ? 'unset' : 'ellipsis'}
       >
-        {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}{' '}
-        {fullDescription}
+        {getNumberOfBags(transaction.type.value)} {fullDescription}
       </Td>
 
       <Td px={padding} title={capitalCase(transaction.details.coffeeType)} w='120px'>
