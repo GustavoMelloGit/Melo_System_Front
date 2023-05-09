@@ -102,10 +102,14 @@ const headerColumns: TableHeaderColumns[] = [
     w: '150px',
   },
   {
+    id: 'type.value',
+    label: 'Pesagem',
+    px: 3,
+  },
+  {
     id: 'clientBalance',
     label: 'Saldo',
     isSortable: true,
-    w: '120px',
     px: 3,
   },
   {

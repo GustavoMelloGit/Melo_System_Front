@@ -3,7 +3,6 @@ import { capitalCase } from 'change-case'
 import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
-import { pluralize } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
   CoffeeDetailsTypesEnum,
@@ -62,7 +61,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         whiteSpace={showText ? 'pre-wrap' : 'nowrap'}
         textOverflow={showText ? 'unset' : 'ellipsis'}
       >
-        {getNumberOfBags(transaction.type.value)} {fullDescription}
+        {fullDescription}
       </Td>
 
       <Td px={padding} title={capitalCase(transaction.details.coffeeType)} w='120px'>
@@ -72,7 +71,10 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         {CoffeeDetailsTypesEnum[details.bebida]}
       </Td>
       <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
-        {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
+        {getNumberOfBags(transaction.type.value)}
+      </Td>
+      <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
+        {getNumberOfBags(transaction.clientBalance)}
       </Td>
       <Td px={padding} textAlign='center'>
         <MoreInfoTooltip
