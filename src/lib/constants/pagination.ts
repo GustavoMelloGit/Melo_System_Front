@@ -8,6 +8,6 @@ export const PaginationParams = {
   sortOrder: 'orderDirection',
   searchFor: 'searchFor',
   searchBy: 'query',
-}
+} as const
 
 export const DEFAULT_ROWS_PER_PAGE = DEFAULT_ROWS_PER_PAGE_OPTIONS[1]
