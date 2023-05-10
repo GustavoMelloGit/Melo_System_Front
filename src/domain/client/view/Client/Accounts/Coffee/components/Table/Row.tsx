@@ -20,12 +20,12 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   const [showText, setShowText] = useState(false)
   const { details } = transaction
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
-    moisture: `${details.moisture} de umidade`,
-    picking: `${details.picking} de cata`,
+    moisture: `${details.moisture}% de umidade`,
+    picking: `${details.picking}% de cata`,
     sieve: `${details.sieve}% na 17/18`,
-    drilled: `${details.drilled} de broca`,
-    foulness: `${details.foulness} de impureza`,
-    description: details.description,
+    drilled: `${details.drilled}% de broca`,
+    foulness: `${details.foulness}% de impureza`,
+    description: `- ${details.description}`,
     bebida: '',
     coffeeType: '',
   }
@@ -37,8 +37,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   }
   const fullDescription = Object.entries(details).reduce((acc, [key, value]) => {
     const messageValue = messageByDetail[key as keyof CoffeeDetails]
-    const isNumber = typeof value === 'number'
-    if (isNumber && value === 0) return acc
+    if (!value) return acc
     if (messageValue) return acc + messageValue + ' '
     return acc
   }, '')

@@ -1,6 +1,8 @@
 import { type Timestamp, type WithId } from '../../../../shared/types/utils/model'
 import { type UserModel } from '../../../auth/types/model/user'
+import { type BookModel } from '../../../coffee/types/model/book'
 import { type CoffeeDetails, type EscolhaDetails } from '../../../coffee/types/model/coffee'
+import { type SheetModel } from '../../../coffee/types/model/sheet'
 
 export type TransactionModel = WithId<{
   clientBalance: number
@@ -30,4 +32,6 @@ export type CoffeeTransactionModel = TransactionModel & {
 
 export type SacariaTransactionModel = TransactionModel & {
   type: TransactionType<'bags'>
+  book: Pick<BookModel, 'number' | 'id'>
+  sheet: Pick<SheetModel, 'number' | 'id'>
 }
