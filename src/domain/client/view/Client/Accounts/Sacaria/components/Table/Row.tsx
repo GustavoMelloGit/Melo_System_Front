@@ -11,7 +11,8 @@ export default function SacariaAccountTableRow({ transaction }: Props): JSX.Elem
   return (
     <Tr>
       <Td>{dateToFormat(transaction.date)}</Td>
-      <Td>{transaction.description}</Td>
+      <Td textAlign='center'>{transaction.sheet.number}</Td>
+      <Td textAlign='center'>{transaction.book.number}</Td>
       <Td color={getColorByValue(transaction.type.value)} textAlign='center'>
         {transaction.type.value > 0 ? `+${transaction.type.value}` : transaction.type.value}
       </Td>

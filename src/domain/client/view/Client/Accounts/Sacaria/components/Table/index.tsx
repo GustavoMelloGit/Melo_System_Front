@@ -66,8 +66,14 @@ const headerColumns: TableHeaderColumns[] = [
     defaultSort: 'desc',
   },
   {
-    id: 'description',
-    label: 'Descrição',
+    id: 'sheet.number',
+    label: 'Folha',
+    textAlign: 'center',
+  },
+  {
+    id: 'book.number',
+    label: 'Talão',
+    textAlign: 'center',
   },
   {
     id: 'type.value',
