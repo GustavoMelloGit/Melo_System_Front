@@ -109,7 +109,7 @@ export default function FeeModal(): JSX.Element {
                     <Tr>
                       <Th>Data</Th>
                       <Th>Valor</Th>
-                      <Th>Juros</Th>
+                      <Th>Valor + Juros</Th>
                     </Tr>
                   </Thead>
                   <Tbody>

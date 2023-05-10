@@ -20,7 +20,7 @@ export function calculateCompoundInterest(
   interestRate: number,
 ): number {
   if (!interestRate) return amount
-  return amount * (1 + interestRate / 100) ** time
+  return amount * (1 + interestRate) ** time
 }
 
 /**
