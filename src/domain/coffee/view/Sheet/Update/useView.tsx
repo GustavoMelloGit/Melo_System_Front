@@ -13,12 +13,12 @@ export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): 
   const { data } = getSheetService(sheetNumber)
 
   async function handleUpdateSheet(values: SheetFormValues): Promise<void> {
-    if (!sheetNumber) return
+    if (!sheetNumber || !bookNumber) return
     values.coffeeDetails = formatCoffeeDetails(values.coffeeDetails)
 
     const { number, ...rest } = values
 
-    const { error } = await updateSheetService(sheetNumber, {
+    const { error } = await updateSheetService(bookNumber, sheetNumber, {
       ...rest,
       ...(values.number !== Number(sheetNumber) && { number: values.number }),
     })
