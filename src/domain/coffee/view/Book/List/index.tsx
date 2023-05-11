@@ -2,7 +2,7 @@ import { IconButton } from '@chakra-ui/react'
 import { IoAddOutline } from 'react-icons/io5'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
-import CoffeeBookTable from '../../../components/Book/List'
+import CoffeeBookTable from '../../../components/Book/Table'
 import useCoffeeBookView from './useView'
 
 export default function CoffeeBookView(): JSX.Element {

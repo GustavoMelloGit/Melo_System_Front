@@ -21,7 +21,7 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
   return (
     <Thead bg={bg}>
       <Tr h={16}>
-        {columns.map(({ align, label, isSortable, id, defaultSort, ...rest }) => (
+        {columns.map(({ align, label, isSortable, id, ...rest }) => (
           <Th
             key={id}
             color={textColor}

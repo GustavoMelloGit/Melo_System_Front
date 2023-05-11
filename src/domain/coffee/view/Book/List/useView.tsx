@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
+import { getDefaultSortParams } from '../../../../../lib/utils/utils'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
@@ -11,7 +12,9 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
   const navigate = useNavigate()
   const { allSearchParams } = useURLSearchParams()
   const params = useServiceParams()
-  const { data, isLoading, error, total, mutate } = getBooksService(params)
+  const { data, isLoading, error, total, mutate } = getBooksService(
+    params || getDefaultSortParams('number'),
+  )
   const openModal = useModal((state) => state.openModal)
 
   async function openCreateBookModal(): Promise<void> {

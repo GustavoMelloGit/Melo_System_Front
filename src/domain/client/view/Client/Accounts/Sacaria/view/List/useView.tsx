@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { getDefaultSortParams } from '../../../../../../../../lib/utils/utils'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
@@ -8,7 +9,10 @@ export default function useSacariaAccountView(): UseSacariaAccountView {
   const { uuid } = useParams()
   const openModal = useModal((state) => state.openModal)
   const params = useServiceParams()
-  const { data, isLoading, total, mutate } = getSacariaAccountService(uuid, params)
+  const { data, isLoading, total, mutate } = getSacariaAccountService(
+    uuid,
+    params || getDefaultSortParams('date'),
+  )
 
   async function handleOpenCreate(): Promise<void> {
     if (!uuid) return

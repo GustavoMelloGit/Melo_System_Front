@@ -48,7 +48,6 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'date',
     label: 'Data',
     isSortable: true,
-    defaultSort: 'desc',
   },
   {
     id: 'bags',

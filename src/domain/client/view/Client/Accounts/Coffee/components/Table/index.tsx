@@ -77,7 +77,6 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'date',
     label: 'Data',
     isSortable: true,
-    defaultSort: 'desc',
     px: 3,
     w: 120,
   },

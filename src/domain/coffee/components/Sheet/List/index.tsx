@@ -53,7 +53,6 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Número',
     isSortable: true,
     maxW: 100,
-    defaultSort: 'desc',
   },
   {
     id: 'clientName',

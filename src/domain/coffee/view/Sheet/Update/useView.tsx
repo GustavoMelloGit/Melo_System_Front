@@ -40,7 +40,6 @@ export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): 
         isDraft: data.isDraft,
         lines: data.lines,
         number: data.number,
-        bookNumber: Number(bookNumber),
       }
     : ({
         number: 0,
@@ -54,7 +53,6 @@ export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): 
           bebida: 'duro',
           coffeeType: 'bica_corrida',
         },
-        bookNumber: Number(bookNumber),
         lines: [{ bags: 0, weight: 0 }],
       } as SheetFormValues)
 

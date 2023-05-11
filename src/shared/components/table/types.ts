@@ -22,7 +22,6 @@ export type TableHeaderColumns<T = string> = Omit<TableColumnHeaderProps, 'id'> 
   label: string
   isSortable?: boolean
   align?: 'left' | 'right' | 'center'
-  defaultSort?: 'asc' | 'desc'
 }
 export type TableHeaderProps = {
   columns: TableHeaderColumns[]

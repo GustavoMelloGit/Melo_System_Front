@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { getDefaultSortParams } from '../../../../../../../../lib/utils/utils'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import { getEscolhaAccountService } from '../../service/get'
@@ -6,7 +7,10 @@ import { getEscolhaAccountService } from '../../service/get'
 export default function useEscolhaAccountView(): UseEscolhaAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { data, isLoading, total } = getEscolhaAccountService(uuid, params)
+  const { data, isLoading, total } = getEscolhaAccountService(
+    uuid,
+    params || getDefaultSortParams('date'),
+  )
 
   return {
     data: data ?? [],
