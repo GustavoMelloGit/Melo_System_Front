@@ -5,7 +5,6 @@ import { Routes } from '../../../../../lib/routes'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
-import TableLinkToButton from '../../../../../shared/components/table/buttons/LinkTo'
 import { type ClientModel } from '../../../types/model/Client'
 
 export type ClientsTableRowProps = {
@@ -51,9 +50,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
           <Link to={Routes.updateClient(client.id)}>
             <TableEditButton colorScheme='blue' as='span' aria-label='Editar cliente' />
           </Link>
-          <LinkOverlay as={Link} to={Routes.clientPage(client.id)}>
-            <TableLinkToButton aria-label='Ver cliente' />
-          </LinkOverlay>
+          <LinkOverlay as={Link} to={Routes.clientPage(client.id)}></LinkOverlay>
         </HStack>
       </Td>
     </LinkBox>
