@@ -9,7 +9,7 @@ import { type CurrencyTransactionModel } from '../types/model/Transaction'
 
 export async function createClientService(
   values: ClientFormValues,
-): Promise<PostServiceResponse<ClientModel>> {
+): PostServiceResponse<ClientModel> {
   try {
     let profileImage = values.profileImage
     const profileImageIsBase64 = profileImage?.includes('data:image')

@@ -7,13 +7,16 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import EscolhaFormView from '../../components/Form'
 import useCreateEscolhaView from './useView'
 
-const CreateEscolhaView = (): JSX.Element => {
-  const closeModal = useModal((state) => state.closeModal)
-  const { handleCreateEscolha } = useCreateEscolhaView()
+type Props = {
+  clientId: string
+  onSuccess?: (data: EscolhaTransactionModel) => void
+}
+const CreateEscolhaView = ({ clientId, onSuccess }: Props): JSX.Element => {
+  const { handleCreateEscolha, closeModal } = useCreateEscolhaView({ clientId, onSuccess })
   return (
     <Modal onClose={closeModal} isOpen isCentered>
       <ModalOverlay />
@@ -29,7 +32,12 @@ const CreateEscolhaView = (): JSX.Element => {
             onSubmit={handleCreateEscolha}
             initialValues={{
               date: new Date().toISOString().split('T')[0],
-              value: 0,
+              bags: 0,
+              weight: 0,
+              details: {
+                foulness: 0,
+                utilization: 0,
+              },
               description: '',
             }}
           />
