@@ -1,4 +1,4 @@
-import { Avatar, HStack, Link as StyledLink, Td, Tr } from '@chakra-ui/react'
+import { Avatar, HStack, LinkBox, LinkOverlay, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
@@ -17,7 +17,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
     setShowBalance((prev) => !prev)
   }
   return (
-    <Tr>
+    <LinkBox as={Tr}>
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
@@ -29,9 +29,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         overflow='hidden'
         data-cy='table-cell-client-name'
       >
-        <StyledLink as={Link} to={Routes.clientPage(client.id)}>
-          {client.name}
-        </StyledLink>
+        {client.name}
       </Td>
       <Td title={client.nickname} data-cy='table-cell-client-nickname'>
         {client.nickname}
@@ -53,11 +51,11 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
           <Link to={Routes.updateClient(client.id)}>
             <TableEditButton colorScheme='blue' as='span' aria-label='Editar cliente' />
           </Link>
-          <Link to={Routes.clientPage(client.id)}>
+          <LinkOverlay as={Link} to={Routes.clientPage(client.id)}>
             <TableLinkToButton aria-label='Ver cliente' />
-          </Link>
+          </LinkOverlay>
         </HStack>
       </Td>
-    </Tr>
+    </LinkBox>
   )
 }

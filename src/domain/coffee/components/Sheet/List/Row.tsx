@@ -1,4 +1,4 @@
-import { Badge, Flex, Td, Tr } from '@chakra-ui/react'
+import { Badge, Flex, LinkBox, LinkOverlay, Td, Tr } from '@chakra-ui/react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
@@ -16,7 +16,7 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
   if (!number) return <Navigate to={Routes.books} replace />
 
   return (
-    <Tr h={61}>
+    <LinkBox as={Tr} h={61}>
       <Td>{sheet.number}</Td>
       <Td>{sheet.client.name}</Td>
       <Td>{sheet.courier}</Td>
@@ -29,9 +29,9 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
       <Td>
         {sheet.isDraft ? (
           <Flex justify='center'>
-            <Link to={Routes.updateSheet(number, sheet.number)}>
+            <LinkOverlay as={Link} to={Routes.updateSheet(number, sheet.number)}>
               <TableEditButton as='span' aria-label='Editar folha' colorScheme='blue' />
-            </Link>
+            </LinkOverlay>
             <TableButton
               aria-label='Excluir folha'
               onClick={onClickDelete}
@@ -41,12 +41,12 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
           </Flex>
         ) : (
           <Flex justify='center'>
-            <Link to={Routes.sheetDetails(number, sheet.number)}>
+            <LinkOverlay as={Link} to={Routes.sheetDetails(number, sheet.number)}>
               <TableLinkToButton aria-label='Visualizar folha' colorScheme='blue' />
-            </Link>
+            </LinkOverlay>
           </Flex>
         )}
       </Td>
-    </Tr>
+    </LinkBox>
   )
 }
