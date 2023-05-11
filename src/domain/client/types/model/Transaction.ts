@@ -32,6 +32,6 @@ export type CoffeeTransactionModel = TransactionModel & {
 
 export type SacariaTransactionModel = TransactionModel & {
   type: TransactionType<'bags'>
-  book: Pick<BookModel, 'number' | 'id'>
-  sheet: Pick<SheetModel, 'number' | 'id'>
+  book: Pick<BookModel, 'number' | 'id'> | null
+  sheet: Pick<SheetModel, 'number' | 'id'> | null
 }

@@ -65,13 +65,17 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
   {
-    id: 'sheet.number',
-    label: 'Folha',
-    textAlign: 'center',
+    id: 'description',
+    label: 'Descrição',
   },
   {
     id: 'book.number',
     label: 'Talão',
+    textAlign: 'center',
+  },
+  {
+    id: 'sheet.number',
+    label: 'Folha',
     textAlign: 'center',
   },
   {
