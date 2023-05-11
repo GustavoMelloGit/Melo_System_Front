@@ -117,19 +117,19 @@ export default function ClientDetails(): JSX.Element {
               </TabList>
             </Card>
             <TabPanels>
-              <TabPanel>
+              <TabPanel px={0}>
                 <ListTransactionsView />
               </TabPanel>
               <TabPanel px={0}>
                 <CoffeeAccountView />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <EscolhaAccountView />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <InDevelopmentTag />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <SacariaAccountView />
               </TabPanel>
             </TabPanels>
