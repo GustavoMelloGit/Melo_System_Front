@@ -37,7 +37,7 @@ export default function SacariaAccountTable({
           <TableAddButton
             onClick={onClickAdd}
             aria-label='adicionar sacaria'
-            title='Fazer lançamento'
+            title='Fazer lançamento de sacaria'
           />
         ),
       }}

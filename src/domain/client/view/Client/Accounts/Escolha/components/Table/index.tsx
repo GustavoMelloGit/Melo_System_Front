@@ -1,3 +1,4 @@
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -7,9 +8,16 @@ import {
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import EscolhaAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<EscolhaTransactionModel[]>
+type Props = CustomTableComponentProps<EscolhaTransactionModel[]> & {
+  onClickAdd: () => void
+}
 
-export default function EscolhaAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
+export default function EscolhaAccountTable({
+  data,
+  isLoading,
+  totalLength,
+  onClickAdd,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -25,6 +33,13 @@ export default function EscolhaAccountTable({ data, isLoading, totalLength }: Pr
       }}
       filter={{
         searchForOptions,
+        actions: (
+          <TableAddButton
+            onClick={onClickAdd}
+            aria-label='adicionar escolha'
+            title='Fazer lançamento de escolha'
+          />
+        ),
       }}
     >
       {data?.map((transaction) => (
