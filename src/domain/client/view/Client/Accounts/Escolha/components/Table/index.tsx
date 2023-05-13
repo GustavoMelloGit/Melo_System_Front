@@ -65,10 +65,6 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
   {
-    id: 'bags',
-    label: 'Sacos',
-  },
-  {
     id: 'utilization',
     label: 'Aproveitamento',
     isSortable: true,
@@ -77,6 +73,14 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'impurity',
     label: 'Impureza',
     isSortable: true,
+  },
+  {
+    id: 'type.value',
+    label: 'Pesagem',
+  },
+  {
+    id: 'type.value',
+    label: 'Saldo',
   },
   {
     id: 'actions',
