@@ -37,7 +37,7 @@ export default function SacariaAccountTable({
           <TableAddButton
             onClick={onClickAdd}
             aria-label='adicionar sacaria'
-            title='Fazer lançamento'
+            title='Fazer lançamento de sacaria'
           />
         ),
       }}
@@ -63,16 +63,24 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'date',
     label: 'Data',
     isSortable: true,
-    defaultSort: 'desc',
   },
   {
     id: 'description',
     label: 'Descrição',
   },
   {
+    id: 'book.number',
+    label: 'Talão',
+    textAlign: 'center',
+  },
+  {
+    id: 'sheet.number',
+    label: 'Folha',
+    textAlign: 'center',
+  },
+  {
     id: 'type.value',
-    label: 'Valor',
-    isSortable: true,
+    label: 'Sacos',
     textAlign: 'center',
   },
   {

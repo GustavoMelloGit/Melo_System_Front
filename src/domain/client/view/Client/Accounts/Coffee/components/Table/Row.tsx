@@ -3,7 +3,6 @@ import { capitalCase } from 'change-case'
 import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
-import { pluralize } from '../../../../../../../../lib/utils/utils'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
   CoffeeDetailsTypesEnum,
@@ -21,14 +20,13 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   const [showText, setShowText] = useState(false)
   const { details } = transaction
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
-    moisture: `${details.moisture} de umidade`,
-    picking: `${details.picking} de cata`,
+    moisture: `${details.moisture}% de umidade`,
+    picking: `${details.picking}% de cata`,
     sieve: `${details.sieve}% na 17/18`,
-    drilled: `${details.drilled} de broca`,
-    foulness: `${details.foulness} de impureza`,
-    description: details.description,
+    drilled: `${details.drilled}% de broca`,
+    foulness: `${details.foulness}% de impureza`,
+    description: `- ${details.description}`,
     bebida: '',
-    weightPerBag: '',
     coffeeType: '',
   }
   const labelByTypeName: Record<CoffeeTypes, string> = {
@@ -39,8 +37,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   }
   const fullDescription = Object.entries(details).reduce((acc, [key, value]) => {
     const messageValue = messageByDetail[key as keyof CoffeeDetails]
-    const isNumber = typeof value === 'number'
-    if (isNumber && value === 0) return acc
+    if (!value) return acc
     if (messageValue) return acc + messageValue + ' '
     return acc
   }, '')
@@ -63,7 +60,6 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         whiteSpace={showText ? 'pre-wrap' : 'nowrap'}
         textOverflow={showText ? 'unset' : 'ellipsis'}
       >
-        {getNumberOfBags(transaction.type.value, transaction.details.weightPerBag)}{' '}
         {fullDescription}
       </Td>
 
@@ -74,7 +70,10 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         {CoffeeDetailsTypesEnum[details.bebida]}
       </Td>
       <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
-        {transaction.clientBalance} {pluralize('Kg', transaction.clientBalance)}
+        {getNumberOfBags(transaction.type.value)}
+      </Td>
+      <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
+        {getNumberOfBags(transaction.clientBalance)}
       </Td>
       <Td px={padding} textAlign='center'>
         <MoreInfoTooltip

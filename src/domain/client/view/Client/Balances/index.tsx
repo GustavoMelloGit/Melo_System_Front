@@ -12,6 +12,7 @@ import { Fragment, type ReactNode } from 'react'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import { useModal } from '../../../../../shared/hooks/useModal'
+import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
 import { getClientBalancesService } from '../../../service'
 import { type ClientBalance } from '../../../types/model/Client'
 
@@ -93,7 +94,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                       formattedValue = formatCurrency(value)
                       break
                     case 'weight':
-                      formattedValue = `${value} Kgs`
+                      formattedValue = getNumberOfBags(value)
                       break
                     case 'bag':
                       formattedValue = `${value} Sacas`

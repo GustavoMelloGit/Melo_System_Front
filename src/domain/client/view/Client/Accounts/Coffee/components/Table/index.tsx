@@ -77,7 +77,6 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'date',
     label: 'Data',
     isSortable: true,
-    defaultSort: 'desc',
     px: 3,
     w: 120,
   },
@@ -102,10 +101,14 @@ const headerColumns: TableHeaderColumns[] = [
     w: '150px',
   },
   {
+    id: 'type.value',
+    label: 'Pesagem',
+    px: 3,
+  },
+  {
     id: 'clientBalance',
     label: 'Saldo',
     isSortable: true,
-    w: '120px',
     px: 3,
   },
   {

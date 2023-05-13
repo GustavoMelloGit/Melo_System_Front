@@ -1,4 +1,3 @@
-import { DEFAULT_WIGHT_PER_BAG } from '../../../constants/coffee'
 import { getSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
@@ -17,12 +16,10 @@ export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSh
         isDraft: data.isDraft,
         lines: data.lines,
         number: data.number,
-        weightPerBag: data.weightPerBag,
       }
     : ({
         number: 0,
         weighingDate: new Date().toISOString().split('T')[0],
-        weightPerBag: DEFAULT_WIGHT_PER_BAG,
         coffeeDetails: {
           picking: 0,
           foulness: 0,

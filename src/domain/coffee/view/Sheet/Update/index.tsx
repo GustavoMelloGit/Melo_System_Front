@@ -7,7 +7,7 @@ import useUpdateSheetView from './useView'
 
 export default function UpdateSheetView(): JSX.Element {
   const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
-  const { updateSheet, initialValues } = useUpdateSheetView({ sheetNumber })
+  const { updateSheet, initialValues } = useUpdateSheetView({ sheetNumber, bookNumber })
   if (!bookNumber || !sheetNumber) return <Navigate to={Routes.books} />
   return (
     <Page title='Adicionar Folha' data-cy='create-sheet-page'>

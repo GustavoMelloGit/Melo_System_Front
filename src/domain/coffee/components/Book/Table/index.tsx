@@ -44,7 +44,6 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'number',
     label: 'Número',
     isSortable: true,
-    defaultSort: 'desc',
   },
   {
     id: 'createdAt',

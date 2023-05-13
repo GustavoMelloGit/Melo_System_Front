@@ -1,5 +1,4 @@
 import { Box, IconButton, Text, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react'
-import { useEffect } from 'react'
 import { BsArrowUpShort } from 'react-icons/bs'
 import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
@@ -19,16 +18,10 @@ export default function TableHeader({ columns }: TableHeaderProps): JSX.Element 
     })
   }
 
-  useEffect(() => {
-    const defaultSortColumn = columns.find((column) => column.defaultSort)
-    if (!defaultSortColumn) return
-    handleSort(defaultSortColumn.id, defaultSortColumn.defaultSort ?? 'desc')
-  }, [columns])
-
   return (
     <Thead bg={bg}>
       <Tr h={16}>
-        {columns.map(({ align, label, isSortable, id, defaultSort, ...rest }) => (
+        {columns.map(({ align, label, isSortable, id, ...rest }) => (
           <Th
             key={id}
             color={textColor}

@@ -1,10 +1,9 @@
 import {
   Button,
-  FormControl,
-  FormLabel,
   Grid,
   GridItem,
-  Switch,
+  Radio,
+  RadioGroup,
   Textarea,
   VStack,
   type TextareaProps,
@@ -49,16 +48,18 @@ export default function CheckingAccountForm({
       <VStack align='stretch' gap={4}>
         <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)']} gap={3}>
           <GridItem colSpan={[1, 2]}>
-            <FormControl>
-              <FormLabel htmlFor='isDebit'>Débito?</FormLabel>
-              <Switch
-                id='isDebit'
-                isChecked={isDebit}
-                onChange={() => {
-                  setIsDebit((prev) => !prev)
-                }}
-              />
-            </FormControl>
+            <RadioGroup
+              value={isDebit ? 'debit' : 'credit'}
+              onChange={(value) => {
+                setIsDebit(value === 'debit')
+              }}
+              display='flex'
+              gap={4}
+              mb={1}
+            >
+              <Radio value='debit'>Débito</Radio>
+              <Radio value='credit'>Crédito</Radio>
+            </RadioGroup>
           </GridItem>
           <GridItem>
             <ControllerField<CheckingAccountFormValues>
@@ -77,9 +78,7 @@ export default function CheckingAccountForm({
               errors={errors}
               leftIcon='R$'
               isRequired
-              inputGroupProps={{
-                color: isDebit ? 'red.400' : 'green.500',
-              }}
+              color={isDebit ? 'red.400' : 'green.500'}
             />
           </GridItem>
 

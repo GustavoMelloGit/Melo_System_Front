@@ -90,46 +90,46 @@ export default function ClientDetails(): JSX.Element {
             <Card overflow='auto' p={4} roundedTop={0} borderColor='inherit'>
               <TabList justifyContent='center' minW='max-content' w='full'>
                 <Link to='?tab=0' draggable={false}>
-                  <Tab as='span' data-cy='checkingAccount-tab'>
+                  <Tab as='span' data-cy='checkingAccount-tab' roundedTop={6}>
                     Conta Corrente
                   </Tab>
                 </Link>
                 <Link to='?tab=1' draggable={false}>
-                  <Tab as='span' data-cy='coffe-tab'>
+                  <Tab as='span' data-cy='coffe-tab' roundedTop={6}>
                     Conta Café
                   </Tab>
                 </Link>
                 <Link to='?tab=2' draggable={false}>
-                  <Tab as='span' data-cy='choice-tab'>
+                  <Tab as='span' data-cy='choice-tab' roundedTop={6}>
                     Conta Escolha
                   </Tab>
                 </Link>
                 <Link to='?tab=3' draggable={false}>
-                  <Tab as='span' data-cy='harvest-tab'>
+                  <Tab as='span' data-cy='harvest-tab' roundedTop={6}>
                     Conta Colheita
                   </Tab>
                 </Link>
                 <Link to='?tab=4' draggable={false}>
-                  <Tab as='span' data-cy='sack-tab'>
+                  <Tab as='span' data-cy='sack-tab' roundedTop={6}>
                     Conta Sacaria
                   </Tab>
                 </Link>
               </TabList>
             </Card>
             <TabPanels>
-              <TabPanel>
+              <TabPanel px={0}>
                 <ListTransactionsView />
               </TabPanel>
               <TabPanel px={0}>
                 <CoffeeAccountView />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <EscolhaAccountView />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <InDevelopmentTag />
               </TabPanel>
-              <TabPanel>
+              <TabPanel px={0}>
                 <SacariaAccountView />
               </TabPanel>
             </TabPanels>

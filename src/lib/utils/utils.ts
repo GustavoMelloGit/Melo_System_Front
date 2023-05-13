@@ -1,3 +1,5 @@
+import { PaginationParams } from '../constants/pagination'
+
 /**
  * Deeply removes all properties with falsy values from an object.
  * @param obj The object to remove properties from.
@@ -33,4 +35,14 @@ export function removeEmptyObjects(obj: Record<string, any>): Record<string, any
  */
 export function pluralize(word: string, count: number, suffix = 's'): string {
   return count === 1 ? word : `${word}${suffix}`
+}
+
+/**
+ * Returns default sort search params for given sort field and order.
+ * @param sortBy The field to sort by.
+ * @param sortOrder The order to sort by.
+ * @returns the default sort search params.
+ */
+export function getDefaultSortParams(sortBy: string, sortOrder: 'desc' | 'asc' = 'desc'): string {
+  return `${PaginationParams.sortBy}=${sortBy}&${PaginationParams.sortOrder}=${sortOrder}`
 }

@@ -1,24 +1,24 @@
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { DEFAULT_WIGHT_PER_BAG } from '../../../constants/coffee'
 import { getSheetService, updateSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
 
 type Props = {
   sheetNumber: string | undefined
+  bookNumber: string | undefined
 }
-export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateSheetView {
+export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): UseUpdateSheetView {
   const navigate = useNavigate()
   const { data } = getSheetService(sheetNumber)
 
   async function handleUpdateSheet(values: SheetFormValues): Promise<void> {
-    if (!sheetNumber) return
+    if (!sheetNumber || !bookNumber) return
     values.coffeeDetails = formatCoffeeDetails(values.coffeeDetails)
 
     const { number, ...rest } = values
 
-    const { error } = await updateSheetService(sheetNumber, {
+    const { error } = await updateSheetService(bookNumber, sheetNumber, {
       ...rest,
       ...(values.number !== Number(sheetNumber) && { number: values.number }),
     })
@@ -40,12 +40,10 @@ export default function useUpdateSheetView({ sheetNumber }: Props): UseUpdateShe
         isDraft: data.isDraft,
         lines: data.lines,
         number: data.number,
-        weightPerBag: data.weightPerBag,
       }
     : ({
         number: 0,
         weighingDate: new Date().toISOString().split('T')[0],
-        weightPerBag: DEFAULT_WIGHT_PER_BAG,
         coffeeDetails: {
           picking: 0,
           foulness: 0,
