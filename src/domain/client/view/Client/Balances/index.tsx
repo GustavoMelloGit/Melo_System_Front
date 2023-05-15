@@ -22,7 +22,6 @@ type Props = {
 const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
   const { data } = getClientBalancesService(clientUuid)
   const closeModal = useModal((state) => state.closeModal)
-  console.log(data)
   const displayData: Record<
     ClientBalance['type'],
     {
