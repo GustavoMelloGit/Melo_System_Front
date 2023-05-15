@@ -1,9 +1,20 @@
-import { Button, Grid, GridItem, Stack, Textarea, type TextareaProps } from '@chakra-ui/react'
+import {
+  Button,
+  Grid,
+  GridItem,
+  Radio,
+  RadioGroup,
+  Stack,
+  Textarea,
+  type TextareaProps,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import { type EscolhaFormValues } from '../../types/esolha'
 
@@ -36,6 +47,8 @@ type Props = {
   initialValues: Partial<EscolhaFormValues>
 }
 const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
+  const [isDebit, setIsDebit] = useState<boolean>(true)
+  const inputColor = getColorByValue(isDebit ? -1 : 1)
   const {
     handleSubmit,
     control,
@@ -46,9 +59,31 @@ const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit((values) => {
+        onSubmit({
+          ...values,
+          weight: values.weight * (isDebit ? -1 : 1),
+          bags: values.bags * (isDebit ? -1 : 1),
+        })
+      })}
+    >
       <Stack spacing={6}>
         <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' gap={4}>
+          <GridItem colSpan={[1, 2]}>
+            <RadioGroup
+              value={isDebit ? 'true' : 'false'}
+              onChange={(value) => {
+                setIsDebit(value === 'true')
+              }}
+              display='flex'
+              gap={4}
+              mb={1}
+            >
+              <Radio value='true'>Débito</Radio>
+              <Radio value='false'>Crédito</Radio>
+            </RadioGroup>
+          </GridItem>
           <GridItem colSpan={2}>
             <ControllerField<EscolhaFormValues>
               name='date'
@@ -69,6 +104,7 @@ const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               placeholder='Ex.: 10'
               required
               rightIcon={<GiChipsBag />}
+              color={inputColor}
             />
           </GridItem>
           <GridItem>
@@ -82,6 +118,7 @@ const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               placeholder='Ex.: 10'
               required
               rightIcon='Kg'
+              color={inputColor}
             />
           </GridItem>
           <GridItem>
@@ -121,7 +158,7 @@ const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
         </Grid>
 
         <Button w='full' type='submit' colorScheme='green' isLoading={isSubmitting}>
-          Creditar
+          Salvar
         </Button>
       </Stack>
     </form>

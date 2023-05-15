@@ -50,7 +50,7 @@ export type ClientModel = {
 } & Timestamp
 
 export type ClientBalance = {
-  type: CoffeeDetailsTypes | 'bags' | 'currency'
+  type: CoffeeDetailsTypes | 'bags' | 'currency' | 'escolha'
   value: number
 }
 
