@@ -79,7 +79,7 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Pesagem',
   },
   {
-    id: 'type.value',
+    id: 'clientBalance',
     label: 'Saldo',
   },
   {

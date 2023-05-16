@@ -8,10 +8,7 @@ export type EscolhaFormValues = {
   description?: string
 }
 
-export type CreateEscolhaValues = {
+export type CreateEscolhaValues = Omit<EscolhaFormValues, 'bags' | 'weight'> & {
   clientId: string
-  date: string
   value: number
-  details: Pick<EscolhaDetails, 'foulness' | 'utilization'> | undefined
-  description?: string
 }

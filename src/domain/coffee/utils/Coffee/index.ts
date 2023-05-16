@@ -2,7 +2,7 @@ import GlobalConfig from '../../../../lib/constants/config'
 
 /**
  * Function that takes amount in Kg and the bags/Kg and returns the number of bags in a formatted string
- * @param amount Amount in Kg
+ * @param absoluteAmount Amount in Kg
  * @param KgPerBag Kg per bag
  * @returns Number of bags
  * @example
@@ -14,10 +14,11 @@ export const getNumberOfBags = (
   amount: number,
   KgPerBag: number = GlobalConfig.weightPerBag,
 ): string => {
-  const numberOfBags = Math.floor(amount / KgPerBag)
-  if (numberOfBags === 0) return `${amount} Kg`
-  const remainder = Math.round(((amount % KgPerBag) + Number.EPSILON) * 100) / 100
-  const numberOfBagsString = numberOfBags > 0 ? `${numberOfBags} Sc` : ''
+  const absoluteAmount = Math.abs(amount)
+  const numberOfBags = Math.floor(absoluteAmount / KgPerBag)
+  if (numberOfBags === 0) return `${absoluteAmount} Kg`
+  const remainder = Math.round(((absoluteAmount % KgPerBag) + Number.EPSILON) * 100) / 100
+  const numberOfBagsString = numberOfBags > 0 ? `${numberOfBags} Sc` : ``
   const remainderString = remainder > 0 ? `${remainder} Kg` : ''
-  return `${numberOfBagsString} ${remainderString}`.trim()
+  return `${amount < 0 ? '-' : ''}${numberOfBagsString} ${remainderString}`.trim()
 }

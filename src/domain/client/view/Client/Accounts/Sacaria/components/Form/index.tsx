@@ -1,8 +1,19 @@
-import { Button, Grid, GridItem, Stack, Textarea, type TextareaProps } from '@chakra-ui/react'
+import {
+  Button,
+  Grid,
+  GridItem,
+  Radio,
+  RadioGroup,
+  Stack,
+  Textarea,
+  type TextareaProps,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import { type SacariaFormValues } from '../../types/sacaria'
 
@@ -19,6 +30,7 @@ type Props = {
   initialValues: Partial<SacariaFormValues>
 }
 const SacariaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
+  const [isDebit, setIsDebit] = useState<boolean>(true)
   const {
     handleSubmit,
     control,
@@ -29,9 +41,30 @@ const SacariaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit((values) => {
+        onSubmit({
+          ...values,
+          value: isDebit ? -values.value : values.value,
+        })
+      })}
+    >
       <Stack spacing={6}>
         <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' gap={2}>
+          <GridItem colSpan={[1, 2]}>
+            <RadioGroup
+              value={isDebit ? 'true' : 'false'}
+              onChange={(value) => {
+                setIsDebit(value === 'true')
+              }}
+              display='flex'
+              gap={4}
+              mb={1}
+            >
+              <Radio value='true'>Débito</Radio>
+              <Radio value='false'>Crédito</Radio>
+            </RadioGroup>
+          </GridItem>
           <GridItem>
             <ControllerField<SacariaFormValues>
               name='date'
@@ -50,6 +83,7 @@ const SacariaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               control={control}
               placeholder='Ex.: 10'
               required
+              color={getColorByValue(isDebit ? -1 : 1)}
             />
           </GridItem>
           <GridItem colSpan={2}>

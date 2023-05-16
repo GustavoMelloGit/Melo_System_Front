@@ -5,7 +5,7 @@ export type CoffeeDetails = {
   drilled: number
   foulness: number
   description: string
-  bebida: CoffeeDetailsTypes
+  bebida: CoffeeBebidas
   coffeeType: CoffeeTypes
 }
 
@@ -24,7 +24,7 @@ export const CoffeeTypesEnum: Record<CoffeeTypes, string> = {
   escolha: 'Escolha',
 }
 
-export type CoffeeDetailsTypes =
+export type CoffeeBebidas =
   | 'rio_velho'
   | 'rio_zona'
   | 'rio'
@@ -34,7 +34,7 @@ export type CoffeeDetailsTypes =
   | 'duro_riado'
   | 'duro'
 
-export const CoffeeDetailsTypesEnum: Record<CoffeeDetailsTypes, string> = {
+export const CoffeeBebidasLabel: Record<CoffeeBebidas, string> = {
   rio_velho: 'Rio Velho',
   rio_zona: 'Rio Zona',
   rio: 'Rio',

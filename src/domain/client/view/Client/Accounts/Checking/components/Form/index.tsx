@@ -27,7 +27,7 @@ export default function CheckingAccountForm({
   initialValues,
   submitText,
 }: CheckingAccountFormProps): JSX.Element {
-  const [isDebit, setIsDebit] = useState(true)
+  const [isDebit, setIsDebit] = useState<boolean>(true)
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -49,16 +49,16 @@ export default function CheckingAccountForm({
         <Grid gridTemplateColumns={['1fr', 'repeat(2, 1fr)']} gap={3}>
           <GridItem colSpan={[1, 2]}>
             <RadioGroup
-              value={isDebit ? 'debit' : 'credit'}
+              value={isDebit ? 'true' : 'false'}
               onChange={(value) => {
-                setIsDebit(value === 'debit')
+                setIsDebit(value === 'true')
               }}
               display='flex'
               gap={4}
               mb={1}
             >
-              <Radio value='debit'>Débito</Radio>
-              <Radio value='credit'>Crédito</Radio>
+              <Radio value='true'>Débito</Radio>
+              <Radio value='false'>Crédito</Radio>
             </RadioGroup>
           </GridItem>
           <GridItem>

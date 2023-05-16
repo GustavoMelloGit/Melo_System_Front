@@ -1,20 +1,25 @@
 import { Select } from '@chakra-ui/react'
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import {
-  CoffeeDetailsTypesEnum,
-  CoffeeTypesEnum,
-} from '../../../../../../../coffee/types/model/coffee'
+import { CoffeeBebidasLabel, CoffeeTypesEnum } from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
+type Props = CustomTableComponentProps<CoffeeTransactionModel[]> & {
+  onClickAdd: () => void
+}
 
-export default function CoffeeAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
+export default function CoffeeAccountTable({
+  data,
+  isLoading,
+  totalLength,
+  onClickAdd,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -30,6 +35,13 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
       }}
       filter={{
         searchForOptions,
+        actions: (
+          <TableAddButton
+            onClick={onClickAdd}
+            aria-label='adicionar transação'
+            title='Fazer lançamento'
+          />
+        ),
       }}
     >
       {data?.map((transaction) => (
@@ -50,7 +62,7 @@ const searchForOptions: SearchForOption = {
     label: 'Bebida',
     Input: (
       <Select variant='filled' roundedLeft={0} flexGrow={1}>
-        {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+        {Object.entries(CoffeeBebidasLabel).map(([value, label]) => (
           <option key={value} value={value}>
             {label}
           </option>

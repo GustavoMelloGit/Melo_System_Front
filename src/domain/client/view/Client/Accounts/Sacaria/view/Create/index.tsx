@@ -43,7 +43,7 @@ const CreateSacariaView = ({ clientUuid, refetch }: Props): JSX.Element => {
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
-            Creditar sacaria
+            Conta Sacaria
           </Heading>
         </ModalHeader>
         <ModalBody pb={8}>

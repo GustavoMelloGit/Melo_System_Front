@@ -1,11 +1,12 @@
-import { Td, Tr } from '@chakra-ui/react'
+import { Collapse, Td, Tr } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
-  CoffeeDetailsTypesEnum,
+  CoffeeBebidasLabel,
+  type CoffeeBebidas,
   type CoffeeDetails,
   type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
@@ -25,7 +26,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     sieve: `${details.sieve}% na 17/18`,
     drilled: `${details.drilled}% de broca`,
     foulness: `${details.foulness}% de impureza`,
-    description: `- ${details.description}`,
+    description: `${details.description}`,
     bebida: '',
     coffeeType: '',
   }
@@ -54,22 +55,22 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         onClick={() => {
           setShowText((prev) => !prev)
         }}
-        overflow='hidden'
         maxW={200}
         wordBreak='break-word'
-        whiteSpace={showText ? 'pre-wrap' : 'nowrap'}
-        textOverflow={showText ? 'unset' : 'ellipsis'}
+        whiteSpace='pre-wrap'
       >
-        {fullDescription}
+        <Collapse startingHeight={20} in={showText}>
+          {fullDescription}
+        </Collapse>
       </Td>
 
       <Td px={padding} title={capitalCase(transaction.details.coffeeType)} w='120px'>
         {labelByTypeName[transaction.details.coffeeType]}
       </Td>
       <Td px={padding} w='150px'>
-        {CoffeeDetailsTypesEnum[details.bebida]}
+        {CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}
       </Td>
-      <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
+      <Td px={padding} w='120px' color={getColorByValue(transaction.type.value)}>
         {getNumberOfBags(transaction.type.value)}
       </Td>
       <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>

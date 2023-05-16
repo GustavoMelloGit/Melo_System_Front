@@ -22,7 +22,6 @@ type Props = {
 const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
   const { data } = getClientBalancesService(clientUuid)
   const closeModal = useModal((state) => state.closeModal)
-
   const displayData: Record<
     ClientBalance['type'],
     {
@@ -68,6 +67,10 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
     },
     rio_zona: {
       label: 'Café Rio Zona',
+      displayType: 'weight',
+    },
+    escolha: {
+      label: 'Café Escolha',
       displayType: 'weight',
     },
   }
