@@ -38,7 +38,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
   return (
     <Modal isCentered onClose={closeModal} isOpen>
       <ModalOverlay />
-      <ModalContent maxW={600}>
+      <ModalContent maxW={900}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>

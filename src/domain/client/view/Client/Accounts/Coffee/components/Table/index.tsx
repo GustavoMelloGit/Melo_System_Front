@@ -6,10 +6,7 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import {
-  CoffeeDetailsTypesEnum,
-  CoffeeTypesEnum,
-} from '../../../../../../../coffee/types/model/coffee'
+import { CoffeeBebidasLabel, CoffeeTypesEnum } from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
@@ -65,7 +62,7 @@ const searchForOptions: SearchForOption = {
     label: 'Bebida',
     Input: (
       <Select variant='filled' roundedLeft={0} flexGrow={1}>
-        {Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => (
+        {Object.entries(CoffeeBebidasLabel).map(([value, label]) => (
           <option key={value} value={value}>
             {label}
           </option>

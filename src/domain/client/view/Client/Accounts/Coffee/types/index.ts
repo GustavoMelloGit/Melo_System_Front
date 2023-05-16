@@ -1,5 +1,6 @@
 import {
   type CoffeeDetails,
+  type CoffeeTypes,
   type DespolpadoDetails,
 } from '../../../../../../coffee/types/model/coffee'
 
@@ -9,6 +10,14 @@ export type CoffeeFormValues = {
   weight: number
   description: string
   details: Partial<CoffeeDetails | DespolpadoDetails>
+}
+
+export const CoffeeTypesForm: {
+  [key in CoffeeTypes]?: string
+} = {
+  bica_corrida: 'Bica Corrida',
+  conilon: 'Conilon',
+  despolpado: 'Despolpado',
 }
 
 export type CreateCoffeeValues = Omit<CoffeeFormValues, 'bags' | 'weight'> & {

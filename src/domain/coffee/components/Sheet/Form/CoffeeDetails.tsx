@@ -5,7 +5,7 @@ import { hasCoffeeDetailsType, hasUtilizationType } from '../../../../../lib/con
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
-import { CoffeeDetailsTypesEnum, CoffeeTypesEnum } from '../../../types/model/coffee'
+import { CoffeeBebidasLabel, CoffeeTypesEnum } from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
@@ -47,7 +47,7 @@ export default function SheetFormCoffeeDetails({
               register={register}
               name='coffeeDetails.bebida'
               label='Bebida'
-              options={Object.entries(CoffeeDetailsTypesEnum).map(([value, label]) => ({
+              options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
                 value,
                 label,
               }))}

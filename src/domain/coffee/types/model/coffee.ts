@@ -34,7 +34,7 @@ export type CoffeeBebidas =
   | 'duro_riado'
   | 'duro'
 
-export const CoffeeDetailsTypesEnum: Record<CoffeeBebidas, string> = {
+export const CoffeeBebidasLabel: Record<CoffeeBebidas, string> = {
   rio_velho: 'Rio Velho',
   rio_zona: 'Rio Zona',
   rio: 'Rio',

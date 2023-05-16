@@ -5,7 +5,7 @@ import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
-  CoffeeDetailsTypesEnum,
+  CoffeeBebidasLabel,
   type CoffeeBebidas,
   type CoffeeDetails,
   type CoffeeTypes,
@@ -68,7 +68,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         {labelByTypeName[transaction.details.coffeeType]}
       </Td>
       <Td px={padding} w='150px'>
-        {CoffeeDetailsTypesEnum[transaction.type.name as CoffeeBebidas]}
+        {CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}
       </Td>
       <Td px={padding} w='120px' color={getColorByValue(transaction.type.value)}>
         {getNumberOfBags(transaction.type.value)}
