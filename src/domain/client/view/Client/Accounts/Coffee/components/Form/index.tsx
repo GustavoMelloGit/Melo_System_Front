@@ -209,7 +209,7 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
           </GridItem>
         </Grid>
         <ControllerField<CoffeeFormValues, TextareaProps>
-          name='description'
+          name='details.description'
           label='Descrição'
           control={control}
           CustomInput={<Textarea />}

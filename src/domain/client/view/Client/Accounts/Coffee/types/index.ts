@@ -8,7 +8,6 @@ export type CoffeeFormValues = {
   date: string
   bags: number
   weight: number
-  description: string
   details: Partial<CoffeeDetails | DespolpadoDetails>
 }
 

@@ -26,7 +26,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     sieve: `${details.sieve}% na 17/18`,
     drilled: `${details.drilled}% de broca`,
     foulness: `${details.foulness}% de impureza`,
-    description: `- ${details.description}`,
+    description: `${details.description}`,
     bebida: '',
     coffeeType: '',
   }

@@ -51,7 +51,6 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
             initialValues={{
               date: new Date().toISOString().split('T')[0],
               bags: 0,
-              description: '',
               details: {
                 bebida: 'duro',
                 coffeeType: 'bica_corrida',
