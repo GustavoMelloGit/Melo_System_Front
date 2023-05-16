@@ -1,4 +1,5 @@
 import { Select } from '@chakra-ui/react'
+import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -12,9 +13,16 @@ import {
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import CoffeeAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<CoffeeTransactionModel[]>
+type Props = CustomTableComponentProps<CoffeeTransactionModel[]> & {
+  onClickAdd: () => void
+}
 
-export default function CoffeeAccountTable({ data, isLoading, totalLength }: Props): JSX.Element {
+export default function CoffeeAccountTable({
+  data,
+  isLoading,
+  totalLength,
+  onClickAdd,
+}: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -30,6 +38,13 @@ export default function CoffeeAccountTable({ data, isLoading, totalLength }: Pro
       }}
       filter={{
         searchForOptions,
+        actions: (
+          <TableAddButton
+            onClick={onClickAdd}
+            aria-label='adicionar transação'
+            title='Fazer lançamento'
+          />
+        ),
       }}
     >
       {data?.map((transaction) => (

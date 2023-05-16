@@ -1,14 +1,11 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { type Path, type UseFormRegister, type UseFormWatch } from 'react-hook-form'
+import { hasCoffeeDetailsType, hasUtilizationType } from '../../../../../lib/constants/coffee'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
-import {
-  CoffeeDetailsTypesEnum,
-  CoffeeTypesEnum,
-  type CoffeeTypes,
-} from '../../../types/model/coffee'
+import { CoffeeDetailsTypesEnum, CoffeeTypesEnum } from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
@@ -24,8 +21,7 @@ export default function SheetFormCoffeeDetails({
   isDisabled,
 }: Props): JSX.Element {
   const currentCoffeeType = watch('coffeeDetails.coffeeType')
-  const hasCoffeeDetailsType: CoffeeTypes[] = ['bica_corrida', 'conilon']
-  const hasUtilizationType: CoffeeTypes[] = ['escolha']
+
   return (
     <Stack spacing={4}>
       <Heading as='h2' size='lg'>

@@ -1,5 +1,5 @@
 import { type Timestamp } from '../../../../shared/types/utils/model'
-import { type CoffeeDetailsTypes } from '../../../coffee/types/model/coffee'
+import { type CoffeeBebidas } from '../../../coffee/types/model/coffee'
 
 export type Address = {
   city?: string
@@ -50,7 +50,7 @@ export type ClientModel = {
 } & Timestamp
 
 export type ClientBalance = {
-  type: CoffeeDetailsTypes | 'bags' | 'currency' | 'escolha'
+  type: CoffeeBebidas | 'bags' | 'currency' | 'escolha'
   value: number
 }
 

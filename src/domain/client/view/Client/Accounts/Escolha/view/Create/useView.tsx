@@ -12,12 +12,16 @@ type Props = {
 export default function useCreateEscolhaView({ clientId, onSuccess }: Props): UseCreateEscolhaView {
   const closeModal = useModal((state) => state.closeModal)
 
-  async function handleCreateEscolha(values: EscolhaFormValues): Promise<void> {
+  async function handleCreateEscolha({
+    bags,
+    weight,
+    ...values
+  }: EscolhaFormValues): Promise<void> {
     const { error, data } = await createEscolhaService({
       clientId,
       date: values.date,
       details: values.details,
-      value: values.bags * GlobalConfig.weightPerBag + values.weight,
+      value: bags * GlobalConfig.weightPerBag + weight,
       description: values.description,
     })
     if (error) {
