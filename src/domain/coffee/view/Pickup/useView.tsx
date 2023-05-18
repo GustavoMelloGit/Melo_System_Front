@@ -6,12 +6,14 @@ import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { type GetServiceResponse } from '../../../../shared/types/utils/service'
 import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
 import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../services/Pickup/put'
-import { type PickupCoffeeModel, type PickupCoffeeStatuses } from '../../types/model/pickup'
+import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
+
+const initialParams = `status=${PickupCoffeeStatuses.PENDING}`
 
 export default function usePickupView(): UsePickupView {
   const { handleAddParam, getParam } = useURLSearchParams()
   const params = useServiceParams()
-  const order = getPickupOrdersService(`${params}`)
+  const order = getPickupOrdersService(params || initialParams)
   const openModal = useModal((state) => state.openModal)
   const currentStatus = getParam('status') as PickupCoffeeStatuses | null
   const test = useRef<HTMLButtonElement>(null)
