@@ -8,14 +8,16 @@ import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
 import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../services/Pickup/put'
 import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
 
-const initialParams = `status=${PickupCoffeeStatuses.PENDING}`
+const initialStatus = PickupCoffeeStatuses.PENDING
 
 export default function usePickupView(): UsePickupView {
   const { handleAddParam, getParam } = useURLSearchParams()
   const params = useServiceParams()
-  const order = getPickupOrdersService(params || initialParams)
-  const openModal = useModal((state) => state.openModal)
   const currentStatus = getParam('status') as PickupCoffeeStatuses | null
+  const order = getPickupOrdersService(
+    `${params}${currentStatus ? '' : `&status=${initialStatus}`}`,
+  )
+  const openModal = useModal((state) => state.openModal)
   const test = useRef<HTMLButtonElement>(null)
 
   async function handleOpenForm(): Promise<void> {
