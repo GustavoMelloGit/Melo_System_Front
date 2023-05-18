@@ -8,7 +8,6 @@ import {
 } from 'react-hook-form'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
-import RHFField from '../../../../../shared/components/inputs/RHFField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { getClientsService } from '../../../../client/service'
 import { type SheetFormValues } from '../../../types/model/sheet'
@@ -59,6 +58,7 @@ export default function SheetFormSheetDetails({
                 }))}
                 isLoading={isLoading}
                 handleChange={onChange}
+                isRequired
                 isDisabled={isDisabled('clientId')}
                 placeholder='Ex.: João da Silva'
                 {...field}
@@ -67,14 +67,14 @@ export default function SheetFormSheetDetails({
           />
         </GridItem>
         <GridItem>
-          <RHFField<SheetFormValues>
+          <ControllerField<SheetFormValues>
+            control={control}
             name='number'
-            register={register}
             label='Número da folha'
             placeholder='Ex.: 12'
             type='number'
             inputMode='numeric'
-            errors={errors}
+            required
             isDisabled={isDisabled('number')}
           />
         </GridItem>
@@ -84,16 +84,17 @@ export default function SheetFormSheetDetails({
             label='Data da pesagem'
             type='date'
             control={control}
+            required
             isDisabled={isDisabled('weighingDate')}
           />
         </GridItem>
         <GridItem>
-          <RHFField<SheetFormValues>
+          <ControllerField<SheetFormValues>
+            control={control}
             name='courier'
-            register={register}
             label='Nome do motorista'
             placeholder='Ex.: João da Silva'
-            errors={errors}
+            required
             isDisabled={isDisabled('courier')}
           />
         </GridItem>

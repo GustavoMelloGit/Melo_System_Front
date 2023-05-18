@@ -1,15 +1,16 @@
-import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
+import { Divider, Grid, GridItem, Heading, Select, Stack } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
-import { type Path, type UseFormRegister, type UseFormWatch } from 'react-hook-form'
+import { type Control, type Path, type UseFormRegister, type UseFormWatch } from 'react-hook-form'
 import { hasCoffeeDetailsType, hasUtilizationType } from '../../../../../lib/constants/coffee'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
-import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
 import { CoffeeBebidasLabel, CoffeeTypesEnum } from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
   register: UseFormRegister<SheetFormValues>
+  control: Control<SheetFormValues>
   errors: unknown
   watch: UseFormWatch<SheetFormValues>
   isDisabled: (fieldName: Path<SheetFormValues>) => boolean
@@ -19,6 +20,7 @@ export default function SheetFormCoffeeDetails({
   errors,
   watch,
   isDisabled,
+  control,
 }: Props): JSX.Element {
   const currentCoffeeType = watch('coffeeDetails.coffeeType')
 
@@ -30,28 +32,40 @@ export default function SheetFormCoffeeDetails({
       <Divider />
       <Grid templateColumns='repeat(auto-fit, minmax(160px, 1fr))' gap={4} mb={4}>
         <GridItem>
-          <RHFSelectField<SheetFormValues>
+          <ControllerField<SheetFormValues>
+            control={control}
             name='coffeeDetails.coffeeType'
-            register={register}
             label='Tipo de café'
-            options={Object.keys(CoffeeTypesEnum).map((value) => ({
-              value,
-              label: capitalCase(value),
-            }))}
+            required
             isDisabled={isDisabled('coffeeDetails.coffeeType')}
+            CustomInput={
+              <Select>
+                {Object.keys(CoffeeTypesEnum).map((value) => (
+                  <option key={value} value={value}>
+                    {capitalCase(value)}
+                  </option>
+                ))}
+              </Select>
+            }
           />
         </GridItem>
         {currentCoffeeType && hasCoffeeDetailsType.includes(currentCoffeeType) && (
           <GridItem>
-            <RHFSelectField<SheetFormValues>
-              register={register}
+            <ControllerField<SheetFormValues>
+              control={control}
               name='coffeeDetails.bebida'
               label='Bebida'
-              options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
-                value,
-                label,
-              }))}
+              required
               isDisabled={isDisabled('coffeeDetails.bebida')}
+              CustomInput={
+                <Select>
+                  {Object.entries(CoffeeBebidasLabel).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </Select>
+              }
             />
           </GridItem>
         )}

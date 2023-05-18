@@ -28,7 +28,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
   })
   const {
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     control,
   } = form
 
@@ -73,7 +73,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                 />
               </GridItem>
               <GridItem>
-                <ControllerField
+                <ControllerField<PickupFormValues>
                   control={control}
                   required
                   name='bags'
@@ -81,12 +81,11 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   type='number'
                   min={1}
                   inputMode='numeric'
-                  errors={errors}
                   data-cy='bags-input'
                 />
               </GridItem>
               <GridItem colSpan={[1, 2]}>
-                <ControllerField
+                <ControllerField<PickupFormValues>
                   control={control}
                   required
                   name='address'
