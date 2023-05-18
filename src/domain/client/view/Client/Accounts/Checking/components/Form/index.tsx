@@ -92,8 +92,13 @@ export default function CheckingAccountForm({
             />
           </GridItem>
         </Grid>
-        <Button colorScheme='green' isLoading={isSubmitting} type='submit'>
-          {submitText}
+        <Button
+          w='full'
+          type='submit'
+          colorScheme={isDebit ? 'red' : 'green'}
+          isLoading={isSubmitting}
+        >
+          {isDebit ? 'Debitar' : 'Creditar'}
         </Button>
       </VStack>
     </form>

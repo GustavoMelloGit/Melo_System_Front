@@ -96,8 +96,13 @@ const SacariaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
           </GridItem>
         </Grid>
 
-        <Button w='full' type='submit' colorScheme='green' isLoading={isSubmitting}>
-          Creditar
+        <Button
+          w='full'
+          type='submit'
+          colorScheme={isDebit ? 'red' : 'green'}
+          isLoading={isSubmitting}
+        >
+          {isDebit ? 'Debitar' : 'Creditar'}
         </Button>
       </Stack>
     </form>

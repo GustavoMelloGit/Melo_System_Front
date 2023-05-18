@@ -1,14 +1,14 @@
-import {
-  type CoffeeDetails,
-  type CoffeeTypes,
-  type DespolpadoDetails,
-} from '../../../../../../coffee/types/model/coffee'
+import { type CoffeeBebidas, type CoffeeTypes } from '../../../../../../coffee/types/model/coffee'
 
 export type CoffeeFormValues = {
   date: string
   bags: number
   weight: number
-  details: Partial<CoffeeDetails | DespolpadoDetails>
+  details: {
+    bebida: CoffeeBebidas
+    coffeeType: CoffeeTypes
+    description: string
+  }
 }
 
 export const CoffeeTypesForm: {
