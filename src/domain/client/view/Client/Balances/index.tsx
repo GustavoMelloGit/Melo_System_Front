@@ -39,7 +39,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
             Saldos
           </Heading>
         </ModalHeader>
-        <ModalBody pb={4}>
+        <ModalBody pb={8}>
           <Stack>
             {data ? (
               <Fragment>
@@ -70,7 +70,6 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                     {data.balances.bags} Sacas
                   </Text>
                 </Flex>
-                <Divider />
               </Fragment>
             ) : (
               Array.from({ length: 4 }).map((_, index) => (
