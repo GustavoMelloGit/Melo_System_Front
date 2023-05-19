@@ -9,7 +9,7 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import { useEffect } from 'react'
-import RHFField from '../../../../../shared/components/inputs/RHFField'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import { type BookFormValues } from '../../../types/model/book'
 import useBookForm from './useBookForm'
 
@@ -19,7 +19,7 @@ type Props = {
 }
 export default function BookForm({ initialValues, onSubmit }: Props): JSX.Element {
   const { form, closeModal } = useBookForm({ initialValues })
-  const { handleSubmit, formState, reset } = form
+  const { handleSubmit, formState, reset, control } = form
 
   useEffect(() => {
     if (initialValues) {
@@ -39,14 +39,14 @@ export default function BookForm({ initialValues, onSubmit }: Props): JSX.Elemen
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
-              <RHFField<BookFormValues>
+              <ControllerField<BookFormValues>
+                control={control}
                 name='number'
-                register={form.register}
                 label='Número do talão'
                 placeholder='Ex.: 12'
                 type='number'
                 inputMode='numeric'
-                errors={formState.errors}
+                required
               />
               <Button type='submit' isLoading={formState.isSubmitting}>
                 Salvar
