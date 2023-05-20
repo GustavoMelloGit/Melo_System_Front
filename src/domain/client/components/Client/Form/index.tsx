@@ -14,6 +14,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import AvatarDropzone from '../../../../../shared/components/inputs/AvatarDropzone'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
@@ -53,13 +54,13 @@ export default function ClientForm({
           <CardBody>
             <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4}>
               <GridItem>
-                <RHFField<ClientFormValues>
-                  register={register}
-                  errors={formState.errors}
+                <ControllerField
+                  control={control}
                   name='name'
                   label='Nome'
                   placeholder='Nome do cliente'
                   data-cy='client-name-input'
+                  required
                 />
               </GridItem>
               <GridItem>

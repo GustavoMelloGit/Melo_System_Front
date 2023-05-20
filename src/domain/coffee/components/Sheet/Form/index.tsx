@@ -69,6 +69,7 @@ export default function SheetForm({
               watch={watch}
               register={register}
               errors={formState.errors}
+              control={control}
             />
             <SheetFormLines
               isDisabled={isDisabled}

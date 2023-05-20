@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Text,
   useOutsideClick,
   type InputProps,
 } from '@chakra-ui/react'
@@ -89,7 +90,16 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
 
     return (
       <FormControl position='relative' ref={ref}>
-        {label && <FormLabel>{label}</FormLabel>}
+        {label && (
+          <FormLabel>
+            {label}
+            {rest.isRequired && (
+              <Text as='span' color='red.500' ml={1}>
+                *
+              </Text>
+            )}
+          </FormLabel>
+        )}
         <InputGroup>
           <Input
             variant='filled'

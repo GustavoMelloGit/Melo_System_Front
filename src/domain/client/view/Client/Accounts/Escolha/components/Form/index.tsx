@@ -69,22 +69,20 @@ const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
       })}
     >
       <Stack spacing={6}>
+        <RadioGroup
+          value={isDebit ? 'true' : 'false'}
+          onChange={(value) => {
+            setIsDebit(value === 'true')
+          }}
+          display='flex'
+          gap={4}
+          mb={1}
+        >
+          <Radio value='true'>Débito</Radio>
+          <Radio value='false'>Crédito</Radio>
+        </RadioGroup>
         <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' gap={4}>
-          <GridItem colSpan={[1, 2]}>
-            <RadioGroup
-              value={isDebit ? 'true' : 'false'}
-              onChange={(value) => {
-                setIsDebit(value === 'true')
-              }}
-              display='flex'
-              gap={4}
-              mb={1}
-            >
-              <Radio value='true'>Débito</Radio>
-              <Radio value='false'>Crédito</Radio>
-            </RadioGroup>
-          </GridItem>
-          <GridItem colSpan={2}>
+          <GridItem>
             <ControllerField<EscolhaFormValues>
               name='date'
               label='Data'
@@ -147,18 +145,21 @@ const EscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               rightIcon='%'
             />
           </GridItem>
-          <GridItem colSpan={2}>
-            <ControllerField<EscolhaFormValues, TextareaProps>
-              name='description'
-              label='Descrição'
-              control={control}
-              CustomInput={<Textarea />}
-            />
-          </GridItem>
         </Grid>
+        <ControllerField<EscolhaFormValues, TextareaProps>
+          name='description'
+          label='Descrição'
+          control={control}
+          CustomInput={<Textarea />}
+        />
 
-        <Button w='full' type='submit' colorScheme='green' isLoading={isSubmitting}>
-          Salvar
+        <Button
+          w='full'
+          type='submit'
+          colorScheme={isDebit ? 'red' : 'green'}
+          isLoading={isSubmitting}
+        >
+          {isDebit ? 'Debitar' : 'Creditar'}
         </Button>
       </Stack>
     </form>

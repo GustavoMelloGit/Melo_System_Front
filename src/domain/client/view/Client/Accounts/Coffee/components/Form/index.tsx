@@ -31,16 +31,16 @@ const validationSchema = yup.object().shape({
     .defined(validationErrors.weightIsRequired)
     .typeError(validationErrors.weightIsInvalid)
     .min(0, validationErrors.weightIsInvalid),
-  details: yup.object().shape({
-    utilization: yup
-      .number()
-      .typeError(validationErrors.utilizationIsInvalid)
-      .min(0, validationErrors.utilizationIsInvalid),
-    foulness: yup
-      .number()
-      .typeError(validationErrors.foulnessIsInvalid)
-      .min(0, validationErrors.foulnessIsInvalid),
-  }),
+  // details: yup.object().shape({
+  //   utilization: yup
+  //     .number()
+  //     .typeError(validationErrors.utilizationIsInvalid)
+  //     .min(0, validationErrors.utilizationIsInvalid),
+  //   foulness: yup
+  //     .number()
+  //     .typeError(validationErrors.foulnessIsInvalid)
+  //     .min(0, validationErrors.foulnessIsInvalid),
+  // }),
   date: yup.string().required(validationErrors.dateIsRequired),
 })
 
@@ -145,7 +145,7 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
             />
           </GridItem>
 
-          <GridItem>
+          {/* <GridItem>
             <ControllerField<CoffeeFormValues>
               name='details.picking'
               control={control}
@@ -206,7 +206,7 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
               step={0.1}
               rightIcon='%'
             />
-          </GridItem>
+          </GridItem> */}
         </Grid>
         <ControllerField<CoffeeFormValues, TextareaProps>
           name='details.description'

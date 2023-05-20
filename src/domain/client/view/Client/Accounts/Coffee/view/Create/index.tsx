@@ -38,7 +38,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
   return (
     <Modal isCentered onClose={closeModal} isOpen>
       <ModalOverlay />
-      <ModalContent maxW={900}>
+      <ModalContent maxW={600}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
@@ -54,12 +54,12 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
               details: {
                 bebida: 'duro',
                 coffeeType: 'bica_corrida',
-                drilled: 0,
                 description: '',
-                foulness: 0,
-                moisture: 0,
-                picking: 0,
-                sieve: 0,
+                // drilled: 0,
+                // foulness: 0,
+                // moisture: 0,
+                // picking: 0,
+                // sieve: 0,
               },
               weight: 0,
             }}

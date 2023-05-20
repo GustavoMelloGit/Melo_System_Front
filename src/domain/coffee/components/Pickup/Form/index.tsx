@@ -2,6 +2,7 @@ import {
   Button,
   Grid,
   GridItem,
+  Heading,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -12,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { Controller } from 'react-hook-form'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
-import RHFField from '../../../../../shared/components/inputs/RHFField'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import { type PickupFormValues } from '../../../types/model/pickup'
 import usePickupForm from './usePickupForm'
 
@@ -27,8 +28,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
   })
   const {
     handleSubmit,
-    register,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     control,
   } = form
 
@@ -37,8 +37,12 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
       <ModalOverlay />
       <ModalContent p={2} pb={4}>
         <ModalCloseButton data-cy='close-modal-button' />
-        <ModalHeader>Buscar café</ModalHeader>
-        <ModalBody>
+        <ModalHeader>
+          <Heading as='h1' fontSize='3xl'>
+            Buscar café
+          </Heading>
+        </ModalHeader>
+        <ModalBody pb={5}>
           <VStack
             as='form'
             spacing={6}
@@ -62,49 +66,30 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                       isLoading={isLoading}
                       handleChange={onChange}
                       placeholder='Ex.: João da Silva'
+                      isRequired
                       {...field}
                     />
                   )}
                 />
-                {/* <RHFField
-                  name='clientName'
-                  label='Cliente'
-                  register={register}
-                  list='client-list'
-                  errors={errors}
-                  data-cy='clientName-input'
-                  {...(isLoading && {
-                    rightIcon: <SpinLoader />,
-                  })}
-                />
-                {clients?.length !== 0 && (
-                  <datalist id='client-list'>
-                    {clients?.map((client) => (
-                      <option key={client.id} value={client.name}>
-                        {client.name} {client.nickname && `(${client.nickname})`}
-                      </option>
-                    ))}
-                  </datalist>
-                )} */}
               </GridItem>
               <GridItem>
-                <RHFField
+                <ControllerField<PickupFormValues>
+                  control={control}
+                  required
                   name='bags'
                   label='Sacos'
                   type='number'
-                  register={register}
                   min={1}
                   inputMode='numeric'
-                  errors={errors}
                   data-cy='bags-input'
                 />
               </GridItem>
               <GridItem colSpan={[1, 2]}>
-                <RHFField
+                <ControllerField<PickupFormValues>
+                  control={control}
+                  required
                   name='address'
                   label='Endereço'
-                  errors={errors}
-                  register={register}
                   data-cy='address-input'
                 />
               </GridItem>
@@ -114,6 +99,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
               type='submit'
               w='full'
               data-cy='submit-pickupCoffee-button'
+              colorScheme='green'
             >
               Salvar
             </Button>

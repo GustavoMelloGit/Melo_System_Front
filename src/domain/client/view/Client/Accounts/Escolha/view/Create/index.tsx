@@ -20,7 +20,7 @@ const CreateEscolhaView = ({ clientId, onSuccess }: Props): JSX.Element => {
   return (
     <Modal onClose={closeModal} isOpen isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxW={600}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
