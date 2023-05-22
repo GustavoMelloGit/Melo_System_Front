@@ -1,5 +1,6 @@
 import { toast } from 'react-hot-toast'
 import GlobalConfig from '../../../../../../../../lib/constants/config'
+import { formatInputDateString } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import { createEscolhaService } from '../../service/post'
@@ -15,11 +16,12 @@ export default function useCreateEscolhaView({ clientId, onSuccess }: Props): Us
   async function handleCreateEscolha({
     bags,
     weight,
+    date,
     ...values
   }: EscolhaFormValues): Promise<void> {
     const { error, data } = await createEscolhaService({
       clientId,
-      date: values.date,
+      date: formatInputDateString(date),
       details: values.details,
       value: bags * GlobalConfig.weightPerBag + weight,
       description: values.description,
