@@ -16,7 +16,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
     setShowBalance((prev) => !prev)
   }
   return (
-    <LinkBox as={Tr}>
+    <LinkBox as={Tr} h={70}>
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
@@ -50,7 +50,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
           <Link to={Routes.updateClient(client.id)}>
             <TableEditButton colorScheme='blue' as='span' aria-label='Editar cliente' />
           </Link>
-          <LinkOverlay as={Link} to={Routes.clientPage(client.id)}></LinkOverlay>
+          <LinkOverlay as={Link} to={Routes.clientPage(client.id)} />
         </HStack>
       </Td>
     </LinkBox>
