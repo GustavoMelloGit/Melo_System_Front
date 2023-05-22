@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import GlobalConfig from '../../../../../../../../lib/constants/config'
+import { formatInputDateToApiDate } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import CoffeeFormView from '../../components/Form'
 import { createCoffeeService } from '../../service/post'
@@ -20,11 +21,17 @@ type Props = {
 }
 export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
-  async function handleCreateCoffee({ bags, weight, ...values }: CoffeeFormValues): Promise<void> {
+  async function handleCreateCoffee({
+    bags,
+    weight,
+    date,
+    ...values
+  }: CoffeeFormValues): Promise<void> {
     const { error } = await createCoffeeService({
       ...values,
       value: bags * GlobalConfig.weightPerBag + weight,
       clientId,
+      date: formatInputDateToApiDate(date),
     })
     if (error) {
       toast.error('Erro ao lançar café')
