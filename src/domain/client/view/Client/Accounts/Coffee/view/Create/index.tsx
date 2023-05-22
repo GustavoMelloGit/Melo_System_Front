@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import GlobalConfig from '../../../../../../../../lib/constants/config'
-import { formatInputDateToApiDate } from '../../../../../../../../lib/utils/date'
+import { formatInputDateString } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import CoffeeFormView from '../../components/Form'
 import { createCoffeeService } from '../../service/post'
@@ -31,7 +31,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
       ...values,
       value: bags * GlobalConfig.weightPerBag + weight,
       clientId,
-      date: formatInputDateToApiDate(date),
+      date: formatInputDateString(date),
     })
     if (error) {
       toast.error('Erro ao lançar café')

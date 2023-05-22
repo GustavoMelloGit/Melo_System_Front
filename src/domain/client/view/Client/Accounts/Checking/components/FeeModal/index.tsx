@@ -19,50 +19,56 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { shallow } from 'zustand/shallow'
+import { formatInputDateString } from '../../../../../../../../lib/utils/date'
 import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import {
   calculateCompoundInterest,
   convertMonthlyInterestRateToDaily,
 } from '../../../../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
-import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
-import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore } from '../../stores/useFeeStore'
+import FeeModalForm, { initialValues } from './Form'
 
-function calculateInterest(date: number, amount: number, interestRate: number): number {
-  const days = Math.floor((new Date().getTime() - date) / (1000 * 3600 * 24))
+function calculateInterest(
+  date: number,
+  amount: number,
+  interestRate: number,
+  targetDate?: number,
+): number {
+  const todayDate = new Date().getTime()
+  const days = Math.floor(((targetDate ?? todayDate) - date) / (1000 * 3600 * 24))
   const dailyInterestRate = convertMonthlyInterestRateToDaily(interestRate)
   return calculateCompoundInterest(days, amount, dailyInterestRate)
 }
 
 export default function FeeModal(): JSX.Element {
-  const { control, handleSubmit } = useForm<FormValues>({
-    defaultValues: {
-      interestRate: DEFAULT_INITIAL_INTEREST,
-    },
+  const [interestParams, setInterestParams] = useState({
+    ...initialValues,
+    date: formatInputDateString(initialValues.date),
   })
-  const [interestRate, setInterestRate] = useState(DEFAULT_INITIAL_INTEREST)
   const closeModal = useModal((state) => state.closeModal)
   const borderColor = useColorModeValue('gray.200', 'gray.600')
-  const [selectedTransactions, setSelectedFees] = useFeeStore((state) => [
-    state.selectedTransactions,
-    state.setSelectedTransactions,
-  ])
+  const [selectedTransactions, setSelectedFees] = useFeeStore(
+    (state) => [state.selectedTransactions, state.setSelectedTransactions],
+    shallow,
+  )
 
   function handleCloseModal(): void {
     setSelectedFees([])
     closeModal()
   }
-  function handleCalculateFee(values: FormValues): void {
-    setInterestRate(values.interestRate)
-  }
 
   let totalWithoutInterest = 0
   let totalAmountWithInterest = 0
   const interestByIndex = selectedTransactions.map((transaction) => {
-    const interest = calculateInterest(transaction.date, transaction.amount, interestRate)
+    const interest = calculateInterest(
+      transaction.date,
+      transaction.amount,
+      interestParams.interestRate,
+      new Date(interestParams.date).getTime(),
+    )
     totalWithoutInterest += transaction.amount
     totalAmountWithInterest += interest
     return interest
@@ -78,22 +84,7 @@ export default function FeeModal(): JSX.Element {
         </ModalHeader>
         <ModalBody>
           <VStack align='stretch' spacing={4}>
-            <form onSubmit={handleSubmit(handleCalculateFee)}>
-              <Controller
-                control={control}
-                name='interestRate'
-                render={({ field: { onChange, value, ...rest } }) => (
-                  <CurrencyInput
-                    leftIcon='%'
-                    label='Taxa de juros'
-                    initialValue={3}
-                    rightIcon={<TableFeeButton aria-label='calcular juros' type='submit' />}
-                    setValue={onChange}
-                    {...rest}
-                  />
-                )}
-              />
-            </form>
+            <FeeModalForm onSubmit={setInterestParams} />
 
             <Box maxH={[300, 400]} overflowY='auto'>
               <TableContainer
@@ -154,9 +145,4 @@ export default function FeeModal(): JSX.Element {
       </ModalContent>
     </Modal>
   )
-}
-
-const DEFAULT_INITIAL_INTEREST = 3
-type FormValues = {
-  interestRate: number
 }
