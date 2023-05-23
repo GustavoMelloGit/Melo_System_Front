@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { getDefaultSortParams } from '../../../../../../../../lib/utils/utils'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
@@ -8,10 +7,7 @@ import { getCoffeeAccountService } from '../../service/get'
 export default function useCoffeeAccountView(): UseCoffeeAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { data, isLoading, total, mutate } = getCoffeeAccountService(
-    uuid,
-    params || getDefaultSortParams('date'),
-  )
+  const { data, isLoading, total, mutate } = getCoffeeAccountService(uuid, params)
 
   async function handleOpenCreateCoffee(): Promise<void> {
     if (!uuid) return
