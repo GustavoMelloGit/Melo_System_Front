@@ -7,7 +7,14 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import { Skeleton } from '@chakra-ui/react'
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Skeleton,
+} from '@chakra-ui/react'
 import { Fragment } from 'react'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
@@ -50,12 +57,29 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                   </Text>
                 </Flex>
                 <Divider />
-                <Flex gap={2} justify='space-between' px={2}>
-                  <Text fontWeight={700}>{displayData.coffee}</Text>
-                  <Text color={getColorByValue(data.balances.coffee)}>
-                    {getNumberOfBags(data.balances.coffee)}
-                  </Text>
-                </Flex>
+                <Accordion allowToggle>
+                  <AccordionItem border='none'>
+                    <AccordionButton px={2} py={0}>
+                      <Flex gap={2} justify='space-between' w='full' mr={2}>
+                        <Text as='span' fontWeight={700}>
+                          {displayData.coffee}
+                        </Text>
+                        <Text color={getColorByValue(data.balances.coffee)}>
+                          {getNumberOfBags(data.balances.coffee)}
+                        </Text>
+                      </Flex>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel>
+                      <Flex gap={2} justify='space-between' px={2}>
+                        <Text fontWeight={700}>Duro</Text>
+                        <Text color={getColorByValue(data.balances.coffee)}>
+                          {getNumberOfBags(data.balances.coffee)}
+                        </Text>
+                      </Flex>
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
                 <Divider />
                 <Flex gap={2} justify='space-between' px={2}>
                   <Text fontWeight={700}>{displayData.escolha}</Text>
