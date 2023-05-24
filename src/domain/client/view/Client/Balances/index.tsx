@@ -70,7 +70,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                       </Flex>
                       <AccordionIcon />
                     </AccordionButton>
-                    <AccordionPanel>
+                    <AccordionPanel pr={7}>
                       <Flex gap={2} justify='space-between' px={2}>
                         <Text fontWeight={700}>Duro</Text>
                         <Text color={getColorByValue(data.balances.coffee)}>
