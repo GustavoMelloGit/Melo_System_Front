@@ -9,6 +9,9 @@ const baseStyle = definePartsStyle({
   dialogContainer: {
     p: 4,
   },
+  overlay: {
+    backdropFilter: 'blur(2px)',
+  },
 })
 
 const ThemeModal = defineMultiStyleConfig({
