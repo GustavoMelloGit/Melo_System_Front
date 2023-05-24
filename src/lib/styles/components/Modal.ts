@@ -12,6 +12,11 @@ const baseStyle = definePartsStyle({
   overlay: {
     backdropFilter: 'blur(2px)',
   },
+  body: {
+    maxH: '70vh',
+    overflowY: 'auto',
+    pos: 'relative',
+  },
 })
 
 const ThemeModal = defineMultiStyleConfig({

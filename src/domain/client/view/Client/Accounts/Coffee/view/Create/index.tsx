@@ -52,7 +52,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
             Conta Café
           </Heading>
         </ModalHeader>
-        <ModalBody pb={8} w='full' maxH='70vh' overflowY='auto' position='relative'>
+        <ModalBody pb={8} w='full'>
           <CoffeeFormView
             onSubmit={handleCreateCoffee}
             initialValues={{
