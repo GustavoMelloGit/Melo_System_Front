@@ -30,7 +30,7 @@ export default function BookForm({ initialValues, onSubmit }: Props): JSX.Elemen
   return (
     <Modal isCentered isOpen onClose={closeModal}>
       <ModalOverlay />
-      <ModalContent pb={6}>
+      <ModalContent>
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
             Criar talão

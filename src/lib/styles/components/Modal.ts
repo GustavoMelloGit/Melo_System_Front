@@ -16,6 +16,7 @@ const baseStyle = definePartsStyle({
     maxH: '70vh',
     overflowY: 'auto',
     pos: 'relative',
+    pb: 8,
   },
 })
 

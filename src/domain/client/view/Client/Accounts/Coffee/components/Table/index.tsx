@@ -11,7 +11,8 @@ import { type CoffeeTransactionModel } from '../../../../../../types/model/Trans
 import CoffeeAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<CoffeeTransactionModel[]> & {
-  onClickAdd: () => void
+  onClickAdd: () => Promise<void>
+  onClickBuy: () => Promise<void>
 }
 
 export default function CoffeeAccountTable({
@@ -19,6 +20,7 @@ export default function CoffeeAccountTable({
   isLoading,
   totalLength,
   onClickAdd,
+  onClickBuy,
 }: Props): JSX.Element {
   return (
     <Table
@@ -37,7 +39,12 @@ export default function CoffeeAccountTable({
         searchForOptions,
         actions: (
           <>
-            <TableButton icon='exchangeDollar' aria-label='Comprar café' title='Comprar café' />
+            <TableButton
+              icon='exchangeDollar'
+              onClick={onClickBuy}
+              aria-label='Comprar café'
+              title='Comprar café'
+            />
             <TableButton
               icon='add'
               onClick={onClickAdd}
@@ -93,8 +100,6 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'date',
     label: 'Data',
     isSortable: true,
-
-    w: 120,
   },
   {
     id: 'description',
@@ -104,16 +109,12 @@ const headerColumns: TableHeaderColumns[] = [
   {
     id: 'details.coffeeType',
     label: 'Tipo',
-
     isSortable: true,
-    w: '120px',
   },
   {
     id: 'details.bebida',
     label: 'Bebida',
     isSortable: true,
-
-    w: '150px',
   },
   {
     id: 'type.value',

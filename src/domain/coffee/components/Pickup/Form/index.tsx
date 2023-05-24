@@ -35,14 +35,14 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
-      <ModalContent p={2} pb={4}>
+      <ModalContent p={2}>
         <ModalCloseButton data-cy='close-modal-button' />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
             Buscar café
           </Heading>
         </ModalHeader>
-        <ModalBody pb={5}>
+        <ModalBody>
           <VStack
             as='form'
             spacing={6}

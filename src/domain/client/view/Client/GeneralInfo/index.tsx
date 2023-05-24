@@ -158,7 +158,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         }}
       >
         <ModalCloseButton />
-        <ModalBody pt={2} pb={8} px={5} overflowY='auto'>
+        <ModalBody pt={2} px={5} overflowY='auto'>
           <Stack align='flex-start' spacing={10} mt={6} id='screenshot-content'>
             <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 

@@ -77,7 +77,7 @@ export default function FeeModal(): JSX.Element {
   return (
     <Modal isOpen isCentered onClose={handleCloseModal} size='xl'>
       <ModalOverlay />
-      <ModalContent py={4}>
+      <ModalContent>
         <ModalCloseButton />
         <ModalHeader>
           <Heading fontSize='3xl'>Calcular juros</Heading>

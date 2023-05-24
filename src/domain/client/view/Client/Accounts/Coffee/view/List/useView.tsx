@@ -16,11 +16,19 @@ export default function useCoffeeAccountView(): UseCoffeeAccountView {
     openModal(<CreateCoffeeView clientId={uuid} refetch={mutate} />)
   }
 
+  async function handleOpenBuyCoffee(): Promise<void> {
+    if (!uuid) return
+    const openModal = useModal.getState().openModal
+    const BuyCoffeeView = (await import('../Buy')).default
+    openModal(<BuyCoffeeView />)
+  }
+
   return {
     data: data ?? [],
     isLoading,
     total: total ?? 0,
     handleOpenCreateCoffee,
+    handleOpenBuyCoffee,
   }
 }
 
@@ -28,5 +36,6 @@ type UseCoffeeAccountView = {
   data: CoffeeTransactionModel[]
   isLoading: boolean
   total: number
-  handleOpenCreateCoffee: () => void
+  handleOpenCreateCoffee: () => Promise<void>
+  handleOpenBuyCoffee: () => Promise<void>
 }
