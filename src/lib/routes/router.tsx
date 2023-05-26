@@ -4,7 +4,6 @@ import { authRoutes } from '../../domain/auth/routes'
 import clientsRoutes from '../../domain/client/routes'
 import coffeeRoutes from '../../domain/coffee/routes'
 import NotFoundPage from '../../domain/error/view/404'
-import homeRoutes from '../../domain/home/routes'
 import PageLayout from '../../shared/components/layout'
 import { ProtectedRoute } from '../../shared/components/Routers'
 
@@ -18,10 +17,9 @@ export const protectedRoutes: RouteObject = {
   // errorElement: <Navigate to={Routes.notFound} />,
   children: [
     {
-      element: <Navigate to={Routes.home} />,
+      element: <Navigate to={Routes.clients} />,
       index: true,
     },
-    ...homeRoutes,
     ...clientsRoutes,
     ...coffeeRoutes,
   ],
