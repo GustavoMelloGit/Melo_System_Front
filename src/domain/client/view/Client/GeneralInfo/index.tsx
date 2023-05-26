@@ -158,8 +158,8 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         }}
       >
         <ModalCloseButton />
-        <ModalBody pt={2} px={5} overflowY='auto'>
-          <Stack align='flex-start' spacing={10} mt={6} id='screenshot-content'>
+        <ModalBody pt={3} px={5} overflowY='auto'>
+          <Stack align='flex-start' spacing={10} id='screenshot-content'>
             <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 
             {!isLegalPerson && (
@@ -189,7 +189,7 @@ function DisplayInfoBox({ data, title }: { data: ClientInfo; title?: string }): 
           <Divider />
         </VStack>
       )}
-      <Grid gridTemplateColumns='repeat(auto-fit, minmax(200px, 1fr))' w='full' gap={6}>
+      <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' w='full' gap={2}>
         {data.map(({ label, value }) => (
           <GridItem key={label}>
             <Box textAlign={['center', 'start']}>
