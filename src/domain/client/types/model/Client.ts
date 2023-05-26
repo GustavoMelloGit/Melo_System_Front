@@ -1,4 +1,4 @@
-import { type Timestamp } from '../../../../shared/types/utils/model'
+import { type Timestamp, type WithId } from '../../../../shared/types/utils/model'
 
 export type Address = {
   city?: string
@@ -53,8 +53,9 @@ export type ClientBalance = {
   coffee: number
   currency: number
   escolha: number
+  details: Record<string, number>
 }
 
-export type ClientBalancesModel = ClientModel & {
+export type ClientBalancesModel = WithId<{
   balances: ClientBalance
-}
+}>
