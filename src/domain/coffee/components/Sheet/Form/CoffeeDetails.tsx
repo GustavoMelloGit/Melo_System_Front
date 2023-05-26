@@ -1,7 +1,7 @@
 import { Divider, Grid, GridItem, Heading, Select, Stack } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { type Control, type Path, type UseFormRegister, type UseFormWatch } from 'react-hook-form'
-import { hasCoffeeDetailsType, hasUtilizationType } from '../../../../../lib/constants/coffee'
+import { CoffeeTypeHasBebida, hasUtilizationType } from '../../../../../lib/constants/coffee'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
@@ -49,7 +49,7 @@ export default function SheetFormCoffeeDetails({
             }
           />
         </GridItem>
-        {currentCoffeeType && hasCoffeeDetailsType.includes(currentCoffeeType) && (
+        {currentCoffeeType && CoffeeTypeHasBebida.includes(currentCoffeeType) && (
           <GridItem>
             <ControllerField<SheetFormValues>
               control={control}

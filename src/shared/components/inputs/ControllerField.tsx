@@ -9,13 +9,13 @@ import {
   Text,
   type InputProps as ChakraInputProps,
 } from '@chakra-ui/react'
-import { cloneElement } from 'react'
+import { cloneElement, type ReactNode } from 'react'
 import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form'
 
 type Props<TFormValues extends FieldValues, KInputProps = ChakraInputProps> = KInputProps & {
   control: Control<TFormValues>
   name: Path<TFormValues>
-  label?: string
+  label?: ReactNode
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   CustomInput?: JSX.Element

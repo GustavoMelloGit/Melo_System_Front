@@ -1,5 +1,15 @@
 import { type CoffeeBebidas, type CoffeeTypes } from '../../../../../../coffee/types/model/coffee'
 
+export type BuyCoffeeFormValues = {
+  coffeeType: CoffeeTypes
+  bebida: CoffeeBebidas
+  weight: number
+  bags: number
+  valuePerBag: number
+  address: string
+  shouldSetOrder: boolean
+}
+
 export type CoffeeFormValues = {
   date: string
   bags: number
