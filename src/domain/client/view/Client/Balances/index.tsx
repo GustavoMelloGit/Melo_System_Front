@@ -7,7 +7,15 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import { Skeleton } from '@chakra-ui/react'
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Skeleton,
+} from '@chakra-ui/react'
+import { capitalCase } from 'change-case'
 import { Fragment } from 'react'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
@@ -27,6 +35,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
     bags: 'Sacaria',
     coffee: 'Café',
     escolha: 'Café Escolha',
+    details: 'Detalhes',
   }
 
   return (
@@ -50,12 +59,31 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                   </Text>
                 </Flex>
                 <Divider />
-                <Flex gap={2} justify='space-between' px={2}>
-                  <Text fontWeight={700}>{displayData.coffee}</Text>
-                  <Text color={getColorByValue(data.balances.coffee)}>
-                    {getNumberOfBags(data.balances.coffee)}
-                  </Text>
-                </Flex>
+                <Accordion allowToggle>
+                  <AccordionItem border='none'>
+                    <AccordionButton px={2} py={0}>
+                      <Flex gap={2} justify='space-between' w='full' mr={2}>
+                        <Text as='span' fontWeight={700}>
+                          {displayData.coffee}
+                        </Text>
+                        <Text color={getColorByValue(data.balances.coffee)}>
+                          {getNumberOfBags(data.balances.coffee)}
+                        </Text>
+                      </Flex>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel pr={7}>
+                      {Object.entries(data.balances.details)
+                        .filter(([_, value]) => value)
+                        .map(([key, value]) => (
+                          <Flex gap={2} justify='space-between' px={2} key={key}>
+                            <Text fontWeight={700}>{capitalCase(key)}</Text>
+                            <Text color={getColorByValue(value)}>{getNumberOfBags(value)}</Text>
+                          </Flex>
+                        ))}
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
                 <Divider />
                 <Flex gap={2} justify='space-between' px={2}>
                   <Text fontWeight={700}>{displayData.escolha}</Text>

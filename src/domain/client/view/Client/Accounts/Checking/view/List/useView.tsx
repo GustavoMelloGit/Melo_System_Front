@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import { getDefaultSortParams } from '../../../../../../../../lib/utils/utils'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../../service'
@@ -10,10 +9,7 @@ export default function useListTransactionsView(): UseListTransactionsView {
   const openModal = useModal((state) => state.openModal)
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { isLoading, mutate, data, total } = getTransactionsService(
-    uuid ?? '',
-    params || getDefaultSortParams('date'),
-  )
+  const { isLoading, mutate, data, total } = getTransactionsService(uuid ?? '', params)
 
   function refetchData(): void {
     void mutate?.()

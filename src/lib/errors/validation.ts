@@ -37,6 +37,9 @@ const validationErrors = {
   utilizationIsInvalid: 'Por favor, informe uma utilização válida',
   foulnessIsRequired: 'Por favor, informe a impureza',
   foulnessIsInvalid: 'Por favor, informe uma impureza válida',
+  bebidaIsRequired: 'Por favor, informe a bebida',
+  valuePerBagIsRequired: 'Por favor, informe o valor por saca',
+  valuePerBagIsInvalid: 'Por favor, informe um valor por saca válido',
   minIsInvalid: (min: number | string) => `Por favor, informe um valor maior ou igual a ${min}`,
   maxIsInvalid: (max: number | string) => `Por favor, informe um valor menor ou igual a ${max}`,
 }

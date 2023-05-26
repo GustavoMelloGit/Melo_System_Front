@@ -1,5 +1,5 @@
 import { Select } from '@chakra-ui/react'
-import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
+import TableButton from '../../../../../../../../shared/components/table/buttons'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -11,7 +11,8 @@ import { type CoffeeTransactionModel } from '../../../../../../types/model/Trans
 import CoffeeAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<CoffeeTransactionModel[]> & {
-  onClickAdd: () => void
+  onClickAdd: () => Promise<void>
+  onClickBuy: () => Promise<void>
 }
 
 export default function CoffeeAccountTable({
@@ -19,6 +20,7 @@ export default function CoffeeAccountTable({
   isLoading,
   totalLength,
   onClickAdd,
+  onClickBuy,
 }: Props): JSX.Element {
   return (
     <Table
@@ -36,11 +38,20 @@ export default function CoffeeAccountTable({
       filter={{
         searchForOptions,
         actions: (
-          <TableAddButton
-            onClick={onClickAdd}
-            aria-label='adicionar transação'
-            title='Fazer lançamento'
-          />
+          <>
+            <TableButton
+              icon='exchangeDollar'
+              onClick={onClickBuy}
+              aria-label='Comprar café'
+              title='Comprar café'
+            />
+            <TableButton
+              icon='add'
+              onClick={onClickAdd}
+              aria-label='adicionar transação'
+              title='Fazer lançamento'
+            />
+          </>
         ),
       }}
     >
@@ -89,44 +100,34 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'date',
     label: 'Data',
     isSortable: true,
-    px: 3,
-    w: 120,
   },
   {
     id: 'description',
     label: 'Descrição',
-    px: 3,
   },
 
   {
     id: 'details.coffeeType',
     label: 'Tipo',
-    px: 3,
     isSortable: true,
-    w: '120px',
   },
   {
     id: 'details.bebida',
     label: 'Bebida',
     isSortable: true,
-    px: 3,
-    w: '150px',
   },
   {
     id: 'type.value',
     label: 'Pesagem',
-    px: 3,
   },
   {
     id: 'clientBalance',
     label: 'Saldo',
     isSortable: true,
-    px: 3,
   },
   {
     id: 'actions',
     label: 'Ações',
     textAlign: 'center',
-    px: 3,
   },
 ]

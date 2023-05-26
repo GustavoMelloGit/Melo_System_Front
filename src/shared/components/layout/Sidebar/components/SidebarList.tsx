@@ -1,5 +1,4 @@
 import { Box, List, VStack } from '@chakra-ui/react'
-import { AiOutlineHome } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
 import { BsTruck } from 'react-icons/bs'
 import { MdOutlineMonitorWeight } from 'react-icons/md'
@@ -18,10 +17,6 @@ const listItem: Record<
     icon?: JSX.Element
   }
 > = {
-  [Routes.home]: {
-    label: 'Home',
-    icon: <AiOutlineHome />,
-  },
   [Routes.clients]: {
     label: 'Clientes',
     icon: <BiUser />,

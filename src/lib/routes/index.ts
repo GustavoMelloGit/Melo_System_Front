@@ -1,6 +1,5 @@
 export const Routes = {
   notFound: '/404',
-  home: '/home',
   login: '/login',
   clients: '/clients',
   clientPage: (uuid: string) => `/clients/${uuid}`,

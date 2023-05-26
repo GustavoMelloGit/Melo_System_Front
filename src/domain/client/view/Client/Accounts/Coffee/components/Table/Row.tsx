@@ -12,7 +12,6 @@ import {
 } from '../../../../../../../coffee/types/model/coffee'
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
-const padding = 3
 
 type Props = {
   transaction: CoffeeTransactionModel
@@ -45,11 +44,8 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
 
   return (
     <Tr>
-      <Td px={padding} w={120}>
-        {dateToFormat(transaction.date)}
-      </Td>
+      <Td w={120}>{dateToFormat(transaction.date)}</Td>
       <Td
-        px={padding}
         title={fullDescription}
         cursor='pointer'
         onClick={() => {
@@ -64,19 +60,17 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         </Collapse>
       </Td>
 
-      <Td px={padding} title={capitalCase(transaction.details.coffeeType)} w='120px'>
+      <Td title={capitalCase(transaction.details.coffeeType)}>
         {labelByTypeName[transaction.details.coffeeType]}
       </Td>
-      <Td px={padding} w='150px'>
-        {CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}
-      </Td>
-      <Td px={padding} w='120px' color={getColorByValue(transaction.type.value)}>
+      <Td>{CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}</Td>
+      <Td color={getColorByValue(transaction.type.value)}>
         {getNumberOfBags(transaction.type.value)}
       </Td>
-      <Td px={padding} w='120px' color={getColorByValue(transaction.clientBalance)}>
+      <Td color={getColorByValue(transaction.clientBalance)}>
         {getNumberOfBags(transaction.clientBalance)}
       </Td>
-      <Td px={padding} textAlign='center'>
+      <Td textAlign='center'>
         <MoreInfoTooltip
           label={`${transaction.user.name}, ${dateToFormat(
             transaction.createdAt,

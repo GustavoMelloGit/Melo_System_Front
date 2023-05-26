@@ -2,7 +2,8 @@ import CoffeeAccountTable from '../../components/Table'
 import useCoffeeAccountView from './useView'
 
 export default function CoffeeAccountView(): JSX.Element {
-  const { data, isLoading, total, handleOpenCreateCoffee } = useCoffeeAccountView()
+  const { data, isLoading, total, handleOpenCreateCoffee, handleOpenBuyCoffee } =
+    useCoffeeAccountView()
 
   return (
     <CoffeeAccountTable
@@ -10,6 +11,7 @@ export default function CoffeeAccountView(): JSX.Element {
       isLoading={isLoading}
       totalLength={total}
       onClickAdd={handleOpenCreateCoffee}
+      onClickBuy={handleOpenBuyCoffee}
     />
   )
 }

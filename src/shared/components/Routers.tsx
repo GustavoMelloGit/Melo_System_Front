@@ -29,7 +29,7 @@ export const UnprotectedRoute = ({ children }: PropsWithChildren): JSX.Element =
   const token = getValue()
 
   if (appInitialized && token) {
-    return <Navigate to={Routes.home} />
+    return <Navigate to={Routes.clients} />
   }
   return <>{children}</>
 }

@@ -11,7 +11,7 @@ import { toast } from 'react-hot-toast'
 import GlobalConfig from '../../../../../../../../lib/constants/config'
 import { formatInputDateString } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import CoffeeFormView from '../../components/Form'
+import CoffeeFormView from '../../components/CreateForm'
 import { createCoffeeService } from '../../service/post'
 import { type CoffeeFormValues } from '../../types'
 
@@ -52,7 +52,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
             Conta Café
           </Heading>
         </ModalHeader>
-        <ModalBody pb={8} w='full' maxH='70vh' overflowY='auto' position='relative'>
+        <ModalBody w='full'>
           <CoffeeFormView
             onSubmit={handleCreateCoffee}
             initialValues={{
