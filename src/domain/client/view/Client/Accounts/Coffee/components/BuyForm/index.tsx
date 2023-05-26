@@ -1,12 +1,38 @@
 import { Button, Flex, Grid, GridItem, Select } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 import { CoffeeTypeHasBebida } from '../../../../../../../../lib/constants/coffee'
+import { validationErrors } from '../../../../../../../../lib/errors'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import { CoffeeBebidasLabel } from '../../../../../../../coffee/types/model/coffee'
+import {
+  CoffeeBebidasLabel,
+  type CoffeeTypes,
+} from '../../../../../../../coffee/types/model/coffee'
 import { type BuyCoffeeFormValues } from '../../types'
 
+const validationSchema = yup.object().shape({
+  coffeeType: yup.string().required(validationErrors.coffeeTypeIsRequired),
+  bebida: yup.string().when('coffeeType', {
+    is: (coffeeType: CoffeeTypes) => CoffeeTypeHasBebida.includes(coffeeType),
+    then: yup.string().required(validationErrors.bebidaIsRequired),
+  }),
+  bags: yup
+    .number()
+    .typeError(validationErrors.bagsIsInvalid)
+    .required(validationErrors.bagsIsRequired),
+  weight: yup
+    .number()
+    .typeError(validationErrors.weightIsInvalid)
+    .required(validationErrors.weightIsRequired),
+  valuePerBag: yup
+    .number()
+    .typeError(validationErrors.valuePerBagIsInvalid)
+    .required(validationErrors.valuePerBagIsRequired),
+  address: yup.string(),
+})
 type Props = {
   onSubmit: (values: BuyCoffeeFormValues) => void
   initialValues: BuyCoffeeFormValues
@@ -14,6 +40,7 @@ type Props = {
 const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const { handleSubmit, control, watch } = useForm<BuyCoffeeFormValues>({
     defaultValues: initialValues,
+    resolver: yupResolver(validationSchema),
   })
   const currentCoffeeType = watch('coffeeType')
   return (
@@ -90,7 +117,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               <Flex align={'center'} gap={1}>
                 Endereço
                 <MoreInfoTooltip
-                  label='Preenchendo o campo de endereço o café automaticamente irá para a lista de cafés a buscar.'
+                  label='Preenchendo esse campo, o café automaticamente irá para a lista de cafés a buscar.'
                   size={16}
                 />
               </Flex>
@@ -98,7 +125,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
           />
         </GridItem>
       </Grid>
-      <Button w='full' mt={4} type='submit'>
+      <Button w='full' mt={4} type='submit' colorScheme='blue'>
         Comprar
       </Button>
     </form>
