@@ -157,9 +157,9 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           md: 'calc(100vh - 8rem)',
         }}
       >
-        <ModalCloseButton />
-        <ModalBody pt={3} px={5} overflowY='auto'>
-          <Stack align='flex-start' spacing={10} id='screenshot-content'>
+        <ModalCloseButton zIndex={2} />
+        <ModalBody pt={3} px={6} overflowY='auto'>
+          <Stack align='flex-start' spacing={5} id='screenshot-content'>
             <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 
             {!isLegalPerson && (
