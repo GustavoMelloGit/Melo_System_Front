@@ -16,8 +16,9 @@ import { type BuyCoffeeFormValues } from '../../types'
 
 type Props = {
   clientId: string
+  refetch: () => void
 }
-const BuyCoffeeView = ({ clientId }: Props): JSX.Element => {
+const BuyCoffeeView = ({ clientId, refetch }: Props): JSX.Element => {
   const closeModal = useModal((state) => state.closeModal)
 
   async function handleBuyCoffee({ bags, weight, ...values }: BuyCoffeeFormValues): Promise<void> {
@@ -38,6 +39,7 @@ const BuyCoffeeView = ({ clientId }: Props): JSX.Element => {
       toast.error('Erro ao comprar café')
       return
     }
+    refetch()
     toast.success('Café comprado com sucesso')
     closeModal()
   }
