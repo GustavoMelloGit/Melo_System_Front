@@ -20,7 +20,7 @@ export default function useCoffeeAccountView(): UseCoffeeAccountView {
     if (!uuid) return
     const openModal = useModal.getState().openModal
     const BuyCoffeeView = (await import('../Buy')).default
-    openModal(<BuyCoffeeView />)
+    openModal(<BuyCoffeeView clientId={uuid} />)
   }
 
   return {
