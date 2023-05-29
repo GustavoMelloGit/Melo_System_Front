@@ -54,10 +54,36 @@ export default function ClientDetails(): JSX.Element {
       <Box>
         <Card roundedBottom={0}>
           <CardHeader pb={0}>
-            <Flex align={'center'} gap={[4, 8]} flexWrap='wrap'>
-              <Avatar size='2xl' loading='lazy' src={client.profileImage} name={client.name} />
-              <Flex justify='space-between' flex={1} flexWrap='wrap' gap={2}>
-                <Box>
+            <Flex
+              align={'center'}
+              flexDir={{
+                base: 'column',
+                sm: 'row',
+              }}
+              gap={[4, 8]}
+              flexWrap='wrap'
+            >
+              <Avatar
+                size={{ base: 'xl', sm: '2xl' }}
+                loading='lazy'
+                src={client.profileImage}
+                name={client.name}
+              />
+              <Flex
+                justify='space-between'
+                flex={1}
+                flexDir={{
+                  base: 'column',
+                  sm: 'row',
+                }}
+                gap={2}
+              >
+                <Box
+                  textAlign={{
+                    base: 'center',
+                    sm: 'left',
+                  }}
+                >
                   <Heading as='h1' fontSize={['xl', '4xl']}>
                     {client.name}
                   </Heading>
@@ -65,7 +91,14 @@ export default function ClientDetails(): JSX.Element {
                     ({client.nickname ?? 'Sem apelido'})
                   </Heading>
                 </Box>
-                <Flex gap={2.5}>
+                <Flex
+                  gap={2.5}
+                  align='center'
+                  justify={{
+                    base: 'center',
+                    sm: 'flex-start',
+                  }}
+                >
                   <IconButton
                     onClick={openClientInfoModal}
                     variant='outline'

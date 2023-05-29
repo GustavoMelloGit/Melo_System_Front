@@ -44,7 +44,14 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   })
   const currentCoffeeType = watch('coffeeType')
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit((values) => {
+        onSubmit({
+          ...values,
+          valuePerBag: Number(values.valuePerBag * 100),
+        })
+      })}
+    >
       <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' gap={4}>
         <GridItem>
           <ControllerField<BuyCoffeeFormValues>
