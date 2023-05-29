@@ -16,7 +16,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
     setShowBalance((prev) => !prev)
   }
   return (
-    <LinkBox as={Tr} h={70}>
+    <LinkBox as={Tr} pos='relative'>
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
@@ -39,6 +39,9 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         color={showBalance ? getColorByValue(client.balance) : 'inherit'}
         data-cy='table-cell-client-balance'
         data-balance={client.balance}
+        zIndex={100}
+        pos='relative'
+        userSelect='none'
       >
         {showBalance ? formatCurrency(client.balance) : 'R$ ----'}
       </Td>
