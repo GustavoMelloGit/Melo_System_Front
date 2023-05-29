@@ -1,5 +1,5 @@
-import { HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-ui/react'
-import { useMemo } from 'react'
+import { Collapse, HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-ui/react'
+import { useMemo, useState } from 'react'
 import { shallow } from 'zustand/shallow'
 import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
@@ -16,6 +16,7 @@ export default function TransactionsListRow({
   transaction,
   onSelectFee,
 }: TransactionsListRowProps): JSX.Element {
+  const [showText, setShowText] = useState<boolean>(false)
   const activeColor = useColorModeValue('blue.500', 'blue.200')
   const [selectionMode, selectedTransactions] = useFeeStore(
     (state) => [state.selectionMode, state.selectedTransactions],
@@ -52,12 +53,17 @@ export default function TransactionsListRow({
       <Td>{dateToFormat(transaction.date, 'dd/MM/yyyy')}</Td>
       <Td
         title={transaction.description}
+        cursor='pointer'
+        onClick={() => {
+          setShowText((prev) => !prev)
+        }}
         maxW={80}
-        whiteSpace='nowrap'
-        textOverflow='ellipsis'
-        overflow='hidden'
+        wordBreak='break-word'
+        whiteSpace='pre-wrap'
       >
-        {transaction.description}
+        <Collapse startingHeight={20} in={showText}>
+          {transaction.description}
+        </Collapse>
       </Td>
       <Td {...selectableColumnsProps(transaction.type.value)} textAlign='center'>
         {formatCurrency(transaction.type.value)}
