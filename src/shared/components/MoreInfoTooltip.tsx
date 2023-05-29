@@ -9,7 +9,7 @@ type MoreInfoTooltipProps = Omit<TooltipProps, 'children' | 'size'> & {
 export default function MoreInfoTooltip({
   label,
   children,
-  size,
+  size = 22,
   ...rest
 }: MoreInfoTooltipProps): JSX.Element {
   return (
