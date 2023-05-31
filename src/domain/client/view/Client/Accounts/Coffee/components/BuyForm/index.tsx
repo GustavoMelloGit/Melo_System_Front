@@ -1,7 +1,6 @@
 import {
   Button,
   Checkbox,
-  Flex,
   FormControl,
   FormLabel,
   Grid,
@@ -19,7 +18,6 @@ import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
-import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import {
   CoffeeBebidasLabel,
   type CoffeeTypes,
@@ -162,15 +160,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
             control={control}
             name='address'
             isDisabled={!pickupCoffee}
-            label={
-              <Flex align={'center'} gap={1}>
-                Endereço
-                <MoreInfoTooltip
-                  label='Preenchendo esse campo, o café automaticamente irá para a lista de cafés a buscar.'
-                  size={16}
-                />
-              </Flex>
-            }
+            label='Endereço'
           />
         </GridItem>
       </Grid>
