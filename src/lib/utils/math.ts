@@ -1,3 +1,5 @@
+import GlobalConfig from '../constants/config'
+
 /**
  * Converts monthly interest rate to daily interest rate
  * @param monthlyInterestRate Monthly interest rate
@@ -31,4 +33,23 @@ export function calculateCompoundInterest(
  */
 export function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+/**
+ * Calculates total value of a coffee based on bags, weight and valuePerBag
+ * @param bags Number of bags
+ * @param weight Weight of each bag
+ * @param valuePerBag Value of each bag
+ * @returns Total value of coffee
+ * @example
+ * calculateTotalValue(2, 60, 10) // 1200
+ */
+export function calculateCoffeeTotalValue(
+  bags: number,
+  weight: number,
+  valuePerBag: number,
+): number {
+  const valueOnWeight = Number(((weight * valuePerBag) / GlobalConfig.weightPerBag).toFixed(2))
+  const valueOnBags = bags * valuePerBag
+  return valueOnWeight + valueOnBags
 }

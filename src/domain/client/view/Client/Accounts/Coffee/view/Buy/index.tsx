@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import GlobalConfig from '../../../../../../../../lib/constants/config'
+import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import BuyCoffeeFormView from '../../components/BuyForm'
 import { buyCoffeeService } from '../../service/post'
@@ -22,11 +23,7 @@ const BuyCoffeeView = ({ clientId, refetch }: Props): JSX.Element => {
   const closeModal = useModal((state) => state.closeModal)
 
   async function handleBuyCoffee({ bags, weight, ...values }: BuyCoffeeFormValues): Promise<void> {
-    const valueOnWeight = Number(
-      ((weight * values.valuePerBag) / GlobalConfig.weightPerBag).toFixed(2),
-    )
-    const valueOnBags = bags * values.valuePerBag
-    const totalValue = valueOnWeight + valueOnBags
+    const totalValue = calculateCoffeeTotalValue(bags, weight, values.valuePerBag)
     const { error } = await buyCoffeeService({
       weight: bags * GlobalConfig.weightPerBag + weight,
       bebida: values.bebida,
@@ -62,7 +59,6 @@ const BuyCoffeeView = ({ clientId, refetch }: Props): JSX.Element => {
               coffeeType: 'bica_corrida',
               bags: 0,
               bebida: 'duro',
-              shouldSetOrder: false,
               valuePerBag: 0,
               weight: 0,
             }}

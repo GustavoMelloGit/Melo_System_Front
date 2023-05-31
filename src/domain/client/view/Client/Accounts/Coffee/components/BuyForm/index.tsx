@@ -1,9 +1,22 @@
-import { Button, Flex, Grid, GridItem, Select } from '@chakra-ui/react'
+import {
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+  Input,
+  Select,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { CoffeeTypeHasBebida } from '../../../../../../../../lib/constants/coffee'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
+import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
@@ -38,17 +51,23 @@ type Props = {
   initialValues: BuyCoffeeFormValues
 }
 const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
+  const [pickupCoffee, setPickupCoffee] = useState<boolean>(false)
   const { handleSubmit, control, watch } = useForm<BuyCoffeeFormValues>({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
   })
   const currentCoffeeType = watch('coffeeType')
+  const currentBags = watch('bags')
+  const currentWeight = watch('weight')
+  const currentValuePerBag = watch('valuePerBag')
+  const totalValue = calculateCoffeeTotalValue(currentBags, currentWeight, currentValuePerBag)
   return (
     <form
-      onSubmit={handleSubmit((values) => {
+      onSubmit={handleSubmit(({ valuePerBag, address, ...values }) => {
         onSubmit({
           ...values,
-          valuePerBag: Number(values.valuePerBag * 100),
+          valuePerBag: valuePerBag * 100,
+          address: pickupCoffee ? address : '',
         })
       })}
     >
@@ -116,10 +135,33 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
             isRequired
           />
         </GridItem>
+        <GridItem>
+          <FormControl>
+            <FormLabel htmlFor='totalValue'>Valor total</FormLabel>
+            <Input
+              disabled
+              id='totalValue'
+              variant='filled'
+              rounded='xl'
+              value={formatCurrency(totalValue * 100)}
+            />
+          </FormControl>
+        </GridItem>
+        <GridItem>
+          <Checkbox
+            isChecked={pickupCoffee}
+            onChange={(e) => {
+              setPickupCoffee(e.target.checked)
+            }}
+          >
+            Café a buscar
+          </Checkbox>
+        </GridItem>
         <GridItem colSpan={2} display='flex'>
           <ControllerField<BuyCoffeeFormValues>
             control={control}
             name='address'
+            isDisabled={!pickupCoffee}
             label={
               <Flex align={'center'} gap={1}>
                 Endereço

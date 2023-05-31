@@ -40,7 +40,7 @@ export default function CoffeeAccountTable({
         actions: (
           <>
             <TableButton
-              icon='exchangeDollar'
+              icon='shopCart'
               onClick={onClickBuy}
               aria-label='Comprar café'
               title='Comprar café'
