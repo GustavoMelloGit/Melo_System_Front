@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { type Address } from '../../domain/client/types/model/Client'
 
 /**
  * Format date values from yyyy-MM-dd to dd/mm/yyyy or dd/mm/yyyy hh:mm format.
@@ -38,4 +39,21 @@ export function formatCurrency(value: number | undefined): string {
  */
 export function dateToFormat(date: string | number, outFormat: string = 'dd/MM/yyyy'): string {
   return format(new Date(date), outFormat)
+}
+
+/**
+ * Format client address to a single string.
+ * @param {Address} address The address to be formatted.
+ * @returns {string} a string with the address formatted.
+ */
+export function formatAddress(address: Address): string {
+  const addressFieldOrder: Array<keyof Address> = [
+    'street',
+    'number',
+    'neighborhood',
+    'brook',
+    'complement',
+  ]
+  const addressFields = addressFieldOrder.map((field) => address[field])
+  return addressFields.filter(Boolean).join(', ')
 }
