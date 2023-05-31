@@ -56,7 +56,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         whiteSpace='pre-wrap'
       >
         <Collapse startingHeight={20} in={showText}>
-          {fullDescription}
+          {fullDescription || transaction.description}
         </Collapse>
       </Td>
 
