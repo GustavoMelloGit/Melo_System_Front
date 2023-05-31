@@ -7,7 +7,6 @@ export type BuyCoffeeFormValues = {
   bags: number
   valuePerBag: number
   address: string
-  shouldSetOrder: boolean
 }
 
 export type CoffeeFormValues = {

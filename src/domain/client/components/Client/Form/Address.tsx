@@ -82,6 +82,15 @@ export default function AddressFields({ register, setValue }: AddressFieldsProps
           data-cy='client-brook-input'
         />
       </GridItem>
+      <GridItem>
+        <RHFField<ClientFormValues>
+          register={register}
+          name='address.complement'
+          label='Complemento'
+          placeholder='Complemento'
+          data-cy='client-complement-input'
+        />
+      </GridItem>
     </Grid>
   )
 }
