@@ -20,7 +20,7 @@ export default function CoffeePickup(): JSX.Element {
     handleUncheckPickup,
     handleDownloadList,
   } = usePickupView()
-  const { isLoading, data, total } = order
+  const { isLoading, data } = order
 
   return (
     <Page title='Buscar café' data-cy='coffee-pickup-page'>
@@ -74,9 +74,9 @@ export default function CoffeePickup(): JSX.Element {
           />
         </Flex>
         <PickupTable
-          data={data}
+          data={data?.data}
           isLoading={isLoading}
-          totalPickups={total ?? 0}
+          totalPickups={data?.total ?? 0}
           onClickUpdate={handleOpenUpdateForm}
           onClickCheck={handleCheckPickup}
           onClickUncheck={handleUncheckPickup}

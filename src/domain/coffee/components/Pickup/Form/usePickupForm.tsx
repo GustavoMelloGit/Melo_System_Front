@@ -18,12 +18,12 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
     resolver: yupResolver(validationSchema),
   })
   const clientName = form.watch('clientName')
-  const { data: clients, isLoading } = getClientsService(`name=${clientName}`)
+  const { data, isLoading } = getClientsService(`name=${clientName}`)
 
   useEffect(() => {
-    if (!clients) return
-    if (clients.length === 1) {
-      const [client] = clients
+    if (!data) return
+    if (data.data.length === 1) {
+      const [client] = data.data
       const { address } = client
       const valueOrUndefined = (value?: string): string => value ?? ''
       const addressString = `${valueOrUndefined(address?.brook)} ${valueOrUndefined(
@@ -31,10 +31,10 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
       )} ${valueOrUndefined(address?.number)} ${valueOrUndefined(address?.complement)}`
       form.setValue('address', addressString)
     }
-  }, [clients])
+  }, [data])
 
   return {
-    clients,
+    clients: data?.data,
     isLoading,
     closeModal,
     form,

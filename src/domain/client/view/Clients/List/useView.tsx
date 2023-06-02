@@ -4,12 +4,12 @@ import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientsListView(): ClientsListView {
   const params = useServiceParams()
-  const { data, error, isLoading, total } = getClientsService(params)
+  const { data, error, isLoading } = getClientsService(params)
   return {
-    data,
+    data: data?.data,
     error,
     isLoading,
-    total: total ?? 0,
+    total: data?.total ?? 0,
   }
 }
 

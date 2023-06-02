@@ -10,7 +10,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
   const { number } = useParams<{ number: string }>()
 
   const params = useServiceParams()
-  const { data, isLoading, error, total, mutate } = getSheetsService(
+  const { data, isLoading, error, mutate } = getSheetsService(
     number,
     params || getDefaultSortParams('number'),
   )
@@ -28,10 +28,10 @@ export default function useBookDetailsView(): UseBookDetailsView {
   }
 
   return {
-    data,
+    data: data?.data,
     isLoading,
     error,
-    total: total ?? 0,
+    total: data?.total ?? 0,
     handleDeleteSheet,
   }
 }

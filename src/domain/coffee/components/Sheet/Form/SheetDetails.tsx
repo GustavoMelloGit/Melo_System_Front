@@ -1,11 +1,5 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
-import {
-  Controller,
-  useWatch,
-  type Control,
-  type Path,
-  type UseFormRegister,
-} from 'react-hook-form'
+import { Controller, useWatch, type Control, type Path } from 'react-hook-form'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
@@ -13,23 +7,16 @@ import { getClientsService } from '../../../../client/service'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
-  register: UseFormRegister<SheetFormValues>
   control: Control<SheetFormValues>
-  errors: unknown
   isDisabled: (fieldName: Path<SheetFormValues>) => boolean
 }
-export default function SheetFormSheetDetails({
-  register,
-  errors,
-  control,
-  isDisabled,
-}: Props): JSX.Element {
+export default function SheetFormSheetDetails({ control, isDisabled }: Props): JSX.Element {
   const clientName = useWatch({
     control,
     name: 'clientId',
   })
   const debouncedClientName = useDebounce(clientName, 250)
-  const { data: clients, isLoading } = getClientsService(
+  const { data, isLoading } = getClientsService(
     debouncedClientName ? `name=${debouncedClientName}` : '',
     {
       revalidateOnFocus: false,
@@ -50,7 +37,7 @@ export default function SheetFormSheetDetails({
             render={({ field: { onChange, ...field } }) => (
               <AutocompleteInput
                 label='Cliente'
-                options={clients?.map((client) => ({
+                options={data?.data.map((client) => ({
                   label: `${
                     client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
                   }`,

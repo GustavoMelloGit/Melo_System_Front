@@ -13,7 +13,7 @@ type Props = {
 }
 const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
   const closeModal = useModal((state) => state.closeModal)
-  const { data: client } = getClientService(clientId)
+  const { data } = getClientService(clientId)
 
   async function handleBuyCoffee({ bags, weight, ...values }: BuyCoffeeFormValues): Promise<void> {
     const totalValue = calculateCoffeeTotalValue(bags, weight, values.valuePerBag)
@@ -35,7 +35,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
   }
 
   const initialValues: BuyCoffeeFormValues = {
-    address: formatAddress(client?.address ?? {}),
+    address: formatAddress(data?.data.address ?? {}),
     coffeeType: 'bica_corrida',
     bags: 0,
     bebida: 'duro',

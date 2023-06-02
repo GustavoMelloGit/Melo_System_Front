@@ -1,22 +1,16 @@
 import { type AxiosResponse } from 'axios'
 import api from '../../../../lib/config/api'
-import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
-import { type GetServiceSwrResponse } from '../../../../shared/types/utils/service'
+import {
+  type HTTPGetResponse,
+  type SWRServiceResponse,
+} from '../../../../shared/types/utils/service'
 import { type PickupCoffeeModel } from '../../types/model/pickup'
 
-export function getPickupOrdersService(
-  params?: string,
-): GetServiceSwrResponse<PickupCoffeeModel[]> {
-  const { data, error, isLoading, mutate } = useFetch(`/orders?${params ?? ''}`)
+export function getPickupOrdersService(params?: string): SWRServiceResponse<PickupCoffeeModel[]> {
+  const response = useFetch<HTTPGetResponse<PickupCoffeeModel[]>>(`/orders?${params ?? ''}`)
 
-  return {
-    data: data?.data,
-    error: errorHandler(error),
-    isLoading,
-    total: data?.total,
-    mutate,
-  }
+  return response
 }
 
 export async function getPickupPdf(): Promise<void> {

@@ -8,7 +8,7 @@ export default function useEscolhaAccountView(): UseEscolhaAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
   const openModal = useModal((state) => state.openModal)
-  const { data, isLoading, total, mutate } = getEscolhaAccountService(uuid, params)
+  const { data, isLoading, mutate } = getEscolhaAccountService(uuid, params)
 
   async function handleOpenCreateEscolha(): Promise<void> {
     if (!uuid) return
@@ -24,9 +24,9 @@ export default function useEscolhaAccountView(): UseEscolhaAccountView {
   }
 
   return {
-    data: data ?? [],
+    data: data?.data ?? [],
     isLoading,
-    total: total ?? 0,
+    total: data?.total ?? 0,
     handleOpenCreateEscolha,
   }
 }

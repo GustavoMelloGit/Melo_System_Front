@@ -1,4 +1,4 @@
-import { type KeyedMutator } from 'swr'
+import { type UseFetch } from '../../hooks/useFetch'
 
 export type PostServiceResponse<T> = Promise<{
   data: T | null
@@ -26,6 +26,11 @@ export type GetServiceResponse<T> = {
   total?: number
 }
 
-export type GetServiceSwrResponse<T> = GetServiceResponse<T> & {
-  mutate: KeyedMutator<T>
+export type SWRServiceResponse<T> = UseFetch<HTTPGetResponse<T>, any>
+
+export type HTTPGetResponse<T> = {
+  data: T
+  limit: number
+  page: number
+  total: number
 }

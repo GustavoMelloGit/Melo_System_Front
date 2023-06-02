@@ -8,7 +8,7 @@ type Props = {
   bookNumber: string | number | undefined
 }
 export default function useCreateSheetView({ bookNumber }: Props): UseCreateSheetView {
-  const { data: lastLine, mutate: refetchLastLine } = getSheetsService(
+  const { data, mutate: refetchLastLine } = getSheetsService(
     bookNumber,
     `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&limit=1`,
   )
@@ -30,7 +30,7 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
 
   const initialValues: Partial<SheetFormValues> = {
     clientId: '',
-    number: (lastLine?.[0]?.number ?? 0) + 1,
+    number: (data?.data?.[0]?.number ?? 0) + 1,
     weighingDate: new Date().toISOString().split('T')[0],
     coffeeDetails: {
       coffeeType: 'bica_corrida',

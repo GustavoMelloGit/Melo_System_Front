@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { type GetServiceResponse } from '../../../../shared/types/utils/service'
+import { type SWRServiceResponse } from '../../../../shared/types/utils/service'
 import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
 import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../services/Pickup/put'
 import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
@@ -93,7 +93,7 @@ export default function usePickupView(): UsePickupView {
 }
 
 type UsePickupView = {
-  order: GetServiceResponse<PickupCoffeeModel[]>
+  order: SWRServiceResponse<PickupCoffeeModel[]>
   handleOpenForm: () => Promise<void>
   handleOpenUpdateForm: (pickup: PickupCoffeeModel) => Promise<void>
   handleCheckPickup: (pickup: PickupCoffeeModel) => Promise<void>

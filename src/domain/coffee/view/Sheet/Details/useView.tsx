@@ -9,13 +9,13 @@ export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSh
 
   const initialValues: SheetFormValues = data
     ? {
-        clientId: data.clientId,
-        coffeeDetails: data.coffeeDetails,
-        courier: data.courier,
-        weighingDate: new Date(data.weighingDate).toISOString().split('T')[0],
-        isDraft: data.isDraft,
-        lines: data.lines,
-        number: data.number,
+        clientId: data.data.clientId,
+        coffeeDetails: data.data.coffeeDetails,
+        courier: data.data.courier,
+        weighingDate: new Date(data.data.weighingDate).toISOString().split('T')[0],
+        isDraft: data.data.isDraft,
+        lines: data.data.lines,
+        number: data.data.number,
       }
     : ({
         number: 0,

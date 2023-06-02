@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { type KeyedMutator } from 'swr'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
+import { type HTTPGetResponse } from '../../../../../shared/types/utils/service'
 import { getClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -15,7 +16,7 @@ export default function useClientDetailsView(): UseClientDetailsView {
   async function openClientInfoModal(): Promise<void> {
     if (!data) return
     const GeneralInfo = (await import('../GeneralInfo')).default
-    openModal(<GeneralInfo client={data} />)
+    openModal(<GeneralInfo client={data.data} />)
   }
 
   async function openClientBalancesModal(): Promise<void> {
@@ -24,7 +25,7 @@ export default function useClientDetailsView(): UseClientDetailsView {
   }
 
   return {
-    client: data,
+    client: data?.data,
     isLoading,
     mutate,
     currentTab,
@@ -36,7 +37,7 @@ export default function useClientDetailsView(): UseClientDetailsView {
 type UseClientDetailsView = {
   client: ClientModel | undefined
   isLoading: boolean
-  mutate: KeyedMutator<ClientModel> | undefined
+  mutate: KeyedMutator<HTTPGetResponse<ClientModel>> | undefined
   currentTab: number
   openClientInfoModal: () => void
   openClientBalancesModal: () => void
