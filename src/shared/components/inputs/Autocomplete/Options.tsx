@@ -31,7 +31,6 @@ export default function OptionsBox({ onSelect }: Props): JSX.Element {
       flexDir='column'
       align='stretch'
       rounded='md'
-      overflow='hidden'
       borderWidth={2}
       borderColor='blue.500'
       py={1}
@@ -42,12 +41,17 @@ export default function OptionsBox({ onSelect }: Props): JSX.Element {
           data-value={option.value}
           variant='ghost'
           rounded={0}
+          p={3}
+          display='block'
+          w='100%'
+          h='fit-content'
+          whiteSpace='nowrap'
+          overflow='hidden'
+          textOverflow='ellipsis'
+          title={String(option.label)}
           onClick={() => {
             handleOnClick(option)
           }}
-          wordBreak='break-all'
-          whiteSpace='normal'
-          p={4}
         >
           {option.label}
         </Button>
