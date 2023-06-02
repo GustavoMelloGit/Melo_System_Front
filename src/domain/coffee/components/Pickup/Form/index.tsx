@@ -1,7 +1,5 @@
 import {
   Button,
-  Grid,
-  GridItem,
   Heading,
   Modal,
   ModalBody,
@@ -9,6 +7,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Stack,
   VStack,
 } from '@chakra-ui/react'
 import { Controller } from 'react-hook-form'
@@ -49,51 +48,45 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
             onSubmit={handleSubmit(onSubmit)}
             data-cy='pickupCoffee-form'
           >
-            <Grid templateColumns={['1fr', 'repeat(2, 1fr)']} gap={2}>
-              <GridItem>
-                <Controller
-                  name='clientName'
-                  control={control}
-                  render={({ field: { onChange, ...field } }) => (
-                    <AutocompleteInput
-                      label='Cliente'
-                      options={clients?.map((client) => ({
-                        label: `${
-                          client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
-                        }`,
-                        value: client.name,
-                      }))}
-                      isLoading={isLoading}
-                      handleChange={onChange}
-                      placeholder='Ex.: João da Silva'
-                      isRequired
-                      {...field}
-                    />
-                  )}
-                />
-              </GridItem>
-              <GridItem>
-                <ControllerField<PickupFormValues>
-                  control={control}
-                  required
-                  name='bags'
-                  label='Sacos'
-                  type='number'
-                  min={1}
-                  inputMode='numeric'
-                  data-cy='bags-input'
-                />
-              </GridItem>
-              <GridItem colSpan={[1, 2]}>
-                <ControllerField<PickupFormValues>
-                  control={control}
-                  required
-                  name='address'
-                  label='Endereço'
-                  data-cy='address-input'
-                />
-              </GridItem>
-            </Grid>
+            <Stack spacing={2} w='full'>
+              <Controller
+                name='clientName'
+                control={control}
+                render={({ field: { onChange, ...field } }) => (
+                  <AutocompleteInput
+                    label='Cliente'
+                    options={clients?.map((client) => ({
+                      label: `${
+                        client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
+                      }`,
+                      value: client.name,
+                    }))}
+                    isLoading={isLoading}
+                    handleChange={onChange}
+                    placeholder='Ex.: João da Silva'
+                    isRequired
+                    {...field}
+                  />
+                )}
+              />
+              <ControllerField<PickupFormValues>
+                control={control}
+                required
+                name='bags'
+                label='Sacos'
+                type='number'
+                min={1}
+                inputMode='numeric'
+                data-cy='bags-input'
+              />
+              <ControllerField<PickupFormValues>
+                control={control}
+                required
+                name='address'
+                label='Endereço'
+                data-cy='address-input'
+              />
+            </Stack>
             <Button
               isLoading={isSubmitting}
               type='submit'
