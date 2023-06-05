@@ -1,10 +1,14 @@
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
+import TableButton from '../../../../shared/components/table/buttons'
+import FertilizerTable from '../../components/Table'
 import useFertilizerListView from './useView'
 
 const FertilizerListView = (): JSX.Element => {
-  const { response } = useFertilizerListView()
-  console.log(response.data)
+  const {
+    response: { data, isLoading },
+    handleAddFertilizer,
+  } = useFertilizerListView()
   return (
     <Page title='Adubos' data-cy='list-clients-page'>
       <HeaderBreadcrumbs
@@ -14,7 +18,17 @@ const FertilizerListView = (): JSX.Element => {
             label: 'Lista de adubos',
           },
         ]}
+        actions={
+          <TableButton
+            aria-label='Adicionar adubo'
+            icon='add'
+            variant='outline'
+            colorScheme='blue'
+            onClick={handleAddFertilizer}
+          />
+        }
       />
+      <FertilizerTable data={data?.data} isLoading={isLoading} totalBooks={data?.total ?? 0} />
     </Page>
   )
 }
