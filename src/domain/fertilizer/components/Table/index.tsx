@@ -1,8 +1,10 @@
+import { toast } from 'react-hot-toast'
 import Table from '../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../shared/components/table/types'
+import { deleteFertilizerService } from '../../services/delete'
 import { type FertilizerModel } from '../../types/model/Fertilizer'
 import FertilizerTableRow from './Row'
 
@@ -10,8 +12,18 @@ type Props = {
   data: FertilizerModel[] | undefined
   totalBooks: number
   isLoading: boolean
+  refetch: () => void
 }
-const FertilizerTable = ({ data, isLoading, totalBooks }: Props): JSX.Element => {
+const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Element => {
+  async function handleDeleteFertilizer(id: string): Promise<void> {
+    const { error } = await deleteFertilizerService(id)
+    if (error) {
+      toast.error(error)
+      return
+    }
+    toast.success('Adubo deletado com sucesso!')
+    refetch()
+  }
   return (
     <Table
       header={{
@@ -33,7 +45,11 @@ const FertilizerTable = ({ data, isLoading, totalBooks }: Props): JSX.Element =>
       }}
     >
       {data?.map((fertilizer) => (
-        <FertilizerTableRow key={fertilizer.name} fertilizer={fertilizer} />
+        <FertilizerTableRow
+          key={fertilizer.name}
+          fertilizer={fertilizer}
+          onClickDelete={handleDeleteFertilizer}
+        />
       ))}
     </Table>
   )
@@ -52,6 +68,11 @@ const headerColumns: TableHeaderColumns[] = [
   {
     id: 'description',
     label: 'Descrição',
+  },
+  {
+    id: 'actions',
+    label: 'Ações',
+    textAlign: 'center',
   },
 ]
 

@@ -6,7 +6,7 @@ import useFertilizerListView from './useView'
 
 const FertilizerListView = (): JSX.Element => {
   const {
-    response: { data, isLoading },
+    response: { data, isLoading, mutate },
     handleAddFertilizer,
   } = useFertilizerListView()
   return (
@@ -28,7 +28,12 @@ const FertilizerListView = (): JSX.Element => {
           />
         }
       />
-      <FertilizerTable data={data?.data} isLoading={isLoading} totalBooks={data?.total ?? 0} />
+      <FertilizerTable
+        data={data?.data}
+        refetch={mutate}
+        isLoading={isLoading}
+        totalBooks={data?.total ?? 0}
+      />
     </Page>
   )
 }
