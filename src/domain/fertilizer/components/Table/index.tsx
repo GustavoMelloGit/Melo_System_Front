@@ -51,11 +51,6 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Data de criação',
     isSortable: true,
   },
-  {
-    id: 'actions',
-    label: 'Ações',
-    align: 'center',
-  },
 ]
 
 const searchForOptions: SearchForOption = {
