@@ -1,5 +1,4 @@
-import { errorHandler } from '../../../../lib/utils/error'
-import useFetch from '../../../../shared/hooks/useFetch'
+import useFetch, { type UseFetch } from '../../../../shared/hooks/useFetch'
 import {
   type HTTPGetResponse,
   type SWRServiceResponse,
@@ -19,13 +18,8 @@ export function getSheetsService(
 
 export function getSheetService(
   sheetNumber: string | number | undefined,
-): SWRServiceResponse<SheetModel> {
-  const { data, error, isLoading, mutate } = useFetch(sheetNumber ? `/sheet/${sheetNumber}` : null)
+): UseFetch<SheetModel, any> {
+  const response = useFetch<SheetModel>(sheetNumber ? `/sheet/${sheetNumber}` : null)
 
-  return {
-    data,
-    error: errorHandler(error),
-    isLoading,
-    mutate,
-  }
+  return response
 }

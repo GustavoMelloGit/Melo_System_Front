@@ -1,5 +1,5 @@
 import { type SWRConfiguration } from 'swr'
-import useFetch from '../../../shared/hooks/useFetch'
+import useFetch, { type UseFetch } from '../../../shared/hooks/useFetch'
 import { type HTTPGetResponse, type SWRServiceResponse } from '../../../shared/types/utils/service'
 import { type ClientBalancesModel, type ClientModel } from '../types/model/Client'
 import { type CurrencyTransactionModel } from '../types/model/Transaction'
@@ -13,8 +13,8 @@ export function getClientsService(
   return response
 }
 
-export function getClientService(id: string): SWRServiceResponse<ClientModel> {
-  const response = useFetch<HTTPGetResponse<ClientModel>>(`/clients/${id}`)
+export function getClientService(id: string): UseFetch<ClientModel, any> {
+  const response = useFetch<ClientModel>(`/clients/${id}`)
 
   return response
 }

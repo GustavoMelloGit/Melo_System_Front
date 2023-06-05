@@ -35,7 +35,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
   }
 
   const initialValues: BuyCoffeeFormValues = {
-    address: formatAddress(data?.data.address ?? {}),
+    address: formatAddress(data?.address ?? {}),
     coffeeType: 'bica_corrida',
     bags: 0,
     bebida: 'duro',

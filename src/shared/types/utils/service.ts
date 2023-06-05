@@ -14,18 +14,6 @@ export type DeleteServiceResponse = Promise<{
   error: string | null
 }>
 
-export type GetResponse<T> = Promise<{
-  data?: T
-  error?: string
-}>
-
-export type GetServiceResponse<T> = {
-  data?: T
-  error?: string
-  isLoading: boolean
-  total?: number
-}
-
 export type SWRServiceResponse<T> = UseFetch<HTTPGetResponse<T>, any>
 
 export type HTTPGetResponse<T> = {
