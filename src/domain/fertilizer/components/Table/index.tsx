@@ -42,23 +42,21 @@ export default FertilizerTable
 
 const headerColumns: TableHeaderColumns[] = [
   {
-    id: 'number',
-    label: 'Número',
-    isSortable: true,
-  },
-  {
     id: 'createdAt',
     label: 'Data de criação',
-    isSortable: true,
+  },
+  {
+    id: 'name',
+    label: 'Nome',
+  },
+  {
+    id: 'description',
+    label: 'Descrição',
   },
 ]
 
 const searchForOptions: SearchForOption = {
-  number: {
-    label: 'Número',
-    inputProps: {
-      type: 'number',
-      inputMode: 'numeric',
-    },
+  name: {
+    label: 'Nome',
   },
 }

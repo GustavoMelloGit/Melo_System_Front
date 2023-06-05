@@ -31,7 +31,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
         {client.name}
       </Td>
       <Td title={client.nickname} data-cy='table-cell-client-nickname'>
-        {client.nickname}
+        {client.nickname ?? '--'}
       </Td>
       <Td
         onClick={handleToggleBalance}
