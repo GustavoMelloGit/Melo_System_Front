@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   Heading,
   Modal,
   ModalBody,
@@ -69,22 +70,31 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   />
                 )}
               />
+              <Flex gap={2}>
+                <ControllerField<PickupFormValues>
+                  control={control}
+                  required
+                  name='bags'
+                  label='Sacos'
+                  type='number'
+                  min={1}
+                  inputMode='numeric'
+                  data-cy='bags-input'
+                />
+                <ControllerField<PickupFormValues>
+                  control={control}
+                  required
+                  name='brook'
+                  label='Córrego'
+                  data-cy='brook-input'
+                />
+              </Flex>
               <ControllerField<PickupFormValues>
                 control={control}
                 required
-                name='bags'
-                label='Sacos'
-                type='number'
-                min={1}
-                inputMode='numeric'
-                data-cy='bags-input'
-              />
-              <ControllerField<PickupFormValues>
-                control={control}
-                required
-                name='address'
-                label='Endereço'
-                data-cy='address-input'
+                name='complement'
+                label='Referência'
+                data-cy='complement-input'
               />
             </Stack>
             <Button

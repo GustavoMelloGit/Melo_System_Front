@@ -55,7 +55,8 @@ export default function PickupTableRow({
     <Tr>
       <Td data-cy='pickupCoffee-table-clientName'>{pickup.clientName}</Td>
       <Td data-cy='pickupCoffee-table-bags'>{pickup.bags}</Td>
-      <Td data-cy='pickupCoffee-table-address'>{pickup.address}</Td>
+      <Td data-cy='pickupCoffee-table-brook'>{pickup.brook}</Td>
+      <Td data-cy='pickupCoffee-table-complement'>{pickup.complement}</Td>
       <Td textAlign='center'>
         <TableEditButton
           aria-label='Editar pedido de coleta'

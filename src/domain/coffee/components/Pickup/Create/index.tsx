@@ -11,6 +11,7 @@ export default function CreateCoffeePickup({ onSuccess }: Props): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
 
   async function handleCreateCoffeePickup(values: PickupFormValues): Promise<void> {
+    console.log('oi')
     const { error } = await createPickupService({
       ...values,
       bags: Number(values.bags),
@@ -28,9 +29,10 @@ export default function CreateCoffeePickup({ onSuccess }: Props): JSX.Element {
     <CoffeePickupForm
       onSubmit={handleCreateCoffeePickup}
       initialValues={{
-        address: '',
         bags: 0,
         clientName: '',
+        brook: '',
+        complement: '',
       }}
     />
   )

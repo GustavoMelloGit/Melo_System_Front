@@ -25,11 +25,8 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
     if (data.data.length === 1) {
       const [client] = data.data
       const { address } = client
-      const valueOrUndefined = (value?: string): string => value ?? ''
-      const addressString = `${valueOrUndefined(address?.brook)} ${valueOrUndefined(
-        address?.street,
-      )} ${valueOrUndefined(address?.number)} ${valueOrUndefined(address?.complement)}`
-      form.setValue('address', addressString)
+      form.setValue('brook', address.brook ?? '')
+      form.setValue('complement', address.complement ?? '')
     }
   }, [data])
 
@@ -44,7 +41,8 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
 const validationSchema = yup.object().shape({
   clientName: yup.string().required(validationErrors.clientNameIsRequired),
   bags: yup.string().required(validationErrors.bagsIsRequired),
-  address: yup.string().required(validationErrors.addressIsRequired),
+  brook: yup.string().required(validationErrors.brookIsRequired),
+  complement: yup.string().required(validationErrors.complementIsRequired),
 })
 
 type UsePickupForm = {
