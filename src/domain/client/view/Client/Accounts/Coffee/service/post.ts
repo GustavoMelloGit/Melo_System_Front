@@ -34,7 +34,8 @@ type BuyCoffeeServiceValues = {
   coffeeType: CoffeeTypes
   weight: number
   value: number
-  address?: string
+  brook?: string
+  complement?: string
 }
 export async function buyCoffeeService({
   clientId,
