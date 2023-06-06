@@ -19,7 +19,7 @@ export type GetServiceResponse<T> = Promise<{
   error: string | null
 }>
 
-export type SWRServiceResponse<T> = UseFetch<HTTPGetResponse<T>, any>
+export type SWRServiceResponse<T> = UseFetch<T, any>
 
 export type HTTPGetResponse<T> = {
   data: T

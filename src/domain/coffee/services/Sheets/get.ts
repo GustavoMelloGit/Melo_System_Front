@@ -8,7 +8,7 @@ import { type SheetModel } from '../../types/model/sheet'
 export function getSheetsService(
   bookNumber: string | number | undefined,
   params?: string,
-): SWRServiceResponse<SheetModel[]> {
+): SWRServiceResponse<HTTPGetResponse<SheetModel[]>> {
   const response = useFetch<HTTPGetResponse<SheetModel[]>>(
     bookNumber ? `/sheets/${bookNumber}?${params ?? ''}` : null,
   )

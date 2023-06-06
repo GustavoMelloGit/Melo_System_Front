@@ -7,7 +7,7 @@ import { type CurrencyTransactionModel } from '../types/model/Transaction'
 export function getClientsService(
   params?: string,
   config?: SWRConfiguration,
-): SWRServiceResponse<ClientModel[]> {
+): SWRServiceResponse<HTTPGetResponse<ClientModel[]>> {
   const response = useFetch<HTTPGetResponse<ClientModel[]>>(`/clients?${params ?? ''}`, config)
 
   return response
@@ -22,7 +22,7 @@ export function getClientService(id: string): UseFetch<ClientModel, any> {
 export function getTransactionsService(
   clientId: string,
   params?: string,
-): SWRServiceResponse<CurrencyTransactionModel[]> {
+): SWRServiceResponse<HTTPGetResponse<CurrencyTransactionModel[]>> {
   const response = useFetch<HTTPGetResponse<CurrencyTransactionModel[]>>(
     `/transactions/currency/${clientId}?${params ?? ''}`,
   )
@@ -33,9 +33,7 @@ export function getTransactionsService(
 export function getClientBalancesService(
   clientId: string | undefined,
 ): SWRServiceResponse<ClientBalancesModel> {
-  const response = useFetch<HTTPGetResponse<ClientBalancesModel>>(
-    clientId ? `/clients/${clientId}/balances` : null,
-  )
+  const response = useFetch<ClientBalancesModel>(clientId ? `/clients/${clientId}/balances` : null)
 
   return response
 }
