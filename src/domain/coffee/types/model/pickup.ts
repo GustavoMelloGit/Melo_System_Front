@@ -1,15 +1,17 @@
 export type PickupCoffeeModel = {
   id: string
   clientName: string
-  address: string
   bags: number
+  brook: string
+  complement: string
   status: PickupCoffeeStatuses
 }
 
 export type PickupFormValues = {
   clientName: string
   bags: number
-  address: string
+  complement: string
+  brook: string
 }
 
 export enum PickupCoffeeStatuses {

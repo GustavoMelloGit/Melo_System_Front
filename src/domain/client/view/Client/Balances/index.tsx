@@ -28,7 +28,8 @@ type Props = {
   clientUuid: string | undefined
 }
 const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
-  const { data } = getClientBalancesService(clientUuid)
+  const { data: response } = getClientBalancesService(clientUuid)
+  const data = response?.data
   const closeModal = useModal((state) => state.closeModal)
   const displayData: Record<keyof ClientBalance, string> = {
     currency: 'Conta Corrente',

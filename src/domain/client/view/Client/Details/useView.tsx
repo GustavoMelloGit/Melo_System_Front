@@ -36,7 +36,7 @@ export default function useClientDetailsView(): UseClientDetailsView {
 type UseClientDetailsView = {
   client: ClientModel | undefined
   isLoading: boolean
-  mutate: KeyedMutator<ClientModel> | undefined
+  mutate: KeyedMutator<ClientModel>
   currentTab: number
   openClientInfoModal: () => void
   openClientBalancesModal: () => void

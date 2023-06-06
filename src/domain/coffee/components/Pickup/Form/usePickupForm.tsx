@@ -18,23 +18,20 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
     resolver: yupResolver(validationSchema),
   })
   const clientName = form.watch('clientName')
-  const { data: clients, isLoading } = getClientsService(`name=${clientName}`)
+  const { data, isLoading } = getClientsService(`name=${clientName}`)
 
   useEffect(() => {
-    if (!clients) return
-    if (clients.length === 1) {
-      const [client] = clients
+    if (!data) return
+    if (data.data.length === 1) {
+      const [client] = data.data
       const { address } = client
-      const valueOrUndefined = (value?: string): string => value ?? ''
-      const addressString = `${valueOrUndefined(address?.brook)} ${valueOrUndefined(
-        address?.street,
-      )} ${valueOrUndefined(address?.number)} ${valueOrUndefined(address?.complement)}`
-      form.setValue('address', addressString)
+      form.setValue('brook', address.brook ?? '')
+      form.setValue('complement', address.complement ?? '')
     }
-  }, [clients])
+  }, [data])
 
   return {
-    clients,
+    clients: data?.data,
     isLoading,
     closeModal,
     form,
@@ -44,7 +41,8 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
 const validationSchema = yup.object().shape({
   clientName: yup.string().required(validationErrors.clientNameIsRequired),
   bags: yup.string().required(validationErrors.bagsIsRequired),
-  address: yup.string().required(validationErrors.addressIsRequired),
+  brook: yup.string().required(validationErrors.brookIsRequired),
+  complement: yup.string().required(validationErrors.complementIsRequired),
 })
 
 type UsePickupForm = {

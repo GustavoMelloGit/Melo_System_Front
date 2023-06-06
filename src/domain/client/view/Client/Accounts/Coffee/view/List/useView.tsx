@@ -7,7 +7,7 @@ import { getCoffeeAccountService } from '../../service/get'
 export default function useCoffeeAccountView(): UseCoffeeAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { data, isLoading, total, mutate } = getCoffeeAccountService(uuid, params)
+  const { data, isLoading, mutate } = getCoffeeAccountService(uuid, params)
 
   async function handleOpenCreateCoffee(): Promise<void> {
     if (!uuid) return
@@ -31,9 +31,9 @@ export default function useCoffeeAccountView(): UseCoffeeAccountView {
   }
 
   return {
-    data: data ?? [],
+    data: data?.data ?? [],
     isLoading,
-    total: total ?? 0,
+    total: data?.total ?? 0,
     handleOpenCreateCoffee,
     handleOpenBuyCoffee,
   }

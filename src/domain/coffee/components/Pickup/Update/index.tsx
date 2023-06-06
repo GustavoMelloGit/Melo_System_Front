@@ -29,7 +29,8 @@ export default function UpdateCoffeePickup({ pickup, onSuccess }: Props): JSX.El
       initialValues={{
         clientName: pickup.clientName,
         bags: pickup.bags,
-        address: pickup.address,
+        brook: pickup.brook,
+        complement: pickup.complement,
       }}
     />
   )

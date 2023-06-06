@@ -1,7 +1,6 @@
 import {
   Button,
-  Grid,
-  GridItem,
+  Flex,
   Heading,
   Modal,
   ModalBody,
@@ -9,6 +8,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Stack,
   VStack,
 } from '@chakra-ui/react'
 import { Controller } from 'react-hook-form'
@@ -49,30 +49,28 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
             onSubmit={handleSubmit(onSubmit)}
             data-cy='pickupCoffee-form'
           >
-            <Grid templateColumns={['1fr', 'repeat(2, 1fr)']} gap={2}>
-              <GridItem>
-                <Controller
-                  name='clientName'
-                  control={control}
-                  render={({ field: { onChange, ...field } }) => (
-                    <AutocompleteInput
-                      label='Cliente'
-                      options={clients?.map((client) => ({
-                        label: `${
-                          client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
-                        }`,
-                        value: client.name,
-                      }))}
-                      isLoading={isLoading}
-                      handleChange={onChange}
-                      placeholder='Ex.: João da Silva'
-                      isRequired
-                      {...field}
-                    />
-                  )}
-                />
-              </GridItem>
-              <GridItem>
+            <Stack spacing={2} w='full'>
+              <Controller
+                name='clientName'
+                control={control}
+                render={({ field: { onChange, ...field } }) => (
+                  <AutocompleteInput
+                    label='Cliente'
+                    options={clients?.map((client) => ({
+                      label: `${
+                        client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
+                      }`,
+                      value: client.name,
+                    }))}
+                    isLoading={isLoading}
+                    handleChange={onChange}
+                    placeholder='Ex.: João da Silva'
+                    isRequired
+                    {...field}
+                  />
+                )}
+              />
+              <Flex gap={2}>
                 <ControllerField<PickupFormValues>
                   control={control}
                   required
@@ -83,17 +81,22 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   inputMode='numeric'
                   data-cy='bags-input'
                 />
-              </GridItem>
-              <GridItem colSpan={[1, 2]}>
                 <ControllerField<PickupFormValues>
                   control={control}
                   required
-                  name='address'
-                  label='Endereço'
-                  data-cy='address-input'
+                  name='brook'
+                  label='Córrego'
+                  data-cy='brook-input'
                 />
-              </GridItem>
-            </Grid>
+              </Flex>
+              <ControllerField<PickupFormValues>
+                control={control}
+                required
+                name='complement'
+                label='Referência'
+                data-cy='complement-input'
+              />
+            </Stack>
             <Button
               isLoading={isSubmitting}
               type='submit'

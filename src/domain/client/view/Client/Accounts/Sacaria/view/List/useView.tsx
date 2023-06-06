@@ -8,7 +8,7 @@ export default function useSacariaAccountView(): UseSacariaAccountView {
   const { uuid } = useParams()
   const openModal = useModal((state) => state.openModal)
   const params = useServiceParams()
-  const { data, isLoading, total, mutate } = getSacariaAccountService(uuid, params)
+  const { data, isLoading, mutate } = getSacariaAccountService(uuid, params)
 
   async function handleOpenCreate(): Promise<void> {
     if (!uuid) return
@@ -17,9 +17,9 @@ export default function useSacariaAccountView(): UseSacariaAccountView {
   }
 
   return {
-    data: data ?? [],
+    data: data?.data ?? [],
     isLoading,
-    total: total ?? 0,
+    total: data?.total ?? 0,
     handleCreate: handleOpenCreate,
   }
 }

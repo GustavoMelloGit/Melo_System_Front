@@ -58,12 +58,7 @@ export default function SheetForm({
       <Card>
         <CardBody>
           <Stack spacing={5}>
-            <SheetFormSheetDetails
-              isDisabled={isDisabled}
-              control={control}
-              register={register}
-              errors={formState.errors}
-            />
+            <SheetFormSheetDetails isDisabled={isDisabled} control={control} />
             <SheetFormCoffeeDetails
               isDisabled={isDisabled}
               watch={watch}

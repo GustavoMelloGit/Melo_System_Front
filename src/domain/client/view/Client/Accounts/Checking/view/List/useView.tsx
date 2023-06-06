@@ -9,7 +9,7 @@ export default function useListTransactionsView(): UseListTransactionsView {
   const openModal = useModal((state) => state.openModal)
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { isLoading, mutate, data, total } = getTransactionsService(uuid ?? '', params)
+  const { isLoading, mutate, data } = getTransactionsService(uuid ?? '', params)
 
   function refetchData(): void {
     void mutate?.()
@@ -20,9 +20,9 @@ export default function useListTransactionsView(): UseListTransactionsView {
   }
 
   return {
-    data: data ?? [],
+    data: data?.data ?? [],
     isLoading,
-    total: total ?? 0,
+    total: data?.total ?? 0,
     handleAddTransaction,
     refetchData,
   }

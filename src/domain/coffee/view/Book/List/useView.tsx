@@ -12,7 +12,7 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
   const navigate = useNavigate()
   const { allSearchParams } = useURLSearchParams()
   const params = useServiceParams()
-  const { data, isLoading, error, total, mutate } = getBooksService(
+  const { data, isLoading, error, mutate } = getBooksService(
     params || getDefaultSortParams('number'),
   )
   const openModal = useModal((state) => state.openModal)
@@ -24,17 +24,17 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
 
   useEffect(() => {
     const latest = allSearchParams.latest
-    if (latest === 'true' && data?.length) {
-      const latestBook = data[0]
+    if (latest === 'true' && data?.data?.length) {
+      const latestBook = data?.data[0]
       navigate(Routes.bookPage(latestBook.number))
     }
   }, [allSearchParams, data])
 
   return {
-    data,
+    data: data?.data,
     isLoading,
     error,
-    total: total ?? 0,
+    total: data?.total ?? 0,
     openCreateBookModal,
   }
 }

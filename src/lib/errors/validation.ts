@@ -42,6 +42,8 @@ const validationErrors = {
   valuePerBagIsInvalid: 'Por favor, informe um valor por saca válido',
   minIsInvalid: (min: number | string) => `Por favor, informe um valor maior ou igual a ${min}`,
   maxIsInvalid: (max: number | string) => `Por favor, informe um valor menor ou igual a ${max}`,
+  brookIsRequired: 'Por favor, informe o córrego',
+  complementIsRequired: 'Por favor, informe o complemento',
 }
 
 export default validationErrors

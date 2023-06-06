@@ -10,7 +10,7 @@ type Props = {
 }
 export default function useCreateBookView({ refetch }: Props): UseCreateBookView {
   const closeModal = useModal((state) => state.closeModal)
-  const { data: lastBook } = getBooksService(
+  const { data } = getBooksService(
     `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&${PaginationParams.rowsPerPage}=1`,
   )
 
@@ -27,7 +27,7 @@ export default function useCreateBookView({ refetch }: Props): UseCreateBookView
 
   return {
     handleCreateBook,
-    lastBookNumber: lastBook?.[0]?.number ?? 0,
+    lastBookNumber: data?.data?.[0]?.number ?? 0,
   }
 }
 

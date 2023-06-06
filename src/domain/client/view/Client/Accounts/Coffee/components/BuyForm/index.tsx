@@ -42,8 +42,10 @@ const validationSchema = yup.object().shape({
     .number()
     .typeError(validationErrors.valuePerBagIsInvalid)
     .required(validationErrors.valuePerBagIsRequired),
-  address: yup.string(),
+  brook: yup.string(),
+  complement: yup.string(),
 })
+
 type Props = {
   onSubmit: (values: BuyCoffeeFormValues) => void
   initialValues: BuyCoffeeFormValues
@@ -61,11 +63,10 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const totalValue = calculateCoffeeTotalValue(currentBags, currentWeight, currentValuePerBag)
   return (
     <form
-      onSubmit={handleSubmit(({ valuePerBag, address, ...values }) => {
+      onSubmit={handleSubmit(({ valuePerBag, ...values }) => {
         onSubmit({
           ...values,
           valuePerBag: valuePerBag * 100,
-          address: pickupCoffee ? address : '',
         })
       })}
     >
@@ -145,7 +146,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
             />
           </FormControl>
         </GridItem>
-        <GridItem>
+        <GridItem colSpan={2}>
           <Checkbox
             isChecked={pickupCoffee}
             onChange={(e) => {
@@ -155,12 +156,20 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
             Café a buscar
           </Checkbox>
         </GridItem>
-        <GridItem colSpan={2} display='flex'>
+        <GridItem display='flex'>
           <ControllerField<BuyCoffeeFormValues>
             control={control}
-            name='address'
+            name='brook'
             isDisabled={!pickupCoffee}
-            label='Endereço'
+            label='Córrego'
+          />
+        </GridItem>
+        <GridItem display='flex'>
+          <ControllerField<BuyCoffeeFormValues>
+            control={control}
+            name='complement'
+            isDisabled={!pickupCoffee}
+            label='Referência'
           />
         </GridItem>
       </Grid>
