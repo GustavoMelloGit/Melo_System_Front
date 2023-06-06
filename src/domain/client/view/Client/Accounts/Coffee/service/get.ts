@@ -8,7 +8,7 @@ import { type CoffeeTransactionModel } from '../../../../../types/model/Transact
 export function getCoffeeAccountService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<CoffeeTransactionModel[]> {
+): SWRServiceResponse<HTTPGetResponse<CoffeeTransactionModel[]>> {
   const response = useFetch<HTTPGetResponse<CoffeeTransactionModel[]>>(
     clientId ? `/transactions/coffee/${clientId}?${params ?? ''}` : null,
   )

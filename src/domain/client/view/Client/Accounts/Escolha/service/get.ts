@@ -8,7 +8,7 @@ import { type EscolhaTransactionModel } from '../../../../../types/model/Transac
 export function getEscolhaAccountService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<EscolhaTransactionModel[]> {
+): SWRServiceResponse<HTTPGetResponse<EscolhaTransactionModel[]>> {
   const response = useFetch<HTTPGetResponse<EscolhaTransactionModel[]>>(
     clientId ? `/transactions/escolha/${clientId}?${params ?? ''}` : null,
   )

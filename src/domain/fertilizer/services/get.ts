@@ -6,7 +6,7 @@ import { type FertilizerModel } from '../types/model/Fertilizer'
 export function getFertilizersService(
   params?: string,
   config?: SWRConfiguration,
-): SWRServiceResponse<FertilizerModel[]> {
+): SWRServiceResponse<HTTPGetResponse<FertilizerModel[]>> {
   const response = useFetch<HTTPGetResponse<FertilizerModel[]>>(
     `/fertilizers?${params ?? ''}`,
     config,

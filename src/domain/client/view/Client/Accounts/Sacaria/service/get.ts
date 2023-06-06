@@ -8,7 +8,7 @@ import { type SacariaTransactionModel } from '../../../../../types/model/Transac
 export function getSacariaAccountService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<SacariaTransactionModel[]> {
+): SWRServiceResponse<HTTPGetResponse<SacariaTransactionModel[]>> {
   const response = useFetch<HTTPGetResponse<SacariaTransactionModel[]>>(
     clientId ? `/transactions/bags/${clientId}?${params ?? ''}` : null,
   )
