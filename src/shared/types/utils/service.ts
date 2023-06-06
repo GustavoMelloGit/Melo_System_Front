@@ -14,6 +14,11 @@ export type DeleteServiceResponse = Promise<{
   error: string | null
 }>
 
+export type GetServiceResponse<T> = Promise<{
+  data: T | null
+  error: string | null
+}>
+
 export type SWRServiceResponse<T> = UseFetch<HTTPGetResponse<T>, any>
 
 export type HTTPGetResponse<T> = {

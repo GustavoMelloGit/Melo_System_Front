@@ -26,7 +26,7 @@ export default function useUpdateClientView(): UseUpdateClientView {
   }
   return {
     handleUpdateClient,
-    initialValues: data?.data ?? emptyClient,
+    initialValues: data ?? emptyClient,
     isLoading,
   }
 }

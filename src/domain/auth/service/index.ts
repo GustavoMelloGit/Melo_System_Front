@@ -1,6 +1,9 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/error'
-import { type GetResponse, type PostServiceResponse } from '../../../shared/types/utils/service'
+import {
+  type GetServiceResponse,
+  type PostServiceResponse,
+} from '../../../shared/types/utils/service'
 import { type SignInValues } from '../types'
 import { type AuthContextType } from '../types/context/auth'
 
@@ -23,17 +26,17 @@ export async function signInService(values: SignInValues): PostServiceResponse<{
   }
 }
 
-export async function verifyTokenService(): GetResponse<boolean> {
+export async function verifyTokenService(): GetServiceResponse<void> {
   try {
     const { data } = await api.get('/verify')
 
     return {
       data,
-      error: undefined,
+      error: null,
     }
   } catch (e) {
     return {
-      data: undefined,
+      data: null,
       error: errorHandler(e),
     }
   }

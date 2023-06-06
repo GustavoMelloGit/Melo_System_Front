@@ -33,13 +33,13 @@ export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): 
 
   const initialValues: SheetFormValues = data
     ? {
-        clientId: data.data.clientId,
-        coffeeDetails: data.data.coffeeDetails,
-        courier: data.data.courier,
-        weighingDate: new Date(data.data.weighingDate).toISOString().split('T')[0],
-        isDraft: data.data.isDraft,
-        lines: data.data.lines,
-        number: data.data.number,
+        clientId: data.clientId,
+        coffeeDetails: data.coffeeDetails,
+        courier: data.courier,
+        weighingDate: new Date(data.weighingDate).toISOString().split('T')[0],
+        isDraft: data.isDraft,
+        lines: data.lines,
+        number: data.number,
       }
     : ({
         number: 0,
