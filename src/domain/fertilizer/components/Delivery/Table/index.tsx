@@ -29,7 +29,7 @@ export default function DeliveryTable({
       rows={{
         isLoading,
         dataLength: data?.length ?? 0,
-        noDataMessage: 'Nenhum café encontrado',
+        noDataMessage: 'Nenhum adubo a entregar',
       }}
       pagination={{
         totalLength: totalPickups,
