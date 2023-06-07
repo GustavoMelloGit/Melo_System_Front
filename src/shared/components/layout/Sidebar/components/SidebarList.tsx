@@ -2,7 +2,7 @@ import { Box, List, VStack } from '@chakra-ui/react'
 import { BiUser } from 'react-icons/bi'
 import { BsTruck } from 'react-icons/bs'
 import { MdOutlineMonitorWeight } from 'react-icons/md'
-import { TbPlant } from 'react-icons/tb'
+import { TbPlant, TbTruckLoading } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { protectedRoutes } from '../../../../../lib/routes/router'
@@ -25,13 +25,17 @@ const listItem: Record<
     label: 'Adubos',
     icon: <TbPlant />,
   },
-  [Routes.coffeePickups]: {
-    label: 'Cafés a buscar',
-    icon: <BsTruck />,
-  },
   [Routes.books]: {
     label: 'Pesagem',
     icon: <MdOutlineMonitorWeight size={20} />,
+  },
+  [Routes.fertilizersDelivery]: {
+    label: 'Adubos a Entregar',
+    icon: <TbTruckLoading />,
+  },
+  [Routes.coffeePickups]: {
+    label: 'Cafés a Buscar',
+    icon: <BsTruck />,
   },
 }
 

@@ -1,7 +1,7 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
-import TableButton from '../../../../shared/components/table/buttons'
-import { type FertilizerModel } from '../../types/model/Fertilizer'
+import TableButton from '../../../../../shared/components/table/buttons'
+import { type FertilizerModel } from '../../../types/model/Fertilizer'
 
 type Props = {
   fertilizer: FertilizerModel
