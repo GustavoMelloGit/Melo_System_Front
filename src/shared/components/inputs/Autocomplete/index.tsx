@@ -13,7 +13,7 @@ import { forwardRef, useEffect, useRef, type ChangeEvent } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 import OptionsBox from './Options'
 import { type Option } from './types'
-import { useAutocompleteStore } from './useAutocomplete'
+import useAutocomplete from './useView'
 
 type Props = InputProps & {
   label?: string
@@ -29,15 +29,11 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
     forwardRef,
   ): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
-    const {
-      setInputValue,
-      setShowOptions,
-      selectOption,
-      inputValue,
-      resetState,
-      setOptions,
-      options: storedOptions,
-    } = useAutocompleteStore()
+    const [state, actions] = useAutocomplete()
+    const { inputValue, options: storedOptions, showOptions } = state
+    const { setInputValue, setShowOptions, selectOption, resetState, setOptions } = actions
+    console.log('state', state)
+
     useOutsideClick({
       ref,
       handler: () => {
@@ -123,7 +119,9 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
             </Button>
           </InputRightElement>
         </InputGroup>
-        {storedOptions && storedOptions.length > 0 && <OptionsBox onSelect={handleOnSelect} />}
+        {storedOptions && storedOptions.length > 0 && (
+          <OptionsBox onSelect={handleOnSelect} options={storedOptions} showOptions={showOptions} />
+        )}
       </FormControl>
     )
   },
