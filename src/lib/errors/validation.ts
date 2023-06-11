@@ -44,6 +44,9 @@ const validationErrors = {
   maxIsInvalid: (max: number | string) => `Por favor, informe um valor menor ou igual a ${max}`,
   brookIsRequired: 'Por favor, informe o córrego',
   complementIsRequired: 'Por favor, informe o complemento',
+  fertilizerIsRequired: 'Por favor, informe o adubo',
+  amountIsRequired: 'Por favor, informe a quantidade',
+  amountIsInvalid: 'Por favor, informe uma quantidade válida',
 }
 
 export default validationErrors

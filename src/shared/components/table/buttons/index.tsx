@@ -1,5 +1,6 @@
 import { IconButton, type IconButtonProps } from '@chakra-ui/react'
 import { useState, type MouseEvent } from 'react'
+import { AiOutlinePrinter } from 'react-icons/ai'
 import { BsCheckCircle, BsTrash } from 'react-icons/bs'
 import { IoAddOutline } from 'react-icons/io5'
 import { RiExchangeDollarLine } from 'react-icons/ri'
@@ -12,6 +13,7 @@ const buttonIcons = {
   remove: <BsTrash size={18} />,
   exchangeDollar: <RiExchangeDollarLine size={20} />,
   shopCart: <TbShoppingCart size={21} />,
+  printer: <AiOutlinePrinter size={22} />,
 }
 
 type Props = Omit<IconButtonProps, 'icon'> & {

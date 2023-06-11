@@ -1,11 +1,11 @@
 import { toast } from 'react-hot-toast'
-import Table from '../../../../shared/components/table/Table'
+import Table from '../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
-} from '../../../../shared/components/table/types'
-import { deleteFertilizerService } from '../../services/delete'
-import { type FertilizerModel } from '../../types/model/Fertilizer'
+} from '../../../../../shared/components/table/types'
+import { deleteFertilizerService } from '../../../services/delete'
+import { type FertilizerModel } from '../../../types/model/Fertilizer'
 import FertilizerTableRow from './Row'
 
 type Props = {
