@@ -1,10 +1,10 @@
 import { Flex, VStack } from '@chakra-ui/react'
-import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
-import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
-import Page from '../../../../shared/components/Page'
-import TableButton from '../../../../shared/components/table/buttons'
-import DeliveryTable from '../../components/Delivery/Table'
-import { FertilizerDeliveryStatuses } from '../../types/model/Delivery'
+import SwitchLabeled from '../../../../../shared/components/inputs/SwitchLabeled'
+import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import Page from '../../../../../shared/components/Page'
+import TableButton from '../../../../../shared/components/table/buttons'
+import DeliveryTable from '../../../components/Delivery/Table'
+import { FertilizerDeliveryStatuses } from '../../../types/model/Delivery'
 import useFertilizerDeliveryView from './useView'
 
 export default function FertilizerDeliveryView(): JSX.Element {
@@ -16,6 +16,8 @@ export default function FertilizerDeliveryView(): JSX.Element {
     handleOpenUpdateForm,
     handleCheckPickup,
     handleUncheckPickup,
+    handleOpenCreateDeliveryForm,
+    handleDownloadPDF,
   } = useFertilizerDeliveryView()
 
   return (
@@ -36,6 +38,7 @@ export default function FertilizerDeliveryView(): JSX.Element {
               variant='outline'
               data-cy='download-fertilizerDelivery-button'
               title='Baixar lista de entrega'
+              onClick={handleDownloadPDF}
             />
             <TableButton
               aria-label='Adicionar café a buscar'
@@ -44,6 +47,7 @@ export default function FertilizerDeliveryView(): JSX.Element {
               variant='outline'
               data-cy='add-fertilizerDelivery-button'
               title='Adicionar café a buscar'
+              onClick={handleOpenCreateDeliveryForm}
             />
           </Flex>
         }

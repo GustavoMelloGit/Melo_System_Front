@@ -7,9 +7,9 @@ type Props = {
   data: FertilizerDeliveryModel[] | undefined
   isLoading: boolean
   totalPickups: number
-  onClickUpdate: (pickup: FertilizerDeliveryModel) => Promise<void>
-  onClickCheck: (pickup: FertilizerDeliveryModel) => Promise<void>
-  onClickUncheck: (pickup: FertilizerDeliveryModel) => Promise<void>
+  onClickUpdate: (delivery: FertilizerDeliveryModel) => Promise<void>
+  onClickCheck: (delivery: FertilizerDeliveryModel) => Promise<void>
+  onClickUncheck: (delivery: FertilizerDeliveryModel) => Promise<void>
   variant?: 'completed' | 'pending'
 }
 export default function DeliveryTable({
@@ -55,7 +55,7 @@ export default function DeliveryTable({
 const headerColumns: TableHeaderColumns[] = [
   { id: 'clientName', label: 'Nome do cliente', isSortable: true },
   { id: 'bags', label: 'Adubo', isSortable: true },
-  { id: 'bags', label: 'Quantidade', isSortable: true },
+  { id: 'amount', label: 'Quantidade', isSortable: true },
   { id: 'brook', label: 'Córrego', isSortable: true },
   { id: 'complement', label: 'Referência' },
   { id: 'actions', label: 'Ações', align: 'center' },

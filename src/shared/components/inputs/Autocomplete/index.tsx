@@ -32,7 +32,6 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
     const [state, actions] = useAutocomplete()
     const { inputValue, options: storedOptions, showOptions } = state
     const { setInputValue, setShowOptions, selectOption, resetState, setOptions } = actions
-    console.log('state', state)
 
     useOutsideClick({
       ref,
