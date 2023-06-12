@@ -46,7 +46,7 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
     >
       {data?.map((fertilizer) => (
         <FertilizerTableRow
-          key={fertilizer.name}
+          key={fertilizer.id}
           fertilizer={fertilizer}
           onClickDelete={handleDeleteFertilizer}
         />
