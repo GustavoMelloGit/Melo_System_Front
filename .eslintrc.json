@@ -19,7 +19,8 @@
     "@typescript-eslint/return-await": "off",
     "react/display-name": "off",
     "@typescript-eslint/consistent-type-assertions": "off",
-    "no-new": "off"
+    "no-new": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn"
   },
   "ignorePatterns": ["cypress"],
   "parser": "@typescript-eslint/parser",

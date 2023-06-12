@@ -35,7 +35,7 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete }: Props): JSX.Element =
         maxW={400}
       >
         <Collapse startingHeight={20} in={showText}>
-          {fertilizer.description ?? '--'}
+          {fertilizer.description || '--'}
         </Collapse>
       </Td>
       <Td textAlign='center'>
