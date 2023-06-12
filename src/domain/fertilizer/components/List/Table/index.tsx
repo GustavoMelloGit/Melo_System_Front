@@ -4,6 +4,7 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
+import { useModal } from '../../../../../shared/hooks/useModal'
 import { deleteFertilizerService } from '../../../services/delete'
 import { type FertilizerModel } from '../../../types/model/Fertilizer'
 import FertilizerTableRow from './Row'
@@ -15,6 +16,7 @@ type Props = {
   refetch: () => void
 }
 const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Element => {
+  const openModal = useModal((state) => state.openModal)
   async function handleDeleteFertilizer(id: string): Promise<void> {
     const { error } = await deleteFertilizerService(id)
     if (error) {
@@ -24,6 +26,11 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
     toast.success('Adubo deletado com sucesso!')
     refetch()
   }
+  async function handleCreditFertilizer(fertilizer: FertilizerModel): Promise<void> {
+    const CreditFertilizer = (await import('../Credit')).default
+    openModal(<CreditFertilizer fertilizer={fertilizer} refetch={refetch} />)
+  }
+
   return (
     <Table
       header={{
@@ -46,9 +53,10 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
     >
       {data?.map((fertilizer) => (
         <FertilizerTableRow
-          key={fertilizer.name}
+          key={fertilizer.id}
           fertilizer={fertilizer}
           onClickDelete={handleDeleteFertilizer}
+          onClickCredit={handleCreditFertilizer}
         />
       ))}
     </Table>
@@ -64,6 +72,11 @@ const headerColumns: TableHeaderColumns[] = [
   {
     id: 'name',
     label: 'Nome',
+  },
+  {
+    id: 'quantity',
+    label: 'Quantidade',
+    textAlign: 'center',
   },
   {
     id: 'description',
