@@ -11,7 +11,7 @@ export async function fertilizerDeliveryDoneService(
   id: string,
 ): PutServiceResponse<FertilizerDeliveryModel> {
   try {
-    const { data } = await api.put(`/orders/${id}`, {
+    const { data } = await api.put(`/fertilizers/delivery/${id}`, {
       status: FertilizerDeliveryStatuses.COMPLETED,
     })
 
@@ -31,7 +31,7 @@ export async function fertilizerDeliveryCancelService(
   id: string,
 ): PutServiceResponse<FertilizerDeliveryModel> {
   try {
-    const { data } = await api.put(`/orders/${id}`, {
+    const { data } = await api.put(`/fertilizers/delivery/${id}`, {
       status: FertilizerDeliveryStatuses.CANCELLED,
     })
 
