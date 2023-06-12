@@ -47,6 +47,8 @@ const validationErrors = {
   fertilizerIsRequired: 'Por favor, informe o adubo',
   amountIsRequired: 'Por favor, informe a quantidade',
   amountIsInvalid: 'Por favor, informe uma quantidade válida',
+  quantityIsRequired: 'Por favor, informe a quantidade',
+  quantityIsInvalid: 'Por favor, informe uma quantidade válida',
 }
 
 export default validationErrors

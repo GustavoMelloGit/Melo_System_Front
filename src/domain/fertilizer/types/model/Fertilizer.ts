@@ -2,11 +2,13 @@ import { type Timestamp, type WithId } from '../../../../shared/types/utils/mode
 
 export type FertilizerModel = WithId<{
   name: string
+  quantity: number
   description?: string
 }> &
   Timestamp
 
 export type FertilizerFormValues = {
   name: string
+  quantity: number
   description?: string
 }

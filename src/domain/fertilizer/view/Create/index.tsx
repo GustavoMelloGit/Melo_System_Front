@@ -31,6 +31,7 @@ const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
           <FertilizerForm
             initialValues={{
               name: '',
+              quantity: 0,
               description: '',
             }}
             onSubmit={handleAddFertilizer}

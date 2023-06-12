@@ -1,4 +1,4 @@
-import { Button, Stack, Textarea } from '@chakra-ui/react'
+import { Button, Flex, Stack, Textarea } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -11,6 +11,10 @@ const validationSchema = yup.object().shape({
     .string()
     .required(validationErrors.nameIsRequired)
     .typeError(validationErrors.nameIsRequired),
+  quantity: yup
+    .number()
+    .required(validationErrors.quantityIsRequired)
+    .typeError(validationErrors.quantityIsRequired),
   description: yup.string(),
 })
 
@@ -28,15 +32,33 @@ export default function FertilizerForm({ initialValues, onSubmit }: Props): JSX.
     resolver: yupResolver(validationSchema),
   })
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(async (values) =>
+        onSubmit({
+          ...values,
+          quantity: Number(values.quantity),
+        }),
+      )}
+    >
       <Stack spacing={3}>
-        <ControllerField
-          control={control}
-          name='name'
-          label='Nome'
-          required
-          placeholder='Insira o nome'
-        />
+        <Flex gap={3}>
+          <ControllerField
+            control={control}
+            name='name'
+            label='Nome'
+            required
+            placeholder='Insira o nome'
+          />
+          <ControllerField
+            control={control}
+            name='quantity'
+            label='Quantidade'
+            required
+            placeholder='Insira a quantidade'
+            type='number'
+            inputMode='numeric'
+          />
+        </Flex>
         <ControllerField
           control={control}
           name='description'
