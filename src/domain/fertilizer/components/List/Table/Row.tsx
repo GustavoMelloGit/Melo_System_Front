@@ -1,4 +1,4 @@
-import { Collapse, Td, Tr } from '@chakra-ui/react'
+import { Collapse, Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { getColorByValue } from '../../../../../lib/utils/styles'
@@ -8,8 +8,9 @@ import { type FertilizerModel } from '../../../types/model/Fertilizer'
 type Props = {
   fertilizer: FertilizerModel
   onClickDelete: (id: string) => Promise<void>
+  onClickCredit: (fertilizer: FertilizerModel) => Promise<void>
 }
-const FertilizerTableRow = ({ fertilizer, onClickDelete }: Props): JSX.Element => {
+const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX.Element => {
   const [showText, setShowText] = useState(false)
   return (
     <Tr>
@@ -38,13 +39,23 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete }: Props): JSX.Element =
           {fertilizer.description || '--'}
         </Collapse>
       </Td>
-      <Td textAlign='center'>
-        <TableButton
-          aria-label='Deletar adubo'
-          icon='remove'
-          colorScheme='red'
-          onClick={async () => onClickDelete(fertilizer.id)}
-        />
+      <Td>
+        <Flex justify='center' gap={1}>
+          <TableButton
+            aria-label='Definir quantidade'
+            title='Definir quantidade'
+            icon='add'
+            colorScheme='blue'
+            onClick={async () => onClickCredit(fertilizer)}
+          />
+          <TableButton
+            aria-label='Deletar adubo'
+            title='Deletar adubo'
+            icon='remove'
+            colorScheme='red'
+            onClick={async () => onClickDelete(fertilizer.id)}
+          />
+        </Flex>
       </Td>
     </Tr>
   )

@@ -6,6 +6,7 @@ import {
   type FertilizerDeliveryFormValues,
   type FertilizerDeliveryModel,
 } from '../types/model/Delivery'
+import { type FertilizerModel } from '../types/model/Fertilizer'
 
 export async function fertilizerDeliveryDoneService(
   id: string,
@@ -34,6 +35,25 @@ export async function fertilizerDeliveryCancelService(
     const { data } = await api.put(`/fertilizers/delivery/${id}`, {
       status: FertilizerDeliveryStatuses.CANCELLED,
     })
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      error: errorHandler(e),
+      data: null,
+    }
+  }
+}
+
+export async function updateFertilizerService(
+  id: string,
+  value: Partial<FertilizerModel>,
+): PutServiceResponse<FertilizerModel> {
+  try {
+    const { data } = await api.put(`/fertilizers/${id}`, value)
 
     return {
       data,
