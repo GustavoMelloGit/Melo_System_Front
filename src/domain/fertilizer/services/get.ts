@@ -25,7 +25,7 @@ export function getFertilizersService(
 
 export async function getFertilizerByNameService(
   name: string,
-): Promise<GetServiceResponse<FertilizerModel>> {
+): GetServiceResponse<FertilizerModel> {
   try {
     const response = await api.get<HTTPGetResponse<FertilizerModel[]>>(`/fertilizers?name=${name}`)
     const sameNameFertilizers = response.data.data.filter((fertilizer) => fertilizer.name === name)
