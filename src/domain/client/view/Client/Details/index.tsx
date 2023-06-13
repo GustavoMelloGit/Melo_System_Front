@@ -12,7 +12,6 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react'
-import { lazy } from 'react'
 import { toast } from 'react-hot-toast'
 import { BiDollarCircle } from 'react-icons/bi'
 import { IoDocumentTextOutline } from 'react-icons/io5'
@@ -22,12 +21,12 @@ import InDevelopmentTag from '../../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
+import ListTransactionsView from '../Accounts/Checking/view/List'
+import CoffeeAccountView from '../Accounts/Coffee/view/List'
+import EscolhaAccountView from '../Accounts/Escolha/view/List'
+import FertilizerAccountView from '../Accounts/Fertilizer/view/List'
+import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import useClientDetailsView from './useView'
-const SacariaAccountView = lazy(async () => import('../Accounts/Sacaria/view/List'))
-const AduboAccountView = lazy(async () => import('../Accounts/Fertilizer/view/List'))
-const EscolhaAccountView = lazy(async () => import('../Accounts/Escolha/view/List'))
-const CoffeeAccountView = lazy(async () => import('../Accounts/Coffee/view/List'))
-const ListTransactionsView = lazy(async () => import('../Accounts/Checking/view/List'))
 
 export default function ClientDetails(): JSX.Element {
   const { client, isLoading, currentTab, openClientInfoModal, openClientBalancesModal } =
@@ -172,7 +171,7 @@ export default function ClientDetails(): JSX.Element {
                 <SacariaAccountView />
               </TabPanel>
               <TabPanel px={0}>
-                <AduboAccountView />
+                <FertilizerAccountView />
               </TabPanel>
             </TabPanels>
           </Tabs>
