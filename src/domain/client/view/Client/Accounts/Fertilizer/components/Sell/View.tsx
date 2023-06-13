@@ -39,12 +39,12 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
     defaultValues: initialValues,
   })
   const [shouldDelivery, setShouldDelivery] = useState<boolean>(false)
-  const fertilizerId = watch('fertilizerId')
+  const fertilizerName = watch('fertilizerName')
   const pricePerBag = watch('pricePerBag')
   const bags = watch('bags')
 
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
-    `name=${fertilizerId}`,
+    `name=${fertilizerName}`,
   )
   return (
     <Modal isOpen isCentered onClose={onClose}>
@@ -68,14 +68,14 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
           >
             <Stack spacing={4}>
               <Controller
-                name='fertilizerId'
+                name='fertilizerName'
                 control={control}
                 render={({ field: { onChange, ...field } }) => (
                   <AutocompleteInput
                     label='Adubo'
                     options={fertilizers?.data?.map((fertilizer) => ({
                       label: fertilizer.name,
-                      value: fertilizer.id,
+                      value: fertilizer.name,
                     }))}
                     isLoading={isLoadingFertilizers}
                     handleChange={onChange}

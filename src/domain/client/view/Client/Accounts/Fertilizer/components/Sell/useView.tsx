@@ -1,4 +1,5 @@
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { getFertilizerByNameService } from '../../../../../../../fertilizer/services/get'
 import { type SellFertilizerFormValues } from './types'
 
 const useSellFertilizerView = (): UseSellFertilizerView => {
@@ -8,6 +9,8 @@ const useSellFertilizerView = (): UseSellFertilizerView => {
     clientId: string,
     values: SellFertilizerFormValues,
   ): Promise<void> {
+    const fertilizer = await getFertilizerByNameService(values.fertilizerName)
+    console.log('fertilizer', fertilizer)
     console.log(clientId, values)
   }
 

@@ -10,7 +10,7 @@ const SellFertilizer = ({ refetch }: Props): JSX.Element => {
     <SellFertilizerView
       onClose={closeModal}
       initialValues={{
-        fertilizerId: '',
+        fertilizerName: '',
         bags: 0,
         pricePerBag: 0,
         brook: '',

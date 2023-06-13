@@ -1,5 +1,5 @@
 export type SellFertilizerFormValues = {
-  fertilizerId: string
+  fertilizerName: string
   bags: number
   pricePerBag: number
   brook?: string
