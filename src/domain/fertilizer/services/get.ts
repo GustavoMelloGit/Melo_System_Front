@@ -1,8 +1,13 @@
 import { type AxiosResponse } from 'axios'
 import { type SWRConfiguration } from 'swr'
 import api from '../../../lib/config/api'
+import { errorHandler } from '../../../lib/utils/error'
 import useFetch from '../../../shared/hooks/useFetch'
-import { type HTTPGetResponse, type SWRServiceResponse } from '../../../shared/types/utils/service'
+import {
+  type GetServiceResponse,
+  type HTTPGetResponse,
+  type SWRServiceResponse,
+} from '../../../shared/types/utils/service'
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerModel } from '../types/model/Fertilizer'
 
@@ -16,6 +21,24 @@ export function getFertilizersService(
   )
 
   return response
+}
+
+export async function getFertilizerByNameService(
+  name: string,
+): GetServiceResponse<FertilizerModel> {
+  try {
+    const response = await api.get<HTTPGetResponse<FertilizerModel[]>>(`/fertilizers?name=${name}`)
+    const sameNameFertilizers = response.data.data.filter((fertilizer) => fertilizer.name === name)
+    return {
+      data: sameNameFertilizers[0],
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
 }
 
 export function getFertilizersDeliveryService(

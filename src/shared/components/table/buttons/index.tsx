@@ -3,6 +3,7 @@ import { useState, type MouseEvent } from 'react'
 import { AiOutlinePrinter } from 'react-icons/ai'
 import { BsCheckCircle, BsTrash } from 'react-icons/bs'
 import { IoAddOutline } from 'react-icons/io5'
+import { MdOutlineSell } from 'react-icons/md'
 import { RiExchangeDollarLine } from 'react-icons/ri'
 import { TbShoppingCart } from 'react-icons/tb'
 import { isAsyncFunction } from '../../../types/utils/typeGuards'
@@ -14,6 +15,7 @@ const buttonIcons = {
   exchangeDollar: <RiExchangeDollarLine size={20} />,
   shopCart: <TbShoppingCart size={21} />,
   printer: <AiOutlinePrinter size={22} />,
+  sell: <MdOutlineSell size={22} />,
 }
 
 type Props = Omit<IconButtonProps, 'icon'> & {

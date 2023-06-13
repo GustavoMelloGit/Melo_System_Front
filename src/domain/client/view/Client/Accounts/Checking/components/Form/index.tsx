@@ -30,7 +30,7 @@ export default function CheckingAccountForm({
   const [isDebit, setIsDebit] = useState<boolean>(true)
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
     control,
   } = useForm<CheckingAccountFormValues>({
     defaultValues: initialValues,
@@ -75,7 +75,6 @@ export default function CheckingAccountForm({
               name='value'
               label='Valor'
               control={control}
-              errors={errors}
               leftIcon='R$'
               isRequired
               color={isDebit ? 'red.400' : 'green.500'}
