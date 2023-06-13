@@ -13,7 +13,6 @@ import {
 import { useState } from 'react'
 import {
   Controller,
-  get,
   type Control,
   type FieldValues,
   type Path,
@@ -24,7 +23,6 @@ export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
   rules?: RegisterOptions
   control: Control<TFormValues, any>
-  errors?: unknown
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   label?: string
@@ -35,7 +33,6 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
   name,
   rules,
   control,
-  errors,
   leftIcon,
   rightIcon,
   label,
@@ -44,8 +41,6 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element {
   const [inputValue, setInputValue] = useState<number>(0)
-  const errorMessages = get(errors, name)
-  const hasError = !!(errors && errorMessages)
 
   function formatCurrency(value: string): string {
     const options = { minimumFractionDigits: 2 }
@@ -65,8 +60,8 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
       name={name}
       control={control}
       rules={rules}
-      render={({ field: { onChange, value, ...field } }) => (
-        <FormControl isInvalid={hasError}>
+      render={({ field: { onChange, value, ...field }, fieldState: { invalid, error } }) => (
+        <FormControl isInvalid={invalid}>
           {label && (
             <FormLabel>
               {label}
@@ -96,7 +91,7 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
             />
             {rightIcon && <InputRightElement>{rightIcon}</InputRightElement>}
           </InputGroup>
-          {errorMessages && <FormErrorMessage>{errorMessages.message}</FormErrorMessage>}
+          {error?.message && <FormErrorMessage>{error.message}</FormErrorMessage>}
         </FormControl>
       )}
     />

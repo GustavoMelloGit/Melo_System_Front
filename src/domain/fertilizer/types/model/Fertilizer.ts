@@ -12,3 +12,7 @@ export type FertilizerFormValues = {
   quantity: number
   description?: string
 }
+
+export type FertilizerDetails = {
+  pricePerBag: number
+}
