@@ -5,7 +5,6 @@ import { BiBlock, BiFilter } from 'react-icons/bi'
 import { BsCheckCircle, BsTrash } from 'react-icons/bs'
 import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
 import { IoAddOutline } from 'react-icons/io5'
-import { MdOutlineSell } from 'react-icons/md'
 import { RiExchangeDollarLine } from 'react-icons/ri'
 import { TbPencil, TbShoppingCart, TbZoomMoney } from 'react-icons/tb'
 import { useModal } from '../hooks/useModal'
@@ -15,10 +14,9 @@ const buttonIcons = {
   add: <IoAddOutline size={24} />,
   check: <BsCheckCircle size={20} />,
   remove: <BsTrash size={18} />,
-  exchangeDollar: <RiExchangeDollarLine size={20} />,
   shopCart: <TbShoppingCart size={21} />,
   printer: <AiOutlinePrinter size={22} />,
-  sell: <MdOutlineSell size={22} />,
+  sell: <RiExchangeDollarLine size={22} />,
   uncheck: <BiBlock size={20} />,
   edit: <TbPencil size={20} />,
   fee: <TbZoomMoney size={22} />,

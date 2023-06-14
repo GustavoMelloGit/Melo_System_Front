@@ -49,7 +49,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
-            Conta Café
+            Lançamento de Café
           </Heading>
         </ModalHeader>
         <ModalBody w='full'>
