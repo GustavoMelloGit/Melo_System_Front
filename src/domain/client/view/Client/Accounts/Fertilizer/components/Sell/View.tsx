@@ -38,7 +38,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
   } = useForm<SellFertilizerFormValues>({
     defaultValues: initialValues,
   })
-  const [shouldDelivery, setShouldDelivery] = useState<boolean>(false)
+  const [shouldDelivery, setShouldDelivery] = useState<boolean>(true)
   const fertilizerName = watch('fertilizerName')
   const pricePerBag = watch('pricePerBag')
   const bags = watch('bags')
