@@ -15,7 +15,7 @@ export async function sellFertilizerService({
   ...values
 }: SellFertilizerServiceValues): PostServiceResponse<void> {
   try {
-    const { data } = await api.post(`/fertilizer/sell/${clientId}`, values)
+    const { data } = await api.post(`/fertilizers/sell/${clientId}`, values)
     return {
       data,
       error: null,

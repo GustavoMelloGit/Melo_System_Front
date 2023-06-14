@@ -62,6 +62,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
               onSubmit({
                 ...values,
                 ...(shouldDelivery && { brook, complement }),
+                bags: Number(bags),
                 pricePerBag: pricePerBag * 100,
               }),
             )}
