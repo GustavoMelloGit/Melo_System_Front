@@ -54,7 +54,7 @@ export default function PickupTable({
 
 const headerColumns: TableHeaderColumns[] = [
   { id: 'clientName', label: 'Nome do cliente', isSortable: true },
-  { id: 'bags', label: 'Sacos', isSortable: true },
+  { id: 'bags', label: 'Sacos', isSortable: true, textAlign: 'center' },
   { id: 'brook', label: 'Córrego', isSortable: true },
   { id: 'complement', label: 'Referência' },
   { id: 'actions', label: 'Ações', align: 'center' },

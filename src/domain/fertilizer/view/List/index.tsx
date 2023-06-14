@@ -1,6 +1,6 @@
+import IconButton from '../../../../shared/components/IconButton'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
-import TableButton from '../../../../shared/components/table/buttons'
 import FertilizerTable from '../../components/List/Table'
 import useFertilizerListView from './useView'
 
@@ -19,7 +19,7 @@ const FertilizerListView = (): JSX.Element => {
           },
         ]}
         actions={
-          <TableButton
+          <IconButton
             aria-label='Adicionar adubo'
             icon='add'
             variant='outline'

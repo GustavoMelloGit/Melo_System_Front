@@ -1,7 +1,5 @@
 import { Flex, Td, Tr } from '@chakra-ui/react'
-import TableCheckButton from '../../../../../shared/components/table/buttons/Check'
-import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
-import TableUncheckButton from '../../../../../shared/components/table/buttons/Uncheck'
+import IconButton from '../../../../../shared/components/IconButton'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
 type Action = 'edit' | 'check' | 'uncheck'
@@ -24,7 +22,8 @@ export default function PickupTableRow({
 
   const buttonByAction: Record<Action, JSX.Element> = {
     edit: (
-      <TableEditButton
+      <IconButton
+        icon='edit'
         aria-label='Editar pedido de coleta'
         title='Editar pedido de coleta'
         colorScheme='blue'
@@ -35,7 +34,8 @@ export default function PickupTableRow({
       />
     ),
     check: (
-      <TableCheckButton
+      <IconButton
+        icon='check'
         aria-label='Finalizar pedido de coleta'
         title='Finalizar pedido de coleta'
         colorScheme='green'
@@ -46,7 +46,9 @@ export default function PickupTableRow({
       />
     ),
     uncheck: (
-      <TableUncheckButton
+      <IconButton
+        icon='uncheck'
+        confirm
         aria-label='Desmarcar pedido de coleta'
         title='Desmarcar pedido de coleta'
         colorScheme='red'
@@ -73,7 +75,9 @@ export default function PickupTableRow({
   return (
     <Tr>
       <Td data-cy='pickupCoffee-table-clientName'>{pickup.clientName}</Td>
-      <Td data-cy='pickupCoffee-table-bags'>{pickup.bags}</Td>
+      <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
+        {pickup.bags}
+      </Td>
       <Td data-cy='pickupCoffee-table-brook'>{pickup.brook}</Td>
       <Td data-cy='pickupCoffee-table-complement'>{pickup.complement}</Td>
       <Td textAlign='center'>

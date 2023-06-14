@@ -1,5 +1,5 @@
 import { Select } from '@chakra-ui/react'
-import TableButton from '../../../../../../../../shared/components/table/buttons'
+import IconButton from '../../../../../../../../shared/components/IconButton'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -39,13 +39,13 @@ export default function CoffeeAccountTable({
         searchForOptions,
         actions: (
           <>
-            <TableButton
+            <IconButton
               icon='shopCart'
               onClick={onClickBuy}
               aria-label='Comprar café'
               title='Comprar café'
             />
-            <TableButton
+            <IconButton
               icon='add'
               onClick={onClickAdd}
               aria-label='adicionar transação'

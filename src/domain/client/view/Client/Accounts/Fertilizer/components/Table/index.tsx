@@ -1,4 +1,4 @@
-import TableButton from '../../../../../../../../shared/components/table/buttons'
+import IconButton from '../../../../../../../../shared/components/IconButton'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -34,7 +34,7 @@ export default function FertilizerAccountTable({
       filter={{
         searchForOptions,
         actions: (
-          <TableButton
+          <IconButton
             icon='sell'
             onClick={onClickSell}
             aria-label='vender adubo'

@@ -1,13 +1,15 @@
-import { IconButton, type IconButtonProps } from '@chakra-ui/react'
+import { IconButton as ChakraIconButton, type IconButtonProps } from '@chakra-ui/react'
 import { useState, type MouseEvent } from 'react'
 import { AiOutlinePrinter } from 'react-icons/ai'
+import { BiBlock, BiFilter } from 'react-icons/bi'
 import { BsCheckCircle, BsTrash } from 'react-icons/bs'
+import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
 import { IoAddOutline } from 'react-icons/io5'
 import { MdOutlineSell } from 'react-icons/md'
 import { RiExchangeDollarLine } from 'react-icons/ri'
-import { TbShoppingCart } from 'react-icons/tb'
-import { useModal } from '../../../hooks/useModal'
-import { isAsyncFunction } from '../../../types/utils/typeGuards'
+import { TbPencil, TbShoppingCart, TbZoomMoney } from 'react-icons/tb'
+import { useModal } from '../hooks/useModal'
+import { isAsyncFunction } from '../types/utils/typeGuards'
 
 const buttonIcons = {
   add: <IoAddOutline size={24} />,
@@ -17,14 +19,20 @@ const buttonIcons = {
   shopCart: <TbShoppingCart size={21} />,
   printer: <AiOutlinePrinter size={22} />,
   sell: <MdOutlineSell size={22} />,
-}
+  uncheck: <BiBlock size={20} />,
+  edit: <TbPencil size={20} />,
+  fee: <TbZoomMoney size={22} />,
+  filter: <BiFilter size={28} />,
+  linkTo: <HiArrowTopRightOnSquare size={20} />,
+} as const
+
 const shouldConfirmAction: Array<keyof typeof buttonIcons> = ['remove']
 
 type Props = Omit<IconButtonProps, 'icon'> & {
   icon: keyof typeof buttonIcons
   confirm?: boolean
 }
-export default function TableButton({
+export default function IconButton({
   icon,
   onClick,
   confirm = false,
@@ -33,7 +41,7 @@ export default function TableButton({
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleConfirm(e: MouseEvent<HTMLButtonElement>): Promise<void> {
-    const ConfirmDialog = (await import('../../ConfirmDialog')).default
+    const ConfirmDialog = (await import('./ConfirmDialog')).default
     useModal.getState().openModal(
       <ConfirmDialog
         onResolve={(response) => {
@@ -68,7 +76,7 @@ export default function TableButton({
   }
 
   return (
-    <IconButton
+    <ChakraIconButton
       icon={buttonIcons[icon]}
       onClick={handleClick}
       isLoading={isLoading}
