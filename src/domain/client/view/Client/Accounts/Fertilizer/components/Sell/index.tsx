@@ -21,7 +21,7 @@ const SellFertilizer = ({ refetch, clientId }: Props): JSX.Element => {
         complement: data?.address.complement ?? '',
       }}
       onSubmit={async (values) => {
-        await handleSellFertilizer('clientId', values)
+        await handleSellFertilizer(clientId, values)
         refetch()
       }}
     />

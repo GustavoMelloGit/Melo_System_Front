@@ -21,5 +21,5 @@ export type FertilizerDeliveryFormValues = {
 export enum FertilizerDeliveryStatuses {
   PENDING = 'inProgress',
   COMPLETED = 'done',
-  CANCELLED = 'canceled',
+  CANCELLED = 'cancelled',
 }

@@ -9,15 +9,19 @@ import {
   fertilizerDeliveryDoneService,
 } from '../../../services/put'
 import {
+  FertilizerDeliveryStatuses,
   type FertilizerDeliveryModel,
-  type FertilizerDeliveryStatuses,
 } from '../../../types/model/Delivery'
+
+const initialStatus = FertilizerDeliveryStatuses.PENDING
 
 export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
   const params = useServiceParams()
   const { handleAddParam, getParam } = useURLSearchParams()
-  const { data, isLoading, mutate } = getFertilizersDeliveryService(params)
   const currentStatus = getParam('status') as FertilizerDeliveryStatuses | null
+  const { data, isLoading, mutate } = getFertilizersDeliveryService(
+    `${params}${currentStatus ? '' : `&status=${initialStatus}`}`,
+  )
   const openModal = useModal((state) => state.openModal)
 
   function handleChangeStatus(status: FertilizerDeliveryStatuses): void {
@@ -36,6 +40,7 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
       return
     }
     toast.success('Entrega concluída com sucesso')
+    await mutate()
   }
 
   async function handleUncheckPickup(pickup: FertilizerDeliveryModel): Promise<void> {
@@ -45,6 +50,7 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
       return
     }
     toast.success('Entrega cancelada com sucesso')
+    await mutate()
   }
 
   async function handleOpenCreateDeliveryForm(): Promise<void> {
