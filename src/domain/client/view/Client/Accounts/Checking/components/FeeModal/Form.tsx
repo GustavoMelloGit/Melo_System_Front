@@ -1,9 +1,9 @@
 import { Flex } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
 import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import IconButton from '../../../../../../../../shared/components/IconButton'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
-import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
 
 type FormValues = {
   interestRate: number
@@ -43,7 +43,7 @@ const FeeModalForm = ({ onSubmit }: Props): JSX.Element => {
               leftIcon='%'
               label='Taxa de juros'
               initialValue={3}
-              rightIcon={<TableFeeButton aria-label='calcular juros' type='submit' />}
+              rightIcon={<IconButton icon='fee' aria-label='calcular juros' type='submit' />}
               setValue={onChange}
               {...rest}
             />

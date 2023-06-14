@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
-import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
+import IconButton from '../../../../../shared/components/IconButton'
 import { type ClientModel } from '../../../types/model/Client'
 
 export type ClientsTableRowProps = {
@@ -51,7 +51,7 @@ export default function ClientsTableRow({ client }: ClientsTableRowProps): JSX.E
       <Td textAlign='center' data-cy='table-cell-client-actions'>
         <HStack w='full' justify='center'>
           <Link to={Routes.updateClient(client.id)}>
-            <TableEditButton colorScheme='blue' as='span' aria-label='Editar cliente' />
+            <IconButton icon='edit' colorScheme='blue' as='span' aria-label='Editar cliente' />
           </Link>
           <LinkOverlay as={Link} to={Routes.clientPage(client.id)} />
         </HStack>

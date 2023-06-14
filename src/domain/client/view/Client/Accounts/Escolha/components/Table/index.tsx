@@ -1,4 +1,4 @@
-import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
+import IconButton from '../../../../../../../../shared/components/IconButton'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -34,7 +34,8 @@ export default function EscolhaAccountTable({
       filter={{
         searchForOptions,
         actions: (
-          <TableAddButton
+          <IconButton
+            icon='add'
             onClick={onClickAdd}
             aria-label='adicionar escolha'
             title='Fazer lançamento de escolha'

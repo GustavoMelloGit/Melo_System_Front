@@ -1,6 +1,5 @@
 import { HStack } from '@chakra-ui/react'
-import TableAddButton from '../../../../../../../../shared/components/table/buttons/Add'
-import TableFeeButton from '../../../../../../../../shared/components/table/buttons/Fee'
+import IconButton from '../../../../../../../../shared/components/IconButton'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
@@ -40,13 +39,15 @@ export default function TransactionsTable({
         searchForOptions,
         actions: (
           <HStack spacing={0.5}>
-            <TableFeeButton
+            <IconButton
+              icon='fee'
               onClick={handleClickFee}
               aria-label='calcular juros'
               title='Calcular juros'
               colorScheme={selectionMode ? 'blue' : undefined}
             />
-            <TableAddButton
+            <IconButton
+              icon='add'
               onClick={onClickAdd}
               aria-label='adicionar transação'
               title='Fazer lançamento'

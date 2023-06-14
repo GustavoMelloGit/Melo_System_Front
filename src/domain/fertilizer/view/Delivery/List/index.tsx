@@ -1,8 +1,8 @@
 import { Flex, VStack } from '@chakra-ui/react'
+import IconButton from '../../../../../shared/components/IconButton'
 import SwitchLabeled from '../../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
-import TableButton from '../../../../../shared/components/table/buttons'
 import DeliveryTable from '../../../components/Delivery/Table'
 import { FertilizerDeliveryStatuses } from '../../../types/model/Delivery'
 import useFertilizerDeliveryView from './useView'
@@ -31,7 +31,7 @@ export default function FertilizerDeliveryView(): JSX.Element {
         ]}
         actions={
           <Flex gap={3}>
-            <TableButton
+            <IconButton
               icon='printer'
               aria-label='Baixar lista de entrega'
               colorScheme='blue'
@@ -40,7 +40,7 @@ export default function FertilizerDeliveryView(): JSX.Element {
               title='Baixar lista de entrega'
               onClick={handleDownloadPDF}
             />
-            <TableButton
+            <IconButton
               aria-label='Adicionar café a buscar'
               icon='add'
               colorScheme='blue'

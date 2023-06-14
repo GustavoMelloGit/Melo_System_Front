@@ -8,6 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
@@ -42,8 +43,12 @@ export default function CreditFertilizerView({
             <Heading as='h1' fontSize='3xl'>
               Definir quantidade
             </Heading>
-            <Heading as='h2' fontSize='sm' color={subheaderColor}>
-              O valor definido substituirá o valor atual
+            <Heading as='h2' fontSize='sm' color={subheaderColor} fontWeight={500}>
+              O valor definido{' '}
+              <Text as='strong' color='white'>
+                substituirá
+              </Text>{' '}
+              o valor atual
             </Heading>
           </Stack>
         </ModalHeader>

@@ -33,7 +33,7 @@ export async function fertilizerDeliveryCancelService(
 ): PutServiceResponse<FertilizerDeliveryModel> {
   try {
     const { data } = await api.put(`/fertilizers/delivery/${id}`, {
-      status: FertilizerDeliveryStatuses.CANCELLED,
+      status: FertilizerDeliveryStatuses.PENDING,
     })
 
     return {

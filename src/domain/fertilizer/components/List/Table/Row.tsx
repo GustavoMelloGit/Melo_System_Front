@@ -2,7 +2,7 @@ import { Collapse, Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { getColorByValue } from '../../../../../lib/utils/styles'
-import TableButton from '../../../../../shared/components/table/buttons'
+import IconButton from '../../../../../shared/components/IconButton'
 import { type FertilizerModel } from '../../../types/model/Fertilizer'
 
 type Props = {
@@ -41,14 +41,14 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props)
       </Td>
       <Td>
         <Flex justify='center' gap={1}>
-          <TableButton
+          <IconButton
             aria-label='Definir quantidade'
             title='Definir quantidade'
             icon='add'
             colorScheme='blue'
             onClick={async () => onClickCredit(fertilizer)}
           />
-          <TableButton
+          <IconButton
             aria-label='Deletar adubo'
             title='Deletar adubo'
             icon='remove'

@@ -2,7 +2,7 @@ import { HStack, LinkBox, LinkOverlay, Td, Tr } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
-import TableLinkToButton from '../../../../../shared/components/table/buttons/LinkTo'
+import IconButton from '../../../../../shared/components/IconButton'
 import { type BookModel } from '../../../types/model/book'
 
 export type Props = {
@@ -16,7 +16,7 @@ export default function BookTableRow({ book }: Props): JSX.Element {
       <Td textAlign='center' data-cy='table-cell-client-actions'>
         <HStack w='full' justify='center'>
           <LinkOverlay as={Link} to={Routes.bookPage(book.number)}>
-            <TableLinkToButton colorScheme='blue' aria-label='detalhes to talão' />
+            <IconButton icon='linkTo' colorScheme='blue' aria-label='detalhes to talão' />
           </LinkOverlay>
         </HStack>
       </Td>

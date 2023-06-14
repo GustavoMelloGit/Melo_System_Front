@@ -1,7 +1,5 @@
 import { Td, Tr } from '@chakra-ui/react'
-import TableCheckButton from '../../../../../shared/components/table/buttons/Check'
-import TableEditButton from '../../../../../shared/components/table/buttons/Edit'
-import TableUncheckButton from '../../../../../shared/components/table/buttons/Uncheck'
+import IconButton from '../../../../../shared/components/IconButton'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 
 type Props = {
@@ -23,7 +21,8 @@ export default function DeliveryTableRow({
   switch (variant) {
     case 'completed':
       secondaryAction = (
-        <TableUncheckButton
+        <IconButton
+          icon='uncheck'
           aria-label='Desmarcar pedido de coleta'
           title='Desmarcar pedido de coleta'
           colorScheme='red'
@@ -36,7 +35,8 @@ export default function DeliveryTableRow({
       break
     case 'pending':
       secondaryAction = (
-        <TableCheckButton
+        <IconButton
+          icon='check'
           aria-label='Finalizar pedido de coleta'
           title='Finalizar pedido de coleta'
           colorScheme='green'
@@ -55,11 +55,14 @@ export default function DeliveryTableRow({
     <Tr>
       <Td data-cy='pickupCoffee-table-clientName'>{pickup.clientName}</Td>
       <Td data-cy='pickupCoffee-table-fertilizerName'>{pickup.fertilizer.name}</Td>
-      <Td data-cy='pickupCoffee-table-bags'>{pickup.amount}</Td>
+      <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
+        {pickup.amount}
+      </Td>
       <Td data-cy='pickupCoffee-table-brook'>{pickup.brook}</Td>
       <Td data-cy='pickupCoffee-table-complement'>{pickup.complement}</Td>
       <Td textAlign='center'>
-        <TableEditButton
+        <IconButton
+          icon='edit'
           aria-label='Editar pedido de coleta'
           title='Editar pedido de coleta'
           colorScheme='blue'
