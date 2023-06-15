@@ -1,18 +1,22 @@
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
-import { Fragment } from 'react'
+import { Fragment, lazy } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { Toaster } from 'react-hot-toast'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './domain/auth/context/AuthContext'
 import './lib/config/firebase'
 import router from './lib/routes/router'
+import { useScreenProtectionStore } from './lib/stores/ScreenProtectionStore'
 import theme, { themeManager } from './lib/styles/theme'
 import ModalManager from './shared/components/ModalManager'
 import ProviderComposer from './shared/components/ProviderComposer'
 import Suspense from './shared/components/Suspense'
 import LayoutProvider from './shared/contexts/LayoutContext'
+const LockScreenView = lazy(async () => import('./shared/components/layout/Content/LockScreenView'))
 
 function App(): JSX.Element {
+  const isLocked = useScreenProtectionStore((state) => state.isLocked)
+
   return (
     <ChakraProvider theme={theme} colorModeManager={themeManager}>
       <ColorModeScript
@@ -21,7 +25,7 @@ function App(): JSX.Element {
       />
       <ProviderComposer contexts={[LayoutProvider, Suspense, HelmetProvider, AuthProvider]}>
         <Fragment>
-          <RouterProvider router={router} />
+          {isLocked ? <LockScreenView /> : <RouterProvider router={router} />}
           <ModalManager />
         </Fragment>
       </ProviderComposer>
