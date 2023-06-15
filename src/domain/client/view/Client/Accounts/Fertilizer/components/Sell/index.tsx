@@ -19,6 +19,7 @@ const SellFertilizer = ({ refetch, clientId }: Props): JSX.Element => {
         pricePerBag: 0,
         brook: data?.address.brook ?? '',
         complement: data?.address.complement ?? '',
+        deliveryDate: new Date().toISOString().split('T')[0],
       }}
       onSubmit={async (values) => {
         await handleSellFertilizer(clientId, values)
