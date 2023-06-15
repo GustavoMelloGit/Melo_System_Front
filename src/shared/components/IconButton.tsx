@@ -78,7 +78,9 @@ export default function IconButton({
 
   return (
     <ChakraIconButton
-      icon={cloneElement(buttonIcons[icon], { size: iconSize })}
+      icon={cloneElement(buttonIcons[icon], {
+        ...(iconSize && { size: iconSize }),
+      })}
       onClick={handleClick}
       isLoading={isLoading}
       variant='ghost'

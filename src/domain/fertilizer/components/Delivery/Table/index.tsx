@@ -35,13 +35,13 @@ export default function DeliveryTable({
         totalLength: totalPickups,
       }}
       table={{
-        'data-cy': 'pickupCoffee-table',
+        'data-cy': 'deliveryCoffee-table',
       }}
     >
-      {data?.map((pickup, index) => (
+      {data?.map((delivery, index) => (
         <DeliveryTableRow
           key={index}
-          pickup={pickup}
+          delivery={delivery}
           onClickUpdate={onClickUpdate}
           onClickCheck={onClickCheck}
           onClickUncheck={onClickUncheck}
@@ -53,6 +53,7 @@ export default function DeliveryTable({
 }
 
 const headerColumns: TableHeaderColumns[] = [
+  { id: 'date', label: 'Data', isSortable: true },
   { id: 'clientName', label: 'Nome do cliente', isSortable: true },
   { id: 'bags', label: 'Adubo', isSortable: true },
   { id: 'amount', label: 'Quantidade', isSortable: true, textAlign: 'center' },

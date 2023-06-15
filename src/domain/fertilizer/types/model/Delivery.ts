@@ -8,6 +8,7 @@ export type FertilizerDeliveryModel = {
   brook: string
   complement: string
   status: FertilizerDeliveryStatuses
+  date: number
 }
 
 export type FertilizerDeliveryFormValues = {
