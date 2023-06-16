@@ -4,9 +4,14 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaLock } from 'react-icons/fa'
 import * as yup from 'yup'
+import BackgroundImage1 from '../../../../lib/assets/lockscreen-background-1.jpg'
+import BackgroundImage2 from '../../../../lib/assets/lockscreen-background-2.jpg'
+import BackgroundImage3 from '../../../../lib/assets/lockscreen-background-3.jpg'
 import { validationErrors } from '../../../../lib/errors'
 import { useScreenProtectionStore } from '../../../../lib/stores/ScreenProtectionStore'
 import ControllerField from '../../inputs/ControllerField'
+
+const backgroundImages = [BackgroundImage1, BackgroundImage2, BackgroundImage3]
 
 const schema = yup.object().shape({
   password: yup.string().required(validationErrors.passwordIsRequired),
@@ -49,7 +54,7 @@ export default function LockScreenView(): JSX.Element {
       <Box
         as='aside'
         pos='relative'
-        bgImage={`src/lib/assets/lockscreen-background-${currentBackgroundImage}.jpg`}
+        bgImage={backgroundImages[currentBackgroundImage - 1]}
         bgSize='cover'
         bgPosition='center'
         bgRepeat='no-repeat'
