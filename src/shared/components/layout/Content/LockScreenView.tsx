@@ -1,36 +1,103 @@
-import { Button, Center, Heading } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaLock } from 'react-icons/fa'
+import * as yup from 'yup'
+import { validationErrors } from '../../../../lib/errors'
 import { useScreenProtectionStore } from '../../../../lib/stores/ScreenProtectionStore'
 import ControllerField from '../../inputs/ControllerField'
+
+const schema = yup.object().shape({
+  password: yup.string().required(validationErrors.passwordIsRequired),
+})
 
 type LockScreenFormValues = {
   password: string
 }
 export default function LockScreenView(): JSX.Element {
+  const [currentBackgroundImage, setCurrentBackgroundImage] = useState(1)
   const unlock = useScreenProtectionStore((state) => state.unlock)
-  const { control, handleSubmit } = useForm<LockScreenFormValues>()
+  const { control, handleSubmit } = useForm<LockScreenFormValues>({
+    resolver: yupResolver(schema),
+  })
 
   function handleUnlock(data: LockScreenFormValues): void {
     if (data.password) unlock()
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBackgroundImage((prev) => {
+        if (prev === 3) return 1
+        return prev + 1
+      })
+    }, 10000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
   return (
-    <Center minH='100vh'>
-      <form onSubmit={handleSubmit(handleUnlock)}>
-        <Heading as='h1' size='lg' mb={4}>
-          Lock Screen
-        </Heading>
-        <ControllerField
-          name='password'
-          control={control}
-          label='Senha'
-          type='password'
-          placeholder='Digite sua senha'
-        />
-        <Button type='submit' w='full'>
-          Unlock
-        </Button>
-      </form>
-    </Center>
+    <Flex
+      minH='100vh'
+      flexDir={{
+        base: 'column-reverse',
+        md: 'row',
+      }}
+    >
+      <Box
+        as='aside'
+        pos='relative'
+        bgImage={`src/lib/assets/lockscreen-background-${currentBackgroundImage}.jpg`}
+        bgSize='cover'
+        bgPosition='center'
+        bgRepeat='no-repeat'
+        transition='background-image 0.5s ease-in-out'
+        flex={1}
+        role='img'
+        aria-label='Background'
+        maxW='calc(50vw - 200px)'
+      />
+      <Box
+        flex={1}
+        px={9}
+        pt={{
+          base: 0,
+          md: 40,
+        }}
+        display='flex'
+        alignItems={{
+          base: 'center',
+          md: 'flex-start',
+        }}
+        justifyContent={{
+          base: 'center',
+          md: 'flex-start',
+        }}
+      >
+        <Box maxW={300}>
+          <form onSubmit={handleSubmit(handleUnlock)}>
+            <Heading as='h1' size='xl' fontWeight={700}>
+              Você ativou o bloqueio de tela
+            </Heading>
+            <Heading as='h2' size='sm' mb={8} fontWeight={500} mt={2}>
+              Digite sua senha para desbloquear
+            </Heading>
+            <ControllerField
+              leftIcon={<FaLock />}
+              name='password'
+              control={control}
+              type='password'
+              placeholder='Digite sua senha'
+              variant='filled'
+            />
+            <Button type='submit' w='full' colorScheme='yellow' mt={5}>
+              Desbloquear
+            </Button>
+          </form>
+        </Box>
+      </Box>
+    </Flex>
   )
 }

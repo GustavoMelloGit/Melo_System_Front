@@ -13,10 +13,10 @@ export default function SidebarHeader(): JSX.Element {
     <VStack align='stretch' as='header'>
       {isOpen && <ToggleSidebarButton alignSelf='flex-end' />}
       <Flex align='center' gap={4}>
-        <Avatar name={user.email} />
+        <Avatar name={user.name} />
         <VStack align='flex-start' w='full'>
           <Heading noOfLines={1} as='h1' fontSize='md'>
-            {user.email}
+            {user.name}
           </Heading>
           <Button
             variant='outline'

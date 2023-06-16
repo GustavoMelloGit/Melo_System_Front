@@ -3,15 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
-import RHFField from '../../../../../shared/components/inputs/RHFField'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFPasswordField from '../../../../../shared/components/inputs/RHFPasswordField'
 import { type SignInValues } from '../../../types'
 
 const validationSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email(validationErrors.emailIsInvalid)
-    .required(validationErrors.emailIsRequired),
+  nickname: yup.string().required(validationErrors.nicknameIsRequired),
   password: yup.string().required(validationErrors.passwordIsRequired),
 })
 
@@ -23,6 +20,7 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
     formState: { isSubmitting, errors },
     handleSubmit,
     register,
+    control,
   } = useForm<SignInValues>({
     resolver: yupResolver(validationSchema),
   })
@@ -33,16 +31,14 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       <VStack spacing={3}>
-        <RHFField<SignInValues>
-          register={register}
-          name='email'
-          label='Email'
-          errors={errors}
-          inputMode='email'
-          autoComplete='email'
-          placeholder='email@exemplo.com'
+        <ControllerField
+          name='nickname'
+          control={control}
+          label='Usuário'
+          autoComplete='username'
+          placeholder='admin'
           variant='outline'
-          data-cy='email-input'
+          data-cy='nickname-input'
         />
         <RHFPasswordField<SignInValues>
           register={register}
@@ -54,7 +50,7 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
           variant='outline'
           data-cy='password-input'
         />
-        <Button isLoading={isSubmitting} w='full' type='submit' data-cy='submit'>
+        <Button isLoading={isSubmitting} w='full' type='submit' data-cy='submit' colorScheme='blue'>
           Login
         </Button>
       </VStack>
