@@ -16,8 +16,12 @@ import {
   ModalOverlay,
   Stack,
 } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { validationErrors } from '../../../../../../../../lib/errors'
+import { formatInputDateString } from '../../../../../../../../lib/utils/date'
 import AutocompleteInput from '../../../../../../../../shared/components/inputs/Autocomplete'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
@@ -30,6 +34,18 @@ type Props = {
   onSubmit: (values: SellFertilizerFormValues) => Promise<void>
 }
 const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.Element => {
+  const [shouldDelivery, setShouldDelivery] = useState<boolean>(true)
+
+  const validationSchema = yup.object().shape({
+    fertilizerName: yup.string().required(validationErrors.fatherNameIsRequired),
+    bags: yup.number().required(validationErrors.bagsIsRequired),
+    pricePerBag: yup.number().required(validationErrors.pricePerBagIsRequired),
+    deliveryDate: yup.string().required(validationErrors.deliveryDateIsRequired),
+    ...(shouldDelivery && {
+      brook: yup.string().required(validationErrors.brookIsRequired),
+      complement: yup.string().required(validationErrors.complementIsRequired),
+    }),
+  })
   const {
     handleSubmit,
     control,
@@ -37,8 +53,8 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
     formState: { isSubmitting },
   } = useForm<SellFertilizerFormValues>({
     defaultValues: initialValues,
+    resolver: yupResolver(validationSchema),
   })
-  const [shouldDelivery, setShouldDelivery] = useState<boolean>(true)
   const fertilizerName = watch('fertilizerName')
   const pricePerBag = watch('pricePerBag')
   const bags = watch('bags')
@@ -58,12 +74,13 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
         </ModalHeader>
         <ModalBody>
           <form
-            onSubmit={handleSubmit(async ({ brook, complement, ...values }) =>
+            onSubmit={handleSubmit(async ({ brook, complement, deliveryDate, ...values }) =>
               onSubmit({
                 ...values,
                 ...(shouldDelivery && { brook, complement }),
                 bags: Number(bags),
                 pricePerBag: pricePerBag * 100,
+                deliveryDate: formatInputDateString(deliveryDate),
               }),
             )}
           >
@@ -86,6 +103,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
                   />
                 )}
               />
+
               <Flex gap={4}>
                 <RHFCurrencyInput
                   name='pricePerBag'
@@ -99,25 +117,34 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
                   name='bags'
                   type='number'
                   label='Quantidade'
-                  isRequired
+                  required
                   placeholder='Insira a quantidade'
                 />
               </Flex>
-              <FormControl>
-                <FormLabel htmlFor='totalPrice'>Valor total</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon>R$</InputLeftAddon>
-                  <Input
-                    id='totalPrice'
-                    isDisabled
-                    value={Intl.NumberFormat('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    }).format(pricePerBag * bags)}
-                    variant='filled'
-                  />
-                </InputGroup>
-              </FormControl>
+              <Flex gap={4}>
+                <FormControl>
+                  <FormLabel htmlFor='totalPrice'>Valor total</FormLabel>
+                  <InputGroup>
+                    <InputLeftAddon>R$</InputLeftAddon>
+                    <Input
+                      id='totalPrice'
+                      isDisabled
+                      value={Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(pricePerBag * bags)}
+                      variant='filled'
+                    />
+                  </InputGroup>
+                </FormControl>
+                <ControllerField
+                  name='deliveryDate'
+                  control={control}
+                  label='Data de entrega'
+                  type='date'
+                  required
+                />
+              </Flex>
               <Checkbox
                 isChecked={shouldDelivery}
                 onChange={(e) => {
@@ -132,12 +159,14 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
                   name='brook'
                   isDisabled={!shouldDelivery}
                   label='Córrego'
+                  required
                 />
                 <ControllerField
                   control={control}
                   name='complement'
                   isDisabled={!shouldDelivery}
                   label='Referência'
+                  required
                 />
               </Flex>
               <Button isLoading={isSubmitting} type='submit' colorScheme='green'>

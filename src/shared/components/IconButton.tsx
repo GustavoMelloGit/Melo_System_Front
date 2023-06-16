@@ -1,6 +1,6 @@
 import { IconButton as ChakraIconButton, type IconButtonProps } from '@chakra-ui/react'
-import { useState, type MouseEvent } from 'react'
-import { AiOutlinePrinter } from 'react-icons/ai'
+import { cloneElement, useState, type MouseEvent } from 'react'
+import { AiOutlineLock, AiOutlinePrinter } from 'react-icons/ai'
 import { BiBlock, BiFilter } from 'react-icons/bi'
 import { BsCheckCircle, BsTrash } from 'react-icons/bs'
 import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
@@ -22,6 +22,7 @@ const buttonIcons = {
   fee: <TbZoomMoney size={22} />,
   filter: <BiFilter size={28} />,
   linkTo: <HiArrowTopRightOnSquare size={20} />,
+  lock: <AiOutlineLock />,
 } as const
 
 const shouldConfirmAction: Array<keyof typeof buttonIcons> = ['remove']
@@ -29,11 +30,13 @@ const shouldConfirmAction: Array<keyof typeof buttonIcons> = ['remove']
 type Props = Omit<IconButtonProps, 'icon'> & {
   icon: keyof typeof buttonIcons
   confirm?: boolean
+  iconSize?: number
 }
 export default function IconButton({
   icon,
   onClick,
   confirm = false,
+  iconSize,
   ...props
 }: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(false)
@@ -75,7 +78,9 @@ export default function IconButton({
 
   return (
     <ChakraIconButton
-      icon={buttonIcons[icon]}
+      icon={cloneElement(buttonIcons[icon], {
+        ...(iconSize && { size: iconSize }),
+      })}
       onClick={handleClick}
       isLoading={isLoading}
       variant='ghost'

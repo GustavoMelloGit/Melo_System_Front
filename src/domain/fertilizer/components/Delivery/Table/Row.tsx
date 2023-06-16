@@ -1,16 +1,17 @@
 import { Td, Tr } from '@chakra-ui/react'
+import { dateToFormat } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 
 type Props = {
-  pickup: FertilizerDeliveryModel
+  delivery: FertilizerDeliveryModel
   onClickUpdate: (pickup: FertilizerDeliveryModel) => Promise<void>
   onClickCheck: (pickup: FertilizerDeliveryModel) => Promise<void>
   onClickUncheck: (pickup: FertilizerDeliveryModel) => Promise<void>
   variant?: 'completed' | 'pending'
 }
 export default function DeliveryTableRow({
-  pickup,
+  delivery,
   onClickUpdate,
   onClickCheck,
   onClickUncheck,
@@ -27,9 +28,9 @@ export default function DeliveryTableRow({
           title='Desmarcar pedido de coleta'
           colorScheme='red'
           onClick={() => {
-            void onClickUncheck(pickup)
+            void onClickUncheck(delivery)
           }}
-          data-cy='pickupCoffee-uncheck'
+          data-cy='deliveryCoffee-uncheck'
         />
       )
       break
@@ -41,9 +42,9 @@ export default function DeliveryTableRow({
           title='Finalizar pedido de coleta'
           colorScheme='green'
           onClick={() => {
-            void onClickCheck(pickup)
+            void onClickCheck(delivery)
           }}
-          data-cy='pickupCoffee-check'
+          data-cy='deliveryCoffee-check'
         />
       )
       break
@@ -53,13 +54,14 @@ export default function DeliveryTableRow({
 
   return (
     <Tr>
-      <Td data-cy='pickupCoffee-table-clientName'>{pickup.clientName}</Td>
-      <Td data-cy='pickupCoffee-table-fertilizerName'>{pickup.fertilizer.name}</Td>
-      <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
-        {pickup.amount}
+      <Td data-cy='deliveryCoffee-table-date'>{dateToFormat(delivery.date ?? 0, 'dd/MM/yyyy')}</Td>
+      <Td data-cy='deliveryCoffee-table-clientName'>{delivery.clientName}</Td>
+      <Td data-cy='deliveryCoffee-table-fertilizerName'>{delivery.fertilizer.name}</Td>
+      <Td data-cy='deliveryCoffee-table-bags' textAlign='center'>
+        {delivery.amount}
       </Td>
-      <Td data-cy='pickupCoffee-table-brook'>{pickup.brook}</Td>
-      <Td data-cy='pickupCoffee-table-complement'>{pickup.complement}</Td>
+      <Td data-cy='deliveryCoffee-table-brook'>{delivery.brook}</Td>
+      <Td data-cy='deliveryCoffee-table-complement'>{delivery.complement}</Td>
       <Td textAlign='center'>
         <IconButton
           icon='edit'
@@ -67,9 +69,9 @@ export default function DeliveryTableRow({
           title='Editar pedido de coleta'
           colorScheme='blue'
           onClick={() => {
-            void onClickUpdate(pickup)
+            void onClickUpdate(delivery)
           }}
-          data-cy='pickupCoffee-edit'
+          data-cy='deliveryCoffee-edit'
         />
         {secondaryAction}
       </Td>
