@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { FaLock } from 'react-icons/fa'
 import * as yup from 'yup'
@@ -44,68 +45,76 @@ export default function LockScreenView(): JSX.Element {
   }, [])
 
   return (
-    <Flex
-      minH='100vh'
-      flexDir={{
-        base: 'column-reverse',
-        md: 'row',
-      }}
-    >
-      <Box
-        as='aside'
-        pos='relative'
-        bgImage={backgroundImages[currentBackgroundImage - 1]}
-        bgSize='cover'
-        bgPosition='center'
-        bgRepeat='no-repeat'
-        transition='background-image 0.5s ease-in-out'
-        flex={1}
-        role='img'
-        aria-label='Background'
-        maxW={{
-          base: '100%',
-          md: 'calc(50vw - 200px)',
-        }}
-      />
-      <Box
-        flex={1}
-        px={9}
-        pt={{
-          base: 0,
-          md: 40,
-        }}
-        display='flex'
-        alignItems={{
-          base: 'center',
-          md: 'flex-start',
-        }}
-        justifyContent={{
-          base: 'center',
-          md: 'flex-start',
+    <>
+      <Helmet>
+        <meta name='robots' content='noindex' />
+        <link rel='preload' href={BackgroundImage1} as='image' />
+        <link rel='preload' href={BackgroundImage2} as='image' />
+        <link rel='preload' href={BackgroundImage3} as='image' />
+      </Helmet>
+      <Flex
+        minH='100svh'
+        flexDir={{
+          base: 'column-reverse',
+          md: 'row',
         }}
       >
-        <Box maxW={300}>
-          <form onSubmit={handleSubmit(handleUnlock)}>
-            <Heading as='h1' size='xl' fontWeight={700}>
-              Você ativou o bloqueio de tela
-            </Heading>
-            <Heading as='h2' size='sm' mb={8} fontWeight={500} mt={2}>
-              Digite sua senha para desbloquear
-            </Heading>
-            <ControllerField
-              leftIcon={<FaLock />}
-              name='password'
-              control={control}
-              type='password'
-              placeholder='Digite sua senha'
-              variant='filled'
-            />
-            <Button type='submit' w='full' colorScheme='yellow' mt={5}>
-              Desbloquear
-            </Button>
-          </form>
+        <Box
+          as='aside'
+          pos='relative'
+          bgImage={backgroundImages[currentBackgroundImage - 1]}
+          bgSize='cover'
+          bgPosition='center'
+          bgRepeat='no-repeat'
+          transition='background-image 0.5s ease-in-out'
+          flex={1}
+          role='img'
+          aria-label='Background'
+          maxW={{
+            base: '100%',
+            md: 'calc(50vw - 200px)',
+          }}
+        />
+        <Box
+          flex={1}
+          px={9}
+          pt={{
+            base: 0,
+            md: 40,
+          }}
+          display='flex'
+          alignItems={{
+            base: 'center',
+            md: 'flex-start',
+          }}
+          justifyContent={{
+            base: 'center',
+            md: 'flex-start',
+          }}
+        >
+          <Box maxW={300}>
+            <form onSubmit={handleSubmit(handleUnlock)}>
+              <Heading as='h1' size='xl' fontWeight={700}>
+                Você ativou o bloqueio de tela
+              </Heading>
+              <Heading as='h2' size='sm' mb={8} fontWeight={500} mt={2}>
+                Digite sua senha para desbloquear
+              </Heading>
+              <ControllerField
+                leftIcon={<FaLock />}
+                name='password'
+                control={control}
+                type='password'
+                placeholder='Digite sua senha'
+                variant='filled'
+              />
+              <Button type='submit' w='full' colorScheme='yellow' mt={5}>
+                Desbloquear
+              </Button>
+            </form>
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </>
   )
 }
