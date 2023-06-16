@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaLock } from 'react-icons/fa'
 import * as yup from 'yup'
-import BackgroundImage1 from '../../../../lib/assets/lockscreen-background-1.jpg'
-import BackgroundImage2 from '../../../../lib/assets/lockscreen-background-2.jpg'
-import BackgroundImage3 from '../../../../lib/assets/lockscreen-background-3.jpg'
+import BackgroundImage1 from '../../../../lib/assets/lockscreen-background-1.webp'
+import BackgroundImage2 from '../../../../lib/assets/lockscreen-background-2.webp'
+import BackgroundImage3 from '../../../../lib/assets/lockscreen-background-3.webp'
 import { validationErrors } from '../../../../lib/errors'
 import { useScreenProtectionStore } from '../../../../lib/stores/ScreenProtectionStore'
 import ControllerField from '../../inputs/ControllerField'
@@ -62,7 +62,10 @@ export default function LockScreenView(): JSX.Element {
         flex={1}
         role='img'
         aria-label='Background'
-        maxW='calc(50vw - 200px)'
+        maxW={{
+          base: '100%',
+          md: 'calc(50vw - 200px)',
+        }}
       />
       <Box
         flex={1}
