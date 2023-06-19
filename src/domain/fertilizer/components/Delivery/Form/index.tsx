@@ -1,6 +1,6 @@
 import {
   Button,
-  Flex,
+  Grid,
   Heading,
   Modal,
   ModalBody,
@@ -8,7 +8,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Stack,
   VStack,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,6 +15,7 @@ import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { formatInputDateString } from '../../../../../lib/utils/date'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import { useModal } from '../../../../../shared/hooks/useModal'
@@ -71,7 +71,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
-      <ModalContent p={2}>
+      <ModalContent p={2} maxW={700}>
         <ModalCloseButton data-cy='close-modal-button' />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
@@ -86,11 +86,12 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
               await onSubmit({
                 ...values,
                 amount: Number(values.amount),
+                date: formatInputDateString(values.date),
               })
             })}
             data-cy='pickupCoffee-form'
           >
-            <Stack spacing={2} w='full'>
+            <Grid w='full' gridTemplateColumns='repeat(auto-fit, minmax(240px, 1fr))' gap={2}>
               <Controller
                 name='clientName'
                 control={control}
@@ -127,26 +128,33 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
                   />
                 )}
               />
-              <Flex gap={2}>
-                <ControllerField<FertilizerDeliveryFormValues>
-                  control={control}
-                  required
-                  name='amount'
-                  label='Quantidade'
-                  data-cy='brook-input'
-                  placeholder='Quantidade'
-                  type='number'
-                  inputMode='numeric'
-                />
-                <ControllerField<FertilizerDeliveryFormValues>
-                  control={control}
-                  required
-                  name='brook'
-                  label='Córrego'
-                  data-cy='brook-input'
-                  placeholder='Nome do córrego'
-                />
-              </Flex>
+              <ControllerField<FertilizerDeliveryFormValues>
+                control={control}
+                required
+                name='amount'
+                label='Quantidade'
+                data-cy='brook-input'
+                placeholder='Quantidade'
+                type='number'
+                inputMode='numeric'
+              />
+              <ControllerField<FertilizerDeliveryFormValues>
+                control={control}
+                required
+                name='date'
+                label='Data de entrega'
+                data-cy='date-input'
+                placeholder='Data de entrega'
+                type='date'
+              />
+              <ControllerField<FertilizerDeliveryFormValues>
+                control={control}
+                required
+                name='brook'
+                label='Córrego'
+                data-cy='brook-input'
+                placeholder='Nome do córrego'
+              />
               <ControllerField<FertilizerDeliveryFormValues>
                 control={control}
                 required
@@ -155,7 +163,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
                 data-cy='complement-input'
                 placeholder='Referência'
               />
-            </Stack>
+            </Grid>
             <Button
               isLoading={isSubmitting}
               type='submit'
