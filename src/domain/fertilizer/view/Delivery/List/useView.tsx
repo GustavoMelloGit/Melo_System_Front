@@ -28,13 +28,13 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
     handleAddParam('status', status)
   }
 
-  async function handleOpenUpdateForm(pickup: FertilizerDeliveryModel): Promise<void> {
+  async function handleOpenUpdateForm(delivery: FertilizerDeliveryModel): Promise<void> {
     const UpdateFertilizerDelivery = (await import('../Update')).default
-    openModal(<UpdateFertilizerDelivery refetch={async () => mutate()} pickup={pickup} />)
+    openModal(<UpdateFertilizerDelivery refetch={async () => mutate()} delivery={delivery} />)
   }
 
-  async function handleCheckPickup(pickup: FertilizerDeliveryModel): Promise<void> {
-    const { error } = await fertilizerDeliveryDoneService(pickup.id)
+  async function handleCheckPickup(delivery: FertilizerDeliveryModel): Promise<void> {
+    const { error } = await fertilizerDeliveryDoneService(delivery.id)
     if (error) {
       toast.error('Não foi possível concluir a entrega')
       return

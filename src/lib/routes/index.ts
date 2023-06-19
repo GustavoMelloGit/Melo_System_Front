@@ -15,4 +15,5 @@ export const Routes = {
     `/books/${bookNumber}/update/${sheetNumber}`,
   sheetDetails: (bookNumber: string | number, sheetNumber: string | number) =>
     `/books/${bookNumber}/details/${sheetNumber}`,
+  transfer: '/transfer',
 } as const

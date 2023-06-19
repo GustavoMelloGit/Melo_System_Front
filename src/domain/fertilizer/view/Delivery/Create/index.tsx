@@ -16,6 +16,7 @@ export default function CreateFertilizerDelivery({ refetch }: Props): JSX.Elemen
         brook: '',
         complement: '',
         fertilizerId: '',
+        date: new Date().toISOString().split('T')[0],
       }}
       onSubmit={async (values) => {
         const { error } = await createFertilizerDeliveryService(values)

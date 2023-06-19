@@ -17,6 +17,7 @@ export type FertilizerDeliveryFormValues = {
   fertilizerId: string
   brook: string
   complement: string
+  date: string
 }
 
 export enum FertilizerDeliveryStatuses {

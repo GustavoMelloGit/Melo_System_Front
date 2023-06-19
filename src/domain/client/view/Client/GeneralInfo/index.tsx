@@ -14,7 +14,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useMemo } from 'react'
-import { dateToFormat } from '../../../../../lib/utils/formatters'
+import { formatDate } from '../../../../../lib/utils/formatters'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -119,7 +119,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           {
             label: 'Data de emissão do RG',
             value: client.personType.rgEmissionDate
-              ? dateToFormat(client.personType.rgEmissionDate)
+              ? formatDate(client.personType.rgEmissionDate)
               : defaultEmptyValue,
           },
           {
@@ -129,7 +129,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           {
             label: 'Data de nascimento',
             value: client.personType.birthDate
-              ? dateToFormat(client.personType.birthDate)
+              ? formatDate(client.personType.birthDate)
               : defaultEmptyValue,
           },
           {
@@ -158,7 +158,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
         }}
       >
         <ModalCloseButton zIndex={2} />
-        <ModalBody pt={3} px={6} overflowY='auto'>
+        <ModalBody pt={4} px={6} overflowY='auto'>
           <Stack align='flex-start' spacing={5} id='screenshot-content'>
             <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 

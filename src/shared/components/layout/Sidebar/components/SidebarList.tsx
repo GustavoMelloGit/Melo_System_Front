@@ -37,6 +37,10 @@ const listItem: Record<
     label: 'Cafés a Buscar',
     icon: <BsTruck />,
   },
+  // [Routes.transfer]: {
+  //   label: 'Transferência',
+  //   icon: <CgArrowsExchange size={24} />,
+  // },
 }
 
 const customPaths: Record<string, string> = {

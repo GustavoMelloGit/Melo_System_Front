@@ -52,6 +52,7 @@ const validationErrors = {
   pricePerBagIsRequired: 'Por favor, informe o preço por saca',
   deliveryDateIsRequired: 'Por favor, informe a data de entrega',
   nicknameIsRequired: 'Por favor, informe o apelido',
+  passwordIsIncorrect: 'Senha incorreta',
 }
 
 export default validationErrors

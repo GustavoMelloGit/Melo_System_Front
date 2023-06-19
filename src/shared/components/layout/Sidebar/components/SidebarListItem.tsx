@@ -1,4 +1,4 @@
-import { ListItem, useColorModeValue } from '@chakra-ui/react'
+import { Center, ListItem, useColorModeValue } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 type SidebarListItemProps = {
@@ -29,7 +29,9 @@ export default function SidebarListItem({
         }}
         draggable={false}
       >
-        {icon}
+        <Center as='span' w={6}>
+          {icon}
+        </Center>
         {label}
       </Link>
     </ListItem>

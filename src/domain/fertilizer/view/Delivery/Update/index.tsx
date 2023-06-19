@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import FertilizerDeliveryForm from '../../../components/Delivery/Form'
@@ -6,18 +7,19 @@ import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 
 type Props = {
   refetch: () => void
-  pickup: FertilizerDeliveryModel
+  delivery: FertilizerDeliveryModel
 }
-export default function UpdateFertilizerDelivery({ refetch, pickup }: Props): JSX.Element {
+export default function UpdateFertilizerDelivery({ refetch, delivery }: Props): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
   return (
     <FertilizerDeliveryForm
       initialValues={{
-        amount: pickup.amount,
-        clientName: pickup.clientName,
-        brook: pickup.brook,
-        complement: pickup.complement,
-        fertilizerId: pickup.fertilizer.id,
+        amount: delivery.amount,
+        clientName: delivery.clientName,
+        brook: delivery.brook,
+        complement: delivery.complement,
+        fertilizerId: delivery.fertilizer.id,
+        date: format(delivery.date, 'yyyy-MM-dd'),
       }}
       onSubmit={async (values) => {
         const { error } = await updateFertilizerDeliveryService(values)

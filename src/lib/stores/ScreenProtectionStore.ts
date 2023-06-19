@@ -3,6 +3,7 @@ import { devtools, persist } from 'zustand/middleware'
 
 type State = {
   isLocked: boolean
+  password: string
 }
 type Action = {
   lock: () => void
@@ -14,6 +15,7 @@ export const useScreenProtectionStore = create<State & Action>()(
     persist(
       (set) => ({
         isLocked: false,
+        password: '123456',
         lock: () => {
           set({ isLocked: true })
         },
