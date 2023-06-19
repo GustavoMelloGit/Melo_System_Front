@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { FaLock } from 'react-icons/fa'
 import * as yup from 'yup'
+import { shallow } from 'zustand/shallow'
 import BackgroundImage1 from '../../../../lib/assets/lockscreen-background-1.webp'
 import BackgroundImage2 from '../../../../lib/assets/lockscreen-background-2.webp'
 import BackgroundImage3 from '../../../../lib/assets/lockscreen-background-3.webp'
@@ -23,13 +24,17 @@ type LockScreenFormValues = {
 }
 export default function LockScreenView(): JSX.Element {
   const [currentBackgroundImage, setCurrentBackgroundImage] = useState(1)
-  const unlock = useScreenProtectionStore((state) => state.unlock)
-  const { control, handleSubmit } = useForm<LockScreenFormValues>({
+  const { unlock, password } = useScreenProtectionStore(
+    (state) => ({ unlock: state.unlock, password: state.password }),
+    shallow,
+  )
+  const { control, handleSubmit, setError } = useForm<LockScreenFormValues>({
     resolver: yupResolver(schema),
   })
 
   function handleUnlock(data: LockScreenFormValues): void {
-    if (data.password) unlock()
+    if (data.password === password) unlock()
+    else setError('password', { message: validationErrors.passwordIsIncorrect })
   }
 
   useEffect(() => {
