@@ -15,7 +15,7 @@ const Page = forwardRef<HTMLDivElement, Props>(({ children, title = '', meta, ..
       {meta}
     </Helmet>
 
-    <VStack align='stretch' spacing={10} ref={ref} {...other}>
+    <VStack align='stretch' spacing={10} flex={1} ref={ref} {...other}>
       {children}
     </VStack>
   </>
