@@ -22,7 +22,7 @@ const listItem: Record<
     icon: <BiUser />,
   },
   [Routes.fertilizers]: {
-    label: 'Adubos',
+    label: 'Estoque de Adubos',
     icon: <TbPlant />,
   },
   [Routes.books]: {
