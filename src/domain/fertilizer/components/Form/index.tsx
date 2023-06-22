@@ -45,9 +45,9 @@ export default function FertilizerForm({ initialValues, onSubmit }: Props): JSX.
           <ControllerField
             control={control}
             name='name'
-            label='Nome'
+            label='Fórmula'
             required
-            placeholder='Insira o nome'
+            placeholder='Insira a fórmula'
           />
           <ControllerField
             control={control}
