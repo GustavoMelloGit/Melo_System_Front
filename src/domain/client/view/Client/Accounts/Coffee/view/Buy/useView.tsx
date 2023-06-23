@@ -1,5 +1,5 @@
 import { toast } from 'react-hot-toast'
-import GlobalConfig from '../../../../../../../../lib/constants/config'
+import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { getClientService } from '../../../../../../service'
@@ -17,7 +17,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
   async function handleBuyCoffee({ bags, weight, ...values }: BuyCoffeeFormValues): Promise<void> {
     const totalValue = calculateCoffeeTotalValue(bags, weight, values.valuePerBag)
     const { error } = await buyCoffeeService({
-      weight: bags * GlobalConfig.weightPerBag + weight,
+      weight: formatBagsIntoWeight(bags, weight),
       bebida: values.bebida,
       value: totalValue,
       brook: values.brook.trim().length > 0 ? values.brook : undefined,

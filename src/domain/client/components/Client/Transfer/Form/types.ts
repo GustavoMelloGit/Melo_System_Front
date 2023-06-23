@@ -9,7 +9,7 @@ export type CoffeeClientTransfer = {
   clientId: string
   transferType: 'coffee'
   bebida: CoffeeBebidas
-  coffeType: CoffeeTypes
+  coffeeType: CoffeeTypes
   bags: number
   weight: number
 }

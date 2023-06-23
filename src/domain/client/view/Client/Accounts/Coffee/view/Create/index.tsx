@@ -8,8 +8,8 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import GlobalConfig from '../../../../../../../../lib/constants/config'
 import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatters'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import CoffeeFormView from '../../components/CreateForm'
 import { createCoffeeService } from '../../service/post'
@@ -29,7 +29,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
   }: CoffeeFormValues): Promise<void> {
     const { error } = await createCoffeeService({
       ...values,
-      value: bags * GlobalConfig.weightPerBag + weight,
+      value: formatBagsIntoWeight(bags, weight),
       clientId,
       date: formatInputDateString(date),
     })

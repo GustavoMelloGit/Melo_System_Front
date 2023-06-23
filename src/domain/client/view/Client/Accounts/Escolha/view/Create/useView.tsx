@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
-import GlobalConfig from '../../../../../../../../lib/constants/config'
 import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatters'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import { createEscolhaService } from '../../service/post'
@@ -23,7 +23,7 @@ export default function useCreateEscolhaView({ clientId, onSuccess }: Props): Us
       clientId,
       date: formatInputDateString(date),
       details: values.details,
-      value: bags * GlobalConfig.weightPerBag + weight,
+      value: formatBagsIntoWeight(bags, weight),
       description: values.description,
     })
     if (error) {

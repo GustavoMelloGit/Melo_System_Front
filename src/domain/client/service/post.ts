@@ -2,6 +2,7 @@ import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PostServiceResponse } from '../../../shared/types/utils/service'
+import { type CoffeeDetails } from '../../coffee/types/model/coffee'
 import { type ClientFormValues } from '../components/Client/Form/useClientForm'
 import { type CheckingAccountFormValues } from '../types/model/CheckingAccount'
 import { type ClientModel } from '../types/model/Client'
@@ -63,6 +64,7 @@ type TransferBetweenClientsServiceData = {
     item: {
       type: string
       value: number
+      details?: Partial<CoffeeDetails>
     }
   }
   to: {
@@ -70,6 +72,7 @@ type TransferBetweenClientsServiceData = {
     item: {
       type: string
       value: number
+      details?: Partial<CoffeeDetails>
     }
   }
 }

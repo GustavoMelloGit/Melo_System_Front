@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { type Address } from '../../domain/client/types/model/Client'
+import GlobalConfig from '../constants/config'
 
 /**
  * Format date values from yyyy-MM-dd to dd/mm/yyyy or dd/mm/yyyy hh:mm format.
@@ -56,4 +57,8 @@ export function formatAddress(address: Address): string {
   ]
   const addressFields = addressFieldOrder.map((field) => address[field])
   return addressFields.filter(Boolean).join(', ')
+}
+
+export function formatBagsIntoWeight(bags: number, weight?: number): number {
+  return Number(bags * GlobalConfig.weightPerBag + (weight ?? 0))
 }

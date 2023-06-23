@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Controller, type Control } from 'react-hook-form'
 import AutocompleteInput from '../../../../../../shared/components/inputs/Autocomplete'
@@ -31,28 +31,30 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
       <Text as='legend' fontSize='lg' fontWeight='bold' px={2}>
         {referral === 'from' ? 'Transferir de' : 'Transferir para'}
       </Text>
-      <Controller
-        name={`${referral}.clientId`}
-        control={control}
-        render={({ field: { onChange, ...field } }) => (
-          <AutocompleteInput
-            label='Cliente'
-            options={clients?.data?.map((client) => ({
-              label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
-              value: client.id,
-            }))}
-            isLoading={isLoadingClients}
-            handleChange={(value) => {
-              onChange(value)
-              setClientName(value)
-            }}
-            placeholder='Nome do cliente'
-            isRequired
-            {...field}
-          />
-        )}
-      />
-      <TransferReferralTransferTypeFields control={control} referral={referral} />
+      <Stack spacing={2}>
+        <Controller
+          name={`${referral}.clientId`}
+          control={control}
+          render={({ field: { onChange, ...field } }) => (
+            <AutocompleteInput
+              label='Cliente'
+              options={clients?.data?.map((client) => ({
+                label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
+                value: client.id,
+              }))}
+              isLoading={isLoadingClients}
+              handleChange={(value) => {
+                onChange(value)
+                setClientName(value)
+              }}
+              placeholder='Nome do cliente'
+              isRequired
+              {...field}
+            />
+          )}
+        />
+        <TransferReferralTransferTypeFields control={control} referral={referral} />
+      </Stack>
     </Box>
   )
 }
