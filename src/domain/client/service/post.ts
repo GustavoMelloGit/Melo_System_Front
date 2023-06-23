@@ -56,3 +56,37 @@ export async function createTransactionService(
     }
   }
 }
+
+type TransferBetweenClientsServiceData = {
+  from: {
+    clientId: string
+    item: {
+      type: string
+      value: number
+    }
+  }
+  to: {
+    clientId: string
+    item: {
+      type: string
+      value: number
+    }
+  }
+}
+export async function transferBetweenClientsService(
+  values: TransferBetweenClientsServiceData,
+): PostServiceResponse<CurrencyTransactionModel> {
+  try {
+    const { data } = await api.post(`/transfer`, values)
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
+}
