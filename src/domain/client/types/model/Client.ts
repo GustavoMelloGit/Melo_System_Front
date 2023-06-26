@@ -29,9 +29,9 @@ export type NaturalPerson = {
   type?: 'fisica'
   cpf?: string
   rg?: string
-  rgEmissionDate?: string
+  rgEmissionDate?: number
   producerRegistration?: string
-  birthDate?: string
+  birthDate?: number
   fatherName?: string
   motherName?: string
 }

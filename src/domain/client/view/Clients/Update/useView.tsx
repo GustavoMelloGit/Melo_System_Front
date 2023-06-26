@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
-import { type ClientFormValues } from '../../../components/Client/Form/useClientForm'
+import { type ClientFormValues } from '../../../components/Client/Form/types'
 import { getClientService, updateClientService } from '../../../service'
 
 export default function useUpdateClientView(): UseUpdateClientView {
@@ -26,7 +26,19 @@ export default function useUpdateClientView(): UseUpdateClientView {
   }
   return {
     handleUpdateClient,
-    initialValues: data ?? emptyClient,
+    initialValues:
+      ({
+        ...data,
+        ...(data?.personType?.type === 'fisica' &&
+          data.personType.birthDate &&
+          data.personType.rgEmissionDate && {
+            personType: {
+              ...data.personType,
+              birthDate: new Date(data.personType.birthDate).toISOString().split('T')[0],
+              rgEmissionDate: new Date(data.personType.rgEmissionDate).toISOString().split('T')[0],
+            },
+          }),
+      } as ClientFormValues) ?? emptyClient,
     isLoading,
   }
 }
@@ -47,14 +59,27 @@ const emptyClient: ClientFormValues = {
     state: '',
     street: '',
     zipCode: '',
+    location: {
+      lat: 0,
+      lng: 0,
+    },
   },
   balance: 0,
+  description: '',
+  nickname: '',
   contact: {
     phone: '',
   },
+  personType: {
+    type: 'fisica',
+    birthDate: '',
+    cpf: '',
+    rg: '',
+    fatherName: '',
+    motherName: '',
+    producerRegistration: '',
+    rgEmissionDate: '',
+  },
   profileImage: ' ',
-  id: '',
   name: '',
-  createdAt: 0,
-  updatedAt: 0,
 }
