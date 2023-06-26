@@ -2,6 +2,7 @@ import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PostServiceResponse } from '../../../shared/types/utils/service'
+import { type CoffeeDetails } from '../../coffee/types/model/coffee'
 import { type ClientFormValues } from '../components/Client/Form/useClientForm'
 import { type CheckingAccountFormValues } from '../types/model/CheckingAccount'
 import { type ClientModel } from '../types/model/Client'
@@ -44,6 +45,42 @@ export async function createTransactionService(
       value: Number(values.value),
       type: 'currency',
     })
+
+    return {
+      data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
+}
+
+type TransferBetweenClientsServiceData = {
+  from: {
+    clientId: string
+    item: {
+      type: string
+      value: number
+      details?: Partial<CoffeeDetails>
+    }
+  }
+  to: {
+    clientId: string
+    item: {
+      type: string
+      value: number
+      details?: Partial<CoffeeDetails>
+    }
+  }
+}
+export async function transferBetweenClientsService(
+  values: TransferBetweenClientsServiceData,
+): PostServiceResponse<CurrencyTransactionModel> {
+  try {
+    const { data } = await api.post(`/transfer`, values)
 
     return {
       data,

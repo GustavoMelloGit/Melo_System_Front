@@ -10,7 +10,6 @@ import {
   type InputGroupProps,
   type InputProps,
 } from '@chakra-ui/react'
-import { useState } from 'react'
 import {
   Controller,
   type Control,
@@ -27,6 +26,7 @@ export type FormInputProps<TFormValues extends FieldValues> = {
   rightIcon?: React.ReactNode
   label?: string
   inputGroupProps?: InputGroupProps
+  onChangeValue?: (value: number) => void
 } & Omit<InputProps, 'name'>
 
 export default function RHFCurrencyInput<TFormValues extends Record<string, unknown>>({
@@ -38,14 +38,13 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
   label,
   inputGroupProps,
   isRequired,
+  onChangeValue,
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element {
-  const [inputValue, setInputValue] = useState<number>(0)
-
   function formatCurrency(value: string): string {
     const options = { minimumFractionDigits: 2 }
     const result = new Intl.NumberFormat('pt-BR', options).format(parseFloat(value) / 100)
-
+    onChangeValue?.((+value ?? 0) / 100)
     if (result === 'NaN') {
       return '0,00'
     }
@@ -79,11 +78,10 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
               rounded='xl'
               inputMode='numeric'
               fontWeight={500}
-              value={formatCurrency((inputValue * 100).toString())}
+              value={formatCurrency((+value * 100).toString())}
               onChange={async (event) => {
                 const { value } = event.target
                 const onlyNumbers = value.replace('.', '').replace(',', '').replace(/\D/g, '')
-                setInputValue(+onlyNumbers / 100)
                 onChange(+onlyNumbers / 100)
               }}
               {...field}

@@ -40,7 +40,7 @@ export default function CheckingAccountForm({
   return (
     <form
       onSubmit={handleSubmit(async ({ value, ...values }) => {
-        const valueInCents = value * 100
+        const valueInCents = Math.round(value * 100)
         const convertedValue = isDebit ? -valueInCents : valueInCents
         await onSubmit({ ...values, value: convertedValue })
       })}
