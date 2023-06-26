@@ -102,11 +102,6 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
   {
-    id: 'description',
-    label: 'Descrição',
-  },
-
-  {
     id: 'details.coffeeType',
     label: 'Tipo',
     isSortable: true,
@@ -115,6 +110,10 @@ const headerColumns: TableHeaderColumns[] = [
     id: 'details.bebida',
     label: 'Bebida',
     isSortable: true,
+  },
+  {
+    id: 'description',
+    label: 'Descrição',
   },
   {
     id: 'type.value',
