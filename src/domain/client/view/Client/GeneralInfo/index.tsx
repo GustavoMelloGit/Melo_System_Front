@@ -14,7 +14,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useMemo } from 'react'
-import { formatDate } from '../../../../../lib/utils/formatters'
+import { formatAndSumDayOfDate } from '../../../../../lib/utils/date'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -119,7 +119,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           {
             label: 'Data de emissão do RG',
             value: client.personType.rgEmissionDate
-              ? formatDate(client.personType.rgEmissionDate)
+              ? formatAndSumDayOfDate(client.personType.rgEmissionDate)
               : defaultEmptyValue,
           },
           {
@@ -129,7 +129,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           {
             label: 'Data de nascimento',
             value: client.personType.birthDate
-              ? formatDate(client.personType.birthDate)
+              ? formatAndSumDayOfDate(client.personType.birthDate)
               : defaultEmptyValue,
           },
           {

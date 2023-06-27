@@ -42,6 +42,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
           overflow='hidden'
           textOverflow='ellipsis'
           title={String(option.label)}
+          textAlign='left'
           onClick={() => {
             handleOnClick(option)
           }}

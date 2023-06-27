@@ -36,17 +36,6 @@ export default function SheetForm({
     }
     return false
   }
-
-  const submitFormHandler = handleSubmit(async ({ weighingDate, ...values }) => {
-    try {
-      await onSubmit?.({
-        ...values,
-        weighingDate: formatInputDateString(weighingDate),
-      })
-      reset()
-    } catch {}
-  })
-
   useEffect(() => {
     if (initialValues) {
       reset(initialValues)
@@ -54,7 +43,19 @@ export default function SheetForm({
   }, [initialValues])
 
   return (
-    <form onSubmit={submitFormHandler}>
+    <form
+      onSubmit={handleSubmit(async ({ weighingDate, ...values }) => {
+        await onSubmit?.({
+          ...values,
+          weighingDate: formatInputDateString(weighingDate),
+        })
+        reset({
+          courier: '',
+          clientId: '',
+          number: values.number + 1,
+        })
+      })}
+    >
       <Card>
         <CardBody>
           <Stack spacing={5}>

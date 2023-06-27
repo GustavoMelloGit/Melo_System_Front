@@ -19,10 +19,11 @@ type Props = {
 export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
   const [showText, setShowText] = useState(false)
   const { details } = transaction
+
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
-    moisture: `${details.moisture}% de umidade`,
     picking: `${details.picking}% de cata`,
     sieve: `${details.sieve}% na 17/18`,
+    moisture: `${details.moisture}% de umidade`,
     drilled: `${details.drilled}% de broca`,
     foulness: `${details.foulness}% de impureza`,
     description: `${details.description}`,
@@ -35,7 +36,19 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     despolpado: 'DESP',
     escolha: 'ESC',
   }
-  const fullDescription = Object.entries(details).reduce((acc, [key, value]) => {
+
+  const sortedDetails: CoffeeDetails = {
+    picking: details.picking,
+    sieve: details.sieve,
+    moisture: details.moisture,
+    drilled: details.drilled,
+    foulness: details.foulness,
+    description: details.description,
+    bebida: details.bebida,
+    coffeeType: details.coffeeType,
+  }
+
+  const fullDescription = Object.entries(sortedDetails).reduce((acc, [key, value]) => {
     const messageValue = messageByDetail[key as keyof CoffeeDetails]
     if (!value) return acc
     if (messageValue) return acc + messageValue + ' '
@@ -45,6 +58,10 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   return (
     <Tr>
       <Td w={120}>{dateToFormat(transaction.date)}</Td>
+      <Td title={capitalCase(transaction.details.coffeeType)}>
+        {labelByTypeName[transaction.details.coffeeType]}
+      </Td>
+      <Td>{CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}</Td>
       <Td
         title={fullDescription}
         cursor='pointer'
@@ -60,10 +77,6 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         </Collapse>
       </Td>
 
-      <Td title={capitalCase(transaction.details.coffeeType)}>
-        {labelByTypeName[transaction.details.coffeeType]}
-      </Td>
-      <Td>{CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}</Td>
       <Td color={getColorByValue(transaction.type.value)}>
         {getNumberOfBags(transaction.type.value)}
       </Td>
