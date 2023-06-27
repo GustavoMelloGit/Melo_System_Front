@@ -21,6 +21,9 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   const { data, isLoading } = getClientsService(`name=${clientName}`)
 
   useEffect(() => {
+    const isUpdate = initialValues?.complement && initialValues?.brook
+    if (isUpdate) return
+
     if (!data) return
     if (data.data.length === 1) {
       const [client] = data.data
