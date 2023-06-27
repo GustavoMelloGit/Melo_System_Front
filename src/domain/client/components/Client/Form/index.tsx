@@ -22,7 +22,8 @@ import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
 import AddressFields from './Address'
 import LegalPersonFields from './LegalPerson'
 import NaturalPersonFields from './NaturalPerson'
-import useClientForm, { type ClientFormValues } from './useClientForm'
+import { type ClientFormValues } from './types'
+import useClientForm from './useClientForm'
 
 type ClientFormProps = {
   onSubmit: (values: ClientFormValues) => Promise<void>

@@ -8,7 +8,7 @@ import {
 import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
-import { type ClientFormValues } from './useClientForm'
+import { type ClientFormValues } from './types'
 
 type NaturalPersonFieldsProps = {
   formState: FormState<ClientFormValues>
