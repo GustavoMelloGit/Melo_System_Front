@@ -53,6 +53,10 @@ export default function SheetForm({
           courier: '',
           clientId: '',
           number: values.number + 1,
+          coffeeDetails: {
+            coffeeType: 'bica_corrida',
+            bebida: 'duro',
+          },
         })
       })}
     >

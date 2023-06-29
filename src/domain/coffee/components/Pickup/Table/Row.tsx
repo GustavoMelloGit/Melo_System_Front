@@ -1,5 +1,5 @@
 import { Collapse, Flex, Td, Tr } from '@chakra-ui/react'
-import { useState } from 'react'
+import { cloneElement, useState } from 'react'
 import IconButton from '../../../../../shared/components/IconButton'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
@@ -98,7 +98,11 @@ export default function PickupTableRow({
       </Td>
       <Td textAlign='center'>
         <Flex align='center' justify='center' gap={1}>
-          {actions.map((action) => buttonByAction[action])}
+          {actions.map((action) =>
+            cloneElement(buttonByAction[action], {
+              key: action,
+            }),
+          )}
         </Flex>
       </Td>
     </Tr>

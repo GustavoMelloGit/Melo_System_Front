@@ -10,11 +10,13 @@ type ClientsTableProps = {
   data: ClientModel[] | undefined
   totalClients: number
   isLoading: boolean
+  onRemove: (id: string) => void
 }
 export default function ClientsTable({
   data,
   isLoading,
   totalClients,
+  onRemove,
 }: ClientsTableProps): JSX.Element {
   return (
     <Table
@@ -34,7 +36,7 @@ export default function ClientsTable({
       }}
     >
       {data?.map((client, index) => (
-        <ClientsTableRow key={index} client={client} />
+        <ClientsTableRow onRemove={onRemove} key={index} client={client} />
       ))}
     </Table>
   )

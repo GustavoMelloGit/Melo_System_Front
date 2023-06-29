@@ -87,6 +87,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                   name='brook'
                   label='Córrego'
                   data-cy='brook-input'
+                  placeholder='Informe o córrego'
                 />
               </Flex>
               <ControllerField<PickupFormValues>
@@ -95,6 +96,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                 name='complement'
                 label='Referência'
                 data-cy='complement-input'
+                placeholder='Informe a referência'
               />
             </Stack>
             <Button

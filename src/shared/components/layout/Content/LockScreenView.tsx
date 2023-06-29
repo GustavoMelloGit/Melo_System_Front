@@ -30,6 +30,9 @@ export default function LockScreenView(): JSX.Element {
   )
   const { control, handleSubmit, setError } = useForm<LockScreenFormValues>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      password: '',
+    },
   })
 
   function handleUnlock(data: LockScreenFormValues): void {
@@ -98,7 +101,7 @@ export default function LockScreenView(): JSX.Element {
           }}
         >
           <Box maxW={300}>
-            <form onSubmit={handleSubmit(handleUnlock)}>
+            <form onSubmit={handleSubmit(handleUnlock)} autoComplete='off'>
               <Heading as='h1' size='xl' fontWeight={700}>
                 Você ativou o bloqueio de tela
               </Heading>
@@ -112,6 +115,7 @@ export default function LockScreenView(): JSX.Element {
                 type='password'
                 placeholder='Digite sua senha'
                 variant='filled'
+                autoComplete='off'
               />
               <Button type='submit' w='full' colorScheme='yellow' mt={5}>
                 Desbloquear

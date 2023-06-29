@@ -8,7 +8,7 @@ import ClientsTable from '../../../components/Clients/Table'
 import useClientsListView from './useView'
 
 export default function ClientsListView(): JSX.Element {
-  const { data, isLoading, total } = useClientsListView()
+  const { data, isLoading, total, handleRemoveClient } = useClientsListView()
   return (
     <Page title='Clientes' data-cy='list-clients-page'>
       <HeaderBreadcrumbs
@@ -31,7 +31,12 @@ export default function ClientsListView(): JSX.Element {
           </Link>
         }
       />
-      <ClientsTable totalClients={total} data={data} isLoading={isLoading} />
+      <ClientsTable
+        totalClients={total}
+        data={data}
+        isLoading={isLoading}
+        onRemove={handleRemoveClient}
+      />
     </Page>
   )
 }

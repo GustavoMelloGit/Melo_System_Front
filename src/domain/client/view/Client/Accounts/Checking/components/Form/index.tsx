@@ -20,12 +20,10 @@ import { type CheckingAccountFormValues } from '../../../../../../types/model/Ch
 type CheckingAccountFormProps = {
   onSubmit: (values: CheckingAccountFormValues) => Promise<void>
   initialValues?: CheckingAccountFormValues
-  submitText: string
 }
 export default function CheckingAccountForm({
   onSubmit,
   initialValues,
-  submitText,
 }: CheckingAccountFormProps): JSX.Element {
   const [isDebit, setIsDebit] = useState<boolean>(true)
   const {
