@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
@@ -11,6 +11,7 @@ import BackgroundImage2 from '../../../../lib/assets/lockscreen-background-2.web
 import BackgroundImage3 from '../../../../lib/assets/lockscreen-background-3.webp'
 import { validationErrors } from '../../../../lib/errors'
 import { useScreenProtectionStore } from '../../../../lib/stores/ScreenProtectionStore'
+import { useModal } from '../../../hooks/useModal'
 import ControllerField from '../../inputs/ControllerField'
 
 const backgroundImages = [BackgroundImage1, BackgroundImage2, BackgroundImage3]
@@ -28,12 +29,18 @@ export default function LockScreenView(): JSX.Element {
     (state) => ({ unlock: state.unlock, password: state.password }),
     shallow,
   )
+  const openModal = useModal((state) => state.openModal)
   const { control, handleSubmit, setError } = useForm<LockScreenFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
       password: '',
     },
   })
+
+  async function handleGoToChangePassword(): Promise<void> {
+    const SetLockScreenPassword = (await import('./SetLockScreenPassword')).default
+    openModal(<SetLockScreenPassword />)
+  }
 
   function handleUnlock(data: LockScreenFormValues): void {
     if (data.password === password) unlock()
@@ -117,6 +124,18 @@ export default function LockScreenView(): JSX.Element {
                 variant='filled'
                 autoComplete='off'
               />
+              <Text fontSize='sm' color='gray.500' mt={2}>
+                Esqueceu sua senha?{' '}
+                <Button
+                  variant='link'
+                  color='yellow.500'
+                  fontWeight={500}
+                  fontSize='sm'
+                  onClick={handleGoToChangePassword}
+                >
+                  Alterar senha
+                </Button>
+              </Text>
               <Button type='submit' w='full' colorScheme='yellow' mt={5}>
                 Desbloquear
               </Button>
