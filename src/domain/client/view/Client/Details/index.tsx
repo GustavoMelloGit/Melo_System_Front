@@ -3,9 +3,9 @@ import {
   Box,
   Card,
   CardHeader,
+  Center,
   Flex,
   Heading,
-  IconButton,
   Tab,
   TabList,
   TabPanel,
@@ -13,10 +13,10 @@ import {
   Tabs,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { BiDollarCircle } from 'react-icons/bi'
-import { IoDocumentTextOutline } from 'react-icons/io5'
+import { BsZoomIn } from 'react-icons/bs'
 import { Link, Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
+import IconButton from '../../../../../shared/components/IconButton'
 import InDevelopmentTag from '../../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
@@ -29,8 +29,14 @@ import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import useClientDetailsView from './useView'
 
 export default function ClientDetails(): JSX.Element {
-  const { client, isLoading, currentTab, openClientInfoModal, openClientBalancesModal } =
-    useClientDetailsView()
+  const {
+    client,
+    isLoading,
+    currentTab,
+    openClientInfoModal,
+    openClientBalancesModal,
+    zoomClientImage,
+  } = useClientDetailsView()
 
   if (isLoading) return <SpinLoader />
   if (!client) {
@@ -63,12 +69,42 @@ export default function ClientDetails(): JSX.Element {
               gap={[4, 8]}
               flexWrap='wrap'
             >
-              <Avatar
-                size={{ base: 'xl', sm: '2xl' }}
-                loading='lazy'
-                src={client.profileImage}
-                name={client.name}
-              />
+              <Box
+                pos='relative'
+                borderRadius='full'
+                boxSize={{
+                  base: '96px',
+                  sm: '128px',
+                }}
+              >
+                {client.profileImage && (
+                  <Center
+                    as='button'
+                    opacity={0}
+                    pos='absolute'
+                    inset={0}
+                    borderRadius='full'
+                    background='rgba(0,0,0,0.5)'
+                    transition='opacity 0.2s'
+                    zIndex={1}
+                    _hover={{
+                      opacity: 1,
+                    }}
+                    onClick={() => {
+                      zoomClientImage(client.profileImage ?? '')
+                    }}
+                  >
+                    <BsZoomIn size={26} />
+                  </Center>
+                )}
+                <Avatar
+                  boxSize='full'
+                  size={{ base: 'xl', sm: '2xl' }}
+                  loading='lazy'
+                  src={client.profileImage}
+                  name={client.name}
+                />
+              </Box>
               <Flex
                 justify='space-between'
                 flex={1}
@@ -104,14 +140,14 @@ export default function ClientDetails(): JSX.Element {
                     variant='outline'
                     title='Informações gerais do cliente'
                     aria-label='Informações gerais do cliente'
-                    icon={<IoDocumentTextOutline size={20} />}
+                    icon='document'
                   />
                   <IconButton
                     onClick={openClientBalancesModal}
                     variant='outline'
                     title='Saldos do cliente'
                     aria-label='Saldos do cliente'
-                    icon={<BiDollarCircle size={20} />}
+                    icon='circledDollar'
                   />
                 </Flex>
               </Flex>

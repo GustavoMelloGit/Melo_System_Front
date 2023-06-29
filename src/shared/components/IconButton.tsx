@@ -1,10 +1,10 @@
 import { IconButton as ChakraIconButton, type IconButtonProps } from '@chakra-ui/react'
 import { cloneElement, useState, type MouseEvent } from 'react'
 import { AiOutlineLock, AiOutlinePrinter } from 'react-icons/ai'
-import { BiBlock, BiFilter } from 'react-icons/bi'
-import { BsCheckCircle, BsTrash } from 'react-icons/bs'
+import { BiBlock, BiDollarCircle, BiFilter } from 'react-icons/bi'
+import { BsCheckCircle, BsTrash, BsZoomIn } from 'react-icons/bs'
 import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
-import { IoAddOutline } from 'react-icons/io5'
+import { IoAddOutline, IoDocumentTextOutline } from 'react-icons/io5'
 import { RiExchangeDollarLine } from 'react-icons/ri'
 import { TbPencil, TbShoppingCart, TbZoomMoney } from 'react-icons/tb'
 import { useModal } from '../hooks/useModal'
@@ -23,6 +23,9 @@ const buttonIcons = {
   filter: <BiFilter size={28} />,
   linkTo: <HiArrowTopRightOnSquare size={20} />,
   lock: <AiOutlineLock />,
+  zoom: <BsZoomIn size={20} />,
+  document: <IoDocumentTextOutline size={20} />,
+  circledDollar: <BiDollarCircle size={20} />,
 } as const
 
 const shouldConfirmAction: Array<keyof typeof buttonIcons> = ['remove']
