@@ -2,6 +2,7 @@ import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
+import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 
@@ -12,6 +13,7 @@ export default function EscolhaAccountTableRow({ transaction }: Props): JSX.Elem
   return (
     <Tr>
       <Td>{dateToFormat(transaction.date)}</Td>
+      <CollapsibleTd>{transaction.description}</CollapsibleTd>
       <Td>{transaction?.details?.utilization ?? 0}</Td>
       <Td>{transaction?.details?.foulness ?? 0}</Td>
       <Td color={getColorByValue(transaction.type.value)}>

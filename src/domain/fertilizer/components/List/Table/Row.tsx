@@ -1,8 +1,8 @@
-import { Collapse, Flex, Td, Tr } from '@chakra-ui/react'
+import { Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
-import { useState } from 'react'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import IconButton from '../../../../../shared/components/IconButton'
+import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type FertilizerModel } from '../../../types/model/Fertilizer'
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
   onClickCredit: (fertilizer: FertilizerModel) => Promise<void>
 }
 const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX.Element => {
-  const [showText, setShowText] = useState(false)
   return (
     <Tr>
       <Td data-cy='table-cell-fertilizer-createdAt'>
@@ -25,20 +24,7 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props)
       >
         {fertilizer.quantity ?? 0}
       </Td>
-      <Td
-        title={fertilizer.description ?? '--'}
-        cursor='pointer'
-        onClick={() => {
-          setShowText((prev) => !prev)
-        }}
-        wordBreak='break-word'
-        whiteSpace='pre-wrap'
-        maxW={400}
-      >
-        <Collapse startingHeight={20} in={showText}>
-          {fertilizer.description || '--'}
-        </Collapse>
-      </Td>
+      <CollapsibleTd>{fertilizer.description ?? '--'}</CollapsibleTd>
       <Td>
         <Flex justify='center' gap={1}>
           <IconButton

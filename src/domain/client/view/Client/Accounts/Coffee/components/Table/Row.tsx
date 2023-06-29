@@ -1,9 +1,9 @@
-import { Collapse, Td, Tr } from '@chakra-ui/react'
+import { Td, Tr } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
-import { useState } from 'react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
+import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import {
   CoffeeBebidasLabel,
   type CoffeeBebidas,
@@ -17,7 +17,6 @@ type Props = {
   transaction: CoffeeTransactionModel
 }
 export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
-  const [showText, setShowText] = useState(false)
   const { details } = transaction
 
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
@@ -62,21 +61,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
         {labelByTypeName[transaction.details.coffeeType]}
       </Td>
       <Td>{CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}</Td>
-      <Td
-        title={fullDescription}
-        cursor='pointer'
-        onClick={() => {
-          setShowText((prev) => !prev)
-        }}
-        maxW={200}
-        wordBreak='break-word'
-        whiteSpace='pre-wrap'
-      >
-        <Collapse startingHeight={20} in={showText}>
-          {fullDescription || transaction.description}
-        </Collapse>
-      </Td>
-
+      <CollapsibleTd>{fullDescription || transaction.description}</CollapsibleTd>
       <Td color={getColorByValue(transaction.type.value)}>
         {getNumberOfBags(transaction.type.value)}
       </Td>
