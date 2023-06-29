@@ -40,8 +40,6 @@ export default function useIdle(delay: number = 10000): UseIdle {
     document.addEventListener('mousewheel', resetTimer, false)
     document.addEventListener('touchmove', resetTimer, false)
     document.addEventListener('MSPointerMove', resetTimer, false)
-    window.addEventListener('blur', startTimer, false)
-    window.addEventListener('focus', resetTimer, false)
   }
 
   const cleanUp = (): void => {
@@ -52,8 +50,6 @@ export default function useIdle(delay: number = 10000): UseIdle {
     document.removeEventListener('mousewheel', resetTimer)
     document.removeEventListener('touchmove', resetTimer)
     document.removeEventListener('MSPointerMove', resetTimer)
-    window.removeEventListener('blur', startTimer)
-    window.removeEventListener('focus', resetTimer)
 
     clearTimeout(timeoutId.current)
   }

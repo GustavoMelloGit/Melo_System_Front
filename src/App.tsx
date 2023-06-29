@@ -16,12 +16,14 @@ import LayoutProvider from './shared/contexts/LayoutContext'
 import useIdle from './shared/hooks/useIdle'
 const LockScreenView = lazy(async () => import('./shared/components/layout/Content/LockScreenView'))
 
+const delayToLock = 10 * 60 * 1000 // 10 minutes
+
 function App(): JSX.Element {
   const [isLocked, lock] = useScreenProtectionStore(
     (state) => [state.isLocked, state.lock],
     shallow,
   )
-  const { isIdle } = useIdle(10 * 60 * 1000)
+  const { isIdle } = useIdle(delayToLock)
 
   if (isIdle && !isLocked) {
     lock()
