@@ -11,6 +11,10 @@ export async function createEscolhaService({
   try {
     const { data } = await api.post(`/transactions/${clientId}`, {
       ...values,
+      details: {
+        ...values.details,
+        coffeeType: 'escolha',
+      },
       type: 'escolha',
     })
     return {
