@@ -9,9 +9,6 @@ const baseStyle = definePartsStyle({
   dialogContainer: {
     p: 4,
   },
-  overlay: {
-    backdropFilter: 'blur(2px)',
-  },
   body: {
     maxH: '70vh',
     overflowY: 'auto',
