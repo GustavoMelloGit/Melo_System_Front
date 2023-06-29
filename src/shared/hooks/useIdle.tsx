@@ -1,64 +1,63 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { throttle } from 'throttle-debounce'
 
-export default function useIdle(delay: number = 10000): UseIdle {
-  const [isIdle, setIsIdle] = useState<boolean>(false)
-  // create a new reference to track timer
-  const timeoutId = useRef<NodeJS.Timeout>()
+const defaultEvents = ['mousemove', 'mousedown', 'resize', 'keydown', 'touchstart', 'wheel']
+const oneMinute = 60e3
 
-  // assign and remove the listeners
+const useIdle = (
+  ms: number = oneMinute,
+  initialState: boolean = false,
+  events: string[] = defaultEvents,
+): boolean => {
+  const [state, setState] = useState<boolean>(initialState)
+
   useEffect(() => {
-    setup()
+    let mounted = true
+    let timeout: any
+    let localState: boolean = state
+    const set = (newState: boolean): void => {
+      if (mounted) {
+        localState = newState
+        setState(newState)
+      }
+    }
+
+    const onEvent = throttle(50, () => {
+      if (localState) {
+        set(false)
+      }
+
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        set(true)
+      }, ms)
+    })
+    const onVisibility = (): void => {
+      if (!document.hidden) {
+        onEvent()
+      }
+    }
+
+    for (let i = 0; i < events.length; i++) {
+      window.addEventListener(events[i], onEvent)
+    }
+    document.addEventListener('visibilitychange', onVisibility)
+
+    timeout = setTimeout(() => {
+      set(true)
+    }, ms)
 
     return () => {
-      cleanUp()
+      mounted = false
+
+      for (let i = 0; i < events.length; i++) {
+        window.removeEventListener(events[i], onEvent)
+      }
+      document.removeEventListener('visibilitychange', onVisibility)
     }
-  })
+  }, [ms, events])
 
-  const startTimer = (): void => {
-    timeoutId.current = setTimeout(goInactive, delay)
-  }
-
-  const resetTimer = (): void => {
-    clearTimeout(timeoutId.current)
-    goActive()
-  }
-
-  const goInactive = (): void => {
-    setIsIdle(true)
-  }
-
-  const goActive = (): void => {
-    setIsIdle(false)
-    startTimer()
-  }
-
-  const setup = (): void => {
-    document.addEventListener('mousemove', resetTimer, false)
-    document.addEventListener('mousedown', resetTimer, false)
-    document.addEventListener('keypress', resetTimer, false)
-    document.addEventListener('DOMMouseScroll', resetTimer, false)
-    document.addEventListener('mousewheel', resetTimer, false)
-    document.addEventListener('touchmove', resetTimer, false)
-    document.addEventListener('MSPointerMove', resetTimer, false)
-  }
-
-  const cleanUp = (): void => {
-    document.removeEventListener('mousemove', resetTimer)
-    document.removeEventListener('mousedown', resetTimer)
-    document.removeEventListener('keypress', resetTimer)
-    document.removeEventListener('DOMMouseScroll', resetTimer)
-    document.removeEventListener('mousewheel', resetTimer)
-    document.removeEventListener('touchmove', resetTimer)
-    document.removeEventListener('MSPointerMove', resetTimer)
-
-    clearTimeout(timeoutId.current)
-  }
-
-  return {
-    isIdle,
-  }
+  return state
 }
 
-type UseIdle = {
-  isIdle: boolean
-}
+export default useIdle

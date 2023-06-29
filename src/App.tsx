@@ -23,7 +23,7 @@ function App(): JSX.Element {
     (state) => [state.isLocked, state.lock],
     shallow,
   )
-  const { isIdle } = useIdle(delayToLock)
+  const isIdle = useIdle(delayToLock)
 
   if (isIdle && !isLocked) {
     lock()
