@@ -66,6 +66,11 @@ const headerColumns: TableHeaderColumns[] = [
     isSortable: true,
   },
   {
+    id: 'description',
+    label: 'Descrição',
+    isSortable: true,
+  },
+  {
     id: 'utilization',
     label: 'Aproveitamento',
     isSortable: true,

@@ -9,7 +9,19 @@ export async function createSheetService(
   bookNumber: string | number,
 ): PostServiceResponse<SheetModel> {
   try {
-    const { data } = await api.post(`/sheets/${bookNumber}/${clientId}`, values)
+    const { data } = await api.post(`/sheets/${bookNumber}/${clientId}`, {
+      ...values,
+      coffeeDetails: {
+        ...values.coffeeDetails,
+        ...(values.coffeeDetails.coffeeType === 'escolha'
+          ? {
+              bebida: undefined,
+            }
+          : {
+              bebida: values.coffeeDetails.bebida,
+            }),
+      },
+    })
 
     return {
       data,
