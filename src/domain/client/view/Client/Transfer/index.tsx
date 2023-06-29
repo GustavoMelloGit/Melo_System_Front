@@ -7,19 +7,21 @@ import ClientTransferForm from '../../../components/Client/Transfer/Form'
 import { type ClientTransferFormValues } from '../../../components/Client/Transfer/Form/types'
 import { transferBetweenClientsService } from '../../../service'
 
+const formatCurrencyValue = (value: number): number => value * 100
+
 export default function ClientTransferView(): JSX.Element {
   async function handleSubmitTransfer(values: ClientTransferFormValues): Promise<void> {
     const fromItemType = 'bebida' in values.from ? values.from.bebida : 'currency'
     const fromValue: number =
       'bebida' in values.from
         ? formatBagsIntoWeight(values.from.bags, values.from.weight)
-        : values.from.value
+        : formatCurrencyValue(values.from.value)
 
     const toItemType = 'bebida' in values.to ? values.to.bebida : 'currency'
     const toValue: number =
       'bebida' in values.to
         ? formatBagsIntoWeight(values.to.bags, values.to.weight)
-        : values.to.value * 100
+        : formatCurrencyValue(values.to.value)
 
     const { error } = await transferBetweenClientsService({
       from: {

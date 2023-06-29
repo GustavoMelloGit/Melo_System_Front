@@ -1,5 +1,6 @@
-import { Flex, FormControl, FormLabel, Select, Stack } from '@chakra-ui/react'
-import { Controller, useFormContext, useWatch, type Control } from 'react-hook-form'
+import { Flex, FormControl, FormLabel, Select, Stack, type SelectProps } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { Controller, useFormContext, useWatch, type Path } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../shared/components/inputs/RHFCurrencyInput'
@@ -13,61 +14,85 @@ const valueLabelByReferral: Record<Referral, string> = {
   to: 'Valor a ser recebido',
 }
 
+const selectFieldStyle: SelectProps = {
+  rounded: 'xl',
+  variant: 'filled',
+}
+
 type Props = {
-  control: Control<ClientTransferFormValues, any>
   referral: Referral
 }
-export default function TransferReferralTransferTypeFields({
-  control,
-  referral,
-}: Props): JSX.Element {
-  const { setValue, register } = useFormContext<ClientTransferFormValues>()
-  const type = useWatch({
+export default function TransferReferralTransferTypeFields({ referral }: Props): JSX.Element {
+  const { setValue, control, register } = useFormContext<ClientTransferFormValues>()
+  const transferType = useWatch({
     control,
     name: `${referral}.transferType`,
   })
+  const value = useWatch({
+    control,
+    name: `${referral}.value`,
+  })
+  const bebida = useWatch({
+    control,
+    name: `${referral}.bebida`,
+  })
+  const coffeeType = useWatch({
+    control,
+    name: `${referral}.coffeeType`,
+  })
+  const bags = useWatch({
+    control,
+    name: `${referral}.bags`,
+  })
+  const weight = useWatch({
+    control,
+    name: `${referral}.weight`,
+  })
+
+  const mirrorFromValuesIntoToValues = (
+    field: Path<ClientTransferFormValues>,
+    value: any,
+  ): void => {
+    setValue(field, value)
+  }
+
+  useEffect(() => {
+    if (referral === 'from') {
+      mirrorFromValuesIntoToValues(`to.transferType`, transferType)
+      mirrorFromValuesIntoToValues(`to.value`, value)
+      mirrorFromValuesIntoToValues(`to.bebida`, bebida)
+      mirrorFromValuesIntoToValues(`to.coffeeType`, coffeeType)
+      mirrorFromValuesIntoToValues(`to.bags`, bags)
+      mirrorFromValuesIntoToValues(`to.weight`, weight)
+    }
+  }, [transferType, value, bebida, coffeeType, bags, weight])
+
   return (
     <Stack spacing={4}>
       <Flex gap={2}>
         <Controller
           control={control}
           name={`${referral}.transferType`}
-          render={({ field: { onChange, ...field } }) => (
+          render={({ field }) => (
             <FormControl>
               <FormLabel htmlFor={field.name}>Tipo de transferência</FormLabel>
-              <Select
-                rounded='xl'
-                variant={'filled'}
-                onChange={(e) => {
-                  onChange(e)
-                  if (referral === 'from') {
-                    setValue(`to.transferType`, e.target.value as 'currency' | 'coffee')
-                  }
-                }}
-                id={field.name}
-                {...field}
-              >
+              <Select id={field.name} {...selectFieldStyle} {...field}>
                 <option value='currency'>Dinheiro</option>
                 <option value='coffee'>Café</option>
               </Select>
             </FormControl>
           )}
         />
-        {type === 'currency' && (
+        {transferType === 'currency' && (
           <RHFCurrencyInput
             control={control}
             leftIcon='R$'
             name={`${referral}.value`}
             label={valueLabelByReferral[referral]}
-            onChangeValue={(value) => {
-              if (referral === 'from' && typeof value !== 'undefined') {
-                setValue(`to.value`, value)
-              }
-            }}
           />
         )}
       </Flex>
-      {type === 'coffee' && (
+      {transferType === 'coffee' && (
         <>
           <Flex gap={2}>
             <RHFSelectField

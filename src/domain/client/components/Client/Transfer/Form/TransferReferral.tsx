@@ -53,7 +53,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
             />
           )}
         />
-        <TransferReferralTransferTypeFields control={control} referral={referral} />
+        <TransferReferralTransferTypeFields referral={referral} />
       </Stack>
     </Box>
   )

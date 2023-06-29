@@ -1,6 +1,7 @@
 import { Box, List, VStack } from '@chakra-ui/react'
 import { BiUser } from 'react-icons/bi'
 import { BsTruck } from 'react-icons/bs'
+import { CgArrowsExchange } from 'react-icons/cg'
 import { MdOutlineMonitorWeight } from 'react-icons/md'
 import { TbPlant, TbTruckLoading } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
@@ -37,10 +38,10 @@ const listItem: Record<
     label: 'Cafés a Buscar',
     icon: <BsTruck />,
   },
-  // [Routes.transfer]: {
-  //   label: 'Transferência',
-  //   icon: <CgArrowsExchange size={24} />,
-  // },
+  [Routes.transfer]: {
+    label: 'Transferência',
+    icon: <CgArrowsExchange size={24} />,
+  },
 }
 
 const customPaths: Record<string, string> = {
