@@ -1,7 +1,5 @@
-import { Flex, IconButton, VStack } from '@chakra-ui/react'
-import { AiOutlinePrinter } from 'react-icons/ai'
-import { IoAddOutline } from 'react-icons/io5'
-import PromiseIconButton from '../../../../shared/components/buttons/PromiseIconButton'
+import { Flex, VStack } from '@chakra-ui/react'
+import IconButton from '../../../../shared/components/IconButton'
 import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
@@ -33,10 +31,10 @@ export default function CoffeePickup(): JSX.Element {
         ]}
         actions={
           <Flex gap={3}>
-            <PromiseIconButton
-              icon={<AiOutlinePrinter size={22} />}
+            <IconButton
+              icon='printer'
               aria-label='Baixar lista de cafés a buscar'
-              service={handleDownloadList}
+              onClick={handleDownloadList}
               colorScheme='blue'
               variant='outline'
               data-cy='download-pickupCoffee-button'
@@ -44,7 +42,7 @@ export default function CoffeePickup(): JSX.Element {
             />
             <IconButton
               aria-label='Adicionar café a buscar'
-              icon={<IoAddOutline size={22} />}
+              icon='add'
               colorScheme='blue'
               variant='outline'
               onClick={handleOpenForm}
