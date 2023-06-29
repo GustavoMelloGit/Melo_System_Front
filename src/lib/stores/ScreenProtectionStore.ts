@@ -8,6 +8,7 @@ type State = {
 type Action = {
   lock: () => void
   unlock: () => void
+  setPassword: (password: string) => void
 }
 
 export const useScreenProtectionStore = create<State & Action>()(
@@ -21,6 +22,9 @@ export const useScreenProtectionStore = create<State & Action>()(
         },
         unlock: () => {
           set({ isLocked: false })
+        },
+        setPassword: (password) => {
+          set({ password })
         },
       }),
       {
