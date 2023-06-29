@@ -11,7 +11,7 @@ import SheetFormLines from './Lines'
 import SheetFormSheetDetails from './SheetDetails'
 
 type Props = {
-  initialValues?: SheetFormValues
+  initialValues: SheetFormValues
   onSubmit?: (values: SheetFormValues) => Promise<void>
   variant?: 'create' | 'edit' | 'view'
 }
@@ -20,10 +20,9 @@ export default function SheetForm({
   onSubmit,
   variant = 'create',
 }: Props): JSX.Element {
-  const { register, handleSubmit, formState, control, setValue, reset, watch } =
-    useForm<SheetFormValues>({
-      resolver: yupResolver(validationSchema),
-    })
+  const { register, handleSubmit, formState, control, setValue, reset } = useForm<SheetFormValues>({
+    resolver: yupResolver(validationSchema),
+  })
 
   function isDisabled(fieldName: Path<SheetFormValues>): boolean {
     let disabledFields: Array<Path<SheetFormValues>>
@@ -53,9 +52,19 @@ export default function SheetForm({
           courier: '',
           clientId: '',
           number: values.number + 1,
+          isDraft: false,
+          lines: [{ bags: 0, weight: 0 }],
+          weighingDate: new Date().toISOString().split('T')[0],
           coffeeDetails: {
             coffeeType: 'bica_corrida',
             bebida: 'duro',
+            description: '',
+            drilled: 0,
+            foulness: 0,
+            moisture: 0,
+            picking: 0,
+            sieve: 0,
+            utilization: 0,
           },
         })
       })}
@@ -66,7 +75,6 @@ export default function SheetForm({
             <SheetFormSheetDetails isDisabled={isDisabled} control={control} />
             <SheetFormCoffeeDetails
               isDisabled={isDisabled}
-              watch={watch}
               register={register}
               errors={formState.errors}
               control={control}

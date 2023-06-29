@@ -1,6 +1,6 @@
 import { Divider, Grid, GridItem, Heading, Select, Stack } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
-import { type Control, type Path, type UseFormRegister, type UseFormWatch } from 'react-hook-form'
+import { useWatch, type Control, type Path, type UseFormRegister } from 'react-hook-form'
 import { CoffeeTypeHasBebida, hasUtilizationType } from '../../../../../lib/constants/coffee'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
@@ -12,17 +12,18 @@ type Props = {
   register: UseFormRegister<SheetFormValues>
   control: Control<SheetFormValues>
   errors: unknown
-  watch: UseFormWatch<SheetFormValues>
   isDisabled: (fieldName: Path<SheetFormValues>) => boolean
 }
 export default function SheetFormCoffeeDetails({
   register,
   errors,
-  watch,
   isDisabled,
   control,
 }: Props): JSX.Element {
-  const currentCoffeeType = watch('coffeeDetails.coffeeType')
+  const currentCoffeeType = useWatch({
+    control,
+    name: 'coffeeDetails.coffeeType',
+  })
 
   return (
     <Stack spacing={4}>
