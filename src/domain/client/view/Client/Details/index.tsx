@@ -17,7 +17,6 @@ import { BsZoomIn } from 'react-icons/bs'
 import { Link, Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import IconButton from '../../../../../shared/components/IconButton'
-import InDevelopmentTag from '../../../../../shared/components/InDevelopmentTag'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
@@ -173,12 +172,12 @@ export default function ClientDetails(): JSX.Element {
                     Conta Escolha
                   </Tab>
                 </Link>
-                <Link to='?tab=3' draggable={false}>
+                {/* <Link to='?tab=3' draggable={false}>
                   <Tab as='span' data-cy='harvest-tab' roundedTop={6}>
                     Conta Colheita
                   </Tab>
-                </Link>
-                <Link to='?tab=4' draggable={false}>
+                </Link> */}
+                <Link to='?tab=3' draggable={false}>
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>
                     Conta Sacaria
                   </Tab>
@@ -200,9 +199,9 @@ export default function ClientDetails(): JSX.Element {
               <TabPanel px={0}>
                 <EscolhaAccountView />
               </TabPanel>
-              <TabPanel px={0}>
+              {/* <TabPanel px={0}>
                 <InDevelopmentTag />
-              </TabPanel>
+              </TabPanel> */}
               <TabPanel px={0}>
                 <SacariaAccountView />
               </TabPanel>
