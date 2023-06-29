@@ -30,6 +30,9 @@ export default function LockScreenView(): JSX.Element {
   )
   const { control, handleSubmit, setError } = useForm<LockScreenFormValues>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      password: '',
+    },
   })
 
   function handleUnlock(data: LockScreenFormValues): void {
