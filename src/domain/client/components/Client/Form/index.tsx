@@ -78,13 +78,27 @@ export default function ClientForm({
                   register={register}
                   name='contact.phone'
                   label='Telefone'
-                  placeholder='Telefone do cliente'
+                  placeholder='(xx) xxxxx-xxxx'
                   mask='(00) 00000-0000'
                   type='tel'
                   setValue={(value) => {
                     setValue('contact.phone', value.match(/\d/g)?.join('') ?? '')
                   }}
                   data-cy='client-phone-input'
+                />
+              </GridItem>
+              <GridItem>
+                <RHFMaskInput<ClientFormValues>
+                  register={register}
+                  name='contact.secondaryPhone'
+                  label='Telefone secundário'
+                  placeholder='(xx) xxxxx-xxxx'
+                  mask='(00) 00000-0000'
+                  type='tel'
+                  setValue={(value) => {
+                    setValue('contact.secondaryPhone', value.match(/\d/g)?.join('') ?? '')
+                  }}
+                  data-cy='client-secondaryPhone-input'
                 />
               </GridItem>
               <GridItem>
