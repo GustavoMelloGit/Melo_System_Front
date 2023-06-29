@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Heading,
   Modal,
   ModalBody,
@@ -19,6 +20,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { shallow } from 'zustand/shallow'
 import { formatInputDateString } from '../../../../../../../../lib/utils/date'
 import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
@@ -28,6 +30,9 @@ import {
 } from '../../../../../../../../lib/utils/math'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { createTransactionService } from '../../../../../../service'
+import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
+import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
 import { useFeeStore } from '../../stores/useFeeStore'
 import FeeModalForm, { initialValues } from './Form'
 
@@ -35,15 +40,17 @@ function calculateInterest(
   date: number,
   amount: number,
   interestRate: number,
-  targetDate?: number,
+  targetDate: number,
 ): number {
-  const todayDate = new Date().getTime()
-  const days = Math.floor(((targetDate ?? todayDate) - date) / (1000 * 3600 * 24))
+  const days = Math.floor((targetDate - date) / (1000 * 3600 * 24))
   const dailyInterestRate = convertMonthlyInterestRateToDaily(interestRate)
   return calculateCompoundInterest(days, amount, dailyInterestRate)
 }
 
-export default function FeeModal(): JSX.Element {
+type Props = {
+  clientId: string
+}
+export default function FeeModal({ clientId }: Props): JSX.Element {
   const [interestParams, setInterestParams] = useState({
     ...initialValues,
     date: formatInputDateString(initialValues.date),
@@ -60,8 +67,20 @@ export default function FeeModal(): JSX.Element {
     closeModal()
   }
 
+  async function handleCreateTransaction(values: CheckingAccountFormValues): Promise<void> {
+    const { error } = await createTransactionService(values, clientId)
+    if (error) {
+      toast.error(error)
+      return
+    }
+    toast.success('Lançamento criado com sucesso!')
+    CheckingAccountEmitter.emit('transactionCreated', values)
+    handleCloseModal()
+  }
+
   let totalWithoutInterest = 0
   let totalAmountWithInterest = 0
+  let totalOfInterest = 0
   const interestByIndex = selectedTransactions.map((transaction) => {
     const interest = calculateInterest(
       transaction.date,
@@ -69,15 +88,16 @@ export default function FeeModal(): JSX.Element {
       interestParams.interestRate,
       new Date(interestParams.date).getTime(),
     )
-    totalWithoutInterest += transaction.amount
-    totalAmountWithInterest += interest
+    totalWithoutInterest = Math.floor(transaction.amount + totalWithoutInterest)
+    totalAmountWithInterest = Math.floor(interest + totalAmountWithInterest)
+    totalOfInterest = Math.floor(interest - transaction.amount + totalOfInterest)
     return interest
   })
 
   return (
     <Modal isOpen isCentered onClose={handleCloseModal} size='xl'>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxW={800}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading fontSize='3xl'>Calcular juros</Heading>
@@ -85,7 +105,6 @@ export default function FeeModal(): JSX.Element {
         <ModalBody>
           <VStack align='stretch' spacing={4}>
             <FeeModalForm onSubmit={setInterestParams} />
-
             <Box maxH={[300, 400]} overflowY='auto'>
               <TableContainer
                 sx={{
@@ -100,7 +119,8 @@ export default function FeeModal(): JSX.Element {
                     <Tr>
                       <Th>Data</Th>
                       <Th>Valor</Th>
-                      <Th>Valor + Juros</Th>
+                      <Th>Juros</Th>
+                      <Th>Total</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -111,28 +131,24 @@ export default function FeeModal(): JSX.Element {
                           {formatCurrency(transaction.amount)}
                         </Td>
                         <Td color={getColorByValue(interestByIndex[index])}>
+                          {formatCurrency(interestByIndex[index] - transaction.amount)}
+                        </Td>
+                        <Td color={getColorByValue(interestByIndex[index])}>
                           {formatCurrency(interestByIndex[index])}
                         </Td>
                       </Tr>
                     ))}
                   </Tbody>
                   <Tfoot>
-                    <Tr>
-                      <Th fontSize='md' fontWeight={600}>
-                        Total
-                      </Th>
-                      <Th
-                        fontSize='md'
-                        fontWeight={700}
-                        color={getColorByValue(totalWithoutInterest)}
-                      >
+                    <Tr fontWeight={700}>
+                      <Th fontSize='md'>Total</Th>
+                      <Th fontSize='md' color={getColorByValue(totalWithoutInterest)}>
                         {formatCurrency(totalWithoutInterest)}
                       </Th>
-                      <Th
-                        fontSize='md'
-                        fontWeight={700}
-                        color={getColorByValue(totalAmountWithInterest)}
-                      >
+                      <Th fontSize='md' color={getColorByValue(totalOfInterest)}>
+                        {formatCurrency(totalOfInterest)}
+                      </Th>
+                      <Th fontSize='md' color={getColorByValue(totalAmountWithInterest)}>
                         {formatCurrency(totalAmountWithInterest)}
                       </Th>
                     </Tr>
@@ -140,6 +156,19 @@ export default function FeeModal(): JSX.Element {
                 </Table>
               </TableContainer>
             </Box>
+            <Button
+              colorScheme={totalAmountWithInterest > 0 ? 'green' : 'red'}
+              onClick={async () => {
+                await handleCreateTransaction({
+                  date: new Date().toISOString(),
+                  description: 'ACERTO DE JUROS',
+                  value: totalAmountWithInterest,
+                })
+              }}
+            >
+              {totalAmountWithInterest > 0 ? 'Creditar' : 'Debitar'}{' '}
+              {formatCurrency(Math.abs(totalAmountWithInterest))}
+            </Button>
           </VStack>
         </ModalBody>
       </ModalContent>

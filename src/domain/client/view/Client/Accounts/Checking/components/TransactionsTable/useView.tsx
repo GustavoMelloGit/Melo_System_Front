@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { useFeeStore, type TransactionSelected } from '../../stores/useFeeStore'
 import FeeModal from '../FeeModal'
 
 export default function useTransactionTable(): UseTransactionTable {
+  const { uuid: clientId } = useParams<{ uuid: string }>()
   const openModal = useModal((state) => state.openModal)
   const location = useLocation()
   const {
@@ -36,8 +37,8 @@ export default function useTransactionTable(): UseTransactionTable {
     if (!selectionMode) {
       setSelectionMode(true)
     } else if (selectionMode && !hasSelectedFees) setSelectionMode(false)
-    else {
-      openModal(<FeeModal />)
+    else if (clientId) {
+      openModal(<FeeModal clientId={clientId} />)
       setSelectionMode(false)
     }
   }

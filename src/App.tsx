@@ -21,7 +21,7 @@ function App(): JSX.Element {
     (state) => [state.isLocked, state.lock],
     shallow,
   )
-  const { isIdle } = useIdle(5 * 60 * 1000)
+  const { isIdle } = useIdle(10 * 60 * 1000)
 
   if (isIdle && !isLocked) {
     lock()

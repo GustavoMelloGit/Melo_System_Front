@@ -1,8 +1,10 @@
+import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { getTransactionsService } from '../../../../../../service'
 import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
+import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
 import CreateTransactionView from '../Create'
 
 export default function useListTransactionsView(): UseListTransactionsView {
@@ -11,13 +13,24 @@ export default function useListTransactionsView(): UseListTransactionsView {
   const params = useServiceParams()
   const { isLoading, mutate, data } = getTransactionsService(uuid ?? '', params)
 
-  function refetchData(): void {
-    void mutate?.()
+  async function refetchData(): Promise<void> {
+    await mutate()
   }
 
   function handleAddTransaction(): void {
-    openModal(<CreateTransactionView refetch={refetchData} uuid={uuid ?? ''} />)
+    openModal(<CreateTransactionView uuid={uuid ?? ''} />)
   }
+
+  const createTransactionHandler = useCallback(async () => {
+    await refetchData()
+  }, [refetchData])
+
+  useEffect(() => {
+    CheckingAccountEmitter.on('transactionCreated', createTransactionHandler)
+    return () => {
+      CheckingAccountEmitter.off('transactionCreated', createTransactionHandler)
+    }
+  }, [])
 
   return {
     data: data?.data ?? [],

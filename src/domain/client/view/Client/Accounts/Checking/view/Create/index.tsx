@@ -13,15 +13,12 @@ import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../../service'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 import CheckingAccountForm from '../../components/Form'
+import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
 
 type CreateTransactionViewProps = {
   uuid: string
-  refetch: () => void
 }
-export default function CreateTransactionView({
-  uuid,
-  refetch,
-}: CreateTransactionViewProps): JSX.Element {
+export default function CreateTransactionView({ uuid }: CreateTransactionViewProps): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
 
   async function handleCreateTransaction({
@@ -41,7 +38,7 @@ export default function CreateTransactionView({
     }
     toast.success('Lançamento criado com sucesso!')
     closeModal()
-    refetch()
+    CheckingAccountEmitter.emit('transactionCreated', { date, ...values })
   }
 
   return (
@@ -57,7 +54,6 @@ export default function CreateTransactionView({
         <ModalBody>
           <CheckingAccountForm
             onSubmit={handleCreateTransaction}
-            submitText='Salvar'
             initialValues={{
               date: new Date().toISOString().split('T')[0],
               description: '',
