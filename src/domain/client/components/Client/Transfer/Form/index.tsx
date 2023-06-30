@@ -26,7 +26,6 @@ export default function ClientTransferForm({
 }: Props): JSX.Element {
   const methods = useForm<ClientTransferFormValues>({
     defaultValues: initialValues,
-    shouldUnregister: true,
   })
   const { handleSubmit, control, reset } = methods
   const actionButtonBg = useColorModeValue('white', '#1A202C')

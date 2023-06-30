@@ -52,7 +52,9 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
     resolver: yupResolver(validationSchema),
   })
   const clientName = watch('clientName')
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(`name=${clientName}`)
+  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+    `name=${clientName}&limit=10`,
+  )
   const fertilizerId = watch('fertilizerId')
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
     `name=${fertilizerId}`,

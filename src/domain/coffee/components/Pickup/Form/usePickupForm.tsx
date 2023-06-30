@@ -18,7 +18,7 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
     resolver: yupResolver(validationSchema),
   })
   const clientName = form.watch('clientName')
-  const { data, isLoading } = getClientsService(`name=${clientName}`)
+  const { data, isLoading } = getClientsService(`name=${clientName}&limit=10`)
 
   useEffect(() => {
     const isUpdate = initialValues?.complement && initialValues?.brook

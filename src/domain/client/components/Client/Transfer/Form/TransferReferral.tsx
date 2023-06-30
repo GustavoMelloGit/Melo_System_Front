@@ -12,7 +12,9 @@ type Props = {
 }
 export default function TransferReferral({ control, referral }: Props): JSX.Element {
   const [clientName, setClientName] = useState<string>('')
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(`name=${clientName}`)
+  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+    `name=${clientName}&limit=10`,
+  )
 
   return (
     <Box
@@ -29,7 +31,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
       bg='rgba(255, 255, 255, 0.02)'
     >
       <Text as='legend' fontSize='lg' fontWeight='bold' px={2}>
-        {referral === 'from' ? 'Transferir de' : 'Transferir para'}
+        {referral === 'from' ? 'Tra nsferir de' : 'Transferir para'}
       </Text>
       <Stack spacing={2}>
         <Controller
