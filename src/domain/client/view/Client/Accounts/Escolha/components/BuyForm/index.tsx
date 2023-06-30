@@ -3,21 +3,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { CoffeeTypeHasBebida } from '../../../../../../../../lib/constants/coffee'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeValuePerWeight } from '../../../../../../../../lib/utils/math'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
-import { type CoffeeTypes } from '../../../../../../../coffee/types/model/coffee'
 import { type BuyEscolhaFormValues } from '../../types/esolha'
 
 const validationSchema = yup.object().shape({
-  coffeeType: yup.string().required(validationErrors.coffeeTypeIsRequired),
-  bebida: yup.string().when('coffeeType', {
-    is: (coffeeType: CoffeeTypes) => CoffeeTypeHasBebida.includes(coffeeType),
-    then: yup.string().required(validationErrors.bebidaIsRequired),
-  }),
   bags: yup
     .number()
     .typeError(validationErrors.bagsIsInvalid)
@@ -39,7 +32,7 @@ type Props = {
   initialValues: BuyEscolhaFormValues
 }
 const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
-  const [pickupCoffee, setPickupCoffee] = useState<boolean>(false)
+  const [pickupCoffee, setPickupCoffee] = useState<boolean>(true)
   const { handleSubmit, control, watch } = useForm<BuyEscolhaFormValues>({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
