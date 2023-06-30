@@ -23,6 +23,10 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
     control,
   } = useForm<SignInValues>({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      nickname: '',
+      password: '',
+    },
   })
 
   async function submitHandler(values: SignInValues): Promise<void> {
