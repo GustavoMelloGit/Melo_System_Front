@@ -7,41 +7,50 @@ import {
   useNumberInput,
   type NumberInputProps,
 } from '@chakra-ui/react'
+import { forwardRef } from 'react'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
-type Props = NumberInputProps
-export default function NumberInput(props: Props): JSX.Element {
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
-    ...props,
-  })
-
-  const inc = getIncrementButtonProps()
-  const dec = getDecrementButtonProps()
-  const input = getInputProps()
-
-  const rounded = 'xl'
-
-  return (
-    <InputGroup w='full'>
-      <InputLeftElement>
-        <IconButton
-          aria-label='Decrement value'
-          icon={<AiOutlineMinus />}
-          roundedLeft={rounded}
-          roundedRight={0}
-          {...dec}
-        />
-      </InputLeftElement>
-      <Input variant='filled' textAlign='center' rounded={rounded} {...input} />
-      <InputRightElement>
-        <IconButton
-          aria-label='Increment value'
-          icon={<AiOutlinePlus />}
-          roundedRight={rounded}
-          roundedLeft={0}
-          {...inc}
-        />
-      </InputRightElement>
-    </InputGroup>
-  )
+type Props = NumberInputProps & {
+  showControls?: boolean
 }
+const NumberInput = forwardRef<HTMLInputElement, Props>(
+  ({ showControls = true, ...props }, ref): JSX.Element => {
+    const { getInputProps, getIncrementButtonProps, getDecrementButtonProps, htmlProps } =
+      useNumberInput({
+        ...props,
+      })
+    const inc = getIncrementButtonProps()
+    const dec = getDecrementButtonProps()
+    const input = getInputProps()
+
+    return (
+      <InputGroup w='full'>
+        {showControls && (
+          <InputLeftElement>
+            <IconButton
+              aria-label='Decrement value'
+              icon={<AiOutlineMinus />}
+              roundedLeft={props.rounded}
+              roundedRight={0}
+              {...dec}
+            />
+          </InputLeftElement>
+        )}
+        <Input ref={ref} {...htmlProps} {...input} />
+        {showControls && (
+          <InputRightElement>
+            <IconButton
+              aria-label='Increment value'
+              icon={<AiOutlinePlus />}
+              roundedRight={props.rounded}
+              roundedLeft={0}
+              {...inc}
+            />
+          </InputRightElement>
+        )}
+      </InputGroup>
+    )
+  },
+)
+
+export default NumberInput
