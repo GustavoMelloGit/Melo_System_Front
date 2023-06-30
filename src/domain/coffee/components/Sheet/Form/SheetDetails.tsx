@@ -17,7 +17,7 @@ export default function SheetFormSheetDetails({ control, isDisabled }: Props): J
   })
   const debouncedClientName = useDebounce(clientName, 250)
   const { data, isLoading } = getClientsService(
-    debouncedClientName ? `name=${debouncedClientName}` : '',
+    debouncedClientName ? `name=${debouncedClientName}&limit=10` : '',
     {
       revalidateOnFocus: false,
     },

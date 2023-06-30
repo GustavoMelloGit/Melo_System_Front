@@ -2,6 +2,7 @@ import { Box, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Controller, type Control } from 'react-hook-form'
 import AutocompleteInput from '../../../../../../shared/components/inputs/Autocomplete'
+import useDebounce from '../../../../../../shared/hooks/useDebounce'
 import { getClientsService } from '../../../../service'
 import TransferReferralTransferTypeFields from './TransferReferralTransferTypeFields'
 import { type ClientTransferFormValues, type Referral } from './types'
@@ -12,7 +13,10 @@ type Props = {
 }
 export default function TransferReferral({ control, referral }: Props): JSX.Element {
   const [clientName, setClientName] = useState<string>('')
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(`name=${clientName}`)
+  const debouncedClientName = useDebounce(clientName, 300)
+  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+    `name=${debouncedClientName}&limit=10`,
+  )
 
   return (
     <Box
@@ -29,7 +33,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
       bg='rgba(255, 255, 255, 0.02)'
     >
       <Text as='legend' fontSize='lg' fontWeight='bold' px={2}>
-        {referral === 'from' ? 'Transferir de' : 'Transferir para'}
+        {referral === 'from' ? 'Tra nsferir de' : 'Transferir para'}
       </Text>
       <Stack spacing={2}>
         <Controller
@@ -53,7 +57,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
             />
           )}
         />
-        <TransferReferralTransferTypeFields control={control} referral={referral} />
+        <TransferReferralTransferTypeFields referral={referral} />
       </Stack>
     </Box>
   )

@@ -3,20 +3,41 @@ import { FormProvider, useForm } from 'react-hook-form'
 import TransferReferral from './TransferReferral'
 import { type ClientTransferFormValues } from './types'
 
-type Props = {
-  onSubmit: (values: ClientTransferFormValues) => void
-  initialValues: ClientTransferFormValues
+const emptyInitialValues: ClientTransferFormValues = {
+  from: {
+    clientId: '',
+    value: 0,
+    transferType: 'currency',
+  },
+  to: {
+    clientId: '',
+    value: 0,
+    transferType: 'currency',
+  },
 }
-export default function ClientTransferForm({ initialValues, onSubmit }: Props): JSX.Element {
+
+type Props = {
+  onSubmit: (values: ClientTransferFormValues) => Promise<void>
+  initialValues?: ClientTransferFormValues
+}
+export default function ClientTransferForm({
+  initialValues = emptyInitialValues,
+  onSubmit,
+}: Props): JSX.Element {
   const methods = useForm<ClientTransferFormValues>({
     defaultValues: initialValues,
   })
-  const { handleSubmit, control } = methods
+  const { handleSubmit, control, reset } = methods
   const actionButtonBg = useColorModeValue('white', '#1A202C')
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(async (values) => {
+          await onSubmit(values)
+          reset(emptyInitialValues)
+        })}
+      >
         <Stack spacing={8}>
           <Flex justify='space-between' align='flex-start' flexWrap='wrap' w='full' gap={8}>
             <TransferReferral control={control} referral='from' />

@@ -28,9 +28,11 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
     toast.success('Folha criada com sucesso')
   }
 
-  const initialValues: Partial<SheetFormValues> = {
+  const initialValues: SheetFormValues = {
     clientId: '',
     number: (data?.data?.[0]?.number ?? 0) + 1,
+    isDraft: false,
+    courier: '',
     weighingDate: new Date().toISOString().split('T')[0],
     coffeeDetails: {
       coffeeType: 'bica_corrida',
@@ -41,12 +43,13 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
       sieve: 0,
       utilization: 0,
       bebida: 'duro',
+      description: '',
     },
     lines: [{ bags: 0, weight: 0 }],
   }
 
   return {
-    initialValues: initialValues as SheetFormValues,
+    initialValues,
     createSheet: handleCreateSheet,
   }
 }

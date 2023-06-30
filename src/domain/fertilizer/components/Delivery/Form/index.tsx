@@ -18,6 +18,7 @@ import { validationErrors } from '../../../../../lib/errors'
 import { formatInputDateString } from '../../../../../lib/utils/date'
 import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../client/service'
 import { getFertilizersService } from '../../../services/get'
@@ -52,7 +53,10 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
     resolver: yupResolver(validationSchema),
   })
   const clientName = watch('clientName')
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(`name=${clientName}`)
+  const debouncedClientName = useDebounce(clientName, 300)
+  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+    `name=${debouncedClientName}&limit=10`,
+  )
   const fertilizerId = watch('fertilizerId')
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
     `name=${fertilizerId}`,

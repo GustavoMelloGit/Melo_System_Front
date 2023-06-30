@@ -17,6 +17,7 @@ export type Address = {
 
 export type ClientContact = {
   phone?: string
+  secondaryPhone?: string
 }
 
 export type LegalPerson = {

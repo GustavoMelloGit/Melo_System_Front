@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../client/service'
 import { type ClientModel } from '../../../../client/types/model/Client'
@@ -18,7 +19,8 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
     resolver: yupResolver(validationSchema),
   })
   const clientName = form.watch('clientName')
-  const { data, isLoading } = getClientsService(`name=${clientName}`)
+  const debouncedClientName = useDebounce(clientName, 300)
+  const { data, isLoading } = getClientsService(`name=${debouncedClientName}&limit=10`)
 
   useEffect(() => {
     const isUpdate = initialValues?.complement && initialValues?.brook
