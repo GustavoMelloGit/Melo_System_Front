@@ -2,13 +2,15 @@ import EscolhaAccountTable from '../../components/Table'
 import useEscolhaAccountView from './useView'
 
 export default function EscolhaAccountView(): JSX.Element {
-  const { data, isLoading, total, handleOpenCreateEscolha } = useEscolhaAccountView()
+  const { data, isLoading, total, handleOpenCreateEscolha, handleOpenBuyEscolha } =
+    useEscolhaAccountView()
   return (
     <EscolhaAccountTable
       data={data}
       isLoading={isLoading}
       totalLength={total}
       onClickAdd={handleOpenCreateEscolha}
+      onClickBuy={handleOpenBuyEscolha}
     />
   )
 }

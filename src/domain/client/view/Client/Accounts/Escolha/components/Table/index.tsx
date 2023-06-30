@@ -10,6 +10,7 @@ import EscolhaAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<EscolhaTransactionModel[]> & {
   onClickAdd: () => void
+  onClickBuy: () => void
 }
 
 export default function EscolhaAccountTable({
@@ -17,6 +18,7 @@ export default function EscolhaAccountTable({
   isLoading,
   totalLength,
   onClickAdd,
+  onClickBuy,
 }: Props): JSX.Element {
   return (
     <Table
@@ -34,12 +36,20 @@ export default function EscolhaAccountTable({
       filter={{
         searchForOptions,
         actions: (
-          <IconButton
-            icon='add'
-            onClick={onClickAdd}
-            aria-label='adicionar escolha'
-            title='Fazer lançamento de escolha'
-          />
+          <>
+            <IconButton
+              icon='shopCart'
+              onClick={onClickBuy}
+              aria-label='Comprar escolha'
+              title='Comprar escolha'
+            />
+            <IconButton
+              icon='add'
+              onClick={onClickAdd}
+              aria-label='adicionar transação'
+              title='Fazer lançamento'
+            />
+          </>
         ),
       }}
     >

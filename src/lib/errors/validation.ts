@@ -53,6 +53,8 @@ const validationErrors = {
   deliveryDateIsRequired: 'Por favor, informe a data de entrega',
   nicknameIsRequired: 'Por favor, informe o apelido',
   passwordIsIncorrect: 'Senha incorreta',
+  valuePerWeightIsInvalid: 'Por favor, informe um valor por peso válido',
+  valuePerWeightIsRequired: 'Por favor, informe o valor por peso',
 }
 
 export default validationErrors

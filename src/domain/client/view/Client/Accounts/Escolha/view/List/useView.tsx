@@ -23,11 +23,18 @@ export default function useEscolhaAccountView(): UseEscolhaAccountView {
     )
   }
 
+  async function handleOpenBuyEscolha(): Promise<void> {
+    if (!uuid) return
+    const BuyEscolhaView = (await import('../../view/Buy')).default
+    openModal(<BuyEscolhaView clientId={uuid} refetch={mutate} />)
+  }
+
   return {
     data: data?.data ?? [],
     isLoading,
     total: data?.total ?? 0,
     handleOpenCreateEscolha,
+    handleOpenBuyEscolha,
   }
 }
 
@@ -36,4 +43,5 @@ type UseEscolhaAccountView = {
   isLoading: boolean
   total: number
   handleOpenCreateEscolha: () => Promise<void>
+  handleOpenBuyEscolha: () => Promise<void>
 }
