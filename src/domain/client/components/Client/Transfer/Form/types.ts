@@ -1,12 +1,13 @@
 import { type CoffeeBebidas, type CoffeeTypes } from '../../../../../coffee/types/model/coffee'
 
-export type CurrencyClientTransfer = {
+export type BaseReferral = {
   clientId: string
+}
+export type CurrencyReferralTransfer = BaseReferral & {
   value: number
   transferType: 'currency'
 }
-export type CoffeeClientTransfer = {
-  clientId: string
+export type CoffeeReferralTransfer = BaseReferral & {
   transferType: 'coffee'
   bebida: CoffeeBebidas
   coffeeType: CoffeeTypes
@@ -14,10 +15,10 @@ export type CoffeeClientTransfer = {
   weight: number
 }
 
-export type ClientTransfer = CurrencyClientTransfer | CoffeeClientTransfer
+export type ReferralTransfer = CurrencyReferralTransfer | CoffeeReferralTransfer
 export type Referral = 'from' | 'to'
 
 export type ClientTransferFormValues = {
-  from: ClientTransfer
-  to: ClientTransfer
+  from: ReferralTransfer
+  to: ReferralTransfer
 }

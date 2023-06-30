@@ -2,7 +2,7 @@ import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PostServiceResponse } from '../../../shared/types/utils/service'
-import { type CoffeeDetails } from '../../coffee/types/model/coffee'
+import { type CoffeeBebidas, type CoffeeDetails } from '../../coffee/types/model/coffee'
 import { type ClientFormValues } from '../components/Client/Form/types'
 import { type CheckingAccountFormValues } from '../types/model/CheckingAccount'
 import { type ClientModel } from '../types/model/Client'
@@ -58,23 +58,17 @@ export async function createTransactionService(
   }
 }
 
-type TransferBetweenClientsServiceData = {
-  from: {
-    clientId: string
-    item: {
-      type: string
-      value: number
-      details?: Partial<CoffeeDetails>
-    }
+export type TransferBetweenClientsReferralData = {
+  clientId: string
+  item: {
+    type: 'currency' | CoffeeBebidas
+    value: number
+    details?: Partial<CoffeeDetails>
   }
-  to: {
-    clientId: string
-    item: {
-      type: string
-      value: number
-      details?: Partial<CoffeeDetails>
-    }
-  }
+}
+export type TransferBetweenClientsServiceData = {
+  from: TransferBetweenClientsReferralData
+  to: TransferBetweenClientsReferralData
 }
 export async function transferBetweenClientsService(
   values: TransferBetweenClientsServiceData,
