@@ -39,6 +39,7 @@ export type NaturalPerson = {
 
 export type ClientModel = {
   id: string
+  code: number
   profileImage?: string
   name: string
   nickname?: string

@@ -30,6 +30,7 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
 
   const initialValues: SheetFormValues = {
     clientId: '',
+    clientName: '',
     number: (data?.data?.[0]?.number ?? 0) + 1,
     isDraft: false,
     courier: '',

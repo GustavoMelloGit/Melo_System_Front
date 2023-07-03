@@ -2,6 +2,7 @@ import { type CoffeeBebidas, type CoffeeTypes } from '../../../../../coffee/type
 
 export type BaseReferral = {
   clientId: string
+  clientName: string
 }
 export type CurrencyReferralTransfer = BaseReferral & {
   value: number

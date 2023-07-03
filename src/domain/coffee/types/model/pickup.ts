@@ -8,6 +8,7 @@ export type PickupCoffeeModel = {
 }
 
 export type PickupFormValues = {
+  clientId: string
   clientName: string
   bags: number
   complement: string
