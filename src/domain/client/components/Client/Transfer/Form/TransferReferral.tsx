@@ -15,7 +15,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
   const [clientName, setClientName] = useState<string>('')
   const debouncedClientName = useDebounce(clientName, 300)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `name=${debouncedClientName}&limit=10`,
+    `searchableName=${debouncedClientName}&limit=10`,
   )
 
   return (
@@ -33,7 +33,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
       bg='rgba(255, 255, 255, 0.02)'
     >
       <Text as='legend' fontSize='lg' fontWeight='bold' px={2}>
-        {referral === 'from' ? 'Tra nsferir de' : 'Transferir para'}
+        {referral === 'from' ? 'Transferir de' : 'Transferir para'}
       </Text>
       <Stack spacing={2}>
         <Controller

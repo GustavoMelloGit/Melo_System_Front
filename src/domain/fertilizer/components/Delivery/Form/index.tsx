@@ -55,7 +55,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   const clientName = watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `name=${debouncedClientName}&limit=10`,
+    `searchableName=${debouncedClientName}&limit=10`,
   )
   const fertilizerId = watch('fertilizerId')
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(

@@ -20,7 +20,7 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   })
   const clientName = form.watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
-  const { data, isLoading } = getClientsService(`name=${debouncedClientName}&limit=10`)
+  const { data, isLoading } = getClientsService(`searchableName=${debouncedClientName}&limit=10`)
 
   useEffect(() => {
     const isUpdate = initialValues?.complement && initialValues?.brook
