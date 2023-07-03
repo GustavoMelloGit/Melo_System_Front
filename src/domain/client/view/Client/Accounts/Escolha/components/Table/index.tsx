@@ -37,12 +37,12 @@ export default function EscolhaAccountTable({
         searchForOptions,
         actions: (
           <>
-            <IconButton
+            {/* <IconButton
               icon='shopCart'
               onClick={onClickBuy}
               aria-label='Comprar escolha'
               title='Comprar escolha'
-            />
+            /> */}
             <IconButton
               icon='add'
               onClick={onClickAdd}
