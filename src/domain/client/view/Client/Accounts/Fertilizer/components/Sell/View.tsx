@@ -92,7 +92,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
                   <AutocompleteInput
                     label='Adubo'
                     options={fertilizers?.data?.map((fertilizer) => ({
-                      label: fertilizer.name,
+                      label: `${fertilizer.name} ${fertilizer.description ?? ''}`,
                       value: fertilizer.name,
                     }))}
                     isLoading={isLoadingFertilizers}

@@ -15,7 +15,7 @@ export const protectedRoutes: RouteObject = {
       <PageLayout />
     </ProtectedRoute>
   ),
-  // errorElement: <Navigate to={Routes.notFound} />,
+  errorElement: <Navigate to={Routes.notFound} />,
   children: [
     {
       element: <Navigate to={Routes.clients} />,

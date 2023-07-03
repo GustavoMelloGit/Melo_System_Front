@@ -20,7 +20,7 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   })
   const clientName = form.watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
-  const { data, isLoading } = getClientsService(`name=${debouncedClientName}&limit=10`)
+  const { data, isLoading } = getClientsService(`searchableName=${debouncedClientName}&limit=10`)
 
   useEffect(() => {
     const isUpdate = initialValues?.complement && initialValues?.brook
@@ -44,7 +44,7 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
 }
 
 const validationSchema = yup.object().shape({
-  clientName: yup.string().required(validationErrors.clientNameIsRequired),
+  clientId: yup.string().required(validationErrors.clientNameIsRequired),
   bags: yup.string().required(validationErrors.bagsIsRequired),
   brook: yup.string().required(validationErrors.brookIsRequired),
   complement: yup.string().required(validationErrors.complementIsRequired),

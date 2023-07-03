@@ -29,6 +29,7 @@ export default function CreateCoffeePickup({ onSuccess }: Props): JSX.Element {
       onSubmit={handleCreateCoffeePickup}
       initialValues={{
         bags: 0,
+        clientId: '',
         clientName: '',
         brook: '',
         complement: '',

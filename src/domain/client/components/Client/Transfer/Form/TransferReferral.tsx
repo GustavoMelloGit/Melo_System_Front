@@ -1,7 +1,6 @@
 import { Box, Stack, Text } from '@chakra-ui/react'
-import { useState } from 'react'
-import { Controller, type Control } from 'react-hook-form'
-import AutocompleteInput from '../../../../../../shared/components/inputs/Autocomplete'
+import { useWatch, type Control } from 'react-hook-form'
+import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
 import useDebounce from '../../../../../../shared/hooks/useDebounce'
 import { getClientsService } from '../../../../service'
 import TransferReferralTransferTypeFields from './TransferReferralTransferTypeFields'
@@ -12,10 +11,13 @@ type Props = {
   referral: Referral
 }
 export default function TransferReferral({ control, referral }: Props): JSX.Element {
-  const [clientName, setClientName] = useState<string>('')
+  const clientName = useWatch({
+    control,
+    name: `${referral}.clientName`,
+  })
   const debouncedClientName = useDebounce(clientName, 300)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `name=${debouncedClientName}&limit=10`,
+    `searchableName=${debouncedClientName}&limit=10`,
   )
 
   return (
@@ -33,29 +35,21 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
       bg='rgba(255, 255, 255, 0.02)'
     >
       <Text as='legend' fontSize='lg' fontWeight='bold' px={2}>
-        {referral === 'from' ? 'Tra nsferir de' : 'Transferir para'}
+        {referral === 'from' ? 'Transferir de' : 'Transferir para'}
       </Text>
       <Stack spacing={2}>
-        <Controller
-          name={`${referral}.clientId`}
+        <ControllerAutocomplete
           control={control}
-          render={({ field: { onChange, ...field } }) => (
-            <AutocompleteInput
-              label='Cliente'
-              options={clients?.data?.map((client) => ({
-                label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
-                value: client.id,
-              }))}
-              isLoading={isLoadingClients}
-              handleChange={(value) => {
-                onChange(value)
-                setClientName(value)
-              }}
-              placeholder='Nome do cliente'
-              isRequired
-              {...field}
-            />
-          )}
+          name={`${referral}.clientId`}
+          auxName={`${referral}.clientName`}
+          label='Cliente'
+          options={clients?.data?.map((client) => ({
+            label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
+            value: client.id,
+          }))}
+          isLoading={isLoadingClients}
+          placeholder='Nome do cliente'
+          isRequired
         />
         <TransferReferralTransferTypeFields referral={referral} />
       </Stack>

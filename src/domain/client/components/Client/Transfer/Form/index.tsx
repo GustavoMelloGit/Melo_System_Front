@@ -6,11 +6,13 @@ import { type ClientTransferFormValues } from './types'
 const emptyInitialValues: ClientTransferFormValues = {
   from: {
     clientId: '',
+    clientName: '',
     value: 0,
     transferType: 'currency',
   },
   to: {
     clientId: '',
+    clientName: '',
     value: 0,
     transferType: 'currency',
   },

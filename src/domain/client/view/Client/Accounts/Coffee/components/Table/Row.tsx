@@ -1,5 +1,4 @@
 import { Td, Tr } from '@chakra-ui/react'
-import { capitalCase } from 'change-case'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
@@ -13,12 +12,7 @@ import {
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 
-type Props = {
-  transaction: CoffeeTransactionModel
-}
-export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
-  const { details } = transaction
-
+function getFullDescription(details: CoffeeDetails): string {
   const messageByDetail: Record<keyof CoffeeDetails, string> = {
     picking: `${details.picking}% de cata`,
     sieve: `${details.sieve}% na 17/18`,
@@ -28,12 +22,6 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     description: `${details.description}`,
     bebida: '',
     coffeeType: '',
-  }
-  const labelByTypeName: Record<CoffeeTypes, string> = {
-    bica_corrida: 'BC',
-    conilon: 'CON',
-    despolpado: 'DESP',
-    escolha: 'ESC',
   }
 
   const sortedDetails: CoffeeDetails = {
@@ -47,19 +35,38 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     coffeeType: details.coffeeType,
   }
 
-  const fullDescription = Object.entries(sortedDetails).reduce((acc, [key, value]) => {
+  const description = Object.entries(sortedDetails).reduce((acc, [key, value]) => {
     const messageValue = messageByDetail[key as keyof CoffeeDetails]
     if (!value) return acc
     if (messageValue) return acc + messageValue + ' '
     return acc
   }, '')
+  return description
+}
+
+type Props = {
+  transaction: CoffeeTransactionModel
+}
+export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Element {
+  const labelByTypeName: Record<CoffeeTypes, string> = {
+    bica_corrida: 'BC',
+    conilon: 'CON',
+    despolpado: 'DESP',
+    escolha: 'ESC',
+  }
+
+  const fullDescription: string = transaction.details
+    ? getFullDescription(transaction.details)
+    : transaction.description
+
+  const coffeeTypeColumnValue: string = transaction.details
+    ? labelByTypeName[transaction.details.coffeeType]
+    : '--'
 
   return (
     <Tr>
       <Td w={120}>{dateToFormat(transaction.date)}</Td>
-      <Td title={capitalCase(transaction.details.coffeeType)}>
-        {labelByTypeName[transaction.details.coffeeType]}
-      </Td>
+      <Td title={coffeeTypeColumnValue}>{coffeeTypeColumnValue}</Td>
       <Td>{CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}</Td>
       <CollapsibleTd>{fullDescription || transaction.description}</CollapsibleTd>
       <Td color={getColorByValue(transaction.type.value)}>

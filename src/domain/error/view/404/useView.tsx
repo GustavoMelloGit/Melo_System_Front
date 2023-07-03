@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
+import { Routes } from '../../../../lib/routes'
 
 export default function useNotFoundPage(): UseNotFoundPage {
   const navigate = useNavigate()
 
   const handleGoBack = (): void => {
-    navigate(-1)
+    navigate(Routes.clients)
   }
 
   return {

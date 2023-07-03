@@ -1,6 +1,6 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
-import { Controller, useWatch, type Control, type Path } from 'react-hook-form'
-import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
+import { useWatch, type Control, type Path } from 'react-hook-form'
+import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { getClientsService } from '../../../../client/service'
@@ -13,11 +13,11 @@ type Props = {
 export default function SheetFormSheetDetails({ control, isDisabled }: Props): JSX.Element {
   const clientName = useWatch({
     control,
-    name: 'clientId',
+    name: 'clientName',
   })
   const debouncedClientName = useDebounce(clientName, 250)
   const { data, isLoading } = getClientsService(
-    debouncedClientName ? `name=${debouncedClientName}&limit=10` : '',
+    debouncedClientName ? `searchableName=${debouncedClientName}&limit=10` : '',
     {
       revalidateOnFocus: false,
     },
@@ -31,26 +31,21 @@ export default function SheetFormSheetDetails({ control, isDisabled }: Props): J
       <Divider />
       <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4} mb={4}>
         <GridItem>
-          <Controller
-            name='clientId'
+          <ControllerAutocomplete
             control={control}
-            render={({ field: { onChange, ...field } }) => (
-              <AutocompleteInput
-                label='Cliente'
-                options={data?.data.map((client) => ({
-                  label: `${
-                    client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
-                  }`,
-                  value: client.id,
-                }))}
-                isLoading={isLoading}
-                handleChange={onChange}
-                isRequired
-                isDisabled={isDisabled('clientId')}
-                placeholder='Ex.: João da Silva'
-                {...field}
-              />
-            )}
+            name='clientId'
+            auxName='clientName'
+            label='Cliente'
+            options={data?.data.map((client) => ({
+              label: `${
+                client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
+              }`,
+              value: client.id,
+            }))}
+            isLoading={isLoading}
+            isRequired
+            isDisabled={isDisabled('clientId')}
+            placeholder='Ex.: João da Silva'
           />
         </GridItem>
         <GridItem>

@@ -1,6 +1,7 @@
 import {
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
@@ -9,29 +10,34 @@ import {
   useOutsideClick,
   type InputProps,
 } from '@chakra-ui/react'
-import { forwardRef, useEffect, useRef, type ChangeEvent } from 'react'
+import { forwardRef, useEffect, useRef, type ChangeEvent, type FocusEvent } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 import OptionsBox from './Options'
 import { type Option } from './types'
 import useAutocomplete from './useView'
 
-type Props = InputProps & {
+type OnSelectData = {
+  value: Option['value']
+  label: Option['label']
+}
+
+export type Props = InputProps & {
   label?: string
   options?: Option[]
   isLoading?: boolean
+  error?: string
   handleChange?: (value: string) => void
-  handleBlur?: () => void
-  handleFocus?: () => void
+  handleSelect?: (data: OnSelectData) => void
 }
 const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
   (
-    { label, options, isLoading, handleChange, handleFocus, value, ...rest },
+    { label, options, isLoading, handleChange, error, onFocus, handleSelect, ...rest },
     forwardRef,
   ): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
     const [state, actions] = useAutocomplete()
-    const { inputValue, options: storedOptions, showOptions } = state
-    const { setInputValue, setShowOptions, selectOption, resetState, setOptions } = actions
+    const { options: storedOptions, showOptions } = state
+    const { setShowOptions, resetState, setOptions } = actions
 
     useOutsideClick({
       ref,
@@ -44,20 +50,21 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
       setShowOptions(true)
     }
 
-    function handleOnFocus(): void {
+    function handleOnFocus(e: FocusEvent<HTMLInputElement>): void {
       handleShowOptions()
-      if (handleFocus) handleFocus()
+      onFocus?.(e)
     }
 
     function handleOnChange(e: ChangeEvent<HTMLInputElement>): void {
-      setInputValue(e.target.value)
       if (handleChange) handleChange(e.target.value)
     }
 
     function handleOnSelect(option: Option): void {
-      selectOption(option.value)
-      setInputValue(String(option.label))
       setShowOptions(false)
+      handleSelect?.({
+        value: option.value,
+        label: option.label,
+      })
       if (handleChange) handleChange(String(option.value))
     }
 
@@ -67,16 +74,6 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
         resetState()
       }
     }, [])
-
-    useEffect(() => {
-      // Set input value when value prop changes
-      const option = storedOptions?.find((option) => option.value === value)
-      if (option) {
-        setInputValue(String(option.label))
-      } else {
-        setInputValue(String(value))
-      }
-    }, [value, options])
 
     useEffect(() => {
       if (!options) return
@@ -99,12 +96,11 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
           <Input
             variant='filled'
             rounded='xl'
-            onFocus={handleOnFocus}
             onChange={handleOnChange}
-            value={inputValue}
             autoComplete='off'
             ref={forwardRef}
             {...rest}
+            onFocus={handleOnFocus}
           />
           <InputRightElement>
             <Button
@@ -118,6 +114,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
             </Button>
           </InputRightElement>
         </InputGroup>
+        {error && <FormErrorMessage data-cy='validation-message'>{error}</FormErrorMessage>}
         {storedOptions && storedOptions.length > 0 && (
           <OptionsBox onSelect={handleOnSelect} options={storedOptions} showOptions={showOptions} />
         )}

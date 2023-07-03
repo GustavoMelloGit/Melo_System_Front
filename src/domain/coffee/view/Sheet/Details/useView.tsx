@@ -10,6 +10,7 @@ export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSh
   const initialValues: SheetFormValues = data
     ? {
         clientId: data.clientId,
+        clientName: data.clientId,
         coffeeDetails: data.coffeeDetails,
         courier: data.courier,
         weighingDate: new Date(data.weighingDate).toISOString().split('T')[0],
@@ -17,7 +18,11 @@ export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSh
         lines: data.lines,
         number: data.number,
       }
-    : ({
+    : {
+        clientId: '',
+        clientName: '',
+        courier: '',
+        isDraft: false,
         number: 0,
         weighingDate: new Date().toISOString().split('T')[0],
         coffeeDetails: {
@@ -30,7 +35,7 @@ export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSh
           coffeeType: 'bica_corrida',
         },
         lines: [{ bags: 0, weight: 0 }],
-      } as SheetFormValues)
+      }
 
   return {
     initialValues,

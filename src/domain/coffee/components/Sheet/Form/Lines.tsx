@@ -43,7 +43,7 @@ export default function SheetFormLines({
             <RHFField<SheetFormValues>
               name={`lines.${index}.bags`}
               register={register}
-              label='Sacos'
+              label='Sacas'
               placeholder='Ex.: 10'
               type='number'
               inputMode='numeric'

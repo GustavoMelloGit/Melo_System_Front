@@ -48,9 +48,10 @@ export default function SheetForm({
           ...values,
           weighingDate: formatInputDateString(weighingDate),
         })
-        reset({
+        const emptyInitialValues: SheetFormValues = {
           courier: '',
           clientId: '',
+          clientName: '',
           number: values.number + 1,
           isDraft: false,
           lines: [{ bags: 0, weight: 0 }],
@@ -66,7 +67,8 @@ export default function SheetForm({
             sieve: 0,
             utilization: 0,
           },
-        })
+        }
+        reset(emptyInitialValues)
       })}
     >
       <Card>

@@ -11,8 +11,7 @@ import {
   Stack,
   VStack,
 } from '@chakra-ui/react'
-import { Controller } from 'react-hook-form'
-import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
+import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import { type PickupFormValues } from '../../../types/model/pickup'
 import usePickupForm from './usePickupForm'
@@ -50,25 +49,19 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
             data-cy='pickupCoffee-form'
           >
             <Stack spacing={2} w='full'>
-              <Controller
-                name='clientName'
+              <ControllerAutocomplete
                 control={control}
-                render={({ field: { onChange, ...field } }) => (
-                  <AutocompleteInput
-                    label='Cliente'
-                    options={clients?.map((client) => ({
-                      label: `${
-                        client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
-                      }`,
-                      value: client.name,
-                    }))}
-                    isLoading={isLoading}
-                    handleChange={onChange}
-                    placeholder='Ex.: João da Silva'
-                    isRequired
-                    {...field}
-                  />
-                )}
+                name='clientId'
+                auxName='clientName'
+                options={clients?.map((client) => ({
+                  label: `${
+                    client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
+                  }`,
+                  value: client.id,
+                }))}
+                placeholder='Ex.: João da Silva'
+                isRequired
+                isLoading={isLoading}
               />
               <Flex gap={2}>
                 <ControllerField<PickupFormValues>

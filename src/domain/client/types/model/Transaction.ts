@@ -28,7 +28,7 @@ export type TransactionType<TName = string> = {
 }
 
 export type CoffeeTransactionModel = TransactionModel & {
-  details: CoffeeDetails
+  details?: CoffeeDetails
 }
 
 export type SacariaTransactionModel = TransactionModel & {
