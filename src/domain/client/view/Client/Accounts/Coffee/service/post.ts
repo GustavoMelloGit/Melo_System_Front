@@ -32,6 +32,7 @@ type BuyCoffeeServiceValues = {
   clientId: string
   bebida: CoffeeBebidas
   coffeeType: CoffeeTypes
+  pricePerBag: number
   weight: number
   value: number
   brook?: string

@@ -24,6 +24,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
       complement: values.complement.trim().length > 0 ? values.complement : undefined,
       clientId,
       coffeeType: values.coffeeType,
+      pricePerBag: values.valuePerBag,
     })
     if (error) {
       toast.error('Erro ao comprar café')

@@ -53,3 +53,7 @@ export function calculateCoffeeTotalValue(
   const valueOnBags = bags * valuePerBag
   return valueOnWeight + valueOnBags
 }
+
+export function calculateCoffeeValuePerWeight(bags: number, weight: number, value: number): number {
+  return (bags * GlobalConfig.weightPerBag + weight) * value
+}

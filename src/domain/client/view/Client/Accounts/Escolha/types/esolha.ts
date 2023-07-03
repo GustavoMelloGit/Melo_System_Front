@@ -8,6 +8,13 @@ export type EscolhaFormValues = {
   description?: string
 }
 
+export type BuyEscolhaFormValues = {
+  weight: number
+  bags: number
+  valuePerWeight: number
+  complement: string
+  brook: string
+}
 export type CreateEscolhaValues = Omit<EscolhaFormValues, 'bags' | 'weight'> & {
   clientId: string
   value: number
