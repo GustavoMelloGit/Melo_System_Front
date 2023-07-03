@@ -26,21 +26,21 @@ const listItem: Record<
     label: 'Transferência',
     icon: <CgArrowsExchange size={24} />,
   },
-  [Routes.fertilizers]: {
-    label: 'Estoque de Adubos',
-    icon: <TbPlant />,
+  [Routes.coffeePickups]: {
+    label: 'Cafés a Buscar',
+    icon: <BsTruck />,
   },
   [Routes.fertilizersDelivery]: {
     label: 'Adubos a Entregar',
     icon: <TbTruckLoading />,
   },
-  [Routes.coffeePickups]: {
-    label: 'Cafés a Buscar',
-    icon: <BsTruck />,
-  },
   [Routes.books]: {
     label: 'Pesagem',
     icon: <MdOutlineMonitorWeight size={20} />,
+  },
+  [Routes.fertilizers]: {
+    label: 'Estoque de Adubos',
+    icon: <TbPlant />,
   },
 }
 
@@ -75,7 +75,7 @@ export default function SidebarList(): JSX.Element {
           return (
             <SidebarListItem
               key={route}
-              to={customPaths[route] || route}
+              to={customPaths[route] ?? route}
               label={elements.label}
               icon={elements.icon}
               isActive={route.split('/')[1] === basePath}
