@@ -182,7 +182,7 @@ export default function ClientDetails(): JSX.Element {
                     Conta Sacaria
                   </Tab>
                 </Link>
-                <Link to='?tab=5' draggable={false}>
+                <Link to='?tab=4' draggable={false}>
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>
                     Conta Adubo
                   </Tab>
