@@ -28,7 +28,7 @@ export default function UpdateCoffeePickup({ pickup, onSuccess }: Props): JSX.El
       onSubmit={handleUpdateCoffeePickup}
       initialValues={{
         clientId: 'teste',
-        clientName: pickup.clientName,
+        clientName: pickup.client.name,
         bags: pickup.bags,
         brook: pickup.brook,
         complement: pickup.complement,
