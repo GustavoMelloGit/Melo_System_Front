@@ -3,7 +3,7 @@ import { Flex, Select, Text, useColorMode } from '@chakra-ui/react'
 export default function ChangeTheme(): JSX.Element {
   const { setColorMode, colorMode } = useColorMode()
   return (
-    <Flex w='full' justify='space-between' align='center'>
+    <Flex flexWrap='wrap' gap={2} w='full' justify='space-between' align='center'>
       <Text fontWeight={700} fontSize='lg'>
         Tema
       </Text>
