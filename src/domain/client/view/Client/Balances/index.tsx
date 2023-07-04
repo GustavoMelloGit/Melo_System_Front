@@ -54,7 +54,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
               <Fragment>
                 <Flex gap={2} justify='space-between' px={2}>
                   <Text fontWeight={700}>{displayData.currency}</Text>
-                  <Text color={getColorByValue(data.balances.currency)}>
+                  <Text color={getColorByValue(data.balances?.currency ?? 0)}>
                     {formatCurrency(data.balances.currency)}
                   </Text>
                 </Flex>
@@ -66,8 +66,8 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                         <Text as='span' fontWeight={700}>
                           {displayData.coffee}
                         </Text>
-                        <Text color={getColorByValue(data.balances.coffee)}>
-                          {getNumberOfBags(data.balances.coffee)}
+                        <Text color={getColorByValue(data.balances?.coffee ?? 0)}>
+                          {getNumberOfBags(data.balances?.coffee ?? 0)}
                         </Text>
                       </Flex>
                       <AccordionIcon />
@@ -87,15 +87,15 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                 <Divider />
                 <Flex gap={2} justify='space-between' px={2}>
                   <Text fontWeight={700}>{displayData.escolha}</Text>
-                  <Text color={getColorByValue(data.balances.escolha)}>
-                    {getNumberOfBags(data.balances.escolha)}
+                  <Text color={getColorByValue(data.balances?.escolha ?? 0)}>
+                    {getNumberOfBags(data.balances.escolha ?? 0)}
                   </Text>
                 </Flex>
                 <Divider />
                 <Flex gap={2} justify='space-between' px={2}>
                   <Text fontWeight={700}>{displayData.bags}</Text>
-                  <Text color={getColorByValue(data.balances.bags)}>
-                    {data.balances.bags} Sacas
+                  <Text color={getColorByValue(data.balances?.bags ?? 0)}>
+                    {data.balances?.bags ?? 0} Sacas
                   </Text>
                 </Flex>
               </Fragment>
