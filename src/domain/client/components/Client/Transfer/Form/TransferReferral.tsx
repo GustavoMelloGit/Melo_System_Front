@@ -63,7 +63,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
             placeholder='Nome do cliente'
             isRequired
           />
-          {clientId && (
+          {clientId && clientName && (
             <IconButton
               onClick={async () => {
                 const { openModal } = useModal.getState()
