@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
+import SidebarSettings from '.'
 import LockScreenButton from './LockScreenButton'
-import SidebarSettings from './Settings'
 
 export default function SidebarFooter(): JSX.Element {
   return (
