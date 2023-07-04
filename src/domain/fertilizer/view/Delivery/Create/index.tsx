@@ -13,9 +13,11 @@ export default function CreateFertilizerDelivery({ refetch }: Props): JSX.Elemen
       initialValues={{
         amount: 1,
         clientName: '',
+        clientId: '',
         brook: '',
         complement: '',
         fertilizerId: '',
+        fertilizerName: '',
         date: new Date().toISOString().split('T')[0],
       }}
       onSubmit={async (values) => {

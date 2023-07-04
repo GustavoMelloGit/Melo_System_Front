@@ -55,7 +55,7 @@ export default function DeliveryTableRow({
   return (
     <Tr>
       <Td data-cy='deliveryCoffee-table-date'>{dateToFormat(delivery.date ?? 0, 'dd/MM/yyyy')}</Td>
-      <Td data-cy='deliveryCoffee-table-clientName'>{delivery.clientName}</Td>
+      <Td data-cy='deliveryCoffee-table-clientName'>{delivery.client.name}</Td>
       <Td data-cy='deliveryCoffee-table-fertilizerName'>{delivery.fertilizer.name}</Td>
       <Td data-cy='deliveryCoffee-table-bags' textAlign='center'>
         {delivery.amount}
