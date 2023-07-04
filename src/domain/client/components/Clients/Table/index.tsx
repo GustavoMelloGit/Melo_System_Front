@@ -53,7 +53,7 @@ const headerColumns: TableHeaderColumns[] = [
 
 const searchForOptions: SearchForOption = {
   searchableName: { label: 'Nome' },
+  code: { label: 'Código' },
   nickname: { label: 'Apelido' },
-  id: { label: 'ID' },
   'address.brook': { label: 'Córrego' },
 }
