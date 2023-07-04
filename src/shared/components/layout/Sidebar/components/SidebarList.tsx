@@ -40,7 +40,7 @@ const listItem: Record<
   },
   [Routes.fertilizers]: {
     label: 'Estoque de Adubos',
-    icon: <TbPlant />,
+    icon: <TbPlant size={18} />,
   },
 }
 
