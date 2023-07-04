@@ -1,7 +1,13 @@
-import { Box, Stack, Text } from '@chakra-ui/react'
+import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { useWatch, type Control } from 'react-hook-form'
+import {
+  clientNameWithNickname,
+  clientNameWithoutNickname,
+} from '../../../../../../lib/utils/formatters'
+import IconButton from '../../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
 import useDebounce from '../../../../../../shared/hooks/useDebounce'
+import { useModal } from '../../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../service'
 import TransferReferralTransferTypeFields from './TransferReferralTransferTypeFields'
 import { type ClientTransferFormValues, type Referral } from './types'
@@ -15,11 +21,14 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
     control,
     name: `${referral}.clientName`,
   })
+  const clientId = useWatch({
+    control,
+    name: `${referral}.clientId`,
+  })
   const debouncedClientName = useDebounce(clientName, 300)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `searchableName=${debouncedClientName}&limit=10`,
+    `searchableName=${clientNameWithoutNickname(debouncedClientName)}&limit=10`,
   )
-
   return (
     <Box
       as='fieldset'
@@ -38,19 +47,38 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
         {referral === 'from' ? 'Transferir de' : 'Transferir para'}
       </Text>
       <Stack spacing={2}>
-        <ControllerAutocomplete
-          control={control}
-          name={`${referral}.clientId`}
-          auxName={`${referral}.clientName`}
-          label='Cliente'
-          options={clients?.data?.map((client) => ({
-            label: `${client.name} ${client.nickname ? `(${client.nickname})` : ''}`,
-            value: client.id,
-          }))}
-          isLoading={isLoadingClients}
-          placeholder='Nome do cliente'
-          isRequired
-        />
+        <Flex align='flex-end' gap={3}>
+          <ControllerAutocomplete
+            control={control}
+            name={`${referral}.clientId`}
+            auxName={`${referral}.clientName`}
+            label='Cliente'
+            options={clients?.data?.map((client) => ({
+              label: client.nickname
+                ? clientNameWithNickname(client.name, client.nickname)
+                : client.name,
+              value: client.id,
+            }))}
+            isLoading={isLoadingClients}
+            placeholder='Nome do cliente'
+            isRequired
+          />
+          {clientId && (
+            <IconButton
+              onClick={async () => {
+                const { openModal } = useModal.getState()
+                const Balances = (await import('../../../../view/Client/Balances')).default
+                openModal(<Balances clientUuid={clientId} />)
+              }}
+              variant='solid'
+              colorScheme='blue'
+              rounded='xl'
+              title='Saldos do cliente'
+              aria-label='Saldos do cliente'
+              icon='circledDollar'
+            />
+          )}
+        </Flex>
         <TransferReferralTransferTypeFields referral={referral} />
       </Stack>
     </Box>

@@ -1,8 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { clientNameWithoutNickname } from '../../../../../lib/utils/formatters'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../client/service'
@@ -20,12 +21,8 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   })
   const clientName = form.watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
-  const clientNameWithoutNickname = useMemo(
-    () => debouncedClientName.split(' (')[0],
-    [debouncedClientName],
-  )
   const { data, isLoading } = getClientsService(
-    `searchableName=${clientNameWithoutNickname}&limit=10`,
+    `searchableName=${clientNameWithoutNickname(debouncedClientName)}&limit=10`,
   )
 
   useEffect(() => {
