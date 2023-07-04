@@ -103,7 +103,7 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
               setPickupCoffee(e.target.checked)
             }}
           >
-            Café a buscar
+            Escolha a buscar
           </Checkbox>
         </GridItem>
         <GridItem display='flex'>

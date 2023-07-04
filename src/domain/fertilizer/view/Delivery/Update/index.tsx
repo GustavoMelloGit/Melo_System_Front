@@ -24,7 +24,14 @@ export default function UpdateFertilizerDelivery({ refetch, delivery }: Props): 
         date: format(delivery.date, 'yyyy-MM-dd'),
       }}
       onSubmit={async (values) => {
-        const { error } = await updateFertilizerDeliveryService(values)
+        const { error } = await updateFertilizerDeliveryService(delivery.id, {
+          amount: values.amount,
+          brook: values.brook,
+          clientName: values.clientName,
+          complement: values.complement,
+          date: values.date,
+          fertilizerId: values.fertilizerId,
+        })
         if (error) {
           toast.error(error)
           return
