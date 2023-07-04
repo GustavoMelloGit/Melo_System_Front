@@ -50,7 +50,6 @@ export default function PickupTableRow({
     uncheck: (
       <IconButton
         icon='uncheck'
-        confirm
         aria-label='Desmarcar pedido de coleta'
         title='Desmarcar pedido de coleta'
         colorScheme='red'
@@ -76,7 +75,8 @@ export default function PickupTableRow({
 
   return (
     <Tr>
-      <Td data-cy='pickupCoffee-table-clientName'>{pickup.clientName}</Td>
+      <Td data-cy='pickupCoffee-table-clientName'>{pickup.client.code}</Td>
+      <Td data-cy='pickupCoffee-table-clientName'>{pickup.client.name}</Td>
       <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
         {pickup.bags}
       </Td>

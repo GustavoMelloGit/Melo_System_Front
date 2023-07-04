@@ -12,11 +12,11 @@ import {
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
 import { formatInputDateString } from '../../../../../lib/utils/date'
-import AutocompleteInput from '../../../../../shared/components/inputs/Autocomplete'
+import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
@@ -96,41 +96,31 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
             data-cy='pickupCoffee-form'
           >
             <Grid w='full' gridTemplateColumns='repeat(auto-fit, minmax(240px, 1fr))' gap={2}>
-              <Controller
-                name='clientName'
+              <ControllerAutocomplete
                 control={control}
-                render={({ field: { onChange, ...field } }) => (
-                  <AutocompleteInput
-                    label='Cliente'
-                    options={clients?.data?.map((client) => ({
-                      label: client.name,
-                      value: client.name,
-                    }))}
-                    isLoading={isLoadingClients}
-                    handleChange={onChange}
-                    placeholder='Nome do cliente'
-                    isRequired
-                    {...field}
-                  />
-                )}
+                name='clientId'
+                auxName='clientName'
+                label='Cliente'
+                isLoading={isLoadingClients}
+                options={clients?.data?.map((client) => ({
+                  label: client.name,
+                  value: client.name,
+                }))}
+                placeholder='Nome do cliente'
+                isRequired
               />
-              <Controller
-                name='fertilizerId'
+              <ControllerAutocomplete
                 control={control}
-                render={({ field: { onChange, ...field } }) => (
-                  <AutocompleteInput
-                    label='Adubo'
-                    options={fertilizers?.data?.map((fertilizer) => ({
-                      label: fertilizer.name,
-                      value: fertilizer.id,
-                    }))}
-                    isLoading={isLoadingFertilizers}
-                    handleChange={onChange}
-                    placeholder='Nome do adubo'
-                    isRequired
-                    {...field}
-                  />
-                )}
+                name='fertilizerId'
+                auxName='fertilizerName'
+                label='Adubo'
+                options={fertilizers?.data?.map((fertilizer) => ({
+                  label: fertilizer.name,
+                  value: fertilizer.id,
+                }))}
+                isLoading={isLoadingFertilizers}
+                placeholder='Nome do adubo'
+                isRequired
               />
               <ControllerField<FertilizerDeliveryFormValues>
                 control={control}

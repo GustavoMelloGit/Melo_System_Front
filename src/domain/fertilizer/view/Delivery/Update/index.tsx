@@ -15,7 +15,9 @@ export default function UpdateFertilizerDelivery({ refetch, delivery }: Props): 
     <FertilizerDeliveryForm
       initialValues={{
         amount: delivery.amount,
-        clientName: delivery.clientName,
+        clientId: delivery.client.id,
+        clientName: delivery.client.name,
+        fertilizerName: delivery.fertilizer.name,
         brook: delivery.brook,
         complement: delivery.complement,
         fertilizerId: delivery.fertilizer.id,

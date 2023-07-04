@@ -28,11 +28,11 @@ const listItem: Record<
   },
   [Routes.coffeePickups]: {
     label: 'Cafés a Buscar',
-    icon: <BsTruck />,
+    icon: <BsTruck size={18} />,
   },
   [Routes.fertilizersDelivery]: {
     label: 'Adubos a Entregar',
-    icon: <TbTruckLoading />,
+    icon: <TbTruckLoading size={20} />,
   },
   [Routes.books]: {
     label: 'Pesagem',
@@ -40,7 +40,7 @@ const listItem: Record<
   },
   [Routes.fertilizers]: {
     label: 'Estoque de Adubos',
-    icon: <TbPlant />,
+    icon: <TbPlant size={18} />,
   },
 }
 

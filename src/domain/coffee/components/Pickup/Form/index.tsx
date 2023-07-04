@@ -11,6 +11,7 @@ import {
   Stack,
   VStack,
 } from '@chakra-ui/react'
+import { clientNameWithNickname } from '../../../../../lib/utils/formatters'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import { type PickupFormValues } from '../../../types/model/pickup'
@@ -55,7 +56,9 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                 auxName='clientName'
                 options={clients?.map((client) => ({
                   label: `${
-                    client.nickname ? `${client.name} (${client.nickname})` : `${client.name}`
+                    client.nickname
+                      ? clientNameWithNickname(client.name, client.nickname)
+                      : `${client.name}`
                   }`,
                   value: client.id,
                 }))}

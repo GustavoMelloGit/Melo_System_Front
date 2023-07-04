@@ -94,6 +94,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
               <RHFField<FilterFormValues>
                 register={register}
                 rounded='md'
+                type='search'
                 roundedLeft={['md', 'none']}
                 placeholder='Pesquisar'
                 {...(DOMProperties ?? {})}

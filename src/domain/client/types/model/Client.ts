@@ -51,10 +51,10 @@ export type ClientModel = {
 } & Timestamp
 
 export type ClientBalance = {
-  bags: number
-  coffee: number
-  currency: number
-  escolha: number
+  bags?: number
+  coffee?: number
+  currency?: number
+  escolha?: number
   details: Record<string, number>
 }
 

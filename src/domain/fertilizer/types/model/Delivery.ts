@@ -1,8 +1,9 @@
+import { type ClientModel } from '../../../client/types/model/Client'
 import { type FertilizerModel } from './Fertilizer'
 
 export type FertilizerDeliveryModel = {
   id: string
-  clientName: string
+  client: ClientModel
   amount: number
   fertilizer: FertilizerModel
   brook: string
@@ -13,8 +14,10 @@ export type FertilizerDeliveryModel = {
 
 export type FertilizerDeliveryFormValues = {
   clientName: string
+  clientId: string
   amount: number
   fertilizerId: string
+  fertilizerName: string
   brook: string
   complement: string
   date: string

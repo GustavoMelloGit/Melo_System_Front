@@ -37,7 +37,10 @@ export default function ControllerAutocomplete<TFormValues extends FieldValues>(
             mainField.field.onChange(value)
             onChange(label)
           }}
-          onChange={onChange}
+          onChange={(e) => {
+            mainField.field.onChange('')
+            onChange(e)
+          }}
           {...field}
           {...props}
         />

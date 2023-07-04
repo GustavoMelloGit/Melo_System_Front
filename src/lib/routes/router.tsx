@@ -5,6 +5,7 @@ import clientsRoutes from '../../domain/client/routes'
 import coffeeRoutes from '../../domain/coffee/routes'
 import NotFoundPage from '../../domain/error/view/404'
 import fertilizerRoutes from '../../domain/fertilizer/routes'
+import systemRoutes from '../../domain/system/routes'
 import PageLayout from '../../shared/components/layout'
 import { ProtectedRoute } from '../../shared/components/Routers'
 
@@ -24,6 +25,7 @@ export const protectedRoutes: RouteObject = {
     ...clientsRoutes,
     ...coffeeRoutes,
     ...fertilizerRoutes,
+    ...systemRoutes,
   ],
 }
 

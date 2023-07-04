@@ -2,6 +2,7 @@ import { toast } from 'react-hot-toast'
 import { calculateCoffeeValuePerWeight } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { getClientService } from '../../../../../../service'
+import { buyEscolhaService } from '../../service/post'
 import { type BuyEscolhaFormValues } from '../../types/esolha'
 
 type Props = {
@@ -14,23 +15,21 @@ const useBuyEscolhaView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
 
   async function handleBuyCoffee({ bags, weight, ...values }: BuyEscolhaFormValues): Promise<void> {
     const totalValue = calculateCoffeeValuePerWeight(bags, weight, values.valuePerWeight)
-    console.log(totalValue, values)
-    // const { error } = await buyCoffeeService({
-    //   weight: formatBagsIntoWeight(bags, weight),
-    //   bebida: values.bebida,
-    //   value: totalValue,
-    //   brook: values.brook.trim().length > 0 ? values.brook : undefined,
-    //   complement: values.complement.trim().length > 0 ? values.complement : undefined,
-    //   clientId,
-    //   coffeeType: values.coffeeType,
-    //   pricePerBag: values.valuePerBag,
-    // })
-    // if (error) {
-    //   toast.error('Erro ao comprar café')
-    //   return
-    // }
+    const { error } = await buyEscolhaService({
+      weight: totalValue,
+      value: totalValue,
+      brook: values.brook.trim().length > 0 ? values.brook : undefined,
+      complement: values.complement.trim().length > 0 ? values.complement : undefined,
+      clientId,
+      coffeeType: 'escolha',
+      pricePerWeight: values.valuePerWeight,
+    })
+    if (error) {
+      toast.error('Erro ao comprar escolha')
+      return
+    }
     refetch()
-    toast.success('Café comprado com sucesso')
+    toast.success('Escolha comprada com sucesso')
     closeModal()
   }
 
