@@ -16,7 +16,7 @@ export default function SidebarListItem({
   const bg = useColorModeValue('gray.100', 'gray.700')
 
   return (
-    <ListItem {...(isActive && { bg })} rounded={5} fontWeight={600}>
+    <ListItem {...(isActive && { bg })} transition='background .3s' rounded={5} fontWeight={600}>
       <Link
         to={to}
         style={{
