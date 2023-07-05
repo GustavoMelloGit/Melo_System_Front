@@ -14,6 +14,7 @@ export type BuyEscolhaFormValues = {
   valuePerWeight: number
   complement: string
   brook: string
+  description: string
 }
 export type CreateEscolhaValues = Omit<EscolhaFormValues, 'bags' | 'weight'> & {
   clientId: string

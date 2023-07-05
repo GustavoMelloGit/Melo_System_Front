@@ -19,7 +19,7 @@ const BuyEscolhaView = ({ clientId, refetch }: Props): JSX.Element => {
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxW={500}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>

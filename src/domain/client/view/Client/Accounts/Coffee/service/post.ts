@@ -35,6 +35,7 @@ type BuyCoffeeServiceValues = {
   pricePerBag: number
   weight: number
   value: number
+  description?: string
   brook?: string
   complement?: string
 }

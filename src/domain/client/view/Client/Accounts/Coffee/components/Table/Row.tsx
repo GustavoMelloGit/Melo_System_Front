@@ -12,36 +12,43 @@ import {
 import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 
-function getFullDescription(details: CoffeeDetails): string {
-  const messageByDetail: Record<keyof CoffeeDetails, string> = {
-    picking: `${details.picking}% de cata`,
-    sieve: `${details.sieve}% na 17/18`,
-    moisture: `${details.moisture}% de umidade`,
-    drilled: `${details.drilled}% de broca`,
-    foulness: `${details.foulness}% de impureza`,
-    description: `${details.description}`,
-    bebida: '',
-    coffeeType: '',
+function getFullDescription(transaction: CoffeeTransactionModel): string {
+  if (transaction.details) {
+    const { details } = transaction
+    const messageByDetail: Record<keyof CoffeeDetails, string> = {
+      picking: `${details.picking}% de cata`,
+      sieve: `${details.sieve}% na 17/18`,
+      moisture: `${details.moisture}% de umidade`,
+      drilled: `${details.drilled}% de broca`,
+      foulness: `${details.foulness}% de impureza`,
+      description: `${details.description}`,
+      bebida: '',
+      coffeeType: '',
+    }
+
+    const sortedDetails: CoffeeDetails = {
+      picking: details.picking,
+      sieve: details.sieve,
+      moisture: details.moisture,
+      drilled: details.drilled,
+      foulness: details.foulness,
+      description: details.description,
+      bebida: details.bebida,
+      coffeeType: details.coffeeType,
+    }
+
+    const detailsDescription = Object.entries(sortedDetails).reduce((acc, [key, value]) => {
+      const messageValue = messageByDetail[key as keyof CoffeeDetails]
+      if (!value) return acc
+      if (messageValue) return acc + messageValue + ' '
+      return acc
+    }, '')
+
+    const withTransactionDescription = `${detailsDescription} ${transaction.description}`
+    return withTransactionDescription
   }
 
-  const sortedDetails: CoffeeDetails = {
-    picking: details.picking,
-    sieve: details.sieve,
-    moisture: details.moisture,
-    drilled: details.drilled,
-    foulness: details.foulness,
-    description: details.description,
-    bebida: details.bebida,
-    coffeeType: details.coffeeType,
-  }
-
-  const description = Object.entries(sortedDetails).reduce((acc, [key, value]) => {
-    const messageValue = messageByDetail[key as keyof CoffeeDetails]
-    if (!value) return acc
-    if (messageValue) return acc + messageValue + ' '
-    return acc
-  }, '')
-  return description
+  return transaction.description
 }
 
 type Props = {
@@ -55,9 +62,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     escolha: 'ESC',
   }
 
-  const fullDescription: string = transaction.details
-    ? getFullDescription(transaction.details)
-    : transaction.description
+  const fullDescription: string = getFullDescription(transaction)
 
   const coffeeTypeColumnValue: string = transaction.details
     ? labelByTypeName[transaction.details.coffeeType]

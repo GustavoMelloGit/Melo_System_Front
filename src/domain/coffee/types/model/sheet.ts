@@ -19,7 +19,7 @@ export type SheetModel = WithId<
     bookId: string
     number: number
     weighingDate: number
-    client: Pick<ClientModel, 'name'>
+    client: ClientModel
     coffeeDetails: CoffeeDetails
     coffeeType: CoffeeTypes
     courier: string

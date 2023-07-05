@@ -69,6 +69,7 @@ export type TransferBetweenClientsReferralData = {
 export type TransferBetweenClientsServiceData = {
   from: TransferBetweenClientsReferralData
   to: TransferBetweenClientsReferralData
+  description: string
 }
 export async function transferBetweenClientsService(
   values: TransferBetweenClientsServiceData,

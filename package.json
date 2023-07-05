@@ -17,6 +17,7 @@
     "axios": "^1.2.6",
     "change-case": "^4.1.2",
     "compressorjs": "^1.1.1",
+    "currency.js": "^2.0.4",
     "date-fns": "^2.29.3",
     "events": "^3.3.0",
     "firebase": "^9.17.0",
