@@ -38,5 +38,6 @@ export const formValuesToServiceValuesAdapter = (
   return {
     from: fromValues,
     to: toValues,
+    description: values.description,
   }
 }

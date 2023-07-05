@@ -10,10 +10,7 @@ import { transferBetweenClientsService } from '../../../service'
 export default function ClientTransferView(): JSX.Element {
   async function handleSubmitTransfer(values: ClientTransferFormValues): Promise<void> {
     const serviceData = formValuesToServiceValuesAdapter(values)
-    const { error } = await transferBetweenClientsService({
-      ...serviceData,
-      description: values.description,
-    })
+    const { error } = await transferBetweenClientsService(serviceData)
     if (error) {
       toast.error(error)
       return
