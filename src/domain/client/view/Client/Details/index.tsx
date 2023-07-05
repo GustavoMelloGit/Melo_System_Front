@@ -119,7 +119,7 @@ export default function ClientDetails(): JSX.Element {
                   base: 'column',
                   sm: 'row',
                 }}
-                gap={2}
+                gap={6}
               >
                 <Box
                   textAlign={{
@@ -127,10 +127,13 @@ export default function ClientDetails(): JSX.Element {
                     sm: 'left',
                   }}
                 >
+                  <Heading size={'xs'} mt={0.5} fontWeight={400}>
+                    Cód.: {client.code}
+                  </Heading>
                   <Heading as='h1' fontSize={['xl', '4xl']}>
                     {client.name}
                   </Heading>
-                  <Heading size={['sm', 'md']} fontWeight={400} fontStyle='italic'>
+                  <Heading size={['xs', 'md']} fontWeight={400} fontStyle='italic'>
                     ({client.nickname ?? 'Sem apelido'})
                   </Heading>
                 </Box>

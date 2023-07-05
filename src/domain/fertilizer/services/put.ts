@@ -1,11 +1,7 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/error'
 import { type PutServiceResponse } from '../../../shared/types/utils/service'
-import {
-  FertilizerDeliveryStatuses,
-  type FertilizerDeliveryFormValues,
-  type FertilizerDeliveryModel,
-} from '../types/model/Delivery'
+import { FertilizerDeliveryStatuses, type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerModel } from '../types/model/Fertilizer'
 
 export async function fertilizerDeliveryDoneService(
@@ -67,11 +63,20 @@ export async function updateFertilizerService(
   }
 }
 
+type UpdateFertilizerDeliveryServiceData = {
+  clientName: string
+  amount: number
+  fertilizerId: string
+  brook: string
+  complement: string
+  date: string
+}
 export async function updateFertilizerDeliveryService(
-  values: FertilizerDeliveryFormValues,
+  id: string,
+  values: UpdateFertilizerDeliveryServiceData,
 ): PutServiceResponse<FertilizerDeliveryModel> {
   try {
-    const { data } = await api.put('/fertilizers/delivery', values)
+    const { data } = await api.put(`/fertilizers/delivery/${id}`, values)
 
     return {
       data,
