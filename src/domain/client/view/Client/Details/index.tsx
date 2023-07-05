@@ -47,7 +47,7 @@ export default function ClientDetails(): JSX.Element {
 
   if (isLoading) return <SpinLoader />
   if (!client) {
-    toast.error('Cliente não encossntrado')
+    toast.error('Cliente não encontrado')
     return <Navigate to={Routes.clients} />
   }
   return (
