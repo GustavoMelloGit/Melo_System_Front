@@ -11,7 +11,7 @@ type FormValues = {
 }
 
 export const initialValues: FormValues = {
-  interestRate: 3,
+  interestRate: 5,
   date: new Date().toISOString().split('T')[0],
 }
 
@@ -42,7 +42,7 @@ const FeeModalForm = ({ onSubmit }: Props): JSX.Element => {
             <CurrencyInput
               leftIcon='%'
               label='Taxa de juros'
-              initialValue={3}
+              initialValue={initialValues.interestRate}
               rightIcon={<IconButton icon='fee' aria-label='calcular juros' type='submit' />}
               setValue={onChange}
               {...rest}
