@@ -57,9 +57,10 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
     `searchableName=${debouncedClientName}&limit=10`,
   )
-  const fertilizerId = watch('fertilizerId')
+  const fertilizerName = watch('fertilizerName')
+  const debouncedFertilizerName = useDebounce(fertilizerName, 300)
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
-    `name=${fertilizerId}`,
+    `name=${debouncedFertilizerName}`,
   )
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
             as='form'
             spacing={6}
             onSubmit={handleSubmit(async (values) => {
+              console.log(values)
               await onSubmit({
                 ...values,
                 amount: Number(values.amount),
@@ -104,7 +106,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
                 isLoading={isLoadingClients}
                 options={clients?.data?.map((client) => ({
                   label: client.name,
-                  value: client.name,
+                  value: client.id,
                 }))}
                 placeholder='Nome do cliente'
                 isRequired
