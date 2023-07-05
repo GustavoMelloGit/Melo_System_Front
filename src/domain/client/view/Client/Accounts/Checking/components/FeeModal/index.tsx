@@ -93,6 +93,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
     totalOfInterest = Math.floor(interest - transaction.amount + totalOfInterest)
     return interest
   })
+  const valueToTransactionBeCreated = totalOfInterest
 
   return (
     <Modal isOpen isCentered onClose={handleCloseModal} size='xl'>
@@ -162,12 +163,12 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
                 await handleCreateTransaction({
                   date: new Date().toISOString(),
                   description: 'ACERTO DE JUROS',
-                  value: totalAmountWithInterest,
+                  value: valueToTransactionBeCreated,
                 })
               }}
             >
               {totalAmountWithInterest > 0 ? 'Creditar' : 'Debitar'}{' '}
-              {formatCurrency(Math.abs(totalAmountWithInterest))}
+              {formatCurrency(Math.abs(valueToTransactionBeCreated))}
             </Button>
           </VStack>
         </ModalBody>
