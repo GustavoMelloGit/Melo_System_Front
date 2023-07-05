@@ -25,6 +25,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
       clientId,
       coffeeType: values.coffeeType,
       pricePerBag: values.valuePerBag,
+      description: values.description,
     })
     if (error) {
       toast.error('Erro ao comprar café')
@@ -40,6 +41,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
     bags: 0,
     bebida: 'duro',
     valuePerBag: 0,
+    description: '',
     weight: 0,
     brook: data?.address?.brook ?? '',
     complement: data?.address?.complement ?? '',

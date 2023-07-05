@@ -19,7 +19,7 @@ const BuyCoffeeView = ({ clientId, refetch }: Props): JSX.Element => {
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxW={600}>
         <ModalCloseButton />
         <ModalHeader>
           <Heading as='h1' fontSize='3xl'>
