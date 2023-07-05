@@ -22,4 +22,5 @@ export type Referral = 'from' | 'to'
 export type ClientTransferFormValues = {
   from: ReferralTransfer
   to: ReferralTransfer
+  description: string
 }

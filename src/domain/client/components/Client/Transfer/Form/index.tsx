@@ -1,5 +1,18 @@
-import { Button, Center, Flex, Stack, useColorModeValue } from '@chakra-ui/react'
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Button,
+  Center,
+  Flex,
+  Stack,
+  Textarea,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
+import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
 import TransferReferral from './TransferReferral'
 import { type ClientTransferFormValues } from './types'
 
@@ -16,6 +29,7 @@ const emptyInitialValues: ClientTransferFormValues = {
     value: 0,
     transferType: 'currency',
   },
+  description: '',
 }
 
 type Props = {
@@ -45,6 +59,21 @@ export default function ClientTransferForm({
             <TransferReferral control={control} referral='from' />
             <TransferReferral control={control} referral='to' />
           </Flex>
+          <Accordion allowToggle>
+            <AccordionItem>
+              <AccordionButton display='flex' gap={4}>
+                Adicionar observação <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel>
+                <ControllerField
+                  control={control}
+                  name='description'
+                  placeholder='Escreva aqui a sua observação'
+                  CustomInput={<Textarea />}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
           <Center
             position={{
               base: 'fixed',
