@@ -1,4 +1,15 @@
-import { Button, Checkbox, FormControl, FormLabel, Grid, GridItem, Input } from '@chakra-ui/react'
+import {
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+  Input,
+  Stack,
+  Textarea,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -96,33 +107,41 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
             />
           </FormControl>
         </GridItem>
-        <GridItem colSpan={2}>
-          <Checkbox
-            isChecked={pickupCoffee}
-            onChange={(e) => {
-              setPickupCoffee(e.target.checked)
-            }}
-          >
-            Escolha a buscar
-          </Checkbox>
+        <GridItem gridColumn={'-1 / 1'}>
+          <ControllerField
+            control={control}
+            name='description'
+            label='Observação'
+            CustomInput={<Textarea />}
+          />
         </GridItem>
-        <GridItem display='flex'>
-          <ControllerField<BuyEscolhaFormValues>
+      </Grid>
+      <Stack mt={4}>
+        <Checkbox
+          isChecked={pickupCoffee}
+          onChange={(e) => {
+            setPickupCoffee(e.target.checked)
+          }}
+        >
+          Café a buscar
+        </Checkbox>
+        <Flex gap={4}>
+          <ControllerField
             control={control}
             name='brook'
             isDisabled={!pickupCoffee}
             label='Córrego'
+            flex={1}
           />
-        </GridItem>
-        <GridItem display='flex'>
-          <ControllerField<BuyEscolhaFormValues>
+          <ControllerField
             control={control}
             name='complement'
             isDisabled={!pickupCoffee}
             label='Referência'
+            flex={1}
           />
-        </GridItem>
-      </Grid>
+        </Flex>
+      </Stack>
       <Button w='full' mt={4} type='submit' colorScheme='blue'>
         Comprar
       </Button>
