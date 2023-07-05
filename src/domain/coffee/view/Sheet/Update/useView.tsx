@@ -34,7 +34,7 @@ export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): 
   const initialValues: SheetFormValues = data
     ? {
         clientId: data.clientId,
-        clientName: data.clientId,
+        clientName: data.client.name,
         coffeeDetails: data.coffeeDetails,
         courier: data.courier,
         weighingDate: new Date(data.weighingDate).toISOString().split('T')[0],
