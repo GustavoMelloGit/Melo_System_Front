@@ -43,7 +43,7 @@ type Props = {
   initialValues: BuyEscolhaFormValues
 }
 const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
-  const [pickupCoffee, setPickupCoffee] = useState<boolean>(true)
+  const [pickupCoffee, setPickupCoffee] = useState<boolean>(false)
   const { handleSubmit, control, watch } = useForm<BuyEscolhaFormValues>({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
