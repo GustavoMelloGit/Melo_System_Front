@@ -70,3 +70,10 @@ export function clientNameWithoutNickname(clientName: string): string {
 export function clientNameWithNickname(clientName: string, nickname: string): string {
   return `${clientName} (${nickname})`
 }
+
+export function currencyValueCorrection(valueInCents: number): number {
+  const minBRLValue = 0.01
+  const BRL = valueInCents / 100
+  if (Math.abs(BRL) < minBRLValue) return 0
+  return valueInCents
+}
