@@ -2,7 +2,7 @@ import { Avatar, HStack, LinkBox, LinkOverlay, Td, Tr } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
-import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import IconButton from '../../../../../shared/components/IconButton'
 import { type ClientModel } from '../../../types/model/Client'
@@ -16,6 +16,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
   function handleToggleBalance(): void {
     setShowBalance((prev) => !prev)
   }
+  const clientBalance = currencyValueCorrection(client.balance)
 
   return (
     <LinkBox as={Tr} pos='relative'>
@@ -38,14 +39,14 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
       <Td
         onClick={handleToggleBalance}
         cursor='pointer'
-        color={showBalance ? getColorByValue(client.balance) : 'inherit'}
+        color={showBalance ? getColorByValue(clientBalance) : 'inherit'}
         data-cy='table-cell-client-balance'
-        data-balance={client.balance}
+        data-balance={clientBalance}
         zIndex={100}
         pos='relative'
         userSelect='none'
       >
-        {showBalance ? formatCurrency(client.balance) : 'R$ ----'}
+        {showBalance ? formatCurrency(clientBalance) : 'R$ ----'}
       </Td>
       <Td title={client?.contact?.phone} data-cy='table-cell-client-phone'>
         {client?.contact?.phone}
