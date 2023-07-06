@@ -86,6 +86,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
             transaction.createdAt,
             'dd/MM/yyyy kk:mm',
           )}`}
+          placement='left'
         />
       </Td>
     </Tr>
