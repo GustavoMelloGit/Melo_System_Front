@@ -36,7 +36,6 @@ function getFullDescription(transaction: CoffeeTransactionModel): string {
       bebida: details.bebida,
       coffeeType: details.coffeeType,
     }
-
     const detailsDescription = Object.entries(sortedDetails).reduce((acc, [key, value]) => {
       const messageValue = messageByDetail[key as keyof CoffeeDetails]
       if (!value) return acc
@@ -44,7 +43,9 @@ function getFullDescription(transaction: CoffeeTransactionModel): string {
       return acc
     }, '')
 
-    const withTransactionDescription = `${detailsDescription} ${transaction.description}`
+    const withTransactionDescription = `${detailsDescription} ${
+      transaction.description ? transaction.description : ''
+    }`
     return withTransactionDescription
   }
 
@@ -63,7 +64,6 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
   }
 
   const fullDescription: string = getFullDescription(transaction)
-
   const coffeeTypeColumnValue: string = transaction.details
     ? labelByTypeName[transaction.details.coffeeType]
     : '--'
