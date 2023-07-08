@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { type ReactNode } from 'react'
 
 type ProviderComposerProps = {
   contexts: Array<React.JSXElementConstructor<React.PropsWithChildren<any>>>
-  children: JSX.Element
+  children: ReactNode
 }
 export default function ProviderComposer({
   contexts,
