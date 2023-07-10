@@ -24,7 +24,7 @@ export default function SheetsTable({
       rows={{
         isLoading,
         dataLength: data?.length ?? 0,
-        noDataMessage: 'Nenhum talão encontrado',
+        noDataMessage: 'Nenhuma folha encontrada',
       }}
       pagination={{
         totalLength,
