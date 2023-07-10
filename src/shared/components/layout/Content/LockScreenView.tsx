@@ -127,6 +127,7 @@ export default function LockScreenView(): JSX.Element {
               <Text fontSize='sm' color='gray.500' mt={2}>
                 Esqueceu sua senha?{' '}
                 <Button
+                  type='button'
                   variant='link'
                   color='yellow.500'
                   fontWeight={500}

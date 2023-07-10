@@ -97,6 +97,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                 type='search'
                 roundedLeft={['md', 'none']}
                 placeholder='Pesquisar'
+                autoFocus
                 {...(DOMProperties ?? {})}
                 name='query'
                 data-cy='table-search-input'

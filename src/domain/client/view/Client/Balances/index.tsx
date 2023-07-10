@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { Fragment } from 'react'
-import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
@@ -38,6 +38,8 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
     details: 'Detalhes',
   }
 
+  const currencyBalance = currencyValueCorrection(data?.balances.currency ?? 0)
+
   return (
     <Modal isOpen={true} isCentered onClose={closeModal}>
       <ModalOverlay />
@@ -55,7 +57,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
                 <Flex gap={2} justify='space-between' px={2}>
                   <Text fontWeight={700}>{displayData.currency}</Text>
                   <Text color={getColorByValue(data.balances?.currency ?? 0)}>
-                    {formatCurrency(data.balances.currency)}
+                    {formatCurrency(currencyBalance)}
                   </Text>
                 </Flex>
                 <Divider />

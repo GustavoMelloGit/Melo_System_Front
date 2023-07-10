@@ -58,13 +58,21 @@ export async function createTransactionService(
   }
 }
 
+export type ServiceTransferType = 'currency' | 'escolha' | 'bags' | CoffeeBebidas
+type BaseTransferItem<T extends ServiceTransferType> = {
+  value: number
+  type: T
+}
+export type TransferCurrencyItem = BaseTransferItem<'currency'>
+export type TransferCoffeeItem = BaseTransferItem<CoffeeBebidas> & {
+  details?: Partial<CoffeeDetails>
+}
+export type TransferEscolhaItem = BaseTransferItem<'escolha'>
+export type TransferBagsItem = BaseTransferItem<'bags'>
+
 export type TransferBetweenClientsReferralData = {
   clientId: string
-  item: {
-    type: 'currency' | CoffeeBebidas
-    value: number
-    details?: Partial<CoffeeDetails>
-  }
+  item: TransferCurrencyItem | TransferEscolhaItem | TransferCoffeeItem | TransferBagsItem
 }
 export type TransferBetweenClientsServiceData = {
   from: TransferBetweenClientsReferralData

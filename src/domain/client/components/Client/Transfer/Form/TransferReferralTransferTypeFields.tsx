@@ -79,6 +79,8 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               <Select id={field.name} {...selectFieldStyle} {...field}>
                 <option value='currency'>Dinheiro</option>
                 <option value='coffee'>Café</option>
+                <option value='escolha'>Escolha</option>
+                {/* <option value='bags'>Sacaria</option> */}
               </Select>
             </FormControl>
           )}
@@ -114,6 +116,10 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               }))}
             />
           </Flex>
+        </>
+      )}
+      {(transferType === 'coffee' || transferType === 'escolha') && (
+        <>
           <Flex gap={2}>
             <ControllerField
               control={control}
@@ -139,6 +145,19 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
             />
           </Flex>
         </>
+      )}
+      {transferType === 'bags' && (
+        <ControllerField
+          control={control}
+          name={`${referral}.value`}
+          label='Sacas'
+          type='number'
+          inputMode='numeric'
+          min={0}
+          placeholder='Ex.: 10'
+          required
+          rightIcon={<GiChipsBag />}
+        />
       )}
     </Stack>
   )
