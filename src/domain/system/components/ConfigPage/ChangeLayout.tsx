@@ -44,7 +44,7 @@ export default function ChangeLayout(): JSX.Element {
   }
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={0.5}>
       <Flex flexWrap='wrap' gap={2} w='full' justify='space-between' align='center'>
         <Text fontWeight={700} fontSize='lg'>
           Layout
@@ -64,7 +64,7 @@ export default function ChangeLayout(): JSX.Element {
         </Select>
       </Flex>
       <Accordion allowToggle>
-        <AccordionItem borderTop='none'>
+        <AccordionItem border='none'>
           <AccordionButton>
             <Text>Visualizar</Text>
             <AccordionIcon />
