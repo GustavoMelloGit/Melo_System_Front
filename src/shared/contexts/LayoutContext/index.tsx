@@ -23,10 +23,11 @@ export const LayoutContext = createContext<LayoutContextType>({
   },
 })
 
+const breakpoint = 900
 export default function LayoutProvider({ children }: PropsWithChildren): JSX.Element {
   const { width } = usePageSize()
   const { getValue, setValue } = StorageManager('layout.size')
-  const [sideBarIsOpen, setSideBarIsOpen] = useState(width > 768)
+  const [sideBarIsOpen, setSideBarIsOpen] = useState(width > breakpoint)
   const [layoutSize, setLayoutSize] = useState<LayoutSizes>(getValue() ?? 'lg')
 
   const toggleSideBar = useCallback(() => {
@@ -47,7 +48,7 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
   }, [])
 
   useEffect(() => {
-    if (width > 768) {
+    if (width > breakpoint) {
       setSideBarIsOpen(true)
     } else {
       setSideBarIsOpen(false)
