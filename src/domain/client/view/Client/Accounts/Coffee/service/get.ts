@@ -1,6 +1,6 @@
 import useFetch from '../../../../../../../shared/hooks/useFetch'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../../../../shared/types/utils/service'
 import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'
@@ -8,8 +8,8 @@ import { type CoffeeTransactionModel } from '../../../../../types/model/Transact
 export function getCoffeeAccountService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<CoffeeTransactionModel[]>> {
-  const response = useFetch<HTTPGetResponse<CoffeeTransactionModel[]>>(
+): SWRServiceResponse<GetListResponse<CoffeeTransactionModel[]>> {
+  const response = useFetch<GetListResponse<CoffeeTransactionModel[]>>(
     clientId ? `/transactions/coffee/${clientId}?${params ?? ''}` : null,
   )
 

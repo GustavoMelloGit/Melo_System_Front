@@ -1,6 +1,6 @@
 import useFetch from '../../../../../../../shared/hooks/useFetch'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../../../../shared/types/utils/service'
 import { type SacariaTransactionModel } from '../../../../../types/model/Transaction'
@@ -8,8 +8,8 @@ import { type SacariaTransactionModel } from '../../../../../types/model/Transac
 export function getSacariaAccountService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<SacariaTransactionModel[]>> {
-  const response = useFetch<HTTPGetResponse<SacariaTransactionModel[]>>(
+): SWRServiceResponse<GetListResponse<SacariaTransactionModel[]>> {
+  const response = useFetch<GetListResponse<SacariaTransactionModel[]>>(
     clientId ? `/transactions/bags/${clientId}?${params ?? ''}` : null,
   )
 

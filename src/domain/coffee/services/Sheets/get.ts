@@ -1,6 +1,6 @@
 import useFetch, { type UseFetch } from '../../../../shared/hooks/useFetch'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../shared/types/utils/service'
 import { type SheetModel } from '../../types/model/sheet'
@@ -8,8 +8,8 @@ import { type SheetModel } from '../../types/model/sheet'
 export function getSheetsService(
   bookNumber: string | number | undefined,
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<SheetModel[]>> {
-  const response = useFetch<HTTPGetResponse<SheetModel[]>>(
+): SWRServiceResponse<GetListResponse<SheetModel[]>> {
+  const response = useFetch<GetListResponse<SheetModel[]>>(
     bookNumber ? `/sheets/${bookNumber}?${params ?? ''}` : null,
   )
 

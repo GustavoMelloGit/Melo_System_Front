@@ -76,3 +76,7 @@ export function currencyValueCorrection(valueInCents: number): number {
   const correctValueInCents = currency(valueInCents).divide(100).intValue
   return correctValueInCents
 }
+
+export function formatRequestParams(obj: Record<string, string>): string {
+  return Object.entries(obj).reduce((acc, curr) => acc + `&${curr[0]}=${curr[1]}`, '')
+}

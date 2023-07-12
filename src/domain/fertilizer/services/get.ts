@@ -4,8 +4,8 @@ import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/error'
 import useFetch from '../../../shared/hooks/useFetch'
 import {
+  type GetListResponse,
   type GetServiceResponse,
-  type HTTPGetResponse,
   type SWRServiceResponse,
 } from '../../../shared/types/utils/service'
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
@@ -14,8 +14,8 @@ import { type FertilizerModel } from '../types/model/Fertilizer'
 export function getFertilizersService(
   params?: string,
   config?: SWRConfiguration,
-): SWRServiceResponse<HTTPGetResponse<FertilizerModel[]>> {
-  const response = useFetch<HTTPGetResponse<FertilizerModel[]>>(
+): SWRServiceResponse<GetListResponse<FertilizerModel[]>> {
+  const response = useFetch<GetListResponse<FertilizerModel[]>>(
     `/fertilizers?${params ?? ''}`,
     config,
   )
@@ -27,7 +27,7 @@ export async function getFertilizerByNameService(
   name: string,
 ): GetServiceResponse<FertilizerModel> {
   try {
-    const response = await api.get<HTTPGetResponse<FertilizerModel[]>>(`/fertilizers?name=${name}`)
+    const response = await api.get<GetListResponse<FertilizerModel[]>>(`/fertilizers?name=${name}`)
     const sameNameFertilizers = response.data.data.filter((fertilizer) => fertilizer.name === name)
     return {
       data: sameNameFertilizers[0],
@@ -43,8 +43,8 @@ export async function getFertilizerByNameService(
 
 export function getFertilizersDeliveryService(
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<FertilizerDeliveryModel[]>> {
-  const response = useFetch<HTTPGetResponse<FertilizerDeliveryModel[]>>(
+): SWRServiceResponse<GetListResponse<FertilizerDeliveryModel[]>> {
+  const response = useFetch<GetListResponse<FertilizerDeliveryModel[]>>(
     `/fertilizers/delivery?${params ?? ''}`,
   )
 

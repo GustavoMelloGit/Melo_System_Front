@@ -1,6 +1,6 @@
 import useFetch from '../../../../../../../shared/hooks/useFetch'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../../../../shared/types/utils/service'
 import { type FertilizerTransactionModel } from '../../../../../types/model/Transaction'
@@ -8,8 +8,8 @@ import { type FertilizerTransactionModel } from '../../../../../types/model/Tran
 export function getFertilizerTransactionService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<FertilizerTransactionModel[]>> {
-  const response = useFetch<HTTPGetResponse<FertilizerTransactionModel[]>>(
+): SWRServiceResponse<GetListResponse<FertilizerTransactionModel[]>> {
+  const response = useFetch<GetListResponse<FertilizerTransactionModel[]>>(
     clientId ? `/transactions/fertilizer/${clientId}?${params ?? ''}` : null,
   )
 

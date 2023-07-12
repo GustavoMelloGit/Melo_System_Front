@@ -2,15 +2,15 @@ import { type AxiosResponse } from 'axios'
 import api from '../../../../lib/config/api'
 import useFetch from '../../../../shared/hooks/useFetch'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../shared/types/utils/service'
 import { type PickupCoffeeModel } from '../../types/model/pickup'
 
 export function getPickupOrdersService(
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<PickupCoffeeModel[]>> {
-  const response = useFetch<HTTPGetResponse<PickupCoffeeModel[]>>(`/orders?${params ?? ''}`)
+): SWRServiceResponse<GetListResponse<PickupCoffeeModel[]>> {
+  const response = useFetch<GetListResponse<PickupCoffeeModel[]>>(`/orders?${params ?? ''}`)
 
   return response
 }

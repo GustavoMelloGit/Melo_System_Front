@@ -17,4 +17,5 @@ export const Routes = {
     `/books/${bookNumber}/details/${sheetNumber}`,
   transfer: '/transfer',
   config: '/config',
+  transactionMetrics: '/metrics',
 } as const

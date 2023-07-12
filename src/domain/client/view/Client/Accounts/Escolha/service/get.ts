@@ -1,6 +1,6 @@
 import useFetch from '../../../../../../../shared/hooks/useFetch'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../../../../shared/types/utils/service'
 import { type EscolhaTransactionModel } from '../../../../../types/model/Transaction'
@@ -8,8 +8,8 @@ import { type EscolhaTransactionModel } from '../../../../../types/model/Transac
 export function getEscolhaAccountService(
   clientId: string | undefined,
   params?: string,
-): SWRServiceResponse<HTTPGetResponse<EscolhaTransactionModel[]>> {
-  const response = useFetch<HTTPGetResponse<EscolhaTransactionModel[]>>(
+): SWRServiceResponse<GetListResponse<EscolhaTransactionModel[]>> {
+  const response = useFetch<GetListResponse<EscolhaTransactionModel[]>>(
     clientId ? `/transactions/escolha/${clientId}?${params ?? ''}` : null,
   )
 
