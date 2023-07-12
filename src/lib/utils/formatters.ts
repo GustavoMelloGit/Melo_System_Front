@@ -1,3 +1,4 @@
+import currency from 'currency.js'
 import { format } from 'date-fns'
 import { type Address } from '../../domain/client/types/model/Client'
 import GlobalConfig from '../constants/config'
@@ -72,8 +73,6 @@ export function clientNameWithNickname(clientName: string, nickname: string): st
 }
 
 export function currencyValueCorrection(valueInCents: number): number {
-  const minBRLValue = 0.01
-  const BRL = valueInCents / 100
-  if (Math.abs(BRL) < minBRLValue) return 0
-  return valueInCents
+  const correctValueInCents = currency(valueInCents).divide(100).intValue
+  return correctValueInCents
 }
