@@ -22,7 +22,7 @@ export type ClientFormValues = {
   name: string
   nickname?: string
   balance: number
-  personType?: ClientFormValuesLegalPerson | ClientFormValuesNaturalPerson
+  personType: ClientFormValuesLegalPerson | ClientFormValuesNaturalPerson
   address: Address
   contact: ClientContact
   description?: string
