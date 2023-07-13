@@ -77,6 +77,6 @@ export function currencyValueCorrection(valueInCents: number): number {
   return correctValueInCents
 }
 
-export function formatRequestParams(obj: Record<string, string>): string {
+export function formatRequestParams(obj: Record<string, string | number>): string {
   return Object.entries(obj).reduce((acc, curr) => acc + `&${curr[0]}=${curr[1]}`, '')
 }

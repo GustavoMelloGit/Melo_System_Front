@@ -27,3 +27,8 @@ export type GetListResponse<T> = {
   page: number
   total: number
 }
+
+export type PaginationParams = {
+  limit: number
+  page: number
+}
