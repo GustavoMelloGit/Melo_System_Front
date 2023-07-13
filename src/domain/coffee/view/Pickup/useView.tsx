@@ -4,7 +4,7 @@ import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import {
-  type HTTPGetResponse,
+  type GetListResponse,
   type SWRServiceResponse,
 } from '../../../../shared/types/utils/service'
 import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
@@ -96,7 +96,7 @@ export default function usePickupView(): UsePickupView {
 }
 
 type UsePickupView = {
-  order: SWRServiceResponse<HTTPGetResponse<PickupCoffeeModel[]>>
+  order: SWRServiceResponse<GetListResponse<PickupCoffeeModel[]>>
   handleOpenForm: () => Promise<void>
   handleOpenUpdateForm: (pickup: PickupCoffeeModel) => Promise<void>
   handleCheckPickup: (pickup: PickupCoffeeModel) => Promise<void>

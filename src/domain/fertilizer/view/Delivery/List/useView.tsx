@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { type HTTPGetResponse } from '../../../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../../../shared/types/utils/service'
 import { getFertilizersDeliveryPdf, getFertilizersDeliveryService } from '../../../services/get'
 import {
   fertilizerDeliveryCancelService,
@@ -78,7 +78,7 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
 type UseFertilizerDeliveryView = {
   currentStatus: FertilizerDeliveryStatuses | null
   handleChangeStatus: (status: FertilizerDeliveryStatuses) => void
-  data: HTTPGetResponse<FertilizerDeliveryModel[]> | undefined
+  data: GetListResponse<FertilizerDeliveryModel[]> | undefined
   isLoading: boolean
   handleOpenUpdateForm: (pickup: FertilizerDeliveryModel) => Promise<void>
   handleCheckPickup: (pickup: FertilizerDeliveryModel) => Promise<void>

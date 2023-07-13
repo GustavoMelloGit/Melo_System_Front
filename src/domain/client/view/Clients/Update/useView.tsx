@@ -24,21 +24,28 @@ export default function useUpdateClientView(): UseUpdateClientView {
     navigate(-1)
     await mutate?.()
   }
+  let initialValues: ClientFormValues = emptyClient
+
+  if (data && data.personType.type === 'fisica') {
+    initialValues = {
+      ...data,
+      personType: {
+        ...data.personType,
+        ...(data.personType.birthDate && {
+          birthDate: new Date(data.personType.birthDate).toISOString().split('T')[0],
+        }),
+        ...(data.personType.rgEmissionDate && {
+          rgEmissionDate: new Date(data.personType.rgEmissionDate).toISOString().split('T')[0],
+        }),
+      },
+    } as ClientFormValues
+  } else if (data && data.personType.type === 'juridica') {
+    initialValues = data as ClientFormValues
+  }
+
   return {
     handleUpdateClient,
-    initialValues:
-      ({
-        ...data,
-        ...(data?.personType?.type === 'fisica' &&
-          data.personType.birthDate &&
-          data.personType.rgEmissionDate && {
-            personType: {
-              ...data.personType,
-              birthDate: new Date(data.personType.birthDate).toISOString().split('T')[0],
-              rgEmissionDate: new Date(data.personType.rgEmissionDate).toISOString().split('T')[0],
-            },
-          }),
-      } as ClientFormValues) ?? emptyClient,
+    initialValues,
     isLoading,
   }
 }

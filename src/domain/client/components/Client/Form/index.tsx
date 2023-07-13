@@ -138,7 +138,11 @@ export default function ClientForm({
                       </AccordionButton>
                       <AccordionPanel>
                         {isLegalPerson ? (
-                          <LegalPersonFields register={register} formState={formState} />
+                          <LegalPersonFields
+                            register={register}
+                            setValue={setValue}
+                            formState={formState}
+                          />
                         ) : (
                           <NaturalPersonFields
                             control={control}

@@ -21,9 +21,14 @@ export type GetServiceResponse<T> = Promise<{
 
 export type SWRServiceResponse<T> = UseFetch<T, any>
 
-export type HTTPGetResponse<T> = {
+export type GetListResponse<T> = {
   data: T
   limit: number
   page: number
   total: number
+}
+
+export type PaginationParams = {
+  limit: number
+  page: number
 }

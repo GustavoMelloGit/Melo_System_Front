@@ -44,7 +44,7 @@ export type ClientModel = {
   name: string
   nickname?: string
   balance: number
-  personType?: LegalPerson | NaturalPerson
+  personType: LegalPerson | NaturalPerson
   address: Address
   contact: ClientContact
   description?: string
