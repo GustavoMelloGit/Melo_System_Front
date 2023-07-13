@@ -1,46 +1,42 @@
 import { VStack } from '@chakra-ui/react'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
-import { type ExtendedRecord } from '../../../../shared/types/utils/ExtendedRecord'
-import { type TransactionTypeName } from '../../../client/types/model/Transaction'
 import TransactionMetricsTableView from '../../components/Transaction/TableView'
 import { getTransactionMetrics } from '../../services/get'
 
-const metricsOptions: ExtendedRecord<TransactionTypeName, string> = {
-  undefined: 'Sem filtro',
-  currency: 'Corrente',
-  bags: 'Sacaria',
-  escolha: 'Escolha',
-  fertilizer: 'Adubo',
-  duro: 'Café duro',
-  duro_riado: 'Café duro riado',
-  rio: 'Café rio',
-  rio_velho: 'Café rio velho',
-  rio_zona: 'Café rio zona',
-  riado: 'Café riado',
-  riado_rio: 'Café riado rio',
-  duro_riado_rio: 'Café duro riado rio',
-}
+// const metricsOptions: ExtendedRecord<TransactionTypeName, string> = {
+//   undefined: 'Sem filtro',
+//   currency: 'Corrente',
+//   bags: 'Sacaria',
+//   escolha: 'Escolha',
+//   fertilizer: 'Adubo',
+//   duro: 'Café duro',
+//   duro_riado: 'Café duro riado',
+//   rio: 'Café rio',
+//   rio_velho: 'Café rio velho',
+//   rio_zona: 'Café rio zona',
+//   riado: 'Café riado',
+//   riado_rio: 'Café riado rio',
+//   duro_riado_rio: 'Café duro riado rio',
+// }
 
-type TransactionMetricsFilterOptions = {
-  type: keyof typeof metricsOptions
-  startDate: string
-  endDate: string
-}
+// type TransactionMetricsFilterOptions = {
+//   type: keyof typeof metricsOptions
+//   startDate: string
+//   endDate: string
+// }
 export default function TransactionMetricsView(): JSX.Element | null {
-  const [filterParams, setFilterParams] = useState<TransactionMetricsFilterOptions | undefined>(
-    undefined,
-  )
-  const { handleSubmit, control } = useForm<TransactionMetricsFilterOptions>({
-    defaultValues: {
-      endDate: '',
-      startDate: '',
-      type: 'undefined',
-    },
-  })
-  const { data, isLoading } = getTransactionMetrics(filterParams)
+  // const [filterParams, setFilterParams] = useState<TransactionMetricsFilterOptions | undefined>(
+  //   undefined,
+  // )
+  // const { handleSubmit, control } = useForm<TransactionMetricsFilterOptions>({
+  //   defaultValues: {
+  //     endDate: '',
+  //     startDate: '',
+  //     type: 'undefined',
+  //   },
+  // })
+  const { data, isLoading } = getTransactionMetrics()
 
   return (
     <Page title='Relatórios'>
