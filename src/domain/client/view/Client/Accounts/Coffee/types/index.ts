@@ -6,9 +6,9 @@ export type BuyCoffeeFormValues = {
   weight: number
   bags: number
   valuePerBag: number
-  complement: string
   description: string
-  brook: string
+  complement?: string
+  brook?: string
 }
 
 export type CoffeeFormValues = {
