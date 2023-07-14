@@ -66,10 +66,14 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const totalValue = calculateCoffeeTotalValue(currentBags, currentWeight, currentValuePerBag)
   return (
     <form
-      onSubmit={handleSubmit(({ valuePerBag, ...values }) => {
+      onSubmit={handleSubmit(({ valuePerBag, brook, complement, ...values }) => {
         onSubmit({
           ...values,
           valuePerBag: valuePerBag * 100,
+          ...(pickupCoffee && {
+            complement,
+            brook,
+          }),
         })
       })}
     >
