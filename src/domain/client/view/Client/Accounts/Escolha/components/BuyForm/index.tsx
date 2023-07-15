@@ -39,12 +39,17 @@ const validationSchema = yup.object().shape({
 })
 
 type Props = {
-  onSubmit: (values: BuyEscolhaFormValues) => void
+  onSubmit: (values: BuyEscolhaFormValues) => Promise<void>
   initialValues: BuyEscolhaFormValues
 }
 const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const [pickupCoffee, setPickupCoffee] = useState<boolean>(false)
-  const { handleSubmit, control, watch } = useForm<BuyEscolhaFormValues>({
+  const {
+    handleSubmit,
+    control,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<BuyEscolhaFormValues>({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
   })
@@ -58,10 +63,14 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
   )
   return (
     <form
-      onSubmit={handleSubmit(({ valuePerWeight, ...values }) => {
-        onSubmit({
+      onSubmit={handleSubmit(async ({ valuePerWeight, complement, brook, ...values }) => {
+        await onSubmit({
           ...values,
           valuePerWeight: valuePerWeight * 100,
+          ...(pickupCoffee && {
+            complement,
+            brook,
+          }),
         })
       })}
     >
@@ -142,7 +151,7 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
           />
         </Flex>
       </Stack>
-      <Button w='full' mt={4} type='submit' colorScheme='blue'>
+      <Button isLoading={isSubmitting} w='full' mt={4} type='submit' colorScheme='blue'>
         Comprar
       </Button>
     </form>
