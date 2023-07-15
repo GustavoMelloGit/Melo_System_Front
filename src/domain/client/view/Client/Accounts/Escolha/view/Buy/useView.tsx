@@ -19,8 +19,8 @@ const useBuyEscolhaView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
     const { error } = await buyEscolhaService({
       weight: formatBagsIntoWeight(bags, weight),
       value: totalValue,
-      brook: values.brook.trim().length > 0 ? values.brook : undefined,
-      complement: values.complement.trim().length > 0 ? values.complement : undefined,
+      brook: values.brook,
+      complement: values.complement,
       clientId,
       coffeeType: 'escolha',
       pricePerWeight: values.valuePerWeight,
