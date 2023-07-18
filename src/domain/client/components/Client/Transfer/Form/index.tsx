@@ -14,21 +14,22 @@ import {
 import { FormProvider, useForm } from 'react-hook-form'
 import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
 import TransferReferral from './TransferReferral'
-import { type ClientTransferFormValues } from './types'
+import { type ClientTransferFormValues, type ReferralTransfer, type TransferType } from './types'
+
+const emptyReferral: ReferralTransfer = {
+  clientId: '',
+  clientName: '',
+  value: 0,
+  bags: 0,
+  bebida: 'duro',
+  coffeeType: 'bica_corrida',
+  weight: 0,
+  transferType: 'currency' as TransferType,
+}
 
 const emptyInitialValues: ClientTransferFormValues = {
-  from: {
-    clientId: '',
-    clientName: '',
-    value: 0,
-    transferType: 'currency',
-  },
-  to: {
-    clientId: '',
-    clientName: '',
-    value: 0,
-    transferType: 'currency',
-  },
+  from: emptyReferral,
+  to: emptyReferral,
   description: '',
 }
 
