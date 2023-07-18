@@ -26,27 +26,27 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
   const { setValue, control, register } = useFormContext<ClientTransferFormValues>()
   const transferType = useWatch({
     control,
-    name: `${referral}.transferType`,
+    name: `from.transferType`,
   })
   const value = useWatch({
     control,
-    name: `${referral}.value`,
+    name: `from.value`,
   })
   const bebida = useWatch({
     control,
-    name: `${referral}.bebida`,
+    name: `from.bebida`,
   })
   const coffeeType = useWatch({
     control,
-    name: `${referral}.coffeeType`,
+    name: `from.coffeeType`,
   })
   const bags = useWatch({
     control,
-    name: `${referral}.bags`,
+    name: `from.bags`,
   })
   const weight = useWatch({
     control,
-    name: `${referral}.weight`,
+    name: `from.weight`,
   })
 
   const mirrorFromValuesIntoToValues = (
@@ -57,14 +57,12 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
   }
 
   useEffect(() => {
-    if (referral === 'from') {
-      mirrorFromValuesIntoToValues(`to.transferType`, transferType)
-      mirrorFromValuesIntoToValues(`to.value`, value)
-      mirrorFromValuesIntoToValues(`to.bebida`, bebida)
-      mirrorFromValuesIntoToValues(`to.coffeeType`, coffeeType)
-      mirrorFromValuesIntoToValues(`to.bags`, bags)
-      mirrorFromValuesIntoToValues(`to.weight`, weight)
-    }
+    mirrorFromValuesIntoToValues(`to.transferType`, transferType)
+    mirrorFromValuesIntoToValues(`to.value`, value)
+    mirrorFromValuesIntoToValues(`to.bebida`, bebida)
+    mirrorFromValuesIntoToValues(`to.coffeeType`, coffeeType)
+    mirrorFromValuesIntoToValues(`to.bags`, bags)
+    mirrorFromValuesIntoToValues(`to.weight`, weight)
   }, [transferType, value, bebida, coffeeType, bags, weight])
 
   return (
@@ -98,19 +96,19 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
         <>
           <Flex gap={2}>
             <RHFSelectField
+              name={`${referral}.coffeeType`}
               register={register}
-              name={`${referral}.bebida`}
-              label='Bebida'
-              options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
+              label='Tipo de café'
+              options={Object.entries(CoffeeTypesForm).map(([value, label]) => ({
                 value,
                 label,
               }))}
             />
             <RHFSelectField
-              name={`${referral}.coffeeType`}
               register={register}
-              label='Tipo de café'
-              options={Object.entries(CoffeeTypesForm).map(([value, label]) => ({
+              name={`${referral}.bebida`}
+              label='Bebida'
+              options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
                 value,
                 label,
               }))}
