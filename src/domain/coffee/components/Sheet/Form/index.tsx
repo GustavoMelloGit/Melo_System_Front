@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useForm, type Path } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
-import { formatInputDateString } from '../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import SheetFormCoffeeDetails from './CoffeeDetails'
 import SheetFormLines from './Lines'
@@ -46,7 +46,7 @@ export default function SheetForm({
       onSubmit={handleSubmit(async ({ weighingDate, ...values }) => {
         await onSubmit?.({
           ...values,
-          weighingDate: formatInputDateString(weighingDate),
+          weighingDate: dateInputToApiDate(weighingDate),
         })
         const emptyInitialValues: SheetFormValues = {
           courier: '',

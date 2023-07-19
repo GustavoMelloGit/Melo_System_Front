@@ -17,8 +17,7 @@ import RHFField from '../inputs/RHFField'
 import { type FilterFormValues, type TableFilterProps } from './types'
 
 export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
-  const { getParam } = useURLSearchParams()
-  const { handleAddParams, handleRemoveParams } = useURLSearchParams()
+  const { handleAddParams, handleRemoveParams, getParam } = useURLSearchParams()
   const bg = useColorModeValue('gray.200', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
   const { handleSubmit, register, watch, control } = useForm<FilterFormValues>({

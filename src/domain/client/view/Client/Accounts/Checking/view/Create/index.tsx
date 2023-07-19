@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../../service'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
@@ -28,7 +28,7 @@ export default function CreateTransactionView({ uuid }: CreateTransactionViewPro
     const { error } = await createTransactionService(
       {
         ...values,
-        date: formatInputDateString(date),
+        date: dateInputToApiDate(date),
       },
       uuid,
     )

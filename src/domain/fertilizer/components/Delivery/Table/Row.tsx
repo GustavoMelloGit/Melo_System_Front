@@ -1,6 +1,7 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
+import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 
 type Props = {
@@ -55,13 +56,17 @@ export default function DeliveryTableRow({
   return (
     <Tr>
       <Td data-cy='deliveryCoffee-table-date'>{dateToFormat(delivery.date ?? 0, 'dd/MM/yyyy')}</Td>
-      <Td data-cy='deliveryCoffee-table-clientName'>{delivery.client.name}</Td>
-      <Td data-cy='deliveryCoffee-table-fertilizerName'>{delivery.fertilizer.name}</Td>
+      <CollapsibleTd data-cy='deliveryCoffee-table-clientName'>
+        {delivery.client.name}
+      </CollapsibleTd>
+      <CollapsibleTd data-cy='deliveryCoffee-table-fertilizerName'>
+        {delivery.fertilizer.name}
+      </CollapsibleTd>
       <Td data-cy='deliveryCoffee-table-bags' textAlign='center'>
         {delivery.amount}
       </Td>
       <Td data-cy='deliveryCoffee-table-brook'>{delivery.brook}</Td>
-      <Td data-cy='deliveryCoffee-table-complement'>{delivery.complement}</Td>
+      <CollapsibleTd data-cy='deliveryCoffee-table-complement'>{delivery.complement}</CollapsibleTd>
       <Td textAlign='center'>
         <IconButton
           icon='edit'

@@ -22,7 +22,7 @@ import {
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { shallow } from 'zustand/shallow'
-import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import {
   calculateCompoundInterest,
@@ -53,7 +53,7 @@ type Props = {
 export default function FeeModal({ clientId }: Props): JSX.Element {
   const [interestParams, setInterestParams] = useState({
     ...initialValues,
-    date: formatInputDateString(initialValues.date),
+    date: dateInputToApiDate(initialValues.date),
   })
   const closeModal = useModal((state) => state.closeModal)
   const borderColor = useColorModeValue('gray.200', 'gray.600')

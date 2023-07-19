@@ -1,6 +1,7 @@
-import { Collapse, Flex, Td, Tr } from '@chakra-ui/react'
-import { cloneElement, useState } from 'react'
+import { Flex, Td, Tr } from '@chakra-ui/react'
+import { cloneElement } from 'react'
 import IconButton from '../../../../../shared/components/IconButton'
+import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
 type Action = 'edit' | 'check' | 'uncheck'
@@ -19,7 +20,6 @@ export default function PickupTableRow({
   onClickUncheck,
   variant = 'pending',
 }: Props): JSX.Element {
-  const [showRef, setShowRef] = useState<boolean>(false)
   const actions: Action[] = []
 
   const buttonByAction: Record<Action, JSX.Element> = {
@@ -81,21 +81,7 @@ export default function PickupTableRow({
         {pickup.bags}
       </Td>
       <Td data-cy='pickupCoffee-table-brook'>{pickup.brook}</Td>
-      <Td
-        data-cy='pickupCoffee-table-complement'
-        title={pickup.complement}
-        cursor='pointer'
-        onClick={() => {
-          setShowRef((prev) => !prev)
-        }}
-        maxW={80}
-        wordBreak='break-word'
-        whiteSpace='pre-wrap'
-      >
-        <Collapse startingHeight={20} in={showRef}>
-          {pickup.complement}
-        </Collapse>
-      </Td>
+      <CollapsibleTd>{pickup.complement}</CollapsibleTd>
       <Td textAlign='center'>
         <Flex align='center' justify='center' gap={1}>
           {actions.map((action) =>

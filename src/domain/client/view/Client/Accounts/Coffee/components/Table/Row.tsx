@@ -5,7 +5,6 @@ import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoT
 import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import {
   CoffeeBebidasLabel,
-  type CoffeeBebidas,
   type CoffeeDetails,
   type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
@@ -72,7 +71,7 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
     <Tr>
       <Td w={120}>{dateToFormat(transaction.date)}</Td>
       <Td title={coffeeTypeColumnValue}>{coffeeTypeColumnValue}</Td>
-      <Td>{CoffeeBebidasLabel[transaction.type.name as CoffeeBebidas]}</Td>
+      <Td>{CoffeeBebidasLabel[transaction.type.name]}</Td>
       <CollapsibleTd>{fullDescription || transaction.description}</CollapsibleTd>
       <Td color={getColorByValue(transaction.type.value)}>
         {getNumberOfBags(transaction.type.value)}
