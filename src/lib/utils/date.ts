@@ -1,6 +1,10 @@
-export function formatInputDateString(date: string): string {
+export function dateInputToApiDate(date: string): string {
   const currentTime = new Date().toISOString().split('T')[1]
   return date + 'T' + currentTime
+}
+
+export function apiDateToDateInput(date: string): string {
+  return date.split('T')[0]
 }
 
 export function formatAndSumDayOfDate(date: number): string {

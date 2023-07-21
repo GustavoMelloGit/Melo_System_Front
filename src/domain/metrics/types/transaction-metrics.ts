@@ -11,3 +11,9 @@ export type TransactionMetrics = WithId<{
 export type GetTransactionMetricsResponse = {
   data: TransactionMetrics[]
 }
+
+export type TransactionMetricsFilterOptions = {
+  type: string
+  startDate: string
+  endDate: string
+}

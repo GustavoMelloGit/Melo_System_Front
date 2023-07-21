@@ -26,7 +26,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
   const { setValue, control, register } = useFormContext<ClientTransferFormValues>()
   const transferType = useWatch({
     control,
-    name: `from.transferType`,
+    name: `${referral}.transferType`,
   })
   const value = useWatch({
     control,
@@ -71,10 +71,19 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
         <Controller
           control={control}
           name={`${referral}.transferType`}
-          render={({ field }) => (
+          render={({ field: { onChange, ...field } }) => (
             <FormControl>
               <FormLabel htmlFor={field.name}>Tipo de transferência</FormLabel>
-              <Select id={field.name} {...selectFieldStyle} {...field}>
+              <Select
+                id={field.name}
+                {...selectFieldStyle}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  console.log(field)
+                  onChange(e)
+                }}
+                {...field}
+              >
                 <option value='currency'>Dinheiro</option>
                 <option value='coffee'>Café</option>
                 <option value='escolha'>Escolha</option>

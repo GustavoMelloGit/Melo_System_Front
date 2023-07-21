@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import SacariaFormView from '../../components/Form'
 import { createSacariaService } from '../../service/post'
@@ -24,7 +24,7 @@ const CreateSacariaView = ({ clientUuid, refetch }: Props): JSX.Element => {
     const { error } = await createSacariaService(
       {
         ...values,
-        date: formatInputDateString(date),
+        date: dateInputToApiDate(date),
       },
       clientUuid,
     )

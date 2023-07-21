@@ -15,7 +15,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
-import { formatInputDateString } from '../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
@@ -92,7 +92,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
               await onSubmit({
                 ...values,
                 amount: Number(values.amount),
-                date: formatInputDateString(values.date),
+                date: dateInputToApiDate(values.date),
               })
             })}
             data-cy='pickupCoffee-form'

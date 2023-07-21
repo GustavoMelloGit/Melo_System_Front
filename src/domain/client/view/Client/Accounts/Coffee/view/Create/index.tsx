@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatters'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import CoffeeFormView from '../../components/CreateForm'
@@ -31,7 +31,7 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
       ...values,
       value: formatBagsIntoWeight(bags, weight),
       clientId,
-      date: formatInputDateString(date),
+      date: dateInputToApiDate(date),
     })
     if (error) {
       toast.error('Erro ao lançar café')

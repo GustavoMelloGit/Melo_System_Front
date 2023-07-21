@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
-import { formatInputDateString } from '../../../../../../../../lib/utils/date'
+import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import IconButton from '../../../../../../../../shared/components/IconButton'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import CurrencyInput from '../../../../../../../../shared/components/inputs/CurrencyInput'
@@ -23,7 +23,7 @@ const FeeModalForm = ({ onSubmit }: Props): JSX.Element => {
     defaultValues: initialValues,
   })
   function handleCalculateFee({ date, ...values }: FormValues): void {
-    onSubmit({ ...values, date: formatInputDateString(date) })
+    onSubmit({ ...values, date: dateInputToApiDate(date) })
   }
   return (
     <form onSubmit={handleSubmit(handleCalculateFee)}>
