@@ -18,7 +18,7 @@ Cypress.Commands.add('login', () => {
     method: 'POST',
     url: `${Cypress.env('api_base')}/login`,
     body: {
-      email: Cypress.env('auth_email'),
+      nickname: Cypress.env('auth_nickname'),
       password: Cypress.env('auth_password'),
     },
     headers: {
@@ -26,6 +26,7 @@ Cypress.Commands.add('login', () => {
     },
   }
   cy.request(options).then((response: any) => {
+    console.log(response)
     const { setValue: setToken } = StorageManager('token')
     const { setValue: setUser } = StorageManager('user')
     setToken(response.body.token)

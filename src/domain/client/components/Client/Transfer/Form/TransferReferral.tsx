@@ -62,6 +62,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
             isLoading={isLoadingClients}
             placeholder='Nome do cliente'
             isRequired
+            data-cy={`${referral}-name-input`}
           />
           {clientId && clientName && (
             <IconButton

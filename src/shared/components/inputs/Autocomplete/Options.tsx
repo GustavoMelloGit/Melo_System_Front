@@ -29,6 +29,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
       py={1}
       maxH={200}
       overflowY='auto'
+      data-cy='autocomplete-options'
     >
       {options.map((option) => (
         <Button

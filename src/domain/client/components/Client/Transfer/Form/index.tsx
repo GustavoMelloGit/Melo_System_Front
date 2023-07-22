@@ -54,13 +54,14 @@ export default function ClientTransferForm({
           await onSubmit(values)
           reset(emptyInitialValues)
         })}
+        data-cy='client-transfer-form'
       >
         <Stack spacing={8}>
           <Flex justify='space-between' align='flex-start' flexWrap='wrap' w='full' gap={8}>
             <TransferReferral control={control} referral='from' />
             <TransferReferral control={control} referral='to' />
           </Flex>
-          <Accordion allowToggle>
+          <Accordion allowToggle defaultIndex={[0]}>
             <AccordionItem>
               <AccordionButton display='flex' gap={4}>
                 Adicionar observação <AccordionIcon />
@@ -98,6 +99,7 @@ export default function ClientTransferForm({
                 base: '90%',
                 sm: 300,
               }}
+              data-cy='submit-button'
             >
               Transferir
             </Button>
