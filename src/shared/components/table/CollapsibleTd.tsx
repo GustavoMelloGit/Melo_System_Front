@@ -1,7 +1,8 @@
-import { Collapse, Td } from '@chakra-ui/react'
-import { useState, type PropsWithChildren } from 'react'
+import { Collapse, Td, type TableCellProps } from '@chakra-ui/react'
+import { useState } from 'react'
 
-export default function CollapsibleTd({ children }: PropsWithChildren): JSX.Element {
+type Props = TableCellProps
+export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element {
   const [showText, setShowText] = useState<boolean>(false)
   return (
     <Td
@@ -13,6 +14,7 @@ export default function CollapsibleTd({ children }: PropsWithChildren): JSX.Elem
       maxW={80}
       wordBreak='break-word'
       whiteSpace='pre-wrap'
+      {...rest}
     >
       <Collapse startingHeight={20} in={showText}>
         {children}
