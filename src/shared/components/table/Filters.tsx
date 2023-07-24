@@ -8,7 +8,7 @@ import {
   Show,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { cloneElement } from 'react'
+import { cloneElement, useCallback, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { BiSearchAlt } from 'react-icons/bi'
 import { PaginationParams } from '../../../lib/constants/pagination'
@@ -20,7 +20,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
   const { handleAddParams, handleRemoveParams, getParam } = useURLSearchParams()
   const bg = useColorModeValue('gray.200', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
-  const { handleSubmit, register, watch, control } = useForm<FilterFormValues>({
+  const { handleSubmit, register, watch, control, reset } = useForm<FilterFormValues>({
     defaultValues: {
       query: queryParam ?? '',
       searchFor: getParam(PaginationParams.searchFor) ?? Object.keys(searchForOptions)[0],
@@ -31,9 +31,17 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
   const DOMProperties = { ...inputProps }
   delete DOMProperties?.valueGetter
 
-  function handleSubmitFilter({ query, searchFor }: FilterFormValues): void {
+  const handleCleanFilter = useCallback((): void => {
+    handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
+    reset({
+      query: '',
+      searchFor: Object.keys(searchForOptions)[0],
+    })
+  }, [reset, searchForOptions, handleRemoveParams])
+
+  const handleSubmitFilter = ({ query, searchFor }: FilterFormValues): void => {
     if (!query) {
-      handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
+      handleCleanFilter()
       return
     }
     if (inputProps?.valueGetter) {
@@ -45,6 +53,19 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
       searchFor,
     })
   }
+
+  const handleClickEsc = useCallback(
+    (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') handleCleanFilter()
+    },
+    [handleCleanFilter],
+  )
+  useEffect(() => {
+    window.addEventListener('keydown', handleClickEsc)
+    return () => {
+      window.removeEventListener('keydown', handleClickEsc)
+    }
+  }, [])
 
   return (
     <form onSubmit={handleSubmit(handleSubmitFilter)}>
@@ -102,6 +123,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                 data-cy='table-search-input'
               />
             )}
+
             <IconButton
               type='submit'
               variant='ghost'
