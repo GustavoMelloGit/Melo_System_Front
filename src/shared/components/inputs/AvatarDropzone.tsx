@@ -54,7 +54,7 @@ export default function AvatarDropzone({
       {...rest}
     >
       <div {...getRootProps()}>
-        <input {...getInputProps()} />
+        <input {...getInputProps()} capture />
         <Center
           pos='absolute'
           inset={0}

@@ -82,6 +82,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
                   console.log(field)
                   onChange(e)
                 }}
+                data-cy={`${referral}-transferType-input`}
                 {...field}
               >
                 <option value='currency'>Dinheiro</option>
@@ -98,6 +99,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
             leftIcon='R$'
             name={`${referral}.value`}
             label={valueLabelByReferral[referral]}
+            data-cy={`${referral}-currency-input`}
           />
         )}
       </Flex>
@@ -108,6 +110,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               name={`${referral}.coffeeType`}
               register={register}
               label='Tipo de café'
+              data-cy={`${referral}-coffeeType-input`}
               options={Object.entries(CoffeeTypesForm).map(([value, label]) => ({
                 value,
                 label,
@@ -117,6 +120,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               register={register}
               name={`${referral}.bebida`}
               label='Bebida'
+              data-cy={`${referral}-bebida-input`}
               options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
                 value,
                 label,
@@ -138,6 +142,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               placeholder='Ex.: 10'
               required
               rightIcon={<GiChipsBag />}
+              data-cy={`${referral}-bags-input`}
             />
             <ControllerField
               name={`${referral}.weight`}
@@ -149,6 +154,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               placeholder='Ex.: 10'
               required
               rightIcon='Kg'
+              data-cy={`${referral}-weight-input`}
             />
           </Flex>
         </>
@@ -164,6 +170,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
           placeholder='Ex.: 10'
           required
           rightIcon={<GiChipsBag />}
+          data-cy={`${referral}-bagsValue-input`}
         />
       )}
     </Stack>

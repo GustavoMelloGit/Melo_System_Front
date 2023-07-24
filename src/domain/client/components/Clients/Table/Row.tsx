@@ -5,6 +5,7 @@ import { Routes } from '../../../../../lib/routes'
 import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import IconButton from '../../../../../shared/components/IconButton'
+import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type ClientModel } from '../../../types/model/Client'
 
 export type ClientsTableRowProps = {
@@ -24,8 +25,8 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
       <Td
+        maxW={80}
         title={client.name}
-        maxW={40}
         whiteSpace='nowrap'
         textOverflow='ellipsis'
         overflow='hidden'
@@ -33,16 +34,22 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
       >
         {client.name}
       </Td>
-      <Td title={client.nickname} data-cy='table-cell-client-nickname'>
+      <CollapsibleTd
+        maxW={60}
+        pos='relative'
+        userSelect='none'
+        zIndex={2}
+        data-cy='table-cell-client-nickname'
+      >
         {client.nickname ?? '--'}
-      </Td>
+      </CollapsibleTd>
       <Td
         onClick={handleToggleBalance}
         cursor='pointer'
         color={showBalance ? getColorByValue(clientBalance) : 'inherit'}
         data-cy='table-cell-client-balance'
         data-balance={clientBalance}
-        zIndex={100}
+        zIndex={1}
         pos='relative'
         userSelect='none'
       >
@@ -65,7 +72,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
           <IconButton
             icon='remove'
             colorScheme='red'
-            zIndex={100}
+            zIndex={1}
             cursor='pointer'
             as='span'
             role='button'

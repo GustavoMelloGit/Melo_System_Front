@@ -63,12 +63,6 @@ export default function CoffeeAccountTable({
 }
 
 const searchForOptions: SearchForOption = {
-  oneDayInterval: {
-    label: 'Data',
-    inputProps: {
-      type: 'date',
-    },
-  },
   'type.name': {
     label: 'Bebida',
     Input: (
@@ -80,6 +74,12 @@ const searchForOptions: SearchForOption = {
         ))}
       </Select>
     ),
+  },
+  oneDayInterval: {
+    label: 'Data',
+    inputProps: {
+      type: 'date',
+    },
   },
   'details.coffeeType': {
     label: 'Tipo',
