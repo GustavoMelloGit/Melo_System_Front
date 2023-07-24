@@ -52,7 +52,19 @@ export default function ClientTransferForm({
       <form
         onSubmit={handleSubmit(async (values) => {
           await onSubmit(values)
-          reset(emptyInitialValues)
+          reset({
+            from: {
+              ...emptyReferral,
+              clientId: values.from.clientId,
+              clientName: values.from.clientName,
+              transferType: values.from.transferType,
+            } as ReferralTransfer,
+            to: {
+              ...emptyReferral,
+              transferType: values.from.transferType,
+            } as ReferralTransfer,
+            description: '',
+          })
         })}
         data-cy='client-transfer-form'
       >
