@@ -1,11 +1,14 @@
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardHeader,
   Center,
+  Divider,
   Flex,
   Heading,
+  HStack,
   Tab,
   TabList,
   TabPanel,
@@ -16,7 +19,6 @@ import { toast } from 'react-hot-toast'
 import { BsZoomIn } from 'react-icons/bs'
 import { Link, Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
-import IconButton from '../../../../../shared/components/IconButton'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
@@ -126,10 +128,73 @@ export default function ClientDetails(): JSX.Element {
                     base: 'center',
                     sm: 'left',
                   }}
+                  w='full'
                 >
-                  <Heading size={'xs'} mt={0.5} fontWeight={400}>
-                    Cód.: {client.code}
-                  </Heading>
+                  <Flex
+                    mt={0.5}
+                    fontSize={{
+                      base: 'xs',
+                      sm: 'sm',
+                    }}
+                    justify='space-between'
+                    flexDir={{
+                      base: 'column',
+                      sm: 'row',
+                    }}
+                    align='center'
+                    flexWrap='wrap'
+                    gap={{
+                      base: 1,
+                      sm: 4,
+                    }}
+                    mb={{
+                      base: 1,
+                      sm: 0,
+                    }}
+                  >
+                    <Heading fontSize='inherit' color='white' fontWeight={400}>
+                      Cód.: {client.code}{' '}
+                    </Heading>
+                    <HStack
+                      divider={<Divider orientation='vertical' h={4} />}
+                      align='center'
+                      fontWeight={600}
+                      gap={{
+                        base: 1,
+                        sm: 2,
+                      }}
+                      color='blue.500'
+                      flexWrap='wrap'
+                    >
+                      {/* <ChakraLink as={Link} to=''>
+                        Cafés a buscar
+                      </ChakraLink>
+                      <Button
+                        onClick={openClientSheetsModal}
+                        variant='link'
+                        color='inherit'
+                        fontSize='inherit'
+                      >
+                        Folhas
+                      </Button> */}
+                      <Button
+                        onClick={openClientInfoModal}
+                        variant='link'
+                        color='inherit'
+                        fontSize='inherit'
+                      >
+                        Detalhes
+                      </Button>
+                      <Button
+                        onClick={openClientBalancesModal}
+                        variant='link'
+                        color='inherit'
+                        fontSize='inherit'
+                      >
+                        Saldos
+                      </Button>
+                    </HStack>
+                  </Flex>
                   <Heading as='h1' fontSize={['xl', '4xl']}>
                     {client.name}
                   </Heading>
@@ -137,29 +202,6 @@ export default function ClientDetails(): JSX.Element {
                     ({client.nickname ?? 'Sem apelido'})
                   </Heading>
                 </Box>
-                <Flex
-                  gap={2.5}
-                  align='center'
-                  justify={{
-                    base: 'center',
-                    sm: 'flex-start',
-                  }}
-                >
-                  <IconButton
-                    onClick={openClientInfoModal}
-                    variant='outline'
-                    title='Informações gerais do cliente'
-                    aria-label='Informações gerais do cliente'
-                    icon='document'
-                  />
-                  <IconButton
-                    onClick={openClientBalancesModal}
-                    variant='outline'
-                    title='Saldos do cliente'
-                    aria-label='Saldos do cliente'
-                    icon='circledDollar'
-                  />
-                </Flex>
               </Flex>
             </Flex>
           </CardHeader>

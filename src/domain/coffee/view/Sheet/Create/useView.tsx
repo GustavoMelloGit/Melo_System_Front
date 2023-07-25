@@ -8,10 +8,10 @@ type Props = {
   bookNumber: string | number | undefined
 }
 export default function useCreateSheetView({ bookNumber }: Props): UseCreateSheetView {
-  const { data, mutate: refetchLastLine } = getSheetsService(
+  const { data, mutate: refetchLastLine } = getSheetsService({
     bookNumber,
-    `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&limit=1`,
-  )
+    params: `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&limit=1`,
+  })
 
   async function handleCreateSheet({ clientId, ...values }: SheetFormValues): Promise<void> {
     if (!bookNumber) return
