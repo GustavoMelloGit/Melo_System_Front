@@ -1,4 +1,9 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Button,
   Checkbox,
   Flex,
@@ -15,14 +20,16 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Text,
+  Textarea,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
-import AutocompleteInput from '../../../../../../../../shared/components/inputs/Autocomplete'
+import ControllerAutocomplete from '../../../../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import { getFertilizersService } from '../../../../../../../fertilizer/services/get'
@@ -85,23 +92,19 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
             )}
           >
             <Stack spacing={4}>
-              <Controller
-                name='fertilizerName'
+              <ControllerAutocomplete
                 control={control}
-                render={({ field: { onChange, ...field } }) => (
-                  <AutocompleteInput
-                    label='Adubo'
-                    options={fertilizers?.data?.map((fertilizer) => ({
-                      label: `${fertilizer.name} ${fertilizer.description ?? ''}`,
-                      value: fertilizer.name,
-                    }))}
-                    isLoading={isLoadingFertilizers}
-                    handleChange={onChange}
-                    placeholder='Nome do adubo'
-                    isRequired
-                    {...field}
-                  />
-                )}
+                name='fertilizerId'
+                auxName='fertilizerName'
+                options={fertilizers?.data?.map((fertilizer) => ({
+                  label: `${fertilizer.name} ${fertilizer.description ?? ''}`,
+                  value: fertilizer.id,
+                  key: fertilizer.id,
+                }))}
+                isLoading={isLoadingFertilizers}
+                placeholder='Nome do adubo'
+                label='Adubo'
+                isRequired
               />
 
               <Flex gap={4}>
@@ -169,6 +172,25 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
                   required
                 />
               </Flex>
+              <Accordion allowToggle>
+                <AccordionItem>
+                  <AccordionButton display='flex' justifyContent='space-between'>
+                    <Text as='label' htmlFor='description'>
+                      Observação
+                    </Text>
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    <ControllerField
+                      control={control}
+                      name='description'
+                      CustomInput={<Textarea />}
+                      placeholder='Escreva uma observação'
+                      id='description'
+                    />
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
               <Button isLoading={isSubmitting} type='submit' colorScheme='green'>
                 Vender
               </Button>

@@ -33,7 +33,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
     >
       {options.map((option) => (
         <Button
-          key={String(option.value)}
+          key={option.key ?? String(option.value)}
           data-value={option.value}
           variant='ghost'
           rounded={0}

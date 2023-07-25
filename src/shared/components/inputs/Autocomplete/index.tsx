@@ -36,8 +36,8 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
   ): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
     const [state, actions] = useAutocomplete()
-    const { options: storedOptions, showOptions } = state
-    const { setShowOptions, resetState, setOptions } = actions
+    const { showOptions } = state
+    const { setShowOptions, resetState } = actions
 
     useOutsideClick({
       ref,
@@ -75,11 +75,6 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
       }
     }, [])
 
-    useEffect(() => {
-      if (!options) return
-      setOptions(options)
-    }, [options])
-
     return (
       <FormControl position='relative' ref={ref}>
         {label && (
@@ -115,8 +110,8 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
           </InputRightElement>
         </InputGroup>
         {error && <FormErrorMessage data-cy='validation-message'>{error}</FormErrorMessage>}
-        {storedOptions && storedOptions.length > 0 && (
-          <OptionsBox onSelect={handleOnSelect} options={storedOptions} showOptions={showOptions} />
+        {options && options.length > 0 && (
+          <OptionsBox onSelect={handleOnSelect} options={options} showOptions={showOptions} />
         )}
       </FormControl>
     )
