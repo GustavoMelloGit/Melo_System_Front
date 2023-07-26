@@ -14,7 +14,7 @@ export function getSheetsService({
   params,
 }: GetSheetServiceData): SWRServiceResponse<GetListResponse<SheetModel[]>> {
   const response = useFetch<GetListResponse<SheetModel[]>>(
-    bookNumber ? `/sheets/${bookNumber}?${params ?? ''}` : null,
+    `/sheets?${bookNumber ? `bookNumber=${bookNumber}&` : ''}${params ?? ''}`,
   )
 
   return response
