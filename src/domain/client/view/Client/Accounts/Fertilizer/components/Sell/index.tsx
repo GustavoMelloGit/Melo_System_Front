@@ -15,6 +15,8 @@ const SellFertilizer = ({ refetch, clientId }: Props): JSX.Element => {
       onClose={closeModal}
       initialValues={{
         fertilizerName: '',
+        fertilizerId: '',
+        description: '',
         bags: 0,
         pricePerBag: 0,
         brook: data?.address.brook ?? '',

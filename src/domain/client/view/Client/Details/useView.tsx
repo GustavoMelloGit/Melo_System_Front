@@ -28,6 +28,12 @@ export default function useClientDetailsView(): UseClientDetailsView {
     openModal(<ZoomImageModal imageSrc={imageSrc} />)
   }
 
+  async function openClientSheetsModal(): Promise<void> {
+    if (!uuid) return
+    const Sheets = (await import('../Sheets')).default
+    openModal(<Sheets clientId={uuid} />)
+  }
+
   return {
     client: data,
     isLoading,
@@ -36,6 +42,7 @@ export default function useClientDetailsView(): UseClientDetailsView {
     openClientInfoModal,
     openClientBalancesModal,
     zoomClientImage,
+    openClientSheetsModal,
   }
 }
 
@@ -46,5 +53,6 @@ type UseClientDetailsView = {
   currentTab: number
   openClientInfoModal: () => void
   openClientBalancesModal: () => void
+  openClientSheetsModal: () => Promise<void>
   zoomClientImage: (image: string) => void
 }

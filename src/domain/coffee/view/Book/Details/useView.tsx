@@ -10,10 +10,10 @@ export default function useBookDetailsView(): UseBookDetailsView {
   const { number } = useParams<{ number: string }>()
 
   const params = useServiceParams()
-  const { data, isLoading, error, mutate } = getSheetsService(
-    number,
-    params || getDefaultSortParams('number'),
-  )
+  const { data, isLoading, error, mutate } = getSheetsService({
+    bookNumber: number,
+    params: params || getDefaultSortParams('number'),
+  })
 
   async function handleDeleteSheet(sheet: SheetModel): Promise<void> {
     const { error } = await deleteSheetService(sheet.number)
