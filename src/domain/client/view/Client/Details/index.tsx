@@ -167,9 +167,9 @@ export default function ClientDetails(): JSX.Element {
                       color='blue.500'
                       flexWrap='wrap'
                     >
-                      <ChakraLink as={Link} to=''>
+                      {/* <ChakraLink as={Link} to=''>
                         Cafés a buscar
-                      </ChakraLink>
+                      </ChakraLink> */}
                       <ChakraLink as={Link} to={Routes.clientSheets(client.id)}>
                         Folhas
                       </ChakraLink>
