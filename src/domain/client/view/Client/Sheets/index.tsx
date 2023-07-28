@@ -1,35 +1,34 @@
-import { Heading } from '@chakra-ui/layout'
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/modal'
-import { useModal } from '../../../../../shared/hooks/useModal'
-import { getSheetsService } from '../../../../coffee/services/Sheets'
+import { Routes } from '../../../../../lib/routes'
+import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import Page from '../../../../../shared/components/Page'
+import ClientSheetsTable from '../../../components/Client/Sheets'
+import useClientSheetsPage from './useView'
 
-type Props = {
-  clientId: string
-}
-export default function ClientSheetsView({ clientId }: Props): JSX.Element {
-  const { data } = getSheetsService({ params: `clientId=${clientId}` })
-  const closeModal = useModal((state) => state.closeModal)
-  console.log(data)
-
+export default function ClientSheetsView(): JSX.Element {
+  const { sheets, client, clientId, isLoading } = useClientSheetsPage()
   return (
-    <Modal isOpen={true} isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>
-          <Heading as='h1' fontSize='3xl'>
-            Folhas
-          </Heading>
-        </ModalHeader>
-        <ModalBody pb={8}></ModalBody>
-      </ModalContent>
-    </Modal>
+    <Page title='Pesagens do cliente'>
+      <HeaderBreadcrumbs
+        heading={`Folhas - ${client?.name ?? 'Cliente'}`}
+        links={[
+          {
+            label: 'Clientes',
+            to: Routes.clients,
+          },
+          {
+            label: client?.name ?? clientId,
+            to: Routes.clientPage(clientId),
+          },
+          {
+            label: 'Pesagens',
+          },
+        ]}
+      />
+      <ClientSheetsTable
+        data={sheets?.data}
+        totalLength={sheets?.total ?? 0}
+        isLoading={isLoading}
+      />
+    </Page>
   )
 }

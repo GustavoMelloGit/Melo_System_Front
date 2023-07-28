@@ -18,4 +18,5 @@ export const Routes = {
   transfer: '/transfer',
   config: '/config',
   transactionMetrics: '/metrics',
+  clientSheets: (uuid: string) => `/clients/${uuid}/sheets`,
 } as const

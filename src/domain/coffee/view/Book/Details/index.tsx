@@ -9,7 +9,7 @@ import useBookDetailsView from './useView'
 
 export default function BookDetailsView(): JSX.Element {
   const { number } = useParams<{ number: string }>()
-  const { data, isLoading, total, handleDeleteSheet } = useBookDetailsView()
+  const { data, isLoading, total } = useBookDetailsView()
   if (!number) return <Navigate to={Routes.books} />
 
   return (
@@ -39,12 +39,7 @@ export default function BookDetailsView(): JSX.Element {
           </Link>
         }
       />
-      <SheetsTable
-        onDeleteSheet={handleDeleteSheet}
-        data={data}
-        isLoading={isLoading}
-        totalLength={total}
-      />
+      <SheetsTable data={data} isLoading={isLoading} totalLength={total} />
     </Page>
   )
 }
