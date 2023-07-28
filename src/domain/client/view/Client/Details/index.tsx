@@ -9,6 +9,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Link as ChakraLink,
   Tab,
   TabList,
   TabPanel,
@@ -168,15 +169,10 @@ export default function ClientDetails(): JSX.Element {
                     >
                       {/* <ChakraLink as={Link} to=''>
                         Cafés a buscar
-                      </ChakraLink>
-                      <Button
-                        onClick={openClientSheetsModal}
-                        variant='link'
-                        color='inherit'
-                        fontSize='inherit'
-                      >
+                      </ChakraLink> */}
+                      <ChakraLink as={Link} to={Routes.clientSheets(client.id)}>
                         Folhas
-                      </Button> */}
+                      </ChakraLink>
                       <Button
                         onClick={openClientInfoModal}
                         variant='link'

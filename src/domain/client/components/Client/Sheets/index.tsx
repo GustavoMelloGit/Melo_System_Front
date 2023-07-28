@@ -1,15 +1,13 @@
 import Table from '../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
-  type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
-import { SEARCH_CLIENT_NAME_PARAM } from '../../../constants/sheet'
-import { type SheetModel } from '../../../types/model/sheet'
+import { type SheetModel } from '../../../../coffee/types/model/sheet'
 import SheetsTableRow from './Row'
 
 type Props = CustomTableComponentProps<SheetModel[]>
-export default function SheetsTable({ data, isLoading, totalLength }: Props): JSX.Element {
+export default function ClientSheetsTable({ data, isLoading, totalLength }: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -22,9 +20,6 @@ export default function SheetsTable({ data, isLoading, totalLength }: Props): JS
       }}
       pagination={{
         totalLength,
-      }}
-      filter={{
-        searchForOptions,
       }}
       table={{
         'data-cy': 'coffee-book-table',
@@ -63,22 +58,4 @@ const headerColumns: TableHeaderColumns[] = [
     label: 'Status',
     align: 'center',
   },
-  {
-    id: 'actions',
-    label: 'Ações',
-    align: 'center',
-  },
 ]
-
-const searchForOptions: SearchForOption = {
-  number: {
-    label: 'Número',
-    inputProps: {
-      type: 'number',
-      inputMode: 'numeric',
-    },
-  },
-  [SEARCH_CLIENT_NAME_PARAM]: {
-    label: 'Nome do cliente',
-  },
-}

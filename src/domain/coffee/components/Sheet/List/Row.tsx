@@ -3,16 +3,15 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
+import { SheetsEmitter } from '../../../events/sheets'
 import { type SheetModel } from '../../../types/model/sheet'
 
 export type Props = {
   sheet: SheetModel
-  onClickDelete?: () => Promise<void> | void
 }
-export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Element {
+export default function SheetsTableRow({ sheet }: Props): JSX.Element {
   const { number } = useParams<{ number: string }>()
   if (!number) return <Navigate to={Routes.books} replace />
-
   return (
     <LinkBox as={Tr} h={61}>
       <Td>{sheet.number}</Td>
@@ -32,7 +31,9 @@ export default function SheetsTableRow({ sheet, onClickDelete }: Props): JSX.Ele
             </LinkOverlay>
             <IconButton
               aria-label='Excluir folha'
-              onClick={onClickDelete}
+              onClick={() => {
+                SheetsEmitter.emit('removeSheet', sheet.number)
+              }}
               colorScheme='red'
               icon='remove'
             />

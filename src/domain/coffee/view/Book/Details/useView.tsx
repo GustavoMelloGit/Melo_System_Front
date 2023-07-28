@@ -1,7 +1,9 @@
+import { useCallback, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 import { getDefaultSortParams } from '../../../../../lib/utils/utils'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
+import { SheetsEmitter } from '../../../events/sheets'
 import { deleteSheetService } from '../../../services/Sheets/delete'
 import { getSheetsService } from '../../../services/Sheets/get'
 import { type SheetModel } from '../../../types/model/sheet'
@@ -15,24 +17,34 @@ export default function useBookDetailsView(): UseBookDetailsView {
     params: params || getDefaultSortParams('number'),
   })
 
-  async function handleDeleteSheet(sheet: SheetModel): Promise<void> {
-    const { error } = await deleteSheetService(sheet.number)
+  const handleDeleteSheet = useCallback(
+    async (sheetNumber: number): Promise<void> => {
+      const { error } = await deleteSheetService(sheetNumber)
 
-    if (error) {
-      toast.error(error)
-      return
+      if (error) {
+        toast.error(error)
+        return
+      }
+
+      await mutate()
+      toast.success('Folha excluída com sucesso!')
+    },
+    [mutate],
+  )
+
+  useEffect(() => {
+    SheetsEmitter.on('removeSheet', handleDeleteSheet)
+
+    return () => {
+      SheetsEmitter.off('removeSheet', handleDeleteSheet)
     }
-
-    await mutate()
-    toast.success('Folha excluída com sucesso!')
-  }
+  }, [])
 
   return {
     data: data?.data,
     isLoading,
     error,
     total: data?.total ?? 0,
-    handleDeleteSheet,
   }
 }
 
@@ -41,5 +53,4 @@ type UseBookDetailsView = {
   isLoading: boolean
   error: string | undefined
   total: number
-  handleDeleteSheet: (sheet: SheetModel) => Promise<void>
 }
