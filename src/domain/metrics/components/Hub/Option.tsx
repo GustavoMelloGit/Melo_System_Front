@@ -1,5 +1,6 @@
 import { Box, Card, CardBody, Flex, Heading, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { type ReactNode } from 'react'
+import { IoIosArrowForward } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
 type Props = {
@@ -17,19 +18,45 @@ export default function MetricsHubOption({ icon, subtitle, title, url }: Props):
         transform: 'scale(1.01)',
       }}
     >
-      <CardBody>
-        <Flex gap={2}>
+      <CardBody
+        p={{
+          base: 3,
+          sm: 5,
+        }}
+      >
+        <Flex gap={3} align='center'>
           {icon}
           <Box>
-            <Heading as='h2' fontSize='lg' mb={0.5}>
+            <Heading
+              as='h2'
+              fontSize={{
+                base: 'md',
+                sm: 'lg',
+              }}
+              mb={0.5}
+            >
               {title}
             </Heading>
-            <Heading as='h3' fontSize='sm' fontWeight={500} opacity={0.7}>
+            <Heading
+              as='h3'
+              fontSize={{
+                base: 'xs',
+                sm: 'sm',
+              }}
+              fontWeight={500}
+              opacity={0.7}
+            >
               <LinkOverlay as={Link} to={url}>
                 {subtitle}
               </LinkOverlay>
             </Heading>
           </Box>
+          <IoIosArrowForward
+            size={24}
+            style={{
+              marginLeft: 'auto',
+            }}
+          />
         </Flex>
       </CardBody>
     </LinkBox>

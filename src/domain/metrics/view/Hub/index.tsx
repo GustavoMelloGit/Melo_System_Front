@@ -8,9 +8,29 @@ import MetricsHubOption from '../../components/Hub/Option'
 export default function MetricsHubView(): JSX.Element {
   return (
     <Page title='Relatórios'>
-      <Container as='section' pt={20}>
-        <Heading as='h1'>Escolha o tipo de relatório</Heading>
-        <Stack mt={10} spacing={3}>
+      <Container
+        as='section'
+        pt={{
+          base: 5,
+          sm: 20,
+        }}
+      >
+        <Heading
+          as='h1'
+          fontSize={{
+            base: 'xl',
+            sm: '3xl',
+          }}
+        >
+          Escolha o tipo de relatório
+        </Heading>
+        <Stack
+          mt={{
+            base: 6,
+            sm: 10,
+          }}
+          spacing={3}
+        >
           <MetricsHubOption
             icon={<TbShoppingCart size={40} />}
             title='Compras de café'
