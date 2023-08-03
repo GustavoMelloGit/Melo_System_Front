@@ -17,6 +17,8 @@ export const Routes = {
     `/books/${bookNumber}/details/${sheetNumber}`,
   transfer: '/transfer',
   config: '/config',
-  transactionMetrics: '/metrics',
+  transactionMetrics: '/metrics/transactions',
+  metricsHub: '/metrics/hub',
+  buyCoffeeMetrics: '/metrics/buy-coffee',
   clientSheets: (uuid: string) => `/clients/${uuid}/sheets`,
 } as const

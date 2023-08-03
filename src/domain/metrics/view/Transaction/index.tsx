@@ -1,5 +1,6 @@
 import { Button, Flex, Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import { Routes } from '../../../../lib/routes'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
@@ -20,6 +21,10 @@ export default function TransactionMetricsView(): JSX.Element | null {
       <HeaderBreadcrumbs
         heading='Relatórios'
         links={[
+          {
+            label: 'Tipo do relatório',
+            to: Routes.metricsHub,
+          },
           {
             label: 'Relatórios do sistema',
           },
