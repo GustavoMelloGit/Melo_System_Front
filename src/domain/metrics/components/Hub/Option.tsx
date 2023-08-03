@@ -12,7 +12,7 @@ export default function MetricsHubOption({ icon, subtitle, title, url }: Props):
   return (
     <LinkBox
       as={Card}
-      transition='transform 100ms ease-in'
+      transition='transform 120ms ease-in'
       _hover={{
         transform: 'scale(1.01)',
       }}
