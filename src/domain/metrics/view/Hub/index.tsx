@@ -14,13 +14,13 @@ export default function MetricsHubView(): JSX.Element {
           <MetricsHubOption
             icon={<TbShoppingCart size={40} />}
             title='Compras de café'
-            subtitle='Relatórios referentes as compras de cafés realizadas'
+            subtitle='Relatório referente as compras de cafés realizadas.'
             url={Routes.buyCoffeeMetrics}
           />
           <MetricsHubOption
             icon={<BiTransferAlt size={40} />}
             title='Transações'
-            subtitle='Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+            subtitle='Relatório referente a todas as movimentações do sistema.'
             url={Routes.transactionMetrics}
           />
         </Stack>
