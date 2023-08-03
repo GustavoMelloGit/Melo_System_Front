@@ -88,7 +88,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
                 <option value='currency'>Dinheiro</option>
                 <option value='coffee'>Café</option>
                 <option value='escolha'>Escolha</option>
-                {/* <option value='bags'>Sacaria</option> */}
+                <option value='bags'>Sacaria</option>
               </Select>
             </FormControl>
           )}
