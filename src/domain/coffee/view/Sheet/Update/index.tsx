@@ -1,4 +1,4 @@
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
@@ -6,8 +6,7 @@ import SheetForm from '../../../components/Sheet/Form'
 import useUpdateSheetView from './useView'
 
 export default function UpdateSheetView(): JSX.Element {
-  const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
-  const { updateSheet, initialValues } = useUpdateSheetView({ sheetNumber, bookNumber })
+  const { updateSheet, initialValues, bookNumber, sheetNumber } = useUpdateSheetView()
   if (!bookNumber || !sheetNumber) return <Navigate to={Routes.books} />
   return (
     <Page title='Adicionar Folha' data-cy='create-sheet-page'>

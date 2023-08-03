@@ -19,7 +19,8 @@ export default function useBookDetailsView(): UseBookDetailsView {
 
   const handleDeleteSheet = useCallback(
     async (sheetNumber: number): Promise<void> => {
-      const { error } = await deleteSheetService(sheetNumber)
+      if (!number) return
+      const { error } = await deleteSheetService(sheetNumber, number)
 
       if (error) {
         toast.error(error)
