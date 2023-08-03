@@ -104,6 +104,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
               rounded='xl'
               onClick={handleShowOptions}
               isLoading={isLoading}
+              isDisabled={rest.isDisabled}
             >
               <IoIosArrowDown />
             </Button>
