@@ -1,16 +1,17 @@
+import { useParams } from 'react-router-dom'
 import { getSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
-type Props = {
-  sheetNumber: string | undefined
-}
-export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSheetView {
-  const { data } = getSheetService(sheetNumber)
+export default function useSheetDetailsView(): UseUpdateSheetView {
+  const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
+  const { data } = getSheetService(
+    bookNumber && sheetNumber ? { bookNumber, sheetNumber } : undefined,
+  )
 
   const initialValues: SheetFormValues = data
     ? {
         clientId: data.clientId,
-        clientName: data.clientId,
+        clientName: data.client.name,
         coffeeDetails: data.coffeeDetails,
         courier: data.courier,
         weighingDate: new Date(data.weighingDate).toISOString().split('T')[0],
@@ -39,9 +40,13 @@ export default function useSheetDetailsView({ sheetNumber }: Props): UseUpdateSh
 
   return {
     initialValues,
+    bookNumber,
+    sheetNumber,
   }
 }
 
 type UseUpdateSheetView = {
   initialValues: SheetFormValues
+  bookNumber: string | undefined
+  sheetNumber: string | undefined
 }

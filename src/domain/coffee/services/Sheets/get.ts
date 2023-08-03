@@ -5,14 +5,14 @@ import {
 } from '../../../../shared/types/utils/service'
 import { type SheetModel } from '../../types/model/sheet'
 
-type GetSheetServiceData = {
+type GetSheetServicesData = {
   bookNumber?: string | number
   params?: string
 }
 export function getSheetsService({
   bookNumber,
   params,
-}: GetSheetServiceData): SWRServiceResponse<GetListResponse<SheetModel[]>> {
+}: GetSheetServicesData): SWRServiceResponse<GetListResponse<SheetModel[]>> {
   const response = useFetch<GetListResponse<SheetModel[]>>(
     `/sheets?${bookNumber ? `bookNumber=${bookNumber}&` : ''}${params ?? ''}`,
   )
@@ -20,8 +20,14 @@ export function getSheetsService({
   return response
 }
 
-export function getSheetService(sheetNumber?: string | number): UseFetch<SheetModel, any> {
-  const response = useFetch<SheetModel>(sheetNumber ? `/sheet/${sheetNumber}` : null)
+type GetSheetServiceData = {
+  sheetNumber: string | number
+  bookNumber: string | number
+}
+export function getSheetService(data?: GetSheetServiceData): UseFetch<SheetModel, any> {
+  const response = useFetch<SheetModel>(
+    data ? `/sheet/${data.bookNumber}/${data.sheetNumber}` : null,
+  )
 
   return response
 }

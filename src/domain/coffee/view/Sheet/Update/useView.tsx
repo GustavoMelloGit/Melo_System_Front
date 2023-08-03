@@ -1,16 +1,15 @@
 import { toast } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getSheetService, updateSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
 
-type Props = {
-  sheetNumber: string | undefined
-  bookNumber: string | undefined
-}
-export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): UseUpdateSheetView {
+export default function useUpdateSheetView(): UseUpdateSheetView {
   const navigate = useNavigate()
-  const { data } = getSheetService(sheetNumber)
+  const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
+  const { data } = getSheetService(
+    bookNumber && sheetNumber ? { bookNumber, sheetNumber } : undefined,
+  )
 
   async function handleUpdateSheet(values: SheetFormValues): Promise<void> {
     if (!sheetNumber || !bookNumber) return
@@ -62,10 +61,14 @@ export default function useUpdateSheetView({ sheetNumber, bookNumber }: Props): 
   return {
     initialValues,
     updateSheet: handleUpdateSheet,
+    bookNumber,
+    sheetNumber,
   }
 }
 
 type UseUpdateSheetView = {
   initialValues: SheetFormValues
   updateSheet: (values: SheetFormValues) => Promise<void>
+  bookNumber: string | undefined
+  sheetNumber: string | undefined
 }

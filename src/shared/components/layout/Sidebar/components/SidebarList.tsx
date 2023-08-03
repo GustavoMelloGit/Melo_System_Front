@@ -43,7 +43,7 @@ const listItem: Record<
     label: 'Estoque de Adubos',
     icon: <TbPlant size={18} />,
   },
-  [Routes.transactionMetrics]: {
+  [Routes.metricsHub]: {
     label: 'Relatórios',
     icon: <HiOutlineDocumentReport size={20} />,
   },
