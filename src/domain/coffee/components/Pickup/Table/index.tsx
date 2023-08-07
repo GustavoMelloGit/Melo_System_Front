@@ -1,20 +1,17 @@
 import { Flex, VStack } from '@chakra-ui/react'
 import SwitchLabeled from '../../../../../shared/components/inputs/SwitchLabeled'
-import { PickupCoffeeStatuses } from '../../../types/model/pickup'
+import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../../types/model/pickup'
 import usePickupTableView from './useView'
 import PickupTableView from './View'
 
-export default function PickupTable(): JSX.Element {
-  const {
-    data,
-    isLoading,
-    onClickCheck,
-    onClickUncheck,
-    onClickUpdate,
-    totalPickups,
-    handleChangeStatus,
-    currentStatus,
-  } = usePickupTableView()
+type Props = {
+  data: PickupCoffeeModel[] | undefined
+  isLoading: boolean
+  total: number
+}
+export default function PickupTable({ data, isLoading, total }: Props): JSX.Element {
+  const { onClickCheck, onClickUncheck, onClickUpdate, handleChangeStatus, currentStatus } =
+    usePickupTableView()
   return (
     <VStack>
       <Flex justify='center'>
@@ -38,7 +35,7 @@ export default function PickupTable(): JSX.Element {
       <PickupTableView
         data={data}
         isLoading={isLoading}
-        totalPickups={totalPickups}
+        totalPickups={total}
         onClickUpdate={onClickUpdate}
         onClickCheck={onClickCheck}
         onClickUncheck={onClickUncheck}

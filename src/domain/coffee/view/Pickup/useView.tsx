@@ -1,6 +1,8 @@
+import { useCallback, useEffect } from 'react'
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
+import { PickupEmitter } from '../../events/pickup'
 import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
 import { PickupCoffeeStatuses } from '../../types/model/pickup'
 
@@ -18,13 +20,7 @@ export default function usePickupView(): UsePickupView {
   async function handleOpenForm(): Promise<void> {
     try {
       const CreateCoffeePickup = (await import('../../components/Pickup/Create')).default
-      openModal(
-        <CreateCoffeePickup
-          onSuccess={() => {
-            void order.mutate?.()
-          }}
-        />,
-      )
+      openModal(<CreateCoffeePickup />)
     } catch (e) {
       console.error(e)
     }
@@ -34,6 +30,23 @@ export default function usePickupView(): UsePickupView {
     await getPickupPdf()
   }
 
+  const refetchData = useCallback(async () => {
+    void order.mutate()
+  }, [order.mutate])
+
+  useEffect(() => {
+    PickupEmitter.on('pickupChecked', refetchData)
+    PickupEmitter.on('pickupUnchecked', refetchData)
+    PickupEmitter.on('pickupUpdated', refetchData)
+    PickupEmitter.on('pickupCreated', refetchData)
+
+    return () => {
+      PickupEmitter.off('pickupChecked', refetchData)
+      PickupEmitter.off('pickupUnchecked', refetchData)
+      PickupEmitter.off('pickupUpdated', refetchData)
+      PickupEmitter.off('pickupCreated', refetchData)
+    }
+  }, [refetchData])
   return {
     handleOpenForm,
     handleDownloadList,
