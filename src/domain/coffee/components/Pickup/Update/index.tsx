@@ -1,26 +1,26 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
+import { PickupEmitter } from '../../../events/pickup'
 import { updatePickupService } from '../../../services/Pickup/put'
 import { type PickupCoffeeModel, type PickupFormValues } from '../../../types/model/pickup'
 import CoffeePickupForm from '../Form'
 
 type Props = {
-  onSuccess?: () => void
   pickup: PickupCoffeeModel
 }
-export default function UpdateCoffeePickup({ pickup, onSuccess }: Props): JSX.Element {
+export default function UpdateCoffeePickup({ pickup }: Props): JSX.Element {
   const closeModal = useModal((state) => state.closeModal)
   async function handleUpdateCoffeePickup(values: PickupFormValues): Promise<void> {
-    const { error } = await updatePickupService(pickup?.id, {
+    const { error, data } = await updatePickupService(pickup?.id, {
       ...values,
       bags: Number(values.bags),
     })
-    if (error) {
+    if (error || !data) {
       toast.error(error)
       return
     }
     toast.success('Atualizado com sucesso!')
-    onSuccess?.()
+    PickupEmitter.emit('pickupUpdated', data)
     closeModal()
   }
   return (

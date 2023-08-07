@@ -9,7 +9,7 @@ export default function ClientSheetsView(): JSX.Element {
   return (
     <Page title='Pesagens do cliente'>
       <HeaderBreadcrumbs
-        heading={`Folhas - ${client?.name ?? 'Cliente'}`}
+        heading={`Folhas`}
         links={[
           {
             label: 'Clientes',

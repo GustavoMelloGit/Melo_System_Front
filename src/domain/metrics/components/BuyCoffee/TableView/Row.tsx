@@ -1,0 +1,54 @@
+import { Td, Tr } from '@chakra-ui/react'
+import { format } from 'date-fns'
+import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../lib/utils/styles'
+import { type TransactionTypeName } from '../../../../client/types/model/Transaction'
+import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
+import { type TransactionMetrics } from '../../../types/transaction-metrics'
+
+const labelByType: Record<TransactionTypeName, string> = {
+  bags: 'Sacaria',
+  currency: 'Corrente',
+  escolha: 'Escolha',
+  fertilizer: 'Adubo',
+  duro: 'Café duro',
+  duro_riado: 'Café duro riado',
+  rio: 'Café rio',
+  rio_velho: 'Café rio velho',
+  rio_zona: 'Café rio zona',
+  riado: 'Café riado',
+  riado_rio: 'Café riado rio',
+  duro_riado_rio: 'Café duro riado rio',
+}
+
+const formatterByType: Record<TransactionTypeName, (value: number) => string | number> = {
+  bags: (value) => `${value} Sacas`,
+  currency: formatCurrency,
+  escolha: getNumberOfBags,
+  fertilizer: (value) => `${value} Sacos`,
+  duro: getNumberOfBags,
+  duro_riado: getNumberOfBags,
+  rio: getNumberOfBags,
+  rio_velho: getNumberOfBags,
+  rio_zona: getNumberOfBags,
+  riado: getNumberOfBags,
+  riado_rio: getNumberOfBags,
+  duro_riado_rio: getNumberOfBags,
+}
+
+type Props = {
+  metric: TransactionMetrics
+}
+export default function TransactionMetricsTableViewRow({ metric }: Props): JSX.Element {
+  const { client, date, type } = metric.props
+  return (
+    <Tr>
+      <Td>{format(date, 'dd/MM/yyyy')}</Td>
+      <Td>
+        {client.code} - {client.name}
+      </Td>
+      <Td>{labelByType[type.name]}</Td>
+      <Td color={getColorByValue(type.value)}>{formatterByType[type.name]?.(type.value)}</Td>
+    </Tr>
+  )
+}

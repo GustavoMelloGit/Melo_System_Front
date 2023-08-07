@@ -26,7 +26,7 @@ export default function TransactionMetricsView(): JSX.Element | null {
             to: Routes.metricsHub,
           },
           {
-            label: 'Relatórios do sistema',
+            label: 'Transações',
           },
         ]}
       />

@@ -88,7 +88,6 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
             as='form'
             spacing={6}
             onSubmit={handleSubmit(async (values) => {
-              console.log(values)
               await onSubmit({
                 ...values,
                 amount: Number(values.amount),

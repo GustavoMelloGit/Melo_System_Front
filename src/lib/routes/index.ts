@@ -21,4 +21,5 @@ export const Routes = {
   metricsHub: '/metrics/hub',
   buyCoffeeMetrics: '/metrics/buy-coffee',
   clientSheets: (uuid: string) => `/clients/${uuid}/sheets`,
+  clientPickups: (uuid: string) => `/clients/${uuid}/pickup`,
 } as const

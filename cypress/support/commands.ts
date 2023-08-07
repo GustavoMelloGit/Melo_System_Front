@@ -26,7 +26,6 @@ Cypress.Commands.add('login', () => {
     },
   }
   cy.request(options).then((response: any) => {
-    console.log(response)
     const { setValue: setToken } = StorageManager('token')
     const { setValue: setUser } = StorageManager('user')
     setToken(response.body.token)

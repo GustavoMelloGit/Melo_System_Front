@@ -9,7 +9,6 @@ import {
   Flex,
   Heading,
   HStack,
-  Link as ChakraLink,
   Tab,
   TabList,
   TabPanel,
@@ -18,9 +17,10 @@ import {
 } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import { BsZoomIn } from 'react-icons/bs'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import Link from '../../../../../shared/components/Link'
 import Page from '../../../../../shared/components/Page'
 import SpinLoader from '../../../../../shared/components/SpinLoader'
 import ListTransactionsView from '../Accounts/Checking/view/List'
@@ -167,12 +167,8 @@ export default function ClientDetails(): JSX.Element {
                       color='blue.500'
                       flexWrap='wrap'
                     >
-                      {/* <ChakraLink as={Link} to=''>
-                        Cafés a buscar
-                      </ChakraLink> */}
-                      <ChakraLink as={Link} to={Routes.clientSheets(client.id)}>
-                        Folhas
-                      </ChakraLink>
+                      <Link to={Routes.clientPickups(client.id)}>Cafés a buscar</Link>
+                      <Link to={Routes.clientSheets(client.id)}>Folhas</Link>
                       <Button
                         onClick={openClientInfoModal}
                         variant='link'
@@ -191,10 +187,10 @@ export default function ClientDetails(): JSX.Element {
                       </Button>
                     </HStack>
                   </Flex>
-                  <Heading as='h1' fontSize={['xl', '4xl']}>
+                  <Heading as='h1' fontSize={['xl', '3xl']}>
                     {client.name}
                   </Heading>
-                  <Heading size={['xs', 'md']} fontWeight={400} fontStyle='italic'>
+                  <Heading fontSize={['xs', 'md']} fontWeight={400} fontStyle='italic'>
                     ({client.nickname ?? 'Sem apelido'})
                   </Heading>
                 </Box>

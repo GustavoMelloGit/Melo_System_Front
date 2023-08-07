@@ -1,6 +1,6 @@
-import { Flex, Heading, HStack, Link, Text, VStack } from '@chakra-ui/react'
+import { Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import { BsDot } from 'react-icons/bs'
-import { Link as ReactLink } from 'react-router-dom'
+import Link from '../../Link'
 
 type HeaderBreadcrumbsProps = {
   heading: string
@@ -19,11 +19,19 @@ export default function HeaderBreadcrumbs({
   return (
     <Flex as='header' w='full' justify='space-between'>
       <VStack align='flex-start'>
-        <Heading as='h1'>{heading}</Heading>
+        <Heading
+          as='h1'
+          fontSize={{
+            base: 'xl',
+            sm: '3xl',
+          }}
+        >
+          {heading}
+        </Heading>
         <HStack spacing={2} divider={<BsDot />}>
           {links?.map((link, index) =>
             link.to ? (
-              <Link as={ReactLink} to={link.to} key={index} data-cy={`breadcrumb-${link.to}`}>
+              <Link to={link.to} key={index} noOfLines={1} data-cy={`breadcrumb-${link.to}`}>
                 {link.label}
               </Link>
             ) : (
