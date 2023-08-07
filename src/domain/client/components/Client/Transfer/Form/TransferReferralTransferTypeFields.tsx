@@ -78,8 +78,6 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
                 id={field.name}
                 {...selectFieldStyle}
                 onChange={(e) => {
-                  console.log(e.target.value)
-                  console.log(field)
                   onChange(e)
                 }}
                 data-cy={`${referral}-transferType-input`}
