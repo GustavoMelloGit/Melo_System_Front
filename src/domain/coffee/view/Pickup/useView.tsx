@@ -2,9 +2,13 @@ import { useCallback, useEffect } from 'react'
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
+import {
+  type GetListResponse,
+  type SWRServiceResponse,
+} from '../../../../shared/types/utils/service'
 import { PickupEmitter } from '../../events/pickup'
 import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
-import { PickupCoffeeStatuses } from '../../types/model/pickup'
+import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
 
 const initialStatus = PickupCoffeeStatuses.PENDING
 
@@ -31,7 +35,7 @@ export default function usePickupView(): UsePickupView {
   }
 
   const refetchData = useCallback(async () => {
-    void order.mutate()
+    await order.mutate()
   }, [order.mutate])
 
   useEffect(() => {
@@ -47,13 +51,16 @@ export default function usePickupView(): UsePickupView {
       PickupEmitter.off('pickupCreated', refetchData)
     }
   }, [refetchData])
+
   return {
     handleOpenForm,
     handleDownloadList,
+    order,
   }
 }
 
 type UsePickupView = {
   handleOpenForm: () => Promise<void>
   handleDownloadList: () => Promise<void>
+  order: SWRServiceResponse<GetListResponse<PickupCoffeeModel[]>>
 }

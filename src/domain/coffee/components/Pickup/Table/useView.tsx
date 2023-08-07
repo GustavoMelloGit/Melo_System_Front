@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
+import { PickupEmitter } from '../../../events/pickup'
 import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../../services/Pickup/put'
 import { type PickupCoffeeModel, type PickupCoffeeStatuses } from '../../../types/model/pickup'
 
@@ -10,12 +11,8 @@ export default function usePickupTableView(): UsePickupTableView {
   const currentStatus = getParam('status') as PickupCoffeeStatuses | null
 
   async function handleOpenUpdateForm(pickup: PickupCoffeeModel): Promise<void> {
-    try {
-      const UpdateCoffeePickup = (await import('../Update')).default
-      openModal(<UpdateCoffeePickup pickup={pickup} />)
-    } catch (e) {
-      console.error(e)
-    }
+    const UpdateCoffeePickup = (await import('../Update')).default
+    openModal(<UpdateCoffeePickup pickup={pickup} />)
   }
 
   async function handleCheckPickup(pickup: PickupCoffeeModel): Promise<void> {
@@ -25,6 +22,7 @@ export default function usePickupTableView(): UsePickupTableView {
       return
     }
     toast.success('Pedido de coleta finalizado com sucesso')
+    PickupEmitter.emit('pickupChecked', pickup)
   }
 
   async function handleUncheckPickup(pickup: PickupCoffeeModel): Promise<void> {
@@ -34,6 +32,7 @@ export default function usePickupTableView(): UsePickupTableView {
       return
     }
     toast.success('Pedido de coleta desmarcado com sucesso')
+    PickupEmitter.emit('pickupUnchecked', pickup)
   }
 
   function handleChangeStatus(status: PickupCoffeeStatuses): void {

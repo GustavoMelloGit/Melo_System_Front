@@ -6,7 +6,7 @@ import PickupTable from '../../components/Pickup/Table'
 import usePickupView from './useView'
 
 export default function CoffeePickup(): JSX.Element {
-  const { handleOpenForm, handleDownloadList } = usePickupView()
+  const { handleOpenForm, handleDownloadList, order } = usePickupView()
 
   return (
     <Page title='Buscar café' data-cy='coffee-pickup-page'>
@@ -40,7 +40,11 @@ export default function CoffeePickup(): JSX.Element {
           </Flex>
         }
       />
-      <PickupTable />
+      <PickupTable
+        data={order.data?.data}
+        isLoading={order.isLoading}
+        total={order.data?.total ?? 0}
+      />
     </Page>
   )
 }
