@@ -167,7 +167,7 @@ export default function ClientDetails(): JSX.Element {
                       color='blue.500'
                       flexWrap='wrap'
                     >
-                      <Link to=''>Cafés a buscar</Link>
+                      <Link to={Routes.clientPickups(client.id)}>Cafés a buscar</Link>
                       <Link to={Routes.clientSheets(client.id)}>Folhas</Link>
                       <Button
                         onClick={openClientInfoModal}
@@ -187,10 +187,10 @@ export default function ClientDetails(): JSX.Element {
                       </Button>
                     </HStack>
                   </Flex>
-                  <Heading as='h1' fontSize={['xl', '4xl']}>
+                  <Heading as='h1' fontSize={['xl', '3xl']}>
                     {client.name}
                   </Heading>
-                  <Heading size={['xs', 'md']} fontWeight={400} fontStyle='italic'>
+                  <Heading fontSize={['xs', 'md']} fontWeight={400} fontStyle='italic'>
                     ({client.nickname ?? 'Sem apelido'})
                   </Heading>
                 </Box>
