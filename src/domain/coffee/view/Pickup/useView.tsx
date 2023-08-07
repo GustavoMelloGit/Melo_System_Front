@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
@@ -21,7 +20,6 @@ export default function usePickupView(): UsePickupView {
     `${params}${currentStatus ? '' : `&status=${initialStatus}`}`,
   )
   const openModal = useModal((state) => state.openModal)
-  const test = useRef<HTMLButtonElement>(null)
 
   async function handleOpenForm(): Promise<void> {
     try {
@@ -91,7 +89,6 @@ export default function usePickupView(): UsePickupView {
     currentStatus,
     handleUncheckPickup,
     handleDownloadList,
-    test,
   }
 }
 
@@ -104,5 +101,4 @@ type UsePickupView = {
   handleChangeStatus: (status: PickupCoffeeStatuses) => void
   handleDownloadList: () => Promise<void>
   currentStatus: PickupCoffeeStatuses | null
-  test: React.RefObject<HTMLButtonElement>
 }
