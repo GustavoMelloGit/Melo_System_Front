@@ -5,6 +5,8 @@ import {
   type BuyCoffeeMetricsFilterOptions,
   type GetBuyCoffeeMetricsResponse,
 } from '../../types/buy-coffee-metrics'
+import { formatEndDate } from '../../utils/formatEndDate'
+import { formatStartDate } from '../../utils/formatStartDate'
 
 const initialDateInputValue = new Date().toISOString().split('T')[0]
 const initialValues: BuyCoffeeMetricsFilterOptions = {
@@ -13,13 +15,16 @@ const initialValues: BuyCoffeeMetricsFilterOptions = {
 }
 
 export default function useBuyCoffeeMetricsView(): UseBuyCoffeeMetricsView {
-  const { queryParam, handleAddParam, allSearchParams } = useURLSearchParams()
+  const { queryParam, handleAddParam, allSearchParams } = useURLSearchParams({
+    startDate: formatStartDate(initialDateInputValue),
+    endDate: formatEndDate(initialDateInputValue),
+  })
   const { data, isLoading } = getBuyCoffeeMetrics(queryParam)
 
   const handleSubmitFilters = (values: BuyCoffeeMetricsFilterOptions): void => {
     const { endDate, startDate } = values
-    handleAddParam('startDate', `${startDate}T00:00:00.000Z`)
-    handleAddParam('endDate', `${endDate}T23:59:59.000Z`)
+    handleAddParam('startDate', formatStartDate(startDate))
+    handleAddParam('endDate', formatEndDate(endDate))
   }
 
   const defaultValues: BuyCoffeeMetricsFilterOptions = {
