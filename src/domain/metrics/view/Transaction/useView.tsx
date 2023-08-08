@@ -1,5 +1,4 @@
 import { apiDateToDateInput } from '../../../../lib/utils/date'
-import { isEmptyObject } from '../../../../lib/utils/isEmptyObject'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { getTransactionMetrics } from '../../services/get'
 import {
@@ -30,13 +29,15 @@ export default function useTransactionMetricsView(): UseTransactionMetricsView {
     }
   }
 
-  const defaultValues: TransactionMetricsFilterOptions = isEmptyObject(allSearchParams)
-    ? {
-        startDate: apiDateToDateInput(allSearchParams.startDate),
-        endDate: apiDateToDateInput(allSearchParams.endDate),
-        type: allSearchParams.type ?? initialValues.type,
-      }
-    : initialValues
+  const defaultValues: TransactionMetricsFilterOptions = {
+    startDate: allSearchParams?.startDate
+      ? apiDateToDateInput(allSearchParams.startDate)
+      : initialValues.startDate,
+    endDate: allSearchParams?.endDate
+      ? apiDateToDateInput(allSearchParams.endDate)
+      : initialValues.endDate,
+    type: allSearchParams?.type ?? initialValues.type,
+  }
 
   return {
     data,

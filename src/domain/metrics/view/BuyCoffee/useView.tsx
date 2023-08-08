@@ -1,5 +1,4 @@
 import { apiDateToDateInput } from '../../../../lib/utils/date'
-import { isEmptyObject } from '../../../../lib/utils/isEmptyObject'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { getBuyCoffeeMetrics } from '../../services/get'
 import {
@@ -23,12 +22,14 @@ export default function useBuyCoffeeMetricsView(): UseBuyCoffeeMetricsView {
     handleAddParam('endDate', `${endDate}T23:59:59.000Z`)
   }
 
-  const defaultValues: BuyCoffeeMetricsFilterOptions = isEmptyObject(allSearchParams)
-    ? {
-        startDate: apiDateToDateInput(allSearchParams.startDate),
-        endDate: apiDateToDateInput(allSearchParams.endDate),
-      }
-    : initialValues
+  const defaultValues: BuyCoffeeMetricsFilterOptions = {
+    startDate: allSearchParams?.startDate
+      ? apiDateToDateInput(allSearchParams.startDate)
+      : initialValues.startDate,
+    endDate: allSearchParams?.endDate
+      ? apiDateToDateInput(allSearchParams.endDate)
+      : initialValues.endDate,
+  }
 
   return {
     data,
