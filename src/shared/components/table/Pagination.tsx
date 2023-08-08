@@ -1,4 +1,4 @@
-import { Flex, IconButton, Select, Show, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, IconButton, Select, Show, Text, useColorModeValue } from '@chakra-ui/react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import {
   DEFAULT_PAGINATION_LIMIT,
@@ -8,7 +8,10 @@ import {
 import useURLSearchParams from '../../hooks/useURLSearchParams'
 import { type TablePaginationProps } from './types'
 
-export default function TablePagination({ totalLength }: TablePaginationProps): JSX.Element {
+export default function TablePagination({
+  totalLength,
+  showPagination = true,
+}: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.200', 'gray.700')
   const { handleAddParam, getParam, handleRemoveParam } = useURLSearchParams()
   const pageParam = getParam(PaginationParams.page)
@@ -30,6 +33,10 @@ export default function TablePagination({ totalLength }: TablePaginationProps): 
     const value = Number(event.target.value)
     handleRemoveParam(PaginationParams.page)
     handleAddParam(PaginationParams.rowsPerPage, value)
+  }
+
+  if (!showPagination) {
+    return <Box role='presentation' w='full' bgColor={bg} roundedBottom={16} h={37} />
   }
 
   return (
