@@ -1,39 +1,38 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type GetTransactionMetricsResponse } from '../../../types/transaction-metrics'
-import TransactionMetricsTableViewRow from './Row'
+import { type GetBuyCoffeeMetricsResponse } from '../../../types/buy-coffee-metrics'
+import BuyCoffeeMetricsTableViewRow from './Row'
 
 type Props = {
-  data?: GetTransactionMetricsResponse
+  data?: GetBuyCoffeeMetricsResponse
   isLoading: boolean
 }
-export default function TransactionMetricsTableView({ data, isLoading }: Props): JSX.Element {
+export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): JSX.Element {
   return (
-    <>
-      <Table
-        header={{
-          columns: headerColumns,
-        }}
-        rows={{
-          isLoading,
-          dataLength: data?.data.length ?? 0,
-          noDataMessage: 'Nenhum dado encontrado',
-        }}
-        pagination={{
-          totalLength: data?.data.length ?? 0,
-        }}
-      >
-        {data?.data.map((transaction) => (
-          <TransactionMetricsTableViewRow key={transaction.id} metric={transaction} />
-        ))}
-      </Table>
-    </>
+    <Table
+      header={{
+        columns: headerColumns,
+      }}
+      rows={{
+        isLoading,
+        dataLength: data?.data.length ?? 0,
+        noDataMessage: 'Nenhum dado encontrado',
+      }}
+      pagination={{
+        totalLength: data?.data.length ?? 0,
+        showPagination: false,
+      }}
+    >
+      {data?.data.map((transaction) => (
+        <BuyCoffeeMetricsTableViewRow key={transaction._id} metric={transaction} />
+      ))}
+    </Table>
   )
 }
 
 const headerColumns: TableHeaderColumns[] = [
   { id: 'date', label: 'Data' },
   { id: 'clientName', label: 'Nome do Cliente' },
-  { id: 'type.name', label: 'Conta' },
-  { id: 'type.value', label: 'Valor' },
+  { id: 'type.name', label: 'Valor P/ Saca' },
+  { id: 'type.value', label: 'Sacas' },
 ]

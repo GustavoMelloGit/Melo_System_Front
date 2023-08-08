@@ -29,6 +29,7 @@ export type TableHeaderProps = {
 
 export type TablePaginationProps = {
   totalLength: number
+  showPagination?: boolean
 }
 
 export type FilterInputProps = InputProps & {

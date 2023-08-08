@@ -1,8 +1,10 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { formatRequestParams } from '../../lib/utils/formatters'
 
-export default function useURLSearchParams(): UseParams {
+export default function useURLSearchParams(
+  defaultValues?: Record<string, string | number>,
+): UseParams {
   const [urlSearchParams, setUrlSearchParams] = useSearchParams()
   const allSearchParams: Record<string, string> = useMemo(
     () =>
@@ -45,6 +47,14 @@ export default function useURLSearchParams(): UseParams {
   function getParam(key: string): string | null {
     return urlSearchParams.get(key)
   }
+
+  useEffect(() => {
+    if (defaultValues && urlSearchParams.size === 0) {
+      Object.entries(defaultValues).forEach(([key, value]) => {
+        handleAddParam(key, value)
+      })
+    }
+  }, [defaultValues])
 
   return {
     handleAddParam,

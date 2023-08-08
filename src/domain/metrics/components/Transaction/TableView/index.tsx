@@ -21,6 +21,7 @@ export default function TransactionMetricsTableView({ data, isLoading }: Props):
         }}
         pagination={{
           totalLength: data?.data.length ?? 0,
+          showPagination: false,
         }}
       >
         {data?.data.map((transaction) => (
