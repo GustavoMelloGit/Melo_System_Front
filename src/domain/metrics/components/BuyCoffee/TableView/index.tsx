@@ -31,8 +31,8 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
 }
 
 const headerColumns: TableHeaderColumns[] = [
-  { id: 'date', label: 'Data', isSortable: true },
-  { id: 'clientName', label: 'Nome do Cliente', isSortable: true },
-  { id: 'type.name', label: 'Valor P/ Saca', isSortable: true },
-  { id: 'type.value', label: 'Sacas', isSortable: true },
+  { id: 'date', label: 'Data' },
+  { id: 'clientName', label: 'Nome do Cliente' },
+  { id: 'type.name', label: 'Valor P/ Saca' },
+  { id: 'type.value', label: 'Sacas' },
 ]
