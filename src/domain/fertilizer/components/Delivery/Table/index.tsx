@@ -54,7 +54,7 @@ export default function DeliveryTable({
 
 const headerColumns: TableHeaderColumns[] = [
   { id: 'date', label: 'Data de entrega', isSortable: true },
-  { id: 'clientName', label: 'Nome do cliente', isSortable: true },
+  { id: 'clientName', label: 'Cliente', isSortable: true },
   { id: 'bags', label: 'Adubo', isSortable: true },
   { id: 'amount', label: 'Quantidade', isSortable: true, textAlign: 'center' },
   { id: 'brook', label: 'Córrego', isSortable: true },

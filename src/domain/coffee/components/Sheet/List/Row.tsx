@@ -15,7 +15,9 @@ export default function SheetsTableRow({ sheet }: Props): JSX.Element {
   return (
     <LinkBox as={Tr} h={61}>
       <Td>{sheet.number}</Td>
-      <Td>{sheet.client.name}</Td>
+      <Td>
+        {sheet.client.code} - {sheet.client.name}
+      </Td>
       <Td>{sheet.courier}</Td>
       <Td>{dateToFormat(sheet.weighingDate, 'dd/MM/yyyy')}</Td>
       <Td textAlign='center'>

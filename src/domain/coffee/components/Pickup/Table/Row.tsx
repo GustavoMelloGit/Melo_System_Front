@@ -1,6 +1,8 @@
 import { Flex, Td, Tr } from '@chakra-ui/react'
 import { cloneElement } from 'react'
+import { Routes } from '../../../../../lib/routes'
 import IconButton from '../../../../../shared/components/IconButton'
+import Link from '../../../../../shared/components/Link'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
@@ -75,8 +77,11 @@ export default function PickupTableRow({
 
   return (
     <Tr>
-      <Td data-cy='pickupCoffee-table-clientName'>{pickup.client.code}</Td>
-      <Td data-cy='pickupCoffee-table-clientName'>{pickup.client.name}</Td>
+      <Td data-cy='pickupCoffee-table-clientName'>
+        <Link to={Routes.clientPage(pickup.client.id)}>
+          {pickup.client.code} - {pickup.client.name}
+        </Link>
+      </Td>
       <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
         {pickup.bags}
       </Td>

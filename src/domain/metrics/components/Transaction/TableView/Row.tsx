@@ -1,7 +1,9 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
+import { Routes } from '../../../../../lib/routes'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/styles'
+import Link from '../../../../../shared/components/Link'
 import { type TransactionTypeName } from '../../../../client/types/model/Transaction'
 import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
 import { type TransactionMetrics } from '../../../types/transaction-metrics'
@@ -45,7 +47,9 @@ export default function TransactionMetricsTableViewRow({ metric }: Props): JSX.E
     <Tr>
       <Td>{format(date, 'dd/MM/yyyy')}</Td>
       <Td>
-        {client.code} - {client.name}
+        <Link to={Routes.clientPage(client.id)}>
+          {client.code} - {client.name}
+        </Link>
       </Td>
       <Td>{labelByType[type.name]}</Td>
       <Td color={getColorByValue(type.value)}>{formatterByType[type.name]?.(type.value)}</Td>
