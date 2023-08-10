@@ -1,8 +1,8 @@
 import { Collapse, Td, type TableCellProps } from '@chakra-ui/react'
 import { useMemo, useState, type ReactNode } from 'react'
 
-type Props = TableCellProps & {
-  children: ReactNode | ((props: { isCollapsed: boolean }) => JSX.Element)
+type Props = Omit<TableCellProps, 'children'> & {
+  children: ReactNode | ((props: { isCollapsed: boolean }) => ReactNode)
 }
 export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element {
   const [showText, setShowText] = useState<boolean>(false)
@@ -12,7 +12,7 @@ export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element
       return children({ isCollapsed: showText })
     }
     return children
-  }, [showText])
+  }, [showText, children])
 
   return (
     <Td

@@ -1,6 +1,8 @@
 import { Td, Tr } from '@chakra-ui/react'
-import { dateToFormat } from '../../../../../lib/utils/formatters'
+import { Routes } from '../../../../../lib/routes'
+import { dateToFormat, formatClientName } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
+import Link from '../../../../../shared/components/Link'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 
@@ -53,11 +55,19 @@ export default function DeliveryTableRow({
       secondaryAction = <></>
   }
 
+  const clientColumnValue = formatClientName(delivery.client)
+
   return (
     <Tr>
       <Td data-cy='deliveryCoffee-table-date'>{dateToFormat(delivery.date ?? 0, 'dd/MM/yyyy')}</Td>
       <CollapsibleTd data-cy='deliveryCoffee-table-clientName'>
-        {delivery.client.name}
+        {({ isCollapsed }) =>
+          isCollapsed ? (
+            <Link to={Routes.clientPage(delivery.client.id)}>{clientColumnValue}</Link>
+          ) : (
+            clientColumnValue
+          )
+        }
       </CollapsibleTd>
       <CollapsibleTd data-cy='deliveryCoffee-table-fertilizerName'>
         {delivery.fertilizer.name}

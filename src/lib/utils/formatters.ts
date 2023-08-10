@@ -1,6 +1,6 @@
 import currency from 'currency.js'
 import { format } from 'date-fns'
-import { type Address } from '../../domain/client/types/model/Client'
+import { type Address, type ClientModel } from '../../domain/client/types/model/Client'
 import GlobalConfig from '../constants/config'
 
 /**
@@ -79,4 +79,8 @@ export function currencyValueCorrection(valueInCents: number): number {
 
 export function formatRequestParams(obj: Record<string, string | number>): string {
   return Object.entries(obj).reduce((acc, curr) => acc + `&${curr[0]}=${curr[1]}`, '')
+}
+
+export function formatClientName(client: ClientModel): string {
+  return `${client.code} - ${client.name}`
 }
