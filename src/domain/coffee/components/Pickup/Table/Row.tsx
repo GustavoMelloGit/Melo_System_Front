@@ -1,6 +1,9 @@
 import { Flex, Td, Tr } from '@chakra-ui/react'
 import { cloneElement } from 'react'
+import { Routes } from '../../../../../lib/routes'
+import { formatClientName } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
+import Link from '../../../../../shared/components/Link'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
@@ -73,10 +76,19 @@ export default function PickupTableRow({
       actions.push('edit')
   }
 
+  const clientColumnValue = formatClientName(pickup.client)
+
   return (
     <Tr>
-      <Td data-cy='pickupCoffee-table-clientName'>{pickup.client.code}</Td>
-      <Td data-cy='pickupCoffee-table-clientName'>{pickup.client.name}</Td>
+      <CollapsibleTd data-cy='pickupCoffee-table-clientName'>
+        {({ isCollapsed }) =>
+          isCollapsed ? (
+            <Link to={Routes.clientPage(pickup.client.id)}>{clientColumnValue}</Link>
+          ) : (
+            clientColumnValue
+          )
+        }
+      </CollapsibleTd>
       <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
         {pickup.bags}
       </Td>
