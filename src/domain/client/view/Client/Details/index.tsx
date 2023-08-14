@@ -53,6 +53,11 @@ export default function ClientDetails(): JSX.Element {
     toast.error('Cliente não encontrado')
     return <Navigate to={Routes.clients} />
   }
+
+  const linkStyle = {
+    textDecoration: 'none',
+  }
+
   return (
     <Page title={client.name}>
       <HeaderBreadcrumbs
@@ -202,17 +207,21 @@ export default function ClientDetails(): JSX.Element {
           <Tabs isLazy w='full' index={currentTab}>
             <Card overflow='auto' p={4} roundedTop={0} borderColor='inherit'>
               <TabList justifyContent='center' minW='max-content' w='full'>
-                <Link to={`?tab=${ClientAccountsEnum.checking}`} draggable={false}>
+                <Link
+                  style={linkStyle}
+                  to={`?tab=${ClientAccountsEnum.checking}`}
+                  draggable={false}
+                >
                   <Tab as='span' data-cy='checkingAccount-tab' roundedTop={6}>
                     Conta Corrente
                   </Tab>
                 </Link>
-                <Link to={`?tab=${ClientAccountsEnum.coffee}`} draggable={false}>
+                <Link style={linkStyle} to={`?tab=${ClientAccountsEnum.coffee}`} draggable={false}>
                   <Tab as='span' data-cy='coffe-tab' roundedTop={6}>
                     Conta Café
                   </Tab>
                 </Link>
-                <Link to={`?tab=${ClientAccountsEnum.escolha}`} draggable={false}>
+                <Link style={linkStyle} to={`?tab=${ClientAccountsEnum.escolha}`} draggable={false}>
                   <Tab as='span' data-cy='choice-tab' roundedTop={6}>
                     Conta Escolha
                   </Tab>
@@ -222,12 +231,16 @@ export default function ClientDetails(): JSX.Element {
                     Conta Colheita
                   </Tab>
                 </Link> */}
-                <Link to={`?tab=${ClientAccountsEnum.bags}`} draggable={false}>
+                <Link style={linkStyle} to={`?tab=${ClientAccountsEnum.bags}`} draggable={false}>
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>
                     Conta Sacaria
                   </Tab>
                 </Link>
-                <Link to={`?tab=${ClientAccountsEnum.fertilizer}`} draggable={false}>
+                <Link
+                  style={linkStyle}
+                  to={`?tab=${ClientAccountsEnum.fertilizer}`}
+                  draggable={false}
+                >
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>
                     Conta Adubo
                   </Tab>
