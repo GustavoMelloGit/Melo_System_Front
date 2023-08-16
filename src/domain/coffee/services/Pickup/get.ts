@@ -1,5 +1,5 @@
-import { type AxiosResponse } from 'axios'
 import api from '../../../../lib/config/api'
+import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
 import {
   type GetListResponse,
@@ -15,14 +15,11 @@ export function getPickupOrdersService(
   return response
 }
 
-export async function getPickupPdf(): Promise<void> {
+export async function getPDFPickupOrdersService(): Promise<PickupCoffeeModel[]> {
   try {
-    const response: AxiosResponse<Blob> = await api.get('/orders/pdf', {
-      responseType: 'blob',
-    })
-    const url = URL.createObjectURL(response.data)
-    window.open(url, '_blank')
-  } catch (error) {
-    console.error(error)
+    const response = await api.get<PickupCoffeeModel[]>('/orders?status=inProgress')
+    return response.data
+  } catch (e) {
+    throw new Error(errorHandler(e))
   }
 }

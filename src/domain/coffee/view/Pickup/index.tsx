@@ -2,11 +2,12 @@ import { Flex } from '@chakra-ui/react'
 import IconButton from '../../../../shared/components/IconButton'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
+import PickupPDFDownloadButton from '../../components/Pickup/Pdf/DownloadButton'
 import PickupTable from '../../components/Pickup/Table'
 import usePickupView from './useView'
 
 export default function CoffeePickup(): JSX.Element {
-  const { handleOpenForm, handleDownloadList, order } = usePickupView()
+  const { handleOpenForm, order } = usePickupView()
 
   return (
     <Page title='Buscar café' data-cy='coffee-pickup-page'>
@@ -19,15 +20,7 @@ export default function CoffeePickup(): JSX.Element {
         ]}
         actions={
           <Flex gap={3}>
-            <IconButton
-              icon='printer'
-              aria-label='Baixar lista de cafés a buscar'
-              onClick={handleDownloadList}
-              colorScheme='blue'
-              variant='outline'
-              data-cy='download-pickupCoffee-button'
-              title='Baixar lista de cafés a buscar'
-            />
+            <PickupPDFDownloadButton />
             <IconButton
               aria-label='Adicionar café a buscar'
               icon='add'

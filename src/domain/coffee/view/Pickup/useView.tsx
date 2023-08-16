@@ -7,7 +7,7 @@ import {
   type SWRServiceResponse,
 } from '../../../../shared/types/utils/service'
 import { PickupEmitter } from '../../events/pickup'
-import { getPickupOrdersService, getPickupPdf } from '../../services/Pickup/get'
+import { getPickupOrdersService } from '../../services/Pickup/get'
 import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
 
 const initialStatus = PickupCoffeeStatuses.PENDING
@@ -30,10 +30,6 @@ export default function usePickupView(): UsePickupView {
     }
   }
 
-  async function handleDownloadList(): Promise<void> {
-    await getPickupPdf()
-  }
-
   const refetchData = useCallback(async () => {
     await order.mutate()
   }, [order.mutate])
@@ -54,13 +50,11 @@ export default function usePickupView(): UsePickupView {
 
   return {
     handleOpenForm,
-    handleDownloadList,
     order,
   }
 }
 
 type UsePickupView = {
   handleOpenForm: () => Promise<void>
-  handleDownloadList: () => Promise<void>
   order: SWRServiceResponse<GetListResponse<PickupCoffeeModel[]>>
 }
