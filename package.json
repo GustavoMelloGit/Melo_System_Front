@@ -14,6 +14,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@hookform/resolvers": "^2.9.10",
+    "@react-pdf/renderer": "^3.1.12",
     "apexcharts": "^3.41.0",
     "axios": "^1.2.6",
     "change-case": "^4.1.2",
