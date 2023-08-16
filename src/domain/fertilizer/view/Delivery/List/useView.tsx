@@ -3,6 +3,7 @@ import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { type GetListResponse } from '../../../../../shared/types/utils/service'
+import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
 import { getFertilizersDeliveryService } from '../../../services/get'
 import {
   fertilizerDeliveryCancelService,
@@ -34,23 +35,25 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
   }
 
   async function handleCheckPickup(delivery: FertilizerDeliveryModel): Promise<void> {
-    const { error } = await fertilizerDeliveryDoneService(delivery.id)
+    const { error, data } = await fertilizerDeliveryDoneService(delivery.id)
     if (error) {
       toast.error('Não foi possível concluir a entrega')
       return
     }
     toast.success('Entrega concluída com sucesso')
     await mutate()
+    if (data) DeliveryEmitter.emit('deliveryChanged', data)
   }
 
   async function handleUncheckPickup(pickup: FertilizerDeliveryModel): Promise<void> {
-    const { error } = await fertilizerDeliveryCancelService(pickup.id)
+    const { error, data } = await fertilizerDeliveryCancelService(pickup.id)
     if (error) {
       toast.error('Não foi possível cancelar a entrega')
       return
     }
     toast.success('Entrega cancelada com sucesso')
     await mutate()
+    if (data) DeliveryEmitter.emit('deliveryChanged', data)
   }
 
   async function handleOpenCreateDeliveryForm(): Promise<void> {
