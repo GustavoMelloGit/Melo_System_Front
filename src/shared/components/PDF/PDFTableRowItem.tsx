@@ -8,7 +8,7 @@ export default function PDFTableRowItem({ children, style, ...rest }: Props): JS
     <View
       style={{
         flex: 1,
-        padding: '5px 0',
+        padding: '3px 5px',
         ...style,
       }}
       {...rest}

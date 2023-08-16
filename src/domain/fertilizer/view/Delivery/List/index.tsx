@@ -3,6 +3,7 @@ import IconButton from '../../../../../shared/components/IconButton'
 import SwitchLabeled from '../../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
+import FertilizerDeliveryPDFDownloadButton from '../../../components/Delivery/PDF/DownloadButton'
 import DeliveryTable from '../../../components/Delivery/Table'
 import { FertilizerDeliveryStatuses } from '../../../types/model/Delivery'
 import useFertilizerDeliveryView from './useView'
@@ -17,7 +18,6 @@ export default function FertilizerDeliveryView(): JSX.Element {
     handleCheckPickup,
     handleUncheckPickup,
     handleOpenCreateDeliveryForm,
-    handleDownloadPDF,
   } = useFertilizerDeliveryView()
 
   return (
@@ -31,15 +31,7 @@ export default function FertilizerDeliveryView(): JSX.Element {
         ]}
         actions={
           <Flex gap={3}>
-            <IconButton
-              icon='printer'
-              aria-label='Baixar lista de entrega'
-              colorScheme='blue'
-              variant='outline'
-              data-cy='download-fertilizerDelivery-button'
-              title='Baixar lista de entrega'
-              onClick={handleDownloadPDF}
-            />
+            <FertilizerDeliveryPDFDownloadButton />
             <IconButton
               aria-label='Adicionar café a buscar'
               icon='add'
