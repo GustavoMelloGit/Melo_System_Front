@@ -1,18 +1,12 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import { Fragment } from 'react'
+import PDFTable from '../../../../../shared/components/PDF/PDFTable'
+import PDFTableDivider from '../../../../../shared/components/PDF/PDFTableDivider'
+import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
+import PDFTableRow from '../../../../../shared/components/PDF/PDFTableRow'
+import PDFTableRowItem from '../../../../../shared/components/PDF/PDFTableRowItem'
 import { type PickupPDFData } from './types'
 
-const rowItem = {
-  flex: 1,
-  padding: '5px 0',
-} as const
-const row = {
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  borderBottom: '1pt solid black',
-} as const
 const boldText = {
   fontFamily: 'Helvetica-Bold',
 } as const
@@ -24,31 +18,11 @@ const styles = StyleSheet.create({
     margin: '0 auto',
     fontSize: 8,
   },
-  row,
-  rowItem,
-  rowItemCentered: {
-    ...rowItem,
-    textAlign: 'center',
-  },
-  table: {
-    width: '100%',
-    marginTop: 10,
-  },
-  brookDivider: {
-    borderBottom: '1px solid black',
-    backgroundColor: '#C0C0C0',
-    padding: '5px 3px',
-    ...boldText,
-  },
   header: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  tableHeader: {
-    ...row,
-    ...boldText,
   },
 })
 
@@ -79,42 +53,50 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
               })}
             </Text>
           </View>
-          <View style={styles.table}>
-            <View style={styles.tableHeader}>
-              <Text style={styles.rowItem}>Cliente</Text>
-              <Text
+          <PDFTable>
+            <PDFTableHeader>
+              <PDFTableRowItem>
+                <Text>Cliente</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem
                 style={{
-                  ...styles.rowItemCentered,
                   maxWidth: 70,
+                  textAlign: 'center',
                 }}
               >
-                Sacos
-              </Text>
-              <Text style={styles.rowItem}>Referência</Text>
-            </View>
+                <Text>Sacos</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>Referência</Text>
+              </PDFTableRowItem>
+            </PDFTableHeader>
             {Object.entries(data).map(([brook, data]) => (
               <Fragment key={brook}>
-                <View style={styles.brookDivider}>
-                  <Text style={{ fontWeight: 700 }}>{brook}</Text>
-                </View>
+                <PDFTableDivider>
+                  <Text>{brook}</Text>
+                </PDFTableDivider>
 
                 {data.map((order) => (
-                  <View key={order.id} style={styles.row}>
-                    <Text style={styles.rowItem}>{order.client}</Text>
-                    <Text
+                  <PDFTableRow key={order.id}>
+                    <PDFTableRowItem>
+                      <Text>{order.client}</Text>
+                    </PDFTableRowItem>
+                    <PDFTableRowItem
                       style={{
-                        ...styles.rowItemCentered,
                         maxWidth: 70,
+                        textAlign: 'center',
                       }}
                     >
-                      {order.bags}
-                    </Text>
-                    <Text style={styles.rowItem}>{order.address}</Text>
-                  </View>
+                      <Text>{order.bags}</Text>
+                    </PDFTableRowItem>
+                    <PDFTableRowItem>
+                      <Text>{order.address}</Text>
+                    </PDFTableRowItem>
+                  </PDFTableRow>
                 ))}
               </Fragment>
             ))}
-          </View>
+          </PDFTable>
         </View>
       </Page>
     </Document>
