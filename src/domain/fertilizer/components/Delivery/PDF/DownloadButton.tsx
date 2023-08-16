@@ -1,33 +1,49 @@
 import { usePDF } from '@react-pdf/renderer'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { normalize } from '../../../../../lib/utils/normalize'
 import { sortObjectProperties } from '../../../../../lib/utils/sortObjectProperties'
 import IconButton from '../../../../../shared/components/IconButton'
+import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
 import { getFertilizersDeliveryService } from '../../../services/get'
 import PickupPDFTemplate from './Template'
 import { type FertilizerDeliveryPDFData, type FertilizerDeliveryPDFItem } from './types'
 
 export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
-  const { data, isLoading } = getFertilizersDeliveryService('status=inProgress&limit=10000')
+  const { data, isLoading, mutate } = getFertilizersDeliveryService('status=inProgress&limit=10000')
   const [instance, updateInstance] = usePDF({
     document: <PickupPDFTemplate data={{}} />,
   })
 
+  const updatePdfInstance = useCallback(async () => {
+    if (!data) return
+    await mutate()
+    const templateData: FertilizerDeliveryPDFData = {}
+    data.data.forEach((order) => {
+      const formattedBrook = normalize(order.brook).toUpperCase()
+      const formattedOrder: FertilizerDeliveryPDFItem = order
+      if (templateData[formattedBrook]) {
+        templateData[formattedBrook].push(formattedOrder)
+      } else {
+        templateData[formattedBrook] = [formattedOrder]
+      }
+    })
+    updateInstance(<PickupPDFTemplate data={sortObjectProperties(templateData)} />)
+  }, [data, mutate])
+
   useEffect(() => {
     if (!isLoading && data) {
-      const templateData: FertilizerDeliveryPDFData = {}
-      data.data.forEach((order) => {
-        const formattedBrook = normalize(order.brook).toUpperCase()
-        const formattedOrder: FertilizerDeliveryPDFItem = order
-        if (templateData[formattedBrook]) {
-          templateData[formattedBrook].push(formattedOrder)
-        } else {
-          templateData[formattedBrook] = [formattedOrder]
-        }
-      })
-      updateInstance(<PickupPDFTemplate data={sortObjectProperties(templateData)} />)
+      void updatePdfInstance()
     }
-  }, [data, isLoading])
+  }, [updatePdfInstance, isLoading, data])
+
+  useEffect(() => {
+    DeliveryEmitter.on('deliveryCreated', updatePdfInstance)
+    DeliveryEmitter.on('deliveryChanged', updatePdfInstance)
+    return () => {
+      DeliveryEmitter.off('deliveryCreated', updatePdfInstance)
+      DeliveryEmitter.off('deliveryChanged', updatePdfInstance)
+    }
+  }, [updatePdfInstance])
 
   return (
     <IconButton
