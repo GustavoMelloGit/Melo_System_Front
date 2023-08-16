@@ -1,4 +1,3 @@
-import { type AxiosResponse } from 'axios'
 import { type SWRConfiguration } from 'swr'
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/error'
@@ -49,16 +48,4 @@ export function getFertilizersDeliveryService(
   )
 
   return response
-}
-
-export async function getFertilizersDeliveryPdf(): Promise<void> {
-  try {
-    const response: AxiosResponse<Blob> = await api.get('/fertilizers/delivery/pdf', {
-      responseType: 'blob',
-    })
-    const url = URL.createObjectURL(response.data)
-    window.open(url, '_blank')
-  } catch (error) {
-    console.error(error)
-  }
 }

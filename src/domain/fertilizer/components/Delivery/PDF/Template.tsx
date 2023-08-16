@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
+import { format } from 'date-fns'
 import { Fragment } from 'react'
+import { formatClientName } from '../../../../../lib/utils/formatters'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFTable from '../../../../../shared/components/PDF/PDFTable'
 import PDFTableDivider from '../../../../../shared/components/PDF/PDFTableDivider'
@@ -7,7 +9,7 @@ import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
 import PDFTableRow from '../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../shared/components/PDF/styles'
-import { type PickupPDFData } from './types'
+import { type FertilizerDeliveryPDFData } from './types'
 
 const styles = StyleSheet.create({
   header: {
@@ -19,9 +21,9 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  data: PickupPDFData
+  data: FertilizerDeliveryPDFData
 }
-export default function PickupPDFTemplate({ data }: Props): JSX.Element {
+export default function FertilizerDeliveryTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
       <View style={styles.header}>
@@ -31,7 +33,7 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
             fontSize: 16,
           }}
         >
-          Cafés a Buscar
+          Adubos a entregar
         </Text>
         <Text
           style={{
@@ -46,7 +48,13 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
       <PDFTable>
         <PDFTableHeader>
           <PDFTableRowItem>
+            <Text>Data de Entrega</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
             <Text>Cliente</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
+            <Text>Adubo</Text>
           </PDFTableRowItem>
           <PDFTableRowItem
             style={{
@@ -54,10 +62,10 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
               textAlign: 'center',
             }}
           >
-            <Text>Sacos</Text>
+            <Text>Quantidade</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
-            <Text>Referência</Text>
+            <Text>Complemento</Text>
           </PDFTableRowItem>
         </PDFTableHeader>
         {Object.entries(data).map(([brook, data]) => (
@@ -69,7 +77,13 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
             {data.map((order) => (
               <PDFTableRow key={order.id}>
                 <PDFTableRowItem>
-                  <Text>{order.client}</Text>
+                  <Text>{format(order.date, 'dd/MM/yyyy')}</Text>
+                </PDFTableRowItem>
+                <PDFTableRowItem>
+                  <Text>{formatClientName(order.client)}</Text>
+                </PDFTableRowItem>
+                <PDFTableRowItem>
+                  <Text>{order.fertilizer.name}</Text>
                 </PDFTableRowItem>
                 <PDFTableRowItem
                   style={{
@@ -77,10 +91,10 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
                     textAlign: 'center',
                   }}
                 >
-                  <Text>{order.bags}</Text>
+                  <Text>{order.amount}</Text>
                 </PDFTableRowItem>
                 <PDFTableRowItem>
-                  <Text>{order.address}</Text>
+                  <Text>{order.complement}</Text>
                 </PDFTableRowItem>
               </PDFTableRow>
             ))}

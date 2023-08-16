@@ -3,7 +3,7 @@ import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { type GetListResponse } from '../../../../../shared/types/utils/service'
-import { getFertilizersDeliveryPdf, getFertilizersDeliveryService } from '../../../services/get'
+import { getFertilizersDeliveryService } from '../../../services/get'
 import {
   fertilizerDeliveryCancelService,
   fertilizerDeliveryDoneService,
@@ -58,10 +58,6 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
     openModal(<CreateFertilizerDelivery refetch={async () => mutate()} />)
   }
 
-  async function handleDownloadPDF(): Promise<void> {
-    await getFertilizersDeliveryPdf()
-  }
-
   return {
     currentStatus,
     handleChangeStatus,
@@ -71,7 +67,6 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
     handleCheckPickup,
     handleUncheckPickup,
     handleOpenCreateDeliveryForm,
-    handleDownloadPDF,
   }
 }
 
@@ -84,5 +79,4 @@ type UseFertilizerDeliveryView = {
   handleCheckPickup: (pickup: FertilizerDeliveryModel) => Promise<void>
   handleUncheckPickup: (pickup: FertilizerDeliveryModel) => Promise<void>
   handleOpenCreateDeliveryForm: () => Promise<void>
-  handleDownloadPDF: () => Promise<void>
 }
