@@ -8,6 +8,8 @@ export type PickupCoffeeModel = {
   brook: string
   complement: string
   status: PickupCoffeeStatuses
+  createdAt: number
+  updatedAt: number
 }
 
 export type PickupFormValues = {
