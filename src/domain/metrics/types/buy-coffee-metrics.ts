@@ -1,4 +1,5 @@
 import { type ClientModel } from '../../client/types/model/Client'
+import { type CoffeeBebidas, type CoffeeTypes } from '../../coffee/types/model/coffee'
 
 export type GetBuyCoffeeMetricsResponse = {
   meta: {
@@ -15,6 +16,8 @@ export type BuyCoffeeMetrics = {
   date: number
   value: number
   valuePerBag: number
+  coffeeType: CoffeeTypes
+  bebida: CoffeeBebidas
   weight: number
   _id: string
 }
