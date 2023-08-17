@@ -25,4 +25,6 @@ export type BuyCoffeeMetrics = {
 export type BuyCoffeeMetricsFilterOptions = {
   startDate: string
   endDate: string
+  coffeeType: CoffeeTypes
+  bebida: CoffeeBebidas
 }
