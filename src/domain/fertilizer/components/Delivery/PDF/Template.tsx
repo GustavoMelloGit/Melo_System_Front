@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { Fragment } from 'react'
 import { formatClientName } from '../../../../../lib/utils/formatters'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
+import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../shared/components/PDF/PDFTable'
 import PDFTableDivider from '../../../../../shared/components/PDF/PDFTableDivider'
 import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
@@ -26,6 +27,8 @@ type Props = {
 export default function FertilizerDeliveryTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
+      <PDFPaddingElement />
+
       <View style={styles.header}>
         <Text
           style={{
