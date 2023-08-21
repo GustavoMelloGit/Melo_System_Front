@@ -1,5 +1,6 @@
 import { Container, Heading, Stack } from '@chakra-ui/react'
 import { BiTransferAlt } from 'react-icons/bi'
+import { FaSearchDollar } from 'react-icons/fa'
 import { TbShoppingCart } from 'react-icons/tb'
 import { Routes } from '../../../../lib/routes'
 import Page from '../../../../shared/components/Page'
@@ -32,7 +33,7 @@ export default function MetricsHubView(): JSX.Element {
           spacing={3}
         >
           <MetricsHubOption
-            icon={<TbShoppingCart size={40} />}
+            icon={<TbShoppingCart size={37} />}
             title='Compras de café'
             subtitle='Relatório referente as compras de cafés realizadas.'
             url={Routes.buyCoffeeMetrics}
@@ -42,6 +43,12 @@ export default function MetricsHubView(): JSX.Element {
             title='Transações'
             subtitle='Relatório referente a todas as movimentações do sistema.'
             url={Routes.transactionMetrics}
+          />
+          <MetricsHubOption
+            icon={<FaSearchDollar size={28} />}
+            title='Preço de café'
+            subtitle='Consultar valor pago por saco e tipo de café'
+            url={Routes.coffeePrice}
           />
         </Stack>
       </Container>

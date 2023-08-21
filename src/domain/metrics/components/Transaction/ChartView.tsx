@@ -2,7 +2,7 @@ import { type ApexOptions } from 'apexcharts'
 import currency from 'currency.js'
 import { format } from 'date-fns'
 import Chart from 'react-apexcharts'
-import { type GetTransactionMetricsResponse } from '../../types/transaction-metrics'
+import { type GetTransactionMetricsResponse } from '../../types/transactionMetrics'
 
 type Props = {
   data: GetTransactionMetricsResponse

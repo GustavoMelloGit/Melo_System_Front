@@ -1,10 +1,10 @@
 import { type CoffeeBebidas, type CoffeeTypes } from '../../coffee/types/model/coffee'
 
 export type GetBuyCoffeeMetricsResponse = {
-  data: CoffeePriceMetrics[]
+  data: BuyCoffeeMetric[]
 }
 
-export type CoffeePriceMetrics = {
+export type BuyCoffeeMetric = {
   type: `${CoffeeTypes}.${CoffeeBebidas}`
   value: number
   weight: number

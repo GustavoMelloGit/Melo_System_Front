@@ -1,6 +1,6 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type GetBuyCoffeeMetricsResponse } from '../../../types/buy-coffee-metrics'
+import { type GetBuyCoffeeMetricsResponse } from '../../../types/coffeePriceMetrics'
 import BuyCoffeeMetricsTableViewRow from './Row'
 
 type Props = {
@@ -24,7 +24,10 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
       }}
     >
       {data?.data.map((transaction) => (
-        <BuyCoffeeMetricsTableViewRow key={transaction._id} metric={transaction} />
+        <BuyCoffeeMetricsTableViewRow
+          key={`${transaction.type}-${transaction.value}-${transaction.weight}`}
+          metric={transaction}
+        />
       ))}
     </Table>
   )

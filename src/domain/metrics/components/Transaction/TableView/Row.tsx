@@ -6,7 +6,7 @@ import { getColorByValue } from '../../../../../lib/utils/styles'
 import Link from '../../../../../shared/components/Link'
 import { type TransactionTypeName } from '../../../../client/types/model/Transaction'
 import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
-import { type TransactionMetrics } from '../../../types/transaction-metrics'
+import { type TransactionMetrics } from '../../../types/transactionMetrics'
 
 const labelByType: Record<TransactionTypeName, string> = {
   bags: 'Sacaria',

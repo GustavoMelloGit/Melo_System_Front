@@ -1,6 +1,6 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type GetTransactionMetricsResponse } from '../../../types/transaction-metrics'
+import { type GetTransactionMetricsResponse } from '../../../types/transactionMetrics'
 import TransactionMetricsTableViewRow from './Row'
 
 type Props = {

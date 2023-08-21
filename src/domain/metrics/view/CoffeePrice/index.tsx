@@ -4,12 +4,12 @@ import { Routes } from '../../../../lib/routes'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
-import BuyCoffeeMetricsTableView from '../../components/BuyCoffee/TableView'
+import CoffeePriceMetricsTableView from '../../components/CoffeePrice/TableView'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
-import useBuyCoffeeMetricsView from './useView'
+import useCoffeePriceMetricsView from './useView'
 
-export default function BuyCoffeeMetricsView(): JSX.Element {
-  const { data, isLoading, defaultValues, handleSubmitFilters } = useBuyCoffeeMetricsView()
+export default function CoffeePriceMetricsView(): JSX.Element {
+  const { data, isLoading, defaultValues, handleSubmitFilters } = useCoffeePriceMetricsView()
   const { handleSubmit, control } = useForm<CoffeePriceMetricsFilterOptions>({ defaultValues })
 
   return (
@@ -53,7 +53,7 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
           Filtrar
         </Button>
       </Flex>
-      <BuyCoffeeMetricsTableView isLoading={isLoading} data={data} />
+      <CoffeePriceMetricsTableView isLoading={isLoading} data={data} />
     </Page>
   )
 }
