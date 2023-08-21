@@ -8,7 +8,7 @@ export default function PDFContainer({ children }: PropsWithChildren): JSX.Eleme
         <View
           style={{
             width: '100%',
-            padding: '20px 50px',
+            padding: '0 50px',
             maxWidth: '29cm',
             margin: '0 auto',
             fontSize: 8,

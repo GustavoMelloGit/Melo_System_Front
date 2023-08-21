@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
+import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../shared/components/PDF/PDFTable'
 import PDFTableDivider from '../../../../../shared/components/PDF/PDFTableDivider'
 import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
@@ -23,6 +24,7 @@ type Props = {
 export default function PickupPDFTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
+      <PDFPaddingElement />
       <View style={styles.header}>
         <Text
           style={{
