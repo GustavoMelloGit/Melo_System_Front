@@ -11,7 +11,7 @@ import { type BuyCoffeeMetrics } from '../../../types/buy-coffee-metrics'
 type Props = {
   metric: BuyCoffeeMetrics
 }
-export default function BuyCoffeeMetricsTableViewRow({ metric }: Props): JSX.Element {
+export default function CoffeePriceMetricsTableViewRow({ metric }: Props): JSX.Element {
   const { client, date, valuePerBag, weight, coffeeType, bebida } = metric
   return (
     <Tr>

@@ -12,6 +12,8 @@ const initialDateInputValue = new Date().toISOString().split('T')[0]
 const initialValues: BuyCoffeeMetricsFilterOptions = {
   endDate: initialDateInputValue,
   startDate: initialDateInputValue,
+  coffeeType: 'bica_corrida',
+  bebida: 'duro',
 }
 
 export default function useBuyCoffeeMetricsView(): UseBuyCoffeeMetricsView {
@@ -25,9 +27,13 @@ export default function useBuyCoffeeMetricsView(): UseBuyCoffeeMetricsView {
     const { endDate, startDate } = values
     handleAddParam('startDate', formatStartDate(startDate))
     handleAddParam('endDate', formatEndDate(endDate))
+    // objectEntries(restValues).forEach(([key, value]) => {
+    //   handleAddParam(key, value)
+    // })
   }
 
   const defaultValues: BuyCoffeeMetricsFilterOptions = {
+    ...initialValues,
     startDate: allSearchParams?.startDate
       ? apiDateToDateInput(allSearchParams.startDate)
       : initialValues.startDate,

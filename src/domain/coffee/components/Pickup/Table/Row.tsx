@@ -1,9 +1,11 @@
-import { Flex, Td, Tr } from '@chakra-ui/react'
+import { Center, Flex, Td, Tr } from '@chakra-ui/react'
+import { format } from 'date-fns'
 import { cloneElement } from 'react'
 import { Routes } from '../../../../../lib/routes'
 import { formatClientName } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
 import Link from '../../../../../shared/components/Link'
+import MoreInfoTooltip from '../../../../../shared/components/MoreInfoTooltip'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
@@ -101,6 +103,12 @@ export default function PickupTableRow({
               key: action,
             }),
           )}
+          <Center boxSize={'40px'}>
+            <MoreInfoTooltip
+              label={`Solicitado dia ${format(pickup.createdAt, 'dd/MM/yyyy')}`}
+              placement='left'
+            />
+          </Center>
         </Flex>
       </Td>
     </Tr>

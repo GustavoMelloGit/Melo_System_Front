@@ -1,13 +1,13 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type GetBuyCoffeeMetricsResponse } from '../../../types/buy-coffee-metrics'
-import BuyCoffeeMetricsTableViewRow from './Row'
+import CoffeePriceMetricsTableViewRow from './Row'
 
 type Props = {
   data?: GetBuyCoffeeMetricsResponse
   isLoading: boolean
 }
-export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): JSX.Element {
+export default function CoffeePriceMetricsTableView({ data, isLoading }: Props): JSX.Element {
   return (
     <Table
       header={{
@@ -24,7 +24,7 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
       }}
     >
       {data?.data.map((transaction) => (
-        <BuyCoffeeMetricsTableViewRow key={transaction._id} metric={transaction} />
+        <CoffeePriceMetricsTableViewRow key={transaction._id} metric={transaction} />
       ))}
     </Table>
   )

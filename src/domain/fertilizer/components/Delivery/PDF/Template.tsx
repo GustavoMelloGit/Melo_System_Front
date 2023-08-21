@@ -47,7 +47,11 @@ export default function FertilizerDeliveryTemplate({ data }: Props): JSX.Element
       </View>
       <PDFTable>
         <PDFTableHeader>
-          <PDFTableRowItem>
+          <PDFTableRowItem
+            style={{
+              maxWidth: 80,
+            }}
+          >
             <Text>Data de Entrega</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
@@ -75,8 +79,12 @@ export default function FertilizerDeliveryTemplate({ data }: Props): JSX.Element
             </PDFTableDivider>
 
             {data.map((order) => (
-              <PDFTableRow key={order.id}>
-                <PDFTableRowItem>
+              <PDFTableRow wrap={false} key={order.id}>
+                <PDFTableRowItem
+                  style={{
+                    maxWidth: 80,
+                  }}
+                >
                   <Text>{format(order.date, 'dd/MM/yyyy')}</Text>
                 </PDFTableRowItem>
                 <PDFTableRowItem>

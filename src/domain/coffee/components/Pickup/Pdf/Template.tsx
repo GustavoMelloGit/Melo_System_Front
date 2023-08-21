@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
-import { Fragment } from 'react'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFTable from '../../../../../shared/components/PDF/PDFTable'
 import PDFTableDivider from '../../../../../shared/components/PDF/PDFTableDivider'
@@ -61,13 +60,13 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
           </PDFTableRowItem>
         </PDFTableHeader>
         {Object.entries(data).map(([brook, data]) => (
-          <Fragment key={brook}>
+          <View key={brook}>
             <PDFTableDivider>
               <Text>{brook}</Text>
             </PDFTableDivider>
 
             {data.map((order) => (
-              <PDFTableRow key={order.id}>
+              <PDFTableRow key={order.id} wrap={false}>
                 <PDFTableRowItem>
                   <Text>{order.client}</Text>
                 </PDFTableRowItem>
@@ -84,7 +83,7 @@ export default function PickupPDFTemplate({ data }: Props): JSX.Element {
                 </PDFTableRowItem>
               </PDFTableRow>
             ))}
-          </Fragment>
+          </View>
         ))}
       </PDFTable>
     </PDFContainer>
