@@ -34,10 +34,7 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
 }
 
 const headerColumns: TableHeaderColumns[] = [
-  { id: 'date', label: 'Data', isSortable: true },
-  { id: 'client.searchableName', label: 'Nome do Cliente', isSortable: true },
-  { id: 'coffeeType', label: 'Tipo do café', isSortable: true },
-  { id: 'bebida', label: 'Bebida', isSortable: true },
-  { id: 'valuePerBag', label: 'Valor P/ Saca', isSortable: true },
-  { id: 'value', label: 'Sacas', isSortable: true },
+  { id: 'coffeeType', label: 'Tipo de café', isSortable: true },
+  { id: 'value', label: 'Valor', isSortable: true },
+  { id: 'weight', label: 'Quantidade', isSortable: true },
 ]

@@ -22,7 +22,7 @@ export default function CoffeePriceMetricsView(): JSX.Element {
             to: Routes.metricsHub,
           },
           {
-            label: 'Compras de café',
+            label: 'Preço de café',
           },
         ]}
       />

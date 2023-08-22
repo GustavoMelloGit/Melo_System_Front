@@ -39,16 +39,16 @@ export default function MetricsHubView(): JSX.Element {
             url={Routes.buyCoffeeMetrics}
           />
           <MetricsHubOption
-            icon={<BiTransferAlt size={40} />}
-            title='Transações'
-            subtitle='Relatório referente a todas as movimentações do sistema.'
-            url={Routes.transactionMetrics}
-          />
-          <MetricsHubOption
             icon={<FaSearchDollar size={28} />}
             title='Preço de café'
             subtitle='Consultar valor pago por saco e tipo de café'
             url={Routes.coffeePrice}
+          />
+          <MetricsHubOption
+            icon={<BiTransferAlt size={40} />}
+            title='Transações'
+            subtitle='Relatório referente a todas as movimentações do sistema.'
+            url={Routes.transactionMetrics}
           />
         </Stack>
       </Container>
