@@ -1,8 +1,5 @@
 import Table from '../../../../../shared/components/table/Table'
-import {
-  type SearchForOption,
-  type TableHeaderColumns,
-} from '../../../../../shared/components/table/types'
+import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 import DeliveryTableRow from './Row'
 
@@ -40,9 +37,9 @@ export default function DeliveryTable({
       table={{
         'data-cy': 'deliveryCoffee-table',
       }}
-      filter={{
-        searchForOptions,
-      }}
+      // filter={{
+      //   searchForOptions,
+      // }}
     >
       {data?.map((delivery, index) => (
         <DeliveryTableRow
@@ -68,8 +65,8 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
 
-const searchForOptions: SearchForOption = {
-  'client.searchableName': {
-    label: 'Nome do Cliente',
-  },
-}
+// const searchForOptions: SearchForOption = {
+//   'client.searchableName': {
+//     label: 'Nome do Cliente',
+//   },
+// }
