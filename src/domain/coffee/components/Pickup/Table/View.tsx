@@ -70,9 +70,9 @@ const searchForOptions: SearchForOption = {
   'client.searchableName': {
     label: 'Nome do Cliente',
   },
-  'client.code': {
-    label: 'Código do Cliente',
-  },
+  // 'client.code': {
+  //   label: 'Código do Cliente',
+  // },
   brook: {
     label: 'Córrego',
   },
