@@ -1,10 +1,10 @@
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type GetBuyCoffeeMetricsResponse } from '../../../types/buy-coffee-metrics'
+import { type GetCoffeePriceMetricsResponse } from '../../../types/buyCoffeeMetrics'
 import CoffeePriceMetricsTableViewRow from './Row'
 
 type Props = {
-  data?: GetBuyCoffeeMetricsResponse
+  data?: GetCoffeePriceMetricsResponse
   isLoading: boolean
 }
 export default function CoffeePriceMetricsTableView({ data, isLoading }: Props): JSX.Element {

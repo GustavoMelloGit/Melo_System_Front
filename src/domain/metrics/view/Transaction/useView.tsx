@@ -4,7 +4,7 @@ import { getTransactionMetrics } from '../../services/get'
 import {
   type GetTransactionMetricsResponse,
   type TransactionMetricsFilterOptions,
-} from '../../types/transaction-metrics'
+} from '../../types/transactionMetrics'
 import { formatEndDate } from '../../utils/formatEndDate'
 import { formatStartDate } from '../../utils/formatStartDate'
 

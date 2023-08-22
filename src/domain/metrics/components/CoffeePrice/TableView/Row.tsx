@@ -6,10 +6,10 @@ import { formatClientName, formatCurrency } from '../../../../../lib/utils/forma
 import Link from '../../../../../shared/components/Link'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
-import { type BuyCoffeeMetrics } from '../../../types/buy-coffee-metrics'
+import { type CoffeePriceMetrics } from '../../../types/buyCoffeeMetrics'
 
 type Props = {
-  metric: BuyCoffeeMetrics
+  metric: CoffeePriceMetrics
 }
 export default function CoffeePriceMetricsTableViewRow({ metric }: Props): JSX.Element {
   const { client, date, valuePerBag, weight, coffeeType, bebida } = metric

@@ -1,5 +1,8 @@
 import Table from '../../../../../shared/components/table/Table'
-import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
+import {
+  type SearchForOption,
+  type TableHeaderColumns,
+} from '../../../../../shared/components/table/types'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 import PickupTableRow from './Row'
 
@@ -37,6 +40,9 @@ export default function PickupTableView({
       table={{
         'data-cy': 'pickupCoffee-table',
       }}
+      filter={{
+        searchForOptions,
+      }}
     >
       {data?.map((pickup, index) => (
         <PickupTableRow
@@ -53,9 +59,21 @@ export default function PickupTableView({
 }
 
 const headerColumns: TableHeaderColumns[] = [
-  { id: 'clientName', label: 'Cliente', isSortable: true },
+  { id: 'client.searchableName', label: 'Cliente', isSortable: true },
   { id: 'bags', label: 'Sacos', isSortable: true, textAlign: 'center' },
   { id: 'brook', label: 'Córrego', isSortable: true },
   { id: 'complement', label: 'Referência' },
   { id: 'actions', label: 'Ações', align: 'center' },
 ]
+
+const searchForOptions: SearchForOption = {
+  'client.searchableName': {
+    label: 'Nome do Cliente',
+  },
+  'client.code': {
+    label: 'Código do Cliente',
+  },
+  brook: {
+    label: 'Córrego',
+  },
+}

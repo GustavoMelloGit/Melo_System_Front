@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Flex, Heading, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import { Box, Card, CardBody, Center, Flex, Heading, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { type ReactNode } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,7 @@ export default function MetricsHubOption({ icon, subtitle, title, url }: Props):
         }}
       >
         <Flex gap={3} align='center'>
-          {icon}
+          <Center boxSize={'40px'}>{icon}</Center>
           <Box>
             <Heading
               as='h2'

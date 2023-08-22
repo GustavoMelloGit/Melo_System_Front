@@ -7,6 +7,7 @@ export const Routes = {
   clients: '/clients',
   clientSheets: (uuid: string) => `/clients/${uuid}/sheets`,
   coffeePickups: '/coffee-pickups',
+  coffeePrice: '/metrics/coffee-price',
   config: '/config',
   createClient: '/clients/create',
   createSheet: (bookNumber: string | number) => `/books/${bookNumber}/create`,

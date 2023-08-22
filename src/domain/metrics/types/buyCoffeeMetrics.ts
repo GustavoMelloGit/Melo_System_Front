@@ -1,16 +1,16 @@
 import { type ClientModel } from '../../client/types/model/Client'
 import { type CoffeeBebidas, type CoffeeTypes } from '../../coffee/types/model/coffee'
 
-export type GetBuyCoffeeMetricsResponse = {
+export type GetCoffeePriceMetricsResponse = {
   meta: {
     totalValue: number
     totalWeight: number
     totalBags: number
   }
-  data: BuyCoffeeMetrics[]
+  data: CoffeePriceMetrics[]
 }
 
-export type BuyCoffeeMetrics = {
+export type CoffeePriceMetrics = {
   bags: number
   client: ClientModel
   date: number
@@ -22,7 +22,7 @@ export type BuyCoffeeMetrics = {
   _id: string
 }
 
-export type BuyCoffeeMetricsFilterOptions = {
+export type CoffeePriceMetricsFilterOptions = {
   startDate: string
   endDate: string
   coffeeType: CoffeeTypes

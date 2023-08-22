@@ -7,7 +7,7 @@ import Page from '../../../../shared/components/Page'
 import { type ExtendedRecord } from '../../../../shared/types/utils/ExtendedRecord'
 import { type TransactionTypeName } from '../../../client/types/model/Transaction'
 import TransactionMetricsTableView from '../../components/Transaction/TableView'
-import { type TransactionMetricsFilterOptions } from '../../types/transaction-metrics'
+import { type TransactionMetricsFilterOptions } from '../../types/transactionMetrics'
 import useTransactionMetricsView, { undefinedFilterType } from './useView'
 
 export default function TransactionMetricsView(): JSX.Element | null {
