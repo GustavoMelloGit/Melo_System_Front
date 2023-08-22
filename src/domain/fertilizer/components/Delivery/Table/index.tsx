@@ -70,6 +70,6 @@ const headerColumns: TableHeaderColumns[] = [
 
 const searchForOptions: SearchForOption = {
   'client.searchableName': {
-    label: 'Nome',
+    label: 'Nome do Cliente',
   },
 }
