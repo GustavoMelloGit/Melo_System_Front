@@ -1,3 +1,4 @@
+import { PaginationParams } from '../../../../lib/constants/pagination'
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { getBuyCoffeeMetrics } from '../../services/get'
@@ -18,6 +19,8 @@ export default function useBuyCoffeeMetricsView(): UseBuyCoffeeMetricsView {
   const { queryParam, handleAddParam, allSearchParams } = useURLSearchParams({
     startDate: formatStartDate(initialDateInputValue),
     endDate: formatEndDate(initialDateInputValue),
+    [PaginationParams.sortBy]: 'value',
+    [PaginationParams.sortOrder]: 'desc',
   })
   const { data, isLoading } = getBuyCoffeeMetrics(queryParam)
 
