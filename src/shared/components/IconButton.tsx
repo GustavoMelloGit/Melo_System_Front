@@ -1,5 +1,5 @@
 import { IconButton as ChakraIconButton, type IconButtonProps } from '@chakra-ui/react'
-import { cloneElement, useState, type MouseEvent } from 'react'
+import { cloneElement, forwardRef, useState, type MouseEvent } from 'react'
 import { AiOutlineLock, AiOutlinePrinter } from 'react-icons/ai'
 import { BiBlock, BiDollarCircle, BiFilter } from 'react-icons/bi'
 import { BsCheckCircle, BsTrash, BsZoomIn } from 'react-icons/bs'
@@ -35,59 +35,58 @@ type Props = Omit<IconButtonProps, 'icon'> & {
   confirm?: boolean
   iconSize?: number
 }
-export default function IconButton({
-  icon,
-  onClick,
-  confirm = false,
-  iconSize,
-  ...props
-}: Props): JSX.Element {
-  const [isLoading, setIsLoading] = useState(false)
+const IconButton = forwardRef<HTMLButtonElement, Props>(
+  ({ icon, onClick, confirm = false, iconSize, ...props }, ref): JSX.Element => {
+    const [isLoading, setIsLoading] = useState(false)
 
-  async function handleConfirm(e: MouseEvent<HTMLButtonElement>): Promise<void> {
-    const ConfirmDialog = (await import('./ConfirmDialog')).default
-    useModal.getState().openModal(
-      <ConfirmDialog
-        onResolve={(response) => {
-          if (response && onClick) {
-            if (isAsyncFunction(onClick)) {
-              setIsLoading(true)
-              void onClick(e)
-              setIsLoading(false)
-            } else {
-              onClick(e)
+    async function handleConfirm(e: MouseEvent<HTMLButtonElement>): Promise<void> {
+      const ConfirmDialog = (await import('./ConfirmDialog')).default
+      useModal.getState().openModal(
+        <ConfirmDialog
+          onResolve={(response) => {
+            if (response && onClick) {
+              if (isAsyncFunction(onClick)) {
+                setIsLoading(true)
+                void onClick(e)
+                setIsLoading(false)
+              } else {
+                onClick(e)
+              }
             }
-          }
-        }}
-      />,
-    )
-  }
+          }}
+        />,
+      )
+    }
 
-  async function handleClick(e: MouseEvent<HTMLButtonElement>): Promise<void> {
-    if (onClick) {
-      if (confirm || shouldConfirmAction.includes(icon)) {
-        await handleConfirm(e)
-        return
-      }
-      if (isAsyncFunction(onClick)) {
-        setIsLoading(true)
-        await onClick(e)
-        setIsLoading(false)
-      } else {
-        onClick(e)
+    async function handleClick(e: MouseEvent<HTMLButtonElement>): Promise<void> {
+      if (onClick) {
+        if (confirm || shouldConfirmAction.includes(icon)) {
+          await handleConfirm(e)
+          return
+        }
+        if (isAsyncFunction(onClick)) {
+          setIsLoading(true)
+          await onClick(e)
+          setIsLoading(false)
+        } else {
+          onClick(e)
+        }
       }
     }
-  }
 
-  return (
-    <ChakraIconButton
-      icon={cloneElement(buttonIcons[icon], {
-        ...(iconSize && { size: iconSize }),
-      })}
-      onClick={handleClick}
-      isLoading={isLoading}
-      variant='ghost'
-      {...props}
-    />
-  )
-}
+    return (
+      <ChakraIconButton
+        icon={cloneElement(buttonIcons[icon], {
+          ...(iconSize && { size: iconSize }),
+        })}
+        ref={ref}
+        onClick={handleClick}
+        isLoading={isLoading}
+        variant='ghost'
+        {...props}
+      />
+    )
+  },
+)
+
+export default IconButton

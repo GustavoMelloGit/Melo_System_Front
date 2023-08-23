@@ -37,7 +37,7 @@ const validationSchema = yup.object().shape({
 
 export type Props = {
   onSubmit: (values: FertilizerDeliveryFormValues) => Promise<void>
-  initialValues?: FertilizerDeliveryFormValues
+  initialValues: FertilizerDeliveryFormValues
 }
 
 export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Props): JSX.Element {
@@ -68,8 +68,12 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
     if (clients.data.length === 1) {
       const [client] = clients.data
       const { address } = client
-      setValue('brook', address.brook ?? '')
-      setValue('complement', address.complement ?? '')
+      if (!initialValues.brook) {
+        setValue('brook', address.brook ?? '')
+      }
+      if (!initialValues.complement) {
+        setValue('complement', address.complement ?? '')
+      }
     }
   }, [clients])
 
