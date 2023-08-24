@@ -8,7 +8,7 @@ import IconButton from '../../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
 import useDebounce from '../../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../service'
+import { getClientsService } from '../../../../service/getClientsService'
 import TransferReferralTransferTypeFields from './TransferReferralTransferTypeFields'
 import { type ClientTransferFormValues, type Referral } from './types'
 
