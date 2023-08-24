@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
-import { getClientsService } from '../../../service'
 import { deleteClientService } from '../../../service/delete'
+import { getClientsService } from '../../../service/getClientsService'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientsListView(): ClientsListView {

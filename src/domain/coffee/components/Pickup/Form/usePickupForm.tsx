@@ -6,7 +6,7 @@ import { validationErrors } from '../../../../../lib/errors'
 import { clientNameWithoutNickname } from '../../../../../lib/utils/formatters'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../client/service'
+import { getClientsService } from '../../../../client/service/getClientsService'
 import { type ClientModel } from '../../../../client/types/model/Client'
 import { type PickupFormValues } from '../../../types/model/pickup'
 

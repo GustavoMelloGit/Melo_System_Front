@@ -3,7 +3,7 @@ import { useWatch, type Control, type Path } from 'react-hook-form'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
-import { getClientsService } from '../../../../client/service'
+import { getClientsService } from '../../../../client/service/getClientsService'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
