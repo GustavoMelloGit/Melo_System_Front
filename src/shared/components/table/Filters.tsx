@@ -16,6 +16,8 @@ import useURLSearchParams from '../../hooks/useURLSearchParams'
 import RHFField from '../inputs/RHFField'
 import { type FilterFormValues, type TableFilterProps } from './types'
 
+const isMobile = window.screen.width < 768
+
 export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
   const { handleAddParams, handleRemoveParams, getParam } = useURLSearchParams()
   const bg = useColorModeValue('gray.200', 'gray.700')
@@ -117,7 +119,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                 type='search'
                 roundedLeft={['md', 'none']}
                 placeholder='Pesquisar'
-                autoFocus
+                autoFocus={!isMobile}
                 {...(DOMProperties ?? {})}
                 name='query'
                 data-cy='table-search-input'
