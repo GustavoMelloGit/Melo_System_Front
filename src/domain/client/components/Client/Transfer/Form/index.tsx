@@ -13,21 +13,21 @@ import {
 } from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
+import { type DeepPartial } from '../../../../../../shared/types/utils/DeepPartial'
 import TransferReferral from './TransferReferral'
 import { type ClientTransferFormValues, type ReferralTransfer, type TransferType } from './types'
 
-const emptyReferral: ReferralTransfer = {
+const emptyReferral: Partial<ReferralTransfer> = {
   clientId: '',
   clientName: '',
   value: 0,
   bags: 0,
-  bebida: 'duro',
   coffeeType: 'bica_corrida',
   weight: 0,
   transferType: 'currency' as TransferType,
 }
 
-const emptyInitialValues: ClientTransferFormValues = {
+const emptyInitialValues: DeepPartial<ClientTransferFormValues> = {
   from: emptyReferral,
   to: emptyReferral,
   description: '',
@@ -35,7 +35,7 @@ const emptyInitialValues: ClientTransferFormValues = {
 
 type Props = {
   onSubmit: (values: ClientTransferFormValues) => Promise<void>
-  initialValues?: ClientTransferFormValues
+  initialValues?: DeepPartial<ClientTransferFormValues>
 }
 export default function ClientTransferForm({
   initialValues = emptyInitialValues,
