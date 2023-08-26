@@ -1,7 +1,7 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import { getNumberOfBags } from '../../../../../../../../lib/utils/getNumberOfBags'
-import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import {
