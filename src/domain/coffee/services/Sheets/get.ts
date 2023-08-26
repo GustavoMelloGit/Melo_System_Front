@@ -1,8 +1,6 @@
 import useFetch, { type UseFetch } from '../../../../shared/hooks/useFetch'
-import {
-  type GetListResponse,
-  type SWRServiceResponse,
-} from '../../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
+import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { type SheetModel } from '../../types/model/sheet'
 
 type GetSheetServicesData = {

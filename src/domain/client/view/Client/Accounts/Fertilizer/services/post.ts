@@ -1,6 +1,6 @@
 import api from '../../../../../../../lib/config/api'
-import { errorHandler } from '../../../../../../../lib/utils/error'
-import { type PostServiceResponse } from '../../../../../../../shared/types/utils/service'
+import { errorHandler } from '../../../../../../../lib/utils/errorHandler'
+import { type PostServiceResponse } from '../../../../../../../shared/types/service/PostServiceResponse'
 
 type SellFertilizerServiceValues = {
   clientId: string

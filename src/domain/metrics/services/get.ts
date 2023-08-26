@@ -1,5 +1,5 @@
 import useFetch from '../../../shared/hooks/useFetch'
-import { type SWRServiceResponse } from '../../../shared/types/utils/service'
+import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
 import { type GetCoffeePriceMetricsResponse } from '../types/buyCoffeeMetrics'
 import { type GetBuyCoffeeMetricsResponse } from '../types/coffeePriceMetrics'
 import { type GetTransactionMetricsResponse } from '../types/transactionMetrics'

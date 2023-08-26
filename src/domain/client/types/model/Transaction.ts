@@ -1,4 +1,5 @@
-import { type Timestamp, type WithId } from '../../../../shared/types/utils/model'
+import { type Timestamp } from '../../../../shared/types/Timestamp'
+import { type WithId } from '../../../../shared/types/WithId'
 import { type UserModel } from '../../../auth/types/model/user'
 import { type BookModel } from '../../../coffee/types/model/book'
 import {

@@ -6,7 +6,7 @@ import {
   dateToFormat,
   formatCurrency,
 } from '../../../../../../../../lib/utils/formatters'
-import { getColorByValue } from '../../../../../../../../lib/utils/styles'
+import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'

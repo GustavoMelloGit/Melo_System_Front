@@ -7,8 +7,8 @@ import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
 import { IoAddOutline, IoDocumentTextOutline } from 'react-icons/io5'
 import { RiExchangeDollarLine } from 'react-icons/ri'
 import { TbPencil, TbShoppingCart, TbZoomMoney } from 'react-icons/tb'
+import { isAsyncFunction } from '../../lib/utils/isAsyncFunction'
 import { useModal } from '../hooks/useModal'
-import { isAsyncFunction } from '../types/utils/typeGuards'
 
 const buttonIcons = {
   add: <IoAddOutline size={24} />,

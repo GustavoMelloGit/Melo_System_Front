@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
-import { clientNameWithoutNickname } from '../../../../../lib/utils/formatters'
+import { normalize } from '../../../../../lib/utils/normalize'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../client/service/getClientsService'
@@ -22,7 +22,7 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   const clientName = form.watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
   const { data, isLoading } = getClientsService(
-    `searchableName=${clientNameWithoutNickname(debouncedClientName)}&limit=10`,
+    `searchableName=${normalize(debouncedClientName)}&limit=10`,
   )
 
   useEffect(() => {

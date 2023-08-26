@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
-import { type DeepPartial } from '../../../../../../shared/types/utils/DeepPartial'
+import { type DeepPartial } from '../../../../../../shared/types/DeepPartial'
 import TransferReferral from './TransferReferral'
 import { type ClientTransferFormValues, type ReferralTransfer, type TransferType } from './types'
 

@@ -24,11 +24,11 @@ import { toast } from 'react-hot-toast'
 import { shallow } from 'zustand/shallow'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
+import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import {
   calculateCompoundInterest,
   convertMonthlyInterestRateToDaily,
 } from '../../../../../../../../lib/utils/math'
-import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../../service'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'

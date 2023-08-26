@@ -2,10 +2,10 @@ import { Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { Routes } from '../../../../../lib/routes'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
-import { getColorByValue } from '../../../../../lib/utils/styles'
+import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
+import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Link from '../../../../../shared/components/Link'
 import { type TransactionTypeName } from '../../../../client/types/model/Transaction'
-import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
 import { type TransactionMetrics } from '../../../types/transactionMetrics'
 
 const labelByType: Record<TransactionTypeName, string> = {

@@ -1,9 +1,7 @@
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { useWatch, type Control } from 'react-hook-form'
-import {
-  clientNameWithNickname,
-  clientNameWithoutNickname,
-} from '../../../../../../lib/utils/formatters'
+import { clientNameWithNickname } from '../../../../../../lib/utils/formatters'
+import { normalize } from '../../../../../../lib/utils/normalize'
 import IconButton from '../../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
 import useDebounce from '../../../../../../shared/hooks/useDebounce'
@@ -27,7 +25,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
   })
   const debouncedClientName = useDebounce(clientName, 300)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `searchableName=${clientNameWithoutNickname(debouncedClientName)}&limit=10`,
+    `searchableName=${normalize(debouncedClientName)}&limit=10`,
   )
   return (
     <Box

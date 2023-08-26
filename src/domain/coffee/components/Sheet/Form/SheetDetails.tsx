@@ -1,5 +1,6 @@
 import { Divider, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
 import { useWatch, type Control, type Path } from 'react-hook-form'
+import { normalize } from '../../../../../lib/utils/normalize'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
@@ -17,7 +18,7 @@ export default function SheetFormSheetDetails({ control, isDisabled }: Props): J
   })
   const debouncedClientName = useDebounce(clientName, 250)
   const { data, isLoading } = getClientsService(
-    debouncedClientName ? `searchableName=${debouncedClientName}&limit=10` : '',
+    debouncedClientName ? `searchableName=${normalize(debouncedClientName)}&limit=10` : '',
     {
       revalidateOnFocus: false,
     },

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { type GetListResponse } from '../../../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { getPickupOrdersService } from '../../../../coffee/services/Pickup/get'
 import { type PickupCoffeeModel } from '../../../../coffee/types/model/pickup'
 import { getClientService } from '../../../service'

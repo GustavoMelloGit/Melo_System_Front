@@ -1,6 +1,6 @@
 import api from '../../../lib/config/api'
-import { errorHandler } from '../../../lib/utils/error'
-import { type GetServiceResponse } from '../../../shared/types/utils/service'
+import { errorHandler } from '../../../lib/utils/errorHandler'
+import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
 import { type SignInResponse, type SignInValues } from '../types'
 
 export async function signInService(values: SignInValues): SignInResponse {

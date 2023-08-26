@@ -1,4 +1,4 @@
-import { type WithId } from '../../../shared/types/utils/model'
+import { type WithId } from '../../../shared/types/WithId'
 import { type ClientModel } from '../../client/types/model/Client'
 import { type AllTransactions } from '../../client/types/model/Transaction'
 

@@ -1,5 +1,9 @@
 import axios, { type AxiosError } from 'axios'
-import { type AxiosErrorResponse } from '../../shared/types/utils/error'
+import { type AxiosErrorResponse } from '../../shared/types/AxiosErrorResponse'
+
+function isAxiosError<ResponseType>(error: unknown): error is AxiosError<ResponseType> {
+  return axios.isAxiosError(error)
+}
 
 export function errorHandler(error: unknown): string {
   if (isAxiosError<AxiosErrorResponse>(error)) {
@@ -10,8 +14,4 @@ export function errorHandler(error: unknown): string {
   }
 
   return 'Um erro desconhecido ocorreu'
-}
-
-export function isAxiosError<ResponseType>(error: unknown): error is AxiosError<ResponseType> {
-  return axios.isAxiosError(error)
 }

@@ -1,7 +1,7 @@
 import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
-import { errorHandler } from '../../../lib/utils/error'
-import { type PutServiceResponse } from '../../../shared/types/utils/service'
+import { errorHandler } from '../../../lib/utils/errorHandler'
+import { type PutServiceResponse } from '../../../shared/types/service/PutServiceResponse'
 import { type ClientFormValues } from '../components/Client/Form/types'
 import { type ClientModel } from '../types/model/Client'
 

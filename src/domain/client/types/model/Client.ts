@@ -1,4 +1,5 @@
-import { type Timestamp, type WithId } from '../../../../shared/types/utils/model'
+import { type Timestamp } from '../../../../shared/types/Timestamp'
+import { type WithId } from '../../../../shared/types/WithId'
 
 export type Address = {
   city?: string

@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
-import { getColorByValue } from '../../../../../../../../lib/utils/styles'
+import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import { type SacariaFormValues } from '../../types/sacaria'
 

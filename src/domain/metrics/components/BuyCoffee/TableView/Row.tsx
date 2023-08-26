@@ -1,7 +1,7 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
-import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
+import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import { type BuyCoffeeMetric } from '../../../types/coffeePriceMetrics'
 
 type Props = {

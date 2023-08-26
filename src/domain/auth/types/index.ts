@@ -1,4 +1,4 @@
-import { type PostServiceResponse } from '../../../shared/types/utils/service'
+import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
 import { type AuthContextType } from './context/auth'
 
 export type SignInValues = {

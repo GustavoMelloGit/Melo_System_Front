@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
-import { getColorByValue } from '../../../../../../../../lib/utils/styles'
+import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import { type EscolhaFormValues } from '../../types/esolha'
 

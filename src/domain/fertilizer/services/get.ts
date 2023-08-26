@@ -1,12 +1,10 @@
 import { type SWRConfiguration } from 'swr'
 import api from '../../../lib/config/api'
-import { errorHandler } from '../../../lib/utils/error'
+import { errorHandler } from '../../../lib/utils/errorHandler'
 import useFetch from '../../../shared/hooks/useFetch'
-import {
-  type GetListResponse,
-  type GetServiceResponse,
-  type SWRServiceResponse,
-} from '../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
+import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
+import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerModel } from '../types/model/Fertilizer'
 
