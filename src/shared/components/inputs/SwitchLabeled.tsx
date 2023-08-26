@@ -38,27 +38,6 @@ export default function SwitchLabeled({
     setCurrentActive(1)
     onChange(rightValue ?? true)
   }
-  const beforeProps = {
-    position: 'absolute',
-    inset: 0,
-    borderRadius: 'inherit',
-    bg: 'gray.500',
-    animationDuration: '300ms',
-    animationTimingFunction: 'ease-in-out',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1,
-  }
-
-  const afterProps = {
-    position: 'absolute',
-    inset: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 2,
-  }
 
   return (
     <Flex p={1} gap={1} bg={wrapperBg} rounded={8} {...wrapperProps}>
@@ -112,4 +91,26 @@ export default function SwitchLabeled({
       </Button>
     </Flex>
   )
+}
+
+const beforeProps = {
+  position: 'absolute',
+  inset: 0,
+  borderRadius: 'inherit',
+  bg: 'gray.500',
+  animationDuration: '300ms',
+  animationTimingFunction: 'ease-in-out',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 1,
+}
+
+const afterProps = {
+  position: 'absolute',
+  inset: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 2,
 }
