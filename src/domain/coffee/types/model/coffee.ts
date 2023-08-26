@@ -17,7 +17,7 @@ export type DespolpadoDetails = Omit<CoffeeDetails, 'type'>
 
 export type CoffeeTypes = 'bica_corrida' | 'despolpado' | 'conilon' | 'escolha'
 
-export const CoffeeTypesEnum: Record<CoffeeTypes, string> = {
+export const CoffeeTypesLabel: Record<CoffeeTypes, string> = {
   bica_corrida: 'Bica Corrida',
   conilon: 'Conilon',
   despolpado: 'Despolpado',

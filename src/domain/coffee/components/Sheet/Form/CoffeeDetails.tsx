@@ -5,7 +5,7 @@ import { CoffeeTypeHasBebida, hasUtilizationType } from '../../../../../lib/cons
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFTextField from '../../../../../shared/components/inputs/RHFTextField'
-import { CoffeeBebidasLabel, CoffeeTypesEnum } from '../../../types/model/coffee'
+import { CoffeeBebidasLabel, CoffeeTypesLabel } from '../../../types/model/coffee'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
@@ -41,7 +41,7 @@ export default function SheetFormCoffeeDetails({
             isDisabled={isDisabled('coffeeDetails.coffeeType')}
             CustomInput={
               <Select>
-                {Object.keys(CoffeeTypesEnum).map((value) => (
+                {Object.keys(CoffeeTypesLabel).map((value) => (
                   <option key={value} value={value}>
                     {capitalCase(value)}
                   </option>
