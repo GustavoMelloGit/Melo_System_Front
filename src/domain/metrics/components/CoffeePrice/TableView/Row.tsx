@@ -3,9 +3,9 @@ import { capitalCase } from 'change-case'
 import { format } from 'date-fns'
 import { Routes } from '../../../../../lib/routes'
 import { formatClientName, formatCurrency } from '../../../../../lib/utils/formatters'
+import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Link from '../../../../../shared/components/Link'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
-import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
 import { type CoffeePriceMetrics } from '../../../types/buyCoffeeMetrics'
 
 type Props = {

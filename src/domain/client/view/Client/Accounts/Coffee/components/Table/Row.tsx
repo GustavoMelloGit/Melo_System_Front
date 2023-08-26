@@ -1,5 +1,6 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { getNumberOfBags } from '../../../../../../../../lib/utils/getNumberOfBags'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
@@ -8,7 +9,6 @@ import {
   type CoffeeDetails,
   type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
-import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 
 function getFullDescription(transaction: CoffeeTransactionModel): string {

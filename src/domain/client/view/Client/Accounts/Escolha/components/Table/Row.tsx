@@ -1,9 +1,9 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
+import { getNumberOfBags } from '../../../../../../../../lib/utils/getNumberOfBags'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
-import { getNumberOfBags } from '../../../../../../../coffee/utils/Coffee'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {

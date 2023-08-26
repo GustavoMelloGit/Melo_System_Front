@@ -18,9 +18,9 @@ import {
 import { capitalCase } from 'change-case'
 import { Fragment } from 'react'
 import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
+import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import { getColorByValue } from '../../../../../lib/utils/styles'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { getNumberOfBags } from '../../../../coffee/utils/Coffee'
 import { getClientBalancesService } from '../../../service'
 import { type ClientBalance } from '../../../types/model/Client'
 

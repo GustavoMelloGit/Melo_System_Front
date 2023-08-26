@@ -1,4 +1,4 @@
-import GlobalConfig from '../../../../lib/constants/config'
+import GlobalConfig from '../constants/config'
 
 /**
  * Function that returns the number of bags and weight in Kg
@@ -10,7 +10,7 @@ import GlobalConfig from '../../../../lib/constants/config'
  * getNumberOfBagsAndWeight(61, 61) // [1, 0]
  * getNumberOfBagsAndWeight(61, 62) // [0, 61]
  */
-export const getNumberOfBagsAndWeight = (
+const getNumberOfBagsAndWeight = (
   amount: number,
   KgPerBag: number = GlobalConfig.weightPerBag,
 ): [number, number] => {
