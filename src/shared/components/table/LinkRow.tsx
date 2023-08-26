@@ -6,7 +6,7 @@ type Props = LinkBoxProps & {
 }
 export default function LinkRow({ children, to, ...rest }: Props): JSX.Element {
   return (
-    <LinkBox as={Tr} {...rest}>
+    <LinkBox as={Tr} transform='scale(1)' {...rest}>
       {children}
       <Td
         visibility='hidden'
@@ -14,13 +14,7 @@ export default function LinkRow({ children, to, ...rest }: Props): JSX.Element {
           all: 'unset',
         }}
       >
-        <LinkOverlay
-          as={Link}
-          to={to}
-          _before={{
-            border: '1px solid red',
-          }}
-        />
+        <LinkOverlay as={Link} to={to} />
       </Td>
     </LinkBox>
   )
