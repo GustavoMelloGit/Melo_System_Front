@@ -22,14 +22,6 @@ export type CoffeeFormValues = {
   }
 }
 
-export const CoffeeTypesForm: {
-  [key in CoffeeTypes]?: string
-} = {
-  bica_corrida: 'Bica Corrida',
-  conilon: 'Conilon',
-  despolpado: 'Despolpado',
-}
-
 export type CreateCoffeeValues = Omit<CoffeeFormValues, 'bags' | 'weight'> & {
   clientId: string
   value: number

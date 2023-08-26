@@ -17,8 +17,13 @@ import { validationErrors } from '../../../../../../../../lib/errors'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFSelectField from '../../../../../../../../shared/components/inputs/RHFSelectField'
-import { CoffeeBebidasLabel } from '../../../../../../../coffee/types/model/coffee'
-import { CoffeeTypesForm, type CoffeeFormValues } from '../../types/index'
+import {
+  CoffeeBebidasLabel,
+  CoffeeTypesLabel,
+} from '../../../../../../../coffee/types/model/coffee'
+import { type CoffeeFormValues } from '../../types/index'
+
+const { escolha, ...coffeeTypesOptions } = CoffeeTypesLabel
 
 const validationSchema = yup.object().shape({
   bags: yup
@@ -99,7 +104,7 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
               name='details.coffeeType'
               register={register}
               label='Tipo de café'
-              options={Object.entries(CoffeeTypesForm).map(([value, label]) => ({
+              options={Object.entries(coffeeTypesOptions).map(([value, label]) => ({
                 value,
                 label,
               }))}

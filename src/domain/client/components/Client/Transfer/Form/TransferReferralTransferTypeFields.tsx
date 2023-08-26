@@ -5,8 +5,7 @@ import { GiChipsBag } from 'react-icons/gi'
 import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../shared/components/inputs/RHFCurrencyInput'
 import RHFSelectField from '../../../../../../shared/components/inputs/RHFSelectField'
-import { CoffeeBebidasLabel } from '../../../../../coffee/types/model/coffee'
-import { CoffeeTypesForm } from '../../../../view/Client/Accounts/Coffee/types'
+import { CoffeeBebidasLabel, CoffeeTypesLabel } from '../../../../../coffee/types/model/coffee'
 import { type ClientTransferFormValues, type Referral } from './types'
 
 const valueLabelByReferral: Record<Referral, string> = {
@@ -18,6 +17,8 @@ const selectFieldStyle: SelectProps = {
   rounded: 'xl',
   variant: 'filled',
 }
+
+const { escolha, ...coffeeTypesOptions } = CoffeeTypesLabel
 
 type Props = {
   referral: Referral
@@ -109,7 +110,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
               register={register}
               label='Tipo de café'
               data-cy={`${referral}-coffeeType-input`}
-              options={Object.entries(CoffeeTypesForm).map(([value, label]) => ({
+              options={Object.entries(coffeeTypesOptions).map(([value, label]) => ({
                 value,
                 label,
               }))}
