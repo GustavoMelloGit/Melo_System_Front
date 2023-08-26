@@ -1,5 +1,5 @@
 import axios, { type AxiosError } from 'axios'
-import { type AxiosErrorResponse } from '../../shared/types/utils/error'
+import { type AxiosErrorResponse } from '../../shared/types/AxiosErrorResponse'
 
 export function errorHandler(error: unknown): string {
   if (isAxiosError<AxiosErrorResponse>(error)) {

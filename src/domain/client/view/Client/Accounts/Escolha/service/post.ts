@@ -1,6 +1,6 @@
 import api from '../../../../../../../lib/config/api'
 import { errorHandler } from '../../../../../../../lib/utils/error'
-import { type PostServiceResponse } from '../../../../../../../shared/types/utils/service'
+import { type PostServiceResponse } from '../../../../../../../shared/types/service/PostServiceResponse'
 import { type EscolhaTransactionModel } from '../../../../../types/model/Transaction'
 import { type CreateEscolhaValues } from '../types/esolha'
 

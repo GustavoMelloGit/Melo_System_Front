@@ -1,4 +1,6 @@
-import { type Responsible, type Timestamp, type WithId } from '../../../../shared/types/utils/model'
+import { type Responsible } from '../../../../shared/types/Responsible'
+import { type Timestamp } from '../../../../shared/types/Timestamp'
+import { type WithId } from '../../../../shared/types/WithId'
 import { type ClientModel } from '../../../client/types/model/Client'
 import {
   type CoffeeDetails,

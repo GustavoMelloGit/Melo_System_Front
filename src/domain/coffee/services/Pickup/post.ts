@@ -1,6 +1,6 @@
 import api from '../../../../lib/config/api'
 import { errorHandler } from '../../../../lib/utils/error'
-import { type PostServiceResponse } from '../../../../shared/types/utils/service'
+import { type PostServiceResponse } from '../../../../shared/types/service/PostServiceResponse'
 import { type PickupCoffeeModel, type PickupFormValues } from '../../types/model/pickup'
 
 export async function createPickupService(

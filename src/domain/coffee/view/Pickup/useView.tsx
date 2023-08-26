@@ -2,10 +2,8 @@ import { useCallback, useEffect } from 'react'
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import {
-  type GetListResponse,
-  type SWRServiceResponse,
-} from '../../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
+import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { PickupEmitter } from '../../events/pickup'
 import { getPickupOrdersService } from '../../services/Pickup/get'
 import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'

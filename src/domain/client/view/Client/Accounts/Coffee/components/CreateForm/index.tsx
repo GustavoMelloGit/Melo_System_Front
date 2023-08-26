@@ -18,7 +18,7 @@ import { validationErrors } from '../../../../../../../../lib/errors'
 import objectEntries from '../../../../../../../../lib/utils/objectEntries'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
-import { type DeepPartial } from '../../../../../../../../shared/types/utils/DeepPartial'
+import { type DeepPartial } from '../../../../../../../../shared/types/DeepPartial'
 import {
   CoffeeBebidasLabel,
   CoffeeTypesLabel,

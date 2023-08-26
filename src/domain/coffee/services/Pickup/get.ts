@@ -1,10 +1,8 @@
 import api from '../../../../lib/config/api'
 import { errorHandler } from '../../../../lib/utils/error'
 import useFetch from '../../../../shared/hooks/useFetch'
-import {
-  type GetListResponse,
-  type SWRServiceResponse,
-} from '../../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
+import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { type PickupCoffeeModel } from '../../types/model/pickup'
 
 export function getPickupOrdersService(

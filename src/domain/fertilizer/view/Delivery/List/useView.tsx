@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { type GetListResponse } from '../../../../../shared/types/utils/service'
+import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
 import { getFertilizersDeliveryService } from '../../../services/get'
 import {

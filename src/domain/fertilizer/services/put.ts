@@ -1,6 +1,6 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/error'
-import { type PutServiceResponse } from '../../../shared/types/utils/service'
+import { type PutServiceResponse } from '../../../shared/types/service/PutServiceResponse'
 import { FertilizerDeliveryStatuses, type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerModel } from '../types/model/Fertilizer'
 
