@@ -36,11 +36,10 @@ export default function Table({
               bg: trHoverColor,
             },
           },
-          borderCollapse: 'separate',
           roundedTop: filter ? 0 : 16,
         }}
       >
-        <ChakraTable variant='simple' {...table}>
+        <ChakraTable variant='simple' pos='relative' {...table}>
           <TableHeader {...header} />
           <Tbody>
             <TableRow {...rows}>{children}</TableRow>

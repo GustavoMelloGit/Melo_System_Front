@@ -1,4 +1,4 @@
-import { Avatar, HStack, LinkBox, LinkOverlay, Td, Tr } from '@chakra-ui/react'
+import { Avatar, HStack, Td } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
@@ -6,6 +6,7 @@ import { currencyValueCorrection, formatCurrency } from '../../../../../lib/util
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../shared/components/IconButton'
 import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
+import LinkRow from '../../../../../shared/components/table/LinkRow'
 import { type ClientModel } from '../../../types/model/Client'
 
 export type ClientsTableRowProps = {
@@ -20,7 +21,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
   const clientBalance = currencyValueCorrection(client.balance)
 
   return (
-    <LinkBox as={Tr} pos='relative'>
+    <LinkRow to={Routes.clientPage(client.id)}>
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
@@ -81,9 +82,8 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
               onRemove(client.id)
             }}
           />
-          <LinkOverlay as={Link} to={Routes.clientPage(client.id)} />
         </HStack>
       </Td>
-    </LinkBox>
+    </LinkRow>
   )
 }

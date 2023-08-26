@@ -1,4 +1,4 @@
-import { Badge, LinkBox, Td, Tr } from '@chakra-ui/react'
+import { Badge, Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
 import { type SheetModel } from '../../../../coffee/types/model/sheet'
 
@@ -7,7 +7,7 @@ export type Props = {
 }
 export default function ClientSheetsTableRow({ sheet }: Props): JSX.Element {
   return (
-    <LinkBox as={Tr} h={61}>
+    <Tr>
       <Td>{sheet.number}</Td>
       <Td>{sheet.client.name}</Td>
       <Td>{sheet.courier}</Td>
@@ -17,6 +17,6 @@ export default function ClientSheetsTableRow({ sheet }: Props): JSX.Element {
           {sheet.isDraft ? 'Rascunho' : 'Creditado'}
         </Badge>
       </Td>
-    </LinkBox>
+    </Tr>
   )
 }
