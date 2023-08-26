@@ -1,6 +1,6 @@
 import { type SWRConfiguration } from 'swr'
 import api from '../../../lib/config/api'
-import { errorHandler } from '../../../lib/utils/error'
+import { errorHandler } from '../../../lib/utils/errorHandler'
 import useFetch from '../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
 import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'

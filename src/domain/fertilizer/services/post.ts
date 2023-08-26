@@ -1,5 +1,5 @@
 import api from '../../../lib/config/api'
-import { errorHandler } from '../../../lib/utils/error'
+import { errorHandler } from '../../../lib/utils/errorHandler'
 import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerFormValues, type FertilizerModel } from '../types/model/Fertilizer'

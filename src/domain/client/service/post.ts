@@ -1,6 +1,6 @@
 import api from '../../../lib/config/api'
 import { uploadImage } from '../../../lib/service/upload'
-import { errorHandler } from '../../../lib/utils/error'
+import { errorHandler } from '../../../lib/utils/errorHandler'
 import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
 import { type CoffeeBebidas, type CoffeeDetails } from '../../coffee/types/model/coffee'
 import { type ClientFormValues } from '../components/Client/Form/types'

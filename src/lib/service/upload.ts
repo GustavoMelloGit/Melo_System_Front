@@ -1,5 +1,5 @@
 import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage'
-import { errorHandler } from '../utils/error'
+import { errorHandler } from '../utils/errorHandler'
 
 const storage = getStorage()
 

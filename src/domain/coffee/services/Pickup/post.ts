@@ -1,5 +1,5 @@
 import api from '../../../../lib/config/api'
-import { errorHandler } from '../../../../lib/utils/error'
+import { errorHandler } from '../../../../lib/utils/errorHandler'
 import { type PostServiceResponse } from '../../../../shared/types/service/PostServiceResponse'
 import { type PickupCoffeeModel, type PickupFormValues } from '../../types/model/pickup'
 

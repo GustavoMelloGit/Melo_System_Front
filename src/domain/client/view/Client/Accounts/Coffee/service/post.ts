@@ -1,5 +1,5 @@
 import api from '../../../../../../../lib/config/api'
-import { errorHandler } from '../../../../../../../lib/utils/error'
+import { errorHandler } from '../../../../../../../lib/utils/errorHandler'
 import { type PostServiceResponse } from '../../../../../../../shared/types/service/PostServiceResponse'
 import { type CoffeeBebidas, type CoffeeTypes } from '../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'

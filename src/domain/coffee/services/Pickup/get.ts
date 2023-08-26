@@ -1,5 +1,5 @@
 import api from '../../../../lib/config/api'
-import { errorHandler } from '../../../../lib/utils/error'
+import { errorHandler } from '../../../../lib/utils/errorHandler'
 import useFetch from '../../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
