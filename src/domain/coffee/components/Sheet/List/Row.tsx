@@ -1,8 +1,9 @@
-import { Badge, Flex, LinkBox, LinkOverlay, Td, Tr } from '@chakra-ui/react'
+import { Badge, Flex, LinkOverlay, Td } from '@chakra-ui/react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
 import { dateToFormat } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
+import LinkRow from '../../../../../shared/components/table/LinkRow'
 import { SheetsEmitter } from '../../../events/sheets'
 import { type SheetModel } from '../../../types/model/sheet'
 
@@ -13,7 +14,7 @@ export default function SheetsTableRow({ sheet }: Props): JSX.Element {
   const { number } = useParams<{ number: string }>()
   if (!number) return <Navigate to={Routes.books} replace />
   return (
-    <LinkBox as={Tr} h={61}>
+    <LinkRow to={Routes.sheetDetails(number, sheet.number)}>
       <Td>{sheet.number}</Td>
       <Td>
         {sheet.client.code} - {sheet.client.name}
@@ -28,7 +29,7 @@ export default function SheetsTableRow({ sheet }: Props): JSX.Element {
       <Td>
         {sheet.isDraft ? (
           <Flex justify='center'>
-            <LinkOverlay as={Link} to={Routes.updateSheet(number, sheet.number)}>
+            <LinkOverlay as={Link} to={Routes.updateSheet(number, sheet.number)} zIndex={2}>
               <IconButton icon='edit' as='span' aria-label='Editar folha' colorScheme='blue' />
             </LinkOverlay>
             <IconButton
@@ -38,16 +39,15 @@ export default function SheetsTableRow({ sheet }: Props): JSX.Element {
               }}
               colorScheme='red'
               icon='remove'
+              zIndex={2}
             />
           </Flex>
         ) : (
           <Flex justify='center'>
-            <LinkOverlay as={Link} to={Routes.sheetDetails(number, sheet.number)}>
-              <IconButton icon='linkTo' aria-label='Visualizar folha' colorScheme='blue' />
-            </LinkOverlay>
+            <IconButton icon='linkTo' aria-label='Visualizar folha' colorScheme='blue' />
           </Flex>
         )}
       </Td>
-    </LinkBox>
+    </LinkRow>
   )
 }
