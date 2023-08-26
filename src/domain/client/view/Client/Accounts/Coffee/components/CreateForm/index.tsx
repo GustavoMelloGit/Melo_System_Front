@@ -4,6 +4,7 @@ import {
   GridItem,
   Radio,
   RadioGroup,
+  Select,
   Stack,
   Textarea,
   type TextareaProps,
@@ -14,9 +15,10 @@ import { useForm } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import objectEntries from '../../../../../../../../lib/utils/objectEntries'
 import { getColorByValue } from '../../../../../../../../lib/utils/styles'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
-import RHFSelectField from '../../../../../../../../shared/components/inputs/RHFSelectField'
+import { type DeepPartial } from '../../../../../../../../shared/types/utils/DeepPartial'
 import {
   CoffeeBebidasLabel,
   CoffeeTypesLabel,
@@ -36,22 +38,12 @@ const validationSchema = yup.object().shape({
     .defined(validationErrors.weightIsRequired)
     .typeError(validationErrors.weightIsInvalid)
     .min(0, validationErrors.weightIsInvalid),
-  // details: yup.object().shape({
-  //   utilization: yup
-  //     .number()
-  //     .typeError(validationErrors.utilizationIsInvalid)
-  //     .min(0, validationErrors.utilizationIsInvalid),
-  //   foulness: yup
-  //     .number()
-  //     .typeError(validationErrors.foulnessIsInvalid)
-  //     .min(0, validationErrors.foulnessIsInvalid),
-  // }),
   date: yup.string().required(validationErrors.dateIsRequired),
 })
 
 type Props = {
   onSubmit: (values: CoffeeFormValues) => void
-  initialValues: CoffeeFormValues
+  initialValues: DeepPartial<CoffeeFormValues>
 }
 export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.Element {
   const [isDebit, setIsDebit] = useState<boolean>(true)
@@ -60,7 +52,6 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
     handleSubmit,
     control,
     formState: { isSubmitting },
-    register,
   } = useForm<CoffeeFormValues>({
     resolver: yupResolver(validationSchema),
     defaultValues: initialValues,
@@ -100,25 +91,38 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
             />
           </GridItem>
           <GridItem>
-            <RHFSelectField<CoffeeFormValues>
+            <ControllerField<CoffeeFormValues>
               name='details.coffeeType'
-              register={register}
+              control={control}
               label='Tipo de café'
-              options={Object.entries(coffeeTypesOptions).map(([value, label]) => ({
-                value,
-                label,
-              }))}
+              required
+              CustomInput={
+                <Select>
+                  {objectEntries(coffeeTypesOptions).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </Select>
+              }
             />
           </GridItem>
           <GridItem>
-            <RHFSelectField<CoffeeFormValues>
-              register={register}
+            <ControllerField<CoffeeFormValues>
+              control={control}
               name='details.bebida'
               label='Bebida'
-              options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
-                value,
-                label,
-              }))}
+              required
+              CustomInput={
+                <Select>
+                  <option disabled selected></option>
+                  {objectEntries(CoffeeBebidasLabel).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </Select>
+              }
             />
           </GridItem>
           <GridItem>
@@ -149,69 +153,6 @@ export default function CoffeeFormView({ onSubmit, initialValues }: Props): JSX.
               color={inputColor}
             />
           </GridItem>
-
-          {/* <GridItem>
-            <ControllerField<CoffeeFormValues>
-              name='details.picking'
-              control={control}
-              label='Cata'
-              placeholder='Ex.: 25'
-              type='number'
-              inputMode='decimal'
-              step={0.1}
-              min={0}
-              rightIcon='%'
-            />
-          </GridItem>
-          <GridItem>
-            <ControllerField<CoffeeFormValues>
-              name='details.sieve'
-              control={control}
-              label='17 / 18'
-              placeholder='Ex.: 10'
-              type='number'
-              inputMode='decimal'
-              step={0.1}
-              rightIcon='%'
-            />
-          </GridItem>
-          <GridItem>
-            <ControllerField<CoffeeFormValues>
-              name='details.moisture'
-              control={control}
-              label='Umidade'
-              placeholder='Ex.: 12'
-              type='number'
-              inputMode='decimal'
-              step={0.1}
-              rightIcon='%'
-            />
-          </GridItem>
-          <GridItem>
-            <ControllerField<CoffeeFormValues>
-              name='details.drilled'
-              control={control}
-              label='Broca'
-              placeholder='Ex.: 5'
-              type='number'
-              inputMode='decimal'
-              step={0.1}
-              rightIcon='%'
-            />
-          </GridItem>
-
-          <GridItem>
-            <ControllerField<CoffeeFormValues>
-              name='details.foulness'
-              control={control}
-              label='Impureza'
-              placeholder='Ex.: 5'
-              type='number'
-              inputMode='decimal'
-              step={0.1}
-              rightIcon='%'
-            />
-          </GridItem> */}
         </Grid>
         <ControllerField<CoffeeFormValues, TextareaProps>
           name='details.description'
