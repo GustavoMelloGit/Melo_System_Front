@@ -1,3 +1,5 @@
+import { isAsyncFunction as utilIsAsyncFunction } from 'util/types'
+
 type AsyncFunc = (...args: unknown[]) => Promise<unknown>
 type Func = (...args: any) => unknown
 
@@ -7,5 +9,5 @@ type Func = (...args: any) => unknown
  * @returns True if the function is async
  */
 export function isAsyncFunction(fn: Func): fn is AsyncFunc {
-  return fn.constructor.name === 'AsyncFunction'
+  return utilIsAsyncFunction(fn)
 }
