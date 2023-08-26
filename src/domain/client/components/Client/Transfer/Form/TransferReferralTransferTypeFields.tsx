@@ -2,11 +2,10 @@ import { Flex, FormControl, FormLabel, Select, Stack, type SelectProps } from '@
 import { useEffect } from 'react'
 import { Controller, useFormContext, useWatch, type Path } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
+import objectEntries from '../../../../../../lib/utils/objectEntries'
 import ControllerField from '../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../shared/components/inputs/RHFCurrencyInput'
-import RHFSelectField from '../../../../../../shared/components/inputs/RHFSelectField'
-import { CoffeeBebidasLabel } from '../../../../../coffee/types/model/coffee'
-import { CoffeeTypesForm } from '../../../../view/Client/Accounts/Coffee/types'
+import { CoffeeBebidasLabel, CoffeeTypesLabel } from '../../../../../coffee/types/model/coffee'
 import { type ClientTransferFormValues, type Referral } from './types'
 
 const valueLabelByReferral: Record<Referral, string> = {
@@ -19,11 +18,13 @@ const selectFieldStyle: SelectProps = {
   variant: 'filled',
 }
 
+const { escolha, ...coffeeTypesOptions } = CoffeeTypesLabel
+
 type Props = {
   referral: Referral
 }
 export default function TransferReferralTransferTypeFields({ referral }: Props): JSX.Element {
-  const { setValue, control, register } = useFormContext<ClientTransferFormValues>()
+  const { setValue, control } = useFormContext<ClientTransferFormValues>()
   const transferType = useWatch({
     control,
     name: `${referral}.transferType`,
@@ -104,25 +105,38 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
       {transferType === 'coffee' && (
         <>
           <Flex gap={2}>
-            <RHFSelectField
+            <ControllerField
               name={`${referral}.coffeeType`}
-              register={register}
+              control={control}
               label='Tipo de café'
+              required
               data-cy={`${referral}-coffeeType-input`}
-              options={Object.entries(CoffeeTypesForm).map(([value, label]) => ({
-                value,
-                label,
-              }))}
+              CustomInput={
+                <Select>
+                  {objectEntries(coffeeTypesOptions).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </Select>
+              }
             />
-            <RHFSelectField
-              register={register}
+            <ControllerField
+              control={control}
               name={`${referral}.bebida`}
               label='Bebida'
+              required
               data-cy={`${referral}-bebida-input`}
-              options={Object.entries(CoffeeBebidasLabel).map(([value, label]) => ({
-                value,
-                label,
-              }))}
+              CustomInput={
+                <Select>
+                  <option disabled selected></option>
+                  {objectEntries(CoffeeBebidasLabel).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </Select>
+              }
             />
           </Flex>
         </>

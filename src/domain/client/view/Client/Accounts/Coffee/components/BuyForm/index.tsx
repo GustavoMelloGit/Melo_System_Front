@@ -19,10 +19,12 @@ import { CoffeeTypeHasBebida } from '../../../../../../../../lib/constants/coffe
 import { validationErrors } from '../../../../../../../../lib/errors'
 import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
+import objectEntries from '../../../../../../../../lib/utils/objectEntries'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import {
   CoffeeBebidasLabel,
+  CoffeeTypesLabel,
   type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
 import { type BuyCoffeeFormValues } from '../../types'
@@ -51,7 +53,7 @@ const validationSchema = yup.object().shape({
 
 type Props = {
   onSubmit: (values: BuyCoffeeFormValues) => Promise<void>
-  initialValues: BuyCoffeeFormValues
+  initialValues: Partial<BuyCoffeeFormValues>
 }
 const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const [pickupCoffee, setPickupCoffee] = useState<boolean>(false)
@@ -69,6 +71,8 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
   const currentWeight = watch('weight')
   const currentValuePerBag = watch('valuePerBag')
   const totalValue = calculateCoffeeTotalValue(currentBags, currentWeight, currentValuePerBag)
+  const { escolha, ...coffeeTypeOptions } = CoffeeTypesLabel
+
   return (
     <form
       onSubmit={handleSubmit(async ({ valuePerBag, brook, complement, ...values }) => {
@@ -91,9 +95,11 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
             required
             CustomInput={
               <Select>
-                <option value={'bica_corrida'}>Bica Corrida</option>
-                <option value={'conilon'}>Conilon</option>
-                <option value={'despolpado'}>Despolpado</option>
+                {objectEntries(coffeeTypeOptions).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
               </Select>
             }
           />
@@ -107,6 +113,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               required
               CustomInput={
                 <Select>
+                  <option disabled selected></option>
                   {Object.entries(CoffeeBebidasLabel).map(([value, label]) => (
                     <option key={value} value={value}>
                       {label}

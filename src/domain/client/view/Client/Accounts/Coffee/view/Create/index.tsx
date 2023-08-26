@@ -59,14 +59,8 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
               date: new Date().toISOString().split('T')[0],
               bags: 0,
               details: {
-                bebida: 'duro',
                 coffeeType: 'bica_corrida',
                 description: '',
-                // drilled: 0,
-                // foulness: 0,
-                // moisture: 0,
-                // picking: 0,
-                // sieve: 0,
               },
               weight: 0,
             }}

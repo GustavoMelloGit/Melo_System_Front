@@ -41,10 +41,9 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
     closeModal()
   }
 
-  const initialValues: BuyCoffeeFormValues = {
+  const initialValues: Partial<BuyCoffeeFormValues> = {
     coffeeType: 'bica_corrida',
     bags: 0,
-    bebida: 'duro',
     valuePerBag: 0,
     description: '',
     weight: 0,
@@ -62,7 +61,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
 type UseBuyCoffeeView = {
   handleBuyCoffee: (values: BuyCoffeeFormValues) => Promise<void>
   closeModal: () => void
-  initialValues: BuyCoffeeFormValues
+  initialValues: Partial<BuyCoffeeFormValues>
 }
 
 export default useBuyCoffeeView
