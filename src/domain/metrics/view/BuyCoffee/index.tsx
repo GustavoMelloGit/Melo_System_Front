@@ -1,4 +1,4 @@
-import { Button, Flex } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { Routes } from '../../../../lib/routes'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
@@ -26,10 +26,12 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
           },
         ]}
       />
-      <Flex
+      <Box
+        display='grid'
+        gridTemplateColumns='repeat(auto-fit, minmax(160px, 1fr))'
+        placeItems='end'
         as='form'
         gap={2}
-        align='flex-end'
         onSubmit={handleSubmit(handleSubmitFilters)}
         w='full'
       >
@@ -52,7 +54,7 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
         <Button type='submit' w='full' rounded='xl'>
           Filtrar
         </Button>
-      </Flex>
+      </Box>
       <BuyCoffeeMetricsTableView isLoading={isLoading} data={data} />
     </Page>
   )

@@ -1,4 +1,4 @@
-import { Button, Flex, Select } from '@chakra-ui/react'
+import { Box, Button, Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { Routes } from '../../../../lib/routes'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
@@ -30,10 +30,12 @@ export default function TransactionMetricsView(): JSX.Element | null {
           },
         ]}
       />
-      <Flex
+      <Box
+        display='grid'
+        gridTemplateColumns='repeat(auto-fit, minmax(160px, 1fr))'
+        placeItems='end'
         as='form'
         gap={2}
-        align='flex-end'
         onSubmit={handleSubmit(handleSubmitFilters)}
         w='full'
       >
@@ -56,7 +58,7 @@ export default function TransactionMetricsView(): JSX.Element | null {
         <Button type='submit' w='full' rounded='xl'>
           Filtrar
         </Button>
-      </Flex>
+      </Box>
 
       <TransactionMetricsTableView isLoading={isLoading} data={data} />
     </Page>
