@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
 import { dateInputToApiDate } from '../../../../../lib/utils/date'
+import { normalize } from '../../../../../lib/utils/normalize'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
@@ -55,7 +56,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   const clientName = watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `searchableName=${debouncedClientName}&limit=10`,
+    `searchableName=${normalize(debouncedClientName)}&limit=10`,
   )
   const fertilizerName = watch('fertilizerName')
   const debouncedFertilizerName = useDebounce(fertilizerName, 300)
