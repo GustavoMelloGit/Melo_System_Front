@@ -1,5 +1,5 @@
 import useAuth from '../../hooks/useAuth'
-import { type SignInView } from '../../types/view/SignIn/view'
+import { type AuthSignIn } from '../../types/context/auth'
 
 export default function useSignInView(): SignInView {
   const { signIn } = useAuth()
@@ -7,4 +7,8 @@ export default function useSignInView(): SignInView {
   return {
     signIn,
   }
+}
+
+export type SignInView = {
+  signIn: AuthSignIn
 }

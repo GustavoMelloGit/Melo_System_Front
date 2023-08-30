@@ -58,10 +58,18 @@ export default function ClientTransferForm({
               clientId: values.from.clientId,
               clientName: values.from.clientName,
               transferType: values.from.transferType,
+              ...(values.from.transferType === 'coffee' && {
+                bebida: values.from.bebida,
+                coffeeType: values.from.coffeeType,
+              }),
             } as ReferralTransfer,
             to: {
               ...emptyReferral,
               transferType: values.from.transferType,
+              ...(values.from.transferType === 'coffee' && {
+                bebida: values.from.bebida,
+                coffeeType: values.from.coffeeType,
+              }),
             } as ReferralTransfer,
             description: '',
           })
