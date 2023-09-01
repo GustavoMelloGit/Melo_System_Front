@@ -55,11 +55,7 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
                 name='clientId'
                 auxName='clientName'
                 options={clients?.map((client) => ({
-                  label: `${
-                    client.nickname
-                      ? ClientNameParser.addNickname(client.name, client.nickname)
-                      : `${client.name}`
-                  }`,
+                  label: ClientNameParser.addNickname(client.name, client.nickname),
                   value: client.id,
                 }))}
                 placeholder='Ex.: João da Silva'

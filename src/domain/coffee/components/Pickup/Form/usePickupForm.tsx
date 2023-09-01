@@ -22,10 +22,11 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   })
   const clientName = form.watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
+  const searchableName = normalize(ClientNameParser.removeNickname(debouncedClientName))
   const clientNickname = ClientNameParser.getNickname(debouncedClientName)
 
   const { data, isLoading } = getClientsService(
-    `searchableName=${normalize(ClientNameParser.removeNickname(debouncedClientName))}${
+    `searchableName=${searchableName}${
       clientNickname ? `&nickname=${clientNickname ?? ''}` : ''
     }&limit=10`,
   )
