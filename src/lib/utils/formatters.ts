@@ -64,14 +64,6 @@ export function formatBagsIntoWeight(bags: number, weight?: number): number {
   return Number(bags * GlobalConfig.weightPerBag + (weight ?? 0))
 }
 
-export function clientNameWithoutNickname(clientName: string): string {
-  return clientName.split(' (')[0]
-}
-
-export function clientNameWithNickname(clientName: string, nickname: string): string {
-  return `${clientName} (${nickname})`
-}
-
 export function currencyValueCorrection(valueInCents: number): number {
   const correctValueInCents = currency(valueInCents).divide(100).intValue
   return correctValueInCents

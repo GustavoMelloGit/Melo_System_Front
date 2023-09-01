@@ -1,6 +1,6 @@
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { useWatch, type Control } from 'react-hook-form'
-import { clientNameWithNickname } from '../../../../../../lib/utils/formatters'
+import { ClientNameParser } from '../../../../../../lib/utils/clientNameParser'
 import { normalize } from '../../../../../../lib/utils/normalize'
 import IconButton from '../../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
@@ -53,7 +53,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
             label='Cliente'
             options={clients?.data?.map((client) => ({
               label: client.nickname
-                ? clientNameWithNickname(client.name, client.nickname)
+                ? ClientNameParser.addNickname(client.name, client.nickname)
                 : client.name,
               value: client.id,
             }))}
