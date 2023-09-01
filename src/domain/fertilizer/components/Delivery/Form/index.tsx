@@ -15,6 +15,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { ClientNameParser } from '../../../../../lib/utils/clientNameParser'
 import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import { normalize } from '../../../../../lib/utils/normalize'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
@@ -55,8 +56,12 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   })
   const clientName = watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
+  const searchableName = normalize(ClientNameParser.removeNickname(debouncedClientName))
+  const clientNickname = ClientNameParser.getNickname(debouncedClientName)
   const { data: clients, isLoading: isLoadingClients } = getClientsService(
-    `searchableName=${normalize(debouncedClientName)}&limit=10`,
+    `searchableName=${searchableName}${
+      clientNickname ? `&nickname=${clientNickname ?? ''}` : ''
+    }&limit=10`,
   )
   const fertilizerName = watch('fertilizerName')
   const debouncedFertilizerName = useDebounce(fertilizerName, 300)
@@ -66,15 +71,14 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
 
   useEffect(() => {
     if (!clients) return
+    const isUpdate = Boolean(initialValues?.complement && initialValues?.brook)
+    if (isUpdate) return
+
     if (clients.data.length === 1) {
       const [client] = clients.data
       const { address } = client
-      if (!initialValues.brook) {
-        setValue('brook', address.brook ?? '')
-      }
-      if (!initialValues.complement) {
-        setValue('complement', address.complement ?? '')
-      }
+      setValue('brook', address.brook ?? '')
+      setValue('complement', address.complement ?? '')
     }
   }, [clients])
 
@@ -109,7 +113,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
                 label='Cliente'
                 isLoading={isLoadingClients}
                 options={clients?.data?.map((client) => ({
-                  label: client.name,
+                  label: ClientNameParser.addNickname(client.name, client.nickname),
                   value: client.id,
                 }))}
                 placeholder='Nome do cliente'

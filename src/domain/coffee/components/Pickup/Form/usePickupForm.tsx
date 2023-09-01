@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { ClientNameParser } from '../../../../../lib/utils/clientNameParser'
 import { normalize } from '../../../../../lib/utils/normalize'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
@@ -21,12 +22,17 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   })
   const clientName = form.watch('clientName')
   const debouncedClientName = useDebounce(clientName, 300)
+  const searchableName = normalize(ClientNameParser.removeNickname(debouncedClientName))
+  const clientNickname = ClientNameParser.getNickname(debouncedClientName)
+
   const { data, isLoading } = getClientsService(
-    `searchableName=${normalize(debouncedClientName)}&limit=10`,
+    `searchableName=${searchableName}${
+      clientNickname ? `&nickname=${clientNickname ?? ''}` : ''
+    }&limit=10`,
   )
 
   useEffect(() => {
-    const isUpdate = initialValues?.complement && initialValues?.brook
+    const isUpdate = Boolean(initialValues?.complement && initialValues?.brook)
     if (isUpdate) return
 
     if (!data) return
