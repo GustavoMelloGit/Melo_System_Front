@@ -71,15 +71,14 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
 
   useEffect(() => {
     if (!clients) return
+    const isUpdate = Boolean(initialValues?.complement && initialValues?.brook)
+    if (isUpdate) return
+
     if (clients.data.length === 1) {
       const [client] = clients.data
       const { address } = client
-      if (!initialValues.brook) {
-        setValue('brook', address.brook ?? '')
-      }
-      if (!initialValues.complement) {
-        setValue('complement', address.complement ?? '')
-      }
+      setValue('brook', address.brook ?? '')
+      setValue('complement', address.complement ?? '')
     }
   }, [clients])
 
