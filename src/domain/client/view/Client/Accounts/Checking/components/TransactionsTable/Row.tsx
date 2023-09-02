@@ -66,6 +66,7 @@ export default function TransactionsListRow({
       <Td>
         <HStack w='full' justify='center'>
           <MoreInfoTooltip
+            placement='left'
             label={`${transaction.user.name}, ${dateToFormat(
               transaction.createdAt,
               'dd/MM/yyyy kk:mm',

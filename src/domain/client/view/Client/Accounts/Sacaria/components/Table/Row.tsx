@@ -23,6 +23,7 @@ export default function SacariaAccountTableRow({ transaction }: Props): JSX.Elem
       </Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
+          placement='left'
           label={`${transaction.user.name}, ${dateToFormat(
             transaction.createdAt,
             'dd/MM/yyyy kk:mm',
