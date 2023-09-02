@@ -14,6 +14,7 @@ export default function FertilizerAccountTableRow({ transaction }: Props): JSX.E
       <CollapsibleTd>{transaction.description}</CollapsibleTd>
       <Td textAlign='center'>
         <MoreInfoTooltip
+          placement='left'
           label={`${transaction.user.name}, ${dateToFormat(
             transaction.createdAt,
             'dd/MM/yyyy kk:mm',
