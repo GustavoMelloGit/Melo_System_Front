@@ -23,4 +23,5 @@ export const Routes = {
   updateClient: (uuid: string) => `/clients/update/${uuid}`,
   updateSheet: (bookNumber: string | number, sheetNumber: string | number) =>
     `/books/${bookNumber}/update/${sheetNumber}`,
+  users: '/users',
 } as const

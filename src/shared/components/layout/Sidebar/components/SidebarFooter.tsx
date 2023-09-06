@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react'
 import LockScreenButton from './LockScreenButton'
 import SidebarSettings from './Settings'
+import SidebarUsers from './Users'
 
 export default function SidebarFooter(): JSX.Element {
   return (
@@ -14,6 +15,7 @@ export default function SidebarFooter(): JSX.Element {
       }}
       gap={2}
     >
+      <SidebarUsers />
       <SidebarSettings />
       <LockScreenButton />
     </Flex>
