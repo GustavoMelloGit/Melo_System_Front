@@ -1,16 +1,18 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Button,
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   Select,
   Stack,
-  Text,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import { useModal } from '../../../../../shared/hooks/useModal'
 import { type AddUserFormValues } from './types'
 
 const defaultValues: AddUserFormValues = {
@@ -23,6 +25,7 @@ type Props = {
   onSubmit: (values: AddUserFormValues) => Promise<void>
 }
 export default function AddUserView({ onSubmit }: Props): JSX.Element {
+  const closeModal = useModal((state) => state.closeModal)
   const {
     handleSubmit,
     control,
@@ -33,15 +36,16 @@ export default function AddUserView({ onSubmit }: Props): JSX.Element {
   })
 
   return (
-    <Accordion allowToggle>
-      <AccordionItem border='none'>
-        <AccordionButton px={0} justifyContent='space-between'>
-          <Text fontWeight={700} fontSize='lg'>
+    <Modal isOpen onClose={closeModal} isCentered>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton />
+        <ModalHeader>
+          <Heading as='h1' fontSize='3xl'>
             Adicionar usuário
-          </Text>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
+          </Heading>
+        </ModalHeader>
+        <ModalBody>
           <form
             onSubmit={handleSubmit(async (values) => {
               await onSubmit(values)
@@ -78,13 +82,13 @@ export default function AddUserView({ onSubmit }: Props): JSX.Element {
                   </Select>
                 }
               />
-              <Button isLoading={isSubmitting} type='submit' colorScheme='blue'>
-                Adicionar
-              </Button>
             </Stack>
+            <Button mt={4} w='full' isLoading={isSubmitting} type='submit' colorScheme='blue'>
+              Adicionar
+            </Button>
           </form>
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }

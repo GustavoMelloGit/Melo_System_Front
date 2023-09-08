@@ -1,7 +1,11 @@
 import { type Timestamp } from '../../../../shared/types/Timestamp'
+import { type WithId } from '../../../../shared/types/WithId'
 
-export type UserModel = {
-  nickname: string
-  name: string
-  role: 'admin' | 'user'
-} & Timestamp
+export type UserRole = 'admin' | 'user'
+export type UserModel = WithId<
+  {
+    nickname: string
+    name: string
+    role: UserRole
+  } & Timestamp
+>

@@ -125,6 +125,15 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
           </GridItem>
         )}
         <GridItem>
+          <RHFCurrencyInput<BuyCoffeeFormValues>
+            control={control}
+            name='valuePerBag'
+            label='Valor por saco'
+            leftIcon='R$'
+            isRequired
+          />
+        </GridItem>
+        <GridItem>
           <ControllerField<BuyCoffeeFormValues>
             control={control}
             name='bags'
@@ -144,15 +153,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
             required
           />
         </GridItem>
-        <GridItem>
-          <RHFCurrencyInput<BuyCoffeeFormValues>
-            control={control}
-            name='valuePerBag'
-            label='Valor por saco'
-            leftIcon='R$'
-            isRequired
-          />
-        </GridItem>
+
         <GridItem>
           <FormControl>
             <FormLabel htmlFor='totalValue'>Valor total</FormLabel>
