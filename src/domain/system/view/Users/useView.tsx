@@ -2,10 +2,13 @@ import { useCallback, useEffect } from 'react'
 import { useModal } from '../../../../shared/hooks/useModal'
 import { type UserModel } from '../../../auth/types/model/user'
 import { UserEmitter } from '../../events/UserEmitter'
+import getAllPermissionsService from '../../services/getAllPermissionsService'
 import getAllUsersService from '../../services/getAllUsersService'
+import { type Permission } from '../../types/Permission'
 
 export default function useUsersView(): UseUsersView {
-  const { data, isLoading, mutate } = getAllUsersService()
+  const { data: users, isLoading: usersIsLoading, mutate: mutateUsers } = getAllUsersService()
+  const { data: permissions } = getAllPermissionsService()
   const openModal = useModal((state) => state.openModal)
 
   const handleAddUser = async (): Promise<void> => {
@@ -14,8 +17,8 @@ export default function useUsersView(): UseUsersView {
   }
 
   const refetch = useCallback(async () => {
-    await mutate()
-  }, [mutate])
+    await mutateUsers()
+  }, [mutateUsers])
 
   useEffect(() => {
     UserEmitter.on('userCreated', refetch)
@@ -25,9 +28,10 @@ export default function useUsersView(): UseUsersView {
   }, [refetch])
 
   return {
-    users: data ?? [],
-    isLoading,
+    users: users ?? [],
+    isLoading: usersIsLoading,
     handleAddUser,
+    permissions: permissions ?? [],
   }
 }
 
@@ -35,4 +39,5 @@ export type UseUsersView = {
   users: UserModel[]
   isLoading: boolean
   handleAddUser: () => Promise<void>
+  permissions: Permission[]
 }

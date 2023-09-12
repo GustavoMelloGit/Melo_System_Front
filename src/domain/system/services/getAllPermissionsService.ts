@@ -1,12 +1,28 @@
 import useFetch from '../../../shared/hooks/useFetch'
-import { type HttpMethods } from '../../../shared/types/HttpMethods'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
+import { type Permission } from '../types/Permission'
 
-type GetAllPermissionsResponse = [Lowercase<HttpMethods>, string]
+const item1: Permission = {
+  description: 'Criar usuário',
+  method: 'POST',
+  route: `/user/create`,
+}
+const item2: Permission = {
+  description: 'Criar café',
+  method: 'POST',
+  route: `/coffee/create`,
+}
+const item3: Permission = {
+  description: 'Criar cliente',
+  method: 'POST',
+  route: `/client/create`,
+}
+const mockData: Permission[] = [item1, item2, item3]
 
-export default function getAllPermissionsService(): SWRServiceResponse<
-  GetAllPermissionsResponse[]
-> {
-  const response = useFetch('/permissions')
-  return response
+export default function getAllPermissionsService(): SWRServiceResponse<Permission[]> {
+  const { data, ...response } = useFetch('/permissions')
+  return {
+    ...response,
+    data: mockData,
+  }
 }
