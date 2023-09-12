@@ -25,14 +25,14 @@ export default function useUsersView(): UseUsersView {
   }, [refetch])
 
   return {
-    clients: data ?? [],
+    users: data ?? [],
     isLoading,
     handleAddUser,
   }
 }
 
 export type UseUsersView = {
-  clients: UserModel[]
+  users: UserModel[]
   isLoading: boolean
   handleAddUser: () => Promise<void>
 }

@@ -23,7 +23,7 @@ const labelByRole: Record<UserRole, string> = {
 }
 
 export default function UsersView(): JSX.Element {
-  const { clients, handleAddUser } = useUsersView()
+  const { users, handleAddUser } = useUsersView()
 
   return (
     <Page title='Usuários'>
@@ -49,19 +49,19 @@ export default function UsersView(): JSX.Element {
         />
         <Stack as='main' mt={10} divider={<Divider />} spacing={3}>
           <Accordion allowToggle>
-            {clients.map((client) => (
-              <AccordionItem key={client.id}>
+            {users.map((user) => (
+              <AccordionItem key={user.id}>
                 <AccordionButton>
                   <Text as='span' fontSize='lg' textAlign='left' flex={1}>
-                    {client.name}
+                    {user.name}
                   </Text>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel fontSize='sm'>
-                  <InfoBox label='Nome' value={client.name} />
-                  <InfoBox label='Apelido' value={client.nickname} />
-                  <InfoBox label='Permissão' value={labelByRole[client.role]} />
-                  <InfoBox label='ID' value={client.id} />
+                  <InfoBox label='Nome' value={user.name} />
+                  <InfoBox label='Apelido' value={user.nickname} />
+                  <InfoBox label='Permissão' value={labelByRole[user.role]} />
+                  <InfoBox label='ID' value={user.id} />
                 </AccordionPanel>
               </AccordionItem>
             ))}
