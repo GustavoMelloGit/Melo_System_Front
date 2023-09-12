@@ -4,6 +4,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Button,
   Center,
   Container,
@@ -104,23 +105,32 @@ export default function UsersView({ handleAddUser, users, permissions }: Props):
                   </AccordionPanel>
                 </AccordionItem>
               ))}
-              <Fade in={isEmptyObject(dirtyFields)}>
+              <Box pos='sticky' bottom={0} left={0} width='full' pb={8}>
                 <Center
-                  pos='absolute'
-                  bottom={0}
-                  left={0}
-                  width='full'
-                  p='40px'
+                  as={Fade}
+                  in={isEmptyObject(dirtyFields)}
+                  bg={'rgba(26,32,44,0.7)'}
+                  backdropFilter='blur(4px)'
+                  rounded='xl'
                   color='white'
                   mt='4'
                   gap={4}
+                  py={3}
+                  px={4}
+                  shadow='2xl'
+                  justifyContent='space-between'
                 >
-                  <Text>Deseja salvar as alterações?</Text>
-                  <Button type='submit' colorScheme='green'>
-                    Salvar
-                  </Button>
+                  <Text fontWeight='bold'>Deseja salvar as alterações?</Text>
+                  <Flex gap={4}>
+                    <Button variant='link' size='sm' type='reset' color='white' fontWeight='light'>
+                      Cancelar
+                    </Button>
+                    <Button type='submit' colorScheme='green' size='sm'>
+                      Salvar
+                    </Button>
+                  </Flex>
                 </Center>
-              </Fade>
+              </Box>
             </form>
           </Accordion>
         </Stack>
@@ -133,6 +143,7 @@ type InfoProps = {
   label: ReactNode
   value: ReactNode
 }
+
 function InfoBox({ label, value }: InfoProps): JSX.Element {
   return (
     <Flex justify='space-between' align='center'>
