@@ -37,15 +37,16 @@ export async function setUsersPermissionsService(
 export function parseFormValues(values: UsersPermissionsFormValues): UserPermissionData[] {
   const userPermissionData: UserPermissionData[] = []
   const cleanValues = deepCleanObject(values)
-
   objectEntries(cleanValues).forEach(([userId, routes]) => {
     const userData: UserPermissionData = {
       id: userId,
       permissions: routes
-        ? Object.keys(routes).map((route) => {
-            const [method, routeName] = route.split('%') as [HttpMethods, string]
-            return { method, route: routeName }
-          })
+        ? objectEntries(routes)
+            .filter(([_, value]) => Boolean(value))
+            .map(([route]) => {
+              const [method, routeName] = route.split('%') as [HttpMethods, string]
+              return { method, route: routeName }
+            })
         : [],
     }
     userPermissionData.push(userData)
