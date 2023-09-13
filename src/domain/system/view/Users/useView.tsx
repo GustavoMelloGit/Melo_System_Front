@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react'
 import { useModal } from '../../../../shared/hooks/useModal'
+import { type PermissionModel } from '../../../auth/types/model/permission'
 import { type UserModel } from '../../../auth/types/model/user'
 import { UserEmitter } from '../../events/UserEmitter'
 import getAllPermissionsService from '../../services/getAllPermissionsService'
 import getAllUsersService from '../../services/getAllUsersService'
-import { type Permission } from '../../types/Permission'
 
 export default function useUsersView(): UseUsersView {
   const { data: users, isLoading: usersIsLoading, mutate: mutateUsers } = getAllUsersService()
@@ -39,5 +39,5 @@ export type UseUsersView = {
   users: UserModel[]
   isLoading: boolean
   handleAddUser: () => Promise<void>
-  permissions: Permission[]
+  permissions: PermissionModel[]
 }
