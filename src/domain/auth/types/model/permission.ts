@@ -5,7 +5,3 @@ export type PermissionModel = {
   route: string
   description: string
 }
-
-export type WithPermissions<T> = T & {
-  permissions: PermissionModel[]
-}

@@ -14,8 +14,9 @@ import {
   Switch,
   Text,
 } from '@chakra-ui/react'
-import { type ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { deepCleanObject } from '../../../../../lib/utils/deepCleanObject'
 import { isEmptyObject } from '../../../../../lib/utils/isEmptyObject'
 import { type PermissionModel } from '../../../../auth/types/model/permission'
 import { type UserModel, type UserRole } from '../../../../auth/types/model/user'
@@ -26,31 +27,51 @@ const labelByRole: Record<UserRole, string> = {
   user: 'Usuário',
 }
 
-// function parseUsersToFormValues(users: UserModel[]): UsersPermissionsFormValues {
-//     return users.reduce((acc, curr) => {
-//         acc[curr.id] = {
-//             method
-//         }
-//         return acc
-//     }, {})
-// }
+function parseUsersToFormValues(users: UserModel[]): UsersPermissionsFormValues {
+  return users
+    .filter((u) => u.role !== 'admin')
+    .reduce<UsersPermissionsFormValues>((acc, curr) => {
+      curr.permissions.forEach((permission) => {
+        const currentRoute = acc[curr.id]
+        if (currentRoute) {
+          acc[curr.id][`${permission.method}%${permission.route}`] = true
+        } else {
+          acc[curr.id] = {
+            [`${permission.method}%${permission.route}`]: true,
+          }
+        }
+      })
+      return acc
+    }, {})
+}
 
 type Props = {
   users: UserModel[]
   permissions: PermissionModel[]
 }
 export default function UsersListView({ permissions, users }: Props): JSX.Element {
-  console.log(users)
   const {
     control,
     formState: { dirtyFields },
     handleSubmit,
+    reset,
   } = useForm<UsersPermissionsFormValues>()
+
+  useEffect(() => {
+    if (users.length > 0) {
+      const formValues = parseUsersToFormValues(users)
+      reset(formValues)
+    }
+  }, [users])
 
   return (
     <Accordion allowToggle>
-      <form onSubmit={handleSubmit(console.log)}>
-        {users.map((user, index) => (
+      <form
+        onSubmit={handleSubmit((values) => {
+          console.log(deepCleanObject(values))
+        })}
+      >
+        {users.map((user) => (
           <AccordionItem key={user.id}>
             <AccordionButton>
               <Text as='span' fontSize='lg' textAlign='left' flex={1}>
@@ -63,35 +84,41 @@ export default function UsersListView({ permissions, users }: Props): JSX.Elemen
               <InfoBox label='Apelido' value={user.nickname} />
               <InfoBox label='Permissão' value={labelByRole[user.role]} />
               <InfoBox label='ID' value={user.id} />
-              <Flex my={2} align='center' gap={3}>
-                <Divider />
-                <Text fontSize='md'>Permissões</Text>
-                <Divider />
-              </Flex>
-              <Stack>
-                {permissions.map((permission, index) => (
-                  <InfoBox
-                    key={`${permission.route}-${permission.method}`}
-                    label={permission.description}
-                    value={
-                      <Controller
-                        control={control}
-                        name={`${user.id}.${index}.allowed`}
-                        render={({ field: { onChange, value, ...field } }) => (
-                          <Switch
-                            onChange={(e) => {
-                              const isChecked = e.target.checked
-                              onChange(isChecked)
+              {user.role !== 'admin' && (
+                <>
+                  <Flex my={2} align='center' gap={3}>
+                    <Divider />
+                    <Text fontSize='md'>Permissões</Text>
+                    <Divider />
+                  </Flex>
+                  <Stack>
+                    {permissions.map((permission) => (
+                      <InfoBox
+                        key={`${permission.route}-${permission.method}`}
+                        label={permission.description}
+                        value={
+                          <Controller
+                            control={control}
+                            name={`${user.id}.${permission.method}%${permission.route}`}
+                            render={({ field: { onChange, value, ...field } }) => {
+                              return (
+                                <Switch
+                                  onChange={(e) => {
+                                    const isChecked = e.target.checked
+                                    onChange(isChecked)
+                                  }}
+                                  isChecked={value}
+                                  {...field}
+                                />
+                              )
                             }}
-                            checked={value}
-                            {...field}
                           />
-                        )}
+                        }
                       />
-                    }
-                  />
-                ))}
-              </Stack>
+                    ))}
+                  </Stack>
+                </>
+              )}
             </AccordionPanel>
           </AccordionItem>
         ))}

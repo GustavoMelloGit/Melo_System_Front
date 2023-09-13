@@ -1,14 +1,15 @@
 import { type Timestamp } from '../../../../shared/types/Timestamp'
 import { type WithId } from '../../../../shared/types/WithId'
-import { type WithPermissions } from './permission'
+import { type PermissionModel } from './permission'
 
 export type UserRole = 'admin' | 'user'
-export type UserModel = WithPermissions<
-  WithId<
-    {
-      nickname: string
-      name: string
-      role: UserRole
-    } & Timestamp
-  >
+
+export type UserPermission = Pick<PermissionModel, 'method' | 'route'>
+export type UserModel = WithId<
+  {
+    nickname: string
+    name: string
+    role: UserRole
+    permissions: UserPermission[]
+  } & Timestamp
 >
