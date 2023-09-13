@@ -7,7 +7,7 @@ import { type PostServiceResponse } from '../../../shared/types/service/PostServ
 import { type UsersPermissionsFormValues } from '../components/Users/UsersList/types'
 
 export type UserPermissionData = {
-  userId: string
+  id: string
   permissions: Array<{
     method: HttpMethods
     route: string
@@ -40,7 +40,7 @@ export function parseFormValues(values: UsersPermissionsFormValues): UserPermiss
 
   objectEntries(cleanValues).forEach(([userId, routes]) => {
     const userData: UserPermissionData = {
-      userId,
+      id: userId,
       permissions: routes
         ? Object.keys(routes).map((route) => {
             const [method, routeName] = route.split('%') as [HttpMethods, string]
