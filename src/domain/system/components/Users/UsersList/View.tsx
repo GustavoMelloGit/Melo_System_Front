@@ -14,9 +14,8 @@ import {
   Switch,
   Text,
 } from '@chakra-ui/react'
-import { useEffect, type ReactNode } from 'react'
+import { useCallback, useEffect, type ReactNode } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { deepCleanObject } from '../../../../../lib/utils/deepCleanObject'
 import { isEmptyObject } from '../../../../../lib/utils/isEmptyObject'
 import { type PermissionModel } from '../../../../auth/types/model/permission'
 import { type UserModel, type UserRole } from '../../../../auth/types/model/user'
@@ -48,29 +47,36 @@ function parseUsersToFormValues(users: UserModel[]): UsersPermissionsFormValues 
 type Props = {
   users: UserModel[]
   permissions: PermissionModel[]
+  onSubmit: (values: UsersPermissionsFormValues) => void
 }
-export default function UsersListView({ permissions, users }: Props): JSX.Element {
+export default function UsersListView({ permissions, users, onSubmit }: Props): JSX.Element {
   const {
     control,
-    formState: { dirtyFields },
+    formState: { dirtyFields, isSubmitting, isSubmitted },
     handleSubmit,
     reset,
   } = useForm<UsersPermissionsFormValues>()
 
-  useEffect(() => {
+  const setDefaultFormValues = useCallback((): void => {
     if (users.length > 0) {
       const formValues = parseUsersToFormValues(users)
       reset(formValues)
     }
-  }, [users])
+  }, [users, reset])
+
+  useEffect(() => {
+    setDefaultFormValues()
+  }, [setDefaultFormValues])
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setDefaultFormValues()
+    }
+  }, [isSubmitted, setDefaultFormValues])
 
   return (
     <Accordion allowToggle>
-      <form
-        onSubmit={handleSubmit((values) => {
-          console.log(deepCleanObject(values))
-        })}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         {users.map((user) => (
           <AccordionItem key={user.id}>
             <AccordionButton>
@@ -125,7 +131,7 @@ export default function UsersListView({ permissions, users }: Props): JSX.Elemen
         <Box pos='sticky' bottom={0} left={0} width='full' pb={8}>
           <Center
             as={Fade}
-            in={isEmptyObject(dirtyFields)}
+            in={isEmptyObject(dirtyFields) && !isSubmitted}
             bg={'rgba(26,32,44,0.7)'}
             backdropFilter='blur(4px)'
             rounded='xl'
@@ -142,7 +148,7 @@ export default function UsersListView({ permissions, users }: Props): JSX.Elemen
               <Button variant='link' size='sm' type='reset' color='white' fontWeight='light'>
                 Cancelar
               </Button>
-              <Button type='submit' colorScheme='green' size='sm'>
+              <Button isLoading={isSubmitting} type='submit' colorScheme='green' size='sm'>
                 Salvar
               </Button>
             </Flex>

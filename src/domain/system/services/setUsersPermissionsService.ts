@@ -1,8 +1,10 @@
 import api from '../../../lib/config/api'
+import { deepCleanObject } from '../../../lib/utils/deepCleanObject'
 import { errorHandler } from '../../../lib/utils/errorHandler'
+import objectEntries from '../../../lib/utils/objectEntries'
 import { type HttpMethods } from '../../../shared/types/HttpMethods'
 import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
-import { type UserModel } from '../../auth/types/model/user'
+import { type UsersPermissionsFormValues } from '../components/Users/UsersList/types'
 
 export type UserPermissionData = {
   userId: string
@@ -14,7 +16,7 @@ export type UserPermissionData = {
 
 export async function setUsersPermissionsService(
   data: UserPermissionData[],
-): PostServiceResponse<UserModel[]> {
+): PostServiceResponse<void> {
   try {
     const response = await api.put('/users/permissions', {
       idsWithPermissions: data,
@@ -30,4 +32,24 @@ export async function setUsersPermissionsService(
       error: errorHandler(e),
     }
   }
+}
+
+export function parseFormValues(values: UsersPermissionsFormValues): UserPermissionData[] {
+  const userPermissionData: UserPermissionData[] = []
+  const cleanValues = deepCleanObject(values)
+
+  objectEntries(cleanValues).forEach(([userId, routes]) => {
+    const userData: UserPermissionData = {
+      userId,
+      permissions: routes
+        ? Object.keys(routes).map((route) => {
+            const [method, routeName] = route.split('%') as [HttpMethods, string]
+            return { method, route: routeName }
+          })
+        : [],
+    }
+    userPermissionData.push(userData)
+  })
+
+  return userPermissionData
 }

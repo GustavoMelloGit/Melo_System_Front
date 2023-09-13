@@ -4,14 +4,21 @@ import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/Heade
 import Page from '../../../../shared/components/Page'
 import { type PermissionModel } from '../../../auth/types/model/permission'
 import { type UserModel } from '../../../auth/types/model/user'
+import { type UsersPermissionsFormValues } from '../../components/Users/UsersList/types'
 import UsersListView from '../../components/Users/UsersList/View'
 
 type Props = {
   handleAddUser: () => void
   users: UserModel[]
   permissions: PermissionModel[]
+  handleUpdateUsersPermissions: (values: UsersPermissionsFormValues) => Promise<void>
 }
-export default function UsersView({ handleAddUser, users, permissions }: Props): JSX.Element {
+export default function UsersView({
+  handleAddUser,
+  users,
+  permissions,
+  handleUpdateUsersPermissions,
+}: Props): JSX.Element {
   return (
     <Page title='Usuários'>
       <Container maxW={500}>
@@ -35,7 +42,11 @@ export default function UsersView({ handleAddUser, users, permissions }: Props):
           }
         />
         <Stack as='main' mt={10} divider={<Divider />} spacing={3}>
-          <UsersListView permissions={permissions} users={users} />
+          <UsersListView
+            permissions={permissions}
+            users={users}
+            onSubmit={handleUpdateUsersPermissions}
+          />
         </Stack>
       </Container>
     </Page>
