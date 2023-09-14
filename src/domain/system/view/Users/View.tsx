@@ -42,11 +42,13 @@ export default function UsersView({
           }
         />
         <Stack as='main' mt={10} divider={<Divider />} spacing={3}>
-          <UsersListView
-            permissions={permissions}
-            users={users}
-            onSubmit={handleUpdateUsersPermissions}
-          />
+          {users.length > 0 && (
+            <UsersListView
+              permissions={permissions}
+              users={users}
+              onSubmit={handleUpdateUsersPermissions}
+            />
+          )}
         </Stack>
       </Container>
     </Page>

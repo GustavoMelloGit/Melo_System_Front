@@ -14,7 +14,7 @@ import {
   Switch,
   Text,
 } from '@chakra-ui/react'
-import { useCallback, useEffect, type ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { isEmptyObject } from '../../../../../lib/utils/isEmptyObject'
 import { type PermissionModel } from '../../../../auth/types/model/permission'
@@ -47,7 +47,7 @@ function parseUsersToFormValues(users: UserModel[]): UsersPermissionsFormValues 
 type Props = {
   users: UserModel[]
   permissions: PermissionModel[]
-  onSubmit: (values: UsersPermissionsFormValues) => void
+  onSubmit: (values: UsersPermissionsFormValues) => Promise<void>
 }
 export default function UsersListView({ permissions, users, onSubmit }: Props): JSX.Element {
   const {
@@ -55,24 +55,15 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
     formState: { dirtyFields, isSubmitting, isSubmitted },
     handleSubmit,
     reset,
-  } = useForm<UsersPermissionsFormValues>()
-
-  const setDefaultFormValues = useCallback((): void => {
-    if (users.length > 0) {
-      const formValues = parseUsersToFormValues(users)
-      reset(formValues)
-    }
-  }, [users, reset])
-
-  useEffect(() => {
-    setDefaultFormValues()
-  }, [setDefaultFormValues])
+  } = useForm<UsersPermissionsFormValues>({
+    defaultValues: parseUsersToFormValues(users),
+  })
 
   useEffect(() => {
     if (isSubmitted) {
-      setDefaultFormValues()
+      reset()
     }
-  }, [isSubmitted, setDefaultFormValues])
+  }, [reset, isSubmitted])
 
   return (
     <Accordion allowToggle>
@@ -131,7 +122,7 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
         <Box pos='sticky' bottom={0} left={0} width='full' pb={8}>
           <Center
             as={Fade}
-            in={isEmptyObject(dirtyFields) && !isSubmitted}
+            in={isEmptyObject(dirtyFields)}
             bg={'rgba(26,32,44,0.7)'}
             backdropFilter='blur(4px)'
             rounded='xl'
