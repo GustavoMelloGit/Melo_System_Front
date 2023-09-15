@@ -60,6 +60,7 @@ export default function SheetFormCoffeeDetails({
               isDisabled={isDisabled('coffeeDetails.bebida')}
               CustomInput={
                 <Select>
+                  <option disabled selected></option>
                   {Object.entries(CoffeeBebidasLabel).map(([value, label]) => (
                     <option key={value} value={value}>
                       {label}
