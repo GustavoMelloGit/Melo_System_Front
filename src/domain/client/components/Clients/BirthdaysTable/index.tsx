@@ -44,7 +44,7 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
 
 const headerColumns: TableHeaderColumns[] = [
   { id: 'photo', label: 'Foto' },
-  { id: 'name', label: 'Nome', isSortable: true },
-  { id: 'nickname', label: 'Apelido', isSortable: true },
-  { id: 'personType.birthDate', label: 'Aniversário', isSortable: true },
+  { id: 'name', label: 'Nome' },
+  { id: 'nickname', label: 'Apelido' },
+  { id: 'personType.birthDate', label: 'Aniversário' },
 ]
