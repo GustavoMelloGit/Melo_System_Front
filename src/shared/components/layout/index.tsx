@@ -1,14 +1,26 @@
 import { Box, Flex } from '@chakra-ui/react'
-import { Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import useLayoutContext from '../../hooks/useLayoutContext'
+import usePageSize from '../../hooks/usePageSize'
 import Suspense from '../Suspense'
 import ContentWrapper from './Content/ContentWrapper'
 import Sidebar from './Sidebar'
 
 export default function PageLayout(): JSX.Element {
+  const { width } = usePageSize()
   const {
-    sidebar: { isOpen },
+    sidebar: { isOpen, close },
   } = useLayoutContext()
+  const isMobile = width < 768
+  const location = useLocation()
+
+  useEffect(() => {
+    if (isMobile) {
+      close()
+    }
+  }, [location])
+
   return (
     <Flex h='100vh' position='relative'>
       {isOpen && (
