@@ -1,5 +1,5 @@
 import { Box, List, VStack } from '@chakra-ui/react'
-import { BiUser } from 'react-icons/bi'
+import { BiCake, BiUser } from 'react-icons/bi'
 import { BsTruck } from 'react-icons/bs'
 import { CgArrowsExchange } from 'react-icons/cg'
 import { HiOutlineDocumentReport } from 'react-icons/hi'
@@ -88,6 +88,16 @@ const listItem: Record<
       Boolean(
         permissions.find(
           (permission) => permission.method === 'GET' && permission.route.startsWith('/metrics'),
+        ),
+      ),
+  },
+  [Routes.birthdays]: {
+    label: 'Aniversariantes',
+    icon: <BiCake size={20} />,
+    hasPermission: (permissions) =>
+      Boolean(
+        permissions.find(
+          (permission) => permission.method === 'GET' && permission.route.startsWith('/birthdays'),
         ),
       ),
   },

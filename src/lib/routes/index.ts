@@ -24,4 +24,5 @@ export const Routes = {
   updateSheet: (bookNumber: string | number, sheetNumber: string | number) =>
     `/talao/${bookNumber}/folha/${sheetNumber}/atualizar`,
   users: '/usuarios',
+  birthdays: '/aniversarios',
 } as const
