@@ -13,6 +13,8 @@ import {
   Stack,
   Switch,
   Text,
+  useColorModeValue,
+  type FlexProps,
 } from '@chakra-ui/react'
 import { useEffect, type ReactNode } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -50,6 +52,7 @@ type Props = {
   onSubmit: (values: UsersPermissionsFormValues) => Promise<void>
 }
 export default function UsersListView({ permissions, users, onSubmit }: Props): JSX.Element {
+  const bottomBarColor = useColorModeValue('gray.700', 'gray.200')
   const {
     control,
     formState: { dirtyFields, isSubmitting, isSubmitted },
@@ -91,6 +94,21 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
                   <Stack>
                     {permissions.map((permission) => (
                       <InfoBox
+                        wrapperProps={{
+                          pos: 'relative',
+                          _hover: {
+                            _after: {
+                              content: '""',
+                              position: 'absolute',
+                              bottom: -1,
+                              left: 0,
+                              width: '100%',
+                              height: '1px',
+                              background: bottomBarColor,
+                              zIndex: 1,
+                            },
+                          },
+                        }}
                         key={`${permission.route}-${permission.method}`}
                         label={permission.description}
                         value={
@@ -152,11 +170,12 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
 type InfoProps = {
   label: ReactNode
   value: ReactNode
+  wrapperProps?: FlexProps
 }
 
-function InfoBox({ label, value }: InfoProps): JSX.Element {
+function InfoBox({ label, value, wrapperProps }: InfoProps): JSX.Element {
   return (
-    <Flex justify='space-between' align='center'>
+    <Flex justify='space-between' align='center' {...wrapperProps}>
       <Text textTransform='capitalize'>{label}</Text>
       <Text fontWeight={700} textAlign='right'>
         {value}
