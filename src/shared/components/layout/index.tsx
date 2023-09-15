@@ -12,7 +12,7 @@ export default function PageLayout(): JSX.Element {
   const {
     sidebar: { isOpen, close },
   } = useLayoutContext()
-  const isMobile = width < 768
+  const isMobile = width !== 0 && width < 768
   const location = useLocation()
 
   useEffect(() => {
