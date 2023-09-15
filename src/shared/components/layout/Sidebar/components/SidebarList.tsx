@@ -10,8 +10,6 @@ import useAuth from '../../../../../domain/auth/hooks/useAuth'
 import { type UserPermission } from '../../../../../domain/auth/types/model/user'
 import { Routes } from '../../../../../lib/routes'
 import { protectedRoutes } from '../../../../../lib/routes/router'
-import useLayoutContext from '../../../../hooks/useLayoutContext'
-import usePageSize from '../../../../hooks/usePageSize'
 import SidebarListItem from './SidebarListItem'
 
 const listItem: Record<
@@ -104,20 +102,9 @@ export default function SidebarList(): JSX.Element {
   const currentPathname = useLocation().pathname
   const basePath = currentPathname.split('/')[1]
 
-  const {
-    sidebar: { close },
-  } = useLayoutContext()
-  const { width } = usePageSize()
-  const isMobile = width < 768
-
-  const handleCloseSideBar = (): void => {
-    if (isMobile) {
-      close()
-    }
-  }
   return (
     <Box as='nav' flexGrow={1}>
-      <VStack as={List} align='stretch' onClick={handleCloseSideBar}>
+      <VStack as={List} align='stretch'>
         {Object.entries(listItem).map(([route, elements]) => {
           const routeFound = protectedRoutes.children?.find(
             (protectedRoute) => protectedRoute.path === route,
