@@ -8,6 +8,7 @@ const ClientDetailsView = React.lazy(async () => import('../view/Client/Details'
 const TransferCurrencyView = React.lazy(async () => import('../view/Client/Transfer'))
 const ClientSheetsView = React.lazy(async () => import('../view/Client/Sheets'))
 const ClientPickupView = React.lazy(async () => import('../view/Client/Pickup'))
+const BirthdaysView = React.lazy(async () => import('../view/Clients/Birthdays'))
 
 const clientsRoutes: RouteObject[] = [
   {
@@ -37,6 +38,10 @@ const clientsRoutes: RouteObject[] = [
   {
     path: Routes.clientPickups(':uuid'),
     element: <ClientPickupView />,
+  },
+  {
+    path: Routes.birthdays,
+    element: <BirthdaysView />,
   },
 ]
 
