@@ -7,6 +7,7 @@ import {
   Select,
   Show,
   useColorModeValue,
+  type SystemStyleObject,
 } from '@chakra-ui/react'
 import { cloneElement, useCallback, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -17,6 +18,10 @@ import RHFField from '../inputs/RHFField'
 import { type FilterFormValues, type TableFilterProps } from './types'
 
 const isMobile = window.screen.width < 768
+
+const defaultStyle: SystemStyleObject = {
+  borderLeftRadius: 0,
+}
 
 export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
   const { handleAddParams, handleRemoveParams, getParam } = useURLSearchParams()
@@ -106,9 +111,9 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                 name={PaginationParams.searchBy}
                 control={control}
                 render={({ field }) =>
-                  cloneElement(Input, {
+                  cloneElement(Input(field), {
+                    sx: defaultStyle,
                     ...DOMProperties,
-                    ...field,
                   })
                 }
               />
