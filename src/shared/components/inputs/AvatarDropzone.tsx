@@ -39,6 +39,7 @@ export default function AvatarDropzone({
     accept: {
       'image/jpeg': ['.jpg', '.jpeg'],
       'image/png': ['.png'],
+      'image/webp': ['.webp'],
     },
     onError() {
       toast.error(`${validationErrors.fileFormatIsInvalid} (.jpg, .jpeg, .png)`)
