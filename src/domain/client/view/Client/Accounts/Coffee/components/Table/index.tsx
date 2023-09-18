@@ -68,8 +68,8 @@ export default function CoffeeAccountTable({
 const searchForOptions: SearchForOption = {
   'type.name': {
     label: 'Bebida',
-    Input: (
-      <Select variant='filled' roundedLeft={0} flexGrow={1}>
+    Input: (field) => (
+      <Select variant='filled' roundedLeft={0} flexGrow={1} {...field}>
         {Object.entries(CoffeeBebidasLabel).map(([value, label]) => (
           <option key={value} value={value}>
             {label}
@@ -86,8 +86,8 @@ const searchForOptions: SearchForOption = {
   },
   'details.coffeeType': {
     label: 'Tipo',
-    Input: (
-      <Select variant='filled' roundedLeft={0} flexGrow={1}>
+    Input: (field) => (
+      <Select variant='filled' roundedLeft={0} flexGrow={1} {...field}>
         {Object.entries(CoffeeTypesLabel).map(([value, label]) => (
           <option key={value} value={value}>
             {label}
