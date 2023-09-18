@@ -13,7 +13,7 @@ export async function updateClientService(
     let profileImage = values.profileImage
     const profileImageIsBase64 = profileImage?.includes('data:image')
     if (profileImage && profileImageIsBase64) {
-      profileImage = await uploadImage(profileImage, values.name)
+      profileImage = await uploadImage(profileImage, `${values.name}-${id}`)
     }
     const { data } = await api.put(`/clients/${id}`, {
       ...values,

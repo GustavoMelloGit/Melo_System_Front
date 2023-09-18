@@ -8,6 +8,7 @@ export default function useUpdateClientView(): UseUpdateClientView {
   const { uuid } = useParams()
   const navigate = useNavigate()
   const { data, isLoading, mutate } = getClientService(uuid ?? '')
+
   async function handleUpdateClient(values: ClientFormValues): Promise<void> {
     if (!uuid) {
       toast.error('Não foi possível atualizar o cliente')

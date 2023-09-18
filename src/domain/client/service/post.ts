@@ -15,7 +15,10 @@ export async function createClientService(
     let profileImage = values.profileImage
     const profileImageIsBase64 = profileImage?.includes('data:image')
     if (profileImage && profileImageIsBase64) {
-      profileImage = await uploadImage(profileImage, values.name)
+      profileImage = await uploadImage(
+        profileImage,
+        `${values.name}-${Math.floor(Math.random() * 10_000)}`,
+      )
     }
 
     const { data } = await api.post('/clients', {
