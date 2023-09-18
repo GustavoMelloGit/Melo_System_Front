@@ -1,4 +1,6 @@
+import { Select } from '@chakra-ui/react'
 import { format } from 'date-fns'
+import { months } from '../../../../../lib/constants/months'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type ClientModel } from '../../../types/model/Client'
@@ -21,6 +23,22 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
       }}
       pagination={{
         totalLength: clients.length,
+      }}
+      filter={{
+        searchForOptions: {
+          month: {
+            label: 'Mês',
+            Input: (field) => (
+              <Select {...field} value={field.value || String(new Date().getMonth())}>
+                {months.map((month) => (
+                  <option key={month.number} value={month.number}>
+                    {month.number} - {month.name}
+                  </option>
+                ))}
+              </Select>
+            ),
+          },
+        },
       }}
     >
       {clients.map((client) => (
