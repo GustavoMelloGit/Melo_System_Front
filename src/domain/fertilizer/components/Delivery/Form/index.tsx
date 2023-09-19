@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Grid,
   Heading,
@@ -8,6 +9,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Tooltip,
   VStack,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -68,6 +70,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
     `name=${debouncedFertilizerName}`,
   )
+  const canUpdateFertilizer = Boolean(initialValues.fertilizerId.trim().length === 0)
 
   useEffect(() => {
     if (!clients) return
@@ -119,20 +122,32 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
                 placeholder='Nome do cliente'
                 isRequired
               />
-              <ControllerAutocomplete
-                control={control}
-                name='fertilizerId'
-                auxName='fertilizerName'
-                label='Adubo'
-                isDisabled={Boolean(initialValues.fertilizerId.trim().length > 0)}
-                options={fertilizers?.data?.map((fertilizer) => ({
-                  label: fertilizer.name,
-                  value: fertilizer.id,
-                }))}
-                isLoading={isLoadingFertilizers}
-                placeholder='Nome do adubo'
-                isRequired
-              />
+              <Tooltip
+                label={
+                  canUpdateFertilizer
+                    ? undefined
+                    : 'Não é possível atualizar um adubo, por favor crie outro pedido'
+                }
+                placement='left-end'
+                hasArrow
+              >
+                <Box>
+                  <ControllerAutocomplete
+                    control={control}
+                    name='fertilizerId'
+                    auxName='fertilizerName'
+                    label='Adubo'
+                    isDisabled={!canUpdateFertilizer}
+                    options={fertilizers?.data?.map((fertilizer) => ({
+                      label: fertilizer.name,
+                      value: fertilizer.id,
+                    }))}
+                    isLoading={isLoadingFertilizers}
+                    placeholder='Nome do adubo'
+                    isRequired
+                  />
+                </Box>
+              </Tooltip>
               <ControllerField<FertilizerDeliveryFormValues>
                 control={control}
                 required
