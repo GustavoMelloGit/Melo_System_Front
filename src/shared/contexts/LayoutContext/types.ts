@@ -10,4 +10,4 @@ export type LayoutContextType = {
     setSize: (size: LayoutSizes) => void
   }
 }
-export type LayoutSizes = 'xl' | 'lg' | 'md'
+export type LayoutSizes = 'xxl' | 'xl' | 'lg' | 'md' | 'sm'

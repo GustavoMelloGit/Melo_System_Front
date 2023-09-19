@@ -124,6 +124,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
                 name='fertilizerId'
                 auxName='fertilizerName'
                 label='Adubo'
+                isDisabled={Boolean(initialValues.fertilizerId.trim().length > 0)}
                 options={fertilizers?.data?.map((fertilizer) => ({
                   label: fertilizer.name,
                   value: fertilizer.id,

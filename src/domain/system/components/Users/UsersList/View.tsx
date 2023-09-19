@@ -10,6 +10,8 @@ import {
   Divider,
   Fade,
   Flex,
+  FormControl,
+  FormLabel,
   Stack,
   Switch,
   Text,
@@ -108,6 +110,7 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
                               zIndex: 1,
                             },
                           },
+                          cursor: 'pointer',
                         }}
                         key={`${permission.route}-${permission.method}`}
                         label={permission.description}
@@ -175,11 +178,13 @@ type InfoProps = {
 
 function InfoBox({ label, value, wrapperProps }: InfoProps): JSX.Element {
   return (
-    <Flex justify='space-between' align='center' {...wrapperProps}>
-      <Text textTransform='capitalize'>{label}</Text>
+    <FormControl as={Flex} justifyContent='space-between' alignItems='center' {...wrapperProps}>
+      <FormLabel textTransform='capitalize' mb={0} mr={0}>
+        {label}
+      </FormLabel>
       <Text fontWeight={700} textAlign='right'>
         {value}
       </Text>
-    </Flex>
+    </FormControl>
   )
 }

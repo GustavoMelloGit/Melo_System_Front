@@ -24,11 +24,17 @@ export default function ChangeLayout(): JSX.Element {
   }
 
   const layoutOptions: Record<LayoutSizes, string> = {
+    sm: 'Extra Pequeno',
     md: 'Pequeno',
     lg: 'Médio',
     xl: 'Grande',
+    xxl: 'Extra Grande',
   }
-  const widthByLayout: Record<LayoutSizes, SpaceProps['mx']> = {
+  const marginByLayout: Record<LayoutSizes, SpaceProps['mx']> = {
+    sm: {
+      base: 12,
+      sm: 36,
+    },
     md: {
       base: 16,
       sm: 32,
@@ -40,6 +46,10 @@ export default function ChangeLayout(): JSX.Element {
     xl: {
       base: 8,
       sm: 16,
+    },
+    xxl: {
+      base: 6,
+      sm: 12,
     },
   }
 
@@ -84,7 +94,7 @@ export default function ChangeLayout(): JSX.Element {
                   bg='blue.500'
                   h='full'
                   rounded={8}
-                  mx={widthByLayout[size]}
+                  mx={marginByLayout[size]}
                   transition='margin 0.2s'
                 />
               </Box>
