@@ -3,7 +3,7 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
-import { type PickupCoffeeModel } from '../../../types/model/pickup'
+import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../../types/model/pickup'
 import PickupTableRow from './Row'
 
 type Props = {
@@ -13,7 +13,6 @@ type Props = {
   onClickUpdate: (pickup: PickupCoffeeModel) => Promise<void>
   onClickCheck: (pickup: PickupCoffeeModel) => Promise<void>
   onClickUncheck: (pickup: PickupCoffeeModel) => Promise<void>
-  variant?: 'completed' | 'pending'
 }
 export default function PickupTableView({
   data,
@@ -22,7 +21,6 @@ export default function PickupTableView({
   onClickUpdate,
   onClickCheck,
   onClickUncheck,
-  variant = 'pending',
 }: Props): JSX.Element {
   return (
     <Table
@@ -51,7 +49,7 @@ export default function PickupTableView({
           onClickUpdate={onClickUpdate}
           onClickCheck={onClickCheck}
           onClickUncheck={onClickUncheck}
-          variant={variant}
+          variant={pickup.status === PickupCoffeeStatuses.COMPLETED ? 'completed' : 'pending'}
         />
       ))}
     </Table>
