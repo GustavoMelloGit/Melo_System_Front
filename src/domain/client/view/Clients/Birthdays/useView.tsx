@@ -3,7 +3,7 @@ import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { getBirthdaysService } from '../../../service/getBirthdaysService'
 import { type ClientModel } from '../../../types/model/Client'
 
-const currentMonth = new Date().getMonth()
+const currentMonth = new Date().getMonth() + 1
 
 export default function useBirthdaysView(): UseBirthdaysView {
   const { getParam } = useURLSearchParams({

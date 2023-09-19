@@ -6,6 +6,7 @@ import { type TableHeaderColumns } from '../../../../../shared/components/table/
 import { type ClientModel } from '../../../types/model/Client'
 import BirthdaysTableRow from './Row'
 
+const defaultMonth = new Date().getMonth() + 1
 type Props = {
   clients: ClientModel[]
   isLoading: boolean
@@ -29,7 +30,7 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
           month: {
             label: 'Mês',
             Input: (field) => (
-              <Select {...field} value={field.value || String(new Date().getMonth())}>
+              <Select {...field} value={field.value || String(defaultMonth)}>
                 {months.map((month) => (
                   <option key={month.number} value={month.number}>
                     {month.number} - {month.name}
