@@ -3,22 +3,43 @@ import { useCallback, useEffect } from 'react'
 import { normalize } from '../../../../../lib/utils/normalize'
 import { sortObjectProperties } from '../../../../../lib/utils/sortObjectProperties'
 import IconButton from '../../../../../shared/components/IconButton'
+import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
 import { getFertilizersDeliveryService } from '../../../services/get'
+import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 import PickupPDFTemplate from './Template'
 import { type FertilizerDeliveryPDFData, type FertilizerDeliveryPDFItem } from './types'
+
+const today = new Date(`${new Date().toISOString().split('T')[0]}T23:59:59`).getTime()
+
+function parseData(
+  data: GetListResponse<FertilizerDeliveryModel[]> | undefined,
+): GetListResponse<FertilizerDeliveryModel[]> {
+  if (!data) {
+    return {
+      data: [],
+      limit: 10,
+      page: 0,
+      total: 0,
+    }
+  }
+  return {
+    ...data,
+    data: data.data.filter((d) => d.date < today),
+  }
+}
 
 export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
   const { data, isLoading, mutate } = getFertilizersDeliveryService('status=inProgress&limit=10000')
   const [instance, updateInstance] = usePDF({
     document: <PickupPDFTemplate data={{}} />,
   })
-
+  const parsedData = parseData(data)
   const updatePdfInstance = useCallback(async () => {
-    if (!data) return
+    if (!parsedData) return
     await mutate()
     const templateData: FertilizerDeliveryPDFData = {}
-    data.data.forEach((order) => {
+    parsedData.data.forEach((order) => {
       const formattedBrook = normalize(order.brook).toUpperCase()
       const formattedOrder: FertilizerDeliveryPDFItem = order
       if (templateData[formattedBrook]) {
@@ -28,13 +49,13 @@ export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
       }
     })
     updateInstance(<PickupPDFTemplate data={sortObjectProperties(templateData)} />)
-  }, [data, mutate])
+  }, [parsedData, mutate])
 
   useEffect(() => {
-    if (!isLoading && data) {
+    if (!isLoading && parsedData) {
       void updatePdfInstance()
     }
-  }, [updatePdfInstance, isLoading, data])
+  }, [updatePdfInstance, isLoading, parsedData])
 
   useEffect(() => {
     DeliveryEmitter.on('deliveryCreated', updatePdfInstance)
