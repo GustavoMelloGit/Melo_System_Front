@@ -8,7 +8,14 @@ export default function ToggleSidebarButton(props: ButtonProps): JSX.Element {
   } = useLayoutContext()
 
   return (
-    <Button onClick={toggle} w={14} h={14} variant='ghost' aria-label='close sidebar' {...props}>
+    <Button
+      onClick={toggle}
+      w={14}
+      variant='ghost'
+      aria-label='close sidebar'
+      sx={{ aspectRatio: '1 / 1' }}
+      {...props}
+    >
       {isOpen ? <RxDoubleArrowLeft size={22} /> : <RxDoubleArrowRight size={22} />}
     </Button>
   )
