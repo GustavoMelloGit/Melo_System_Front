@@ -39,7 +39,6 @@ export default function PickupTable({ data, isLoading, total }: Props): JSX.Elem
         onClickUpdate={onClickUpdate}
         onClickCheck={onClickCheck}
         onClickUncheck={onClickUncheck}
-        variant={currentStatus === PickupCoffeeStatuses.COMPLETED ? 'completed' : 'pending'}
       />
     </VStack>
   )
