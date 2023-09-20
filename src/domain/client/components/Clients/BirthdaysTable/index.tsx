@@ -1,12 +1,25 @@
 import { Select } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { months } from '../../../../../lib/constants/months'
+import { deepClone } from '../../../../../lib/utils/deepClone'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
-import { type ClientModel } from '../../../types/model/Client'
+import { type ClientModel, type NaturalPerson } from '../../../types/model/Client'
 import BirthdaysTableRow from './Row'
 
+const threeHoursInMilliseconds = 1.08e7
 const defaultMonth = new Date().getMonth() + 1
+
+function orderClientsByBirthday(clients: ClientModel[]): ClientModel[] {
+  const cloneClients = deepClone(clients)
+  cloneClients.sort((a, b) => {
+    const aDate: number = new Date((a.personType as NaturalPerson).birthDate as number).getDate()
+    const bDate: number = new Date((b.personType as NaturalPerson).birthDate as number).getDate()
+    return aDate - bDate
+  })
+  return cloneClients
+}
+
 type Props = {
   clients: ClientModel[]
   isLoading: boolean
@@ -42,7 +55,7 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
         },
       }}
     >
-      {clients.map((client) => (
+      {orderClientsByBirthday(clients).map((client) => (
         <BirthdaysTableRow
           key={client.id}
           client={{
@@ -52,7 +65,10 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
             photo: client.profileImage,
             birthday:
               client.personType.type === 'fisica' && client.personType.birthDate
-                ? format(client.personType.birthDate, 'dd/MM/yyyy')
+                ? format(
+                    new Date(client.personType.birthDate + threeHoursInMilliseconds),
+                    'dd/MM/yyyy',
+                  )
                 : '',
           }}
         />

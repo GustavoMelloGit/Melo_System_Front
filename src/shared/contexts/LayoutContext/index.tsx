@@ -48,11 +48,7 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
   }, [])
 
   useEffect(() => {
-    if (width > breakpoint) {
-      setSideBarIsOpen(true)
-    } else {
-      setSideBarIsOpen(false)
-    }
+    setSideBarIsOpen(width > breakpoint)
   }, [width])
 
   const values = useMemo(
