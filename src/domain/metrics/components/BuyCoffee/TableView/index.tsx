@@ -1,10 +1,13 @@
+import { Td, Tr } from '@chakra-ui/react'
+import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type GetBuyCoffeeMetricsResponse } from '../../../types/coffeePriceMetrics'
 import BuyCoffeeMetricsTableViewRow from './Row'
 
 type Props = {
-  data?: GetBuyCoffeeMetricsResponse
+  data: GetBuyCoffeeMetricsResponse
   isLoading: boolean
 }
 export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): JSX.Element {
@@ -22,6 +25,13 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
         totalLength: data?.data.length ?? 0,
         showPagination: false,
       }}
+      footer={
+        <Tr>
+          <Td>TOTAL</Td>
+          <Td>{formatCurrency(data.data.reduce((acc, curr) => acc + curr.value, 0))}</Td>
+          <Td>{getNumberOfBags(data.data.reduce((acc, curr) => acc + curr.weight, 0))}</Td>
+        </Tr>
+      }
     >
       {data?.data.map((transaction) => (
         <BuyCoffeeMetricsTableViewRow
