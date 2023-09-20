@@ -3,6 +3,7 @@ import {
   type TableColumnHeaderProps,
   type TableProps as ChakraTableProps,
 } from '@chakra-ui/react'
+import { type ReactNode } from 'react'
 import { type ControllerRenderProps } from 'react-hook-form'
 
 export type CustomTableComponentProps<TData> = {
@@ -71,4 +72,5 @@ export type TableProps = {
   filter?: TableFilterProps
   children: React.ReactNode
   table?: ChakraTableProps & Record<`data-${string}`, string>
+  footer?: ReactNode
 }

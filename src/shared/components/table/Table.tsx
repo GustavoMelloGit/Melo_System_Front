@@ -3,6 +3,7 @@ import {
   Table as ChakraTable,
   TableContainer,
   Tbody,
+  Tfoot,
   useColorModeValue,
 } from '@chakra-ui/react'
 import TableFilters from './Filters'
@@ -18,6 +19,7 @@ export default function Table({
   children,
   filter,
   table,
+  footer,
 }: TableProps): JSX.Element {
   const trHoverColor = useColorModeValue('gray.300', 'gray.600')
   return (
@@ -44,6 +46,7 @@ export default function Table({
           <Tbody>
             <TableRow {...rows}>{children}</TableRow>
           </Tbody>
+          {footer && <Tfoot>{footer}</Tfoot>}
         </ChakraTable>
       </TableContainer>
       <TablePagination {...pagination} />

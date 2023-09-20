@@ -55,7 +55,7 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
           Filtrar
         </Button>
       </Box>
-      <BuyCoffeeMetricsTableView isLoading={isLoading} data={data} />
+      <BuyCoffeeMetricsTableView isLoading={isLoading} data={data ?? { data: [] }} />
     </Page>
   )
 }
