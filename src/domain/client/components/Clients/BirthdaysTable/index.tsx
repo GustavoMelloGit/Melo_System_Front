@@ -13,8 +13,12 @@ const defaultMonth = new Date().getMonth() + 1
 function orderClientsByBirthday(clients: ClientModel[]): ClientModel[] {
   const cloneClients = deepClone(clients)
   cloneClients.sort((a, b) => {
-    const aDate: number = new Date((a.personType as NaturalPerson).birthDate as number).getDate()
-    const bDate: number = new Date((b.personType as NaturalPerson).birthDate as number).getDate()
+    const aDate: number = new Date(
+      ((a.personType as NaturalPerson).birthDate as number) + threeHoursInMilliseconds,
+    ).getDate()
+    const bDate: number = new Date(
+      ((b.personType as NaturalPerson).birthDate as number) + threeHoursInMilliseconds,
+    ).getDate()
     return aDate - bDate
   })
   return cloneClients

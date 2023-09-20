@@ -18,7 +18,7 @@ export type Address = {
 
 export type ClientContact = {
   phone?: string
-  secondaryPhone?: string
+  secondaryPhone?: string | null
 }
 
 export type LegalPerson = {
@@ -31,8 +31,8 @@ export type NaturalPerson = {
   type?: 'fisica'
   cpf?: string
   rg?: string
-  rgEmissionDate?: number
-  producerRegistration?: string
+  rgEmissionDate?: number | null
+  producerRegistration?: string | null
   birthDate?: number
   fatherName?: string
   motherName?: string
