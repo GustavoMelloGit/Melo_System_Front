@@ -1,14 +1,7 @@
-import {
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
+import Modal from '../../../../../../../../shared/components/Modal'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../../service'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
@@ -42,16 +35,15 @@ export default function CreateTransactionView({ uuid }: CreateTransactionViewPro
   }
 
   return (
-    <Modal isOpen onClose={closeModal} isCentered>
-      <ModalOverlay />
-      <ModalContent rounded={20}>
-        <ModalCloseButton />
-        <ModalHeader>
+    <Modal isOpen onClose={closeModal}>
+      <Modal.Content rounded={20}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Novo lançamento
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <CheckingAccountForm
             onSubmit={handleCreateTransaction}
             initialValues={{
@@ -60,8 +52,8 @@ export default function CreateTransactionView({ uuid }: CreateTransactionViewPro
               value: 0,
             }}
           />
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

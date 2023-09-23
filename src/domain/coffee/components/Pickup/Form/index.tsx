@@ -1,19 +1,8 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Stack,
-  VStack,
-} from '@chakra-ui/react'
+import { Button, Flex, Heading, Stack, VStack } from '@chakra-ui/react'
 import { ClientNameParser } from '../../../../../lib/utils/clientNameParser'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import Modal from '../../../../../shared/components/Modal'
 import { type PickupFormValues } from '../../../types/model/pickup'
 import usePickupForm from './usePickupForm'
 
@@ -34,15 +23,14 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
 
   return (
     <Modal isOpen isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent p={2}>
-        <ModalCloseButton data-cy='close-modal-button' />
-        <ModalHeader>
+      <Modal.Content p={2}>
+        <Modal.CloseButton data-cy='close-modal-button' />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Buscar café
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <VStack
             as='form'
             spacing={6}
@@ -101,8 +89,8 @@ export default function CoffeePickupForm({ onSubmit, initialValues }: Props): JS
               Salvar
             </Button>
           </VStack>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

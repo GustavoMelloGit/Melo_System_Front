@@ -1,15 +1,7 @@
-import {
-  Button,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Stack,
-} from '@chakra-ui/react'
+import { Button, Heading, Stack } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import Modal from '../../../../../shared/components/Modal'
 import { type BookFormValues } from '../../../types/model/book'
 import useBookForm from './useBookForm'
 
@@ -29,14 +21,13 @@ export default function BookForm({ initialValues, onSubmit }: Props): JSX.Elemen
 
   return (
     <Modal isCentered isOpen onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
+      <Modal.Content>
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Criar talão
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
               <ControllerField<BookFormValues>
@@ -53,8 +44,8 @@ export default function BookForm({ initialValues, onSubmit }: Props): JSX.Elemen
               </Button>
             </Stack>
           </form>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

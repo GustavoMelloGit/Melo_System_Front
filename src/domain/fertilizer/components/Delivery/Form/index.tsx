@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Tooltip,
-  VStack,
-} from '@chakra-ui/react'
+import { Box, Button, Grid, Heading, Tooltip, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -22,6 +9,7 @@ import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import { normalize } from '../../../../../lib/utils/normalize'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import Modal from '../../../../../shared/components/Modal'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientsService } from '../../../../client/service/getClientsService'
@@ -87,15 +75,14 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
 
   return (
     <Modal isOpen isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent p={2} maxW={700}>
-        <ModalCloseButton data-cy='close-modal-button' />
-        <ModalHeader>
+      <Modal.Content p={2} maxW={700}>
+        <Modal.CloseButton data-cy='close-modal-button' />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Entrega de adubo
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <VStack
             as='form'
             spacing={6}
@@ -194,8 +181,8 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
               Salvar
             </Button>
           </VStack>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

@@ -1,12 +1,5 @@
-import {
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import Modal from '../../../../../../../../shared/components/Modal'
 import BuyEscolhaFormView from '../../components/BuyForm'
 import useBuyEscolhaView from './useView'
 
@@ -18,18 +11,17 @@ const BuyEscolhaView = ({ clientId, refetch }: Props): JSX.Element => {
   const { closeModal, handleBuyCoffee, initialValues } = useBuyEscolhaView({ clientId, refetch })
   return (
     <Modal isOpen isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent maxW={500}>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content maxW={500}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Comprar escolha
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <BuyEscolhaFormView onSubmit={handleBuyCoffee} initialValues={initialValues} />
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

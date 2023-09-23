@@ -1,28 +1,16 @@
-import {
-  Box,
-  Divider,
-  Flex,
-  LinkBox,
-  LinkOverlay,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  Skeleton,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Divider, Flex, LinkBox, LinkOverlay, Skeleton, Stack, Text } from '@chakra-ui/react'
 import { Routes } from '../../../../lib/routes'
 import { formatClientName } from '../../../../lib/utils/formatters'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
 import Link from '../../../../shared/components/Link'
+import Modal from '../../../../shared/components/Modal'
 import useSearchBarView from './useView'
 
 export default function SearchBar(): JSX.Element {
   const { isOpen, control, handleClose, clients, showClients, isLoading } = useSearchBarView()
   return (
     <Modal isOpen={isOpen} onClose={handleClose} closeOnEsc>
-      <ModalOverlay />
-      <ModalContent
+      <Modal.Content
         sx={{
           rounded: 8,
           backdropFilter: 'blur(5px)',
@@ -75,7 +63,7 @@ export default function SearchBar(): JSX.Element {
             </Box>
           )}
         </form>
-      </ModalContent>
+      </Modal.Content>
     </Modal>
   )
 }

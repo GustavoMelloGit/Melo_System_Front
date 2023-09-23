@@ -1,13 +1,5 @@
 import { Divider, Flex, Heading, Stack, Text } from '@chakra-ui/layout'
 import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/modal'
-import {
   Accordion,
   AccordionButton,
   AccordionIcon,
@@ -20,6 +12,7 @@ import { Fragment } from 'react'
 import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
+import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { getClientBalancesService } from '../../../service'
 import { type ClientBalance } from '../../../types/model/Client'
@@ -42,15 +35,14 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
 
   return (
     <Modal isOpen={true} isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Saldos
           </Heading>
-        </ModalHeader>
-        <ModalBody pb={8}>
+        </Modal.Header>
+        <Modal.Body pb={8}>
           <Stack>
             {data ? (
               <Fragment>
@@ -113,8 +105,8 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
               ))
             )}
           </Stack>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

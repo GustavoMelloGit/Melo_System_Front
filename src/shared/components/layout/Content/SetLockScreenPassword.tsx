@@ -1,13 +1,4 @@
-import {
-  Button,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Stack,
-} from '@chakra-ui/react'
+import { Button, Heading, Stack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -15,6 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { useScreenProtectionStore } from '../../../../lib/stores/ScreenProtectionStore'
 import { useModal } from '../../../hooks/useModal'
 import ControllerField from '../../inputs/ControllerField'
+import Modal from '../../Modal'
 
 const validationSchema = yup.object().shape({
   currentPassword: yup.string().required('Digite sua senha atual'),
@@ -53,12 +45,11 @@ export default function SetLockScreenPassword(): JSX.Element {
 
   return (
     <Modal isOpen={true} onClose={closeModal} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
+      <Modal.Content>
+        <Modal.Header>
           <Heading fontSize='3xl'>Alterar senha</Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <form onSubmit={handleSubmit(handleChangePassword)} autoComplete='off'>
             <Stack spacing={2}>
               <ControllerField
@@ -82,8 +73,8 @@ export default function SetLockScreenPassword(): JSX.Element {
               Salvar
             </Button>
           </form>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

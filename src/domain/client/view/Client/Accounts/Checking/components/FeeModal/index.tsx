@@ -2,12 +2,6 @@ import {
   Box,
   Button,
   Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Table,
   TableContainer,
   Tbody,
@@ -29,6 +23,7 @@ import {
   calculateCompoundInterest,
   convertMonthlyInterestRateToDaily,
 } from '../../../../../../../../lib/utils/math'
+import Modal from '../../../../../../../../shared/components/Modal'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { createTransactionService } from '../../../../../../service'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
@@ -96,14 +91,13 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
   const valueToTransactionBeCreated = totalOfInterest
 
   return (
-    <Modal isOpen isCentered onClose={handleCloseModal} size='xl'>
-      <ModalOverlay />
-      <ModalContent maxW={800}>
-        <ModalCloseButton />
-        <ModalHeader>
+    <Modal isOpen onClose={handleCloseModal} size='xl'>
+      <Modal.Content maxW={800}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading fontSize='3xl'>Calcular juros</Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <VStack align='stretch' spacing={4}>
             <FeeModalForm onSubmit={setInterestParams} />
             <Box maxH={[300, 400]} overflowY='auto'>
@@ -171,8 +165,8 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
               {formatCurrency(Math.abs(valueToTransactionBeCreated))}
             </Button>
           </VStack>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

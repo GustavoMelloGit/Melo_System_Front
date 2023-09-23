@@ -13,12 +13,6 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Stack,
   Text,
   Textarea,
@@ -32,6 +26,7 @@ import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import ControllerAutocomplete from '../../../../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
+import Modal from '../../../../../../../../shared/components/Modal'
 import { getFertilizersService } from '../../../../../../../fertilizer/services/get'
 import { type SellFertilizerFormValues } from './types'
 
@@ -71,15 +66,14 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
   )
   return (
     <Modal isOpen isCentered onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent maxW={600}>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content maxW={600}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Vender Adubo
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <form
             onSubmit={handleSubmit(async ({ brook, complement, deliveryDate, ...values }) =>
               onSubmit({
@@ -196,8 +190,8 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
               </Button>
             </Stack>
           </form>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

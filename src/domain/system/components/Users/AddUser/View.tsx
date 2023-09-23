@@ -1,17 +1,7 @@
-import {
-  Button,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Stack,
-} from '@chakra-ui/react'
+import { Button, Heading, Select, Stack } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { type AddUserFormValues } from './types'
 
@@ -37,15 +27,14 @@ export default function AddUserView({ onSubmit }: Props): JSX.Element {
 
   return (
     <Modal isOpen onClose={closeModal} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Adicionar usuário
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <form
             onSubmit={handleSubmit(async (values) => {
               await onSubmit(values)
@@ -87,8 +76,8 @@ export default function AddUserView({ onSubmit }: Props): JSX.Element {
               Adicionar
             </Button>
           </form>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

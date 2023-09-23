@@ -1,18 +1,7 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { IoWarning } from 'react-icons/io5'
 import { useModal } from '../hooks/useModal'
+import Modal from './Modal'
 
 type Props = {
   onResolve: (response: boolean) => void
@@ -26,15 +15,14 @@ export default function ConfirmDialog({ onResolve }: Props): JSX.Element {
   }
   return (
     <Modal isOpen isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent rounded={10}>
-        <ModalCloseButton />
-        <ModalHeader pt={8}>
+      <Modal.Content rounded={10}>
+        <Modal.CloseButton />
+        <Modal.Header pt={8}>
           <Heading as='h1' fontSize='3xl'>
             Deseja confirmar a ação?
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <Box
             bg='red.200'
             borderLeftWidth={4}
@@ -75,8 +63,8 @@ export default function ConfirmDialog({ onResolve }: Props): JSX.Element {
               Confirmar
             </Button>
           </Flex>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }
