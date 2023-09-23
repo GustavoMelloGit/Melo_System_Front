@@ -17,7 +17,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
       position='absolute'
       top='100%'
       left={0}
-      right={0}
+      w='full'
       zIndex={1}
       display={showOptions ? 'flex' : 'none'}
       background={bgColor}
@@ -28,7 +28,6 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
       borderColor='blue.500'
       py={1}
       maxH={200}
-      overflowY='auto'
       data-cy='autocomplete-options'
     >
       {options.map((option) => (
@@ -40,10 +39,10 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
           p={3}
           display='block'
           w='100%'
+          h='fit-content'
           minH={10}
-          whiteSpace='nowrap'
-          overflow='hidden'
-          textOverflow='ellipsis'
+          whiteSpace='normal'
+          wordBreak='break-word'
           title={String(option.label)}
           textAlign='left'
           onClick={() => {

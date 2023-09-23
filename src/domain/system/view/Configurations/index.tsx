@@ -4,6 +4,7 @@ import Page from '../../../../shared/components/Page'
 import ChangeLayout from '../../components/ConfigPage/ChangeLayout'
 import ChangeLockScreenTime from '../../components/ConfigPage/ChangeLockScreenTime'
 import ChangeTheme from '../../components/ConfigPage/ChangeTheme'
+import SystemShortcuts from '../../components/ConfigPage/Shortcuts'
 
 export default function ConfigPage(): JSX.Element {
   return (
@@ -21,6 +22,7 @@ export default function ConfigPage(): JSX.Element {
           <ChangeTheme />
           <ChangeLayout />
           <ChangeLockScreenTime />
+          <SystemShortcuts />
         </Stack>
       </Container>
     </Page>
