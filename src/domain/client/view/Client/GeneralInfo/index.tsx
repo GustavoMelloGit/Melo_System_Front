@@ -1,20 +1,7 @@
-import {
-  Box,
-  Divider,
-  Grid,
-  GridItem,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalOverlay,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
+import { Box, Divider, Grid, GridItem, Heading, Stack, Text, VStack } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { formatAndSumDayOfDate } from '../../../../../lib/utils/date'
+import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -148,8 +135,7 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
 
   return (
     <Modal isCentered isOpen onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent
+      <Modal.Content
         w='full'
         maxW={1200}
         maxH={{
@@ -157,8 +143,8 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
           md: 'calc(100vh - 8rem)',
         }}
       >
-        <ModalCloseButton zIndex={2} />
-        <ModalBody pt={4} px={6} overflowY='auto'>
+        <Modal.CloseButton zIndex={2} />
+        <Modal.Body pt={4} px={6} overflowY='auto'>
           <Stack align='flex-start' spacing={5} id='screenshot-content'>
             <DisplayInfoBox title='Geral' data={clientInfo.generalInfo} />
 
@@ -172,8 +158,8 @@ export default function GeneralInfo({ client }: GeneralInfoProps): JSX.Element {
 
             <DisplayInfoBox title='Endereço' data={clientInfo.address} />
           </Stack>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

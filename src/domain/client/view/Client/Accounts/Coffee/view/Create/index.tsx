@@ -1,15 +1,8 @@
-import {
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatters'
+import Modal from '../../../../../../../../shared/components/Modal'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import CoffeeFormView from '../../components/CreateForm'
 import { createCoffeeService } from '../../service/post'
@@ -44,15 +37,14 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
 
   return (
     <Modal isCentered onClose={closeModal} isOpen>
-      <ModalOverlay />
-      <ModalContent maxW={600}>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content maxW={600}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Lançamento de Café
           </Heading>
-        </ModalHeader>
-        <ModalBody w='full'>
+        </Modal.Header>
+        <Modal.Body w='full'>
           <CoffeeFormView
             onSubmit={handleCreateCoffee}
             initialValues={{
@@ -65,8 +57,8 @@ export default function CreateCoffeeView({ clientId, refetch }: Props): JSX.Elem
               weight: 0,
             }}
           />
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

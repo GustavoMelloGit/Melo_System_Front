@@ -1,12 +1,5 @@
-import {
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import Modal from '../../../../shared/components/Modal'
 import { useModal } from '../../../../shared/hooks/useModal'
 import FertilizerForm from '../../components/Form'
 import useCreateFertilizerView from './useView'
@@ -19,15 +12,14 @@ const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
   const closeModal = useModal((state) => state.closeModal)
   return (
     <Modal isCentered isOpen onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
+      <Modal.Content>
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Adicionar adubo
           </Heading>
-          <ModalCloseButton />
-        </ModalHeader>
-        <ModalBody>
+          <Modal.CloseButton />
+        </Modal.Header>
+        <Modal.Body>
           <FertilizerForm
             initialValues={{
               name: '',
@@ -36,8 +28,8 @@ const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
             }}
             onSubmit={handleAddFertilizer}
           />
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

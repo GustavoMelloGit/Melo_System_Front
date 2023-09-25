@@ -26,7 +26,10 @@ export default function PageLayout(): JSX.Element {
       {isOpen && (
         <Box
           as='aside'
-          position={['fixed', 'unset']}
+          position={{
+            base: 'fixed',
+            xs: 'unset',
+          }}
           top={0}
           w={['100vw', '20rem']}
           h='100vh'

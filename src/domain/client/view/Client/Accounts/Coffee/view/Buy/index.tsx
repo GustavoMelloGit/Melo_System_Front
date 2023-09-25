@@ -1,12 +1,5 @@
-import {
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import Modal from '../../../../../../../../shared/components/Modal'
 import BuyCoffeeFormView from '../../components/BuyForm'
 import useBuyCoffeeView from './useView'
 
@@ -17,19 +10,18 @@ type Props = {
 const BuyCoffeeView = ({ clientId, refetch }: Props): JSX.Element => {
   const { closeModal, handleBuyCoffee, initialValues } = useBuyCoffeeView({ clientId, refetch })
   return (
-    <Modal isOpen isCentered onClose={closeModal}>
-      <ModalOverlay />
-      <ModalContent maxW={600}>
-        <ModalCloseButton />
-        <ModalHeader>
+    <Modal isOpen onClose={closeModal}>
+      <Modal.Content maxW={600}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Comprar café
           </Heading>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <BuyCoffeeFormView onSubmit={handleBuyCoffee} initialValues={initialValues} />
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

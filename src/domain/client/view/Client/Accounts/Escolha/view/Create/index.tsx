@@ -1,12 +1,5 @@
-import {
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import Modal from '../../../../../../../../shared/components/Modal'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import EscolhaFormView from '../../components/Form'
 import useCreateEscolhaView from './useView'
@@ -19,15 +12,14 @@ const CreateEscolhaView = ({ clientId, onSuccess }: Props): JSX.Element => {
   const { handleCreateEscolha, closeModal } = useCreateEscolhaView({ clientId, onSuccess })
   return (
     <Modal onClose={closeModal} isOpen isCentered>
-      <ModalOverlay />
-      <ModalContent maxW={600}>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content maxW={600}>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
             Creditar Escolha
           </Heading>
-        </ModalHeader>
-        <ModalBody pb={8}>
+        </Modal.Header>
+        <Modal.Body pb={8}>
           <EscolhaFormView
             onSubmit={handleCreateEscolha}
             initialValues={{
@@ -41,8 +33,8 @@ const CreateEscolhaView = ({ clientId, onSuccess }: Props): JSX.Element => {
               description: '',
             }}
           />
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }

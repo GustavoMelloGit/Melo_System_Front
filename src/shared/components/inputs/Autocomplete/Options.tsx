@@ -29,6 +29,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
       py={1}
       maxH={200}
       data-cy='autocomplete-options'
+      overflowY='auto'
     >
       {options.map((option) => (
         <Button
@@ -40,7 +41,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
           display='block'
           w='100%'
           h='fit-content'
-          minH={10}
+          minHeight='unset'
           whiteSpace='normal'
           wordBreak='break-word'
           title={String(option.label)}

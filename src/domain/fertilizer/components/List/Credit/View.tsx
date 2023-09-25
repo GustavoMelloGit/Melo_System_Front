@@ -1,18 +1,7 @@
-import {
-  Button,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Button, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
 import NumberInput from '../../../../../shared/components/inputs/NumberInput'
+import Modal from '../../../../../shared/components/Modal'
 import { type CreditFertilizerFormValues } from './types'
 
 type Props = {
@@ -35,10 +24,9 @@ export default function CreditFertilizerView({
   })
   return (
     <Modal isOpen onClose={closeModal} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>
+      <Modal.Content>
+        <Modal.CloseButton />
+        <Modal.Header>
           <Stack>
             <Heading as='h1' fontSize='3xl'>
               Definir quantidade
@@ -51,8 +39,8 @@ export default function CreditFertilizerView({
               o valor atual
             </Heading>
           </Stack>
-        </ModalHeader>
-        <ModalBody>
+        </Modal.Header>
+        <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={6}>
               <Controller
@@ -65,8 +53,8 @@ export default function CreditFertilizerView({
               </Button>
             </Stack>
           </form>
-        </ModalBody>
-      </ModalContent>
+        </Modal.Body>
+      </Modal.Content>
     </Modal>
   )
 }
