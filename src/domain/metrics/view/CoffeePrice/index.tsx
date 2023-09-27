@@ -5,6 +5,7 @@ import ControllerField from '../../../../shared/components/inputs/ControllerFiel
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import CoffeePriceMetricsTableView from '../../components/CoffeePrice/TableView'
+import CoffeePriceMetricsDownloadButton from '../../components/CoffeePrice/Template/DownloadButton'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import useCoffeePriceMetricsView from './useView'
 
@@ -25,6 +26,7 @@ export default function CoffeePriceMetricsView(): JSX.Element {
             label: 'Preço de café',
           },
         ]}
+        actions={<CoffeePriceMetricsDownloadButton data={data?.data ?? []} />}
       />
       <Box
         display='grid'

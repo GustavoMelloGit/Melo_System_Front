@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { capitalCase } from 'change-case'
-import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { format } from 'date-fns'
+import { formatClientName, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
@@ -9,7 +10,7 @@ import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
 import PDFTableRow from '../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../shared/components/PDF/styles'
-import { type BuyCoffeeMetric } from '../../../types/coffeePriceMetrics'
+import { type CoffeePriceMetrics } from '../../../types/buyCoffeeMetrics'
 
 const styles = StyleSheet.create({
   header: {
@@ -22,9 +23,9 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  data: BuyCoffeeMetric[]
+  data: CoffeePriceMetrics[]
 }
-export default function BuyCoffeeMetricsTemplate({ data }: Props): JSX.Element {
+export default function CoffeePriceMetricsTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
       <PDFPaddingElement />
@@ -51,40 +52,47 @@ export default function BuyCoffeeMetricsTemplate({ data }: Props): JSX.Element {
       <PDFTable>
         <PDFTableHeader>
           <PDFTableRowItem>
+            <Text>Data</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
+            <Text>Nome do Cliente</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
             <Text>Tipo de Café</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
-            <Text>Valor</Text>
+            <Text>Bebida</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
-            <Text>Quantidade</Text>
+            <Text>Valor P/ Saca</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
+            <Text>Sacas</Text>
           </PDFTableRowItem>
         </PDFTableHeader>
         <View>
           {data.map((metric) => (
-            <PDFTableRow key={metric.type} wrap={false}>
+            <PDFTableRow key={metric._id} wrap={false}>
               <PDFTableRowItem>
-                <Text>{capitalCase(metric.type)}</Text>
+                <Text>{format(metric.date, 'dd/MM/yyyy')}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{formatCurrency(metric.value)}</Text>
+                <Text>{formatClientName(metric.client)}</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>{capitalCase(metric.coffeeType)}</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>{capitalCase(metric.bebida)}</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>{formatCurrency(metric.valuePerBag)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
                 <Text>{getNumberOfBags(metric.weight)}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}
-          <PDFTableRow>
-            <PDFTableRowItem>
-              <Text>TOTAL</Text>
-            </PDFTableRowItem>
-            <PDFTableRowItem>
-              <Text>{formatCurrency(data.reduce((acc, curr) => acc + curr.value, 0))}</Text>
-            </PDFTableRowItem>
-            <PDFTableRowItem>
-              <Text>{getNumberOfBags(data.reduce((acc, curr) => acc + curr.weight, 0))}</Text>
-            </PDFTableRowItem>
-          </PDFTableRow>
         </View>
       </PDFTable>
     </PDFContainer>
