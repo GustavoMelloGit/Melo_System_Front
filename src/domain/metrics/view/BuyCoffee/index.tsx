@@ -5,6 +5,7 @@ import ControllerField from '../../../../shared/components/inputs/ControllerFiel
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import BuyCoffeeMetricsTableView from '../../components/BuyCoffee/TableView'
+import BuyCoffeeMetricsDownloadButton from '../../components/BuyCoffee/Template/DownloadButton'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import useBuyCoffeeMetricsView from './useView'
 
@@ -25,6 +26,7 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
             label: 'Compras de café',
           },
         ]}
+        actions={<BuyCoffeeMetricsDownloadButton data={data?.data ?? []} />}
       />
       <Box
         display='grid'
@@ -35,20 +37,6 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
         onSubmit={handleSubmit(handleSubmitFilters)}
         w='full'
       >
-        {/* <ControllerField
-          control={control}
-          name='bebida'
-          label='Bebida'
-          CustomInput={
-            <Select>
-              {objectEntries(CoffeeBebidasLabel).map(([type, label]) => (
-                <option key={type} value={type}>
-                  {label}
-                </option>
-              ))}
-            </Select>
-          }
-        /> */}
         <ControllerField control={control} name='startDate' type='date' label='Data de Início' />
         <ControllerField control={control} name='endDate' type='date' label='Data final' />
         <Button type='submit' w='full' rounded='xl'>
