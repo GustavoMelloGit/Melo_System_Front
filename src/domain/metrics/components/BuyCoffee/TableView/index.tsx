@@ -26,11 +26,13 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
         showPagination: false,
       }}
       footer={
-        <Tr>
-          <Td>TOTAL</Td>
-          <Td>{formatCurrency(data.data.reduce((acc, curr) => acc + curr.value, 0))}</Td>
-          <Td>{getNumberOfBags(data.data.reduce((acc, curr) => acc + curr.weight, 0))}</Td>
-        </Tr>
+        data.data.length ? (
+          <Tr>
+            <Td>TOTAL</Td>
+            <Td>{formatCurrency(data.data.reduce((acc, curr) => acc + curr.value, 0))}</Td>
+            <Td>{getNumberOfBags(data.data.reduce((acc, curr) => acc + curr.weight, 0))}</Td>
+          </Tr>
+        ) : null
       }
     >
       {data?.data.map((transaction) => (
