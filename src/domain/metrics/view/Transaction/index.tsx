@@ -7,6 +7,7 @@ import Page from '../../../../shared/components/Page'
 import { type ExtendedRecord } from '../../../../shared/types/ExtendedRecord'
 import { type TransactionTypeName } from '../../../client/types/model/Transaction'
 import TransactionMetricsTableView from '../../components/Transaction/TableView'
+import TransactionsMetricsDownloadButton from '../../components/Transaction/Template/DownloadButton'
 import { type TransactionMetricsFilterOptions } from '../../types/transactionMetrics'
 import useTransactionMetricsView, { undefinedFilterType } from './useView'
 
@@ -29,6 +30,7 @@ export default function TransactionMetricsView(): JSX.Element | null {
             label: 'Transações',
           },
         ]}
+        actions={<TransactionsMetricsDownloadButton data={data?.data ?? []} />}
       />
       <Box
         display='grid'
