@@ -31,7 +31,7 @@ export default function PageLayout(): JSX.Element {
             xs: 'unset',
           }}
           top={0}
-          w={['100vw', '20rem']}
+          w={{ base: '100vw', sm: '20rem' }}
           h='100vh'
           bottom={0}
           zIndex={100}
@@ -42,7 +42,7 @@ export default function PageLayout(): JSX.Element {
       <Box
         as='main'
         w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
-        display={isOpen ? ['none', 'flex'] : 'flex'}
+        display={isOpen ? { base: 'none', sm: 'flex' } : 'flex'}
         overflowY={['unset', 'auto']}
       >
         <ContentWrapper>

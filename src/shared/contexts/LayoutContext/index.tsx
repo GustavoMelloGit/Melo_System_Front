@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type PropsWithChildren,
-} from 'react'
+import { createContext, useCallback, useMemo, useState, type PropsWithChildren } from 'react'
 import StorageManager from '../../../lib/utils/StorageManager'
 import usePageSize from '../../hooks/usePageSize'
 import { type LayoutContextType, type LayoutSizes } from './types'
@@ -46,10 +39,6 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
     setLayoutSize(size)
     setValue(size)
   }, [])
-
-  useEffect(() => {
-    setSideBarIsOpen(width > breakpoint)
-  }, [width])
 
   const values = useMemo(
     () => ({
