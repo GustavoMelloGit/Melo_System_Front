@@ -9,7 +9,7 @@ export default function useCredoresDevedoresMetricsView(): UseBuyCoffeeMetricsVi
     greaterThan: allSearchParams.greaterThan,
     limit: allSearchParams.limit,
     page: allSearchParams.page,
-    searchableNickname: allSearchParams.searchableNickname,
+    [allSearchParams[PaginationParams.searchFor]]: allSearchParams[PaginationParams.searchBy],
     orderBy: allSearchParams[PaginationParams.sortBy],
     orderDirection: allSearchParams[PaginationParams.sortOrder] as 'asc' | 'desc',
   })

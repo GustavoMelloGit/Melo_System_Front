@@ -1,7 +1,11 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
+import CurrencyInput from '../../../../../shared/components/inputs/CurrencyInput'
 import Table from '../../../../../shared/components/table/Table'
-import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
+import {
+  type SearchForOption,
+  type TableHeaderColumns,
+} from '../../../../../shared/components/table/types'
 import { type ClientModel } from '../../../../client/types/model/Client'
 import CredoresDevedoresMetricsTableViewRow from './Row'
 
@@ -23,6 +27,9 @@ export default function CredoresDevedoresMetricsTableView({ data, isLoading }: P
       pagination={{
         totalLength: 0,
         showPagination: false,
+      }}
+      filter={{
+        searchForOptions,
       }}
       footer={
         data.length ? (
@@ -48,3 +55,22 @@ const headerColumns: TableHeaderColumns[] = [
   { id: 'address.brook', label: 'Córrego', isSortable: true },
   { id: 'balance', label: 'Saldo', isSortable: true },
 ]
+
+const searchForOptions: SearchForOption = {
+  searchableName: { label: 'Nome' },
+  code: { label: 'Código' },
+  searchableNickname: { label: 'Apelido' },
+  'address.brook': { label: 'Córrego' },
+  greaterThan: {
+    label: 'Saldo Maior Que',
+    // eslint-disable-next-line react/prop-types
+    Input: ({ onChange, ...field }) => (
+      <CurrencyInput
+        {...field}
+        setValue={(value) => {
+          onChange(String(value))
+        }}
+      />
+    ),
+  },
+}

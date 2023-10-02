@@ -11,6 +11,8 @@ type Params = {
   orderDirection: 'asc' | 'desc'
   orderBy: string
   searchableNickname: string
+  searchableName: string
+  code: NumberString
   greaterThan: NumberString
 }
 export function getCredoresDevedoresMetrics(
