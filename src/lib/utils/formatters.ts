@@ -69,8 +69,18 @@ export function currencyValueCorrection(valueInCents: number): number {
   return correctValueInCents
 }
 
-export function formatRequestParams(obj: Record<string, string | number>): string {
-  return Object.entries(obj).reduce((acc, curr) => acc + `&${curr[0]}=${curr[1]}`, '')
+export function formatRequestParams(
+  obj: Record<string, string | number | undefined | null>,
+): string {
+  return Object.entries(obj).reduce((acc, curr) => {
+    const key = curr[0]
+    const value = curr[1]
+    if (value === undefined || value === null || value === '') {
+      return acc
+    } else {
+      return acc + `&${key}=${value}`
+    }
+  }, '')
 }
 
 export function formatClientName(client: ClientModel): string {
