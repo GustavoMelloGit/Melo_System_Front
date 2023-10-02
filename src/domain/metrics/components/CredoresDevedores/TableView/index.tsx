@@ -1,3 +1,4 @@
+import { Td, Tr } from '@chakra-ui/react'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type ClientModel } from '../../../../client/types/model/Client'
@@ -8,7 +9,6 @@ type Props = {
   isLoading: boolean
 }
 export default function CredoresDevedoresMetricsTableView({ data, isLoading }: Props): JSX.Element {
-  console.log(data)
   return (
     <Table
       header={{
@@ -23,6 +23,15 @@ export default function CredoresDevedoresMetricsTableView({ data, isLoading }: P
         totalLength: 0,
         showPagination: false,
       }}
+      footer={
+        data.length ? (
+          <Tr>
+            <Td>TOTAL</Td>
+            <Td></Td>
+            <Td>{data.reduce((acc, curr) => acc + curr.balance, 0)}</Td>
+          </Tr>
+        ) : null
+      }
     >
       {data.map((client) => (
         <CredoresDevedoresMetricsTableViewRow key={client.name} client={client} />
