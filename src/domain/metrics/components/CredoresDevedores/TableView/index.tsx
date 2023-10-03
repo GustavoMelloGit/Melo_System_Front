@@ -64,13 +64,16 @@ const searchForOptions: SearchForOption = {
   greaterThan: {
     label: 'Saldo Maior Que',
     // eslint-disable-next-line react/prop-types
-    Input: ({ onChange, ...field }) => (
-      <CurrencyInput
-        {...field}
-        setValue={(value) => {
-          onChange(String(value))
-        }}
-      />
-    ),
+    Input: ({ onChange, value, ...field }) => {
+      return (
+        <CurrencyInput
+          {...field}
+          initialValue={Number(value) / 100}
+          setValue={(value) => {
+            onChange(String(value * 100))
+          }}
+        />
+      )
+    },
   },
 }
