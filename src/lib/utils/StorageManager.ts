@@ -1,8 +1,9 @@
 const DEFAULT_KEY = '@melo-system:'
 
-export default function StorageManager(key: string): UseLocalStorage {
+export default function StorageManager<T = any>(key: string): UseLocalStorage<T> {
   const storageKey = `${DEFAULT_KEY}${key}`
-  const getValue = (): any => {
+
+  const getValue = (): T => {
     const value = localStorage.getItem(storageKey)
     return value ? JSON.parse(value) : null
   }
@@ -22,8 +23,8 @@ export default function StorageManager(key: string): UseLocalStorage {
   }
 }
 
-type UseLocalStorage = {
-  getValue: () => any
+type UseLocalStorage<T> = {
+  getValue: () => T
   setValue: (value: any) => void
   removeValue: () => void
 }

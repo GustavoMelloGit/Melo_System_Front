@@ -1,6 +1,5 @@
 import { createContext, useCallback, useMemo, useState, type PropsWithChildren } from 'react'
 import StorageManager from '../../../lib/utils/StorageManager'
-import usePageSize from '../../hooks/usePageSize'
 import { type LayoutContextType, type LayoutSizes } from './types'
 
 export const LayoutContext = createContext<LayoutContextType>({
@@ -16,28 +15,30 @@ export const LayoutContext = createContext<LayoutContextType>({
   },
 })
 
-const breakpoint = 900
 export default function LayoutProvider({ children }: PropsWithChildren): JSX.Element {
-  const { width } = usePageSize()
-  const { getValue, setValue } = StorageManager('layout.size')
-  const [sideBarIsOpen, setSideBarIsOpen] = useState(width > breakpoint)
-  const [layoutSize, setLayoutSize] = useState<LayoutSizes>(getValue() ?? 'lg')
+  const { getValue: getSize, setValue: setSize } = StorageManager<LayoutSizes>('layout.size')
+  const { getValue: getSidebar, setValue: setSidebar } = StorageManager<boolean>('layout.sidebar')
+  const [sideBarIsOpen, setSideBarIsOpen] = useState(getSidebar())
+  const [layoutSize, setLayoutSize] = useState<LayoutSizes>(getSize() ?? 'lg')
 
   const toggleSideBar = useCallback(() => {
     setSideBarIsOpen((prev) => !prev)
+    setSidebar(!sideBarIsOpen)
   }, [sideBarIsOpen])
 
   const closeSideBar = useCallback(() => {
     setSideBarIsOpen(false)
+    setSidebar(false)
   }, [sideBarIsOpen])
 
   const openSideBar = useCallback(() => {
     setSideBarIsOpen(true)
+    setSidebar(true)
   }, [sideBarIsOpen])
 
-  const setSize = useCallback((size: LayoutSizes) => {
+  const changeSize = useCallback((size: LayoutSizes) => {
     setLayoutSize(size)
-    setValue(size)
+    setSize(size)
   }, [])
 
   const values = useMemo(
@@ -50,7 +51,7 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
       },
       layout: {
         size: layoutSize,
-        setSize,
+        setSize: changeSize,
       },
     }),
     [sideBarIsOpen, toggleSideBar, closeSideBar, openSideBar, layoutSize, setSize],
