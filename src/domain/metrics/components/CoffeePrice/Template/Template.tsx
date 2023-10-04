@@ -37,7 +37,7 @@ export default function CoffeePriceMetricsTemplate({ data }: Props): JSX.Element
             fontSize: 16,
           }}
         >
-          Compras de café
+          Preço de Café
         </Text>
         <Text
           style={{
