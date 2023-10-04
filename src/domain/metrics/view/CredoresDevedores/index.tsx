@@ -5,6 +5,7 @@ import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/Heade
 import Page from '../../../../shared/components/Page'
 import useTabs from '../../../../shared/hooks/useTabs'
 import CredoresDevedoresMetricsTableView from '../../components/CredoresDevedores/TableView'
+import CredoresDevedoresMetricsDownloadButton from '../../components/CredoresDevedores/Template/DownloadButton'
 import useCredoresDevedoresMetricsView from './useView'
 
 export default function CredoresDevedoresMetricsView(): JSX.Element {
@@ -23,6 +24,7 @@ export default function CredoresDevedoresMetricsView(): JSX.Element {
             label: 'Credores e Devedores',
           },
         ]}
+        actions={<CredoresDevedoresMetricsDownloadButton data={data ?? []} />}
       />
       <Flex justify='center'>
         <SwitchLabeled
