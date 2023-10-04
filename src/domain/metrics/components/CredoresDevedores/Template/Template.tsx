@@ -34,7 +34,7 @@ export default function CredoresDevedoresMetricsTemplate({ data }: Props): JSX.E
             fontSize: 16,
           }}
         >
-          Compras de café
+          Credores e Devedores
         </Text>
         <Text
           style={{

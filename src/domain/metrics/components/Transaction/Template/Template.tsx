@@ -37,7 +37,7 @@ export default function TransactionsMetricsTemplate({ data }: Props): JSX.Elemen
             fontSize: 16,
           }}
         >
-          Compras de café
+          Transações do Sistema
         </Text>
         <Text
           style={{
