@@ -1,13 +1,13 @@
 import { Button, Flex, useColorModeValue, type ButtonProps, type FlexProps } from '@chakra-ui/react'
 import { useState } from 'react'
 
-type Props<T = unknown> = {
-  onChange: (value: T) => void
+type Props = {
+  onChange: (value: string) => void
   leftLabel: string
   rightLabel: string
   defaultActive?: number
-  leftValue?: T
-  rightValue?: T
+  leftValue: string
+  rightValue: string
   leftButtonProps?: ButtonProps & Record<string, string>
   rightButtonProps?: ButtonProps & Record<string, string>
   wrapperProps?: FlexProps
@@ -30,13 +30,13 @@ export default function SwitchLabeled({
   function handleLeftClick(): void {
     if (currentActive === 0) return
     setCurrentActive(0)
-    onChange(leftValue ?? false)
+    onChange(leftValue)
   }
 
   function handleRightClick(): void {
     if (currentActive === 1) return
     setCurrentActive(1)
-    onChange(rightValue ?? true)
+    onChange(rightValue)
   }
 
   return (

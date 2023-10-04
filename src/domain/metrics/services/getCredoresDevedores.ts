@@ -14,6 +14,7 @@ type Params = {
   searchableName: string
   code: NumberString
   greaterThan: NumberString
+  showOnly: 'debit' | 'credit'
 }
 export function getCredoresDevedoresMetrics(
   possibleParams?: Partial<Params>,

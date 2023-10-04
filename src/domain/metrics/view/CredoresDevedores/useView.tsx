@@ -12,6 +12,7 @@ export default function useCredoresDevedoresMetricsView(): UseBuyCoffeeMetricsVi
     [allSearchParams[PaginationParams.searchFor]]: allSearchParams[PaginationParams.searchBy],
     orderBy: allSearchParams[PaginationParams.sortBy],
     orderDirection: allSearchParams[PaginationParams.sortOrder] as 'asc' | 'desc',
+    showOnly: allSearchParams.showOnly as any,
   })
 
   return {
