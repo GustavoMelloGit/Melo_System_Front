@@ -1,6 +1,6 @@
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getTransactionMetrics } from '../../services/get'
+import { getTransactionMetrics } from '../../services/getTransactionMetrics'
 import {
   type GetTransactionMetricsResponse,
   type TransactionMetricsFilterOptions,

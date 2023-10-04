@@ -1,6 +1,6 @@
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getCoffeePriceMetrics } from '../../services/get'
+import { getCoffeePriceMetrics } from '../../services/getCoffeePriceMetrics'
 import {
   type CoffeePriceMetricsFilterOptions,
   type GetCoffeePriceMetricsResponse,

@@ -1,7 +1,7 @@
 import { PaginationParams } from '../../../../lib/constants/pagination'
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getBuyCoffeeMetrics } from '../../services/get'
+import { getBuyCoffeeMetrics } from '../../services/getBuyCoffeeMetrics'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import { type GetBuyCoffeeMetricsResponse } from '../../types/coffeePriceMetrics'
 import { formatEndDate } from '../../utils/formatEndDate'

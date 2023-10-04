@@ -6,6 +6,7 @@ const TransactionMetricsView = lazy(async () => import('../view/Transaction'))
 const MetricsHubView = lazy(async () => import('../view/Hub'))
 const BuyCoffeeMetricsView = lazy(async () => import('../view/BuyCoffee'))
 const CoffeePriceMetricsView = lazy(async () => import('../view/CoffeePrice'))
+const CredoresEDevedoresMetricsView = lazy(async () => import('../view/CredoresDevedores'))
 
 const metricsRoutes: RouteObject[] = [
   {
@@ -23,6 +24,10 @@ const metricsRoutes: RouteObject[] = [
   {
     path: Routes.coffeePrice,
     element: <CoffeePriceMetricsView />,
+  },
+  {
+    path: Routes.credoresEDevedoresMetrics,
+    element: <CredoresEDevedoresMetricsView />,
   },
 ]
 
