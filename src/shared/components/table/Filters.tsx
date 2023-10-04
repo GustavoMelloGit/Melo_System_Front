@@ -3,7 +3,6 @@ import {
   Grid,
   GridItem,
   Hide,
-  IconButton,
   Select,
   Show,
   useColorModeValue,
@@ -11,10 +10,10 @@ import {
 } from '@chakra-ui/react'
 import { cloneElement, useCallback, useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { BiSearchAlt } from 'react-icons/bi'
 import { PaginationParams } from '../../../lib/constants/pagination'
 import useURLSearchParams from '../../hooks/useURLSearchParams'
-import RHFField from '../inputs/RHFField'
+import IconButton from '../IconButton'
+import ControllerField from '../inputs/ControllerField'
 import { type FilterFormValues, type TableFilterProps } from './types'
 
 const isMobile = window.screen.width < 768
@@ -27,7 +26,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
   const { handleAddParams, handleRemoveParams, getParam } = useURLSearchParams()
   const bg = useColorModeValue('gray.200', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
-  const { handleSubmit, register, watch, control, reset } = useForm<FilterFormValues>({
+  const { handleSubmit, watch, control, reset } = useForm<FilterFormValues>({
     defaultValues: {
       query: queryParam ?? '',
       searchFor: getParam(PaginationParams.searchFor) ?? Object.keys(searchForOptions)[0],
@@ -118,11 +117,11 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                 }
               />
             ) : (
-              <RHFField<FilterFormValues>
-                register={register}
+              <ControllerField
+                control={control}
                 rounded='md'
                 type='search'
-                roundedLeft={['md', 'none']}
+                roundedLeft={{ base: 'md', sm: 'none' }}
                 placeholder='Pesquisar'
                 autoFocus={!isMobile}
                 {...(DOMProperties ?? {})}
@@ -136,8 +135,9 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
               variant='ghost'
               aria-label='Pesquisar'
               title='Pesquisar'
-              icon={<BiSearchAlt size={24} />}
+              icon={queryParam ? 'close' : 'search'}
               data-cy='table-submit-search-button'
+              onClick={queryParam ? handleCleanFilter : undefined}
             />
             {actions && <Hide below='sm'>{actions}</Hide>}
           </GridItem>

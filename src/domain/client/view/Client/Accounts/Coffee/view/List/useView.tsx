@@ -1,13 +1,24 @@
 import { useParams } from 'react-router-dom'
+import { PaginationParams } from '../../../../../../../../lib/constants/pagination'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
+import useURLSearchParams from '../../../../../../../../shared/hooks/useURLSearchParams'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import { getCoffeeAccountService } from '../../service/get'
 
 export default function useCoffeeAccountView(): UseCoffeeAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
-  const { data, isLoading, mutate } = getCoffeeAccountService(uuid, params)
+  const { allSearchParams } = useURLSearchParams()
+  let accountType = 'coffee'
+  if (
+    allSearchParams[PaginationParams.searchFor] &&
+    allSearchParams[PaginationParams.searchBy] &&
+    allSearchParams[PaginationParams.searchFor] === 'type.name'
+  ) {
+    accountType = allSearchParams[PaginationParams.searchBy]
+  }
+  const { data, isLoading, mutate } = getCoffeeAccountService(uuid, accountType, params)
 
   async function handleOpenCreateCoffee(): Promise<void> {
     if (!uuid) return

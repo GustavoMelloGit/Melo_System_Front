@@ -6,10 +6,11 @@ import { type CoffeeTransactionModel } from '../../../../../types/model/Transact
 
 export function getCoffeeAccountService(
   clientId: string | undefined,
+  accountType: string,
   params?: string,
 ): SWRServiceResponse<GetListResponse<CoffeeTransactionModel[]>> {
   const response = useFetch<GetListResponse<CoffeeTransactionModel[]>>(
-    clientId ? `/transactions/coffee/${clientId}?${params ?? ''}` : null,
+    clientId ? `/transactions/${accountType}/${clientId}?${params ?? ''}` : null,
   )
 
   return response
