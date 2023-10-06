@@ -1,6 +1,5 @@
 import { formatRequestParams } from '../../../lib/utils/formatters'
 import useFetch from '../../../shared/hooks/useFetch'
-import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
 import { type ClientModel } from '../../client/types/model/Client'
 
@@ -18,7 +17,7 @@ type Params = {
 }
 export function getCredoresDevedoresMetrics(
   possibleParams?: Partial<Params>,
-): SWRServiceResponse<GetListResponse<ClientModel[]>> {
+): SWRServiceResponse<ClientModel[]> {
   const params = formatRequestParams(possibleParams ?? {})
   const response = useFetch(`/metrics/balances?${params ?? ''}`)
 
