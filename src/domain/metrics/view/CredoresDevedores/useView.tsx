@@ -16,7 +16,7 @@ export default function useCredoresDevedoresMetricsView(): UseBuyCoffeeMetricsVi
   })
 
   return {
-    data: data?.data ?? [],
+    data: data ?? [],
     isLoading,
   }
 }
