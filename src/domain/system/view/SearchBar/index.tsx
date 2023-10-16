@@ -9,7 +9,7 @@ import useSearchBarView from './useView'
 export default function SearchBar(): JSX.Element {
   const { isOpen, control, handleClose, clients, showClients, isLoading } = useSearchBarView()
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} closeOnEsc>
+    <Modal isCentered={false} isOpen={isOpen} onClose={handleClose} closeOnEsc>
       <Modal.Content
         sx={{
           rounded: 8,
