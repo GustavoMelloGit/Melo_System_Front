@@ -26,4 +26,5 @@ export const Routes = {
   users: '/usuarios',
   birthdays: '/aniversarios',
   credoresEDevedoresMetrics: '/relatorios/credores-e-devedores',
+  credoresDevedoresCafeMetrics: '/relatorios/credores-devedores-cafe',
 } as const

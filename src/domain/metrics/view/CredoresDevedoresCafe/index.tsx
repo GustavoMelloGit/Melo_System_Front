@@ -4,13 +4,13 @@ import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import useTabs from '../../../../shared/hooks/useTabs'
-import CredoresDevedoresMetricsTableView from '../../components/CredoresDevedores/TableView'
-import CredoresDevedoresMetricsDownloadButton from '../../components/CredoresDevedores/Template/DownloadButton'
-import useCredoresDevedoresMetricsView from './useView'
+import CredoresDevedoresCafeMetricsTableView from '../../components/CredoresDevedoresCafe/TableView'
+import CredoresDevedoresCafeMetricsDownloadButton from '../../components/CredoresDevedoresCafe/Template/DownloadButton'
+import useCredoresDevedoresCafeMetricsView from './useView'
 
-export default function CredoresDevedoresMetricsView(): JSX.Element {
+export default function CredoresDevedoresCafeMetricsView(): JSX.Element {
   const { onChangeTab, currentTab } = useTabs({ queryName: 'showOnly' })
-  const { data, isLoading } = useCredoresDevedoresMetricsView()
+  const { data, isLoading } = useCredoresDevedoresCafeMetricsView()
   return (
     <Page title='Relatórios'>
       <HeaderBreadcrumbs
@@ -21,10 +21,10 @@ export default function CredoresDevedoresMetricsView(): JSX.Element {
             to: Routes.metricsHub,
           },
           {
-            label: 'Credores e Devedores',
+            label: 'Credores e Devedores de Café',
           },
         ]}
-        actions={<CredoresDevedoresMetricsDownloadButton data={data ?? []} />}
+        actions={<CredoresDevedoresCafeMetricsDownloadButton data={data ?? []} />}
       />
       <Flex justify='center'>
         <SwitchLabeled
@@ -38,7 +38,7 @@ export default function CredoresDevedoresMetricsView(): JSX.Element {
           defaultActive={currentTab === 'debit' ? 1 : 0}
         />
       </Flex>
-      <CredoresDevedoresMetricsTableView data={data} isLoading={isLoading} />
+      <CredoresDevedoresCafeMetricsTableView data={data} isLoading={isLoading} />
     </Page>
   )
 }

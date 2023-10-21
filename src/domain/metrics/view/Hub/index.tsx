@@ -1,5 +1,6 @@
 import { Container, Heading, Stack } from '@chakra-ui/react'
 import { BiTransferAlt } from 'react-icons/bi'
+import { CiCoffeeBean } from 'react-icons/ci'
 import { FaSearchDollar } from 'react-icons/fa'
 import { TbDatabaseDollar, TbShoppingCart } from 'react-icons/tb'
 import { Routes } from '../../../../lib/routes'
@@ -53,8 +54,14 @@ export default function MetricsHubView(): JSX.Element {
           <MetricsHubOption
             icon={<TbDatabaseDollar size={32} />}
             title='Credores e Devedores'
-            subtitle='Consulte os saldos dos clientes cadastrados no sistema.'
+            subtitle='Consulte os saldos dos clientes.'
             url={Routes.credoresEDevedoresMetrics}
+          />
+          <MetricsHubOption
+            icon={<CiCoffeeBean size={34} />}
+            title='Credores e Devedores de Café'
+            subtitle='Consulte o saldo de café dos clientes.'
+            url={Routes.credoresDevedoresCafeMetrics}
           />
         </Stack>
       </Container>
