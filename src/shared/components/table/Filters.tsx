@@ -89,7 +89,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
                 <Select
                   variant='filled'
                   roundedLeft='md'
-                  roundedRight={['md', 'none']}
+                  roundedRight={{ base: 'md', sm: 'none' }}
                   data-cy='table-searchFor-select'
                   fontWeight={500}
                   onChange={(e) => {
