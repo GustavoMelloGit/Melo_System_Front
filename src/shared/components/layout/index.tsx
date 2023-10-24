@@ -52,7 +52,10 @@ export default function PageLayout(): JSX.Element {
         pb={20}
         {...(isOpen
           ? {
-              pl: '21rem',
+              pl: {
+                base: 0,
+                sm: '21rem',
+              },
             }
           : {
               px: {
