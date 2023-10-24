@@ -4,7 +4,10 @@ import { type ClientModel } from '../../../client/types/model/Client'
 import { getCredoresDevedoresMetrics } from '../../services/getCredoresDevedores'
 
 export default function useCredoresDevedoresMetricsView(): UseBuyCoffeeMetricsView {
-  const { allSearchParams } = useURLSearchParams()
+  const { allSearchParams } = useURLSearchParams({
+    [PaginationParams.sortBy]: 'balance',
+    [PaginationParams.sortOrder]: 'desc',
+  })
   const { data, isLoading } = getCredoresDevedoresMetrics({
     greaterThan: allSearchParams.greaterThan,
     limit: allSearchParams.limit,
