@@ -4,7 +4,10 @@ import { getCredoresDevedoresCafeMetrics } from '../../services/getCredoresDeved
 import { type ClientCoffeeMetric } from '../../types/credoresDevedoresCafeMetrics'
 
 export default function useCredoresDevedoresCafeMetricsView(): UseBuyCoffeeMetricsView {
-  const { allSearchParams } = useURLSearchParams()
+  const { allSearchParams } = useURLSearchParams({
+    [PaginationParams.sortBy]: 'balance.total',
+    [PaginationParams.sortOrder]: 'desc',
+  })
   const { data, isLoading } = getCredoresDevedoresCafeMetrics({
     greaterThan: allSearchParams.greaterThan,
     limit: allSearchParams.limit,
