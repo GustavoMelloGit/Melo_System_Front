@@ -76,7 +76,11 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
   return (
     <form onSubmit={handleSubmit(handleSubmitFilter)}>
       <Box bg={bg} px={4} pt={4} roundedTop={16}>
-        <Grid templateColumns={['1fr', '1fr 3fr']} templateRows={['1fr 1fr', 'auto']} gap={1}>
+        <Grid
+          templateColumns={{ base: '1fr', sm: '1fr 3fr' }}
+          templateRows={{ base: '1fr 1fr', sm: 'auto' }}
+          gap={1}
+        >
           <GridItem display='flex' alignItems='center' gap={1}>
             <Controller
               control={control}
@@ -131,7 +135,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             )}
 
             <IconButton
-              type='submit'
+              type={queryParam ? 'submit' : 'button'}
               variant='ghost'
               aria-label='Pesquisar'
               title='Pesquisar'
