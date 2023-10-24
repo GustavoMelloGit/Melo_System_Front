@@ -113,7 +113,7 @@ export default function SidebarList(): JSX.Element {
   const basePath = currentPathname.split('/')[1]
 
   return (
-    <Box as='nav' flexGrow={1}>
+    <Box as='nav' flexGrow={1} overflowY='auto'>
       <VStack as={List} align='stretch'>
         {Object.entries(listItem).map(([route, elements]) => {
           const routeFound = protectedRoutes.children?.find(
