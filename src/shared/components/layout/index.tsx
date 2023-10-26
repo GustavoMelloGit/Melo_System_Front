@@ -50,19 +50,12 @@ export default function PageLayout(): JSX.Element {
         maxW={maxW[size]}
         pt={10}
         pb={20}
-        {...(isOpen
-          ? {
-              pl: {
-                base: 0,
-                sm: '21rem',
-              },
-            }
-          : {
-              px: {
-                base: 4,
-                sm: 10,
-              },
-            })}
+        {...(isOpen && {
+          ml: {
+            base: 0,
+            sm: '21rem',
+          },
+        })}
         // w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
         // display={isOpen ? { base: 'none', sm: 'flex' } : 'flex'}
         // overflowY={{ base: 'unset', sm: 'auto' }}

@@ -4,8 +4,9 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Button,
+  Box,
   Flex,
+  Stack,
   Text,
 } from '@chakra-ui/react'
 
@@ -20,25 +21,38 @@ export default function SystemShortcuts(): JSX.Element {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <Flex justify={'space-between'} align='center'>
-            <Text>Pesquisar cliente</Text>
-            <Button
-              variant='unstyled'
-              minH='unset'
-              h='unset'
-              borderWidth={1}
-              borderStyle='solid'
-              borderColor='GrayText'
-              rounded={6}
-              fontWeight='medium'
-              py={1}
-              px={2}
-            >
-              <code>ctrl + space</code>
-            </Button>
-          </Flex>
+          <Stack>
+            <ShortcutItem label='Pesquisar cliente' shortcut='ctrl + space' />
+            <ShortcutItem label='Alternar colapso de células' shortcut='ctrl + o' />
+          </Stack>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
+  )
+}
+
+type ShortcutItemProps = {
+  label: string
+  shortcut: string
+}
+function ShortcutItem({ shortcut, label }: ShortcutItemProps): JSX.Element {
+  return (
+    <Flex justify={'space-between'} align='center'>
+      <Text>{label}</Text>
+      <Box
+        as='code'
+        minH='unset'
+        h='unset'
+        borderWidth={1}
+        borderStyle='solid'
+        borderColor='GrayText'
+        rounded={6}
+        fontWeight='medium'
+        py={1}
+        px={2}
+      >
+        {shortcut}
+      </Box>
+    </Flex>
   )
 }
