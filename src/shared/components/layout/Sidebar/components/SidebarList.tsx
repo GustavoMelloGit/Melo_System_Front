@@ -18,6 +18,7 @@ const listItem: Record<
     label: string
     icon?: JSX.Element
     hasPermission: (permission: UserPermission[]) => boolean
+    isActive?: (basePath: string) => boolean
   }
 > = {
   [Routes.clients]: {
@@ -64,6 +65,9 @@ const listItem: Record<
   [Routes.books]: {
     label: 'Pesagem',
     icon: <MdOutlineMonitorWeight size={20} />,
+    isActive: (basePath) => {
+      return basePath === Routes.books || basePath === Routes.bookPage('').split('/')[1]
+    },
     hasPermission: (permissions) =>
       Boolean(
         permissions.find(
@@ -116,6 +120,13 @@ export default function SidebarList(): JSX.Element {
     <Box as='nav' flexGrow={1} overflowY='auto'>
       <VStack as={List} align='stretch'>
         {Object.entries(listItem).map(([route, elements]) => {
+          let isActive: boolean
+          if (elements.isActive) {
+            isActive = elements.isActive(basePath)
+          } else {
+            isActive = route.split('/')[1] === basePath
+          }
+
           const routeFound = protectedRoutes.children?.find(
             (protectedRoute) => protectedRoute.path === route,
           )
@@ -128,7 +139,7 @@ export default function SidebarList(): JSX.Element {
               to={customPaths[route] ?? route}
               label={elements.label}
               icon={elements.icon}
-              isActive={route.split('/')[1] === basePath}
+              isActive={isActive}
             />
           )
         })}
