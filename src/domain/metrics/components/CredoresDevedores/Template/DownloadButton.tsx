@@ -1,6 +1,6 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import IconButton from '../../../../../shared/components/IconButton'
+import DownloadButton from '../../../../../shared/components/DownloadButton'
 import { type ClientModel } from '../../../../client/types/model/Client'
 import CredoresDevedoresMetricsTemplate from './Template'
 
@@ -20,20 +20,11 @@ export default function CredoresDevedoresMetricsDownloadButton({ data }: Props):
   }, [updatePdfInstance])
 
   return (
-    <IconButton
-      isDisabled={Boolean(instance.error)}
-      isLoading={instance.loading}
-      as='a'
-      /* @ts-expect-error: this property does exist */
-      href={instance.url ?? ''}
-      target='_blank'
-      rel='noreferrer'
-      icon='printer'
-      aria-label='Baixar lista de adubos a entregar'
-      colorScheme='blue'
-      variant='outline'
-      data-cy='download-fertilzer-delivery-button'
-      title='Baixar lista de adubos a entregar'
+    <DownloadButton
+      instance={instance}
+      aria-label='Baixar relatório credores e devedores'
+      data-cy='download-creadores-devedores-metrics'
+      title='Baixar relatório credores e devedores'
     />
   )
 }

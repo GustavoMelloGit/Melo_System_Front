@@ -1,6 +1,6 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import IconButton from '../../../../../shared/components/IconButton'
+import DownloadButton from '../../../../../shared/components/DownloadButton'
 import { type TransactionMetrics } from '../../../types/transactionMetrics'
 import TransactionsMetricsTemplate from './Template'
 
@@ -20,20 +20,11 @@ export default function TransactionsMetricsDownloadButton({ data }: Props): JSX.
   }, [updatePdfInstance])
 
   return (
-    <IconButton
-      isDisabled={Boolean(instance.error)}
-      isLoading={instance.loading}
-      as='a'
-      /* @ts-expect-error: this property does exist */
-      href={instance.url ?? ''}
-      target='_blank'
-      rel='noreferrer'
-      icon='printer'
-      aria-label='Baixar lista de adubos a entregar'
-      colorScheme='blue'
-      variant='outline'
-      data-cy='download-fertilzer-delivery-button'
-      title='Baixar lista de adubos a entregar'
+    <DownloadButton
+      instance={instance}
+      aria-label='Baixar relatório de transações'
+      data-cy='download-transactions-metrics'
+      title='Baixar relatório de transações'
     />
   )
 }
