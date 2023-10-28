@@ -1,7 +1,6 @@
 import { Select, Td, Tr } from '@chakra-ui/react'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import objectEntries from '../../../../../lib/utils/objectEntries'
-import CurrencyInput from '../../../../../shared/components/inputs/CurrencyInput'
 import Table from '../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
@@ -78,21 +77,5 @@ const searchForOptions: SearchForOption = {
         ))}
       </Select>
     ),
-  },
-  // searchableNickname: { label: 'Apelido' },
-  greaterThan: {
-    label: 'Saldo Maior Que',
-    // eslint-disable-next-line react/prop-types
-    Input: ({ onChange, value, ...field }) => {
-      return (
-        <CurrencyInput
-          {...field}
-          initialValue={Number(value) / 100}
-          setValue={(value) => {
-            onChange(String(value * 100))
-          }}
-        />
-      )
-    },
   },
 }
