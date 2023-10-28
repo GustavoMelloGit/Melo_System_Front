@@ -13,7 +13,7 @@ export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element
 
   const commandListenerHandler = useCallback(
     (e: KeyboardEvent) => {
-      const isShortcut = e.ctrlKey && e.code === 'KeyO'
+      const isShortcut = e.ctrlKey && e.code === 'KeyQ'
       if (isShortcut) toggleShowText()
     },
     [toggleShowText],
