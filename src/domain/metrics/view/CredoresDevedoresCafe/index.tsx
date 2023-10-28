@@ -4,6 +4,7 @@ import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
 import useTabs from '../../../../shared/hooks/useTabs'
+import GraphView from '../../components/CredoresDevedoresCafe/GraphView'
 import CredoresDevedoresCafeMetricsTableView from '../../components/CredoresDevedoresCafe/TableView'
 import CredoresDevedoresCafeMetricsDownloadButton from '../../components/CredoresDevedoresCafe/Template/DownloadButton'
 import useCredoresDevedoresCafeMetricsView from './useView'
@@ -38,6 +39,7 @@ export default function CredoresDevedoresCafeMetricsView(): JSX.Element {
           defaultActive={currentTab === 'debit' ? 1 : 0}
         />
       </Flex>
+      <GraphView data={data} isLoading={isLoading} />
       <CredoresDevedoresCafeMetricsTableView data={data} isLoading={isLoading} />
     </Page>
   )

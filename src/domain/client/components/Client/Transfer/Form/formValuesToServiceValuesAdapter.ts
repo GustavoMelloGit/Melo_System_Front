@@ -72,7 +72,6 @@ const formatReferralData = (referralData: ReferralTransfer): TransferBetweenClie
 export const formValuesToServiceValuesAdapter = (
   values: ClientTransferFormValues,
 ): TransferBetweenClientsServiceData => {
-  console.log(values)
   const { from, to } = values
   const fromValues: TransferBetweenClientsReferralData = formatReferralData(from)
   const toValues: TransferBetweenClientsReferralData = formatReferralData(to)
