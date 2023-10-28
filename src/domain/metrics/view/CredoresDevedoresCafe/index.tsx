@@ -39,7 +39,7 @@ export default function CredoresDevedoresCafeMetricsView(): JSX.Element {
           defaultActive={currentTab === 'debit' ? 1 : 0}
         />
       </Flex>
-      <GraphView data={data} isLoading={isLoading} />
+      {!isLoading && <GraphView data={data} isLoading={isLoading} />}
       <CredoresDevedoresCafeMetricsTableView data={data} isLoading={isLoading} />
     </Page>
   )

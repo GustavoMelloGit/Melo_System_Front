@@ -10,26 +10,17 @@ type Props = {
 }
 
 export default function GraphView({ data, isLoading }: Props): JSX.Element {
-  const [coffeeTypeChartData, clientChartData] = formatDataToChart(data)
+  const [coffeeTypeChartData] = formatDataToChart(data)
 
   return (
     <Card>
       <CardBody>
-        <Box
-          display='grid'
-          gridTemplateColumns={{
-            base: '1fr',
-            sm: 'repeat(2, 1fr)',
-          }}
-          gap={4}
-          maxW={800}
-          mx='auto'
-        >
+        <Box display='grid' gridTemplateColumns={'1fr'} gap={4} maxW={400} mx='auto'>
           <PieChart
             chartData={coffeeTypeChartData.chartData}
             options={coffeeTypeChartData.options}
           />
-          <PieChart chartData={clientChartData.chartData} options={clientChartData.options} />
+          {/* <PieChart chartData={clientChartData.chartData} options={clientChartData.options} /> */}
         </Box>
       </CardBody>
     </Card>
