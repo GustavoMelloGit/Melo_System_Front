@@ -1,6 +1,6 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import IconButton from '../../../../../shared/components/IconButton'
+import DownloadButton from '../../../../../shared/components/DownloadButton'
 import { type ClientCoffeeMetric } from '../../../types/credoresDevedoresCafeMetrics'
 import CredoresDevedoresCafeMetricsTemplate from './Template'
 
@@ -20,20 +20,11 @@ export default function CredoresDevedoresCafeMetricsDownloadButton({ data }: Pro
   }, [updatePdfInstance])
 
   return (
-    <IconButton
-      isDisabled={Boolean(instance.error)}
-      isLoading={instance.loading}
-      as='a'
-      /* @ts-expect-error: this property does exist */
-      href={instance.url ?? ''}
-      target='_blank'
-      rel='noreferrer'
-      icon='printer'
-      aria-label='Baixar lista de adubos a entregar'
-      colorScheme='blue'
-      variant='outline'
-      data-cy='download-fertilzer-delivery-button'
-      title='Baixar lista de adubos a entregar'
+    <DownloadButton
+      instance={instance}
+      aria-label='Baixar relatório credores e devedores de café'
+      data-cy='download-credores-devedores-coffee-metrics'
+      title='Baixar relatório credores e devedores de café'
     />
   )
 }
