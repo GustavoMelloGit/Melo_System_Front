@@ -55,6 +55,10 @@ export default function PageLayout(): JSX.Element {
             base: 0,
             sm: '21rem',
           },
+          w: {
+            base: '100vw',
+            sm: 'calc(100vw - 21rem)',
+          },
         })}
         // w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
         // display={isOpen ? { base: 'none', sm: 'flex' } : 'flex'}
