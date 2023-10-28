@@ -16,6 +16,9 @@ const maxW: Record<LayoutSizes, string> = {
   xxl: '1536px',
 }
 
+const sidebarWidth: string = '20rem'
+const scrollbarWidth: string = '1rem'
+
 export default function PageLayout(): JSX.Element {
   const { width } = usePageSize()
   const {
@@ -32,36 +35,40 @@ export default function PageLayout(): JSX.Element {
   }, [location])
 
   return (
-    <Flex minH='100vh' position='relative'>
+    <Flex minH='100vh' position='relative' overflowX='hidden'>
       {isOpen && (
         <Box
           as='aside'
           position='fixed'
           top={0}
-          w={{ base: '100vw', sm: '20rem' }}
+          w={{ base: '100vw', sm: sidebarWidth }}
           h='100svh'
           zIndex={100}
         >
           <Sidebar />
         </Box>
       )}
+      <Box
+        role='presentation'
+        minH='100vh'
+        {...(isOpen && {
+          minW: {
+            base: 0,
+            sm: sidebarWidth,
+          },
+        })}
+      />
       <Container
         as='main'
         maxW={maxW[size]}
         pt={10}
         pb={20}
         {...(isOpen && {
-          ml: {
-            base: 0,
-            sm: '21rem',
+          w: {
+            base: '100vw',
+            sm: `calc(100vw - ${sidebarWidth} - ${scrollbarWidth})`,
           },
         })}
-        // w={isOpen ? 'calc(100vw - 20rem)' : 'full'}
-        // display={isOpen ? { base: 'none', sm: 'flex' } : 'flex'}
-        // overflowY={{ base: 'unset', sm: 'auto' }}
-        // position='relative'
-        // flex={1}
-        // flexDir='column'
       >
         {!isOpen && <ToggleSidebarButton />}
         <Suspense>
