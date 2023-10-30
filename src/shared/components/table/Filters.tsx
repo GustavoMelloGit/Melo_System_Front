@@ -135,7 +135,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             )}
 
             <IconButton
-              type={queryParam ? 'submit' : 'button'}
+              type='submit'
               variant='ghost'
               aria-label='Pesquisar'
               title='Pesquisar'
