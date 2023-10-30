@@ -60,13 +60,7 @@ export default function DeliveryTableRow({
   return (
     <Tr>
       <Td data-cy='deliveryCoffee-table-date'>{dateToFormat(delivery.date ?? 0, 'dd/MM/yyyy')}</Td>
-      <CollapsibleTd
-        data-cy='deliveryCoffee-table-clientName'
-        minW={{
-          base: 80,
-          sm: 'unset',
-        }}
-      >
+      <CollapsibleTd data-cy='deliveryCoffee-table-clientName'>
         {({ isCollapsed }) =>
           isCollapsed ? (
             <Link to={Routes.clientPage(delivery.client.id)}>{clientColumnValue}</Link>

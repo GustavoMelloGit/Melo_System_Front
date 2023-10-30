@@ -82,13 +82,7 @@ export default function PickupTableRow({
 
   return (
     <Tr>
-      <CollapsibleTd
-        data-cy='pickupCoffee-table-clientName'
-        minW={{
-          base: 80,
-          sm: 'unset',
-        }}
-      >
+      <CollapsibleTd data-cy='pickupCoffee-table-clientName'>
         {({ isCollapsed }) =>
           isCollapsed ? (
             <Link to={Routes.clientPage(pickup.client.id)}>{clientColumnValue}</Link>
