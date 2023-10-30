@@ -35,8 +35,8 @@ export default function ClientsTable({
         searchForOptions,
       }}
     >
-      {data?.map((client, index) => (
-        <ClientsTableRow onRemove={onRemove} key={index} client={client} />
+      {data?.map((client) => (
+        <ClientsTableRow onRemove={onRemove} key={client.id} client={client} />
       ))}
     </Table>
   )
