@@ -44,6 +44,11 @@ export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element
       maxW={80}
       wordBreak='break-word'
       whiteSpace='pre-wrap'
+      zIndex={2}
+      minW={{
+        base: 80,
+        sm: 'unset',
+      }}
       {...rest}
     >
       <Collapse startingHeight={20} in={showText}>
