@@ -47,7 +47,7 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
           month: {
             label: 'Mês',
             Input: (field) => (
-              <Select {...field} value={field.value || String(defaultMonth)}>
+              <Select variant={'filled'} {...field} value={field.value || String(defaultMonth)}>
                 {months.map((month) => (
                   <option key={month.number} value={month.number}>
                     {month.number} - {month.name}
