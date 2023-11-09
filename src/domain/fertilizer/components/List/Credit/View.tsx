@@ -32,11 +32,7 @@ export default function CreditFertilizerView({
               Definir quantidade
             </Heading>
             <Heading as='h2' fontSize='sm' color={subheaderColor} fontWeight={500}>
-              O valor definido{' '}
-              <Text as='strong' color='white'>
-                substituirá
-              </Text>{' '}
-              o valor atual
+              O valor definido <Text as='b'>substituirá</Text> o valor atual
             </Heading>
           </Stack>
         </Modal.Header>
@@ -46,7 +42,7 @@ export default function CreditFertilizerView({
               <Controller
                 control={control}
                 name='quantity'
-                render={({ field }) => <NumberInput {...field} />}
+                render={({ field }) => <NumberInput textAlign='center' {...field} />}
               />
               <Button type='submit' w='full' isLoading={isSubmitting} colorScheme='blue'>
                 Salvar
