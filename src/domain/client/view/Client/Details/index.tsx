@@ -35,7 +35,7 @@ export enum ClientAccountsEnum {
   coffee,
   escolha,
   bags,
-  fertilizer,
+  products,
 }
 
 export default function ClientDetails(): JSX.Element {
@@ -233,7 +233,7 @@ export default function ClientDetails(): JSX.Element {
                 </Link>
                 <Link
                   style={linkStyle}
-                  to={`?tab=${ClientAccountsEnum.fertilizer}`}
+                  to={`?tab=${ClientAccountsEnum.products}`}
                   draggable={false}
                 >
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>

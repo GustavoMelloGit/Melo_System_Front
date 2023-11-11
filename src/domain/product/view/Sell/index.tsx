@@ -22,7 +22,7 @@ const SellProduct = (): JSX.Element => {
             ? [
                 {
                   label: 'Cliente',
-                  to: `${Routes.clientPage(client)}?tab=${ClientAccountsEnum.fertilizer}`,
+                  to: `${Routes.clientPage(client)}?tab=${ClientAccountsEnum.products}`,
                 },
               ]
             : []),
