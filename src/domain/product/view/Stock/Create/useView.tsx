@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { createFertilizerService } from '../../../../fertilizer/services/post'
 import { type StockProductFormValues } from '../../../components/Stock/Form/types'
+import { createStockProductService } from '../../../services/createStockProductService'
 
 type Props = {
   onSuccess: () => void
@@ -9,7 +9,7 @@ type Props = {
 export default function useCreateProductView({ onSuccess }: Props): UseCreateFertilizerView {
   const closeModal = useModal((state) => state.closeModal)
   async function handleAddFertilizer(values: StockProductFormValues): Promise<void> {
-    const { error } = await createFertilizerService(values)
+    const { error } = await createStockProductService(values)
     if (error) {
       toast.error(error)
       return
