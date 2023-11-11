@@ -30,7 +30,7 @@ import FertilizerAccountView from '../Accounts/Product/view/List'
 import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import useClientDetailsView from './useView'
 
-enum ClientAccountsEnum {
+export enum ClientAccountsEnum {
   checking,
   coffee,
   escolha,
