@@ -1,7 +1,7 @@
 import React from 'react'
 import { type RouteObject } from 'react-router-dom'
 import { Routes } from '../../../lib/routes'
-const FertilizerListView = React.lazy(async () => import('../view/List'))
+const FertilizerListView = React.lazy(async () => import('../../product/view/Stock/List'))
 const FertilizerDeliveryView = React.lazy(async () => import('../view/Delivery/List'))
 
 const fertilizerRoutes: RouteObject[] = [

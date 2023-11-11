@@ -1,14 +1,14 @@
-import IconButton from '../../../../shared/components/IconButton'
-import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
-import Page from '../../../../shared/components/Page'
-import FertilizerTable from '../../components/List/Table'
-import useFertilizerListView from './useView'
+import IconButton from '../../../../../shared/components/IconButton'
+import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import Page from '../../../../../shared/components/Page'
+import StockTable from '../../../components/Stock/List/Table'
+import useStockListView from './useView'
 
-const FertilizerListView = (): JSX.Element => {
+const StockListView = (): JSX.Element => {
   const {
     response: { data, isLoading, mutate },
     handleAddFertilizer,
-  } = useFertilizerListView()
+  } = useStockListView()
   return (
     <Page title='Estoque' data-cy='list-clients-page'>
       <HeaderBreadcrumbs
@@ -28,7 +28,7 @@ const FertilizerListView = (): JSX.Element => {
           />
         }
       />
-      <FertilizerTable
+      <StockTable
         data={data?.data}
         refetch={mutate}
         isLoading={isLoading}
@@ -37,4 +37,4 @@ const FertilizerListView = (): JSX.Element => {
     </Page>
   )
 }
-export default FertilizerListView
+export default StockListView

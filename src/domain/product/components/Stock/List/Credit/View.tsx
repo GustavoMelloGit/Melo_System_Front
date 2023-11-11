@@ -1,15 +1,15 @@
 import { Button, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
-import NumberInput from '../../../../../shared/components/inputs/NumberInput'
-import Modal from '../../../../../shared/components/Modal'
-import { type CreditFertilizerFormValues } from './types'
+import NumberInput from '../../../../../../shared/components/inputs/NumberInput'
+import Modal from '../../../../../../shared/components/Modal'
+import { type CreditStockProductFormValues } from './types'
 
 type Props = {
   closeModal: () => void
-  onSubmit: (values: CreditFertilizerFormValues) => void
-  initialValues: CreditFertilizerFormValues
+  onSubmit: (values: CreditStockProductFormValues) => void
+  initialValues: CreditStockProductFormValues
 }
-export default function CreditFertilizerView({
+export default function CreditStockProductView({
   closeModal,
   onSubmit,
   initialValues,
@@ -19,7 +19,7 @@ export default function CreditFertilizerView({
     handleSubmit,
     control,
     formState: { isSubmitting },
-  } = useForm<CreditFertilizerFormValues>({
+  } = useForm<CreditStockProductFormValues>({
     defaultValues: initialValues,
   })
   return (

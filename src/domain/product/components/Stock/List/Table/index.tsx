@@ -1,13 +1,13 @@
 import { toast } from 'react-hot-toast'
-import Table from '../../../../../shared/components/table/Table'
+import Table from '../../../../../../shared/components/table/Table'
 import {
   type SearchForOption,
   type TableHeaderColumns,
-} from '../../../../../shared/components/table/types'
-import { useModal } from '../../../../../shared/hooks/useModal'
-import { deleteFertilizerService } from '../../../services/delete'
-import { type FertilizerModel } from '../../../types/model/Fertilizer'
-import FertilizerTableRow from './Row'
+} from '../../../../../../shared/components/table/types'
+import { useModal } from '../../../../../../shared/hooks/useModal'
+import { deleteFertilizerService } from '../../../../../fertilizer/services/delete'
+import { type FertilizerModel } from '../../../../../fertilizer/types/model/Fertilizer'
+import StockTableRow from './Row'
 
 type Props = {
   data: FertilizerModel[] | undefined
@@ -15,7 +15,7 @@ type Props = {
   isLoading: boolean
   refetch: () => void
 }
-const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Element => {
+const StockTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Element => {
   const openModal = useModal((state) => state.openModal)
   async function handleDeleteFertilizer(id: string): Promise<void> {
     const { error } = await deleteFertilizerService(id)
@@ -52,7 +52,7 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
       }}
     >
       {data?.map((fertilizer) => (
-        <FertilizerTableRow
+        <StockTableRow
           key={fertilizer.id}
           fertilizer={fertilizer}
           onClickDelete={handleDeleteFertilizer}
@@ -62,7 +62,7 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
     </Table>
   )
 }
-export default FertilizerTable
+export default StockTable
 
 const headerColumns: TableHeaderColumns[] = [
   {

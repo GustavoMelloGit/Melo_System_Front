@@ -2,9 +2,9 @@ import { Button, Flex, Stack, Textarea } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { validationErrors } from '../../../../lib/errors'
-import ControllerField from '../../../../shared/components/inputs/ControllerField'
-import { type FertilizerFormValues } from '../../types/model/Fertilizer'
+import { validationErrors } from '../../../../../lib/errors'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import { type StockProductFormValues } from './types'
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -19,15 +19,15 @@ const validationSchema = yup.object().shape({
 })
 
 type Props = {
-  initialValues: FertilizerFormValues
-  onSubmit: (values: FertilizerFormValues) => Promise<void>
+  initialValues: StockProductFormValues
+  onSubmit: (values: StockProductFormValues) => Promise<void>
 }
-export default function FertilizerForm({ initialValues, onSubmit }: Props): JSX.Element {
+export default function StockProductForm({ initialValues, onSubmit }: Props): JSX.Element {
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FertilizerFormValues>({
+  } = useForm<StockProductFormValues>({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
   })

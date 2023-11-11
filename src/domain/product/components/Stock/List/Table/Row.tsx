@@ -1,16 +1,16 @@
 import { Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
-import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
-import IconButton from '../../../../../shared/components/IconButton'
-import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
-import { type FertilizerModel } from '../../../types/model/Fertilizer'
+import { getColorByValue } from '../../../../../../lib/utils/getColorByValue'
+import IconButton from '../../../../../../shared/components/IconButton'
+import CollapsibleTd from '../../../../../../shared/components/table/CollapsibleTd'
+import { type FertilizerModel } from '../../../../../fertilizer/types/model/Fertilizer'
 
 type Props = {
   fertilizer: FertilizerModel
   onClickDelete: (id: string) => Promise<void>
   onClickCredit: (fertilizer: FertilizerModel) => Promise<void>
 }
-const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX.Element => {
+const StockTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX.Element => {
   return (
     <Tr>
       <Td data-cy='table-cell-fertilizer-createdAt'>
@@ -46,4 +46,4 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props)
     </Tr>
   )
 }
-export default FertilizerTableRow
+export default StockTableRow

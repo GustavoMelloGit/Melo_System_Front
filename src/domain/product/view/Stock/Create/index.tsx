@@ -1,14 +1,14 @@
 import { Heading } from '@chakra-ui/react'
-import Modal from '../../../../shared/components/Modal'
-import { useModal } from '../../../../shared/hooks/useModal'
-import FertilizerForm from '../../components/Form'
-import useCreateFertilizerView from './useView'
+import Modal from '../../../../../shared/components/Modal'
+import { useModal } from '../../../../../shared/hooks/useModal'
+import StockProductForm from '../../../components/Stock/Form'
+import useCreateProductView from './useView'
 
 type Props = {
   refetch: () => void
 }
-const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
-  const { handleAddFertilizer } = useCreateFertilizerView({ onSuccess: refetch })
+const CreateProductView = ({ refetch }: Props): JSX.Element => {
+  const { handleAddFertilizer } = useCreateProductView({ onSuccess: refetch })
   const closeModal = useModal((state) => state.closeModal)
   return (
     <Modal isCentered isOpen onClose={closeModal}>
@@ -20,7 +20,7 @@ const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body>
-          <FertilizerForm
+          <StockProductForm
             initialValues={{
               name: '',
               quantity: 0,
@@ -33,4 +33,4 @@ const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
     </Modal>
   )
 }
-export default CreateFertilizerView
+export default CreateProductView
