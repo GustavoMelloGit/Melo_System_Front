@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardBody,
@@ -9,8 +10,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftAddon,
   Stack,
   Tag,
   Text,
@@ -23,6 +22,7 @@ import { formatCurrency } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import NumberInput from '../../../../../shared/components/inputs/NumberInput'
 import RHFCurrencyInput from '../../../../../shared/components/inputs/RHFCurrencyInput'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { getFertilizersService } from '../../../../fertilizer/services/get'
@@ -97,7 +97,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
               isRequired
             />
 
-            <Flex gap={4}>
+            <Box display='grid' gridTemplateColumns='repeat(auto-fit, minmax(230px, 1fr))' gap={4}>
               <RHFCurrencyInput
                 name={`products.${itemIndex}.price`}
                 label='Preço de venda'
@@ -105,22 +105,27 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 leftIcon='R$'
                 isRequired
               />
-              <ControllerField
+              <Controller
                 control={control}
                 name={`products.${itemIndex}.quantity`}
-                type='number'
-                label='Quantidade'
-                required
-                placeholder='Insira a quantidade'
+                render={({ field }) => (
+                  <NumberInput
+                    label='Quantidade'
+                    isRequired
+                    placeholder='Insira a quantidade'
+                    {...field}
+                  />
+                )}
               />
-            </Flex>
-            <Flex gap={4}>
               <FormControl>
                 <FormLabel htmlFor='totalPrice'>Valor total</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon>R$</InputLeftAddon>
-                  <Input id='totalPrice' isDisabled value={totalPrice} variant='filled' />
-                </InputGroup>
+                <Input
+                  rounded='xl'
+                  id='totalPrice'
+                  isDisabled
+                  value={totalPrice}
+                  variant='filled'
+                />
               </FormControl>
               <ControllerField
                 name={`products.${itemIndex}.deliveryDate`}
@@ -129,7 +134,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 type='date'
                 required
               />
-            </Flex>
+            </Box>
             <Controller
               control={control}
               name={`products.${itemIndex}.shouldDeliver`}
