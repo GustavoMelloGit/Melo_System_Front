@@ -70,7 +70,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
         <Modal.CloseButton />
         <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
-            Vender Adubo
+            Vender Produto
           </Heading>
         </Modal.Header>
         <Modal.Body>
