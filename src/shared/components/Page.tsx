@@ -11,7 +11,7 @@ type Props = StackProps & {
 const Page = forwardRef<HTMLDivElement, Props>(({ children, title = '', meta, ...other }, ref) => (
   <>
     <Helmet>
-      <title>{`${title} | Melo System`}</title>
+      <title>{`${title} | Melo System - EF`}</title>
       {meta}
     </Helmet>
 
