@@ -1,4 +1,4 @@
-import { Button, Divider, Flex, Show, Stack } from '@chakra-ui/react'
+import { Button, Flex, Stack } from '@chakra-ui/react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import ProductItem from './ProductItem'
@@ -50,7 +50,7 @@ export default function SellProductForm({ onSubmit, initialValues }: Props): JSX
           onSubmit({ client, products: formattedProducts })
         })}
       >
-        <Flex gap={8} flexWrap='wrap'>
+        <Flex gap={4} flexWrap='wrap'>
           <Stack spacing={4} flex={1}>
             {fields.map((item, index) => (
               <ProductItem
@@ -74,9 +74,6 @@ export default function SellProductForm({ onSubmit, initialValues }: Props): JSX
               </Button>
             </Flex>
           </Stack>
-          <Show above='sm'>
-            <Divider orientation='vertical' height={200} />
-          </Show>
           <SellProductSummary />
         </Flex>
       </form>
