@@ -138,13 +138,6 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                   variant='filled'
                 />
               </FormControl>
-              <ControllerField
-                name={`products.${itemIndex}.deliveryDate`}
-                control={control}
-                label='Data de entrega'
-                type='date'
-                required
-              />
             </Box>
             <Controller
               control={control}
@@ -162,6 +155,14 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
               )}
             />
             <Box display='grid' gridTemplateColumns='repeat(auto-fit, minmax(230px, 1fr))' gap={4}>
+              <ControllerField
+                name={`products.${itemIndex}.deliveryDate`}
+                control={control}
+                label='Data de entrega'
+                type='date'
+                isDisabled={!shouldDelivery}
+                required
+              />
               <ControllerField
                 control={control}
                 name={`products.${itemIndex}.brook`}
