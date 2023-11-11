@@ -35,7 +35,7 @@ export default function PageLayout(): JSX.Element {
   }, [location])
 
   return (
-    <Flex minH='100vh' position='relative' overflowX='hidden'>
+    <Flex minH='100vh' position='relative'>
       {isOpen && (
         <Box
           as='aside'
@@ -61,6 +61,7 @@ export default function PageLayout(): JSX.Element {
       <Container
         as='main'
         maxW={maxW[size]}
+        minH='100vh'
         pt={10}
         pb={20}
         {...(isOpen && {
