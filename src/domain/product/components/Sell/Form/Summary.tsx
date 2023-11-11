@@ -71,6 +71,7 @@ type ItemProps = FlexProps & {
   label: ReactNode
   price: ReactNode
 }
+
 function Item({ price, label: product, ...props }: ItemProps): JSX.Element {
   return (
     <Flex align='center' justify='space-between' gap={3} {...props}>
