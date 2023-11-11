@@ -45,9 +45,9 @@ export default function FertilizerForm({ initialValues, onSubmit }: Props): JSX.
           <ControllerField
             control={control}
             name='name'
-            label='Fórmula'
+            label='Nome'
             required
-            placeholder='Insira a fórmula'
+            placeholder='Nome do produto'
           />
           <ControllerField
             control={control}
@@ -63,11 +63,11 @@ export default function FertilizerForm({ initialValues, onSubmit }: Props): JSX.
           control={control}
           name='description'
           label='Descrição'
-          CustomInput={<Textarea placeholder='Insira a descrição' />}
+          CustomInput={<Textarea placeholder='Descrição do produto' />}
         />
       </Stack>
       <Button mt={5} isLoading={isSubmitting} type='submit' colorScheme='blue' w='full'>
-        Salvar
+        Adicionar
       </Button>
     </form>
   )

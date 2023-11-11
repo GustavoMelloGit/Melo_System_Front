@@ -1,10 +1,10 @@
 import { Box, List, VStack } from '@chakra-ui/react'
 import { BiCake, BiUser } from 'react-icons/bi'
-import { BsTruck } from 'react-icons/bs'
+import { BsBoxes, BsTruck } from 'react-icons/bs'
 import { CgArrowsExchange } from 'react-icons/cg'
 import { HiOutlineDocumentReport } from 'react-icons/hi'
 import { MdOutlineMonitorWeight } from 'react-icons/md'
-import { TbPlant, TbTruckLoading } from 'react-icons/tb'
+import { TbTruckLoading } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import useAuth from '../../../../../domain/auth/hooks/useAuth'
 import { type UserPermission } from '../../../../../domain/auth/types/model/user'
@@ -76,8 +76,8 @@ const listItem: Record<
       ),
   },
   [Routes.fertilizers]: {
-    label: 'Estoque de Adubos',
-    icon: <TbPlant size={18} />,
+    label: 'Estoque',
+    icon: <BsBoxes size={20} />,
     hasPermission: (permissions) =>
       Boolean(
         permissions.find(

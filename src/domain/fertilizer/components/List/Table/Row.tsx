@@ -35,8 +35,8 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props)
             onClick={async () => onClickCredit(fertilizer)}
           />
           <IconButton
-            aria-label='Deletar adubo'
-            title='Deletar adubo'
+            aria-label='Remover produto'
+            title='Remover produto'
             icon='remove'
             colorScheme='red'
             onClick={async () => onClickDelete(fertilizer.id)}

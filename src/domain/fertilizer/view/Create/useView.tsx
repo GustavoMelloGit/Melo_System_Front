@@ -14,7 +14,7 @@ export default function useCreateFertilizerView({ onSuccess }: Props): UseCreate
       toast.error(error)
       return
     }
-    toast.success('Adubo criado com sucesso')
+    toast.success('Produto adicionado com sucesso!')
     closeModal()
     onSuccess()
   }

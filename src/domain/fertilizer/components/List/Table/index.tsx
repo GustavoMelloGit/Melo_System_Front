@@ -23,7 +23,7 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
       toast.error(error)
       return
     }
-    toast.success('Adubo deletado com sucesso!')
+    toast.success('Produto removido com sucesso!')
     refetch()
   }
   async function handleCreditFertilizer(fertilizer: FertilizerModel): Promise<void> {
@@ -39,7 +39,7 @@ const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.E
       rows={{
         isLoading,
         dataLength: data?.length ?? 0,
-        noDataMessage: 'Nenhum adubo encontrado.',
+        noDataMessage: 'Nenhum produto encontrado.',
       }}
       pagination={{
         totalLength: totalBooks,

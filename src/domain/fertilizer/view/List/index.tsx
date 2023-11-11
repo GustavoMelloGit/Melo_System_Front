@@ -10,17 +10,17 @@ const FertilizerListView = (): JSX.Element => {
     handleAddFertilizer,
   } = useFertilizerListView()
   return (
-    <Page title='Adubos' data-cy='list-clients-page'>
+    <Page title='Estoque' data-cy='list-clients-page'>
       <HeaderBreadcrumbs
-        heading='Adubos'
+        heading='Estoque'
         links={[
           {
-            label: 'Lista de adubos',
+            label: 'Estoque de produtos',
           },
         ]}
         actions={
           <IconButton
-            aria-label='Adicionar adubo'
+            aria-label='Adicionar produto'
             icon='add'
             variant='outline'
             colorScheme='blue'

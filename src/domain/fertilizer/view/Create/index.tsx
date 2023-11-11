@@ -15,7 +15,7 @@ const CreateFertilizerView = ({ refetch }: Props): JSX.Element => {
       <Modal.Content>
         <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
-            Adicionar adubo
+            Adicionar Produto
           </Heading>
           <Modal.CloseButton />
         </Modal.Header>
