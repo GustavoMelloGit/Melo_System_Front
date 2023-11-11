@@ -35,6 +35,7 @@ type Props = {
   initialValues: Required<SellFertilizerFormValues>
   onSubmit: (values: SellFertilizerFormValues) => Promise<void>
 }
+
 const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.Element => {
   const [shouldDelivery, setShouldDelivery] = useState<boolean>(true)
 
