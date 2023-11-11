@@ -26,7 +26,7 @@ import SpinLoader from '../../../../../shared/components/SpinLoader'
 import ListTransactionsView from '../Accounts/Checking/view/List'
 import CoffeeAccountView from '../Accounts/Coffee/view/List'
 import EscolhaAccountView from '../Accounts/Escolha/view/List'
-import FertilizerAccountView from '../Accounts/Fertilizer/view/List'
+import FertilizerAccountView from '../Accounts/Product/view/List'
 import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import useClientDetailsView from './useView'
 
@@ -226,11 +226,6 @@ export default function ClientDetails(): JSX.Element {
                     Conta Escolha
                   </Tab>
                 </Link>
-                {/* <Link to='?tab=3' draggable={false}>
-                  <Tab as='span' data-cy='harvest-tab' roundedTop={6}>
-                    Conta Colheita
-                  </Tab>
-                </Link> */}
                 <Link style={linkStyle} to={`?tab=${ClientAccountsEnum.bags}`} draggable={false}>
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>
                     Conta Sacaria
@@ -242,7 +237,7 @@ export default function ClientDetails(): JSX.Element {
                   draggable={false}
                 >
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>
-                    Conta Adubo
+                    Conta Comercial
                   </Tab>
                 </Link>
               </TabList>

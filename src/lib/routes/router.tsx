@@ -6,6 +6,7 @@ import coffeeRoutes from '../../domain/coffee/routes'
 import NotFoundPage from '../../domain/error/view/404'
 import fertilizerRoutes from '../../domain/fertilizer/routes'
 import metricsRoutes from '../../domain/metrics/routes'
+import productRoutes from '../../domain/product/routes'
 import systemRoutes from '../../domain/system/routes'
 import PageLayout from '../../shared/components/layout'
 import { ProtectedRoute } from '../../shared/components/Routers'
@@ -28,6 +29,7 @@ export const protectedRoutes: RouteObject = {
     ...fertilizerRoutes,
     ...systemRoutes,
     ...metricsRoutes,
+    ...productRoutes,
   ],
 }
 

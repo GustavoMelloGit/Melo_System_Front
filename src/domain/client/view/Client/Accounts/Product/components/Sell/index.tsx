@@ -1,17 +1,17 @@
 import { getClientService } from '../../../../../../service'
-import useSellFertilizerView from './useView'
-import SellFertilizerView from './View'
+import useSellProductView from './useView'
+import SellProductView from './View'
 
 type Props = {
   refetch: () => void
   clientId: string
 }
-const SellFertilizer = ({ refetch, clientId }: Props): JSX.Element => {
-  const { closeModal, handleSellFertilizer } = useSellFertilizerView()
+const SellProduct = ({ refetch, clientId }: Props): JSX.Element => {
+  const { closeModal, handleSellFertilizer } = useSellProductView()
   const { data } = getClientService(clientId)
 
   return (
-    <SellFertilizerView
+    <SellProductView
       onClose={closeModal}
       initialValues={{
         fertilizerName: '',
@@ -30,4 +30,4 @@ const SellFertilizer = ({ refetch, clientId }: Props): JSX.Element => {
     />
   )
 }
-export default SellFertilizer
+export default SellProduct

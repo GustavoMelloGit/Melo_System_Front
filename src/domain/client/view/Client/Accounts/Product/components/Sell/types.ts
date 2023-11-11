@@ -1,4 +1,4 @@
-export type SellFertilizerFormValues = {
+export type SellProductFormValues = {
   fertilizerName: string
   fertilizerId: string
   bags: number

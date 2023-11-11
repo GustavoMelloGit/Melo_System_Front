@@ -1,4 +1,6 @@
+import { Routes } from '../../../../../../../../lib/routes'
 import IconButton from '../../../../../../../../shared/components/IconButton'
+import Link from '../../../../../../../../shared/components/Link'
 import Table from '../../../../../../../../shared/components/table/Table'
 import {
   type CustomTableComponentProps,
@@ -35,8 +37,10 @@ export default function FertilizerAccountTable({
         searchForOptions,
         actions: (
           <IconButton
+            as={Link}
+            // @ts-expect-error this property does exist
+            to={Routes.sellProduct}
             icon='sell'
-            onClick={onClickSell}
             aria-label='vender adubo'
             title='Vender adubo'
           />
