@@ -15,7 +15,7 @@ export default function SellProductSummary(): JSX.Element {
   const formattedTotalPrice = formatCurrency(totalPrice * 100)
 
   return (
-    <Stack as='aside' flex={1} spacing={4} minWidth={300}>
+    <Stack as='aside' position='sticky' top={0} flex={1} spacing={4} minWidth={300}>
       <Heading fontSize='2xl'>Resumo da venda</Heading>
       <Stack spacing={2} divider={<Divider />}>
         {selectedProducts.map((p) => (

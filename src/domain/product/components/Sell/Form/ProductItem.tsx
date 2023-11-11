@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -17,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
@@ -51,26 +53,30 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
 
   return (
     <Card>
-      <CardHeader onClick={toggleCollapse}>
-        <Flex align='center' justify='space-between'>
-          <Stack>
-            <Flex gap={5}>
-              <Text>{productName || `Selecione o Produto`}</Text>
-              <Tag colorScheme='green' variant='outline'>
-                {formatCurrency(price * 100)}
-              </Tag>
-            </Flex>
-            <Text>Qntd.: {quantity}</Text>
-          </Stack>
-          {itemIndex > 0 && (
-            <IconButton
-              icon='close'
-              colorScheme='red'
-              aria-label='remover produto'
-              onClick={removeProduct}
-              ml={2}
-            />
-          )}
+      <CardHeader position='relative'>
+        <Flex gap={2} align='center'>
+          <Button bg='transparent' inset={0} onClick={toggleCollapse}>
+            {collapseDetails ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          </Button>
+          <Flex align='center' justify='space-between' flex={1}>
+            <Stack spacing={0.5}>
+              <Flex gap={5}>
+                <Text fontWeight={700}>{productName || `Selecione o Produto`}</Text>
+                <Tag colorScheme='green' variant='outline'>
+                  {formatCurrency(price * 100)}
+                </Tag>
+              </Flex>
+              <Text>Qtd.: {quantity}</Text>
+            </Stack>
+            {itemIndex > 0 && (
+              <IconButton
+                icon='close'
+                colorScheme='red'
+                aria-label='remover produto'
+                onClick={removeProduct}
+              />
+            )}
+          </Flex>
         </Flex>
       </CardHeader>
       <Collapse in={collapseDetails}>
