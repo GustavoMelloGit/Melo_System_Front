@@ -1,6 +1,5 @@
-import { toast } from 'react-hot-toast'
-import { useParams } from 'react-router-dom'
-import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { Navigate, useParams } from 'react-router-dom'
+import { Routes } from '../../../../../../../../lib/routes'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import FertilizerAccountTable from '../../components/Table'
 import { getFertilizerTransactionService } from '../../services/get'
@@ -8,17 +7,11 @@ import { getFertilizerTransactionService } from '../../services/get'
 export default function FertilizerAccountView(): JSX.Element {
   const { uuid } = useParams()
   const params = useServiceParams()
-  const openModal = useModal((state) => state.openModal)
 
-  const { data, isLoading, mutate } = getFertilizerTransactionService(uuid, params)
+  const { data, isLoading } = getFertilizerTransactionService(uuid, params)
 
-  async function handleOpenSellModal(): Promise<void> {
-    if (!uuid) {
-      toast.error('Não foi possível abrir a modal de venda de fertilizante')
-      return
-    }
-    const SellFertilizer = (await import('../../components/Sell')).default
-    openModal(<SellFertilizer refetch={mutate} clientId={uuid} />)
+  if (!uuid) {
+    return <Navigate to={Routes.clients} />
   }
 
   return (
@@ -26,7 +19,7 @@ export default function FertilizerAccountView(): JSX.Element {
       data={data?.data}
       isLoading={isLoading}
       totalLength={data?.total ?? 0}
-      onClickSell={handleOpenSellModal}
+      clientId={uuid}
     />
   )
 }
