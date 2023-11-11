@@ -15,19 +15,34 @@ export default function SellProductSummary(): JSX.Element {
   const formattedTotalPrice = formatCurrency(totalPrice * 100)
 
   return (
-    <Box as='aside' flex={1} minWidth={300} position='relative'>
+    <Box as='aside' minWidth={250} flex={1} position='relative'>
       <Stack
         position='sticky'
         className='sticky'
         spacing={4}
         top={12}
-        borderLeft='1px solid white'
+        borderLeftWidth={{
+          base: 0,
+          md: '1px',
+        }}
+        borderColor='GrayText'
         pl={{
           base: 0,
-          sm: 4,
+          md: 4,
+        }}
+        fontSize={{
+          base: 'sm',
+          lg: 'md',
         }}
       >
-        <Heading fontSize='2xl'>Resumo da venda</Heading>
+        <Heading
+          fontSize={{
+            base: 'xl',
+            lg: '2xl',
+          }}
+        >
+          Resumo da venda
+        </Heading>
         <Stack spacing={2} divider={<Divider />}>
           {selectedProducts.map((p) => (
             <Item
@@ -58,15 +73,7 @@ type ItemProps = FlexProps & {
 }
 function Item({ price, label: product, ...props }: ItemProps): JSX.Element {
   return (
-    <Flex
-      align='center'
-      justify='space-between'
-      fontSize={{
-        base: 'sm',
-        sm: 'md',
-      }}
-      {...props}
-    >
+    <Flex align='center' justify='space-between' gap={3} {...props}>
       <Text>{product}</Text>
       <Text fontWeight={700}>{price}</Text>
     </Flex>

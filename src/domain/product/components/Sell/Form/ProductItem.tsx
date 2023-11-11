@@ -19,7 +19,6 @@ import { useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
-import IconButton from '../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import NumberInput from '../../../../../shared/components/inputs/NumberInput'
@@ -55,28 +54,40 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
     <Card>
       <CardHeader position='relative'>
         <Flex gap={2} align='center'>
-          <Button bg='transparent' inset={0} onClick={toggleCollapse}>
+          <Button
+            bg='transparent'
+            inset={0}
+            minW='unset'
+            minH='unset'
+            p={0}
+            h={8}
+            w={8}
+            onClick={toggleCollapse}
+          >
             {collapseDetails ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </Button>
-          <Flex align='center' justify='space-between' flex={1}>
-            <Stack spacing={0.5}>
-              <Flex gap={5}>
-                <Text fontWeight={700}>{productName || `Selecione o Produto`}</Text>
-                <Tag colorScheme='green' variant='outline'>
-                  {formatCurrency(price * 100)}
-                </Tag>
-              </Flex>
+          <Stack spacing={0.5} flex={1}>
+            <Flex justify='space-between' gap={2}>
+              <Text fontWeight={700}>{productName || `Selecione o Produto`}</Text>
+              <Tag colorScheme='green' variant='outline' h={3} minW='max-content'>
+                {formatCurrency(price * 100)}
+              </Tag>
+            </Flex>
+            <Flex justify='space-between' fontSize='sm'>
               <Text>Qtd.: {quantity}</Text>
-            </Stack>
-            {itemIndex > 0 && (
-              <IconButton
-                icon='close'
-                colorScheme='red'
-                aria-label='remover produto'
-                onClick={removeProduct}
-              />
-            )}
-          </Flex>
+              {itemIndex > 0 && (
+                <Button
+                  fontSize='inherit'
+                  variant='link'
+                  onClick={removeProduct}
+                  colorScheme='red'
+                  h='unset'
+                >
+                  Remover
+                </Button>
+              )}
+            </Flex>
+          </Stack>
         </Flex>
       </CardHeader>
       <Collapse in={collapseDetails}>
@@ -150,7 +161,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 </Checkbox>
               )}
             />
-            <Flex gap={4}>
+            <Box display='grid' gridTemplateColumns='repeat(auto-fit, minmax(230px, 1fr))' gap={4}>
               <ControllerField
                 control={control}
                 name={`products.${itemIndex}.brook`}
@@ -165,7 +176,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 label='Referência'
                 required
               />
-            </Flex>
+            </Box>
             <ControllerField
               control={control}
               name={`products.${itemIndex}.description`}
