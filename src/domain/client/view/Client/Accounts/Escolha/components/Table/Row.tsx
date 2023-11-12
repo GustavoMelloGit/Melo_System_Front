@@ -15,10 +15,10 @@ export default function EscolhaAccountTableRow({ transaction }: Props): JSX.Elem
       <Td>{transaction.description}</Td>
       <Td>{transaction?.details?.utilization ?? 0}</Td>
       <Td>{transaction?.details?.foulness ?? 0}</Td>
-      <Td color={getColorByValue(transaction.type.value)}>
+      <Td color={getColorByValue(transaction.type.value)} whiteSpace='nowrap'>
         {getNumberOfBags(transaction.type.value)}
       </Td>
-      <Td color={getColorByValue(transaction.clientBalance)}>
+      <Td color={getColorByValue(transaction.clientBalance)} whiteSpace='nowrap'>
         {getNumberOfBags(transaction.clientBalance)}
       </Td>
       <Td textAlign='center'>

@@ -56,10 +56,14 @@ export default function TransactionsListRow({
     <Tr>
       <Td>{dateToFormat(transaction.date, 'dd/MM/yyyy')}</Td>
       <Td>{transaction.description}</Td>
-      <Td {...selectableColumnsProps(transaction.type.value)} textAlign='center'>
+      <Td
+        {...selectableColumnsProps(transaction.type.value)}
+        whiteSpace='nowrap'
+        textAlign='center'
+      >
         {formatCurrency(transaction.type.value)}
       </Td>
-      <Td {...selectableColumnsProps(clientBalance)} textAlign='center'>
+      <Td {...selectableColumnsProps(clientBalance)} whiteSpace='nowrap' textAlign='center'>
         {formatCurrency(clientBalance)}
       </Td>
       <Td>
