@@ -72,10 +72,10 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
       <Td title={coffeeTypeColumnValue}>{coffeeTypeColumnValue}</Td>
       <Td>{CoffeeBebidasLabel[transaction.type.name]}</Td>
       <Td>{fullDescription || transaction.description}</Td>
-      <Td color={getColorByValue(transaction.type.value)}>
+      <Td color={getColorByValue(transaction.type.value)} whiteSpace='nowrap'>
         {getNumberOfBags(transaction.type.value)}
       </Td>
-      <Td color={getColorByValue(transaction.clientBalance)}>
+      <Td color={getColorByValue(transaction.clientBalance)} whiteSpace='nowrap'>
         {getNumberOfBags(transaction.clientBalance)}
       </Td>
       <Td textAlign='center'>
