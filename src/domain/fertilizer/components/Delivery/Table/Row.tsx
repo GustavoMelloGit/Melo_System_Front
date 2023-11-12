@@ -1,4 +1,4 @@
-import { Td, Tr } from '@chakra-ui/react'
+import { Flex, Td, Tr } from '@chakra-ui/react'
 import { Routes } from '../../../../../lib/routes'
 import { dateToFormat, formatClientName } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
@@ -68,18 +68,20 @@ export default function DeliveryTableRow({
       </Td>
       <Td data-cy='deliveryCoffee-table-brook'>{delivery.brook}</Td>
       <Td data-cy='deliveryCoffee-table-complement'>{delivery.complement}</Td>
-      <Td textAlign='center'>
-        <IconButton
-          icon='edit'
-          aria-label='Editar pedido de coleta'
-          title='Editar pedido de coleta'
-          colorScheme='blue'
-          onClick={() => {
-            void onClickUpdate(delivery)
-          }}
-          data-cy='deliveryCoffee-edit'
-        />
-        {secondaryAction}
+      <Td>
+        <Flex>
+          <IconButton
+            icon='edit'
+            aria-label='Editar pedido de coleta'
+            title='Editar pedido de coleta'
+            colorScheme='blue'
+            onClick={async () => {
+              await onClickUpdate(delivery)
+            }}
+            data-cy='deliveryCoffee-edit'
+          />
+          {secondaryAction}
+        </Flex>
       </Td>
     </Tr>
   )
