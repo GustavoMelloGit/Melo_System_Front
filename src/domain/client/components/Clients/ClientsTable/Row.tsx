@@ -5,7 +5,6 @@ import { Routes } from '../../../../../lib/routes'
 import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../shared/components/IconButton'
-import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import LinkRow from '../../../../../shared/components/table/LinkRow'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -35,15 +34,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
       >
         {client.name}
       </Td>
-      <CollapsibleTd
-        maxW={60}
-        pos='relative'
-        userSelect='none'
-        zIndex={2}
-        data-cy='table-cell-client-nickname'
-      >
-        {client.nickname ?? '--'}
-      </CollapsibleTd>
+      <Td>{client.nickname ?? '--'}</Td>
       <Td
         onClick={handleToggleBalance}
         cursor='pointer'
