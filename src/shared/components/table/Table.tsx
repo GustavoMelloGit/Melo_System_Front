@@ -38,6 +38,7 @@ export default function Table({
               bg: trHoverColor,
             },
           },
+          whiteSpace: 'unset',
           roundedTop: filter ? 0 : 16,
         }}
       >
