@@ -23,7 +23,6 @@ export default function SystemShortcuts(): JSX.Element {
         <AccordionPanel>
           <Stack>
             <ShortcutItem label='Pesquisar cliente' shortcut='ctrl + space' />
-            <ShortcutItem label='Expandir/Recolher quebra de linha' shortcut='ctrl + q' />
           </Stack>
         </AccordionPanel>
       </AccordionItem>
