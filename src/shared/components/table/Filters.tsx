@@ -1,11 +1,14 @@
 import {
   Box,
+  FormControl,
+  FormLabel,
   Grid,
   GridItem,
   Hide,
   Select,
   Show,
   useColorModeValue,
+  VisuallyHidden,
   type SystemStyleObject,
 } from '@chakra-ui/react'
 import { cloneElement, useCallback, useEffect } from 'react'
@@ -86,24 +89,29 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
               control={control}
               name={PaginationParams.searchFor}
               render={({ field: { onChange, ...field } }) => (
-                <Select
-                  variant='filled'
-                  roundedLeft='md'
-                  roundedRight={{ base: 'md', sm: 'none' }}
-                  data-cy='table-searchFor-select'
-                  fontWeight={500}
-                  onChange={(e) => {
-                    onChange(e)
-                    handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
-                  }}
-                  {...field}
-                >
-                  {Object.entries(searchForOptions).map(([value, { label }]) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </Select>
+                <FormControl>
+                  <VisuallyHidden>
+                    <FormLabel>Selecione qual propriedade deseja pesquisar</FormLabel>
+                  </VisuallyHidden>
+                  <Select
+                    variant='filled'
+                    roundedLeft='md'
+                    roundedRight={{ base: 'md', sm: 'none' }}
+                    data-cy='table-searchFor-select'
+                    fontWeight={500}
+                    onChange={(e) => {
+                      onChange(e)
+                      handleRemoveParams([PaginationParams.searchBy, PaginationParams.searchFor])
+                    }}
+                    {...field}
+                  >
+                    {Object.entries(searchForOptions).map(([value, { label }]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
               )}
             />
             {actions && <Show below='sm'>{actions}</Show>}

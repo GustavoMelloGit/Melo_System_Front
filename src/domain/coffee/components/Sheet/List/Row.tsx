@@ -14,8 +14,10 @@ export default function SheetsTableRow({ sheet }: Props): JSX.Element {
   const { number } = useParams<{ number: string }>()
   if (!number) return <Navigate to={Routes.books} replace />
   return (
-    <LinkRow to={Routes.sheetDetails(number, sheet.number)}>
-      <Td>{sheet.number}</Td>
+    <LinkRow>
+      <Td>
+        <LinkRow.Link to={Routes.sheetDetails(number, sheet.number)}>{sheet.number}</LinkRow.Link>
+      </Td>
       <Td>
         {sheet.client.code} - {sheet.client.name}
       </Td>
