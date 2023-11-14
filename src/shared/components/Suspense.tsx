@@ -9,7 +9,7 @@ export default function Suspense({ children }: PropsWithChildren): JSX.Element {
 export function SuspenseLoader(): JSX.Element {
   const bg = useColorModeValue('gray.100', 'gray.700')
   return (
-    <Center flex={1}>
+    <Center minH='100svh' w='full'>
       <Center boxSize={120} bg={bg} rounded={25} shadow='xl'>
         <SpinLoader size='lg' />
       </Center>

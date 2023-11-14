@@ -1,4 +1,15 @@
-import { Box, Flex, IconButton, Select, Show, Text, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Select,
+  Show,
+  Text,
+  useColorModeValue,
+  VisuallyHidden,
+} from '@chakra-ui/react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import {
   DEFAULT_PAGINATION_LIMIT,
@@ -55,13 +66,18 @@ export default function TablePagination({
           {totalLength} {totalLength === 1 ? 'Item' : 'Items'}
         </Text>
       </Show>
-      <Select w={'fit-content'} onChange={handleSetRowsPerPage} value={rowsPerPage}>
-        {DEFAULT_ROWS_PER_PAGE_OPTIONS.map((rowsPerPage) => (
-          <option key={rowsPerPage} value={rowsPerPage}>
-            {rowsPerPage} {rowsPerPage === 1 ? 'Item' : 'Items'}
-          </option>
-        ))}
-      </Select>
+      <FormControl w={'fit-content'}>
+        <VisuallyHidden>
+          <FormLabel>Selecione o número de linhas a serem exibidas</FormLabel>
+        </VisuallyHidden>
+        <Select onChange={handleSetRowsPerPage} value={rowsPerPage}>
+          {DEFAULT_ROWS_PER_PAGE_OPTIONS.map((rowsPerPage) => (
+            <option key={rowsPerPage} value={rowsPerPage}>
+              {rowsPerPage} {rowsPerPage === 1 ? 'Item' : 'Items'}
+            </option>
+          ))}
+        </Select>
+      </FormControl>
       <Flex align='center' gap={[1, 2]} px={[0, 4]}>
         <IconButton
           size={['sm', 'md']}
