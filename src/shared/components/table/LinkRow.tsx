@@ -1,29 +1,21 @@
-import { LinkBox, LinkOverlay, Td, Tr, VisuallyHidden, type LinkBoxProps } from '@chakra-ui/react'
-import Link from '../Link'
+import { LinkBox, LinkOverlay, Tr, type LinkBoxProps } from '@chakra-ui/react'
+import Link, { type Props as LinkProps } from '../Link'
 
-type Props = LinkBoxProps & {
-  to: string
-  descriptiveLinkText: string
-}
-export default function LinkRow({
-  children,
-  to,
-  descriptiveLinkText,
-  ...rest
-}: Props): JSX.Element {
+type Props = LinkBoxProps
+export default function LinkRow({ children, ...rest }: Props): JSX.Element {
   return (
     <LinkBox as={Tr} transform='scale(1)' {...rest}>
       {children}
-      <Td
-        visibility='hidden'
-        sx={{
-          all: 'unset',
-        }}
-      >
-        <LinkOverlay as={Link} to={to}>
-          <VisuallyHidden>{descriptiveLinkText}</VisuallyHidden>
-        </LinkOverlay>
-      </Td>
     </LinkBox>
   )
 }
+
+function LinkRowLink({ children, ...props }: LinkProps): JSX.Element {
+  return (
+    <LinkOverlay as={Link} {...props} _hover={{ textDecor: 'none', ...props.sx }}>
+      {children}
+    </LinkOverlay>
+  )
+}
+
+LinkRow.Link = LinkRowLink
