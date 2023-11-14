@@ -10,7 +10,10 @@ type Props = {
 }
 export default function CredoresDevedoresCafeMetricsTableViewRow({ client }: Props): JSX.Element {
   return (
-    <LinkRow to={Routes.clientPage(client.id)}>
+    <LinkRow
+      to={Routes.clientPage(client.id)}
+      descriptiveLinkText={`Ir para a conta do cliente ${client.name}`}
+    >
       <Td>{client.code}</Td>
       <Td>{client.name}</Td>
       <Td>{capitalCase(client.balance.type)}</Td>

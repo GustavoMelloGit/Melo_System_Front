@@ -10,7 +10,10 @@ export type Props = {
 }
 export default function BookTableRow({ book }: Props): JSX.Element {
   return (
-    <LinkRow to={Routes.bookPage(book.number)}>
+    <LinkRow
+      to={Routes.bookPage(book.number)}
+      descriptiveLinkText={`Ir para o talão ${book.number}`}
+    >
       <Td data-cy='table-cell-client-avatar'>{book.number}</Td>
       <Td>{dateToFormat(book.createdAt, 'dd/MM/yyyy')}</Td>
       <Td textAlign='center' data-cy='table-cell-client-actions'>

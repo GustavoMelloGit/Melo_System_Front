@@ -14,7 +14,10 @@ type Props = {
 }
 export default function BirthdaysTableRow({ client }: Props): JSX.Element {
   return (
-    <LinkRow to={Routes.clientPage(client.id)}>
+    <LinkRow
+      to={Routes.clientPage(client.id)}
+      descriptiveLinkText={`Ir para a conta do cliente ${client.name}`}
+    >
       <Td>
         <Avatar loading='lazy' src={client.photo} name={client.name} />
       </Td>

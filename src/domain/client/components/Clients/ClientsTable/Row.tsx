@@ -20,7 +20,10 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
   const clientBalance = currencyValueCorrection(client.balance)
 
   return (
-    <LinkRow to={Routes.clientPage(client.id)}>
+    <LinkRow
+      to={Routes.clientPage(client.id)}
+      descriptiveLinkText={`Ir para a conta do ${client.name}`}
+    >
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
