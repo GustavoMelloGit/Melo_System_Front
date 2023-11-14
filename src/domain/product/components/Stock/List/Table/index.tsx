@@ -71,7 +71,7 @@ const headerColumns: TableHeaderColumns[] = [
   },
   {
     id: 'name',
-    label: 'Fórmula',
+    label: 'Produto',
   },
   {
     id: 'quantity',
