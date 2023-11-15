@@ -1,7 +1,7 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import DownloadButton from '../../../../../shared/components/DownloadButton'
 import { type TransactionMetrics } from '../../../types/transactionMetrics'
+import MetricsDownloadButton from '../../MetricsDownloadButton'
 import TransactionsMetricsTemplate from './Template'
 
 type Props = {
@@ -20,7 +20,7 @@ export default function TransactionsMetricsDownloadButton({ data }: Props): JSX.
   }, [updatePdfInstance])
 
   return (
-    <DownloadButton
+    <MetricsDownloadButton
       instance={instance}
       aria-label='Baixar relatório de transações'
       data-cy='download-transactions-metrics'

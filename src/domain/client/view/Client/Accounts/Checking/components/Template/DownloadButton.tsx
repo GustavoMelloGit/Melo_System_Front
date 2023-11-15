@@ -1,7 +1,7 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import DownloadButton from '../../../../../../../../shared/components/DownloadButton'
+import DownloadButton from '../../../../../../../../shared/components/buttons/DownloadButton'
 import { getTransactionsFromClientService } from '../../../../../../service/getTransactionsFromClientService'
 import CoffeePriceMetricsTemplate from './Template'
 
@@ -24,8 +24,6 @@ export default function DownloadCheckingAccountButton(): JSX.Element {
       instance={instance}
       aria-label='Imprimir movimentações da conta'
       title='Imprimir movimentações da conta'
-      variant='ghost'
-      colorScheme={undefined}
     />
   )
 }
