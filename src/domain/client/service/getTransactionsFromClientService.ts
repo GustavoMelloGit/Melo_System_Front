@@ -27,7 +27,7 @@ export function getTransactionsFromClientService<T extends Type>(
   type: T,
   clientId: string,
   config?: SWRConfiguration,
-): SWRServiceResponse<ResponseByType<T>> {
+): SWRServiceResponse<Array<ResponseByType<T>>> {
   const response = useFetch(
     `/metrics/findAllTransactionsFromClient?type=${type}&clientId=${clientId}`,
     config,

@@ -2,6 +2,7 @@ import currency from 'currency.js'
 import { format } from 'date-fns'
 import { type Address, type ClientModel } from '../../domain/client/types/model/Client'
 import GlobalConfig from '../constants/config'
+import { ClientNameParser } from './clientNameParser'
 
 /**
  * Format date values from yyyy-MM-dd to dd/mm/yyyy or dd/mm/yyyy hh:mm format.
@@ -84,5 +85,5 @@ export function formatRequestParams(
 }
 
 export function formatClientName(client: ClientModel): string {
-  return `${client.code} - ${client.name}`
+  return ClientNameParser.addCode(client.name, client.code)
 }
