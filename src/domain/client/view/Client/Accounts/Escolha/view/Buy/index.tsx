@@ -5,10 +5,9 @@ import useBuyEscolhaView from './useView'
 
 type Props = {
   clientId: string
-  refetch: () => void
 }
-const BuyEscolhaView = ({ clientId, refetch }: Props): JSX.Element => {
-  const { closeModal, handleBuyCoffee, initialValues } = useBuyEscolhaView({ clientId, refetch })
+const BuyEscolhaView = ({ clientId }: Props): JSX.Element => {
+  const { closeModal, handleBuyCoffee, initialValues } = useBuyEscolhaView({ clientId })
   return (
     <Modal isOpen isCentered onClose={closeModal}>
       <Modal.Content maxW={500}>

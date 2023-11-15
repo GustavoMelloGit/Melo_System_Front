@@ -1,7 +1,9 @@
+import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
+import { EscolhaAccountEmitter } from '../../events/EscolhaAccountEmitter'
 import { getEscolhaAccountService } from '../../service/get'
 
 export default function useEscolhaAccountView(): UseEscolhaAccountView {
@@ -10,24 +12,30 @@ export default function useEscolhaAccountView(): UseEscolhaAccountView {
   const openModal = useModal((state) => state.openModal)
   const { data, isLoading, mutate } = getEscolhaAccountService(uuid, params)
 
+  const refetchData = useCallback(async () => {
+    await mutate()
+  }, [mutate])
+
   async function handleOpenCreateEscolha(): Promise<void> {
     if (!uuid) return
     const CreateEscolhaView = (await import('../../view/Create')).default
-    openModal(
-      <CreateEscolhaView
-        clientId={uuid}
-        onSuccess={() => {
-          void mutate()
-        }}
-      />,
-    )
+    openModal(<CreateEscolhaView clientId={uuid} />)
   }
 
   async function handleOpenBuyEscolha(): Promise<void> {
     if (!uuid) return
     const BuyEscolhaView = (await import('../../view/Buy')).default
-    openModal(<BuyEscolhaView clientId={uuid} refetch={mutate} />)
+    openModal(<BuyEscolhaView clientId={uuid} />)
   }
+
+  useEffect(() => {
+    EscolhaAccountEmitter.on('escolhaBought', refetchData)
+    EscolhaAccountEmitter.on('escolhaCreated', refetchData)
+    return () => {
+      EscolhaAccountEmitter.off('escolhaBought', refetchData)
+      EscolhaAccountEmitter.off('escolhaCreated', refetchData)
+    }
+  }, [refetchData])
 
   return {
     data: data?.data ?? [],
