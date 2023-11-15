@@ -3,18 +3,19 @@ import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatte
 import { calculateCoffeeValuePerWeight } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { getClientService } from '../../../../../../service'
+import { EscolhaAccountEmitter } from '../../events/EscolhaAccountEmitter'
 import { buyEscolhaService } from '../../service/post'
 import { type BuyEscolhaFormValues } from '../../types/esolha'
 
 type Props = {
   clientId: string
-  refetch: () => void
 }
-const useBuyEscolhaView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
+const useBuyEscolhaView = ({ clientId }: Props): UseBuyCoffeeView => {
   const closeModal = useModal((state) => state.closeModal)
   const { data } = getClientService(clientId)
 
-  async function handleBuyCoffee({ bags, weight, ...values }: BuyEscolhaFormValues): Promise<void> {
+  async function handleBuyCoffee(formValues: BuyEscolhaFormValues): Promise<void> {
+    const { bags, weight, ...values } = formValues
     const totalValue = calculateCoffeeValuePerWeight(+bags, +weight, +values.valuePerWeight)
     const { error } = await buyEscolhaService({
       weight: formatBagsIntoWeight(bags, weight),
@@ -30,7 +31,7 @@ const useBuyEscolhaView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
       toast.error('Erro ao comprar escolha')
       return
     }
-    refetch()
+    EscolhaAccountEmitter.emit('escolhaBought', formValues)
     toast.success('Escolha comprada com sucesso')
     closeModal()
   }

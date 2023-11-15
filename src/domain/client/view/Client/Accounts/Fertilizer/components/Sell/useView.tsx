@@ -1,5 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { FertilizerAccountEmitter } from '../../events/FertilizerAccountEmitter'
 import { sellFertilizerService } from '../../services/post'
 import { type SellFertilizerFormValues } from './types'
 
@@ -19,6 +20,7 @@ const useSellFertilizerView = (): UseSellFertilizerView => {
       toast.error(error)
       return
     }
+    FertilizerAccountEmitter.emit('fertilizerSold', values)
     toast.success('Fertilizante vendido com sucesso')
     closeModal()
   }
