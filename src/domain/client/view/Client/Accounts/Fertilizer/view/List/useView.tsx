@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
@@ -28,7 +28,7 @@ export default function useFertilizerAccountView(): UseFertilizerAccountView {
     await mutate()
   }, [mutate])
 
-  useCallback(() => {
+  useEffect(() => {
     FertilizerAccountEmitter.on('fertilizerSold', refetchData)
     return () => {
       FertilizerAccountEmitter.off('fertilizerSold', refetchData)
