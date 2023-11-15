@@ -1,9 +1,6 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { format } from 'date-fns'
-import {
-  currencyValueCorrection,
-  formatCurrency,
-} from '../../../../../../../../lib/utils/formatters'
+import { getNumberOfBags } from '../../../../../../../../lib/utils/getNumberOfBags'
 import PDFContainer from '../../../../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../../../../shared/components/PDF/PDFTable'
@@ -11,7 +8,7 @@ import PDFTableHeader from '../../../../../../../../shared/components/PDF/PDFTab
 import PDFTableRow from '../../../../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../../../../shared/components/PDF/styles'
-import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
+import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 
 const styles = StyleSheet.create({
   header: {
@@ -24,9 +21,9 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  data: CurrencyTransactionModel[]
+  data: EscolhaTransactionModel[]
 }
-export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.Element {
+export default function DownloadEscolhaAccountTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
       <PDFPaddingElement />
@@ -38,7 +35,7 @@ export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.El
             fontSize: 16,
           }}
         >
-          Movimentações Conta Corrente
+          Movimentações Conta Escolha
         </Text>
         <Text
           style={{
@@ -59,7 +56,13 @@ export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.El
             <Text>Descrição</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
-            <Text>Valor</Text>
+            <Text>Aproveitamento</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
+            <Text>Impureza</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
+            <Text>Pesagem</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
             <Text>Saldo</Text>
@@ -75,10 +78,16 @@ export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.El
                 <Text>{metric.description}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{formatCurrency(metric.type.value)}</Text>
+                <Text>{metric.details.utilization ?? 0}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{currencyValueCorrection(metric.clientBalance)}</Text>
+                <Text>{metric.details.foulness ?? 0}</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>{getNumberOfBags(metric.type.value)}</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>{getNumberOfBags(metric.clientBalance)}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}

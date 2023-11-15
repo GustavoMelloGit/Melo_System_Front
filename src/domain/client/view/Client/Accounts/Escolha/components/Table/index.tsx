@@ -6,6 +6,7 @@ import {
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
+import DownloadEscolhaAccountButton from '../Template/DownloadButton'
 import EscolhaAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<EscolhaTransactionModel[]> & {
@@ -37,6 +38,7 @@ export default function EscolhaAccountTable({
         searchForOptions,
         actions: (
           <>
+            <DownloadEscolhaAccountButton />
             <IconButton
               icon='shopCart'
               onClick={onClickBuy}
