@@ -1,7 +1,9 @@
+import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
+import { SacariaAccountEmitter } from '../../events/SacariaAccountEmitter'
 import { getSacariaAccountService } from '../../service/get'
 
 export default function useSacariaAccountView(): UseSacariaAccountView {
@@ -13,8 +15,20 @@ export default function useSacariaAccountView(): UseSacariaAccountView {
   async function handleOpenCreate(): Promise<void> {
     if (!uuid) return
     const CreateSacariaView = (await import('../../view/Create')).default
-    openModal(<CreateSacariaView clientUuid={uuid} refetch={mutate} />)
+    openModal(<CreateSacariaView clientUuid={uuid} />)
   }
+
+  const refetchData = useCallback(async () => {
+    await mutate()
+  }, [mutate])
+
+  useEffect(() => {
+    SacariaAccountEmitter.on('sacariaCreated', refetchData)
+
+    return () => {
+      SacariaAccountEmitter.off('sacariaCreated', refetchData)
+    }
+  }, [refetchData])
 
   return {
     data: data?.data ?? [],
