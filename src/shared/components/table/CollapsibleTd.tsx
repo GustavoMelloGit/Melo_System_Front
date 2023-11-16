@@ -4,6 +4,9 @@ import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react
 type Props = Omit<TableCellProps, 'children'> & {
   children: ReactNode | ((props: { isCollapsed: boolean }) => ReactNode)
 }
+/**
+ * @deprecated This component should not be used anymore.
+ */
 export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element {
   const [showText, setShowText] = useState<boolean>(false)
 

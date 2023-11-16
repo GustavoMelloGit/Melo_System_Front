@@ -35,6 +35,10 @@ function App(): JSX.Element {
           error: {
             className: 'toaster-error',
           },
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
         }}
       />
     </ChakraProvider>

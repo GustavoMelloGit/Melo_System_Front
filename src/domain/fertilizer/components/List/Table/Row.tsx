@@ -2,7 +2,6 @@ import { Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../shared/components/IconButton'
-import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type FertilizerModel } from '../../../types/model/Fertilizer'
 
 type Props = {
@@ -24,7 +23,7 @@ const FertilizerTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props)
       >
         {fertilizer.quantity ?? 0}
       </Td>
-      <CollapsibleTd>{fertilizer.description ?? '--'}</CollapsibleTd>
+      <Td>{fertilizer.description ?? '--'}</Td>
       <Td>
         <Flex justify='center' gap={1}>
           <IconButton

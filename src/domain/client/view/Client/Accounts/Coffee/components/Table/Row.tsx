@@ -3,7 +3,6 @@ import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import { getNumberOfBags } from '../../../../../../../../lib/utils/getNumberOfBags'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import {
   CoffeeBebidasLabel,
   type CoffeeDetails,
@@ -72,11 +71,11 @@ export default function CoffeeAccountTableRow({ transaction }: Props): JSX.Eleme
       <Td w={120}>{dateToFormat(transaction.date)}</Td>
       <Td title={coffeeTypeColumnValue}>{coffeeTypeColumnValue}</Td>
       <Td>{CoffeeBebidasLabel[transaction.type.name]}</Td>
-      <CollapsibleTd>{fullDescription || transaction.description}</CollapsibleTd>
-      <Td color={getColorByValue(transaction.type.value)}>
+      <Td>{fullDescription || transaction.description}</Td>
+      <Td color={getColorByValue(transaction.type.value)} whiteSpace='nowrap'>
         {getNumberOfBags(transaction.type.value)}
       </Td>
-      <Td color={getColorByValue(transaction.clientBalance)}>
+      <Td color={getColorByValue(transaction.clientBalance)} whiteSpace='nowrap'>
         {getNumberOfBags(transaction.clientBalance)}
       </Td>
       <Td textAlign='center'>

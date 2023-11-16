@@ -1,9 +1,8 @@
-import { Td, Tr } from '@chakra-ui/react'
+import { Flex, Td, Tr } from '@chakra-ui/react'
 import { Routes } from '../../../../../lib/routes'
 import { dateToFormat, formatClientName } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
 import Link from '../../../../../shared/components/Link'
-import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 
 type Props = {
@@ -60,35 +59,29 @@ export default function DeliveryTableRow({
   return (
     <Tr>
       <Td data-cy='deliveryCoffee-table-date'>{dateToFormat(delivery.date ?? 0, 'dd/MM/yyyy')}</Td>
-      <CollapsibleTd data-cy='deliveryCoffee-table-clientName'>
-        {({ isCollapsed }) =>
-          isCollapsed ? (
-            <Link to={Routes.clientPage(delivery.client.id)}>{clientColumnValue}</Link>
-          ) : (
-            clientColumnValue
-          )
-        }
-      </CollapsibleTd>
-      <CollapsibleTd data-cy='deliveryCoffee-table-fertilizerName'>
-        {delivery.fertilizer.name}
-      </CollapsibleTd>
+      <Td data-cy='deliveryCoffee-table-clientName'>
+        <Link to={Routes.clientPage(delivery.client.id)}>{clientColumnValue}</Link>
+      </Td>
+      <Td data-cy='deliveryCoffee-table-fertilizerName'>{delivery.fertilizer.name}</Td>
       <Td data-cy='deliveryCoffee-table-bags' textAlign='center'>
         {delivery.amount}
       </Td>
       <Td data-cy='deliveryCoffee-table-brook'>{delivery.brook}</Td>
-      <CollapsibleTd data-cy='deliveryCoffee-table-complement'>{delivery.complement}</CollapsibleTd>
-      <Td textAlign='center'>
-        <IconButton
-          icon='edit'
-          aria-label='Editar pedido de coleta'
-          title='Editar pedido de coleta'
-          colorScheme='blue'
-          onClick={() => {
-            void onClickUpdate(delivery)
-          }}
-          data-cy='deliveryCoffee-edit'
-        />
-        {secondaryAction}
+      <Td data-cy='deliveryCoffee-table-complement'>{delivery.complement}</Td>
+      <Td>
+        <Flex>
+          <IconButton
+            icon='edit'
+            aria-label='Editar pedido de coleta'
+            title='Editar pedido de coleta'
+            colorScheme='blue'
+            onClick={async () => {
+              await onClickUpdate(delivery)
+            }}
+            data-cy='deliveryCoffee-edit'
+          />
+          {secondaryAction}
+        </Flex>
       </Td>
     </Tr>
   )
