@@ -8,17 +8,18 @@ import {
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
 import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
+import DownloadProductAccountButton from '../Template/DownloadButton'
 import FertilizerAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<FertilizerTransactionModel[]> & {
-  onClickSell: () => void
+  clientId: string
 }
 
 export default function FertilizerAccountTable({
   data,
   isLoading,
   totalLength,
-  onClickSell,
+  clientId,
 }: Props): JSX.Element {
   return (
     <Table
@@ -36,14 +37,17 @@ export default function FertilizerAccountTable({
       filter={{
         searchForOptions,
         actions: (
-          <IconButton
-            as={Link}
-            // @ts-expect-error this property does exist
-            to={Routes.sellProduct}
-            icon='sell'
-            aria-label='vender adubo'
-            title='Vender adubo'
-          />
+          <>
+            <DownloadProductAccountButton />
+            <IconButton
+              as={Link}
+              // @ts-expect-error this property does exist
+              to={`${Routes.sellProduct}?client=${clientId}`}
+              icon='sell'
+              aria-label='vender adubo'
+              title='Vender adubo'
+            />
+          </>
         ),
       }}
     >

@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardBody,
@@ -9,8 +10,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftAddon,
   Stack,
   Tag,
   Text,
@@ -20,9 +19,9 @@ import { useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
-import IconButton from '../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import NumberInput from '../../../../../shared/components/inputs/NumberInput'
 import RHFCurrencyInput from '../../../../../shared/components/inputs/RHFCurrencyInput'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { getFertilizersService } from '../../../../fertilizer/services/get'
@@ -55,28 +54,40 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
     <Card>
       <CardHeader position='relative'>
         <Flex gap={2} align='center'>
-          <Button bg='transparent' inset={0} onClick={toggleCollapse}>
+          <Button
+            bg='transparent'
+            inset={0}
+            minW='unset'
+            minH='unset'
+            p={0}
+            h={8}
+            w={8}
+            onClick={toggleCollapse}
+          >
             {collapseDetails ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </Button>
-          <Flex align='center' justify='space-between' flex={1}>
-            <Stack spacing={0.5}>
-              <Flex gap={5}>
-                <Text fontWeight={700}>{productName || `Selecione o Produto`}</Text>
-                <Tag colorScheme='green' variant='outline'>
-                  {formatCurrency(price * 100)}
-                </Tag>
-              </Flex>
+          <Stack spacing={0.5} flex={1}>
+            <Flex justify='space-between' gap={2}>
+              <Text fontWeight={700}>{productName || `Selecione o Produto`}</Text>
+              <Tag colorScheme='green' variant='outline' h={3} minW='max-content'>
+                {formatCurrency(price * 100)}
+              </Tag>
+            </Flex>
+            <Flex justify='space-between' fontSize='sm'>
               <Text>Qtd.: {quantity}</Text>
-            </Stack>
-            {itemIndex > 0 && (
-              <IconButton
-                icon='close'
-                colorScheme='red'
-                aria-label='remover produto'
-                onClick={removeProduct}
-              />
-            )}
-          </Flex>
+              {itemIndex > 0 && (
+                <Button
+                  fontSize='inherit'
+                  variant='link'
+                  onClick={removeProduct}
+                  colorScheme='red'
+                  h='unset'
+                >
+                  Remover
+                </Button>
+              )}
+            </Flex>
+          </Stack>
         </Flex>
       </CardHeader>
       <Collapse in={collapseDetails}>
@@ -97,7 +108,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
               isRequired
             />
 
-            <Flex gap={4}>
+            <Box display='grid' gridTemplateColumns='repeat(auto-fit, minmax(230px, 1fr))' gap={4}>
               <RHFCurrencyInput
                 name={`products.${itemIndex}.price`}
                 label='Preço de venda'
@@ -105,31 +116,29 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 leftIcon='R$'
                 isRequired
               />
-              <ControllerField
+              <Controller
                 control={control}
                 name={`products.${itemIndex}.quantity`}
-                type='number'
-                label='Quantidade'
-                required
-                placeholder='Insira a quantidade'
+                render={({ field }) => (
+                  <NumberInput
+                    label='Quantidade'
+                    isRequired
+                    placeholder='Insira a quantidade'
+                    {...field}
+                  />
+                )}
               />
-            </Flex>
-            <Flex gap={4}>
               <FormControl>
                 <FormLabel htmlFor='totalPrice'>Valor total</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon>R$</InputLeftAddon>
-                  <Input id='totalPrice' isDisabled value={totalPrice} variant='filled' />
-                </InputGroup>
+                <Input
+                  rounded='xl'
+                  id='totalPrice'
+                  isDisabled
+                  value={totalPrice}
+                  variant='filled'
+                />
               </FormControl>
-              <ControllerField
-                name={`products.${itemIndex}.deliveryDate`}
-                control={control}
-                label='Data de entrega'
-                type='date'
-                required
-              />
-            </Flex>
+            </Box>
             <Controller
               control={control}
               name={`products.${itemIndex}.shouldDeliver`}
@@ -145,7 +154,15 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 </Checkbox>
               )}
             />
-            <Flex gap={4}>
+            <Box display='grid' gridTemplateColumns='repeat(auto-fit, minmax(230px, 1fr))' gap={4}>
+              <ControllerField
+                name={`products.${itemIndex}.deliveryDate`}
+                control={control}
+                label='Data de entrega'
+                type='date'
+                isDisabled={!shouldDelivery}
+                required
+              />
               <ControllerField
                 control={control}
                 name={`products.${itemIndex}.brook`}
@@ -160,7 +177,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
                 label='Referência'
                 required
               />
-            </Flex>
+            </Box>
             <ControllerField
               control={control}
               name={`products.${itemIndex}.description`}

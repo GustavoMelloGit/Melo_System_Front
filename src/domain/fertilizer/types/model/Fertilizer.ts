@@ -8,12 +8,6 @@ export type FertilizerModel = WithId<{
 }> &
   Timestamp
 
-export type FertilizerFormValues = {
-  name: string
-  quantity: number
-  description?: string
-}
-
 export type FertilizerDetails = {
   pricePerBag: number
 }

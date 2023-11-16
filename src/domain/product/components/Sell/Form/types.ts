@@ -1,5 +1,4 @@
 export type SellProductFormValues = {
-  client: string
   products: ProductFormValues[]
 }
 

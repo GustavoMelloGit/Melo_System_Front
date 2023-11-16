@@ -30,12 +30,12 @@ import FertilizerAccountView from '../Accounts/Product/view/List'
 import SacariaAccountView from '../Accounts/Sacaria/view/List'
 import useClientDetailsView from './useView'
 
-enum ClientAccountsEnum {
+export enum ClientAccountsEnum {
   checking,
   coffee,
   escolha,
   bags,
-  fertilizer,
+  products,
 }
 
 export default function ClientDetails(): JSX.Element {
@@ -233,7 +233,7 @@ export default function ClientDetails(): JSX.Element {
                 </Link>
                 <Link
                   style={linkStyle}
-                  to={`?tab=${ClientAccountsEnum.fertilizer}`}
+                  to={`?tab=${ClientAccountsEnum.products}`}
                   draggable={false}
                 >
                   <Tab as='span' data-cy='sack-tab' roundedTop={6}>

@@ -5,6 +5,8 @@ import {
   Grid,
   GridItem,
   Hide,
+  InputGroup,
+  InputRightAddon,
   Select,
   Show,
   useColorModeValue,
@@ -23,11 +25,12 @@ const isMobile = window.screen.width < 768
 
 const defaultStyle: SystemStyleObject = {
   borderLeftRadius: 0,
+  rounded: 'none',
 }
 
 export default function TableFilters({ searchForOptions, actions }: TableFilterProps): JSX.Element {
   const { handleAddParams, handleRemoveParams, getParam } = useURLSearchParams()
-  const bg = useColorModeValue('gray.200', 'gray.700')
+  const containerBgColor = useColorModeValue('gray.200', 'gray.700')
   const queryParam = getParam(PaginationParams.searchBy)
   const { handleSubmit, watch, control, reset } = useForm<FilterFormValues>({
     defaultValues: {
@@ -37,7 +40,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
   })
   const currentSearchForOption = searchForOptions[watch('searchFor')]
   const { inputProps, Input } = currentSearchForOption
-  const DOMProperties = { ...inputProps }
+  const DOMProperties = { autoFocus: !isMobile, ...inputProps }
   delete DOMProperties?.valueGetter
 
   const handleCleanFilter = useCallback((): void => {
@@ -69,6 +72,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
     },
     [handleCleanFilter],
   )
+
   useEffect(() => {
     window.addEventListener('keydown', handleClickEsc)
     return () => {
@@ -78,7 +82,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
 
   return (
     <form onSubmit={handleSubmit(handleSubmitFilter)}>
-      <Box bg={bg} px={4} pt={4} roundedTop={16}>
+      <Box bg={containerBgColor} px={4} pt={4} roundedTop={16}>
         <Grid
           templateColumns={{ base: '1fr', sm: '1fr 3fr' }}
           templateRows={{ base: '1fr 1fr', sm: 'auto' }}
@@ -117,40 +121,49 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
             {actions && <Show below='sm'>{actions}</Show>}
           </GridItem>
           <GridItem display='flex' alignItems='center' gap={1}>
-            {Input ? (
-              <Controller
-                name={PaginationParams.searchBy}
-                control={control}
-                render={({ field }) =>
-                  cloneElement(Input(field), {
-                    sx: defaultStyle,
-                    ...DOMProperties,
-                  })
-                }
-              />
-            ) : (
-              <ControllerField
-                control={control}
-                rounded='md'
-                type='search'
-                roundedLeft={{ base: 'md', sm: 'none' }}
-                placeholder='Pesquisar'
-                autoFocus={!isMobile}
-                {...(DOMProperties ?? {})}
-                name='query'
-                data-cy='table-search-input'
-              />
-            )}
-
-            <IconButton
-              type='submit'
-              variant='ghost'
-              aria-label='Pesquisar'
-              title='Pesquisar'
-              icon={queryParam ? 'close' : 'search'}
-              data-cy='table-submit-search-button'
-              onClick={queryParam ? handleCleanFilter : undefined}
-            />
+            <InputGroup>
+              {Input ? (
+                <Controller
+                  name={PaginationParams.searchBy}
+                  control={control}
+                  render={({ field }) =>
+                    cloneElement(Input(field), {
+                      sx: defaultStyle,
+                      ...DOMProperties,
+                    })
+                  }
+                />
+              ) : (
+                <ControllerField
+                  control={control}
+                  rounded='none'
+                  type='search'
+                  placeholder='Pesquisar'
+                  {...(DOMProperties ?? {})}
+                  name='query'
+                  data-cy='table-search-input'
+                />
+              )}
+              <InputRightAddon
+                transition='all 200ms'
+                px={0}
+                minW={{
+                  base: '3rem',
+                  sm: '4rem',
+                }}
+              >
+                <IconButton
+                  w='full'
+                  type='submit'
+                  variant='ghost'
+                  aria-label='Pesquisar'
+                  title='Pesquisar'
+                  icon={'search'}
+                  data-cy='table-submit-search-button'
+                  rounded='none'
+                />
+              </InputRightAddon>
+            </InputGroup>
             {actions && <Hide below='sm'>{actions}</Hide>}
           </GridItem>
         </Grid>

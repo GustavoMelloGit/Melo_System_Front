@@ -7,6 +7,7 @@ type SellFertilizerServiceValues = {
   fertilizerId: string
   bags: number
   pricePerBag: number
+  deliveryDate: string
   brook?: string
   complement?: string
 }

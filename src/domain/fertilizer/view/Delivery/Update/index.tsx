@@ -36,7 +36,7 @@ export default function UpdateFertilizerDelivery({ refetch, delivery }: Props): 
           toast.error(error)
           return
         }
-        toast.success('Adubo adicionado com sucesso')
+        toast.success('Entrega atualizada com sucesso!')
         refetch()
         closeModal()
       }}

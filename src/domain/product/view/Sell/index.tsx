@@ -1,12 +1,13 @@
 import { Routes } from '../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
+import { ClientAccountsEnum } from '../../../client/view/Client/Details'
 import SellProductForm from '../../components/Sell/Form'
 import { EmptyProduct } from '../../components/Sell/Form/types'
 import useSellProductView from './useView'
 
 const SellProduct = (): JSX.Element => {
-  const { handleSellFertilizer } = useSellProductView()
+  const { handleSellFertilizer, client } = useSellProductView()
 
   return (
     <Page title='Vender Produto'>
@@ -17,6 +18,14 @@ const SellProduct = (): JSX.Element => {
             label: 'Clientes',
             to: Routes.clients,
           },
+          ...(client
+            ? [
+                {
+                  label: 'Cliente',
+                  to: `${Routes.clientPage(client)}?tab=${ClientAccountsEnum.products}`,
+                },
+              ]
+            : []),
           {
             label: 'Vender Produtos',
           },
@@ -25,7 +34,6 @@ const SellProduct = (): JSX.Element => {
       <SellProductForm
         onSubmit={handleSellFertilizer}
         initialValues={{
-          client: '',
           products: [EmptyProduct],
         }}
       />

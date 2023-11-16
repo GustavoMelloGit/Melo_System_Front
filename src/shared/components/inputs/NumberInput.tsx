@@ -1,9 +1,12 @@
 import {
+  FormControl,
+  FormLabel,
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Text,
   useNumberInput,
   type NumberInputProps,
 } from '@chakra-ui/react'
@@ -12,9 +15,10 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
 type Props = NumberInputProps & {
   showControls?: boolean
+  label?: string
 }
 const NumberInput = forwardRef<HTMLInputElement, Props>(
-  ({ showControls = true, ...props }, ref): JSX.Element => {
+  ({ showControls = true, label, ...props }, ref): JSX.Element => {
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps, htmlProps } =
       useNumberInput({
         ...props,
@@ -24,31 +28,43 @@ const NumberInput = forwardRef<HTMLInputElement, Props>(
     const input = getInputProps()
 
     return (
-      <InputGroup w='full'>
-        {showControls && (
-          <InputLeftElement>
-            <IconButton
-              aria-label='Decrement value'
-              icon={<AiOutlineMinus />}
-              roundedLeft={props.rounded}
-              roundedRight={0}
-              {...dec}
-            />
-          </InputLeftElement>
+      <FormControl w='full'>
+        {label && (
+          <FormLabel>
+            {label}{' '}
+            {props.isRequired && (
+              <Text as='span' color='red.500' ml={1}>
+                *
+              </Text>
+            )}
+          </FormLabel>
         )}
-        <Input ref={ref} {...htmlProps} {...input} />
-        {showControls && (
-          <InputRightElement>
-            <IconButton
-              aria-label='Increment value'
-              icon={<AiOutlinePlus />}
-              roundedRight={props.rounded}
-              roundedLeft={0}
-              {...inc}
-            />
-          </InputRightElement>
-        )}
-      </InputGroup>
+        <InputGroup>
+          {showControls && (
+            <InputLeftElement>
+              <IconButton
+                aria-label='Decrement value'
+                icon={<AiOutlineMinus />}
+                roundedLeft={props.rounded}
+                roundedRight={0}
+                {...dec}
+              />
+            </InputLeftElement>
+          )}
+          <Input ref={ref} textAlign='center' {...htmlProps} {...input} />
+          {showControls && (
+            <InputRightElement>
+              <IconButton
+                aria-label='Increment value'
+                icon={<AiOutlinePlus />}
+                roundedRight={props.rounded}
+                roundedLeft={0}
+                {...inc}
+              />
+            </InputRightElement>
+          )}
+        </InputGroup>
+      </FormControl>
     )
   },
 )

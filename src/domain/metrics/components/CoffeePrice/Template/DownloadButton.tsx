@@ -1,7 +1,7 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import DownloadButton from '../../../../../shared/components/DownloadButton'
 import { type CoffeePriceMetrics } from '../../../types/buyCoffeeMetrics'
+import MetricsDownloadButton from '../../MetricsDownloadButton'
 import CoffeePriceMetricsTemplate from './Template'
 
 type Props = {
@@ -20,7 +20,7 @@ export default function CoffeePriceMetricsDownloadButton({ data }: Props): JSX.E
   }, [updatePdfInstance])
 
   return (
-    <DownloadButton
+    <MetricsDownloadButton
       instance={instance}
       aria-label='Baixar relatório de preço de café'
       data-cy='download-coffee-price-metrics'

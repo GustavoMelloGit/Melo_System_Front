@@ -16,7 +16,7 @@ const maxW: Record<LayoutSizes, string> = {
   xxl: '1536px',
 }
 
-const sidebarWidth: string = '20rem'
+const sidebarWidth: string = '17rem'
 const scrollbarWidth: string = '1rem'
 
 export default function PageLayout(): JSX.Element {
@@ -35,7 +35,7 @@ export default function PageLayout(): JSX.Element {
   }, [location])
 
   return (
-    <Flex minH='100vh' position='relative' overflowX='hidden'>
+    <Flex minH='100vh' position='relative'>
       {isOpen && (
         <Box
           as='aside'
@@ -61,6 +61,7 @@ export default function PageLayout(): JSX.Element {
       <Container
         as='main'
         maxW={maxW[size]}
+        minH='100vh'
         pt={10}
         pb={20}
         {...(isOpen && {
