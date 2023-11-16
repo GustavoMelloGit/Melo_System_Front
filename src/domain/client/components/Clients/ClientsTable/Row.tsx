@@ -5,7 +5,6 @@ import { Routes } from '../../../../../lib/routes'
 import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../shared/components/IconButton'
-import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import LinkRow from '../../../../../shared/components/table/LinkRow'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -21,29 +20,14 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
   const clientBalance = currencyValueCorrection(client.balance)
 
   return (
-    <LinkRow to={Routes.clientPage(client.id)}>
+    <LinkRow>
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
-      <Td
-        maxW={80}
-        title={client.name}
-        whiteSpace='nowrap'
-        textOverflow='ellipsis'
-        overflow='hidden'
-        data-cy='table-cell-client-name'
-      >
-        {client.name}
+      <Td>
+        <LinkRow.Link to={Routes.clientPage(client.id)}>{client.name}</LinkRow.Link>
       </Td>
-      <CollapsibleTd
-        maxW={60}
-        pos='relative'
-        userSelect='none'
-        zIndex={2}
-        data-cy='table-cell-client-nickname'
-      >
-        {client.nickname ?? '--'}
-      </CollapsibleTd>
+      <Td>{client.nickname ?? '--'}</Td>
       <Td
         onClick={handleToggleBalance}
         cursor='pointer'

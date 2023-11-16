@@ -1,7 +1,7 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import DownloadButton from '../../../../../shared/components/DownloadButton'
 import { type ClientCoffeeMetric } from '../../../types/credoresDevedoresCafeMetrics'
+import MetricsDownloadButton from '../../MetricsDownloadButton'
 import CredoresDevedoresCafeMetricsTemplate from './Template'
 
 type Props = {
@@ -20,7 +20,7 @@ export default function CredoresDevedoresCafeMetricsDownloadButton({ data }: Pro
   }, [updatePdfInstance])
 
   return (
-    <DownloadButton
+    <MetricsDownloadButton
       instance={instance}
       aria-label='Baixar relatório credores e devedores de café'
       data-cy='download-credores-devedores-coffee-metrics'

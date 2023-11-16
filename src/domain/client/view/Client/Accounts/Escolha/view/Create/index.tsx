@@ -1,15 +1,13 @@
 import { Heading } from '@chakra-ui/react'
 import Modal from '../../../../../../../../shared/components/Modal'
-import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import EscolhaFormView from '../../components/Form'
 import useCreateEscolhaView from './useView'
 
 type Props = {
   clientId: string
-  onSuccess?: (data: EscolhaTransactionModel) => void
 }
-const CreateEscolhaView = ({ clientId, onSuccess }: Props): JSX.Element => {
-  const { handleCreateEscolha, closeModal } = useCreateEscolhaView({ clientId, onSuccess })
+const CreateEscolhaView = ({ clientId }: Props): JSX.Element => {
+  const { handleCreateEscolha, closeModal } = useCreateEscolhaView({ clientId })
   return (
     <Modal onClose={closeModal} isOpen isCentered>
       <Modal.Content maxW={600}>

@@ -6,7 +6,6 @@ import { formatClientName } from '../../../../../lib/utils/formatters'
 import IconButton from '../../../../../shared/components/IconButton'
 import Link from '../../../../../shared/components/Link'
 import MoreInfoTooltip from '../../../../../shared/components/MoreInfoTooltip'
-import CollapsibleTd from '../../../../../shared/components/table/CollapsibleTd'
 import { type PickupCoffeeModel } from '../../../types/model/pickup'
 
 type Action = 'edit' | 'check' | 'uncheck'
@@ -82,20 +81,14 @@ export default function PickupTableRow({
 
   return (
     <Tr>
-      <CollapsibleTd data-cy='pickupCoffee-table-clientName'>
-        {({ isCollapsed }) =>
-          isCollapsed ? (
-            <Link to={Routes.clientPage(pickup.client.id)}>{clientColumnValue}</Link>
-          ) : (
-            clientColumnValue
-          )
-        }
-      </CollapsibleTd>
+      <Td data-cy='pickupCoffee-table-clientName'>
+        <Link to={Routes.clientPage(pickup.client.id)}>{clientColumnValue}</Link>
+      </Td>
       <Td data-cy='pickupCoffee-table-bags' textAlign='center'>
         {pickup.bags}
       </Td>
       <Td data-cy='pickupCoffee-table-brook'>{pickup.brook}</Td>
-      <CollapsibleTd>{pickup.complement}</CollapsibleTd>
+      <Td>{pickup.complement}</Td>
       <Td textAlign='center'>
         <Flex align='center' justify='center' gap={1}>
           {actions.map((action) =>

@@ -11,6 +11,7 @@ import {
   CoffeeTypesLabel,
 } from '../../../../../../../coffee/types/model/coffee'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import DownloadCoffeeAccountButton from '../Template/DownloadButton'
 import CoffeeAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<CoffeeTransactionModel[]> & {
@@ -42,6 +43,7 @@ export default function CoffeeAccountTable({
         searchForOptions,
         actions: (
           <>
+            <DownloadCoffeeAccountButton />
             <IconButton
               icon='shopCart'
               onClick={onClickBuy}

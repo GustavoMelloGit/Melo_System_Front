@@ -36,14 +36,16 @@ export default function FertilizerAccountTable({
       filter={{
         searchForOptions,
         actions: (
-          <IconButton
-            as={Link}
-            // @ts-expect-error this property does exist
-            to={`${Routes.sellProduct}?client=${clientId}`}
-            icon='sell'
-            aria-label='vender adubo'
-            title='Vender adubo'
-          />
+          <>
+            <IconButton
+              as={Link}
+              // @ts-expect-error this property does exist
+              to={`${Routes.sellProduct}?client=${clientId}`}
+              icon='sell'
+              aria-label='vender adubo'
+              title='Vender adubo'
+            />
+          </>
         ),
       }}
     >

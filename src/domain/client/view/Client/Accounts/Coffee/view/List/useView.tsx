@@ -1,9 +1,11 @@
+import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { PaginationParams } from '../../../../../../../../lib/constants/pagination'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../../../../shared/hooks/useURLSearchParams'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
+import { CoffeeAccountEmitter } from '../../events/CoffeeAccountEmitter'
 import { getCoffeeAccountService } from '../../service/get'
 
 export default function useCoffeeAccountView(): UseCoffeeAccountView {
@@ -24,22 +26,28 @@ export default function useCoffeeAccountView(): UseCoffeeAccountView {
     if (!uuid) return
     const openModal = useModal.getState().openModal
     const CreateCoffeeView = (await import('../Create')).default
-    openModal(<CreateCoffeeView clientId={uuid} refetch={mutate} />)
+    openModal(<CreateCoffeeView clientId={uuid} />)
   }
 
   async function handleOpenBuyCoffee(): Promise<void> {
     if (!uuid) return
     const openModal = useModal.getState().openModal
     const BuyCoffeeView = (await import('../Buy')).default
-    openModal(
-      <BuyCoffeeView
-        clientId={uuid}
-        refetch={async () => {
-          await mutate()
-        }}
-      />,
-    )
+    openModal(<BuyCoffeeView clientId={uuid} />)
   }
+
+  const refetchData = useCallback(async () => {
+    await mutate()
+  }, [mutate])
+
+  useEffect(() => {
+    CoffeeAccountEmitter.on('coffeeBought', refetchData)
+    CoffeeAccountEmitter.on('coffeeCreated', refetchData)
+    return () => {
+      CoffeeAccountEmitter.off('coffeeBought', refetchData)
+      CoffeeAccountEmitter.off('coffeeCreated', refetchData)
+    }
+  }, [refetchData])
 
   return {
     data: data?.data ?? [],

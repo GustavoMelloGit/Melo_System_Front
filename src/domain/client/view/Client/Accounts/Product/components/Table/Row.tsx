@@ -1,7 +1,6 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
@@ -11,7 +10,7 @@ export default function FertilizerAccountTableRow({ transaction }: Props): JSX.E
   return (
     <Tr>
       <Td>{dateToFormat(transaction.date)}</Td>
-      <CollapsibleTd>{transaction.description}</CollapsibleTd>
+      <Td>{transaction.description}</Td>
       <Td textAlign='center'>
         <MoreInfoTooltip
           placement='left'

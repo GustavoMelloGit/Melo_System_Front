@@ -2,7 +2,6 @@ import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import CollapsibleTd from '../../../../../../../../shared/components/table/CollapsibleTd'
 import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
@@ -12,7 +11,7 @@ export default function SacariaAccountTableRow({ transaction }: Props): JSX.Elem
   return (
     <Tr>
       <Td>{dateToFormat(transaction.date)}</Td>
-      <CollapsibleTd>{transaction.description}</CollapsibleTd>
+      <Td>{transaction.description}</Td>
       <Td textAlign='center'>{transaction?.book?.number ?? '-'}</Td>
       <Td textAlign='center'>{transaction?.sheet?.number ?? '-'}</Td>
       <Td color={getColorByValue(transaction.type.value)} textAlign='center'>

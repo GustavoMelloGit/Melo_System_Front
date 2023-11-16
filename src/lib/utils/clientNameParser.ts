@@ -2,6 +2,7 @@ type IClientNameParser = {
   addNickname: (name: string, nickname: string | undefined) => string
   removeNickname: (name: string) => string
   getNickname: (nameWithNickname: string) => string | null
+  addCode: (name: string, code: number) => string
 }
 
 export const ClientNameParser: IClientNameParser = {
@@ -16,5 +17,8 @@ export const ClientNameParser: IClientNameParser = {
     } else {
       return null
     }
+  },
+  addCode(name, code) {
+    return `${code} - ${name}`
   },
 }
