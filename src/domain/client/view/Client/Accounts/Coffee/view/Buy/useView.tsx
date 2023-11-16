@@ -6,18 +6,19 @@ import {
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import { getClientService } from '../../../../../../service'
+import { CoffeeAccountEmitter } from '../../events/CoffeeAccountEmitter'
 import { buyCoffeeService } from '../../service/post'
 import { type BuyCoffeeFormValues } from '../../types'
 
 type Props = {
   clientId: string
-  refetch: () => void
 }
-const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
+const useBuyCoffeeView = ({ clientId }: Props): UseBuyCoffeeView => {
   const closeModal = useModal((state) => state.closeModal)
   const { data } = getClientService(clientId)
 
-  async function handleBuyCoffee({ bags, weight, ...values }: BuyCoffeeFormValues): Promise<void> {
+  async function handleBuyCoffee(formValues: BuyCoffeeFormValues): Promise<void> {
+    const { bags, weight, ...values } = formValues
     const totalValue = currencyValueCorrection(
       calculateCoffeeTotalValue(bags, weight, values.valuePerBag),
     )
@@ -36,7 +37,7 @@ const useBuyCoffeeView = ({ clientId, refetch }: Props): UseBuyCoffeeView => {
       toast.error('Erro ao comprar café')
       return
     }
-    refetch()
+    CoffeeAccountEmitter.emit('coffeeBought', formValues)
     toast.success('Café comprado com sucesso')
     closeModal()
   }
