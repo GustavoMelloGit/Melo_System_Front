@@ -3,10 +3,10 @@ import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import DownloadButton from '../../../../../../../../shared/components/buttons/DownloadButton'
 import { getTransactionsFromClientService } from '../../../../../../service/getTransactionsFromClientService'
-import { FertilizerAccountEmitter } from '../../events/FertilizerAccountEmitter'
+import { ProductAccountEmitter } from '../../events/ProductAccountEmitter'
 import CoffeePriceMetricsTemplate from './Template'
 
-export default function DownloadFertilizerAccountButton(): JSX.Element {
+export default function DownloadProductAccountButton(): JSX.Element {
   const { uuid } = useParams<'uuid'>()
   const { data, mutate } = getTransactionsFromClientService('fertilizer', uuid ?? '')
   const [instance, updateInstance] = usePDF({
@@ -26,9 +26,9 @@ export default function DownloadFertilizerAccountButton(): JSX.Element {
   }, [updatePdfInstance])
 
   useEffect(() => {
-    FertilizerAccountEmitter.on('fertilizerSold', refetchData)
+    ProductAccountEmitter.on('productSold', refetchData)
     return () => {
-      FertilizerAccountEmitter.off('fertilizerSold', refetchData)
+      ProductAccountEmitter.off('productSold', refetchData)
     }
   }, [refetchData])
 
