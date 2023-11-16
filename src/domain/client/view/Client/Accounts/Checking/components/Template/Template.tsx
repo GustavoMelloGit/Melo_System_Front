@@ -1,9 +1,6 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { format } from 'date-fns'
-import {
-  currencyValueCorrection,
-  formatCurrency,
-} from '../../../../../../../../lib/utils/formatters'
+import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import PDFContainer from '../../../../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../../../../shared/components/PDF/PDFTable'
@@ -52,33 +49,33 @@ export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.El
       </View>
       <PDFTable>
         <PDFTableHeader>
-          <PDFTableRowItem>
+          <PDFTableRowItem style={{ maxWidth: 60 }}>
             <Text>Data</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
             <Text>Descrição</Text>
           </PDFTableRowItem>
-          <PDFTableRowItem>
+          <PDFTableRowItem style={{ maxWidth: 80 }}>
             <Text>Valor</Text>
           </PDFTableRowItem>
-          <PDFTableRowItem>
+          <PDFTableRowItem style={{ maxWidth: 80 }}>
             <Text>Saldo</Text>
           </PDFTableRowItem>
         </PDFTableHeader>
         <View>
           {data.map((metric) => (
             <PDFTableRow key={metric.id} wrap={false}>
-              <PDFTableRowItem>
+              <PDFTableRowItem style={{ maxWidth: 60 }}>
                 <Text>{format(metric.date, 'dd/MM/yyyy')}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
                 <Text>{metric.description}</Text>
               </PDFTableRowItem>
-              <PDFTableRowItem>
+              <PDFTableRowItem style={{ maxWidth: 80 }}>
                 <Text>{formatCurrency(metric.type.value)}</Text>
               </PDFTableRowItem>
-              <PDFTableRowItem>
-                <Text>{currencyValueCorrection(metric.clientBalance)}</Text>
+              <PDFTableRowItem style={{ maxWidth: 80 }}>
+                <Text>{formatCurrency(metric.clientBalance)}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}
