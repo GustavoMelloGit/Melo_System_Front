@@ -1,9 +1,25 @@
 import { Button, Heading, Select, Stack } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import zxcvbn from 'zxcvbn'
+import { validationErrors } from '../../../../../lib/errors'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { type AddUserFormValues } from './types'
+
+const validationSchema = yup.object().shape<Record<keyof AddUserFormValues, any>>({
+  name: yup.string().required(validationErrors.nameIsRequired),
+  nickname: yup.string().required(validationErrors.nicknameIsRequired),
+  password: yup
+    .string()
+    .required(validationErrors.passwordIsRequired)
+    .test('is-strong', validationErrors.passwordIsNotStrongEnougth, (value) =>
+      value ? zxcvbn(value).score >= 4 : false,
+    ),
+  role: yup.string().required(validationErrors.roleIsRequired),
+})
 
 const defaultValues: AddUserFormValues = {
   name: '',
@@ -23,6 +39,7 @@ export default function AddUserView({ onSubmit }: Props): JSX.Element {
     reset,
   } = useForm<AddUserFormValues>({
     defaultValues,
+    resolver: yupResolver(validationSchema),
   })
 
   return (
@@ -47,23 +64,27 @@ export default function AddUserView({ onSubmit }: Props): JSX.Element {
                 name='name'
                 label='Nome'
                 placeholder='Ex.: Gustavo Mello'
+                required
               />
               <ControllerField
                 control={control}
                 name='nickname'
                 label='Login'
                 placeholder='Ex.: Gustavo'
+                required
               />
               <ControllerField
                 control={control}
                 name='password'
                 label='Senha'
                 placeholder='Utilize uma senha forte'
+                required
               />
               <ControllerField
                 control={control}
                 name='role'
                 label='Permissão'
+                required
                 CustomInput={
                   <Select>
                     <option value='user'>Usuário</option>
