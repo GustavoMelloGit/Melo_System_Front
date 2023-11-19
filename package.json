@@ -37,7 +37,8 @@
     "swr": "^2.0.2",
     "throttle-debounce": "^5.0.0",
     "yup": "^0.32.11",
-    "zustand": "^4.3.2"
+    "zustand": "^4.3.2",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -48,6 +49,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@types/throttle-debounce": "^5.0.0",
+    "@types/zxcvbn": "^4.4.4",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@vitejs/plugin-react": "^3.0.0",
     "babel-loader": "^8.3.0",

@@ -2320,6 +2320,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/zxcvbn@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@types/zxcvbn/-/zxcvbn-4.4.4.tgz#987f5fcd87e957097433c476c3a1c91a54f53131"
+  integrity sha512-Tuk4q7q0DnpzyJDI4aMeghGuFu2iS1QAdKpabn8JfbtfGmVDUgvZv1I7mEjP61Bvnp3ljKCC8BE6YYSTNxmvRQ==
+
 "@typescript-eslint/eslint-plugin@^5.0.0":
   version "5.49.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.49.0.tgz#d0b4556f0792194bf0c2fb297897efa321492389"
@@ -6646,3 +6651,8 @@ zustand@^4.3.2:
   integrity sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==
   dependencies:
     use-sync-external-store "1.2.0"
+
+zxcvbn@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/zxcvbn/-/zxcvbn-4.4.2.tgz#28ec17cf09743edcab056ddd8b1b06262cc73c30"
+  integrity sha512-Bq0B+ixT/DMyG8kgX2xWcI5jUvCwqrMxSFam7m0lAf78nf04hv6lNCsyLYdyYTrCVMqNDY/206K7eExYCeSyUQ==
