@@ -2,7 +2,7 @@ import { Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { getColorByValue } from '../../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../../shared/components/IconButton'
-import { type ProductModel } from '../../../../types/Fertilizer'
+import { type ProductModel } from '../../../../types/Product'
 
 type Props = {
   fertilizer: ProductModel

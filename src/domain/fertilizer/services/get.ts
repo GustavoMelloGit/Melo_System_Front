@@ -5,7 +5,7 @@ import useFetch from '../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
 import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
-import { type ProductModel } from '../../product/types/Fertilizer'
+import { type ProductModel } from '../../product/types/Product'
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
 
 export function getFertilizersService(

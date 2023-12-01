@@ -2,7 +2,7 @@ import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/errorHandler'
 import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
 import { type StockProductFormValues } from '../components/Stock/Form/types'
-import { type ProductModel } from '../types/Fertilizer'
+import { type ProductModel } from '../types/Product'
 
 export async function createStockProductService(
   values: StockProductFormValues,

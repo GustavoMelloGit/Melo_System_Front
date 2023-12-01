@@ -6,7 +6,7 @@ import {
 } from '../../../../../../shared/components/table/types'
 import { useModal } from '../../../../../../shared/hooks/useModal'
 import { deleteFertilizerService } from '../../../../../fertilizer/services/delete'
-import { type ProductModel } from '../../../../types/Fertilizer'
+import { type ProductModel } from '../../../../types/Product'
 import StockTableRow from './Row'
 
 type Props = {

@@ -1,5 +1,5 @@
 import { type ClientModel } from '../../../client/types/model/Client'
-import { type ProductModel } from '../../../product/types/Fertilizer'
+import { type ProductModel } from '../../../product/types/Product'
 
 export type FertilizerDeliveryModel = {
   id: string

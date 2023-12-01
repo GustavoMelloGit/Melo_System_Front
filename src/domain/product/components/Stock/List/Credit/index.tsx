@@ -1,4 +1,4 @@
-import { type ProductModel } from '../../../../types/Fertilizer'
+import { type ProductModel } from '../../../../types/Product'
 import useCreditStockProductView from './useView'
 import CreditStockProductView from './View'
 
