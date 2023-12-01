@@ -3,13 +3,18 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import ProductItem from './ProductItem'
 import SellProductSummary from './Summary'
-import { EmptyProduct, type SellProductFormValues } from './types'
+import { type ProductFormValues, type SellProductFormValues } from './types'
 
 type Props = {
   onSubmit: (values: SellProductFormValues) => Promise<void>
   initialValues: SellProductFormValues
+  emptyProduct: ProductFormValues
 }
-export default function SellProductForm({ onSubmit, initialValues }: Props): JSX.Element {
+export default function SellProductForm({
+  onSubmit,
+  initialValues,
+  emptyProduct,
+}: Props): JSX.Element {
   const methods = useForm<SellProductFormValues>({
     defaultValues: initialValues,
   })
@@ -50,7 +55,7 @@ export default function SellProductForm({ onSubmit, initialValues }: Props): JSX
               <Button
                 disabled={isSubmitting}
                 onClick={() => {
-                  append(EmptyProduct)
+                  append(emptyProduct)
                 }}
                 colorScheme='blue'
                 w='full'

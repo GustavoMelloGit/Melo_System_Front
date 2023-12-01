@@ -13,15 +13,3 @@ export type ProductFormValues = {
   complement?: string
   description?: string
 }
-
-export const EmptyProduct: ProductFormValues = {
-  deliveryDate: new Date().toISOString().split('T')[0],
-  productId: '',
-  productName: '',
-  price: 0,
-  quantity: 1,
-  shouldDeliver: false,
-  brook: '',
-  complement: '',
-  description: '',
-}

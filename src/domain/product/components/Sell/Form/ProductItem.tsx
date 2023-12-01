@@ -15,7 +15,7 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
@@ -33,7 +33,7 @@ type Props = {
 }
 export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.Element {
   const [collapseDetails, setCollapseDetails] = useState(true)
-  const { control } = useFormContext<SellProductFormValues>()
+  const { control, setValue } = useFormContext<SellProductFormValues>()
   const productName = useWatch({ control, name: `products.${itemIndex}.productName` })
   const shouldDelivery = useWatch({ control, name: `products.${itemIndex}.shouldDeliver` })
   const price = useWatch({ control, name: `products.${itemIndex}.price` })
@@ -49,6 +49,17 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
     `name=${debouncedProductName}`,
   )
+
+  const fertilizerToBeSold = useMemo(
+    () => (fertilizers?.data && fertilizers.data.length === 1 ? fertilizers.data[0] : null),
+    [fertilizers],
+  )
+
+  useEffect(() => {
+    if (fertilizerToBeSold) {
+      setValue(`products.${itemIndex}.price`, fertilizerToBeSold.sale / 100)
+    }
+  }, [fertilizerToBeSold])
 
   return (
     <Card>
