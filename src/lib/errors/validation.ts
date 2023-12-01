@@ -57,6 +57,10 @@ const validationErrors = {
   valuePerWeightIsInvalid: 'Por favor, informe um valor por peso válido',
   valuePerWeightIsRequired: 'Por favor, informe o valor por peso',
   roleIsRequired: 'Por favor, insira a permissão',
+  costIsRequired: 'Por favor, informe o custo',
+  costIsInvalid: 'Por favor, informe um custo válido',
+  saleIsRequired: 'Por favor, informe a venda',
+  saleIsInvalid: 'Por favor, informe uma venda válida',
 }
 
 export default validationErrors

@@ -1,11 +1,11 @@
 import { type ClientModel } from '../../../client/types/model/Client'
-import { type FertilizerModel } from './Fertilizer'
+import { type ProductModel } from '../../../product/types/Fertilizer'
 
 export type FertilizerDeliveryModel = {
   id: string
   client: ClientModel
   amount: number
-  fertilizer: FertilizerModel
+  fertilizer: ProductModel
   brook: string
   complement: string
   status: FertilizerDeliveryStatuses

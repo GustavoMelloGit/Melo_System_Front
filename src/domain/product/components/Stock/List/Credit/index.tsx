@@ -1,9 +1,9 @@
-import { type FertilizerModel } from '../../../../../fertilizer/types/model/Fertilizer'
+import { type ProductModel } from '../../../../types/Fertilizer'
 import useCreditStockProductView from './useView'
 import CreditStockProductView from './View'
 
 type Props = {
-  fertilizer: FertilizerModel
+  fertilizer: ProductModel
   refetch: () => void
 }
 export default function CreditStockProduct({ fertilizer, refetch }: Props): JSX.Element {

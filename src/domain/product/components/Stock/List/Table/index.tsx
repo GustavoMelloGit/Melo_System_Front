@@ -6,11 +6,11 @@ import {
 } from '../../../../../../shared/components/table/types'
 import { useModal } from '../../../../../../shared/hooks/useModal'
 import { deleteFertilizerService } from '../../../../../fertilizer/services/delete'
-import { type FertilizerModel } from '../../../../../fertilizer/types/model/Fertilizer'
+import { type ProductModel } from '../../../../types/Fertilizer'
 import StockTableRow from './Row'
 
 type Props = {
-  data: FertilizerModel[] | undefined
+  data: ProductModel[] | undefined
   totalBooks: number
   isLoading: boolean
   refetch: () => void
@@ -26,7 +26,7 @@ const StockTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Elemen
     toast.success('Produto removido com sucesso!')
     refetch()
   }
-  async function handleCreditFertilizer(fertilizer: FertilizerModel): Promise<void> {
+  async function handleCreditFertilizer(fertilizer: ProductModel): Promise<void> {
     const CreditFertilizer = (await import('../Credit')).default
     openModal(<CreditFertilizer fertilizer={fertilizer} refetch={refetch} />)
   }

@@ -1,8 +1,8 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/errorHandler'
 import { type PutServiceResponse } from '../../../shared/types/service/PutServiceResponse'
+import { type ProductModel } from '../../product/types/Fertilizer'
 import { FertilizerDeliveryStatuses, type FertilizerDeliveryModel } from '../types/model/Delivery'
-import { type FertilizerModel } from '../types/model/Fertilizer'
 
 export async function fertilizerDeliveryDoneService(
   id: string,
@@ -46,8 +46,8 @@ export async function fertilizerDeliveryCancelService(
 
 export async function updateFertilizerService(
   id: string,
-  value: Partial<FertilizerModel>,
-): PutServiceResponse<FertilizerModel> {
+  value: Partial<ProductModel>,
+): PutServiceResponse<ProductModel> {
   try {
     const { data } = await api.put(`/fertilizers/${id}`, value)
 

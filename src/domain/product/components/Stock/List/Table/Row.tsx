@@ -2,12 +2,12 @@ import { Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { getColorByValue } from '../../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../../shared/components/IconButton'
-import { type FertilizerModel } from '../../../../../fertilizer/types/model/Fertilizer'
+import { type ProductModel } from '../../../../types/Fertilizer'
 
 type Props = {
-  fertilizer: FertilizerModel
+  fertilizer: ProductModel
   onClickDelete: (id: string) => Promise<void>
-  onClickCredit: (fertilizer: FertilizerModel) => Promise<void>
+  onClickCredit: (fertilizer: ProductModel) => Promise<void>
 }
 const StockTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX.Element => {
   return (

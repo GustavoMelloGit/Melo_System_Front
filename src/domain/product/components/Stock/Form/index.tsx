@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import RHFCurrencyInput from '../../../../../shared/components/inputs/RHFCurrencyInput'
 import { type StockProductFormValues } from './types'
 
 const validationSchema = yup.object().shape({
@@ -16,6 +17,14 @@ const validationSchema = yup.object().shape({
     .required(validationErrors.quantityIsRequired)
     .typeError(validationErrors.quantityIsRequired),
   description: yup.string(),
+  cost: yup
+    .number()
+    .required(validationErrors.costIsRequired)
+    .typeError(validationErrors.costIsInvalid),
+  sale: yup
+    .number()
+    .required(validationErrors.saleIsRequired)
+    .typeError(validationErrors.saleIsInvalid),
 })
 
 type Props = {
@@ -37,6 +46,8 @@ export default function StockProductForm({ initialValues, onSubmit }: Props): JS
         onSubmit({
           ...values,
           quantity: Number(values.quantity),
+          cost: values.cost * 100,
+          sale: values.sale * 100,
         }),
       )}
     >
@@ -57,6 +68,22 @@ export default function StockProductForm({ initialValues, onSubmit }: Props): JS
             placeholder='Insira a quantidade'
             type='number'
             inputMode='numeric'
+          />
+        </Flex>
+        <Flex gap={3}>
+          <RHFCurrencyInput
+            name={'cost'}
+            label='Preço de custo'
+            control={control}
+            leftIcon='R$'
+            isRequired
+          />
+          <RHFCurrencyInput
+            name={'sale'}
+            label='Preço de venda'
+            control={control}
+            leftIcon='R$'
+            isRequired
           />
         </Flex>
         <ControllerField

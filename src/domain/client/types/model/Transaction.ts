@@ -8,7 +8,7 @@ import {
   type EscolhaDetails,
 } from '../../../coffee/types/model/coffee'
 import { type SheetModel } from '../../../coffee/types/model/sheet'
-import { type FertilizerDetails } from '../../../fertilizer/types/model/Fertilizer'
+import { type FertilizerDetails } from '../../../product/types/Fertilizer'
 
 export type TransactionTypeName = CoffeeBebidas | 'currency' | 'bags' | 'fertilizer' | 'escolha'
 export type TransactionType<TName extends TransactionTypeName> = {

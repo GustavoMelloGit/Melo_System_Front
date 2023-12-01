@@ -5,26 +5,21 @@ import useFetch from '../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
 import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
+import { type ProductModel } from '../../product/types/Fertilizer'
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
-import { type FertilizerModel } from '../types/model/Fertilizer'
 
 export function getFertilizersService(
   params?: string,
   config?: SWRConfiguration,
-): SWRServiceResponse<GetListResponse<FertilizerModel[]>> {
-  const response = useFetch<GetListResponse<FertilizerModel[]>>(
-    `/fertilizers?${params ?? ''}`,
-    config,
-  )
+): SWRServiceResponse<GetListResponse<ProductModel[]>> {
+  const response = useFetch<GetListResponse<ProductModel[]>>(`/fertilizers?${params ?? ''}`, config)
 
   return response
 }
 
-export async function getFertilizerByNameService(
-  name: string,
-): GetServiceResponse<FertilizerModel> {
+export async function getFertilizerByNameService(name: string): GetServiceResponse<ProductModel> {
   try {
-    const response = await api.get<GetListResponse<FertilizerModel[]>>(`/fertilizers?name=${name}`)
+    const response = await api.get<GetListResponse<ProductModel[]>>(`/fertilizers?name=${name}`)
     const sameNameFertilizers = response.data.data.filter((fertilizer) => fertilizer.name === name)
     return {
       data: sameNameFertilizers[0],

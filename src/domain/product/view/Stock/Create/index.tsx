@@ -25,6 +25,8 @@ const CreateProductView = ({ refetch }: Props): JSX.Element => {
               name: '',
               quantity: 0,
               description: '',
+              cost: 0,
+              sale: 0,
             }}
             onSubmit={handleAddFertilizer}
           />
