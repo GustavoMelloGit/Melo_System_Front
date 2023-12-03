@@ -1,6 +1,6 @@
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { useWatch, type Control } from 'react-hook-form'
-import { ClientNameParser } from '../../../../../../lib/utils/ClientNameParserFix'
+import { ClientNameParser } from '../../../../../../lib/utils/ClientNameParser'
 import { normalize } from '../../../../../../lib/utils/normalize'
 import IconButton from '../../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
