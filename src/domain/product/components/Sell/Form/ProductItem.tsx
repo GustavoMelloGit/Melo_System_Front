@@ -19,6 +19,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { ProductNameParser } from '../../../../../lib/utils/ProductNameParser'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import NumberInput from '../../../../../shared/components/inputs/NumberInput'
@@ -47,7 +48,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
   }
 
   const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
-    `name=${debouncedProductName}`,
+    `name=${ProductNameParser.removeDescription(debouncedProductName)}`,
   )
 
   const fertilizerToBeSold = useMemo(
@@ -109,7 +110,7 @@ export default function ProductItem({ itemIndex, removeProduct }: Props): JSX.El
               name={`products.${itemIndex}.productId`}
               auxName={`products.${itemIndex}.productName`}
               options={fertilizers?.data?.map((fertilizer) => ({
-                label: `${fertilizer.name} ${fertilizer.description ?? ''}`,
+                label: ProductNameParser.addDescription(fertilizer.name, fertilizer.description),
                 value: fertilizer.id,
                 key: fertilizer.id,
               }))}
