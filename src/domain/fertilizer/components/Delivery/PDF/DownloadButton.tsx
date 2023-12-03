@@ -76,11 +76,11 @@ export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
       target='_blank'
       rel='noreferrer'
       icon='printer'
-      aria-label='Baixar lista de adubos a entregar'
+      aria-label='Baixar lista de produtos a entregar'
       colorScheme='blue'
       variant='outline'
       data-cy='download-fertilzer-delivery-button'
-      title='Baixar lista de adubos a entregar'
+      title='Baixar lista de produtos a entregar'
     />
   )
 }

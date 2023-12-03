@@ -36,7 +36,7 @@ export default function FertilizerDeliveryTemplate({ data }: Props): JSX.Element
             fontSize: 16,
           }}
         >
-          Adubos a entregar
+          Produtos a entregar
         </Text>
         <Text
           style={{

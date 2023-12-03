@@ -52,7 +52,7 @@ const listItem: Record<
       ),
   },
   [Routes.fertilizersDelivery]: {
-    label: 'Adubos a Entregar',
+    label: 'Produtos a Entregar',
     icon: <TbTruckLoading size={20} />,
     hasPermission: (permissions) =>
       Boolean(

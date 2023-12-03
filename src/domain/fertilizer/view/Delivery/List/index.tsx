@@ -21,12 +21,12 @@ export default function FertilizerDeliveryView(): JSX.Element {
   } = useFertilizerDeliveryView()
 
   return (
-    <Page title='Adubos - Entrega' data-cy='coffee-fertilizer-delivery-page'>
+    <Page title='Produtos - Entrega' data-cy='coffee-fertilizer-delivery-page'>
       <HeaderBreadcrumbs
-        heading='Adubos a Entregar'
+        heading='Produtos a Entregar'
         links={[
           {
-            label: 'Lista de Adubos',
+            label: 'Lista de Produtos',
           },
         ]}
         actions={
