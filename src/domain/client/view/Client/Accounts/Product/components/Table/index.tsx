@@ -7,11 +7,11 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
-import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
+import { type ProductTransactionModel } from '../../../../../../types/model/Transaction'
 import DownloadProductAccountButton from '../Template/DownloadButton'
 import FertilizerAccountTableRow from './Row'
 
-type Props = CustomTableComponentProps<FertilizerTransactionModel[]> & {
+type Props = CustomTableComponentProps<ProductTransactionModel[]> & {
   clientId: string
 }
 

@@ -7,7 +7,7 @@ import PDFTableHeader from '../../../../../../../../shared/components/PDF/PDFTab
 import PDFTableRow from '../../../../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../../../../shared/components/PDF/styles'
-import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
+import { type ProductTransactionModel } from '../../../../../../types/model/Transaction'
 
 const styles = StyleSheet.create({
   header: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  data: FertilizerTransactionModel[]
+  data: ProductTransactionModel[]
 }
 export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.Element {
   return (

@@ -5,7 +5,7 @@ import {
   type CoffeeTransactionModel,
   type CurrencyTransactionModel,
   type EscolhaTransactionModel,
-  type FertilizerTransactionModel,
+  type ProductTransactionModel,
   type SacariaTransactionModel,
 } from '../types/model/Transaction'
 
@@ -20,7 +20,7 @@ type ResponseByType<T extends Type> = T extends 'currency'
   : T extends 'bags'
   ? SacariaTransactionModel
   : T extends 'fertilizer'
-  ? FertilizerTransactionModel
+  ? ProductTransactionModel
   : unknown
 
 export function getTransactionsFromClientService<T extends Type>(

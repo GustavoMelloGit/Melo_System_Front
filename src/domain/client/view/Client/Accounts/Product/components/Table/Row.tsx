@@ -1,10 +1,10 @@
 import { Td, Tr } from '@chakra-ui/react'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
-import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
+import { type ProductTransactionModel } from '../../../../../../types/model/Transaction'
 
 type Props = {
-  transaction: FertilizerTransactionModel
+  transaction: ProductTransactionModel
 }
 export default function FertilizerAccountTableRow({ transaction }: Props): JSX.Element {
   return (

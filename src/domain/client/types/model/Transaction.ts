@@ -41,7 +41,7 @@ export type SacariaTransactionModel = TransactionBaseModel<'bags'> & {
   sheet: Pick<SheetModel, 'number' | 'id'> | null
 }
 
-export type FertilizerTransactionModel = TransactionBaseModel<'fertilizer'> & {
+export type ProductTransactionModel = TransactionBaseModel<'fertilizer'> & {
   details: FertilizerDetails
 }
 
@@ -50,4 +50,4 @@ export type AllTransactions =
   | EscolhaTransactionModel
   | CoffeeTransactionModel
   | SacariaTransactionModel
-  | FertilizerTransactionModel
+  | ProductTransactionModel
