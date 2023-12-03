@@ -1,8 +1,9 @@
+import { type URLSearchParamsInit } from 'react-router-dom'
 import { PaginationParams } from '../../lib/constants/pagination'
 import useURLSearchParams from './useURLSearchParams'
 
-export default function useServiceParams(): string {
-  const { getParam } = useURLSearchParams()
+export default function useServiceParams(defaultValues?: URLSearchParamsInit): string {
+  const { getParam } = useURLSearchParams(defaultValues)
   const params = new URLSearchParams()
 
   const skip = getParam(PaginationParams.page)
