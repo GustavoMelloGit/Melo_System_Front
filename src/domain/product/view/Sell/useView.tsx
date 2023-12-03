@@ -18,19 +18,18 @@ const useSellProductView = (): UseSellFertilizerView => {
   async function handleSellFertilizer(values: SellProductFormValues): Promise<void> {
     if (!client) return
     try {
-      await Promise.all(
-        values.products.map(async (product) =>
-          sellFertilizerService({
-            clientId: client,
-            bags: product.quantity,
-            fertilizerId: product.productId,
-            pricePerBag: product.price,
-            brook: product.brook,
-            complement: product.complement,
-            deliveryDate: product.deliveryDate,
-          }),
-        ),
-      )
+      const formattedProducts = values.products.map((product) => ({
+        bags: product.quantity,
+        fertilizerId: product.productId,
+        pricePerBag: product.price,
+        brook: product.brook,
+        complement: product.complement,
+        deliveryDate: product.deliveryDate,
+      }))
+      await sellFertilizerService({
+        clientId: client,
+        products: formattedProducts,
+      })
       toast.success('Produtos vendidos com sucesso!')
       navigate(Routes.clientPage(client))
     } catch (error) {

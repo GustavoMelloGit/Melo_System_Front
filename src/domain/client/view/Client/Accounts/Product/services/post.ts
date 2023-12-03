@@ -4,12 +4,14 @@ import { type PostServiceResponse } from '../../../../../../../shared/types/serv
 
 type SellFertilizerServiceValues = {
   clientId: string
-  fertilizerId: string
-  bags: number
-  pricePerBag: number
-  deliveryDate: string
-  brook?: string
-  complement?: string
+  products: Array<{
+    fertilizerId: string
+    bags: number
+    pricePerBag: number
+    deliveryDate: string
+    brook?: string
+    complement?: string
+  }>
 }
 export async function sellFertilizerService({
   clientId,
