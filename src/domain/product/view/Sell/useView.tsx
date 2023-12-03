@@ -17,26 +17,24 @@ const useSellProductView = (): UseSellFertilizerView => {
 
   async function handleSellFertilizer(values: SellProductFormValues): Promise<void> {
     if (!client) return
-    try {
-      const formattedProducts = values.products.map((product) => ({
-        bags: product.quantity,
-        fertilizerId: product.productId,
-        pricePerBag: product.price,
-        brook: product.brook,
-        complement: product.complement,
-        deliveryDate: product.deliveryDate,
-      }))
-      await sellFertilizerService({
-        clientId: client,
-        products: formattedProducts,
-      })
-      toast.success('Produtos vendidos com sucesso!')
-      navigate(Routes.clientPage(client))
-    } catch (error) {
-      toast.error(
-        'Ocorreu um erro na venda dos produtos. Verifique na conta do cliente quais produtos foram vendidos com sucesso.',
-      )
+    const formattedProducts = values.products.map((product) => ({
+      bags: product.quantity,
+      fertilizerId: product.productId,
+      pricePerBag: product.price,
+      brook: product.brook,
+      complement: product.complement,
+      deliveryDate: product.deliveryDate,
+    }))
+    const { error } = await sellFertilizerService({
+      clientId: client,
+      products: formattedProducts,
+    })
+    if (error) {
+      toast.error(error)
+      return
     }
+    toast.success('Produtos vendidos com sucesso!')
+    navigate(Routes.clientPage(client))
   }
 
   const emptyProduct: ProductFormValues = {
