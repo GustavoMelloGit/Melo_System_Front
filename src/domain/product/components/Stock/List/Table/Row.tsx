@@ -1,5 +1,6 @@
 import { Flex, Td, Tr } from '@chakra-ui/react'
 import { format } from 'date-fns'
+import { formatCurrency } from '../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../../shared/components/IconButton'
 import { type ProductModel } from '../../../../types/Product'
@@ -18,11 +19,13 @@ const StockTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX
       <Td data-cy='table-cell-fertilizer-name'>{fertilizer.name}</Td>
       <Td
         data-cy='table-cell-fertilizer-quantity'
-        textAlign='center'
+        textAlign='right'
         color={getColorByValue(fertilizer.quantity ?? 0)}
       >
         {fertilizer.quantity ?? 0}
       </Td>
+      <Td textAlign='right'>{formatCurrency(fertilizer.cost ?? 0)}</Td>
+      <Td textAlign='right'>{formatCurrency(fertilizer.sale ?? 0)}</Td>
       <Td>{fertilizer.description ?? '--'}</Td>
       <Td>
         <Flex justify='center' gap={1}>
