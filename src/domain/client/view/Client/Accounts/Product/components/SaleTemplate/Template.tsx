@@ -162,7 +162,7 @@ export default function DownloadSaleTemplate({ client, saleDate, sales }: Props)
             >
               <PDFTableRowItem>
                 <Text>
-                  {sale.fertilizerName} - {sale.fertilizerDescription}
+                  {sale.fertilizerName} {sale.fertilizerDescription}
                 </Text>
               </PDFTableRowItem>
               <PDFTableRowItem style={{ maxWidth: 80 }}>
@@ -180,7 +180,7 @@ export default function DownloadSaleTemplate({ client, saleDate, sales }: Props)
           ))}
           <PDFTableRow wrap={false}>
             <PDFTableRowItem>
-              <Text style={boldText}>ITEMS: {totalizers.items}</Text>
+              <Text style={boldText}>ITENS: {totalizers.items}</Text>
             </PDFTableRowItem>
             <PDFTableRowItem style={{ maxWidth: 80 }}>
               <Text style={{ textAlign: 'right', ...boldText }}>QTD: {totalizers.quantity}</Text>
