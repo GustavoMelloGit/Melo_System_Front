@@ -3,7 +3,7 @@ import { View } from '@react-pdf/renderer'
 import { type PropsWithChildren } from 'react'
 
 type Props = ReactPDF.ViewProps & PropsWithChildren
-export default function PDFTableRow({ children, ...rest }: Props): JSX.Element {
+export default function PDFTableRow({ children, style, ...rest }: Props): JSX.Element {
   return (
     <View
       style={{
@@ -12,7 +12,7 @@ export default function PDFTableRow({ children, ...rest }: Props): JSX.Element {
         flexDirection: 'row',
         alignItems: 'center',
         borderBottom: '1pt solid black',
-        ...rest.style,
+        ...style,
       }}
       {...rest}
     >

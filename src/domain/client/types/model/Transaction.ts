@@ -8,7 +8,6 @@ import {
   type EscolhaDetails,
 } from '../../../coffee/types/model/coffee'
 import { type SheetModel } from '../../../coffee/types/model/sheet'
-import { type FertilizerDetails } from '../../../product/types/Product'
 
 export type TransactionTypeName = CoffeeBebidas | 'currency' | 'bags' | 'fertilizer' | 'escolha'
 export type TransactionType<TName extends TransactionTypeName> = {
@@ -21,7 +20,7 @@ export type TransactionBaseModel<T extends TransactionTypeName> = WithId<{
   clientId: string
   date: number
   description: string
-  user: UserModel
+  user: Pick<UserModel, 'name' | 'updatedAt' | 'id'>
   type: TransactionType<T>
 }> &
   Timestamp
@@ -41,8 +40,19 @@ export type SacariaTransactionModel = TransactionBaseModel<'bags'> & {
   sheet: Pick<SheetModel, 'number' | 'id'> | null
 }
 
+export type ProductTransactionSaleModel = Array<{
+  deliveryDate: number
+  fertilizerId: string
+  fertilizerName: string
+  fertilizerDescription: string
+  bags: number
+  pricePerBag: number
+  brook: string | null
+  complement: string | null
+}>
+
 export type ProductTransactionModel = TransactionBaseModel<'fertilizer'> & {
-  details: FertilizerDetails
+  sale: ProductTransactionSaleModel
 }
 
 export type AllTransactions =
