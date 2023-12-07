@@ -1,5 +1,5 @@
 import { Button, Flex, Heading, Stack, VStack } from '@chakra-ui/react'
-import { ClientNameParser } from '../../../../../lib/utils/clientNameParserTest'
+import { ClientNameParser } from '../../../../../lib/utils/ClientNameParser'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import Modal from '../../../../../shared/components/Modal'
