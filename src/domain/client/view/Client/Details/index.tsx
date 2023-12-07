@@ -1,3 +1,5 @@
+import { FiEdit } from 'react-icons/fi'
+
 import {
   Avatar,
   Box,
@@ -9,6 +11,7 @@ import {
   Flex,
   Heading,
   HStack,
+  IconButton,
   Tab,
   TabList,
   TabPanel,
@@ -193,7 +196,16 @@ export default function ClientDetails(): JSX.Element {
                     </HStack>
                   </Flex>
                   <Heading as='h1' fontSize={['xl', '3xl']}>
-                    {client.name}
+                    {client.name}{' '}
+                    <IconButton
+                      as={Link}
+                      to={Routes.updateClient(client.id)}
+                      aria-label='editar cliente'
+                      variant='ghost'
+                      colorScheme='blue'
+                    >
+                      <FiEdit size={20} />
+                    </IconButton>
                   </Heading>
                   <Heading fontSize={['xs', 'md']} fontWeight={400} fontStyle='italic'>
                     ({client.nickname ?? 'Sem apelido'})
