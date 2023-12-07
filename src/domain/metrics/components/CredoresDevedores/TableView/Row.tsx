@@ -1,5 +1,5 @@
 import { Td, Tr } from '@chakra-ui/react'
-import { ClientNameParser } from '../../../../../lib/utils/clientNameParser'
+import { ClientNameParser } from '../../../../../lib/utils/clientNameParserTest'
 import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { type ClientModel } from '../../../../client/types/model/Client'
 
