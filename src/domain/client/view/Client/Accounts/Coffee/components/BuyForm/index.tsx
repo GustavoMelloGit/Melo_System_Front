@@ -25,15 +25,14 @@ import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/R
 import {
   CoffeeBebidasLabel,
   CoffeeTypesLabel,
-  type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
 import { type BuyCoffeeFormValues } from '../../types'
 
-const validationSchema = yup.object().shape({
+const validationSchema = yup.object({
   coffeeType: yup.string().required(validationErrors.coffeeTypeIsRequired),
-  bebida: yup.string().when('coffeeType', {
-    is: (coffeeType: CoffeeTypes) => CoffeeTypeHasBebida.includes(coffeeType),
-    then: yup.string().required(validationErrors.bebidaIsRequired),
+  bebida: yup.string().when('coffeeType', ([value], schema) => {
+    const hasBebida = CoffeeTypeHasBebida.includes(value)
+    return hasBebida ? schema.required(validationErrors.bebidaIsRequired) : schema.notRequired()
   }),
   bags: yup
     .number()

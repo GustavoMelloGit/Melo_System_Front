@@ -3,7 +3,7 @@ import { useModal } from '../../../../../shared/hooks/useModal'
 import { updateFertilizerService } from '../../../services/put'
 import { type CreditFertilizerFormValues } from './types'
 
-export default function useCreditFertilizerView() {
+export default function useCreditFertilizerView(): UseCreditFertilizerView {
   const closeModal = useModal((state) => state.closeModal)
 
   async function handleCreditFertilizer(
@@ -23,4 +23,9 @@ export default function useCreditFertilizerView() {
     closeModal,
     handleCreditFertilizer,
   }
+}
+
+type UseCreditFertilizerView = {
+  closeModal: () => void
+  handleCreditFertilizer: (id: string, values: CreditFertilizerFormValues) => Promise<void>
 }

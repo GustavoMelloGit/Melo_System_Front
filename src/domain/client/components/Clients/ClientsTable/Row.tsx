@@ -37,6 +37,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
         zIndex={1}
         pos='relative'
         userSelect='none'
+        minW={28}
       >
         {showBalance ? formatCurrency(clientBalance) : 'R$ ----'}
       </Td>

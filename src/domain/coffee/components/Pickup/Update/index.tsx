@@ -15,7 +15,7 @@ export default function UpdateCoffeePickup({ pickup }: Props): JSX.Element {
       ...values,
       bags: Number(values.bags),
     })
-    if (error || !data) {
+    if (error ?? !data) {
       toast.error(error)
       return
     }
