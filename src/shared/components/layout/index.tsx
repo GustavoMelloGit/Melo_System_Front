@@ -16,7 +16,7 @@ const maxW: Record<LayoutSizes, string> = {
   xxl: '1536px',
 }
 
-const sidebarWidth: string = '17rem'
+const sidebarWidth: string = '18rem'
 const scrollbarWidth: string = '1rem'
 
 export default function PageLayout(): JSX.Element {
