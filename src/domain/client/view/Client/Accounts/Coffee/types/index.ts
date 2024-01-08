@@ -1,0 +1,28 @@
+import { type CoffeeBebidas, type CoffeeTypes } from '../../../../../../coffee/types/model/coffee'
+
+export type BuyCoffeeFormValues = {
+  coffeeType: CoffeeTypes
+  bebida: CoffeeBebidas
+  weight: number
+  bags: number
+  valuePerBag: number
+  description: string
+  complement?: string
+  brook?: string
+}
+
+export type CoffeeFormValues = {
+  date: string
+  bags: number
+  weight: number
+  details: {
+    bebida: CoffeeBebidas
+    coffeeType: CoffeeTypes
+    description: string
+  }
+}
+
+export type CreateCoffeeValues = Omit<CoffeeFormValues, 'bags' | 'weight'> & {
+  clientId: string
+  value: number
+}

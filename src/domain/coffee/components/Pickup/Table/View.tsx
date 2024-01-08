@@ -1,0 +1,77 @@
+import Table from '../../../../../shared/components/table/Table'
+import {
+  type SearchForOption,
+  type TableHeaderColumns,
+} from '../../../../../shared/components/table/types'
+import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../../types/model/pickup'
+import PickupTableRow from './Row'
+
+type Props = {
+  data: PickupCoffeeModel[] | undefined
+  isLoading: boolean
+  totalPickups: number
+  onClickUpdate: (pickup: PickupCoffeeModel) => Promise<void>
+  onClickCheck: (pickup: PickupCoffeeModel) => Promise<void>
+  onClickUncheck: (pickup: PickupCoffeeModel) => Promise<void>
+}
+export default function PickupTableView({
+  data,
+  isLoading,
+  totalPickups,
+  onClickUpdate,
+  onClickCheck,
+  onClickUncheck,
+}: Props): JSX.Element {
+  return (
+    <Table
+      header={{
+        columns: headerColumns,
+      }}
+      rows={{
+        isLoading,
+        dataLength: data?.length ?? 0,
+        noDataMessage: 'Nenhum café encontrado',
+      }}
+      pagination={{
+        totalLength: totalPickups,
+      }}
+      table={{
+        'data-cy': 'pickupCoffee-table',
+      }}
+      filter={{
+        searchForOptions,
+      }}
+    >
+      {data?.map((pickup, index) => (
+        <PickupTableRow
+          key={index}
+          pickup={pickup}
+          onClickUpdate={onClickUpdate}
+          onClickCheck={onClickCheck}
+          onClickUncheck={onClickUncheck}
+          variant={pickup.status === PickupCoffeeStatuses.COMPLETED ? 'completed' : 'pending'}
+        />
+      ))}
+    </Table>
+  )
+}
+
+const headerColumns: TableHeaderColumns[] = [
+  { id: 'client.searchableName', label: 'Cliente', isSortable: true },
+  { id: 'bags', label: 'Sacos', isSortable: true, textAlign: 'center' },
+  { id: 'brook', label: 'Córrego', isSortable: true },
+  { id: 'complement', label: 'Referência' },
+  { id: 'actions', label: 'Ações', align: 'center' },
+]
+
+const searchForOptions: SearchForOption = {
+  'client.searchableName': {
+    label: 'Nome do Cliente',
+  },
+  // 'client.code': {
+  //   label: 'Código do Cliente',
+  // },
+  brook: {
+    label: 'Córrego',
+  },
+}
