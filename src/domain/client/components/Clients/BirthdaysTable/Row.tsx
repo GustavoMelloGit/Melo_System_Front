@@ -7,6 +7,7 @@ type Client = {
   name: string
   nickname: string | undefined
   photo: string | undefined
+  isBirthdayToday: boolean
   id: string
 }
 type Props = {
@@ -14,7 +15,16 @@ type Props = {
 }
 export default function BirthdaysTableRow({ client }: Props): JSX.Element {
   return (
-    <LinkRow>
+    <LinkRow
+      sx={{
+        ...(client.isBirthdayToday && {
+          borderColor: 'yellow.100',
+          borderWidth: '1px',
+          borderStyle: 'solid',
+        }),
+      }}
+      id={client.isBirthdayToday ? 'birthday-today' : undefined}
+    >
       <Td>
         <Avatar loading='lazy' src={client.photo} name={client.name} />
       </Td>

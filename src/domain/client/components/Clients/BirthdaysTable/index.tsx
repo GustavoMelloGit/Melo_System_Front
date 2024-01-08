@@ -24,11 +24,25 @@ function orderClientsByBirthday(clients: ClientModel[]): ClientModel[] {
   return cloneClients
 }
 
+function isClientBirthdayToday(client: ClientModel): boolean {
+  const clientBirthDate = new Date(
+    ((client.personType as NaturalPerson).birthDate as number) + threeHoursInMilliseconds,
+  )
+  const today = new Date()
+  return (
+    clientBirthDate.getDate() === today.getDate() && clientBirthDate.getMonth() === today.getMonth()
+  )
+}
+
 type Props = {
   clients: ClientModel[]
   isLoading: boolean
 }
 export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Element {
+  const clientsHavingBirthdayToday = clients
+    .filter(isClientBirthdayToday)
+    .map((client) => client.id)
+
   return (
     <Table
       header={{
@@ -67,6 +81,7 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
             name: client.name,
             nickname: client.nickname,
             photo: client.profileImage,
+            isBirthdayToday: clientsHavingBirthdayToday.includes(client.id),
             birthday:
               client.personType.type === 'fisica' && client.personType.birthDate
                 ? format(
