@@ -32,7 +32,8 @@
     "no-new": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "warn",
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
-    "@typescript-eslint/unbound-method": "off"
+    "@typescript-eslint/unbound-method": "off",
+    "no-redeclare": "off"
   },
   "ignorePatterns": ["cypress"],
   "parser": "@typescript-eslint/parser",
