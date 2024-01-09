@@ -30,7 +30,7 @@ export default function useUpdateSheetView(): UseUpdateSheetView {
     navigate(-1)
   }
 
-  const initialValues: SheetFormValues = data
+  const initialValues: SheetFormValues | undefined = data
     ? {
         clientId: data.clientId,
         clientName: data.client.name,
@@ -41,22 +41,7 @@ export default function useUpdateSheetView(): UseUpdateSheetView {
         lines: data.lines,
         number: data.number,
       }
-    : ({
-        clientId: '',
-        clientName: '',
-        number: 0,
-        weighingDate: new Date().toISOString().split('T')[0],
-        coffeeDetails: {
-          picking: 0,
-          foulness: 0,
-          drilled: 0,
-          moisture: 0,
-          sieve: 0,
-          bebida: 'duro',
-          coffeeType: 'bica_corrida',
-        },
-        lines: [{ bags: 0, weight: 0 }],
-      } as SheetFormValues)
+    : undefined
 
   return {
     initialValues,
@@ -67,7 +52,7 @@ export default function useUpdateSheetView(): UseUpdateSheetView {
 }
 
 type UseUpdateSheetView = {
-  initialValues: SheetFormValues
+  initialValues: SheetFormValues | undefined
   updateSheet: (values: SheetFormValues) => Promise<void>
   bookNumber: string | undefined
   sheetNumber: string | undefined
