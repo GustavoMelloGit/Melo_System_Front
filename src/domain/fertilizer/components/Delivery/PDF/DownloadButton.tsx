@@ -51,7 +51,7 @@ export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
       }
     })
     updateInstance(<PickupPDFTemplate data={sortObjectProperties(templateData)} />)
-  }, [parsedData, mutate])
+  }, [parsedData, mutate, updateInstance])
 
   useEffect(() => {
     if (!isLoading && parsedData) {

@@ -71,7 +71,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
       setValue('brook', address.brook ?? '')
       setValue('complement', address.complement ?? '')
     }
-  }, [clients])
+  }, [clients, initialValues?.brook, initialValues?.complement, setValue])
 
   return (
     <Modal isOpen isCentered onClose={closeModal}>

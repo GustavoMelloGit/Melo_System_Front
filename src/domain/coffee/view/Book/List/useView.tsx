@@ -28,7 +28,7 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
       const latestBook = data?.data[0]
       navigate(Routes.bookPage(latestBook.number))
     }
-  }, [allSearchParams, data])
+  }, [allSearchParams, data, navigate])
 
   return {
     data: data?.data,

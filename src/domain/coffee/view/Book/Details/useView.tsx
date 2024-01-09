@@ -30,7 +30,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
       await mutate()
       toast.success('Folha excluída com sucesso!')
     },
-    [mutate],
+    [mutate, number],
   )
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
     return () => {
       SheetsEmitter.off('removeSheet', handleDeleteSheet)
     }
-  }, [])
+  }, [handleDeleteSheet])
 
   return {
     data: data?.data,

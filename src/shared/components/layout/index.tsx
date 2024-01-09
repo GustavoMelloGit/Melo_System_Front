@@ -32,7 +32,7 @@ export default function PageLayout(): JSX.Element {
     if (isMobile) {
       close()
     }
-  }, [location])
+  }, [close, isMobile, location])
 
   return (
     <Flex minH='100vh' position='relative' overflowX='hidden'>

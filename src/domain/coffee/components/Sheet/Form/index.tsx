@@ -39,7 +39,7 @@ export default function SheetForm({
     if (initialValues) {
       reset(initialValues)
     }
-  }, [initialValues])
+  }, [initialValues, reset])
 
   return (
     <form

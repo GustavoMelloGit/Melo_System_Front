@@ -28,7 +28,7 @@ export default function CollapsibleTd({ children, ...rest }: Props): JSX.Element
     return () => {
       window.removeEventListener('keydown', commandListenerHandler)
     }
-  }, [])
+  }, [commandListenerHandler])
 
   const childElement = useMemo(() => {
     if (typeof children === 'function') {

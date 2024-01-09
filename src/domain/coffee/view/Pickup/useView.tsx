@@ -30,7 +30,7 @@ export default function usePickupView(): UsePickupView {
 
   const refetchData = useCallback(async () => {
     await order.mutate()
-  }, [order.mutate])
+  }, [order])
 
   useEffect(() => {
     PickupEmitter.on('pickupChecked', refetchData)

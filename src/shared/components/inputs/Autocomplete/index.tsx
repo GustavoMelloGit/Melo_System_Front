@@ -73,7 +73,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
       return () => {
         resetState()
       }
-    }, [])
+    }, [resetState])
 
     return (
       <FormControl position='relative' ref={ref}>

@@ -13,9 +13,9 @@ export default function useListTransactionsView(): UseListTransactionsView {
   const params = useServiceParams()
   const { isLoading, mutate, data } = useGetTransactionsService(uuid ?? '', params)
 
-  async function refetchData(): Promise<void> {
+  const refetchData = useCallback(async (): Promise<void> => {
     await mutate()
-  }
+  }, [mutate])
 
   function handleAddTransaction(): void {
     openModal(<CreateTransactionView uuid={uuid ?? ''} />)
@@ -30,7 +30,7 @@ export default function useListTransactionsView(): UseListTransactionsView {
     return () => {
       CheckingAccountEmitter.off('transactionCreated', createTransactionHandler)
     }
-  }, [])
+  }, [createTransactionHandler])
 
   return {
     data: data?.data ?? [],

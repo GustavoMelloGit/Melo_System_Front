@@ -39,7 +39,7 @@ export default function useSearchBarView(): UseSearchBarView {
     return () => {
       window.removeEventListener('keydown', handleOpenSearchBar)
     }
-  }, [])
+  }, [handleOpenSearchBar])
 
   const showClients = Boolean(
     Boolean(debouncedClient) && data?.data && Boolean(data.data.length) && !isLoading,

@@ -34,7 +34,7 @@ export default function PickupPDFDownloadButton(): JSX.Element {
       }
     })
     updateInstance(<PickupPDFTemplate data={sortObjectProperties(templateData)} />)
-  }, [data, mutate])
+  }, [data, mutate, updateInstance])
 
   useEffect(() => {
     if (!isLoading && data) {
