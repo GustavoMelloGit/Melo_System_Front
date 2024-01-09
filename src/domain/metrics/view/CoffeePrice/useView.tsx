@@ -1,6 +1,6 @@
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getCoffeePriceMetrics } from '../../services/getCoffeePriceMetrics'
+import { useGetCoffeePriceMetrics } from '../../services/getCoffeePriceMetrics'
 import {
   type CoffeePriceMetricsFilterOptions,
   type GetCoffeePriceMetricsResponse,
@@ -21,7 +21,7 @@ export default function useCoffeePriceMetricsView(): UseBuyCoffeeMetricsView {
     startDate: formatStartDate(initialDateInputValue),
     endDate: formatEndDate(initialDateInputValue),
   })
-  const { data, isLoading } = getCoffeePriceMetrics(queryParam)
+  const { data, isLoading } = useGetCoffeePriceMetrics(queryParam)
 
   const handleSubmitFilters = (values: CoffeePriceMetricsFilterOptions): void => {
     const { endDate, startDate } = values

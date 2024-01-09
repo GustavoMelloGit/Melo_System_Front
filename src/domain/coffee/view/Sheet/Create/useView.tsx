@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { PaginationParams } from '../../../../../lib/constants/pagination'
-import { createSheetService, getSheetsService } from '../../../services/Sheets'
+import { createSheetService, useGetSheetsService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
 
@@ -8,7 +8,7 @@ type Props = {
   bookNumber: string | number | undefined
 }
 export default function useCreateSheetView({ bookNumber }: Props): UseCreateSheetView {
-  const { data, mutate: refetchLastLine } = getSheetsService({
+  const { data, mutate: refetchLastLine } = useGetSheetsService({
     bookNumber,
     params: `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&limit=1`,
   })

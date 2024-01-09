@@ -7,7 +7,7 @@ export default function useFetch<Data = any, Error = any>(
 ): UseFetch<Data, Error> {
   const { data, error, isLoading, mutate } = useSWR<Data, Error>(
     url,
-    async (url) => {
+    async (url: string) => {
       const response = await api.get(url)
 
       return response.data

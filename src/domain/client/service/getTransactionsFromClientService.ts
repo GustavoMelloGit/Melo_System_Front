@@ -23,7 +23,7 @@ type ResponseByType<T extends Type> = T extends 'currency'
   ? FertilizerTransactionModel
   : unknown
 
-export function getTransactionsFromClientService<T extends Type>(
+export function useGetTransactionsFromClientService<T extends Type>(
   type: T,
   clientId: string,
   config?: SWRConfiguration,

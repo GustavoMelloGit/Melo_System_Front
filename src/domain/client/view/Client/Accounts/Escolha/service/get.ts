@@ -3,7 +3,7 @@ import { type GetListResponse } from '../../../../../../../shared/types/service/
 import { type SWRServiceResponse } from '../../../../../../../shared/types/service/SWRServiceResponse'
 import { type EscolhaTransactionModel } from '../../../../../types/model/Transaction'
 
-export function getEscolhaAccountService(
+export function useGetEscolhaAccountService(
   clientId: string | undefined,
   params?: string,
 ): SWRServiceResponse<GetListResponse<EscolhaTransactionModel[]>> {

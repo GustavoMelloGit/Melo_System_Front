@@ -9,7 +9,10 @@ export function removeEmptyProperties(obj: Record<string, any>): Record<string, 
   const objectWithoutFalsyValues = Object.fromEntries(
     Object.entries(obj)
       .filter(([_, v]) => v)
-      .map(([k, v]) => [k, v === Object(v) ? removeEmptyProperties(v) : v]),
+      .map(([k, v]) => [
+        k,
+        v === Object(v) ? removeEmptyProperties(v as Record<string, unknown>) : v,
+      ]),
   )
 
   return removeEmptyObjects(objectWithoutFalsyValues)
@@ -22,7 +25,9 @@ export function removeEmptyProperties(obj: Record<string, any>): Record<string, 
  */
 export function removeEmptyObjects(obj: Record<string, any>): Record<string, any> {
   return Object.fromEntries(
-    Object.entries(obj).filter(([_, v]) => v !== Object(v) || Object.keys(v).length > 0),
+    Object.entries(obj).filter(
+      ([_, v]) => v !== Object(v) || Object.keys(v as Record<string, unknown>).length > 0,
+    ),
   )
 }
 

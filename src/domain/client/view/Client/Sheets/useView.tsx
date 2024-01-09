@@ -1,22 +1,22 @@
 import { useParams } from 'react-router-dom'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
-import { getSheetsService } from '../../../../coffee/services/Sheets'
+import { useGetSheetsService } from '../../../../coffee/services/Sheets'
 import { type SheetModel } from '../../../../coffee/types/model/sheet'
-import { getClientService } from '../../../service'
+import { useGetClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientSheetsPage(): UseClientSheetsPage {
   const { uuid } = useParams()
-  const { data: sheets, isLoading: sheetsLoading } = getSheetsService({
-    params: `clientId=${uuid as string}`,
+  const { data: sheets, isLoading: sheetsLoading } = useGetSheetsService({
+    params: `clientId=${uuid ?? ''}`,
   })
-  const { data: client } = getClientService(uuid ?? '')
+  const { data: client } = useGetClientService(uuid ?? '')
 
   return {
     sheets,
     isLoading: sheetsLoading,
     client,
-    clientId: uuid as string,
+    clientId: uuid ?? '',
   }
 }
 

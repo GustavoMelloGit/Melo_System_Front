@@ -2,12 +2,12 @@ import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
 import { type ClientFormValues } from '../../../components/Client/Form/types'
-import { getClientService, updateClientService } from '../../../service'
+import { updateClientService, useGetClientService } from '../../../service'
 
 export default function useUpdateClientView(): UseUpdateClientView {
   const { uuid } = useParams()
   const navigate = useNavigate()
-  const { data, isLoading, mutate } = getClientService(uuid ?? '')
+  const { data, isLoading, mutate } = useGetClientService(uuid ?? '')
 
   async function handleUpdateClient(values: ClientFormValues): Promise<void> {
     if (!uuid) {

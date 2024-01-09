@@ -4,13 +4,13 @@ import { type SWRServiceResponse } from '../../../shared/types/service/SWRServic
 import { type ClientBalancesModel, type ClientModel } from '../types/model/Client'
 import { type CurrencyTransactionModel } from '../types/model/Transaction'
 
-export function getClientService(id: string): UseFetch<ClientModel, any> {
+export function useGetClientService(id: string): UseFetch<ClientModel, any> {
   const response = useFetch<ClientModel>(`/clients/${id}`)
 
   return response
 }
 
-export function getTransactionsService(
+export function useGetTransactionsService(
   clientId: string,
   params?: string,
 ): SWRServiceResponse<GetListResponse<CurrencyTransactionModel[]>> {
@@ -21,7 +21,7 @@ export function getTransactionsService(
   return response
 }
 
-export function getClientBalancesService(
+export function useGetClientBalancesService(
   clientId: string | undefined,
 ): SWRServiceResponse<ClientBalancesModel> {
   const response = useFetch<ClientBalancesModel>(clientId ? `/clients/${clientId}/balances` : null)

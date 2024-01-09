@@ -5,12 +5,12 @@ import { normalize } from '../../../../../lib/utils/normalize'
 import { sortObjectProperties } from '../../../../../lib/utils/sortObjectProperties'
 import IconButton from '../../../../../shared/components/IconButton'
 import { PickupEmitter } from '../../../events/pickup'
-import { getPickupOrdersService } from '../../../services/Pickup/get'
+import { useGetPickupOrdersService } from '../../../services/Pickup/get'
 import PickupPDFTemplate from './Template'
 import { type PickupPDFData } from './types'
 
 export default function PickupPDFDownloadButton(): JSX.Element {
-  const { data, isLoading, mutate } = getPickupOrdersService('status=inProgress&limit=10000')
+  const { data, isLoading, mutate } = useGetPickupOrdersService('status=inProgress&limit=10000')
   const [instance, updateInstance] = usePDF({
     document: <PickupPDFTemplate data={{}} />,
   })

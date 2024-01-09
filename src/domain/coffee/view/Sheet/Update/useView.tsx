@@ -1,13 +1,13 @@
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getSheetService, updateSheetService } from '../../../services/Sheets'
+import { updateSheetService, useGetSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
 
 export default function useUpdateSheetView(): UseUpdateSheetView {
   const navigate = useNavigate()
   const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
-  const { data } = getSheetService(
+  const { data } = useGetSheetService(
     bookNumber && sheetNumber ? { bookNumber, sheetNumber } : undefined,
   )
 

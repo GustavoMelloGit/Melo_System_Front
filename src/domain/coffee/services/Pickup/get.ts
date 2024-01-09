@@ -5,7 +5,7 @@ import { type GetListResponse } from '../../../../shared/types/service/GetListRe
 import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { type PickupCoffeeModel } from '../../types/model/pickup'
 
-export function getPickupOrdersService(
+export function useGetPickupOrdersService(
   params?: string,
 ): SWRServiceResponse<GetListResponse<PickupCoffeeModel[]>> {
   const response = useFetch<GetListResponse<PickupCoffeeModel[]>>(`/orders?${params ?? ''}`)

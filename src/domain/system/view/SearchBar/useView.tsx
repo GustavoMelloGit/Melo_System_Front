@@ -3,7 +3,7 @@ import { useForm, type Control } from 'react-hook-form'
 import { normalize } from '../../../../lib/utils/normalize'
 import useDebounce from '../../../../shared/hooks/useDebounce'
 import { useToggle } from '../../../../shared/hooks/useToggle'
-import { getClientsService } from '../../../client/service/getClientsService'
+import { useGetClientsService } from '../../../client/service/getClientsService'
 import { type ClientModel } from '../../../client/types/model/Client'
 
 const parseClients = (clients?: ClientModel[]): ClientModel[] => {
@@ -18,7 +18,7 @@ export default function useSearchBarView(): UseSearchBarView {
   })
   const searchClient = watch('search')
   const debouncedClient = useDebounce(searchClient)
-  const { data, isLoading } = getClientsService(`searchableName=${normalize(debouncedClient)}`)
+  const { data, isLoading } = useGetClientsService(`searchableName=${normalize(debouncedClient)}`)
 
   const handleOpenSearchBar = useCallback(
     (e: KeyboardEvent) => {

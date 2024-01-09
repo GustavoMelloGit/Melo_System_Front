@@ -1,6 +1,6 @@
 import { PaginationParams } from '../../../../../lib/constants/pagination'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { getBirthdaysService } from '../../../service/getBirthdaysService'
+import { useGetBirthdaysService } from '../../../service/getBirthdaysService'
 import { type ClientModel } from '../../../types/model/Client'
 
 const currentMonth = new Date().getMonth() + 1
@@ -10,7 +10,7 @@ export default function useBirthdaysView(): UseBirthdaysView {
     [PaginationParams.searchBy]: String(currentMonth),
   })
   const month = getParam(PaginationParams.searchBy) ?? currentMonth
-  const { data, isLoading } = getBirthdaysService(month)
+  const { data, isLoading } = useGetBirthdaysService(month)
 
   return {
     data: data ?? [],

@@ -6,7 +6,7 @@ import IconButton from '../../../../../../shared/components/IconButton'
 import ControllerAutocomplete from '../../../../../../shared/components/inputs/ControllerAutocomplete'
 import useDebounce from '../../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../service/getClientsService'
+import { useGetClientsService } from '../../../../service/getClientsService'
 import TransferReferralTransferTypeFields from './TransferReferralTransferTypeFields'
 import { type ClientTransferFormValues, type Referral } from './types'
 
@@ -24,7 +24,7 @@ export default function TransferReferral({ control, referral }: Props): JSX.Elem
     name: `${referral}.clientId`,
   })
   const debouncedClientName = useDebounce(clientName, 300)
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+  const { data: clients, isLoading: isLoadingClients } = useGetClientsService(
     `searchableName=${normalize(debouncedClientName)}&limit=10`,
   )
   return (

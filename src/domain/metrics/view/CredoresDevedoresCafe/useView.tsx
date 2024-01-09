@@ -1,6 +1,6 @@
 import { PaginationParams } from '../../../../lib/constants/pagination'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getCredoresDevedoresCafeMetrics } from '../../services/getCredoresDevedoresCafe'
+import { useGetCredoresDevedoresCafeMetrics } from '../../services/getCredoresDevedoresCafe'
 import { type ClientCoffeeMetric } from '../../types/credoresDevedoresCafeMetrics'
 
 export default function useCredoresDevedoresCafeMetricsView(): UseBuyCoffeeMetricsView {
@@ -8,7 +8,7 @@ export default function useCredoresDevedoresCafeMetricsView(): UseBuyCoffeeMetri
     [PaginationParams.sortBy]: 'balance.total',
     [PaginationParams.sortOrder]: 'desc',
   })
-  const { data, isLoading } = getCredoresDevedoresCafeMetrics({
+  const { data, isLoading } = useGetCredoresDevedoresCafeMetrics({
     greaterThan: allSearchParams.greaterThan,
     limit: allSearchParams.limit,
     page: allSearchParams.page,

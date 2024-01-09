@@ -7,7 +7,7 @@ import { ClientNameParser } from '../../../../../lib/utils/ClientNameParser'
 import { normalize } from '../../../../../lib/utils/normalize'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../client/service/getClientsService'
+import { useGetClientsService } from '../../../../client/service/getClientsService'
 import { type ClientModel } from '../../../../client/types/model/Client'
 import { type PickupFormValues } from '../../../types/model/pickup'
 
@@ -25,7 +25,7 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
   const searchableName = normalize(ClientNameParser.removeNickname(debouncedClientName))
   const clientNickname = ClientNameParser.getNickname(debouncedClientName)
 
-  const { data, isLoading } = getClientsService(
+  const { data, isLoading } = useGetClientsService(
     `searchableName=${searchableName}${
       clientNickname ? `&nickname=${clientNickname ?? ''}` : ''
     }&limit=10`,

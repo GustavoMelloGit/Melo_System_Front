@@ -15,7 +15,7 @@ type Params = {
   greaterThan: NumberString
   showOnly: 'debit' | 'credit'
 }
-export function getCredoresDevedoresCafeMetrics(
+export function useGetCredoresDevedoresCafeMetrics(
   possibleParams?: Partial<Params>,
 ): SWRServiceResponse<ClientCoffeeMetric[]> {
   const params = formatRequestParams(possibleParams ?? {})

@@ -4,7 +4,7 @@ import { type GetListResponse } from '../../../shared/types/service/GetListRespo
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
 import { type ClientModel } from '../types/model/Client'
 
-export function getClientsService(
+export function useGetClientsService(
   params?: string,
   config?: SWRConfiguration,
 ): SWRServiceResponse<GetListResponse<ClientModel[]>> {

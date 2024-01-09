@@ -13,7 +13,7 @@ const useIdle = (
 
   useEffect(() => {
     let mounted = true
-    let timeout: any
+    let timeout: NodeJS.Timeout
     let localState: boolean = state
     const set = (newState: boolean): void => {
       if (mounted) {

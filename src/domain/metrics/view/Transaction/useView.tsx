@@ -1,6 +1,6 @@
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getTransactionMetrics } from '../../services/getTransactionMetrics'
+import { useGetTransactionMetrics } from '../../services/getTransactionMetrics'
 import {
   type GetTransactionMetricsResponse,
   type TransactionMetricsFilterOptions,
@@ -21,7 +21,7 @@ export default function useTransactionMetricsView(): UseTransactionMetricsView {
     startDate: formatStartDate(initialDateInputValue),
     endDate: formatEndDate(initialDateInputValue),
   })
-  const { data, isLoading } = getTransactionMetrics(queryParam)
+  const { data, isLoading } = useGetTransactionMetrics(queryParam)
 
   const handleSubmitFilters = (values: TransactionMetricsFilterOptions): void => {
     const { endDate, startDate, type } = values
