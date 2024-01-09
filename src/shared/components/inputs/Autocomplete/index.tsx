@@ -31,7 +31,7 @@ export type Props = InputProps & {
 }
 const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
   (
-    { label, options, isLoading, handleChange, error, onFocus, handleSelect, ...rest },
+    { label, options, isLoading, handleChange, error, onFocus, handleSelect, isRequired, ...rest },
     forwardRef,
   ): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
@@ -76,11 +76,11 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
     }, [resetState])
 
     return (
-      <FormControl position='relative' ref={ref}>
+      <FormControl position='relative' ref={ref} isInvalid={Boolean(error)}>
         {label && (
           <FormLabel>
             {label}
-            {rest.isRequired && (
+            {isRequired && (
               <Text as='span' color='red.500' ml={1}>
                 *
               </Text>
