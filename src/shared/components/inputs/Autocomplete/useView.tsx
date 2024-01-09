@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { type Option } from './types'
 
 type State = {
@@ -12,31 +12,33 @@ type Actions = {
   resetState: () => void
 }
 
+const initialState: State = {
+  options: [],
+  showOptions: false,
+}
 const useAutocomplete = (): [State, Actions] => {
-  const initialState: State = {
-    options: [],
-    showOptions: false,
-  }
-
   const [state, setState] = useState<State>(initialState)
 
-  const setOptions = (options: Option[]): void => {
+  const setOptions = useCallback((options: Option[]): void => {
     setState((prevState) => ({ ...prevState, options }))
-  }
+  }, [])
 
-  const setShowOptions = (showOptions: boolean): void => {
+  const setShowOptions = useCallback((showOptions: boolean): void => {
     setState((prevState) => ({ ...prevState, showOptions }))
-  }
+  }, [])
 
-  const resetState = (): void => {
+  const resetState = useCallback((): void => {
     setState(initialState)
-  }
+  }, [])
 
-  const actions: Actions = {
-    setOptions,
-    setShowOptions,
-    resetState,
-  }
+  const actions: Actions = useMemo(
+    () => ({
+      setOptions,
+      setShowOptions,
+      resetState,
+    }),
+    [resetState, setOptions, setShowOptions],
+  )
 
   return [state, actions]
 }
