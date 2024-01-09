@@ -38,7 +38,6 @@ export default function ControllerField<
     fontWeight: 500,
     variant: 'filled',
     rounded: 'xl',
-    isRequired: required,
     ...rest,
   }
   return (
