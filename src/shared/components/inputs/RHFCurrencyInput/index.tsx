@@ -44,7 +44,7 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
   function formatCurrency(value: string): string {
     const options = { minimumFractionDigits: 2 }
     const result = new Intl.NumberFormat('pt-BR', options).format(parseFloat(value) / 100)
-    onChangeValue?.((+value) / 100)
+    onChangeValue?.(+value / 100)
     if (result === 'NaN') {
       return '0,00'
     }

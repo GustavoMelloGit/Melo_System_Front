@@ -10,7 +10,7 @@
     "cypress": "cypress open",
     "lint": "eslint --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
-    "format": "prettier --write .",
+    "format": "prettier --config .prettierrc --write .",
     "prepare": "husky install"
   },
   "dependencies": {

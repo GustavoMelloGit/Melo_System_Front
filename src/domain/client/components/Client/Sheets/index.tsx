@@ -25,9 +25,7 @@ export default function ClientSheetsTable({ data, isLoading, totalLength }: Prop
         'data-cy': 'coffee-book-table',
       }}
     >
-      {data?.map((sheet) => (
-        <SheetsTableRow key={sheet.number} sheet={sheet} />
-      ))}
+      {data?.map((sheet) => <SheetsTableRow key={sheet.number} sheet={sheet} />)}
     </Table>
   )
 }

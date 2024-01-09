@@ -30,9 +30,7 @@ export default function SheetsTable({ data, isLoading, totalLength }: Props): JS
         'data-cy': 'coffee-book-table',
       }}
     >
-      {data?.map((sheet) => (
-        <SheetsTableRow key={sheet.number} sheet={sheet} />
-      ))}
+      {data?.map((sheet) => <SheetsTableRow key={sheet.number} sheet={sheet} />)}
     </Table>
   )
 }
