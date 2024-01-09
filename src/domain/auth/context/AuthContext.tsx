@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
     }
   }, [removeToken, removeUser])
 
-  const tokenIsValid = useCallback(async (): Promise<boolean> => {
+  const isTokenValid = useCallback(async (): Promise<boolean> => {
     const { error } = await verifyTokenService()
     if (error) {
       return false
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
   const persistUser = useCallback(async (): Promise<void> => {
     const token = getToken()
     setAuthToken(token)
-    const isValidToken = await tokenIsValid()
+    const isValidToken = await isTokenValid()
     if (!isValidToken) {
       await signOut()
       return
@@ -82,7 +82,8 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
       setUser(user)
     }
     setAppInitialized(true)
-  }, [getToken, getValue, signOut, tokenIsValid])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     void persistUser()
