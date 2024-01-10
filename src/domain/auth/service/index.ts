@@ -1,9 +1,10 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/errorHandler'
 import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
+import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
 import { type SignInResponse, type SignInValues } from '../types'
 
-export async function signInService(values: SignInValues): SignInResponse {
+export async function signInService(values: SignInValues): PostServiceResponse<SignInResponse> {
   try {
     const { data } = await api.post('/login', values)
 
