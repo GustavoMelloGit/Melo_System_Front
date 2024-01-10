@@ -35,7 +35,7 @@
     "@typescript-eslint/unbound-method": "off",
     "no-redeclare": "off"
   },
-  "ignorePatterns": ["cypress"],
+  "ignorePatterns": ["cypress", "*.json"],
   "parser": "@typescript-eslint/parser",
   "root": true
 }
