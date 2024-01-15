@@ -29,6 +29,7 @@ const CreateProductView = ({ refetch }: Props): JSX.Element => {
               sale: 0,
             }}
             onSubmit={handleAddFertilizer}
+            submitButtonLabel='Adicionar'
           />
         </Modal.Body>
       </Modal.Content>

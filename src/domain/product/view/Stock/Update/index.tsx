@@ -17,7 +17,7 @@ const UpdateProductView = ({ product }: Props): JSX.Element => {
       <Modal.Content>
         <Modal.Header>
           <Heading as='h1' fontSize='3xl'>
-            Adicionar Produto
+            Editar Produto
           </Heading>
           <Modal.CloseButton />
         </Modal.Header>
@@ -33,6 +33,7 @@ const UpdateProductView = ({ product }: Props): JSX.Element => {
             onSubmit={async (values) => {
               await updateProductHandler(product.id, values)
             }}
+            submitButtonLabel='Salvar'
           />
         </Modal.Body>
       </Modal.Content>

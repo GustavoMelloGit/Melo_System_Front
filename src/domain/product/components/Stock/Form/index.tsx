@@ -30,8 +30,13 @@ const validationSchema = yup.object().shape({
 type Props = {
   initialValues: StockProductFormValues
   onSubmit: (values: StockProductFormValues) => Promise<void>
+  submitButtonLabel: string
 }
-export default function StockProductForm({ initialValues, onSubmit }: Props): JSX.Element {
+export default function StockProductForm({
+  initialValues,
+  onSubmit,
+  submitButtonLabel,
+}: Props): JSX.Element {
   const {
     control,
     handleSubmit,
@@ -94,7 +99,7 @@ export default function StockProductForm({ initialValues, onSubmit }: Props): JS
         />
       </Stack>
       <Button mt={5} isLoading={isSubmitting} type='submit' colorScheme='blue' w='full'>
-        Adicionar
+        {submitButtonLabel}
       </Button>
     </form>
   )
