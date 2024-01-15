@@ -6,8 +6,8 @@ import useStockListView from './useView'
 
 const StockListView = (): JSX.Element => {
   const {
-    response: { data, isLoading, mutate },
-    handleAddFertilizer,
+    response: { data, isLoading },
+    createProductHandler,
   } = useStockListView()
   return (
     <Page title='Estoque' data-cy='list-clients-page'>
@@ -24,16 +24,11 @@ const StockListView = (): JSX.Element => {
             icon='add'
             variant='outline'
             colorScheme='blue'
-            onClick={handleAddFertilizer}
+            onClick={createProductHandler}
           />
         }
       />
-      <StockTable
-        data={data?.data}
-        refetch={mutate}
-        isLoading={isLoading}
-        totalBooks={data?.total ?? 0}
-      />
+      <StockTable data={data?.data} isLoading={isLoading} totalBooks={data?.total ?? 0} />
     </Page>
   )
 }

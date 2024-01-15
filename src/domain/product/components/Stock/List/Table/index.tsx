@@ -6,6 +6,7 @@ import {
 } from '../../../../../../shared/components/table/types'
 import { useModal } from '../../../../../../shared/hooks/useModal'
 import { deleteFertilizerService } from '../../../../../fertilizer/services/delete'
+import { ProductEmitter } from '../../../../events/ProductEmitter'
 import { type ProductModel } from '../../../../types/Product'
 import StockTableRow from './Row'
 
@@ -13,22 +14,28 @@ type Props = {
   data: ProductModel[] | undefined
   totalBooks: number
   isLoading: boolean
-  refetch: () => void
 }
-const StockTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Element => {
+const StockTable = ({ data, isLoading, totalBooks }: Props): JSX.Element => {
   const openModal = useModal((state) => state.openModal)
-  async function handleDeleteFertilizer(id: string): Promise<void> {
+
+  async function deleteProductHandler(id: string): Promise<void> {
     const { error } = await deleteFertilizerService(id)
     if (error) {
       toast.error(error)
       return
     }
     toast.success('Produto removido com sucesso!')
-    refetch()
+    ProductEmitter.emit('productDeleted', id)
   }
-  async function handleCreditFertilizer(fertilizer: ProductModel): Promise<void> {
+
+  async function creditProductHandler(product: ProductModel): Promise<void> {
     const CreditFertilizer = (await import('../Credit')).default
-    openModal(<CreditFertilizer fertilizer={fertilizer} refetch={refetch} />)
+    openModal(<CreditFertilizer product={product} />)
+  }
+
+  async function updateProductHandler(product: ProductModel): Promise<void> {
+    const UpdateFertilizer = (await import('../../../../view/Stock/Update')).default
+    openModal(<UpdateFertilizer product={product} />)
   }
 
   return (
@@ -55,8 +62,9 @@ const StockTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Elemen
         <StockTableRow
           key={fertilizer.id}
           fertilizer={fertilizer}
-          onClickDelete={handleDeleteFertilizer}
-          onClickCredit={handleCreditFertilizer}
+          onClickDelete={deleteProductHandler}
+          onClickCredit={creditProductHandler}
+          onClickEdit={updateProductHandler}
         />
       ))}
     </Table>

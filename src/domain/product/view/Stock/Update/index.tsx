@@ -1,0 +1,42 @@
+import { Heading } from '@chakra-ui/react'
+import Modal from '../../../../../shared/components/Modal'
+import { useModal } from '../../../../../shared/hooks/useModal'
+import StockProductForm from '../../../components/Stock/Form'
+import { type ProductModel } from '../../../types/Product'
+import useUpdateProductView from './useView'
+
+type Props = {
+  product: ProductModel
+}
+const UpdateProductView = ({ product }: Props): JSX.Element => {
+  const { updateProductHandler } = useUpdateProductView()
+  const closeModal = useModal((state) => state.closeModal)
+
+  return (
+    <Modal isCentered isOpen onClose={closeModal}>
+      <Modal.Content>
+        <Modal.Header>
+          <Heading as='h1' fontSize='3xl'>
+            Adicionar Produto
+          </Heading>
+          <Modal.CloseButton />
+        </Modal.Header>
+        <Modal.Body>
+          <StockProductForm
+            initialValues={{
+              name: product.name,
+              quantity: product.quantity,
+              description: product.description,
+              cost: product.cost,
+              sale: product.sale,
+            }}
+            onSubmit={async (values) => {
+              await updateProductHandler(product.id, values)
+            }}
+          />
+        </Modal.Body>
+      </Modal.Content>
+    </Modal>
+  )
+}
+export default UpdateProductView

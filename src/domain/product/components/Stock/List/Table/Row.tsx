@@ -9,8 +9,14 @@ type Props = {
   fertilizer: ProductModel
   onClickDelete: (id: string) => Promise<void>
   onClickCredit: (fertilizer: ProductModel) => Promise<void>
+  onClickEdit: (fertilizer: ProductModel) => Promise<void>
 }
-const StockTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX.Element => {
+const StockTableRow = ({
+  fertilizer,
+  onClickDelete,
+  onClickCredit,
+  onClickEdit,
+}: Props): JSX.Element => {
   return (
     <Tr>
       <Td data-cy='table-cell-fertilizer-createdAt'>
@@ -29,6 +35,13 @@ const StockTableRow = ({ fertilizer, onClickDelete, onClickCredit }: Props): JSX
       <Td>{fertilizer.description ?? '--'}</Td>
       <Td>
         <Flex justify='center' gap={1}>
+          <IconButton
+            aria-label='Editar produto'
+            title='Editar produto'
+            icon='edit'
+            colorScheme='blue'
+            onClick={async () => onClickEdit(fertilizer)}
+          />
           <IconButton
             aria-label='Definir quantidade'
             title='Definir quantidade'

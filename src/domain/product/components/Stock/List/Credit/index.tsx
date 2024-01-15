@@ -1,23 +1,23 @@
+import { ProductEmitter } from '../../../../events/ProductEmitter'
 import { type ProductModel } from '../../../../types/Product'
 import useCreditStockProductView from './useView'
 import CreditStockProductView from './View'
 
 type Props = {
-  fertilizer: ProductModel
-  refetch: () => void
+  product: ProductModel
 }
-export default function CreditStockProduct({ fertilizer, refetch }: Props): JSX.Element {
+export default function CreditStockProduct({ product }: Props): JSX.Element {
   const { closeModal, handleCreditFertilizer } = useCreditStockProductView()
 
   return (
     <CreditStockProductView
       closeModal={closeModal}
       onSubmit={async (values) => {
-        await handleCreditFertilizer(fertilizer.id, values)
-        refetch()
+        await handleCreditFertilizer(product.id, values)
+        ProductEmitter.emit('productCredited', product.id)
       }}
       initialValues={{
-        quantity: fertilizer.quantity,
+        quantity: product.quantity,
       }}
     />
   )
