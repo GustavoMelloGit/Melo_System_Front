@@ -29,7 +29,7 @@ const StockTable = ({ data, isLoading, totalBooks }: Props): JSX.Element => {
   }
 
   async function creditProductHandler(product: ProductModel): Promise<void> {
-    const CreditFertilizer = (await import('../Credit')).default
+    const CreditFertilizer = (await import('../../../../view/Stock/Credit')).default
     openModal(<CreditFertilizer product={product} />)
   }
 

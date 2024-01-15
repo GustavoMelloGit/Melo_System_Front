@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
-import { useModal } from '../../../../../../shared/hooks/useModal'
-import { updateFertilizerService } from '../../../../../fertilizer/services/put'
+import { useModal } from '../../../../../shared/hooks/useModal'
+import { updateFertilizerService } from '../../../../fertilizer/services/put'
 import { type CreditStockProductFormValues } from './types'
 
 export default function useCreditStockProductView(): UseCreditFertilizerView {

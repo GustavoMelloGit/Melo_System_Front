@@ -1,5 +1,5 @@
-import { ProductEmitter } from '../../../../events/ProductEmitter'
-import { type ProductModel } from '../../../../types/Product'
+import { ProductEmitter } from '../../../events/ProductEmitter'
+import { type ProductModel } from '../../../types/Product'
 import useCreditStockProductView from './useView'
 import CreditStockProductView from './View'
 

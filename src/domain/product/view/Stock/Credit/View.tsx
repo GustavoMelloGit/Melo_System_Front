@@ -1,7 +1,7 @@
 import { Button, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
-import NumberInput from '../../../../../../shared/components/inputs/NumberInput'
-import Modal from '../../../../../../shared/components/Modal'
+import NumberInput from '../../../../../shared/components/inputs/NumberInput'
+import Modal from '../../../../../shared/components/Modal'
 import { type CreditStockProductFormValues } from './types'
 
 type Props = {
