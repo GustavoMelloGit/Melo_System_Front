@@ -44,8 +44,8 @@ export default function useTransactionTable(): UseTransactionTable {
   }
 
   useEffect(() => {
-    if (selectionMode) resetStore()
-  }, [location, resetStore, selectionMode])
+    resetStore()
+  }, [location, resetStore])
 
   return {
     onSelectFee,
