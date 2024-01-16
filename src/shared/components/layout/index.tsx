@@ -1,5 +1,5 @@
 import { Box, Container, Flex } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { lazy, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { type LayoutSizes } from '../../contexts/LayoutContext/types'
 import useLayoutContext from '../../hooks/useLayoutContext'
@@ -7,6 +7,7 @@ import usePageSize from '../../hooks/usePageSize'
 import Suspense from '../Suspense'
 import Sidebar from './Sidebar'
 import ToggleSidebarButton from './Sidebar/components/ToggleSidebarButton'
+const BirthdayPopup = lazy(async () => import('../BirthdayPopup'))
 
 const maxW: Record<LayoutSizes, string> = {
   sm: '640px',
@@ -75,6 +76,7 @@ export default function PageLayout(): JSX.Element {
           <Outlet />
         </Suspense>
       </Container>
+      <BirthdayPopup />
     </Flex>
   )
 }

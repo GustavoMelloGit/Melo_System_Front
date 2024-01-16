@@ -2,6 +2,7 @@ import { Select } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { months } from '../../../../../lib/constants/months'
 import { deepClone } from '../../../../../lib/utils/deepClone'
+import { isClientBirthdayToday } from '../../../../../lib/utils/isClientBirthdayToday'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type ClientModel, type NaturalPerson } from '../../../types/model/Client'
@@ -22,16 +23,6 @@ function orderClientsByBirthday(clients: ClientModel[]): ClientModel[] {
     return aDate - bDate
   })
   return cloneClients
-}
-
-function isClientBirthdayToday(client: ClientModel): boolean {
-  const clientBirthDate = new Date(
-    ((client.personType as NaturalPerson).birthDate as number) + threeHoursInMilliseconds,
-  )
-  const today = new Date()
-  return (
-    clientBirthDate.getDate() === today.getDate() && clientBirthDate.getMonth() === today.getMonth()
-  )
 }
 
 type Props = {
