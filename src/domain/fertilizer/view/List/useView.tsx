@@ -1,10 +1,10 @@
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
-import { getFertilizersService } from '../../services/get'
+import { useGetFertilizersService } from '../../services/get'
 
 export default function useFertilizerListView(): UseFertilizerListView {
   const params = useServiceParams()
-  const response = getFertilizersService(params)
+  const response = useGetFertilizersService(params)
   const openModal = useModal((state) => state.openModal)
 
   async function handleAddFertilizer(): Promise<void> {
@@ -19,6 +19,6 @@ export default function useFertilizerListView(): UseFertilizerListView {
 }
 
 type UseFertilizerListView = {
-  response: ReturnType<typeof getFertilizersService>
+  response: ReturnType<typeof useGetFertilizersService>
   handleAddFertilizer: () => Promise<void>
 }

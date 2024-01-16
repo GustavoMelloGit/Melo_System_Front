@@ -6,14 +6,14 @@ import useServiceParams from '../../../../../../../../shared/hooks/useServicePar
 import { type GetListResponse } from '../../../../../../../../shared/types/service/GetListResponse'
 import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
 import { FertilizerAccountEmitter } from '../../events/FertilizerAccountEmitter'
-import { getFertilizerTransactionService } from '../../services/get'
+import { useGetFertilizerTransactionService } from '../../services/get'
 
 export default function useFertilizerAccountView(): UseFertilizerAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
   const openModal = useModal((state) => state.openModal)
 
-  const { data, isLoading, mutate } = getFertilizerTransactionService(uuid, params)
+  const { data, isLoading, mutate } = useGetFertilizerTransactionService(uuid, params)
 
   async function handleOpenSellModal(): Promise<void> {
     if (!uuid) {

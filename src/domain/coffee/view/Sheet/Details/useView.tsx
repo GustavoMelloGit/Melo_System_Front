@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom'
-import { getSheetService } from '../../../services/Sheets'
+import { useGetSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 export default function useSheetDetailsView(): UseUpdateSheetView {
   const { bookNumber, sheetNumber } = useParams<{ bookNumber: string; sheetNumber: string }>()
-  const { data } = getSheetService(
+  const { data } = useGetSheetService(
     bookNumber && sheetNumber ? { bookNumber, sheetNumber } : undefined,
   )
 

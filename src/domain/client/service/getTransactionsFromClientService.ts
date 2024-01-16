@@ -14,16 +14,16 @@ type Type = 'currency' | 'coffee' | 'escolha' | 'bags' | 'fertilizer'
 type ResponseByType<T extends Type> = T extends 'currency'
   ? CurrencyTransactionModel
   : T extends 'coffee'
-  ? CoffeeTransactionModel
-  : T extends 'escolha'
-  ? EscolhaTransactionModel
-  : T extends 'bags'
-  ? SacariaTransactionModel
-  : T extends 'fertilizer'
-  ? FertilizerTransactionModel
-  : unknown
+    ? CoffeeTransactionModel
+    : T extends 'escolha'
+      ? EscolhaTransactionModel
+      : T extends 'bags'
+        ? SacariaTransactionModel
+        : T extends 'fertilizer'
+          ? FertilizerTransactionModel
+          : unknown
 
-export function getTransactionsFromClientService<T extends Type>(
+export function useGetTransactionsFromClientService<T extends Type>(
   type: T,
   clientId: string,
   config?: SWRConfiguration,

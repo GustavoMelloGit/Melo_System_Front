@@ -53,7 +53,7 @@ export const appRoutes: RouteObject[] = [
 ]
 
 Sentry.init({
-  dsn: 'https://4b8f43bac6d248c487eb0ca4396014a5@o1073411.ingest.sentry.io/6072936',
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   integrations: [
     new Sentry.BrowserTracing({
       // See docs for support of different versions of variation of react router

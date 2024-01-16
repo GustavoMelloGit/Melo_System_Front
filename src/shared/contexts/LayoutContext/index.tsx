@@ -24,22 +24,25 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
   const toggleSideBar = useCallback(() => {
     setSideBarIsOpen((prev) => !prev)
     setSidebar(!sideBarIsOpen)
-  }, [sideBarIsOpen])
+  }, [setSidebar, sideBarIsOpen])
 
   const closeSideBar = useCallback(() => {
     setSideBarIsOpen(false)
     setSidebar(false)
-  }, [sideBarIsOpen])
+  }, [setSidebar])
 
   const openSideBar = useCallback(() => {
     setSideBarIsOpen(true)
     setSidebar(true)
-  }, [sideBarIsOpen])
+  }, [setSidebar])
 
-  const changeSize = useCallback((size: LayoutSizes) => {
-    setLayoutSize(size)
-    setSize(size)
-  }, [])
+  const changeSize = useCallback(
+    (size: LayoutSizes) => {
+      setLayoutSize(size)
+      setSize(size)
+    },
+    [setSize],
+  )
 
   const values = useMemo(
     () => ({
@@ -54,7 +57,7 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
         setSize: changeSize,
       },
     }),
-    [sideBarIsOpen, toggleSideBar, closeSideBar, openSideBar, layoutSize, setSize],
+    [sideBarIsOpen, toggleSideBar, closeSideBar, openSideBar, layoutSize, changeSize],
   )
 
   return <LayoutContext.Provider value={values}>{children}</LayoutContext.Provider>

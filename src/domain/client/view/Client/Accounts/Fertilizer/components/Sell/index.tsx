@@ -1,4 +1,4 @@
-import { getClientService } from '../../../../../../service'
+import { useGetClientService } from '../../../../../../service'
 import useSellFertilizerView from './useView'
 import SellFertilizerView from './View'
 
@@ -7,7 +7,7 @@ type Props = {
 }
 const SellFertilizer = ({ clientId }: Props): JSX.Element => {
   const { closeModal, handleSellFertilizer } = useSellFertilizerView()
-  const { data } = getClientService(clientId)
+  const { data } = useGetClientService(clientId)
 
   return (
     <SellFertilizerView

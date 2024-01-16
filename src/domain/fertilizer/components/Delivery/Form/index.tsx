@@ -7,13 +7,13 @@ import { validationErrors } from '../../../../../lib/errors'
 import { ClientNameParser } from '../../../../../lib/utils/ClientNameParser'
 import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import { normalize } from '../../../../../lib/utils/normalize'
+import Modal from '../../../../../shared/components/Modal'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
-import Modal from '../../../../../shared/components/Modal'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../client/service/getClientsService'
-import { getFertilizersService } from '../../../services/get'
+import { useGetClientsService } from '../../../../client/service/getClientsService'
+import { useGetFertilizersService } from '../../../services/get'
 import { type FertilizerDeliveryFormValues } from '../../../types/model/Delivery'
 
 const validationSchema = yup.object().shape({
@@ -48,14 +48,14 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   const debouncedClientName = useDebounce(clientName, 300)
   const searchableName = normalize(ClientNameParser.removeNickname(debouncedClientName))
   const clientNickname = ClientNameParser.getNickname(debouncedClientName)
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+  const { data: clients, isLoading: isLoadingClients } = useGetClientsService(
     `searchableName=${searchableName}${
       clientNickname ? `&nickname=${clientNickname ?? ''}` : ''
     }&limit=10`,
   )
   const fertilizerName = watch('fertilizerName')
   const debouncedFertilizerName = useDebounce(fertilizerName, 300)
-  const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
+  const { data: fertilizers, isLoading: isLoadingFertilizers } = useGetFertilizersService(
     `name=${debouncedFertilizerName}`,
   )
   const canUpdateFertilizer = Boolean(initialValues.fertilizerId.trim().length === 0)
@@ -71,7 +71,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
       setValue('brook', address.brook ?? '')
       setValue('complement', address.complement ?? '')
     }
-  }, [clients])
+  }, [clients, initialValues?.brook, initialValues?.complement, setValue])
 
   return (
     <Modal isOpen isCentered onClose={closeModal}>

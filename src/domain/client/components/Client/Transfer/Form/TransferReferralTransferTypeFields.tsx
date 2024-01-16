@@ -1,5 +1,5 @@
 import { Flex, FormControl, FormLabel, Select, Stack, type SelectProps } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Controller, useFormContext, useWatch, type Path } from 'react-hook-form'
 import { GiChipsBag } from 'react-icons/gi'
 import objectEntries from '../../../../../../lib/utils/objectEntries'
@@ -50,12 +50,12 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
     name: `from.weight`,
   })
 
-  const mirrorFromValuesIntoToValues = (
-    field: Path<ClientTransferFormValues>,
-    value: any,
-  ): void => {
-    setValue(field, value)
-  }
+  const mirrorFromValuesIntoToValues = useCallback(
+    (field: Path<ClientTransferFormValues>, value: Parameters<typeof setValue>[1]): void => {
+      setValue(field, value)
+    },
+    [setValue],
+  )
 
   useEffect(() => {
     mirrorFromValuesIntoToValues(`to.transferType`, transferType)
@@ -64,7 +64,7 @@ export default function TransferReferralTransferTypeFields({ referral }: Props):
     mirrorFromValuesIntoToValues(`to.coffeeType`, coffeeType)
     mirrorFromValuesIntoToValues(`to.bags`, bags)
     mirrorFromValuesIntoToValues(`to.weight`, weight)
-  }, [transferType, value, bebida, coffeeType, bags, weight])
+  }, [transferType, value, bebida, coffeeType, bags, weight, mirrorFromValuesIntoToValues])
 
   return (
     <Stack spacing={4}>

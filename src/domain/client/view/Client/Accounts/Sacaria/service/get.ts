@@ -4,7 +4,7 @@ import { type SWRServiceResponse } from '../../../../../../../shared/types/servi
 
 import { type SacariaTransactionModel } from '../../../../../types/model/Transaction'
 
-export function getSacariaAccountService(
+export function useGetSacariaAccountService(
   clientId: string | undefined,
   params?: string,
 ): SWRServiceResponse<GetListResponse<SacariaTransactionModel[]>> {

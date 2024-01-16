@@ -23,11 +23,11 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
+import Modal from '../../../../../../../../shared/components/Modal'
 import ControllerAutocomplete from '../../../../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
-import Modal from '../../../../../../../../shared/components/Modal'
-import { getFertilizersService } from '../../../../../../../fertilizer/services/get'
+import { useGetFertilizersService } from '../../../../../../../fertilizer/services/get'
 import { type SellFertilizerFormValues } from './types'
 
 type Props = {
@@ -61,7 +61,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
   const pricePerBag = watch('pricePerBag')
   const bags = watch('bags')
 
-  const { data: fertilizers, isLoading: isLoadingFertilizers } = getFertilizersService(
+  const { data: fertilizers, isLoading: isLoadingFertilizers } = useGetFertilizersService(
     `name=${fertilizerName}`,
   )
   return (

@@ -3,7 +3,7 @@ import { type GetListResponse } from '../../../../../../../shared/types/service/
 import { type SWRServiceResponse } from '../../../../../../../shared/types/service/SWRServiceResponse'
 import { type FertilizerTransactionModel } from '../../../../../types/model/Transaction'
 
-export function getFertilizerTransactionService(
+export function useGetFertilizerTransactionService(
   clientId: string | undefined,
   params?: string,
 ): SWRServiceResponse<GetListResponse<FertilizerTransactionModel[]>> {

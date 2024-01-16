@@ -5,7 +5,7 @@ import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { PickupEmitter } from '../../events/pickup'
-import { getPickupOrdersService } from '../../services/Pickup/get'
+import { useGetPickupOrdersService } from '../../services/Pickup/get'
 import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
 
 const initialStatus = PickupCoffeeStatuses.PENDING
@@ -14,7 +14,7 @@ export default function usePickupView(): UsePickupView {
   const { getParam } = useURLSearchParams()
   const params = useServiceParams()
   const currentStatus = getParam('status') as PickupCoffeeStatuses | null
-  const order = getPickupOrdersService(
+  const order = useGetPickupOrdersService(
     `${params}${currentStatus ? '' : `&status=${initialStatus}`}`,
   )
   const openModal = useModal((state) => state.openModal)
@@ -30,7 +30,7 @@ export default function usePickupView(): UsePickupView {
 
   const refetchData = useCallback(async () => {
     await order.mutate()
-  }, [order.mutate])
+  }, [order])
 
   useEffect(() => {
     PickupEmitter.on('pickupChecked', refetchData)

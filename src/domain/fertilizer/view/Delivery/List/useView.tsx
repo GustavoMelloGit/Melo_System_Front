@@ -4,7 +4,7 @@ import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
-import { getFertilizersDeliveryService } from '../../../services/get'
+import { useGetFertilizersDeliveryService } from '../../../services/get'
 import {
   fertilizerDeliveryCancelService,
   fertilizerDeliveryDoneService,
@@ -20,7 +20,7 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
   const params = useServiceParams()
   const { handleAddParam, getParam } = useURLSearchParams()
   const currentStatus = getParam('status') as FertilizerDeliveryStatuses | null
-  const { data, isLoading, mutate } = getFertilizersDeliveryService(
+  const { data, isLoading, mutate } = useGetFertilizersDeliveryService(
     `${params}${currentStatus ? '' : `&status=${initialStatus}`}`,
   )
   const openModal = useModal((state) => state.openModal)

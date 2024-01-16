@@ -10,7 +10,7 @@ export function deepCleanObject<T extends Record<string, unknown>>(data: T): Dee
       }
 
       if (typeof value === 'object') {
-        const nestedCleaned = deepClean(value)
+        const nestedCleaned = deepClean(value as Record<string, unknown>)
         if (Object.keys(nestedCleaned).length > 0) {
           cleanedObj[key] = nestedCleaned
         }

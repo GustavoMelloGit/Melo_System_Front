@@ -1,11 +1,13 @@
 import {
   Modal as ChakraModal,
+  Heading,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  type HeadingProps,
   type ModalBodyProps,
   type ModalCloseButtonProps,
   type ModalContentProps,
@@ -47,11 +49,19 @@ function Header({ children, ...props }: ModalHeaderProps): JSX.Element {
 function Footer({ children, ...props }: ModalFooterProps): JSX.Element {
   return <ModalFooter {...props}>{children}</ModalFooter>
 }
+function Title({ children, ...props }: HeadingProps): JSX.Element {
+  return (
+    <Heading as='h1' fontSize='3xl' {...props}>
+      {children}
+    </Heading>
+  )
+}
 
 Modal.CloseButton = CloseButton
 Modal.Content = Content
 Modal.Body = Body
 Modal.Header = Header
 Modal.Footer = Footer
+Modal.Title = Title
 
 export default Modal

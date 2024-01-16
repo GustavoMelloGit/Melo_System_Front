@@ -32,9 +32,7 @@ export default function CoffeeBookTable({ data, isLoading, totalBooks }: Props):
         'data-cy': 'coffee-book-table',
       }}
     >
-      {data?.map((book) => (
-        <BookTableRow key={book.number} book={book} />
-      ))}
+      {data?.map((book) => <BookTableRow key={book.number} book={book} />)}
     </Table>
   )
 }

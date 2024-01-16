@@ -5,14 +5,14 @@ import { getDefaultSortParams } from '../../../../../lib/utils/utils'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { getBooksService } from '../../../services/Book/get'
+import { useGetBooksService } from '../../../services/Book/get'
 import { type BookModel } from '../../../types/model/book'
 
 export default function useCoffeeBookView(): UseCoffeeBookView {
   const navigate = useNavigate()
   const { allSearchParams } = useURLSearchParams()
   const params = useServiceParams()
-  const { data, isLoading, error, mutate } = getBooksService(
+  const { data, isLoading, error, mutate } = useGetBooksService(
     params || getDefaultSortParams('number'),
   )
   const openModal = useModal((state) => state.openModal)
@@ -28,7 +28,7 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
       const latestBook = data?.data[0]
       navigate(Routes.bookPage(latestBook.number))
     }
-  }, [allSearchParams, data])
+  }, [allSearchParams, data, navigate])
 
   return {
     data: data?.data,

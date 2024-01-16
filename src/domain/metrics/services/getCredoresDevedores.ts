@@ -15,7 +15,7 @@ type Params = {
   greaterThan: NumberString
   showOnly: 'debit' | 'credit'
 }
-export function getCredoresDevedoresMetrics(
+export function useGetCredoresDevedoresMetrics(
   possibleParams?: Partial<Params>,
 ): SWRServiceResponse<ClientModel[]> {
   const params = formatRequestParams(possibleParams ?? {})

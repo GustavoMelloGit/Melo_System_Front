@@ -14,14 +14,14 @@ import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { getClientBalancesService } from '../../../service'
+import { useGetClientBalancesService } from '../../../service'
 import { type ClientBalance } from '../../../types/model/Client'
 
 type Props = {
   clientUuid: string | undefined
 }
 const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
-  const { data } = getClientBalancesService(clientUuid)
+  const { data } = useGetClientBalancesService(clientUuid)
   const closeModal = useModal((state) => state.closeModal)
   const displayData: Record<keyof ClientBalance, string> = {
     currency: 'Conta Corrente',

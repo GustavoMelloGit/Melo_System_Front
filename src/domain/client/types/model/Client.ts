@@ -22,13 +22,13 @@ export type ClientContact = {
 }
 
 export type LegalPerson = {
-  type?: 'juridica'
+  type: 'juridica'
   cnpj?: string
   stateRegistration?: string
 }
 
 export type NaturalPerson = {
-  type?: 'fisica'
+  type: 'fisica'
   cpf?: string
   rg?: string
   rgEmissionDate?: number | null

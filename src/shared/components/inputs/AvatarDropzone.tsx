@@ -16,24 +16,27 @@ export default function AvatarDropzone({
   ...rest
 }: AvatarDropzoneProps): JSX.Element {
   const [currentImage, setCurrentImage] = useState(currentSrc)
-  const handleOnDrop = useCallback((files: File[]) => {
-    new Compressor(files[0], {
-      quality: 0.6,
-      maxWidth: 300,
-      maxHeight: 300,
-      success(result) {
-        const reader = new FileReader()
-        reader.onload = () => {
-          if (reader.result) {
-            const result = typeof reader.result === 'string' ? reader.result : ''
-            setCurrentImage(result)
-            onDrop?.(result)
+  const handleOnDrop = useCallback(
+    (files: File[]) => {
+      new Compressor(files[0], {
+        quality: 0.6,
+        maxWidth: 300,
+        maxHeight: 300,
+        success(result) {
+          const reader = new FileReader()
+          reader.onload = () => {
+            if (reader.result) {
+              const result = typeof reader.result === 'string' ? reader.result : ''
+              setCurrentImage(result)
+              onDrop?.(result)
+            }
           }
-        }
-        reader.readAsDataURL(result)
-      },
-    })
-  }, [])
+          reader.readAsDataURL(result)
+        },
+      })
+    },
+    [onDrop],
+  )
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
     accept: {

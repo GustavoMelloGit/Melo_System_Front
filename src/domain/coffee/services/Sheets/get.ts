@@ -7,7 +7,7 @@ type GetSheetServicesData = {
   bookNumber?: string | number
   params?: string
 }
-export function getSheetsService({
+export function useGetSheetsService({
   bookNumber,
   params,
 }: GetSheetServicesData): SWRServiceResponse<GetListResponse<SheetModel[]>> {
@@ -22,7 +22,7 @@ type GetSheetServiceData = {
   sheetNumber: string | number
   bookNumber: string | number
 }
-export function getSheetService(data?: GetSheetServiceData): UseFetch<SheetModel, any> {
+export function useGetSheetService(data?: GetSheetServiceData): UseFetch<SheetModel, any> {
   const response = useFetch<SheetModel>(
     data ? `/sheet/${data.bookNumber}/${data.sheetNumber}` : null,
   )

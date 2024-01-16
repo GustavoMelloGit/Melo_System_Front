@@ -5,16 +5,16 @@ import { type PermissionModel } from '../../../auth/types/model/permission'
 import { type UserModel } from '../../../auth/types/model/user'
 import { type UsersPermissionsFormValues } from '../../components/Users/UsersList/types'
 import { UserEmitter } from '../../events/UserEmitter'
-import getAllPermissionsService from '../../services/getAllPermissionsService'
-import getAllUsersService from '../../services/getAllUsersService'
+import useGetAllPermissionsService from '../../services/getAllPermissionsService'
+import useGetAllUsersService from '../../services/getAllUsersService'
 import {
   parseFormValues,
   setUsersPermissionsService,
 } from '../../services/setUsersPermissionsService'
 
 export default function useUsersView(): UseUsersView {
-  const { data: users, isLoading: usersIsLoading, mutate: mutateUsers } = getAllUsersService()
-  const { data: permissions } = getAllPermissionsService()
+  const { data: users, isLoading: usersIsLoading, mutate: mutateUsers } = useGetAllUsersService()
+  const { data: permissions } = useGetAllPermissionsService()
   const openModal = useModal((state) => state.openModal)
 
   async function handleAddUser(): Promise<void> {

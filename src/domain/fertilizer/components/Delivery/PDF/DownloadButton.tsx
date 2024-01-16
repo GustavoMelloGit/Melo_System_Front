@@ -5,7 +5,7 @@ import { sortObjectProperties } from '../../../../../lib/utils/sortObjectPropert
 import IconButton from '../../../../../shared/components/IconButton'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
-import { getFertilizersDeliveryService } from '../../../services/get'
+import { useGetFertilizersDeliveryService } from '../../../services/get'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 import PickupPDFTemplate from './Template'
 import { type FertilizerDeliveryPDFData, type FertilizerDeliveryPDFItem } from './types'
@@ -30,7 +30,9 @@ function parseData(
 }
 
 export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
-  const { data, isLoading, mutate } = getFertilizersDeliveryService('status=inProgress&limit=10000')
+  const { data, isLoading, mutate } = useGetFertilizersDeliveryService(
+    'status=inProgress&limit=10000',
+  )
   const [instance, updateInstance] = usePDF({
     document: <PickupPDFTemplate data={{}} />,
   })
@@ -49,7 +51,7 @@ export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
       }
     })
     updateInstance(<PickupPDFTemplate data={sortObjectProperties(templateData)} />)
-  }, [parsedData, mutate])
+  }, [parsedData, mutate, updateInstance])
 
   useEffect(() => {
     if (!isLoading && parsedData) {

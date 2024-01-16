@@ -8,7 +8,7 @@ import { type SWRServiceResponse } from '../../../shared/types/service/SWRServic
 import { type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerModel } from '../types/model/Fertilizer'
 
-export function getFertilizersService(
+export function useGetFertilizersService(
   params?: string,
   config?: SWRConfiguration,
 ): SWRServiceResponse<GetListResponse<FertilizerModel[]>> {
@@ -38,7 +38,7 @@ export async function getFertilizerByNameService(
   }
 }
 
-export function getFertilizersDeliveryService(
+export function useGetFertilizersDeliveryService(
   params?: string,
 ): SWRServiceResponse<GetListResponse<FertilizerDeliveryModel[]>> {
   const response = useFetch<GetListResponse<FertilizerDeliveryModel[]>>(

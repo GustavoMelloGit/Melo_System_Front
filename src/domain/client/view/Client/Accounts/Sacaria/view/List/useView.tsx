@@ -4,13 +4,13 @@ import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
 import { SacariaAccountEmitter } from '../../events/SacariaAccountEmitter'
-import { getSacariaAccountService } from '../../service/get'
+import { useGetSacariaAccountService } from '../../service/get'
 
 export default function useSacariaAccountView(): UseSacariaAccountView {
   const { uuid } = useParams()
   const openModal = useModal((state) => state.openModal)
   const params = useServiceParams()
-  const { data, isLoading, mutate } = getSacariaAccountService(uuid, params)
+  const { data, isLoading, mutate } = useGetSacariaAccountService(uuid, params)
 
   async function handleOpenCreate(): Promise<void> {
     if (!uuid) return

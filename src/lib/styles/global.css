@@ -1,22 +1,21 @@
 @keyframes slideLeft {
   0% {
     transform: translateX(-100%);
-    color: 'transparent'
+    color: 'transparent';
   }
   100% {
     transform: translateX(0);
-    color: 'black'
+    color: 'black';
   }
 }
 
 @keyframes slideRight {
   0% {
     transform: translateX(100%);
-    color: 'transparent'
+    color: 'transparent';
   }
   100% {
     transform: translateX(0);
-    color: 'black'
+    color: 'black';
   }
 }
-    

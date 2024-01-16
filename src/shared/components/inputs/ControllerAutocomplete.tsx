@@ -32,7 +32,7 @@ export default function ControllerAutocomplete<TFormValues extends FieldValues>(
       control={control}
       render={({ field: { onChange, ...field }, fieldState: { error } }) => (
         <AutocompleteInput
-          error={error?.message}
+          error={error?.message ?? mainField.fieldState.error?.message}
           handleSelect={({ label, value }) => {
             mainField.field.onChange(value)
             onChange(label)

@@ -1,12 +1,12 @@
 import { toast } from 'react-hot-toast'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import { deleteClientService } from '../../../service/delete'
-import { getClientsService } from '../../../service/getClientsService'
+import { useGetClientsService } from '../../../service/getClientsService'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientsListView(): ClientsListView {
   const params = useServiceParams()
-  const { data, error, isLoading, mutate } = getClientsService(params)
+  const { data, error, isLoading, mutate } = useGetClientsService(params)
 
   async function handleRemoveClient(id: string): Promise<void> {
     const { error } = await deleteClientService(id)

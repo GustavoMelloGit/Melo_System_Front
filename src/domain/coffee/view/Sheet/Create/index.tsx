@@ -1,7 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
-import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
+import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import SheetForm from '../../../components/Sheet/Form'
 import useCreateSheetView from './useView'
 
@@ -28,7 +28,7 @@ export default function CreateSheetView(): JSX.Element {
           },
         ]}
       />
-      <SheetForm onSubmit={createSheet} initialValues={initialValues} />
+      <SheetForm variant='create' onSubmit={createSheet} initialValues={initialValues} />
     </Page>
   )
 }

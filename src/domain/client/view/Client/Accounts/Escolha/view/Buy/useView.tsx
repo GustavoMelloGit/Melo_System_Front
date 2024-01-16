@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { formatBagsIntoWeight } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeValuePerWeight } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { getClientService } from '../../../../../../service'
+import { useGetClientService } from '../../../../../../service'
 import { EscolhaAccountEmitter } from '../../events/EscolhaAccountEmitter'
 import { buyEscolhaService } from '../../service/post'
 import { type BuyEscolhaFormValues } from '../../types/esolha'
@@ -12,7 +12,7 @@ type Props = {
 }
 const useBuyEscolhaView = ({ clientId }: Props): UseBuyCoffeeView => {
   const closeModal = useModal((state) => state.closeModal)
-  const { data } = getClientService(clientId)
+  const { data } = useGetClientService(clientId)
 
   async function handleBuyCoffee(formValues: BuyEscolhaFormValues): Promise<void> {
     const { bags, weight, ...values } = formValues

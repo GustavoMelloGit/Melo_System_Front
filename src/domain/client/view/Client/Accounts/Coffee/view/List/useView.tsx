@@ -6,7 +6,7 @@ import useServiceParams from '../../../../../../../../shared/hooks/useServicePar
 import useURLSearchParams from '../../../../../../../../shared/hooks/useURLSearchParams'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import { CoffeeAccountEmitter } from '../../events/CoffeeAccountEmitter'
-import { getCoffeeAccountService } from '../../service/get'
+import { useGetCoffeeAccountService } from '../../service/get'
 
 export default function useCoffeeAccountView(): UseCoffeeAccountView {
   const { uuid } = useParams()
@@ -20,7 +20,7 @@ export default function useCoffeeAccountView(): UseCoffeeAccountView {
   ) {
     accountType = allSearchParams[PaginationParams.searchBy]
   }
-  const { data, isLoading, mutate } = getCoffeeAccountService(uuid, accountType, params)
+  const { data, isLoading, mutate } = useGetCoffeeAccountService(uuid, accountType, params)
 
   async function handleOpenCreateCoffee(): Promise<void> {
     if (!uuid) return

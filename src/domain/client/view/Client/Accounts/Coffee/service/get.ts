@@ -4,7 +4,7 @@ import { type SWRServiceResponse } from '../../../../../../../shared/types/servi
 
 import { type CoffeeTransactionModel } from '../../../../../types/model/Transaction'
 
-export function getCoffeeAccountService(
+export function useGetCoffeeAccountService(
   clientId: string | undefined,
   accountType: string,
   params?: string,

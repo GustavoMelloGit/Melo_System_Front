@@ -62,6 +62,7 @@ export default function LockScreenView(): JSX.Element {
   return (
     <>
       <Helmet>
+        <title>Bloqueio de tela | Melo System</title>
         <meta name='robots' content='noindex' />
         <link rel='preload' href={BackgroundImage1} as='image' />
         <link rel='preload' href={BackgroundImage2} as='image' />

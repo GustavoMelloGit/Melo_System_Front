@@ -2,6 +2,7 @@ import { Select } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { months } from '../../../../../lib/constants/months'
 import { deepClone } from '../../../../../lib/utils/deepClone'
+import { isClientBirthdayToday } from '../../../../../lib/utils/isClientBirthdayToday'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
 import { type ClientModel, type NaturalPerson } from '../../../types/model/Client'
@@ -29,6 +30,10 @@ type Props = {
   isLoading: boolean
 }
 export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Element {
+  const clientsHavingBirthdayToday = clients
+    .filter(isClientBirthdayToday)
+    .map((client) => client.id)
+
   return (
     <Table
       header={{
@@ -67,6 +72,7 @@ export default function BirthdaysTable({ clients, isLoading }: Props): JSX.Eleme
             name: client.name,
             nickname: client.nickname,
             photo: client.profileImage,
+            isBirthdayToday: clientsHavingBirthdayToday.includes(client.id),
             birthday:
               client.personType.type === 'fisica' && client.personType.birthDate
                 ? format(

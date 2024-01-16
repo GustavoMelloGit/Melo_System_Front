@@ -11,9 +11,12 @@ node_modules
 dist
 dist-ssr
 *.local
+yarn.lock
+cypress.env.json
+
 
 # Editor directories and files
-!.vscode/extensions.json
+.vscode
 .idea
 .DS_Store
 *.suo
@@ -27,3 +30,5 @@ build
 .opencommit-commitlint
 # Sentry Config File
 .env.sentry-build-plugin
+pnpm-lock.yaml
+.vscode

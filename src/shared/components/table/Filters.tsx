@@ -9,8 +9,8 @@ import {
   InputRightAddon,
   Select,
   Show,
-  useColorModeValue,
   VisuallyHidden,
+  useColorModeValue,
   type SystemStyleObject,
 } from '@chakra-ui/react'
 import { cloneElement, useCallback, useEffect } from 'react'
@@ -78,7 +78,7 @@ export default function TableFilters({ searchForOptions, actions }: TableFilterP
     return () => {
       window.removeEventListener('keydown', handleClickEsc)
     }
-  }, [])
+  }, [handleClickEsc])
 
   return (
     <form onSubmit={handleSubmit(handleSubmitFilter)}>

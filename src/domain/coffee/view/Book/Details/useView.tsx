@@ -5,14 +5,14 @@ import { getDefaultSortParams } from '../../../../../lib/utils/utils'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import { SheetsEmitter } from '../../../events/sheets'
 import { deleteSheetService } from '../../../services/Sheets/delete'
-import { getSheetsService } from '../../../services/Sheets/get'
+import { useGetSheetsService } from '../../../services/Sheets/get'
 import { type SheetModel } from '../../../types/model/sheet'
 
 export default function useBookDetailsView(): UseBookDetailsView {
   const { number } = useParams<{ number: string }>()
 
   const params = useServiceParams()
-  const { data, isLoading, error, mutate } = getSheetsService({
+  const { data, isLoading, error, mutate } = useGetSheetsService({
     bookNumber: number,
     params: params || getDefaultSortParams('number'),
   })
@@ -30,7 +30,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
       await mutate()
       toast.success('Folha excluída com sucesso!')
     },
-    [mutate],
+    [mutate, number],
   )
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
     return () => {
       SheetsEmitter.off('removeSheet', handleDeleteSheet)
     }
-  }, [])
+  }, [handleDeleteSheet])
 
   return {
     data: data?.data,

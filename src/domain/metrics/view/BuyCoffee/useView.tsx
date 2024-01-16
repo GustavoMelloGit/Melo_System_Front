@@ -1,7 +1,7 @@
 import { PaginationParams } from '../../../../lib/constants/pagination'
 import { apiDateToDateInput } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getBuyCoffeeMetrics } from '../../services/getBuyCoffeeMetrics'
+import { useGetBuyCoffeeMetrics } from '../../services/getBuyCoffeeMetrics'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import { type GetBuyCoffeeMetricsResponse } from '../../types/coffeePriceMetrics'
 import { formatEndDate } from '../../utils/formatEndDate'
@@ -22,7 +22,7 @@ export default function useBuyCoffeeMetricsView(): UseBuyCoffeeMetricsView {
     [PaginationParams.sortBy]: 'value',
     [PaginationParams.sortOrder]: 'desc',
   })
-  const { data, isLoading } = getBuyCoffeeMetrics(queryParam)
+  const { data, isLoading } = useGetBuyCoffeeMetrics(queryParam)
 
   const handleSubmitFilters = (values: CoffeePriceMetricsFilterOptions): void => {
     const { endDate, startDate } = values

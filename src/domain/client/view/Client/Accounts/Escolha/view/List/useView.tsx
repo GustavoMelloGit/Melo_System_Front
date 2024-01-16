@@ -4,13 +4,13 @@ import { useModal } from '../../../../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../../../../shared/hooks/useServiceParams'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
 import { EscolhaAccountEmitter } from '../../events/EscolhaAccountEmitter'
-import { getEscolhaAccountService } from '../../service/get'
+import { useGetEscolhaAccountService } from '../../service/get'
 
 export default function useEscolhaAccountView(): UseEscolhaAccountView {
   const { uuid } = useParams()
   const params = useServiceParams()
   const openModal = useModal((state) => state.openModal)
-  const { data, isLoading, mutate } = getEscolhaAccountService(uuid, params)
+  const { data, isLoading, mutate } = useGetEscolhaAccountService(uuid, params)
 
   const refetchData = useCallback(async () => {
     await mutate()
