@@ -44,20 +44,30 @@ export default function LayoutProvider({ children }: PropsWithChildren): JSX.Ele
     [setSize],
   )
 
+  const sidebar = useMemo(
+    () => ({
+      isOpen: sideBarIsOpen,
+      toggle: toggleSideBar,
+      close: closeSideBar,
+      open: openSideBar,
+    }),
+    [sideBarIsOpen, toggleSideBar, closeSideBar, openSideBar],
+  )
+
+  const layout = useMemo(
+    () => ({
+      size: layoutSize,
+      setSize: changeSize,
+    }),
+    [layoutSize, changeSize],
+  )
+
   const values = useMemo(
     () => ({
-      sidebar: {
-        isOpen: sideBarIsOpen,
-        toggle: toggleSideBar,
-        close: closeSideBar,
-        open: openSideBar,
-      },
-      layout: {
-        size: layoutSize,
-        setSize: changeSize,
-      },
+      sidebar,
+      layout,
     }),
-    [sideBarIsOpen, toggleSideBar, closeSideBar, openSideBar, layoutSize, changeSize],
+    [sidebar, layout],
   )
 
   return <LayoutContext.Provider value={values}>{children}</LayoutContext.Provider>

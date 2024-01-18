@@ -5,8 +5,10 @@ type UsePageSize = {
   height: number
 }
 export default function usePageSize(): UsePageSize {
-  const [width, setWidth] = useState(0)
-  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0)
+  const [height, setHeight] = useState<number>(
+    typeof window !== 'undefined' ? window.innerHeight : 0,
+  )
 
   useEffect(() => {
     function handleResize(): void {
@@ -15,7 +17,6 @@ export default function usePageSize(): UsePageSize {
     }
 
     window.addEventListener('resize', handleResize)
-    handleResize()
 
     return () => {
       window.removeEventListener('resize', handleResize)
