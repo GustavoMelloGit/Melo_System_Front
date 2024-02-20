@@ -1,4 +1,5 @@
 import { Heading } from '@chakra-ui/react'
+import currency from 'currency.js'
 import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import StockProductForm from '../../../components/Stock/Form'
@@ -27,8 +28,8 @@ const UpdateProductView = ({ product }: Props): JSX.Element => {
               name: product.name,
               quantity: product.quantity,
               description: product.description,
-              cost: product.cost,
-              sale: product.sale,
+              cost: currency(product.cost).divide(100).value,
+              sale: currency(product.sale).divide(100).value,
             }}
             onSubmit={async (values) => {
               await updateProductHandler(product.id, values)
