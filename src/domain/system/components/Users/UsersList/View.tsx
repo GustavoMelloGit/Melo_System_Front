@@ -21,6 +21,8 @@ import {
 import { useEffect, type ReactNode } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { isEmptyObject } from '../../../../../lib/utils/isEmptyObject'
+import { useModal } from '../../../../../shared/hooks/useModal'
+import useAuth from '../../../../auth/hooks/useAuth'
 import { type PermissionModel } from '../../../../auth/types/model/permission'
 import { type UserModel, type UserRole } from '../../../../auth/types/model/user'
 import { type UsersPermissionsFormValues } from './types'
@@ -54,6 +56,7 @@ type Props = {
   onSubmit: (values: UsersPermissionsFormValues) => Promise<void>
 }
 export default function UsersListView({ permissions, users, onSubmit }: Props): JSX.Element {
+  const defaultValues = parseUsersToFormValues(users)
   const bottomBarColor = useColorModeValue('gray.700', 'gray.200')
   const {
     control,
@@ -61,8 +64,25 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
     handleSubmit,
     reset,
   } = useForm<UsersPermissionsFormValues>({
-    defaultValues: parseUsersToFormValues(users),
+    defaultValues,
   })
+  const { user: loggedUser } = useAuth()
+  const openModal = useModal((state) => state.openModal)
+  const isLoggedUserAdmin = loggedUser.role === 'admin'
+
+  function resetHandler(): void {
+    reset(defaultValues)
+  }
+
+  async function onDeleteUser(id: string): Promise<void> {
+    const DeleteUserView = (await import('../DeleteUser/View')).default
+    openModal(<DeleteUserView id={id} />)
+  }
+
+  async function onChangePassword(id: string): Promise<void> {
+    const ChangePasswordView = (await import('../ChangePassword/View')).default
+    openModal(<ChangePasswordView id={id} />)
+  }
 
   useEffect(() => {
     if (isSubmitted) {
@@ -86,6 +106,30 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
               <InfoBox label='Apelido' value={user.nickname} />
               <InfoBox label='Permissão' value={labelByRole[user.role]} />
               <InfoBox label='ID' value={user.id} />
+              {isLoggedUserAdmin && (
+                <Flex gap={3} mt={3}>
+                  {loggedUser.id !== user.id && (
+                    <Button
+                      colorScheme='red'
+                      size='sm'
+                      flex={1}
+                      onClick={async () => {
+                        await onDeleteUser(user.id)
+                      }}
+                    >
+                      Remover usuário
+                    </Button>
+                  )}
+                  <Button
+                    onClick={async () => onChangePassword(user.id)}
+                    colorScheme='blue'
+                    size='sm'
+                    flex={1}
+                  >
+                    Alterar senha
+                  </Button>
+                </Flex>
+              )}
               {user.role !== 'admin' && (
                 <>
                   <Flex my={2} align='center' gap={3}>
@@ -110,7 +154,6 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
                               zIndex: 1,
                             },
                           },
-                          cursor: 'pointer',
                         }}
                         key={`${permission.route}-${permission.method}`}
                         label={permission.description}
@@ -157,7 +200,14 @@ export default function UsersListView({ permissions, users, onSubmit }: Props): 
           >
             <Text fontWeight='bold'>Deseja salvar as alterações?</Text>
             <Flex gap={4}>
-              <Button variant='link' size='sm' type='reset' color='white' fontWeight='light'>
+              <Button
+                variant='link'
+                size='sm'
+                onClick={resetHandler}
+                type='reset'
+                color='white'
+                fontWeight='light'
+              >
                 Cancelar
               </Button>
               <Button isLoading={isSubmitting} type='submit' colorScheme='green' size='sm'>

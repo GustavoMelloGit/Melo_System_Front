@@ -38,8 +38,10 @@ export default function useUsersView(): UseUsersView {
 
   useEffect(() => {
     UserEmitter.on('userCreated', refetch)
+    UserEmitter.on('userDeleted', refetch)
     return () => {
       UserEmitter.off('userCreated', refetch)
+      UserEmitter.off('userDeleted', refetch)
     }
   }, [refetch])
 
