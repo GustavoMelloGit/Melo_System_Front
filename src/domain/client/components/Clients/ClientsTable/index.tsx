@@ -44,7 +44,7 @@ export default function ClientsTable({
 
 const headerColumns: TableHeaderColumns[] = [
   { id: 'photo', label: 'Foto', align: 'center' },
-  { id: 'name', label: 'Nome', isSortable: true },
+  { id: 'searchableName', label: 'Nome', isSortable: true },
   { id: 'nickname', label: 'Apelido', isSortable: true },
   { id: 'balance', label: 'Saldo', isSortable: true },
   { id: 'phone', label: 'Telefone' },
