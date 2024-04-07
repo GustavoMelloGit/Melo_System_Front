@@ -7,14 +7,14 @@ import {
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
 import { CoffeeBebidasLabel } from '../../../../coffee/types/model/coffee'
-import { type CreditorsAndDebtorsCoffeeMetric } from '../../../types/creditorsAndDebtorsCoffeeMetrics'
-import CredoresDevedoresCafeMetricsTableViewRow from './Row'
+import { type CreditorsAndDebtorsBebidaMetric } from '../../../types/creditorsAndDebtorsBebidaMetrics'
+import CredoresDevedoresBebidaMetricsTableViewRow from './Row'
 
 type Props = {
-  data: CreditorsAndDebtorsCoffeeMetric[]
+  data: CreditorsAndDebtorsBebidaMetric[]
   isLoading: boolean
 }
-export default function CredoresDevedoresCafeMetricsTableView({
+export default function CredoresDevedoresBebidaMetricsTableView({
   data,
   isLoading,
 }: Props): JSX.Element {
@@ -40,13 +40,17 @@ export default function CredoresDevedoresCafeMetricsTableView({
           <Tr>
             <Td>TOTAL</Td>
             <Td></Td>
-            <Td>{getNumberOfBags(data.reduce((acc, curr) => acc + curr.balance, 0))}</Td>
+            <Td></Td>
+            <Td>{getNumberOfBags(data.reduce((acc, curr) => acc + curr.balance.total, 0))}</Td>
           </Tr>
         ) : null
       }
     >
       {data.map((client) => (
-        <CredoresDevedoresCafeMetricsTableViewRow key={client.id} client={client} />
+        <CredoresDevedoresBebidaMetricsTableViewRow
+          key={`${client.id}-${client.balance.type}-${client.balance.total}`}
+          client={client}
+        />
       ))}
     </Table>
   )
@@ -55,7 +59,8 @@ export default function CredoresDevedoresCafeMetricsTableView({
 const headerColumns: TableHeaderColumns[] = [
   { id: 'code', label: 'Código', isSortable: true },
   { id: 'name', label: 'Cliente', isSortable: true },
-  { id: 'balance', label: 'Saldo', isSortable: true },
+  { id: 'balance.type', label: 'Bebida', isSortable: true },
+  { id: 'balance.total', label: 'Saldo', isSortable: true },
 ]
 
 const searchForOptions: SearchForOption = {
