@@ -8,7 +8,7 @@ import { type CreditorsAndDebtorsBebidaMetric } from '../../../types/creditorsAn
 type Props = {
   client: CreditorsAndDebtorsBebidaMetric
 }
-export default function CredoresDevedoresCafeMetricsTableViewRow({ client }: Props): JSX.Element {
+export default function CredoresDevedoresBebidaMetricsTableViewRow({ client }: Props): JSX.Element {
   return (
     <LinkRow>
       <Td>{client.code}</Td>

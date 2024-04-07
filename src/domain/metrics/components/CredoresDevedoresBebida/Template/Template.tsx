@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 type Props = {
   data: CreditorsAndDebtorsBebidaMetric[]
 }
-export default function CredoresDevedoresCafeMetricsTemplate({ data }: Props): JSX.Element {
+export default function CredoresDevedoresBebidaMetricsTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
       <PDFPaddingElement />

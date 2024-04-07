@@ -5,8 +5,8 @@ import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import useTabs from '../../../../shared/hooks/useTabs'
 import GraphView from '../../components/CredoresDevedoresBebida/GraphView'
-import CredoresDevedoresCafeMetricsTableView from '../../components/CredoresDevedoresBebida/TableView'
-import CredoresDevedoresCafeMetricsDownloadButton from '../../components/CredoresDevedoresBebida/Template/DownloadButton'
+import CredoresDevedoresBebidaMetricsTableView from '../../components/CredoresDevedoresBebida/TableView'
+import CredoresDevedoresBebidaMetricsDownloadButton from '../../components/CredoresDevedoresBebida/Template/DownloadButton'
 import useCredoresDevedoresBebidaMetricsView from './useView'
 
 export default function CredoresDevedoresBebidaMetricsView(): JSX.Element {
@@ -25,7 +25,7 @@ export default function CredoresDevedoresBebidaMetricsView(): JSX.Element {
             label: 'Credores e Devedores de Café',
           },
         ]}
-        actions={<CredoresDevedoresCafeMetricsDownloadButton data={data ?? []} />}
+        actions={<CredoresDevedoresBebidaMetricsDownloadButton data={data ?? []} />}
       />
       <Flex justify='center'>
         <SwitchLabeled
@@ -39,8 +39,8 @@ export default function CredoresDevedoresBebidaMetricsView(): JSX.Element {
           defaultActive={currentTab === 'debit' ? 1 : 0}
         />
       </Flex>
-      {!isLoading && <GraphView data={data} isLoading={isLoading} />}
-      <CredoresDevedoresCafeMetricsTableView data={data} isLoading={isLoading} />
+      {!isLoading && <GraphView data={data} />}
+      <CredoresDevedoresBebidaMetricsTableView data={data} isLoading={isLoading} />
     </Page>
   )
 }

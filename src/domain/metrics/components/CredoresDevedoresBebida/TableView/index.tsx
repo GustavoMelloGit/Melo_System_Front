@@ -8,13 +8,13 @@ import {
 } from '../../../../../shared/components/table/types'
 import { CoffeeBebidasLabel } from '../../../../coffee/types/model/coffee'
 import { type CreditorsAndDebtorsBebidaMetric } from '../../../types/creditorsAndDebtorsBebidaMetrics'
-import CredoresDevedoresCafeMetricsTableViewRow from './Row'
+import CredoresDevedoresBebidaMetricsTableViewRow from './Row'
 
 type Props = {
   data: CreditorsAndDebtorsBebidaMetric[]
   isLoading: boolean
 }
-export default function CredoresDevedoresCafeMetricsTableView({
+export default function CredoresDevedoresBebidaMetricsTableView({
   data,
   isLoading,
 }: Props): JSX.Element {
@@ -47,7 +47,7 @@ export default function CredoresDevedoresCafeMetricsTableView({
       }
     >
       {data.map((client) => (
-        <CredoresDevedoresCafeMetricsTableViewRow
+        <CredoresDevedoresBebidaMetricsTableViewRow
           key={`${client.id}-${client.balance.type}-${client.balance.total}`}
           client={client}
         />

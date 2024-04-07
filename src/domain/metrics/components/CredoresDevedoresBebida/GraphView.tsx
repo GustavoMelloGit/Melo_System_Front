@@ -6,10 +6,9 @@ import { type CreditorsAndDebtorsBebidaMetric } from '../../types/creditorsAndDe
 
 type Props = {
   data: CreditorsAndDebtorsBebidaMetric[]
-  isLoading: boolean
 }
 
-export default function GraphView({ data, isLoading }: Props): JSX.Element {
+export default function GraphView({ data }: Props): JSX.Element {
   const [coffeeTypeChartData] = formatDataToChart(data)
 
   return (
