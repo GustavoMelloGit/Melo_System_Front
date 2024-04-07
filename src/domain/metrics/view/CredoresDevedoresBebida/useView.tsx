@@ -1,14 +1,14 @@
 import { PaginationParams } from '../../../../lib/constants/pagination'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { useGetCredoresDevedoresCafeMetrics } from '../../services/getCredoresDevedoresCafe'
-import { type CreditorsAndDebtorsCoffeeMetric } from '../../types/creditorsAndDebtorsCoffeeMetrics'
+import { useGetCredoresDevedoresBebidaMetrics } from '../../services/getCredoresDevedoresBebida'
+import { type CreditorsAndDebtorsBebidaMetric } from '../../types/creditorsAndDebtorsBebidaMetrics'
 
-export default function useCredoresDevedoresCafeMetricsView(): UseCredoresDevedoresCafeMetricsView {
+export default function useCredoresDevedoresBebidaMetricsView(): UseCredoresDevedoresBebidaMetricsView {
   const { allSearchParams } = useURLSearchParams({
     [PaginationParams.sortBy]: 'balance.total',
     [PaginationParams.sortOrder]: 'desc',
   })
-  const { data, isLoading } = useGetCredoresDevedoresCafeMetrics({
+  const { data, isLoading } = useGetCredoresDevedoresBebidaMetrics({
     greaterThan: allSearchParams.greaterThan,
     limit: allSearchParams.limit,
     page: allSearchParams.page,
@@ -24,7 +24,7 @@ export default function useCredoresDevedoresCafeMetricsView(): UseCredoresDevedo
   }
 }
 
-export type UseCredoresDevedoresCafeMetricsView = {
-  data: CreditorsAndDebtorsCoffeeMetric[]
+export type UseCredoresDevedoresBebidaMetricsView = {
+  data: CreditorsAndDebtorsBebidaMetric[]
   isLoading: boolean
 }

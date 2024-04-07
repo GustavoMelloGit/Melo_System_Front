@@ -2,10 +2,10 @@ import { Box, Card, CardBody } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { getNumberOfBags } from '../../../../lib/utils/getNumberOfBags'
 import PieChart, { type PieChartProps } from '../../../../shared/components/PieChart'
-import { type CreditorsAndDebtorsCoffeeMetric } from '../../types/creditorsAndDebtorsCoffeeMetrics'
+import { type CreditorsAndDebtorsBebidaMetric } from '../../types/creditorsAndDebtorsBebidaMetrics'
 
 type Props = {
-  data: CreditorsAndDebtorsCoffeeMetric[]
+  data: CreditorsAndDebtorsBebidaMetric[]
   isLoading: boolean
 }
 
@@ -29,7 +29,7 @@ export default function GraphView({ data, isLoading }: Props): JSX.Element {
 
 type Charts = 'client' | 'coffee'
 
-function formatDataToChart(data: CreditorsAndDebtorsCoffeeMetric[]): PieChartProps[] {
+function formatDataToChart(data: CreditorsAndDebtorsBebidaMetric[]): PieChartProps[] {
   const chartGrouping: Record<Charts, Array<{ label: string; value: number }>> = {
     client: [],
     coffee: [],

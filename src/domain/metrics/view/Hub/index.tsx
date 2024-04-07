@@ -2,6 +2,7 @@ import { Container, Heading, Stack } from '@chakra-ui/react'
 import { BiTransferAlt } from 'react-icons/bi'
 import { CiCoffeeBean } from 'react-icons/ci'
 import { FaSearchDollar } from 'react-icons/fa'
+import { GiCoffeeBeans } from 'react-icons/gi'
 import { TbDatabaseDollar, TbShoppingCart } from 'react-icons/tb'
 import { Routes } from '../../../../lib/routes'
 import Page from '../../../../shared/components/Page'
@@ -55,11 +56,17 @@ export default function MetricsHubView(): JSX.Element {
             icon={<TbDatabaseDollar size={32} />}
             title='Credores e Devedores'
             subtitle='Consulte os saldos dos clientes.'
-            url={Routes.credoresEDevedoresMetrics}
+            url={Routes.credoresDevedoresMetrics}
+          />
+          <MetricsHubOption
+            icon={<GiCoffeeBeans size={30} />}
+            title='Credores e Devedores de Café - Bebida'
+            subtitle='Consulte o saldo das bebidas de café dos clientes.'
+            url={Routes.credoresDevedoresBebidaMetrics}
           />
           <MetricsHubOption
             icon={<CiCoffeeBean size={34} />}
-            title='Credores e Devedores de Café'
+            title='Credores e Devedores de Café - Saldo'
             subtitle='Consulte o saldo de café dos clientes.'
             url={Routes.credoresDevedoresCafeMetrics}
           />

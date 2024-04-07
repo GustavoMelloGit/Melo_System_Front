@@ -25,6 +25,7 @@ export const Routes = {
     `/talao/${bookNumber}/folha/${sheetNumber}/atualizar`,
   users: '/usuarios',
   birthdays: '/aniversarios',
-  credoresEDevedoresMetrics: '/relatorios/credores-e-devedores',
+  credoresDevedoresMetrics: '/relatorios/credores-e-devedores',
+  credoresDevedoresBebidaMetrics: '/relatorios/credores-devedores-cafe-bebida',
   credoresDevedoresCafeMetrics: '/relatorios/credores-devedores-cafe',
 } as const

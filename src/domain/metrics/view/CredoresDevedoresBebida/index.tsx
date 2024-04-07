@@ -4,13 +4,14 @@ import Page from '../../../../shared/components/Page'
 import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import useTabs from '../../../../shared/hooks/useTabs'
-import CredoresDevedoresCafeMetricsTableView from '../../components/CredoresDevedoresCafe/TableView'
-import CredoresDevedoresCafeMetricsDownloadButton from '../../components/CredoresDevedoresCafe/Template/DownloadButton'
-import useCredoresDevedoresCafeMetricsView from './useView'
+import GraphView from '../../components/CredoresDevedoresBebida/GraphView'
+import CredoresDevedoresCafeMetricsTableView from '../../components/CredoresDevedoresBebida/TableView'
+import CredoresDevedoresCafeMetricsDownloadButton from '../../components/CredoresDevedoresBebida/Template/DownloadButton'
+import useCredoresDevedoresBebidaMetricsView from './useView'
 
-export default function CredoresDevedoresCafeMetricsView(): JSX.Element {
+export default function CredoresDevedoresBebidaMetricsView(): JSX.Element {
   const { onChangeTab, currentTab } = useTabs({ queryName: 'showOnly' })
-  const { data, isLoading } = useCredoresDevedoresCafeMetricsView()
+  const { data, isLoading } = useCredoresDevedoresBebidaMetricsView()
   return (
     <Page title='Relatórios'>
       <HeaderBreadcrumbs
@@ -38,6 +39,7 @@ export default function CredoresDevedoresCafeMetricsView(): JSX.Element {
           defaultActive={currentTab === 'debit' ? 1 : 0}
         />
       </Flex>
+      {!isLoading && <GraphView data={data} isLoading={isLoading} />}
       <CredoresDevedoresCafeMetricsTableView data={data} isLoading={isLoading} />
     </Page>
   )

@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
+import { capitalCase } from 'change-case'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
@@ -7,7 +8,7 @@ import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
 import PDFTableRow from '../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../shared/components/PDF/styles'
-import { type CreditorsAndDebtorsCoffeeMetric } from '../../../types/creditorsAndDebtorsCoffeeMetrics'
+import { type CreditorsAndDebtorsBebidaMetric } from '../../../types/creditorsAndDebtorsBebidaMetrics'
 
 const styles = StyleSheet.create({
   header: {
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  data: CreditorsAndDebtorsCoffeeMetric[]
+  data: CreditorsAndDebtorsBebidaMetric[]
 }
 export default function CredoresDevedoresCafeMetricsTemplate({ data }: Props): JSX.Element {
   return (
@@ -55,12 +56,18 @@ export default function CredoresDevedoresCafeMetricsTemplate({ data }: Props): J
             <Text>Cliente</Text>
           </PDFTableRowItem>
           <PDFTableRowItem>
+            <Text>Bebida</Text>
+          </PDFTableRowItem>
+          <PDFTableRowItem>
             <Text>Saldo</Text>
           </PDFTableRowItem>
         </PDFTableHeader>
         <View>
           {data.map((metric) => (
-            <PDFTableRow key={metric.id} wrap={false}>
+            <PDFTableRow
+              key={`${metric.id}-${metric.balance.type}-${metric.balance.total}`}
+              wrap={false}
+            >
               <PDFTableRowItem>
                 <Text>{metric.code}</Text>
               </PDFTableRowItem>
@@ -68,7 +75,10 @@ export default function CredoresDevedoresCafeMetricsTemplate({ data }: Props): J
                 <Text>{metric.name}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{getNumberOfBags(metric.balance)}</Text>
+                <Text>{capitalCase(metric.balance.type)}</Text>
+              </PDFTableRowItem>
+              <PDFTableRowItem>
+                <Text>{getNumberOfBags(metric.balance.total)}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}
@@ -77,8 +87,11 @@ export default function CredoresDevedoresCafeMetricsTemplate({ data }: Props): J
               <Text>TOTAL</Text>
             </PDFTableRowItem>
             <PDFTableRowItem></PDFTableRowItem>
+            <PDFTableRowItem></PDFTableRowItem>
             <PDFTableRowItem>
-              <Text>{getNumberOfBags(data.reduce((acc, curr) => acc + curr.balance, 0))}</Text>
+              <Text>
+                {getNumberOfBags(data.reduce((acc, curr) => acc + curr.balance.total, 0))}
+              </Text>
             </PDFTableRowItem>
           </PDFTableRow>
         </View>
