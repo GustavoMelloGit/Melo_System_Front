@@ -7,11 +7,11 @@ import {
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
 import { CoffeeBebidasLabel } from '../../../../coffee/types/model/coffee'
-import { type ClientCoffeeMetric } from '../../../types/credoresDevedoresCafeMetrics'
+import { type CreditorsAndDebtorsCoffeeMetric } from '../../../types/creditorsAndDebtorsCoffeeMetrics'
 import CredoresDevedoresCafeMetricsTableViewRow from './Row'
 
 type Props = {
-  data: ClientCoffeeMetric[]
+  data: CreditorsAndDebtorsCoffeeMetric[]
   isLoading: boolean
 }
 export default function CredoresDevedoresCafeMetricsTableView({

@@ -1,7 +1,7 @@
 import { formatRequestParams } from '../../../lib/utils/formatters'
 import useFetch from '../../../shared/hooks/useFetch'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
-import { type ClientCoffeeMetric } from '../types/credoresDevedoresCafeMetrics'
+import { type CreditorsAndDebtorsCoffeeMetric } from '../types/creditorsAndDebtorsCoffeeMetrics'
 
 type NumberString = number | string
 type Params = {
@@ -17,7 +17,7 @@ type Params = {
 }
 export function useGetCredoresDevedoresCafeMetrics(
   possibleParams?: Partial<Params>,
-): SWRServiceResponse<ClientCoffeeMetric[]> {
+): SWRServiceResponse<CreditorsAndDebtorsCoffeeMetric[]> {
   const params = formatRequestParams(possibleParams ?? {})
   const response = useFetch(`/metrics/coffees?${params ?? ''}`)
 

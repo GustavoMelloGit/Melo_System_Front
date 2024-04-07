@@ -3,10 +3,10 @@ import { capitalCase } from 'change-case'
 import { Routes } from '../../../../../lib/routes'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import LinkRow from '../../../../../shared/components/table/LinkRow'
-import { type ClientCoffeeMetric } from '../../../types/credoresDevedoresCafeMetrics'
+import { type CreditorsAndDebtorsCoffeeMetric } from '../../../types/creditorsAndDebtorsCoffeeMetrics'
 
 type Props = {
-  client: ClientCoffeeMetric
+  client: CreditorsAndDebtorsCoffeeMetric
 }
 export default function CredoresDevedoresCafeMetricsTableViewRow({ client }: Props): JSX.Element {
   return (

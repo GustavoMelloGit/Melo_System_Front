@@ -1,11 +1,11 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import { type ClientCoffeeMetric } from '../../../types/credoresDevedoresCafeMetrics'
+import { type CreditorsAndDebtorsCoffeeMetric } from '../../../types/creditorsAndDebtorsCoffeeMetrics'
 import MetricsDownloadButton from '../../MetricsDownloadButton'
 import CredoresDevedoresCafeMetricsTemplate from './Template'
 
 type Props = {
-  data: ClientCoffeeMetric[]
+  data: CreditorsAndDebtorsCoffeeMetric[]
 }
 export default function CredoresDevedoresCafeMetricsDownloadButton({ data }: Props): JSX.Element {
   const [instance, updateInstance] = usePDF({

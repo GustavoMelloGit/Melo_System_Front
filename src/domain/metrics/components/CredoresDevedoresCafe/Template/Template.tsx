@@ -8,7 +8,7 @@ import PDFTableHeader from '../../../../../shared/components/PDF/PDFTableHeader'
 import PDFTableRow from '../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../shared/components/PDF/styles'
-import { type ClientCoffeeMetric } from '../../../types/credoresDevedoresCafeMetrics'
+import { type CreditorsAndDebtorsCoffeeMetric } from '../../../types/creditorsAndDebtorsCoffeeMetrics'
 
 const styles = StyleSheet.create({
   header: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  data: ClientCoffeeMetric[]
+  data: CreditorsAndDebtorsCoffeeMetric[]
 }
 export default function CredoresDevedoresCafeMetricsTemplate({ data }: Props): JSX.Element {
   return (

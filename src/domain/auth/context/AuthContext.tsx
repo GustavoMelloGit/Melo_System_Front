@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
     setValue: setToken,
     getValue: getToken,
     removeValue: removeToken,
-  } = StorageManager<string>('token')
+  } = StorageManager<string | null>('token')
 
   const signIn = useCallback(
     async (values: SignInValues): Promise<void> => {
@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   const persistUser = useCallback(async (): Promise<void> => {
     const token = getToken()
+    if (!token) return
     setAuthToken(token)
     const isValidToken = await isTokenValid()
     setAppInitialized(true)
