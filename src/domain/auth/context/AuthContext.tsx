@@ -68,7 +68,10 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
 
   const persistUser = useCallback(async (): Promise<void> => {
     const token = getToken()
-    if (!token) return
+    if (!token) {
+      setAppInitialized(true)
+      return
+    }
     setAuthToken(token)
     const isValidToken = await isTokenValid()
     setAppInitialized(true)
