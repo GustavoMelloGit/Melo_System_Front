@@ -16,6 +16,7 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 type Props = NumberInputProps & {
   showControls?: boolean
   label?: string
+  placeholder?: string
 }
 const NumberInput = forwardRef<HTMLInputElement, Props>(
   ({ showControls = true, label, ...props }, ref): JSX.Element => {
