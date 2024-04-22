@@ -1,4 +1,5 @@
 import { Button, Divider, Flex, Show, Stack } from '@chakra-ui/react'
+import currency from 'currency.js'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { dateInputToApiDate } from '../../../../../lib/utils/date'
 import ProductItem from './ProductItem'
@@ -33,7 +34,7 @@ export default function SellProductForm({
             ({ quantity, price, deliveryDate, ...product }) => ({
               ...product,
               quantity: Number(quantity),
-              price: price * 100,
+              price: currency(price).multiply(100).value,
               deliveryDate: dateInputToApiDate(deliveryDate),
             }),
           )
