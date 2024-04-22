@@ -11,6 +11,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import currency from 'currency.js'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -66,7 +67,7 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
       onSubmit={handleSubmit(async ({ valuePerWeight, complement, brook, ...values }) => {
         await onSubmit({
           ...values,
-          valuePerWeight: valuePerWeight * 100,
+          valuePerWeight: currency(valuePerWeight).multiply(100).value,
           ...(pickupCoffee && {
             complement,
             brook,
