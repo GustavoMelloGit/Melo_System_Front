@@ -1,11 +1,12 @@
 import { Box, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { Routes } from '../../../../lib/routes'
+import Page from '../../../../shared/components/Page'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
-import Page from '../../../../shared/components/Page'
 import CoffeePriceMetricsTableView from '../../components/CoffeePrice/TableView'
-import CoffeePriceMetricsDownloadButton from '../../components/CoffeePrice/Template/DownloadButton'
+import CoffeePriceMetricsTemplate from '../../components/CoffeePrice/Template/Template'
+import MetricsDownloadButton from '../../components/MetricsDownloadButton'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import useCoffeePriceMetricsView from './useView'
 
@@ -26,7 +27,14 @@ export default function CoffeePriceMetricsView(): JSX.Element {
             label: 'Preço de café',
           },
         ]}
-        actions={<CoffeePriceMetricsDownloadButton data={data?.data ?? []} />}
+        actions={
+          <MetricsDownloadButton
+            template={<CoffeePriceMetricsTemplate data={data?.data ?? []} />}
+            aria-label='Baixar relatório de preço de café'
+            data-cy='download-coffee-price-metrics'
+            title='Baixar relatório de preço de café'
+          />
+        }
       />
       <Box
         display='grid'

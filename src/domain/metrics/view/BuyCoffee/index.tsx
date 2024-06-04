@@ -1,11 +1,12 @@
 import { Box, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { Routes } from '../../../../lib/routes'
+import Page from '../../../../shared/components/Page'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
-import Page from '../../../../shared/components/Page'
 import BuyCoffeeMetricsTableView from '../../components/BuyCoffee/TableView'
-import BuyCoffeeMetricsDownloadButton from '../../components/BuyCoffee/Template/DownloadButton'
+import BuyCoffeeMetricsTemplate from '../../components/BuyCoffee/Template/Template'
+import MetricsDownloadButton from '../../components/MetricsDownloadButton'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import useBuyCoffeeMetricsView from './useView'
 
@@ -26,7 +27,14 @@ export default function BuyCoffeeMetricsView(): JSX.Element {
             label: 'Compras de café',
           },
         ]}
-        actions={<BuyCoffeeMetricsDownloadButton data={data?.data ?? []} />}
+        actions={
+          <MetricsDownloadButton
+            template={<BuyCoffeeMetricsTemplate data={data?.data ?? []} />}
+            aria-label='Baixar relatório de compras de café'
+            data-cy='download-buy-coffee-metrics'
+            title='Baixar relatório de compras de café'
+          />
+        }
       />
       <Box
         display='grid'

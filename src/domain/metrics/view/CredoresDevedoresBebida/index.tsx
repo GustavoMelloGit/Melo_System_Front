@@ -6,7 +6,8 @@ import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/Heade
 import useTabs from '../../../../shared/hooks/useTabs'
 import GraphView from '../../components/CredoresDevedoresBebida/GraphView'
 import CredoresDevedoresBebidaMetricsTableView from '../../components/CredoresDevedoresBebida/TableView'
-import CredoresDevedoresBebidaMetricsDownloadButton from '../../components/CredoresDevedoresBebida/Template/DownloadButton'
+import CredoresDevedoresBebidaMetricsTemplate from '../../components/CredoresDevedoresBebida/Template/Template'
+import MetricsDownloadButton from '../../components/MetricsDownloadButton'
 import useCredoresDevedoresBebidaMetricsView from './useView'
 
 export default function CredoresDevedoresBebidaMetricsView(): JSX.Element {
@@ -25,7 +26,14 @@ export default function CredoresDevedoresBebidaMetricsView(): JSX.Element {
             label: 'Credores e Devedores de Café',
           },
         ]}
-        actions={<CredoresDevedoresBebidaMetricsDownloadButton data={data ?? []} />}
+        actions={
+          <MetricsDownloadButton
+            template={<CredoresDevedoresBebidaMetricsTemplate data={data} />}
+            aria-label='Baixar relatório credores e devedores de café'
+            data-cy='download-credores-devedores-coffee-metrics'
+            title='Baixar relatório credores e devedores de café'
+          />
+        }
       />
       <Flex justify='center'>
         <SwitchLabeled
