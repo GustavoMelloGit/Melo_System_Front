@@ -1,13 +1,14 @@
 import { Box, Button, Select } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { Routes } from '../../../../lib/routes'
+import Page from '../../../../shared/components/Page'
 import ControllerField from '../../../../shared/components/inputs/ControllerField'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
-import Page from '../../../../shared/components/Page'
 import { type ExtendedRecord } from '../../../../shared/types/ExtendedRecord'
 import { type TransactionTypeName } from '../../../client/types/model/Transaction'
+import MetricsDownloadButton from '../../components/MetricsDownloadButton'
 import TransactionMetricsTableView from '../../components/Transaction/TableView'
-import TransactionsMetricsDownloadButton from '../../components/Transaction/Template/DownloadButton'
+import TransactionsMetricsTemplate from '../../components/Transaction/Template/Template'
 import { type TransactionMetricsFilterOptions } from '../../types/transactionMetrics'
 import useTransactionMetricsView, { undefinedFilterType } from './useView'
 
@@ -30,7 +31,14 @@ export default function TransactionMetricsView(): JSX.Element | null {
             label: 'Transações',
           },
         ]}
-        actions={<TransactionsMetricsDownloadButton data={data?.data ?? []} />}
+        actions={
+          <MetricsDownloadButton
+            template={<TransactionsMetricsTemplate data={data?.data ?? []} />}
+            aria-label='Baixar relatório de transações'
+            data-cy='download-transactions-metrics'
+            title='Baixar relatório de transações'
+          />
+        }
       />
       <Box
         display='grid'

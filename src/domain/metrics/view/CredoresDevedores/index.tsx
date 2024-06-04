@@ -1,11 +1,12 @@
 import { Flex } from '@chakra-ui/react'
 import { Routes } from '../../../../lib/routes'
+import Page from '../../../../shared/components/Page'
 import SwitchLabeled from '../../../../shared/components/inputs/SwitchLabeled'
 import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
-import Page from '../../../../shared/components/Page'
 import useTabs from '../../../../shared/hooks/useTabs'
 import CredoresDevedoresMetricsTableView from '../../components/CredoresDevedores/TableView'
-import CredoresDevedoresMetricsDownloadButton from '../../components/CredoresDevedores/Template/DownloadButton'
+import CredoresDevedoresMetricsTemplate from '../../components/CredoresDevedores/Template/Template'
+import MetricsDownloadButton from '../../components/MetricsDownloadButton'
 import useCredoresDevedoresMetricsView from './useView'
 
 export default function CredoresDevedoresMetricsView(): JSX.Element {
@@ -24,7 +25,14 @@ export default function CredoresDevedoresMetricsView(): JSX.Element {
             label: 'Credores e Devedores',
           },
         ]}
-        actions={<CredoresDevedoresMetricsDownloadButton data={data ?? []} />}
+        actions={
+          <MetricsDownloadButton
+            template={<CredoresDevedoresMetricsTemplate data={data} />}
+            aria-label='Baixar relatório credores e devedores'
+            data-cy='download-creadores-devedores-metrics'
+            title='Baixar relatório credores e devedores'
+          />
+        }
       />
       <Flex justify='center'>
         <SwitchLabeled

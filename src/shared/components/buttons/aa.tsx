@@ -3,17 +3,21 @@ import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
 import IconButton from '../IconButton'
 
-export type Props = ButtonProps & {
-  template: JSX.Element
+type TemplateProps<T> = {
+  data: T
 }
-export default function DownloadButton({ template, variant, ...props }: Props): JSX.Element {
+type Props<T> = ButtonProps & {
+  template: (props: TemplateProps<T>) => JSX.Element
+  data: T
+}
+export default function DownloadButton<T>({ template, data, ...props }: Props<T>): JSX.Element {
   const [instance, updateInstance] = usePDF({
-    document: template,
+    document: template({ data }),
   })
 
   const updatePdfInstance = useCallback(async () => {
-    updateInstance(template)
-  }, [updateInstance, template])
+    updateInstance(template({ data }))
+  }, [data, updateInstance, template])
 
   useEffect(() => {
     void updatePdfInstance()
