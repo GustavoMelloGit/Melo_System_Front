@@ -2,6 +2,19 @@ import useFetch from '../../../../../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../../../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../../../../../shared/types/service/SWRServiceResponse'
 import { type EscolhaTransactionModel } from '../../../../../types/model/Transaction'
+import { parseEscolhaTransactionDescription } from '../utils/parsers'
+
+function parseResponse(
+  response: GetListResponse<EscolhaTransactionModel[]>,
+): GetListResponse<EscolhaTransactionModel[]> {
+  return {
+    ...response,
+    data: response.data.map((transaction) => ({
+      ...transaction,
+      description: parseEscolhaTransactionDescription(transaction),
+    })),
+  }
+}
 
 export function useGetEscolhaAccountService(
   clientId: string | undefined,
@@ -11,5 +24,8 @@ export function useGetEscolhaAccountService(
     clientId ? `/transactions/escolha/${clientId}?${params ?? ''}` : null,
   )
 
-  return response
+  return {
+    ...response,
+    data: response.data ? parseResponse(response.data) : response.data,
+  }
 }
