@@ -9,6 +9,7 @@ import PDFTableRow from '../../../../../../../../shared/components/PDF/PDFTableR
 import PDFTableRowItem from '../../../../../../../../shared/components/PDF/PDFTableRowItem'
 import { boldText } from '../../../../../../../../shared/components/PDF/styles'
 import { type EscolhaTransactionModel } from '../../../../../../types/model/Transaction'
+import { parseEscolhaTransactionDescription } from '../../utils/parsers'
 
 const styles = StyleSheet.create({
   header: {
@@ -75,7 +76,7 @@ export default function DownloadEscolhaAccountTemplate({ data }: Props): JSX.Ele
                 <Text>{format(metric.date, 'dd/MM/yyyy')}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{metric.description}</Text>
+                <Text>{parseEscolhaTransactionDescription(metric)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
                 <Text>{metric.details.utilization ?? 0}</Text>
