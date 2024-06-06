@@ -14,6 +14,7 @@ dist-ssr
 yarn.lock
 cypress.env.json
 package-lock.json
+yarn.lock
 
 
 # Editor directories and files
