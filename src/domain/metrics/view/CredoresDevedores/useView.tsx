@@ -8,20 +8,15 @@ export default function useCredoresDevedoresMetricsView(): UseBuyCoffeeMetricsVi
     [PaginationParams.sortBy]: 'balance',
     [PaginationParams.sortOrder]: 'desc',
   })
-  const { data, isLoading } = useGetCredoresDevedoresMetrics(
-    {
-      greaterThan: allSearchParams.greaterThan,
-      limit: allSearchParams[PaginationParams.rowsPerPage],
-      page: allSearchParams[PaginationParams.page],
-      [allSearchParams[PaginationParams.searchFor]]: allSearchParams[PaginationParams.searchBy],
-      orderBy: allSearchParams[PaginationParams.sortBy],
-      orderDirection: allSearchParams[PaginationParams.sortOrder] as 'asc' | 'desc',
-      showOnly: allSearchParams.showOnly as ShowOnly,
-    },
-    {
-      enabled: false,
-    },
-  )
+  const { data, isLoading } = useGetCredoresDevedoresMetrics({
+    greaterThan: allSearchParams.greaterThan,
+    limit: allSearchParams[PaginationParams.rowsPerPage],
+    page: allSearchParams[PaginationParams.page],
+    [allSearchParams[PaginationParams.searchFor]]: allSearchParams[PaginationParams.searchBy],
+    orderBy: allSearchParams[PaginationParams.sortBy],
+    orderDirection: allSearchParams[PaginationParams.sortOrder] as 'asc' | 'desc',
+    showOnly: allSearchParams.showOnly as ShowOnly,
+  })
 
   return {
     data: data ?? [],
