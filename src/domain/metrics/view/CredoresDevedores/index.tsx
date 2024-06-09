@@ -29,7 +29,7 @@ export default function CredoresDevedoresMetricsView(): JSX.Element {
           <MetricsDownloadButton
             template={<CredoresDevedoresMetricsTemplate data={data} />}
             aria-label='Baixar relatório credores e devedores'
-            data-cy='download-creadores-devedores-metrics'
+            data-cy='download-credores-devedores-metrics'
             title='Baixar relatório credores e devedores'
           />
         }

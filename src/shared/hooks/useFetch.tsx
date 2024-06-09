@@ -1,14 +1,22 @@
 import useSWR, { type KeyedMutator, type SWRConfiguration } from 'swr'
 import api from '../../lib/config/api'
-import { errorHandler } from '../../lib/utils/errorHandler'
 import { Logger } from '../../lib/utils/Logger'
+import { errorHandler } from '../../lib/utils/errorHandler'
 
+const logger = new Logger()
+
+export type FetchConfig = SWRConfiguration & {
+  /**
+   * If enabled equals false, the request is only triggered by using the "refetch" function
+   */
+  enabled: boolean
+}
 export default function useFetch<Data = any, Error = any>(
   url: string | null,
-  config?: SWRConfiguration,
+  config: FetchConfig = { enabled: true },
 ): UseFetch<Data, Error> {
   const { data, error, isLoading, mutate } = useSWR<Data, Error>(
-    url,
+    config?.enabled ? url : null,
     async (url: string) => {
       const response = await api.get(url)
 
@@ -18,7 +26,6 @@ export default function useFetch<Data = any, Error = any>(
   )
 
   if (error) {
-    const logger = new Logger()
     logger.error(errorHandler(error))
   }
 
