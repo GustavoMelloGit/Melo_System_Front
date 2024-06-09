@@ -1,5 +1,5 @@
 import { usePDF } from '@react-pdf/renderer'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { normalize } from '../../../../../lib/utils/normalize'
 import { sortObjectProperties } from '../../../../../lib/utils/sortObjectProperties'
 import IconButton from '../../../../../shared/components/IconButton'
@@ -36,7 +36,8 @@ export default function FertilizerDeliveryPDFDownloadButton(): JSX.Element {
   const [instance, updateInstance] = usePDF({
     document: <PickupPDFTemplate data={{}} />,
   })
-  const parsedData = parseData(data)
+  const parsedData = useMemo(() => parseData(data), [data])
+
   const updatePdfInstance = useCallback(async () => {
     if (!parsedData) return
     await mutate()
