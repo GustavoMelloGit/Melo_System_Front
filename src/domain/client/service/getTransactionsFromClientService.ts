@@ -1,5 +1,4 @@
-import { type SWRConfiguration } from 'swr'
-import useFetch from '../../../shared/hooks/useFetch'
+import useFetch, { type FetchConfig } from '../../../shared/hooks/useFetch'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
 import {
   type CoffeeTransactionModel,
@@ -26,7 +25,7 @@ type ResponseByType<T extends Type> = T extends 'currency'
 export function useGetTransactionsFromClientService<T extends Type>(
   type: T,
   clientId: string,
-  config?: SWRConfiguration,
+  config?: FetchConfig,
 ): SWRServiceResponse<Array<ResponseByType<T>>> {
   const response = useFetch(
     `/metrics/findAllTransactionsFromClient?type=${type}&clientId=${clientId}`,

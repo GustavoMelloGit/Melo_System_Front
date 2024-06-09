@@ -9,7 +9,7 @@ export type FetchConfig = SWRConfiguration & {
   /**
    * If enabled equals false, the request is only triggered by using the "refetch" function
    */
-  enabled: boolean
+  enabled?: boolean
 }
 export default function useFetch<Data = any, Error = any>(
   url: string | null,
