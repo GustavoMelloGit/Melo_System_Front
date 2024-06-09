@@ -1,7 +1,6 @@
-import { type SWRConfiguration } from 'swr'
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/errorHandler'
-import useFetch from '../../../shared/hooks/useFetch'
+import useFetch, { type FetchConfig } from '../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
 import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
@@ -10,7 +9,7 @@ import { type FertilizerModel } from '../types/model/Fertilizer'
 
 export function useGetFertilizersService(
   params?: string,
-  config?: SWRConfiguration,
+  config?: FetchConfig,
 ): SWRServiceResponse<GetListResponse<FertilizerModel[]>> {
   const response = useFetch<GetListResponse<FertilizerModel[]>>(
     `/fertilizers?${params ?? ''}`,
