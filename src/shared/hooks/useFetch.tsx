@@ -13,10 +13,11 @@ export type FetchConfig = SWRConfiguration & {
 }
 export default function useFetch<Data = any, Error = any>(
   url: string | null,
-  config: FetchConfig = { enabled: true },
+  config?: FetchConfig,
 ): UseFetch<Data, Error> {
+  const isEnabled = typeof config?.enabled === 'undefined' || config.enabled
   const { data, error, isLoading, mutate } = useSWR<Data, Error>(
-    config?.enabled ? url : null,
+    isEnabled ? url : null,
     async (url: string) => {
       const response = await api.get(url)
 
