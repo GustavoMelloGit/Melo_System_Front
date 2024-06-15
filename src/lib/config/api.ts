@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { logger } from '../utils/Logger'
 
 const api = axios.create({
   baseURL:
@@ -10,4 +11,15 @@ const api = axios.create({
 export const setAuthToken = (token: string): void => {
   api.defaults.headers.common.Authorization = `Bearer ${token}`
 }
+
+api.interceptors.request.use(
+  (config) => {
+    return config
+  },
+  async (error) => {
+    logger.error(error as Error)
+    return Promise.reject(error)
+  },
+)
+
 export default api
