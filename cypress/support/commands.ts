@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { type SignInResponse } from '../../src/domain/auth/types'
+import { type SignInOutputDto } from '../../src/domain/auth/service/AuthService.dto'
 import StorageManager from '../../src/lib/utils/StorageManager'
 
 Cypress.Commands.add('dataCy', (value) => {
@@ -31,7 +31,7 @@ Cypress.Commands.add('login', () => {
   }
 
   cy.session([nickname, password], () => {
-    cy.request(options).then((response: { body: SignInResponse }) => {
+    cy.request(options).then((response: { body: SignInOutputDto }) => {
       const { setValue: setToken } = StorageManager('token')
       const { setValue: setUser } = StorageManager('user')
       setToken(response.body.token)
