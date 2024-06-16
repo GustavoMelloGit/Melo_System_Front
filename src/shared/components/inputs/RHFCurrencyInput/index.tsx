@@ -20,7 +20,7 @@ import {
 
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
+  rules?: RegisterOptions<TFormValues, Path<TFormValues>>
   control: Control<TFormValues, any>
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode

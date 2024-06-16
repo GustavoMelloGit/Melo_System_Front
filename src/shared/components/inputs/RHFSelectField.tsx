@@ -8,10 +8,10 @@ import {
   type SelectProps,
 } from '@chakra-ui/react'
 import {
+  get,
   type DeepMap,
   type FieldError,
   type FieldValues,
-  get,
   type Path,
   type RegisterOptions,
   type UseFormRegister,
@@ -19,7 +19,7 @@ import {
 
 export type RHFSelectFieldProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
+  rules?: RegisterOptions<TFormValues, Path<TFormValues>>
   register: UseFormRegister<TFormValues>
   errors?: Partial<DeepMap<TFormValues, FieldError>>
   leftIcon?: React.ReactNode

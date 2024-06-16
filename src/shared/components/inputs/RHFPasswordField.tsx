@@ -5,15 +5,15 @@ import {
   IconButton,
   Input,
   InputGroup,
-  type InputProps,
   InputRightElement,
+  type InputProps,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import {
+  get,
   type DeepMap,
   type FieldError,
   type FieldValues,
-  get,
   type Path,
   type RegisterOptions,
   type UseFormRegister,
@@ -22,7 +22,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
+  rules?: RegisterOptions<TFormValues, Path<TFormValues>>
   register: UseFormRegister<TFormValues>
   errors?: Partial<DeepMap<TFormValues, FieldError>>
   label?: string
