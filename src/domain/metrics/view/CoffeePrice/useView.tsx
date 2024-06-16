@@ -1,12 +1,10 @@
-import { apiDateToDateInput } from '../../../../lib/utils/date'
+import { apiDateToDateInput, formatEndDate, formatStartDate } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { useGetCoffeePriceMetrics } from '../../services/getCoffeePriceMetrics'
 import {
   type CoffeePriceMetricsFilterOptions,
   type GetCoffeePriceMetricsResponse,
 } from '../../types/buyCoffeeMetrics'
-import { formatEndDate } from '../../utils/formatEndDate'
-import { formatStartDate } from '../../utils/formatStartDate'
 
 const initialDateInputValue = new Date().toISOString().split('T')[0]
 const initialValues: CoffeePriceMetricsFilterOptions = {

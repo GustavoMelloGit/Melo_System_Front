@@ -29,8 +29,12 @@ export async function getTransactionsFromClientService<T extends ClientAccount>(
   params?: string,
 ): Promise<GetServiceResponse<Array<ResponseByClientAccount<T>>>> {
   try {
+    const defaultParams = new URLSearchParams({
+      clientId,
+      type,
+    }).toString()
     const response = await api.get(
-      `/metrics/findAllTransactionsFromClient?type=${type}&clientId=${clientId}${params ? `&${params}` : ''}`,
+      `/metrics/findAllTransactionsFromClient?${defaultParams}${params ? `&${params}` : ''}`,
     )
     return {
       data: response.data,

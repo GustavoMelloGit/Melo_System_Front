@@ -3,18 +3,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../lib/errors'
+import { formatEndDate, formatStartDate } from '../../../../../lib/utils/date'
 import Modal from '../../../../../shared/components/Modal'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import { useModal } from '../../../../../shared/hooks/useModal'
 
 const PickDateModalSchema = yup.object().shape({
   startDate: yup.string().required(validationErrors.fieldIsRequired),
-  endDate: yup
-    .string()
-    .required(validationErrors.fieldIsRequired)
-    .when('startDate', (startDate) => {
-      return yup.date().min(startDate, validationErrors.endDateShouldBeAfterStartDate)
-    }),
+  endDate: yup.string().required(validationErrors.fieldIsRequired),
 })
 
 export type PickDateValues = {
@@ -28,7 +24,7 @@ const defaultInitialValues: PickDateValues = {
 }
 
 type Props = {
-  onSubmit: (values: PickDateValues) => void
+  onSubmit: (values: PickDateValues) => Promise<void>
   initialValues?: Partial<PickDateValues>
 }
 export default function PickDateModal({ onSubmit, initialValues }: Props): JSX.Element {
@@ -54,7 +50,14 @@ export default function PickDateModal({ onSubmit, initialValues }: Props): JSX.E
           <Heading fontSize='3xl'>Escolha o período</Heading>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            onSubmit={handleSubmit(async (values) => {
+              await onSubmit({
+                startDate: formatStartDate(values.startDate),
+                endDate: formatEndDate(values.endDate),
+              })
+            })}
+          >
             <Stack spacing={6}>
               <Grid templateColumns='repeat(auto-fit, minmax(170px, 1fr))' gap={4}>
                 <GridItem>

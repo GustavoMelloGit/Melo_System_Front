@@ -13,3 +13,11 @@ export function formatAndSumDayOfDate(date: number): string {
   const year = new Date(date).getFullYear()
   return new Date(year, month, day).toLocaleDateString('pt-BR')
 }
+
+export function formatEndDate(inputDate: string): string {
+  return `${inputDate}T23:59:59-03:00`
+}
+
+export function formatStartDate(inputDate: string): string {
+  return `${inputDate}T00:00:00-03:00`
+}
