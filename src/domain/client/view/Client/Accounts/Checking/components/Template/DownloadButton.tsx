@@ -1,30 +1,40 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import DownloadButton from '../../../../../../../../shared/components/buttons/DownloadButton'
-import { useGetTransactionsFromClientService } from '../../../../../../service/getTransactionsFromClientService'
-import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
-import CoffeePriceMetricsTemplate from './Template'
+import IconButton from '../../../../../../../../shared/components/IconButton'
+import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import useRenderPDF from '../../../../../../../../shared/hooks/useRenderPDF'
+import { getTransactionsFromClientService } from '../../../../../../service/getTransactionsFromClientService'
+import PickDateModal, { type PickDateValues } from './PickDateModal'
+import DownloadCheckingAccountTemplate from './Template'
 
 export default function DownloadCheckingAccountButton(): JSX.Element {
   const { uuid } = useParams<'uuid'>()
-  const { data, mutate } = useGetTransactionsFromClientService('currency', uuid ?? '')
+  const openModal = useModal((state) => state.openModal)
+  const closeModal = useModal((state) => state.closeModal)
+  const { render } = useRenderPDF()
 
-  const refetchData = useCallback(async () => {
-    await mutate()
-  }, [mutate])
-
-  useEffect(() => {
-    CheckingAccountEmitter.on('transactionCreated', refetchData)
-    return () => {
-      CheckingAccountEmitter.off('transactionCreated', refetchData)
-    }
-  }, [refetchData])
+  const renderPDF = useCallback(
+    async (dates: PickDateValues) => {
+      const searchParams = new URLSearchParams(dates).toString()
+      const { data, error } = await getTransactionsFromClientService(
+        'currency',
+        uuid ?? '',
+        searchParams,
+      )
+      if (error ?? !data) return
+      await render(<DownloadCheckingAccountTemplate data={data} />)
+      closeModal()
+    },
+    [closeModal, render, uuid],
+  )
 
   return (
-    <DownloadButton
-      template={<CoffeePriceMetricsTemplate data={data ?? []} />}
-      aria-label='Imprimir movimentações da conta'
-      title='Imprimir movimentações da conta'
+    <IconButton
+      aria-label='Baixar extrato'
+      icon='printer'
+      onClick={() => {
+        openModal(<PickDateModal onSubmit={renderPDF} />)
+      }}
     />
   )
 }
