@@ -10,7 +10,7 @@ import {
   type ClientAccount,
   type ResponseByClientAccount,
 } from '../../../service/ClientService.dto'
-import PickDateModal, { type PickDateValues } from './PickDateModal'
+import PickDateModal, { type PickDateFormValues } from './PickDateModal'
 
 type Props<T extends ClientAccount> = {
   account: T
@@ -26,21 +26,23 @@ export default function DownloadAccountButton<T extends ClientAccount>({
   const { render } = useRenderPDF()
 
   const renderPDF = useCallback(
-    async (dates: PickDateValues) => {
-      const searchParams = new URLSearchParams(dates).toString()
+    async ({ hasDateRange, ...dates }: PickDateFormValues) => {
+      const searchParams = new URLSearchParams()
+      if (hasDateRange) {
+        searchParams.append('startDate', dates.startDate)
+        searchParams.append('endDate', dates.endDate)
+      }
       const { data, error } = await ClientService.getTransactionsFromClient(
         account,
         uuid ?? '',
-        searchParams,
+        searchParams.toString(),
       )
       if (error ?? !data) {
         toast.error('Erro ao baixar o extrato')
         logger.error(`Erro ao baixar extrato da conta ${account}: ${error}`)
         return
       }
-
       await render(template(data))
-      closeModal()
     },
     [account, closeModal, render, template, uuid],
   )
