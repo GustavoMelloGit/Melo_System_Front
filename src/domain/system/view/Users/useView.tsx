@@ -1,16 +1,40 @@
 import { useCallback, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
+import { deepCleanObject } from '../../../../lib/utils/deepCleanObject'
+import objectEntries from '../../../../lib/utils/objectEntries'
 import { useModal } from '../../../../shared/hooks/useModal'
+import { type HttpMethods } from '../../../../shared/types/HttpMethods'
 import { type PermissionModel } from '../../../auth/types/permission'
 import { type UserModel } from '../../../auth/types/user'
 import { type UsersPermissionsFormValues } from '../../components/Users/UsersList/types'
 import { UserEmitter } from '../../events/UserEmitter'
-import useGetAllPermissionsService from '../../services/getAllPermissionsService'
-import useGetAllUsersService from '../../services/getAllUsersService'
+import { SystemService } from '../../services/SystemService'
+import { type UserPermissionData } from '../../services/SystemService.dto'
 import {
-  parseFormValues,
-  setUsersPermissionsService,
-} from '../../services/setUsersPermissionsService'
+  useGetAllPermissionsService,
+  useGetAllUsersService,
+} from '../../services/SystemService.hooks'
+
+function parseFormValues(values: UsersPermissionsFormValues): UserPermissionData[] {
+  const userPermissionData: UserPermissionData[] = []
+  const cleanValues = deepCleanObject(values)
+  objectEntries(cleanValues).forEach(([userId, routes]) => {
+    const userData: UserPermissionData = {
+      id: userId,
+      permissions: routes
+        ? objectEntries(routes)
+            .filter(([_, value]) => Boolean(value))
+            .map(([route]) => {
+              const [method, routeName] = route.split('%') as [HttpMethods, string]
+              return { method, route: routeName }
+            })
+        : [],
+    }
+    userPermissionData.push(userData)
+  })
+
+  return userPermissionData
+}
 
 export default function useUsersView(): UseUsersView {
   const { data: users, isLoading: usersIsLoading, mutate: mutateUsers } = useGetAllUsersService()
@@ -27,7 +51,7 @@ export default function useUsersView(): UseUsersView {
   }, [mutateUsers])
 
   async function handleUpdateUsersPermissions(values: UsersPermissionsFormValues): Promise<void> {
-    const { error } = await setUsersPermissionsService(parseFormValues(values))
+    const { error } = await SystemService.setUsersPermissions(parseFormValues(values))
     if (error) {
       toast.error(error)
       return

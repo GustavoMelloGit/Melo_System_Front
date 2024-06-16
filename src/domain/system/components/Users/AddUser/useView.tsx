@@ -1,14 +1,14 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import { UserEmitter } from '../../../events/UserEmitter'
-import { createUserService } from '../../../services/createUserService'
+import { SystemService } from '../../../services/SystemService'
 import { type AddUserFormValues } from './types'
 
 export default function useAddUser(): UseAddUser {
   const closeModal = useModal((state) => state.closeModal)
 
   const handleAddUser = async (values: AddUserFormValues): Promise<void> => {
-    const { error } = await createUserService(values)
+    const { error } = await SystemService.createUser(values)
     if (error) {
       toast.error(error)
       return
