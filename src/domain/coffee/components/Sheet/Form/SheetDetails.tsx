@@ -4,7 +4,7 @@ import { normalize } from '../../../../../lib/utils/normalize'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
-import { useGetClientsService } from '../../../../client/service/getClientsService'
+import { useGetClientsService } from '../../../../client/service/ClientService.hooks'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {

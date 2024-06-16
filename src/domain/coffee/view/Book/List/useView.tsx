@@ -26,7 +26,7 @@ export default function useCoffeeBookView(): UseCoffeeBookView {
     const latest = allSearchParams.latest
     if (latest === 'true' && data?.data?.length) {
       const latestBook = data?.data[0]
-      navigate(Routes.bookPage(latestBook.number))
+      navigate(Routes.bookPage(latestBook.number), { replace: true })
     }
   }, [allSearchParams, data, navigate])
 

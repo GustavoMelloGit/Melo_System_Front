@@ -17,7 +17,7 @@ import {
 
 export type RHFTextFieldProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
+  rules?: RegisterOptions<TFormValues, Path<TFormValues>>
   register: UseFormRegister<TFormValues>
   errors?: unknown
   leftIcon?: React.ReactNode

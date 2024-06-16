@@ -1,11 +1,11 @@
 import { Container, Divider, Stack } from '@chakra-ui/react'
 import IconButton from '../../../../shared/components/IconButton'
-import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../shared/components/Page'
-import { type PermissionModel } from '../../../auth/types/model/permission'
-import { type UserModel } from '../../../auth/types/model/user'
-import { type UsersPermissionsFormValues } from '../../components/Users/UsersList/types'
+import HeaderBreadcrumbs from '../../../../shared/components/layout/Header/HeaderBreadcrumbs'
+import { type PermissionModel } from '../../../auth/types/permission'
+import { type UserModel } from '../../../auth/types/user'
 import UsersListView from '../../components/Users/UsersList/View'
+import { type UsersPermissionsFormValues } from '../../components/Users/UsersList/types'
 
 type Props = {
   handleAddUser: () => void

@@ -1,5 +1,5 @@
-import { type Timestamp } from '../../../../shared/types/Timestamp'
-import { type WithId } from '../../../../shared/types/WithId'
+import { type Timestamp } from '../../../shared/types/Timestamp'
+import { type WithId } from '../../../shared/types/WithId'
 import { type PermissionModel } from './permission'
 
 export type UserRole = 'admin' | 'user'

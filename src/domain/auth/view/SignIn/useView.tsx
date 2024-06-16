@@ -1,5 +1,5 @@
 import useAuth from '../../hooks/useAuth'
-import { type AuthSignIn } from '../../types/context/auth'
+import { type SignInInputDto } from '../../service/AuthService.dto'
 
 export default function useSignInView(): SignInView {
   const { signIn } = useAuth()
@@ -10,5 +10,5 @@ export default function useSignInView(): SignInView {
 }
 
 export type SignInView = {
-  signIn: AuthSignIn
+  signIn: (values: SignInInputDto) => Promise<void>
 }

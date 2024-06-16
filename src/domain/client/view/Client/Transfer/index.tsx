@@ -1,16 +1,16 @@
 import { Box } from '@chakra-ui/react'
 import { toast } from 'react-hot-toast'
-import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
+import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import ClientTransferForm from '../../../components/Client/Transfer/Form'
 import { formValuesToServiceValuesAdapter } from '../../../components/Client/Transfer/Form/formValuesToServiceValuesAdapter'
 import { type ClientTransferFormValues } from '../../../components/Client/Transfer/Form/types'
-import { transferBetweenClientsService } from '../../../service'
+import { ClientService } from '../../../service/ClientService'
 
 export default function ClientTransferView(): JSX.Element {
   async function handleSubmitTransfer(values: ClientTransferFormValues): Promise<void> {
     const serviceData = formValuesToServiceValuesAdapter(values)
-    const { error } = await transferBetweenClientsService(serviceData)
+    const { error } = await ClientService.transferBetweenClients(serviceData)
     if (error) {
       toast.error(error)
       return

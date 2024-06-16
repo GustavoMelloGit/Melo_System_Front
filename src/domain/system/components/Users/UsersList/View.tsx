@@ -21,8 +21,8 @@ import {
 import { useEffect, type ReactNode } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { isEmptyObject } from '../../../../../lib/utils/isEmptyObject'
-import { type PermissionModel } from '../../../../auth/types/model/permission'
-import { type UserModel, type UserRole } from '../../../../auth/types/model/user'
+import { type PermissionModel } from '../../../../auth/types/permission'
+import { type UserModel, type UserRole } from '../../../../auth/types/user'
 import { type UsersPermissionsFormValues } from './types'
 
 const labelByRole: Record<UserRole, string> = {

@@ -5,11 +5,11 @@ import { logger } from '../../../../../lib/utils/Logger'
 import IconButton from '../../../../../shared/components/IconButton'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useRenderPDF from '../../../../../shared/hooks/useRenderPDF'
+import { ClientService } from '../../../service/ClientService'
 import {
-  getTransactionsFromClientService,
   type ClientAccount,
   type ResponseByClientAccount,
-} from '../../../service/getTransactionsFromClientService'
+} from '../../../service/ClientService.dto'
 import PickDateModal, { type PickDateValues } from './PickDateModal'
 
 type Props<T extends ClientAccount> = {
@@ -28,7 +28,7 @@ export default function DownloadAccountButton<T extends ClientAccount>({
   const renderPDF = useCallback(
     async (dates: PickDateValues) => {
       const searchParams = new URLSearchParams(dates).toString()
-      const { data, error } = await getTransactionsFromClientService(
+      const { data, error } = await ClientService.getTransactionsFromClient(
         account,
         uuid ?? '',
         searchParams,

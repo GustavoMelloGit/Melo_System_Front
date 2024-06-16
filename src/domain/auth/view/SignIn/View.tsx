@@ -1,6 +1,6 @@
 import { Box, Center, Flex, Heading, VStack } from '@chakra-ui/react'
-import AuthImage from '../../../../lib/assets/auth-image.jpg'
-import SignInForm from '../../components/Forms/SignInForm'
+import AuthImage from '../../../../lib/assets/auth-image.webp'
+import SignInForm from '../../components/SignInForm'
 import useSignInView from './useView'
 
 export default function SignInView(): JSX.Element {

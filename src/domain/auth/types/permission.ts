@@ -1,4 +1,4 @@
-import { type HttpMethods } from '../../../../shared/types/HttpMethods'
+import { type HttpMethods } from '../../../shared/types/HttpMethods'
 
 export type PermissionModel = {
   method: HttpMethods

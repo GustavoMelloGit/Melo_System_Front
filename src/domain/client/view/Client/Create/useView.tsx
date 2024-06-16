@@ -2,14 +2,14 @@ import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
 import { type ClientFormValues } from '../../../components/Client/Form/types'
-import { createClientService } from '../../../service'
+import { ClientService } from '../../../service/ClientService'
 
 export default function useCreateClientView(): UseCreateClientView {
   const navigate = useNavigate()
 
   async function handleCreateClient(values: ClientFormValues): Promise<void> {
     const cleanValues = removeEmptyProperties(values) as ClientFormValues
-    const { error } = await createClientService(cleanValues)
+    const { error } = await ClientService.createClient(cleanValues)
     if (error) {
       toast.error(error)
       return

@@ -5,7 +5,7 @@ import {
 } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { useGetClientService } from '../../../../../../service'
+import { useGetClientService } from '../../../../../../service/ClientService.hooks'
 import { CoffeeAccountEmitter } from '../../events/CoffeeAccountEmitter'
 import { buyCoffeeService } from '../../service/post'
 import { type BuyCoffeeFormValues } from '../../types'
