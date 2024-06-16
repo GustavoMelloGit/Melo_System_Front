@@ -10,7 +10,19 @@ import { useModal } from '../../../../../shared/hooks/useModal'
 
 const PickDateModalSchema = yup.object().shape({
   startDate: yup.string().required(validationErrors.fieldIsRequired),
-  endDate: yup.string().required(validationErrors.fieldIsRequired),
+  endDate: yup
+    .string()
+    .required(validationErrors.fieldIsRequired)
+    .when('startDate', (_, schema) => {
+      return schema.test('is-greater', validationErrors.endDateShouldBeAfterStartDate, function () {
+        const { startDate, endDate } = this.parent
+        if (!startDate || !endDate)
+          return this.createError({
+            message: validationErrors.endDateShouldBeAfterStartDate,
+          })
+        return new Date(String(startDate)) < new Date(String(endDate))
+      })
+    }),
 })
 
 export type PickDateValues = {

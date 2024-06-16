@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
+import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
+import { logger } from '../../../../../lib/utils/Logger'
 import IconButton from '../../../../../shared/components/IconButton'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useRenderPDF from '../../../../../shared/hooks/useRenderPDF'
@@ -31,7 +33,12 @@ export default function DownloadAccountButton<T extends ClientAccount>({
         uuid ?? '',
         searchParams,
       )
-      if (error ?? !data) return
+      if (error ?? !data) {
+        toast.error('Erro ao baixar o extrato')
+        logger.error(`Erro ao baixar extrato da conta ${account}: ${error}`)
+        return
+      }
+
       await render(template(data))
       closeModal()
     },
