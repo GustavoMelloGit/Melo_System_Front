@@ -1,9 +1,5 @@
 import useSWR, { type KeyedMutator, type SWRConfiguration } from 'swr'
 import api from '../../lib/config/api'
-import { Logger } from '../../lib/utils/Logger'
-import { errorHandler } from '../../lib/utils/errorHandler'
-
-const logger = new Logger()
 
 export type FetchConfig = SWRConfiguration & {
   /**
@@ -25,10 +21,6 @@ export default function useFetch<Data = any, Error = any>(
     },
     config,
   )
-
-  if (error) {
-    logger.error(errorHandler(error))
-  }
 
   return { data, error, isLoading, mutate }
 }

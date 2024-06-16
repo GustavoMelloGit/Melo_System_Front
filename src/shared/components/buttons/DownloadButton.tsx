@@ -6,7 +6,12 @@ import IconButton from '../IconButton'
 export type Props = ButtonProps & {
   template: JSX.Element
 }
-export default function DownloadButton({ template, variant, ...props }: Props): JSX.Element {
+export default function DownloadButton({
+  template,
+  variant,
+  isLoading,
+  ...props
+}: Props): JSX.Element {
   const [instance, updateInstance] = usePDF({
     document: template,
   })
@@ -22,7 +27,7 @@ export default function DownloadButton({ template, variant, ...props }: Props): 
   return (
     <IconButton
       isDisabled={Boolean(instance.error)}
-      isLoading={instance.loading}
+      isLoading={isLoading ?? instance.loading}
       as='a'
       /* @ts-expect-error: this property does exist */
       href={instance.url ?? ''}

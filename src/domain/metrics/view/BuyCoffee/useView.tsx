@@ -1,11 +1,9 @@
 import { PaginationParams } from '../../../../lib/constants/pagination'
-import { apiDateToDateInput } from '../../../../lib/utils/date'
+import { apiDateToDateInput, formatEndDate, formatStartDate } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { useGetBuyCoffeeMetrics } from '../../services/getBuyCoffeeMetrics'
 import { type CoffeePriceMetricsFilterOptions } from '../../types/buyCoffeeMetrics'
 import { type GetBuyCoffeeMetricsResponse } from '../../types/coffeePriceMetrics'
-import { formatEndDate } from '../../utils/formatEndDate'
-import { formatStartDate } from '../../utils/formatStartDate'
 
 const initialDateInputValue = new Date().toISOString().split('T')[0]
 const initialValues: CoffeePriceMetricsFilterOptions = {

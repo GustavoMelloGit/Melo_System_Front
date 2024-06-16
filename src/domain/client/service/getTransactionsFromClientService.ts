@@ -1,5 +1,6 @@
-import useFetch, { type FetchConfig } from '../../../shared/hooks/useFetch'
-import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
+import api from '../../../lib/config/api'
+import { errorHandler } from '../../../lib/utils/errorHandler'
+import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
 import {
   type CoffeeTransactionModel,
   type CurrencyTransactionModel,
@@ -8,9 +9,9 @@ import {
   type SacariaTransactionModel,
 } from '../types/model/Transaction'
 
-type Type = 'currency' | 'coffee' | 'escolha' | 'bags' | 'fertilizer'
+export type ClientAccount = 'currency' | 'coffee' | 'escolha' | 'bags' | 'fertilizer'
 
-type ResponseByType<T extends Type> = T extends 'currency'
+export type ResponseByClientAccount<T extends ClientAccount> = T extends 'currency'
   ? CurrencyTransactionModel
   : T extends 'coffee'
     ? CoffeeTransactionModel
@@ -20,17 +21,29 @@ type ResponseByType<T extends Type> = T extends 'currency'
         ? SacariaTransactionModel
         : T extends 'fertilizer'
           ? FertilizerTransactionModel
-          : unknown
+          : never
 
-export function useGetTransactionsFromClientService<T extends Type>(
+export async function getTransactionsFromClientService<T extends ClientAccount>(
   type: T,
   clientId: string,
-  config?: FetchConfig,
-): SWRServiceResponse<Array<ResponseByType<T>>> {
-  const response = useFetch(
-    `/metrics/findAllTransactionsFromClient?type=${type}&clientId=${clientId}`,
-    config,
-  )
-
-  return response
+  params?: string,
+): Promise<GetServiceResponse<Array<ResponseByClientAccount<T>>>> {
+  try {
+    const defaultParams = new URLSearchParams({
+      clientId,
+      type,
+    }).toString()
+    const response = await api.get(
+      `/metrics/findAllTransactionsFromClient?${defaultParams}${params ? `&${params}` : ''}`,
+    )
+    return {
+      data: response.data,
+      error: null,
+    }
+  } catch (e) {
+    return {
+      data: null,
+      error: errorHandler(e),
+    }
+  }
 }

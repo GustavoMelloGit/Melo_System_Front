@@ -4,7 +4,6 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
-import { SEARCH_CLIENT_NAME_PARAM } from '../../../constants/sheet'
 import { type SheetModel } from '../../../types/model/sheet'
 import SheetsTableRow from './Row'
 
@@ -76,7 +75,7 @@ const searchForOptions: SearchForOption = {
       inputMode: 'numeric',
     },
   },
-  [SEARCH_CLIENT_NAME_PARAM]: {
+  clientSearchableName: {
     label: 'Nome do cliente',
   },
 }

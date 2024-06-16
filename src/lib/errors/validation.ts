@@ -61,6 +61,8 @@ const validationErrors = {
   passwordIsIncorrect: 'Senha incorreta',
   valuePerWeightIsInvalid: 'Por favor, informe um valor por peso válido',
   valuePerWeightIsRequired: 'Por favor, informe o valor por peso',
+  fieldIsRequired: 'Campo obrigatório',
+  endDateShouldBeAfterStartDate: 'A data final deve ser posterior à data inicial',
 }
 
 export default validationErrors

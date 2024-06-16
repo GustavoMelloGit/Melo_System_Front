@@ -1,12 +1,10 @@
-import { apiDateToDateInput } from '../../../../lib/utils/date'
+import { apiDateToDateInput, formatEndDate, formatStartDate } from '../../../../lib/utils/date'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { useGetTransactionMetrics } from '../../services/getTransactionMetrics'
 import {
   type GetTransactionMetricsResponse,
   type TransactionMetricsFilterOptions,
 } from '../../types/transactionMetrics'
-import { formatEndDate } from '../../utils/formatEndDate'
-import { formatStartDate } from '../../utils/formatStartDate'
 
 export const undefinedFilterType = 'undefined'
 const initialDateInputValue = new Date().toISOString().split('T')[0]
