@@ -3,7 +3,7 @@ import { useForm, type Control } from 'react-hook-form'
 import { normalize } from '../../../../lib/utils/normalize'
 import useDebounce from '../../../../shared/hooks/useDebounce'
 import { useToggle } from '../../../../shared/hooks/useToggle'
-import { useGetClientsService } from '../../../client/service/getClientsService'
+import { useGetClientsService } from '../../../client/service/ClientService.hooks'
 import { type ClientModel } from '../../../client/types/model/Client'
 
 const parseClients = (clients?: ClientModel[]): ClientModel[] => {

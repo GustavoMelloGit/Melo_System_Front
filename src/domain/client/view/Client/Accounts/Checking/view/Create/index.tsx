@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
 import Modal from '../../../../../../../../shared/components/Modal'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { createTransactionService } from '../../../../../../service'
+import { ClientService } from '../../../../../../service/ClientService'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 import CheckingAccountForm from '../../components/Form'
 import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
@@ -18,7 +18,7 @@ export default function CreateTransactionView({ uuid }: CreateTransactionViewPro
     date,
     ...values
   }: CheckingAccountFormValues): Promise<void> {
-    const { error } = await createTransactionService(
+    const { error } = await ClientService.createCurrencyTransaction(
       {
         ...values,
         date: dateInputToApiDate(date),

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { useGetSheetsService } from '../../../../coffee/services/Sheets'
 import { type SheetModel } from '../../../../coffee/types/model/sheet'
-import { useGetClientService } from '../../../service'
+import { useGetClientService } from '../../../service/ClientService.hooks'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientSheetsPage(): UseClientSheetsPage {

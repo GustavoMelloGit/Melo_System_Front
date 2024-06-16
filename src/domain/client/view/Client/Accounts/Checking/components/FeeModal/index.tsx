@@ -25,7 +25,7 @@ import {
 } from '../../../../../../../../lib/utils/math'
 import Modal from '../../../../../../../../shared/components/Modal'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { createTransactionService } from '../../../../../../service'
+import { ClientService } from '../../../../../../service/ClientService'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
 import { useFeeStore } from '../../stores/useFeeStore'
@@ -63,7 +63,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
   }
 
   async function handleCreateTransaction(values: CheckingAccountFormValues): Promise<void> {
-    const { error } = await createTransactionService(values, clientId)
+    const { error } = await ClientService.createCurrencyTransaction(values, clientId)
     if (error) {
       toast.error(error)
       return

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useGetBirthdaysService } from '../../../domain/client/service/getBirthdaysService'
+import { useGetBirthdaysService } from '../../../domain/client/service/ClientService.hooks'
 import StorageManager from '../../../lib/utils/StorageManager'
 import { isClientBirthdayToday } from '../../../lib/utils/isClientBirthdayToday'
 import { type BirthdayPerson } from './types'

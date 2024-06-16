@@ -1,8 +1,7 @@
-import type ReactPDF from '@react-pdf/renderer'
-import { View } from '@react-pdf/renderer'
+import { View, type ViewProps } from '@react-pdf/renderer'
 import { type PropsWithChildren } from 'react'
 
-type Props = ReactPDF.ViewProps & PropsWithChildren
+type Props = ViewProps & PropsWithChildren
 export default function PDFTableRowItem({ children, style, ...rest }: Props): JSX.Element {
   return (
     <View

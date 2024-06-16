@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
-import { deleteClientService } from '../../../service/delete'
-import { useGetClientsService } from '../../../service/getClientsService'
+import { ClientService } from '../../../service/ClientService'
+import { useGetClientsService } from '../../../service/ClientService.hooks'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientsListView(): ClientsListView {
@@ -9,7 +9,7 @@ export default function useClientsListView(): ClientsListView {
   const { data, error, isLoading, mutate } = useGetClientsService(params)
 
   async function handleRemoveClient(id: string): Promise<void> {
-    const { error } = await deleteClientService(id)
+    const { error } = await ClientService.deleteClient(id)
     if (error) {
       toast.error('Erro ao remover cliente')
       return

@@ -14,7 +14,7 @@ import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Modal from '../../../../../shared/components/Modal'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { useGetClientBalancesService } from '../../../service'
+import { useGetClientBalancesService } from '../../../service/ClientService.hooks'
 import { type ClientBalance } from '../../../types/model/Client'
 
 type Props = {
