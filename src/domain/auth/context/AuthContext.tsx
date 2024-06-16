@@ -9,10 +9,16 @@ import {
 import { toast } from 'react-hot-toast'
 import { setAuthToken } from '../../../lib/config/api'
 import StorageManager from '../../../lib/utils/StorageManager'
-import { signInService, verifyTokenService } from '../service'
-import { type SignInValues } from '../types'
-import { type AuthContextType } from '../types/context/auth'
-import { type UserModel } from '../types/model/user'
+import { AuthService } from '../service/AuthService'
+import { type SignInInputDto } from '../service/AuthService.dto'
+import { type UserModel } from '../types/user'
+
+export type AuthContextType = {
+  user: UserModel
+  signIn: (values: SignInInputDto) => Promise<void>
+  signOut: () => void
+  appInitialized: boolean
+}
 
 const defaultValues: AuthContextType = {
   user: {} as AuthContextType['user'],
@@ -34,8 +40,8 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
   } = StorageManager<string | null>('token')
 
   const signIn = useCallback(
-    async (values: SignInValues): Promise<void> => {
-      const { data, error } = await signInService(values)
+    async (values: SignInInputDto): Promise<void> => {
+      const { data, error } = await AuthService.signInService(values)
       setAppInitialized(true)
       if (error ?? !data) {
         toast.error(error)
@@ -62,7 +68,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): JSX.Element => {
   }, [removeToken, removeUser])
 
   const isTokenValid = useCallback(async (): Promise<boolean> => {
-    const { error } = await verifyTokenService()
+    const { error } = await AuthService.verifyTokenService()
     return !error
   }, [])
 

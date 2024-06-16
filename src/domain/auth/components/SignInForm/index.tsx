@@ -2,26 +2,31 @@ import { Button, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { validationErrors } from '../../../../../lib/errors'
-import ControllerField from '../../../../../shared/components/inputs/ControllerField'
-import RHFPasswordField from '../../../../../shared/components/inputs/RHFPasswordField'
-import { type SignInValues } from '../../../types'
+import { validationErrors } from '../../../../lib/errors'
+import ControllerField from '../../../../shared/components/inputs/ControllerField'
+import RHFPasswordField from '../../../../shared/components/inputs/RHFPasswordField'
 
 const validationSchema = yup.object().shape({
   nickname: yup.string().required(validationErrors.nicknameIsRequired),
   password: yup.string().required(validationErrors.passwordIsRequired),
 })
 
-export type SignInFormProps = {
-  onSubmit: (values: SignInValues) => Promise<void>
+type SignInFormValues = {
+  nickname: string
+  password: string
 }
+
+export type SignInFormProps = {
+  onSubmit: (values: SignInFormValues) => Promise<void>
+}
+
 export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
   const {
     formState: { isSubmitting, errors },
     handleSubmit,
     register,
     control,
-  } = useForm<SignInValues>({
+  } = useForm<SignInFormValues>({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       nickname: '',
@@ -29,7 +34,7 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
     },
   })
 
-  async function submitHandler(values: SignInValues): Promise<void> {
+  async function submitHandler(values: SignInFormValues): Promise<void> {
     await onSubmit(values)
   }
   return (
@@ -44,7 +49,7 @@ export default function SignInForm({ onSubmit }: SignInFormProps): JSX.Element {
           variant='outline'
           data-cy='nickname-input'
         />
-        <RHFPasswordField<SignInValues>
+        <RHFPasswordField
           register={register}
           name='password'
           label='Senha'

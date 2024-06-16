@@ -1,7 +1,7 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/errorHandler'
 import { type PostServiceResponse } from '../../../shared/types/service/PostServiceResponse'
-import { type UserModel } from '../../auth/types/model/user'
+import { type UserModel } from '../../auth/types/user'
 
 type CreateUserData = {
   name: string
