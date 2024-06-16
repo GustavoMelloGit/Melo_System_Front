@@ -5,8 +5,9 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
+import DownloadAccountButton from '../../../../../../components/Client/DownloadAccountButton'
 import { type SacariaTransactionModel } from '../../../../../../types/model/Transaction'
-import DownloadSacariaAccountButton from '../Template/DownloadButton'
+import DownloadSacariaAccountTemplate from '../Template/Template'
 import SacariaAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<SacariaTransactionModel[]> & {
@@ -36,7 +37,12 @@ export default function SacariaAccountTable({
         searchForOptions,
         actions: (
           <>
-            <DownloadSacariaAccountButton />
+            <DownloadAccountButton
+              account='bags'
+              template={(data) => {
+                return <DownloadSacariaAccountTemplate data={data} />
+              }}
+            />
             <IconButton
               icon='add'
               onClick={onClickAdd}

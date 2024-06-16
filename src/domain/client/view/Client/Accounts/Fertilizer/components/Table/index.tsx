@@ -5,8 +5,9 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
+import DownloadAccountButton from '../../../../../../components/Client/DownloadAccountButton'
 import { type FertilizerTransactionModel } from '../../../../../../types/model/Transaction'
-import DownloadFertilizerAccountButton from '../Template/DownloadButton'
+import DownloadCheckingAccountTemplate from '../Template/Template'
 import FertilizerAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<FertilizerTransactionModel[]> & {
@@ -36,7 +37,12 @@ export default function FertilizerAccountTable({
         searchForOptions,
         actions: (
           <>
-            <DownloadFertilizerAccountButton />
+            <DownloadAccountButton
+              account='fertilizer'
+              template={(data) => {
+                return <DownloadCheckingAccountTemplate data={data} />
+              }}
+            />
             <IconButton
               icon='sell'
               onClick={onClickSell}

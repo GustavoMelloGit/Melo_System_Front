@@ -1,13 +1,23 @@
 import { useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import IconButton from '../../../../../../../../shared/components/IconButton'
-import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import useRenderPDF from '../../../../../../../../shared/hooks/useRenderPDF'
-import { getTransactionsFromClientService } from '../../../../../../service/getTransactionsFromClientService'
+import IconButton from '../../../../../shared/components/IconButton'
+import { useModal } from '../../../../../shared/hooks/useModal'
+import useRenderPDF from '../../../../../shared/hooks/useRenderPDF'
+import {
+  getTransactionsFromClientService,
+  type ClientAccount,
+  type ResponseByClientAccount,
+} from '../../../service/getTransactionsFromClientService'
 import PickDateModal, { type PickDateValues } from './PickDateModal'
-import DownloadCheckingAccountTemplate from './Template'
 
-export default function DownloadCheckingAccountButton(): JSX.Element {
+type Props<T extends ClientAccount> = {
+  account: T
+  template: (data: Array<ResponseByClientAccount<T>>) => JSX.Element
+}
+export default function DownloadAccountButton<T extends ClientAccount>({
+  account,
+  template,
+}: Props<T>): JSX.Element {
   const { uuid } = useParams<'uuid'>()
   const openModal = useModal((state) => state.openModal)
   const closeModal = useModal((state) => state.closeModal)
@@ -17,15 +27,15 @@ export default function DownloadCheckingAccountButton(): JSX.Element {
     async (dates: PickDateValues) => {
       const searchParams = new URLSearchParams(dates).toString()
       const { data, error } = await getTransactionsFromClientService(
-        'currency',
+        account,
         uuid ?? '',
         searchParams,
       )
       if (error ?? !data) return
-      await render(<DownloadCheckingAccountTemplate data={data} />)
+      await render(template(data))
       closeModal()
     },
-    [closeModal, render, uuid],
+    [account, closeModal, render, template, uuid],
   )
 
   return (

@@ -2,10 +2,10 @@ import { Button, Grid, GridItem, Heading, Stack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { validationErrors } from '../../../../../../../../lib/errors'
-import Modal from '../../../../../../../../shared/components/Modal'
-import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
-import { useModal } from '../../../../../../../../shared/hooks/useModal'
+import { validationErrors } from '../../../../../lib/errors'
+import Modal from '../../../../../shared/components/Modal'
+import ControllerField from '../../../../../shared/components/inputs/ControllerField'
+import { useModal } from '../../../../../shared/hooks/useModal'
 
 const PickDateModalSchema = yup.object().shape({
   startDate: yup.string().required(validationErrors.fieldIsRequired),

@@ -10,8 +10,9 @@ import {
   CoffeeBebidasLabel,
   CoffeeTypesLabel,
 } from '../../../../../../../coffee/types/model/coffee'
+import DownloadAccountButton from '../../../../../../components/Client/DownloadAccountButton'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
-import DownloadCoffeeAccountButton from '../Template/DownloadButton'
+import DownloadCoffeeAccountTemplate from '../Template/Template'
 import CoffeeAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<CoffeeTransactionModel[]> & {
@@ -43,7 +44,12 @@ export default function CoffeeAccountTable({
         searchForOptions,
         actions: (
           <>
-            <DownloadCoffeeAccountButton />
+            <DownloadAccountButton
+              account='coffee'
+              template={(data) => {
+                return <DownloadCoffeeAccountTemplate data={data} />
+              }}
+            />
             <IconButton
               icon='shopCart'
               onClick={onClickBuy}

@@ -1,8 +1,6 @@
 import api from '../../../lib/config/api'
 import { errorHandler } from '../../../lib/utils/errorHandler'
-import useFetch, { type FetchConfig } from '../../../shared/hooks/useFetch'
 import { type GetServiceResponse } from '../../../shared/types/service/GetServiceResponse'
-import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
 import {
   type CoffeeTransactionModel,
   type CurrencyTransactionModel,
@@ -11,9 +9,9 @@ import {
   type SacariaTransactionModel,
 } from '../types/model/Transaction'
 
-type Type = 'currency' | 'coffee' | 'escolha' | 'bags' | 'fertilizer'
+export type ClientAccount = 'currency' | 'coffee' | 'escolha' | 'bags' | 'fertilizer'
 
-type ResponseByType<T extends Type> = T extends 'currency'
+export type ResponseByClientAccount<T extends ClientAccount> = T extends 'currency'
   ? CurrencyTransactionModel
   : T extends 'coffee'
     ? CoffeeTransactionModel
@@ -23,13 +21,13 @@ type ResponseByType<T extends Type> = T extends 'currency'
         ? SacariaTransactionModel
         : T extends 'fertilizer'
           ? FertilizerTransactionModel
-          : unknown
+          : never
 
-export async function getTransactionsFromClientService<T extends Type>(
+export async function getTransactionsFromClientService<T extends ClientAccount>(
   type: T,
   clientId: string,
   params?: string,
-): Promise<GetServiceResponse<Array<ResponseByType<T>>>> {
+): Promise<GetServiceResponse<Array<ResponseByClientAccount<T>>>> {
   try {
     const response = await api.get(
       `/metrics/findAllTransactionsFromClient?type=${type}&clientId=${clientId}${params ? `&${params}` : ''}`,
@@ -44,18 +42,4 @@ export async function getTransactionsFromClientService<T extends Type>(
       error: errorHandler(e),
     }
   }
-}
-
-export function useGetTransactionsFromClientService<T extends Type>(
-  type: T,
-  clientId: string,
-  params?: string,
-  config?: FetchConfig,
-): SWRServiceResponse<Array<ResponseByType<T>>> {
-  const response = useFetch(
-    `/metrics/findAllTransactionsFromClient?type=${type}&clientId=${clientId}${params ? `&${params}` : ''}`,
-    config,
-  )
-
-  return response
 }
