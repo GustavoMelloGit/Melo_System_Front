@@ -18,7 +18,7 @@ export const LayoutContext = createContext<LayoutContextType>({
 export default function LayoutProvider({ children }: PropsWithChildren): JSX.Element {
   const { getValue: getSize, setValue: setSize } = StorageManager<LayoutSizes>('layout.size')
   const { getValue: getSidebar, setValue: setSidebar } = StorageManager<boolean>('layout.sidebar')
-  const [sideBarIsOpen, setSideBarIsOpen] = useState(getSidebar())
+  const [sideBarIsOpen, setSideBarIsOpen] = useState(getSidebar() ?? true)
   const [layoutSize, setLayoutSize] = useState<LayoutSizes>(getSize() ?? 'lg')
 
   const toggleSideBar = useCallback(() => {
