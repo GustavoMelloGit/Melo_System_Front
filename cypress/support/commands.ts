@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { type SignInOutputDto } from '../../src/domain/auth/service/AuthService.dto'
+import { type SignInOutputDto } from '../../src/domain/auth/service'
 import StorageManager from '../../src/lib/utils/StorageManager'
 
 Cypress.Commands.add('dataCy', (value) => {
