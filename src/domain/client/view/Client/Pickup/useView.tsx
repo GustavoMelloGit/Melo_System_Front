@@ -4,7 +4,7 @@ import { type GetListResponse } from '../../../../../shared/types/service/GetLis
 import { PickupEmitter } from '../../../../coffee/events/pickup'
 import { useGetPickupOrdersService } from '../../../../coffee/services/Pickup'
 import { type PickupCoffeeModel } from '../../../../coffee/types/model/pickup'
-import { useGetClientService } from '../../../service/ClientService.hooks'
+import { useGetClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientPickupView(): UseClientPickupView {

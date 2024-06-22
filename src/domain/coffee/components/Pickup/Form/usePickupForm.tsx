@@ -7,7 +7,7 @@ import { ClientNameParser } from '../../../../../lib/utils/ClientNameParser'
 import { normalize } from '../../../../../lib/utils/normalize'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { useGetClientsService } from '../../../../client/service/ClientService.hooks'
+import { useGetClientsService } from '../../../../client/service'
 import { type ClientModel } from '../../../../client/types/model/Client'
 import { type PickupFormValues } from '../../../types/model/pickup'
 

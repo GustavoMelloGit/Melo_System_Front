@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
 import { type ClientFormValues } from '../../../components/Client/Form/types'
-import { ClientService } from '../../../service/ClientService'
+import { ClientService } from '../../../service'
 
 export default function useCreateClientView(): UseCreateClientView {
   const navigate = useNavigate()

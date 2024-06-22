@@ -3,7 +3,7 @@ import {
   type ServiceTransferType,
   type TransferBetweenClientsReferralData,
   type TransferBetweenClientsServiceData,
-} from '../../../../service/ClientService.dto'
+} from '../../../../service'
 import { type ClientTransferFormValues, type ReferralTransfer } from './types'
 
 const getValueBasedOnType = (referralData: ReferralTransfer): number => {

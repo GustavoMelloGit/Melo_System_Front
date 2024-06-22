@@ -12,7 +12,7 @@ import ControllerAutocomplete from '../../../../../shared/components/inputs/Cont
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { useGetClientsService } from '../../../../client/service/ClientService.hooks'
+import { useGetClientsService } from '../../../../client/service'
 import { useGetFertilizersService } from '../../../services/get'
 import { type FertilizerDeliveryFormValues } from '../../../types/model/Delivery'
 
