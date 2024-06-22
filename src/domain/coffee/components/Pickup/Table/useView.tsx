@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { PickupEmitter } from '../../../events/pickup'
-import { pickupCoffeeDoneService, pickupCoffeePendingService } from '../../../services/Pickup/put'
+import { PickupService } from '../../../services/Pickup'
 import { type PickupCoffeeModel, type PickupCoffeeStatuses } from '../../../types/model/pickup'
 
 export default function usePickupTableView(): UsePickupTableView {
@@ -16,7 +16,7 @@ export default function usePickupTableView(): UsePickupTableView {
   }
 
   async function handleCheckPickup(pickup: PickupCoffeeModel): Promise<void> {
-    const { error } = await pickupCoffeeDoneService(pickup.id)
+    const { error } = await PickupService.markAsDone(pickup.id)
     if (error) {
       toast.error('Não foi possível finalizar o pedido de coleta')
       return
@@ -26,7 +26,7 @@ export default function usePickupTableView(): UsePickupTableView {
   }
 
   async function handleUncheckPickup(pickup: PickupCoffeeModel): Promise<void> {
-    const { error } = await pickupCoffeePendingService(pickup.id)
+    const { error } = await PickupService.markAsPending(pickup.id)
     if (error) {
       toast.error('Não foi possível desmarcar o pedido de coleta')
       return
