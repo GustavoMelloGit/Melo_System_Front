@@ -18,7 +18,9 @@ export default function useSearchBarView(): UseSearchBarView {
   })
   const searchClient = watch('search')
   const debouncedClient = useDebounce(searchClient)
-  const { data, isLoading } = useGetClientsService(`searchableName=${normalize(debouncedClient)}`)
+  const { data, isLoading } = useGetClientsService(`searchableName=${normalize(debouncedClient)}`, {
+    revalidateOnFocus: false,
+  })
 
   const handleOpenSearchBar = useCallback(
     (e: KeyboardEvent) => {

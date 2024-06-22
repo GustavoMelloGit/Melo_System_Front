@@ -24,10 +24,10 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
       <Td textAlign='center' data-cy='table-cell-client-avatar'>
         <Avatar loading='lazy' src={client.profileImage} name={client.name} />
       </Td>
-      <Td>
+      <Td data-cy='table-cell-client-name'>
         <LinkRow.Link to={Routes.clientPage(client.id)}>{client.name}</LinkRow.Link>
       </Td>
-      <Td>{client.nickname ?? '--'}</Td>
+      <Td data-cy='table-cell-client-nickname'>{client.nickname ?? '--'}</Td>
       <Td
         onClick={handleToggleBalance}
         cursor='pointer'
@@ -46,7 +46,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
       </Td>
       <Td textAlign='center' data-cy='table-cell-client-actions'>
         <HStack w='full' justify='center'>
-          <Link to={Routes.updateClient(client.id)}>
+          <Link to={Routes.updateClient(client.id)} data-cy={`edit-client-${client.id}`}>
             <IconButton
               icon='edit'
               role='button'

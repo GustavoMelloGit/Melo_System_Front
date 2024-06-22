@@ -14,9 +14,9 @@ describe('Auth domain', () => {
     cy.visit(Routes.login)
     cy.dataCy('nickname-input').type(Cypress.env('auth_nickname'))
     cy.dataCy('password-input').type(Cypress.env('auth_password'))
+    cy.intercept('POST', '**/login').as('login')
     cy.dataCy('submit').click()
-    cy.intercept('POST', '/login').as('login')
-    cy.wait(10000)
+    cy.wait('@login')
     cy.expectPathnameNot(Routes.login)
   })
   it('should show error on invalid credentials', () => {

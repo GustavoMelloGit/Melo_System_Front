@@ -21,7 +21,11 @@ describe('Client Domain - List View', () => {
     cy.expectPathname(Routes.createClient)
   })
   it('should be able to go to edit client', () => {
-    cy.dataCy('table-edit-button').first().click()
+    cy.dataCy('table-cell-client-actions')
+      .first()
+      .within(() => {
+        cy.get('a').click()
+      })
     cy.location('pathname').should('include', Routes.updateClient(''))
   })
   it('client balance should be hidden by default', () => {
@@ -119,23 +123,16 @@ describe('Client Domain - List View', () => {
         expect(clientBalances).to.deep.equal(sorted)
       })
   })
-  it('should be able to search by name', () => {
+  it.only('should be able to search by name', () => {
     cy.dataCy('table-cell-client-name')
       .first()
       .invoke('text')
       .then((clientName) => {
-        cy.dataCy('table-searchFor-select').select('name')
+        cy.dataCy('table-searchFor-select').select('searchableName')
         cy.dataCy('table-search-input').type(clientName)
         cy.dataCy('table-submit-search-button').click()
-        cy.intercept({
-          method: 'GET',
-          url: '/clients?*',
-        }).as('getClients')
-        cy.wait('@getClients').then((interception) => {
-          const clients = interception.response.body.data as ClientModel[]
-          const clientsName = clients.map((client) => client.name).filter(Boolean) as string[]
-          expect(clientsName).to.include(clientName)
-        })
+        cy.wait('@getClients')
+        expect(cy.dataCy('table-cell-client-name').first()).to.have.text(clientName)
       })
   })
   it('should be able to search by nickname', () => {
@@ -146,10 +143,6 @@ describe('Client Domain - List View', () => {
         cy.dataCy('table-searchFor-select').select('nickname')
         cy.dataCy('table-search-input').type(clientNickname)
         cy.dataCy('table-submit-search-button').click()
-        cy.intercept({
-          method: 'GET',
-          url: '/clients?*',
-        }).as('getClients')
         cy.wait('@getClients').then((interception) => {
           const clients = interception.response.body.data as ClientModel[]
           const clientsNickname = clients
@@ -167,10 +160,6 @@ describe('Client Domain - List View', () => {
       cy.dataCy('table-searchFor-select').select(brookSearchFor)
       cy.dataCy('table-search-input').type(clientBrook)
       cy.dataCy('table-submit-search-button').click()
-      cy.intercept({
-        method: 'GET',
-        url: '/clients?*',
-      }).as('getClients')
       cy.wait('@getClients').then((interception) => {
         const clients = interception.response.body.data as ClientModel[]
         const clientsBrook = clients

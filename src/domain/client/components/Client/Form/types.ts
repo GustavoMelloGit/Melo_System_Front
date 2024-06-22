@@ -21,7 +21,6 @@ export type ClientFormValues = {
   profileImage?: string
   name: string
   nickname?: string
-  balance: number
   personType: ClientFormValuesLegalPerson | ClientFormValuesNaturalPerson
   address: Address
   contact: ClientContact
