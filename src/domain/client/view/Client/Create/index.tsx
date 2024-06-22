@@ -2,7 +2,6 @@ import { Routes } from '../../../../../lib/routes'
 import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/HeaderBreadcrumbs'
 import Page from '../../../../../shared/components/Page'
 import ClientForm from '../../../components/Client/Form'
-import { type ClientFormValues } from '../../../components/Client/Form/types'
 import useCreateClientView from './useView'
 
 export default function CreateClientsView(): JSX.Element {
@@ -22,16 +21,35 @@ export default function CreateClientsView(): JSX.Element {
         ]}
       />
       <ClientForm
-        defaultValues={
-          {
-            personType: {
-              type: 'fisica',
-            },
-            address: {
-              state: 'MG',
-            },
-          } as ClientFormValues
-        }
+        defaultValues={{
+          address: {
+            brook: '',
+            city: '',
+            complement: '',
+            neighborhood: '',
+            number: '',
+            state: '',
+            street: '',
+            zipCode: '',
+          },
+          description: '',
+          nickname: '',
+          contact: {
+            phone: '',
+          },
+          personType: {
+            type: 'fisica',
+            birthDate: '',
+            cpf: '',
+            rg: '',
+            fatherName: '',
+            motherName: '',
+            producerRegistration: '',
+            rgEmissionDate: '',
+          },
+          profileImage: '',
+          name: '',
+        }}
         onSubmit={handleCreateClient}
         submitText='Criar'
       />

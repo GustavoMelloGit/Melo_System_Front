@@ -10,10 +10,6 @@ export type Address = {
   neighborhood?: string
   brook?: string
   complement?: string
-  location?: {
-    lat?: number
-    lng?: number
-  }
 }
 
 export type ClientContact = {

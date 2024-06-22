@@ -68,12 +68,7 @@ const emptyClient: ClientFormValues = {
     state: '',
     street: '',
     zipCode: '',
-    location: {
-      lat: 0,
-      lng: 0,
-    },
   },
-  balance: 0,
   description: '',
   nickname: '',
   contact: {
@@ -89,6 +84,6 @@ const emptyClient: ClientFormValues = {
     producerRegistration: '',
     rgEmissionDate: '',
   },
-  profileImage: ' ',
+  profileImage: '',
   name: '',
 }

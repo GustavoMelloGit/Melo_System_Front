@@ -1,16 +1,13 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import { type UseFormRegister, type UseFormSetValue } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import allStates from '../../../../../lib/constants/states.json'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
 import RHFSelectField from '../../../../../shared/components/inputs/RHFSelectField'
 import { type ClientFormValues } from './types'
 
-type AddressFieldsProps = {
-  register: UseFormRegister<ClientFormValues>
-  setValue: UseFormSetValue<ClientFormValues>
-}
-export default function AddressFields({ register, setValue }: AddressFieldsProps): JSX.Element {
+export default function AddressFields(): JSX.Element {
+  const { setValue, register } = useFormContext<ClientFormValues>()
   return (
     <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4}>
       <GridItem>

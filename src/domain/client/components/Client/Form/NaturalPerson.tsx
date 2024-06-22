@@ -1,27 +1,12 @@
 import { Grid, GridItem } from '@chakra-ui/react'
-import {
-  type Control,
-  type FormState,
-  type UseFormRegister,
-  type UseFormSetValue,
-} from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import RHFDateInput from '../../../../../shared/components/inputs/RHFDateInput'
 import RHFField from '../../../../../shared/components/inputs/RHFField'
 import RHFMaskInput from '../../../../../shared/components/inputs/RHFMaskInput'
 import { type ClientFormValues } from './types'
 
-type NaturalPersonFieldsProps = {
-  formState: FormState<ClientFormValues>
-  control: Control<ClientFormValues>
-  register: UseFormRegister<ClientFormValues>
-  setValue: UseFormSetValue<ClientFormValues>
-}
-export default function NaturalPersonFields({
-  formState,
-  control,
-  register,
-  setValue,
-}: NaturalPersonFieldsProps): JSX.Element {
+export default function NaturalPersonFields(): JSX.Element {
+  const { formState, control, register, setValue } = useFormContext<ClientFormValues>()
   return (
     <Grid templateColumns='repeat(auto-fit, minmax(200px, 1fr))' gap={4}>
       <GridItem>
