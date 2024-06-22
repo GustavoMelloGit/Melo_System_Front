@@ -27,7 +27,7 @@ import Modal from '../../../../../../../../shared/components/Modal'
 import ControllerAutocomplete from '../../../../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
-import { useGetFertilizersService } from '../../../../../../../fertilizer/services/get'
+import { useGetFertilizersService } from '../../../../../../../fertilizer/services'
 import { type SellFertilizerFormValues } from './types'
 
 type Props = {

@@ -4,11 +4,7 @@ import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
-import { useGetFertilizersDeliveryService } from '../../../services/get'
-import {
-  fertilizerDeliveryCancelService,
-  fertilizerDeliveryDoneService,
-} from '../../../services/put'
+import { FertilizerService, useGetFertilizersDeliveryService } from '../../../services'
 import {
   FertilizerDeliveryStatuses,
   type FertilizerDeliveryModel,
@@ -35,7 +31,7 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
   }
 
   async function handleCheckPickup(delivery: FertilizerDeliveryModel): Promise<void> {
-    const { error, data } = await fertilizerDeliveryDoneService(delivery.id)
+    const { error, data } = await FertilizerService.fertilizerDelivered(delivery.id)
     if (error) {
       toast.error('Não foi possível concluir a entrega')
       return
@@ -46,7 +42,7 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
   }
 
   async function handleUncheckPickup(pickup: FertilizerDeliveryModel): Promise<void> {
-    const { error, data } = await fertilizerDeliveryCancelService(pickup.id)
+    const { error, data } = await FertilizerService.fertilizerDeliveryCanceled(pickup.id)
     if (error) {
       toast.error('Não foi possível cancelar a entrega')
       return

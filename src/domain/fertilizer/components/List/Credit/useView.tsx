@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { updateFertilizerService } from '../../../services/put'
+import { FertilizerService } from '../../../services'
 import { type CreditFertilizerFormValues } from './types'
 
 export default function useCreditFertilizerView(): UseCreditFertilizerView {
@@ -10,7 +10,7 @@ export default function useCreditFertilizerView(): UseCreditFertilizerView {
     id: string,
     values: CreditFertilizerFormValues,
   ): Promise<void> {
-    const { error } = await updateFertilizerService(id, values)
+    const { error } = await FertilizerService.update(id, values)
     if (error) {
       toast.error(error)
       return

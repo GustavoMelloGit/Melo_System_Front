@@ -5,7 +5,7 @@ import {
   type TableHeaderColumns,
 } from '../../../../../shared/components/table/types'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { deleteFertilizerService } from '../../../services/delete'
+import { FertilizerService } from '../../../services'
 import { type FertilizerModel } from '../../../types/model/Fertilizer'
 import FertilizerTableRow from './Row'
 
@@ -18,7 +18,7 @@ type Props = {
 const FertilizerTable = ({ data, isLoading, totalBooks, refetch }: Props): JSX.Element => {
   const openModal = useModal((state) => state.openModal)
   async function handleDeleteFertilizer(id: string): Promise<void> {
-    const { error } = await deleteFertilizerService(id)
+    const { error } = await FertilizerService.delete(id)
     if (error) {
       toast.error(error)
       return
