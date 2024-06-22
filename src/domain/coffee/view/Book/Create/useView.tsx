@@ -1,8 +1,8 @@
 import { toast } from 'react-hot-toast'
 import { PaginationParams } from '../../../../../lib/constants/pagination'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { useGetBooksService } from '../../../services/Book/get'
-import { createBookService } from '../../../services/Book/post'
+import { BookService } from '../../../services/Book/BookService'
+import { useGetBooksService } from '../../../services/Book/BookService.hooks'
 import { type BookFormValues } from '../../../types/model/book'
 
 type Props = {
@@ -10,12 +10,15 @@ type Props = {
 }
 export default function useCreateBookView({ refetch }: Props): UseCreateBookView {
   const closeModal = useModal((state) => state.closeModal)
-  const { data } = useGetBooksService(
-    `${PaginationParams.sortBy}=number&${PaginationParams.sortOrder}=desc&${PaginationParams.rowsPerPage}=1`,
-  )
+  const params = new URLSearchParams({
+    [PaginationParams.sortOrder]: 'desc',
+    [PaginationParams.rowsPerPage]: '1',
+    [PaginationParams.sortBy]: 'number',
+  }).toString()
+  const { data } = useGetBooksService(params)
 
   async function handleCreateBook(values: BookFormValues): Promise<void> {
-    const { error } = await createBookService(values)
+    const { error } = await BookService.createBook(values)
     if (error) {
       toast.error(error)
       return
