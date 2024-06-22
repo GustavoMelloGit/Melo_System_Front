@@ -7,7 +7,8 @@ import {
   IconButtonProps,
 } from '@chakra-ui/react'
 import { createContext, forwardRef, useCallback, useContext, useMemo, useRef } from 'react'
-import { MdCamera, MdClear } from 'react-icons/md'
+import { MdCamera } from 'react-icons/md'
+import { TiArrowSync } from 'react-icons/ti'
 import Webcam, { WebcamProps } from 'react-webcam'
 
 type Constraints = {
@@ -91,9 +92,13 @@ const ClearCaptureButton = forwardRef<HTMLButtonElement, ClearCaptureButtonProps
     return (
       <IconButton
         aria-label='clear capture button'
-        icon={<MdClear size={22} />}
-        pos='absolute'
+        icon={<TiArrowSync size={28} />}
         onClick={onClear}
+        pos='absolute'
+        bottom={4}
+        left='50%'
+        transform='translateX(-50%)'
+        colorScheme='blue'
         rounded='full'
         {...props}
         ref={ref}
@@ -105,29 +110,33 @@ const ClearCaptureButton = forwardRef<HTMLButtonElement, ClearCaptureButtonProps
 type CaptureButtonProps = {
   onCapture: (imageSrc: string) => void
 }
-const CaptureButton = forwardRef<HTMLButtonElement, CaptureButtonProps>(({ onCapture }, ref) => {
-  const { webcamRef } = useWebcamContext()
+const CaptureButton = forwardRef<HTMLButtonElement, CaptureButtonProps>(
+  ({ onCapture, ...props }, ref) => {
+    const { webcamRef } = useWebcamContext()
 
-  const capture = useCallback(() => {
-    if (!webcamRef || !webcamRef.current) return
-    const imageSrc = webcamRef.current.getScreenshot()
-    if (imageSrc) onCapture(imageSrc)
-  }, [webcamRef])
+    const capture = useCallback(() => {
+      if (!webcamRef || !webcamRef.current) return
+      const imageSrc = webcamRef.current.getScreenshot()
+      if (imageSrc) onCapture(imageSrc)
+    }, [webcamRef])
 
-  return (
-    <IconButton
-      aria-label='capture picture'
-      icon={<MdCamera size={32} />}
-      onClick={capture}
-      pos='absolute'
-      bottom={4}
-      left='50%'
-      transform='translateX(-50%)'
-      colorScheme='blue'
-      ref={ref}
-    />
-  )
-})
+    return (
+      <IconButton
+        aria-label='capture picture'
+        icon={<MdCamera size={28} />}
+        onClick={capture}
+        pos='absolute'
+        bottom={4}
+        left='50%'
+        transform='translateX(-50%)'
+        colorScheme='blue'
+        rounded='full'
+        {...props}
+        ref={ref}
+      />
+    )
+  },
+)
 
 const WebcamCapture = {
   Root,
