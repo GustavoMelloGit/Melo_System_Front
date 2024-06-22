@@ -14,6 +14,12 @@ import LayoutProvider from './shared/contexts/LayoutContext'
 import useScreenProtection from './shared/hooks/useScreenProtection'
 const LockScreenView = lazy(async () => import('./shared/components/layout/Content/LockScreenView'))
 
+// Bug: https://github.com/vitejs/vite/issues/11804
+// Solution: https://vitejs.dev/guide/build#load-error-handling
+window.addEventListener('vite:preloadError', () => {
+  window.location.reload() // for example, refresh the page
+})
+
 function App(): JSX.Element {
   const { isLocked } = useScreenProtection()
   return (
