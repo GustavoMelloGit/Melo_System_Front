@@ -15,20 +15,17 @@ export default function CaptureImage(): JSX.Element {
   return (
     <Flex justify='center'>
       <WebcamCapture.Root boxSize={240} rounded='full'>
-        {profileImage && (
-          <>
-            <WebcamCapture.ClearCaptureButton
-              right={8}
-              top={8}
-              onClear={() => {
-                updateProfileImage(undefined)
-              }}
-            />
-            <WebcamCapture.Capture src={profileImage} />
-          </>
-        )}
+        {profileImage && <WebcamCapture.Capture src={profileImage} />}
         <WebcamCapture.Video />
-        <WebcamCapture.CaptureButton onCapture={updateProfileImage} />
+        {profileImage ? (
+          <WebcamCapture.ClearCaptureButton
+            onClear={() => {
+              updateProfileImage(undefined)
+            }}
+          />
+        ) : (
+          <WebcamCapture.CaptureButton onCapture={updateProfileImage} />
+        )}
       </WebcamCapture.Root>
     </Flex>
   )
