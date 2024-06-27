@@ -5,7 +5,7 @@ import { sortObjectProperties } from '../../../../../lib/utils/sortObjectPropert
 import IconButton from '../../../../../shared/components/IconButton'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
-import { useGetFertilizersDeliveryService } from '../../../services/get'
+import { useGetFertilizersDeliveryService } from '../../../services'
 import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
 import PickupPDFTemplate from './Template'
 import { type FertilizerDeliveryPDFData, type FertilizerDeliveryPDFItem } from './types'

@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import FertilizerDeliveryForm from '../../../components/Delivery/Form'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
-import { createFertilizerDeliveryService } from '../../../services/post'
+import { FertilizerService } from '../../../services'
 
 type Props = {
   refetch: () => void
@@ -22,7 +22,7 @@ export default function CreateFertilizerDelivery({ refetch }: Props): JSX.Elemen
         date: new Date().toISOString().split('T')[0],
       }}
       onSubmit={async (values) => {
-        const { error, data } = await createFertilizerDeliveryService(values)
+        const { error, data } = await FertilizerService.deliveryFertilizer(values)
         if (error) {
           toast.error(error)
           return

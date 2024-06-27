@@ -11,7 +11,7 @@ export default function CredoresDevedoresMetricsTableViewRow({ client }: Props):
     <Tr>
       <Td>{client.code}</Td>
       <Td>{ClientNameParser.addNickname(client.name, client.nickname)}</Td>
-      <Td>{client.address.brook}</Td>
+      <Td>{client.address?.brook}</Td>
       <Td>{formatCurrency(client.balance)}</Td>
     </Tr>
   )

@@ -5,7 +5,7 @@ import HeaderBreadcrumbs from '../../../../../shared/components/layout/Header/He
 import ClientTransferForm from '../../../components/Client/Transfer/Form'
 import { formValuesToServiceValuesAdapter } from '../../../components/Client/Transfer/Form/formValuesToServiceValuesAdapter'
 import { type ClientTransferFormValues } from '../../../components/Client/Transfer/Form/types'
-import { ClientService } from '../../../service/ClientService'
+import { ClientService } from '../../../service'
 
 export default function ClientTransferView(): JSX.Element {
   async function handleSubmitTransfer(values: ClientTransferFormValues): Promise<void> {

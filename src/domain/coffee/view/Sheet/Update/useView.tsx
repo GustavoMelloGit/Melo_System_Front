@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
-import { updateSheetService, useGetSheetService } from '../../../services/Sheets'
+import { SheetService, useGetSheetService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
 
@@ -17,7 +17,7 @@ export default function useUpdateSheetView(): UseUpdateSheetView {
 
     const { number, ...rest } = values
 
-    const { error } = await updateSheetService(bookNumber, sheetNumber, {
+    const { error } = await SheetService.update(bookNumber, sheetNumber, {
       ...rest,
       ...(values.number !== Number(sheetNumber) && { number: values.number }),
     })

@@ -25,7 +25,7 @@ import {
 } from '../../../../../../../../lib/utils/math'
 import Modal from '../../../../../../../../shared/components/Modal'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { ClientService } from '../../../../../../service/ClientService'
+import { ClientService } from '../../../../../../service'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
 import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
 import { useFeeStore } from '../../stores/useFeeStore'

@@ -5,7 +5,7 @@ import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
 import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { PickupEmitter } from '../../events/pickup'
-import { useGetPickupOrdersService } from '../../services/Pickup/get'
+import { useGetPickupOrdersService } from '../../services/Pickup'
 import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
 
 const initialStatus = PickupCoffeeStatuses.PENDING

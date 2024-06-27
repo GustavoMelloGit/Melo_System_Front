@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { PaginationParams } from '../../../../../lib/constants/pagination'
-import { createSheetService, useGetSheetsService } from '../../../services/Sheets'
+import { SheetService, useGetSheetsService } from '../../../services/Sheets'
 import { type SheetFormValues } from '../../../types/model/sheet'
 import { formatCoffeeDetails } from '../../../utils/Sheet'
 
@@ -19,7 +19,7 @@ export default function useCreateSheetView({ bookNumber }: Props): UseCreateShee
     const formattedCoffeeDetails = formatCoffeeDetails(values.coffeeDetails)
     values.coffeeDetails = formattedCoffeeDetails
 
-    const { error } = await createSheetService(values, clientId, bookNumber)
+    const { error } = await SheetService.create(values, clientId, bookNumber)
     if (error) {
       toast.error(error)
       throw new Error(error)

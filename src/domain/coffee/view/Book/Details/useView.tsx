@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom'
 import { getDefaultSortParams } from '../../../../../lib/utils/utils'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import { SheetsEmitter } from '../../../events/sheets'
-import { deleteSheetService } from '../../../services/Sheets/delete'
-import { useGetSheetsService } from '../../../services/Sheets/get'
+import { SheetService, useGetSheetsService } from '../../../services/Sheets'
 import { type SheetModel } from '../../../types/model/sheet'
 
 export default function useBookDetailsView(): UseBookDetailsView {
@@ -20,7 +19,7 @@ export default function useBookDetailsView(): UseBookDetailsView {
   const handleDeleteSheet = useCallback(
     async (sheetNumber: number): Promise<void> => {
       if (!number) return
-      const { error } = await deleteSheetService(sheetNumber, number)
+      const { error } = await SheetService.delete(sheetNumber, number)
 
       if (error) {
         toast.error(error)

@@ -5,7 +5,7 @@ import { normalize } from '../../../../../lib/utils/normalize'
 import { sortObjectProperties } from '../../../../../lib/utils/sortObjectProperties'
 import IconButton from '../../../../../shared/components/IconButton'
 import { PickupEmitter } from '../../../events/pickup'
-import { useGetPickupOrdersService } from '../../../services/Pickup/get'
+import { useGetPickupOrdersService } from '../../../services/Pickup'
 import PickupPDFTemplate from './Template'
 import { type PickupPDFData } from './types'
 

@@ -2,27 +2,21 @@ import useFetch, { type UseFetch } from '../../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { type SheetModel } from '../../types/model/sheet'
+import { GetSheetInputDto, GetSheetsInputDto } from './SheetService.dto'
 
-type GetSheetServicesData = {
-  bookNumber?: string | number
-  params?: string
-}
 export function useGetSheetsService({
   bookNumber,
   params,
-}: GetSheetServicesData): SWRServiceResponse<GetListResponse<SheetModel[]>> {
-  const response = useFetch<GetListResponse<SheetModel[]>>(
-    `/sheets?${bookNumber ? `bookNumber=${bookNumber}&` : ''}${params ?? ''}`,
-  )
+}: GetSheetsInputDto): SWRServiceResponse<GetListResponse<SheetModel[]>> {
+  const searchParams = new URLSearchParams(params)
+  if (bookNumber) searchParams.append('bookNumber', String(bookNumber))
+
+  const response = useFetch<GetListResponse<SheetModel[]>>(`/sheets?${searchParams.toString()}`)
 
   return response
 }
 
-type GetSheetServiceData = {
-  sheetNumber: string | number
-  bookNumber: string | number
-}
-export function useGetSheetService(data?: GetSheetServiceData): UseFetch<SheetModel, any> {
+export function useGetSheetService(data?: GetSheetInputDto): UseFetch<SheetModel, any> {
   const response = useFetch<SheetModel>(
     data ? `/sheet/${data.bookNumber}/${data.sheetNumber}` : null,
   )

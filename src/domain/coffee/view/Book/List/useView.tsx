@@ -5,7 +5,7 @@ import { getDefaultSortParams } from '../../../../../lib/utils/utils'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { useGetBooksService } from '../../../services/Book/get'
+import { useGetBooksService } from '../../../services/Book/BookService.hooks'
 import { type BookModel } from '../../../types/model/book'
 
 export default function useCoffeeBookView(): UseCoffeeBookView {

@@ -2,8 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
 import { type ClientFormValues } from '../../../components/Client/Form/types'
-import { ClientService } from '../../../service/ClientService'
-import { useGetClientService } from '../../../service/ClientService.hooks'
+import { ClientService, useGetClientService } from '../../../service'
 
 export default function useUpdateClientView(): UseUpdateClientView {
   const { uuid } = useParams()

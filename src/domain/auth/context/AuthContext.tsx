@@ -9,8 +9,7 @@ import {
 import { toast } from 'react-hot-toast'
 import { setAuthToken } from '../../../lib/config/api'
 import StorageManager from '../../../lib/utils/StorageManager'
-import { AuthService } from '../service/AuthService'
-import { type SignInInputDto } from '../service/AuthService.dto'
+import { AuthService, SignInInputDto } from '../service'
 import { type UserModel } from '../types/user'
 
 export type AuthContextType = {

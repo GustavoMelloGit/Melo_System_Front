@@ -1,6 +1,6 @@
 import { useModal } from '../../../../shared/hooks/useModal'
 import useServiceParams from '../../../../shared/hooks/useServiceParams'
-import { useGetFertilizersService } from '../../services/get'
+import { useGetFertilizersService } from '../../services'
 
 export default function useFertilizerListView(): UseFertilizerListView {
   const params = useServiceParams()

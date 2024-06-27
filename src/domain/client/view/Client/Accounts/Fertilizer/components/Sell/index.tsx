@@ -1,4 +1,4 @@
-import { useGetClientService } from '../../../../../../service/ClientService.hooks'
+import { useGetClientService } from '../../../../../../service'
 import useSellFertilizerView from './useView'
 import SellFertilizerView from './View'
 

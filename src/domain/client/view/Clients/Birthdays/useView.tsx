@@ -1,6 +1,6 @@
 import { PaginationParams } from '../../../../../lib/constants/pagination'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { useGetBirthdaysService } from '../../../service/ClientService.hooks'
+import { useGetBirthdaysService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 const currentMonth = new Date().getMonth() + 1

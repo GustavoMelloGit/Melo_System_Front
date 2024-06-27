@@ -5,11 +5,7 @@ import { logger } from '../../../../../lib/utils/Logger'
 import IconButton from '../../../../../shared/components/IconButton'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useRenderPDF from '../../../../../shared/hooks/useRenderPDF'
-import { ClientService } from '../../../service/ClientService'
-import {
-  type ClientAccount,
-  type ResponseByClientAccount,
-} from '../../../service/ClientService.dto'
+import { ClientService, type ClientAccount, type ResponseByClientAccount } from '../../../service'
 import PickDateModal, { type PickDateFormValues } from './PickDateModal'
 
 type Props<T extends ClientAccount> = {

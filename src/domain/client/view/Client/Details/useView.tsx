@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { type KeyedMutator } from 'swr'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { useGetClientService } from '../../../service/ClientService.hooks'
+import { useGetClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientDetailsView(): UseClientDetailsView {

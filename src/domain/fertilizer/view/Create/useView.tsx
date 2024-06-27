@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 import { useModal } from '../../../../shared/hooks/useModal'
-import { createFertilizerService } from '../../services/post'
+import { FertilizerService } from '../../services'
 import { type FertilizerFormValues } from '../../types/model/Fertilizer'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export default function useCreateFertilizerView({ onSuccess }: Props): UseCreateFertilizerView {
   const closeModal = useModal((state) => state.closeModal)
   async function handleAddFertilizer(values: FertilizerFormValues): Promise<void> {
-    const { error } = await createFertilizerService(values)
+    const { error } = await FertilizerService.create(values)
     if (error) {
       toast.error(error)
       return
