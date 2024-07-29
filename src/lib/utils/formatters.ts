@@ -30,9 +30,7 @@ export function formatDate(unformattedDate: string, showTime: boolean = true): s
  * @returns {string} a string with the value formatted to BRL currency.
  */
 export function formatCurrency(value: number | undefined): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
-    value ? centsToCurrency(value) : 0,
-  )
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value ?? 0)
 }
 
 /**
