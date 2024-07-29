@@ -66,12 +66,12 @@ export function formatBagsIntoWeight(bags: number, weight?: number): number {
 }
 
 export function centsToCurrency(valueInCents: number): number {
-  const correctValueInCents = currency(valueInCents).divide(100).intValue
+  const correctValueInCents = currency(valueInCents).divide(100).value
   return correctValueInCents
 }
 
 export function currencyToCents(valueInCurrency: number): number {
-  const correctValueInCurrency = currency(valueInCurrency).multiply(100).intValue
+  const correctValueInCurrency = currency(valueInCurrency).multiply(100).value
   return correctValueInCurrency
 }
 
