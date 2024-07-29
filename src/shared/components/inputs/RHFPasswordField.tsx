@@ -15,14 +15,12 @@ import {
   type FieldValues,
   get,
   type Path,
-  type RegisterOptions,
   type UseFormRegister,
 } from 'react-hook-form'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
   register: UseFormRegister<TFormValues>
   errors?: Partial<DeepMap<TFormValues, FieldError>>
   label?: string
@@ -30,7 +28,6 @@ export type FormInputProps<TFormValues extends FieldValues> = {
 
 const RHFPasswordField = <TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   register,
   errors,
   label,
@@ -53,7 +50,7 @@ const RHFPasswordField = <TFormValues extends Record<string, unknown>>({
           rounded='xl'
           type={isVisible ? 'text' : 'password'}
           fontWeight={500}
-          {...register(name, rules)}
+          {...register(name)}
           {...rest}
         />
         <InputRightElement>

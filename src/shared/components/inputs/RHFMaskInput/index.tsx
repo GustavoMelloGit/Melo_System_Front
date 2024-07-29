@@ -7,18 +7,11 @@ import {
   InputLeftElement,
   type InputProps,
 } from '@chakra-ui/react'
-import {
-  get,
-  type FieldValues,
-  type Path,
-  type RegisterOptions,
-  type UseFormRegister,
-} from 'react-hook-form'
+import { get, type FieldValues, type Path, type UseFormRegister } from 'react-hook-form'
 import { IMaskInput } from 'react-imask'
 
 export type RHFMaskInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
   register: UseFormRegister<TFormValues>
   errors?: unknown
   leftIcon?: React.ReactNode
@@ -29,7 +22,6 @@ export type RHFMaskInputProps<TFormValues extends FieldValues> = {
 
 export default function RHFMaskInput<TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   register,
   errors,
   leftIcon,
@@ -49,8 +41,8 @@ export default function RHFMaskInput<TFormValues extends Record<string, unknown>
           variant='filled'
           rounded='xl'
           fontWeight={500}
-          {...register(name, rules)}
-          inputRef={register(name, rules).ref}
+          {...register(name)}
+          inputRef={register(name).ref}
           onAccept={(value: string) => {
             setValue?.(value)
           }}

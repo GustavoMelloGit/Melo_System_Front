@@ -10,17 +10,10 @@ import {
   type InputGroupProps,
   type InputProps,
 } from '@chakra-ui/react'
-import {
-  Controller,
-  type Control,
-  type FieldValues,
-  type Path,
-  type RegisterOptions,
-} from 'react-hook-form'
+import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form'
 
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
-  rules?: RegisterOptions
   control: Control<TFormValues, any>
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
@@ -31,7 +24,6 @@ export type FormInputProps<TFormValues extends FieldValues> = {
 
 export default function RHFCurrencyInput<TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   control,
   leftIcon,
   rightIcon,
@@ -58,7 +50,6 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
     <Controller
       name={name}
       control={control}
-      rules={rules}
       render={({ field: { onChange, value, ...field }, fieldState: { invalid, error } }) => (
         <FormControl isInvalid={invalid}>
           {label && (
