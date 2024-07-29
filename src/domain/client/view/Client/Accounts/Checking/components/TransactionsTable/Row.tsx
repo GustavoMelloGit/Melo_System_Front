@@ -2,7 +2,7 @@ import { HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-
 import { useMemo } from 'react'
 import { shallow } from 'zustand/shallow'
 import {
-  currencyValueCorrection,
+  centsToCurrency,
   dateToFormat,
   formatCurrency,
 } from '../../../../../../../../lib/utils/formatters'
@@ -30,7 +30,7 @@ export default function TransactionsListRow({
     [transaction.id, selectedTransactions],
   )
   const valueSelected = transactionSelected?.amount
-  const clientBalance = currencyValueCorrection(transaction.clientBalance)
+  const clientBalance = centsToCurrency(transaction.clientBalance)
 
   const handleSelectFee = (amount: number): void => {
     if (!selectionMode) return

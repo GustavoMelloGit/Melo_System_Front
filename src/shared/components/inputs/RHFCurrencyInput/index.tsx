@@ -17,6 +17,7 @@ import {
   type Path,
   type RegisterOptions,
 } from 'react-hook-form'
+import { centsToCurrency, currencyToCents } from '../../../../lib/utils/formatters'
 
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
@@ -44,7 +45,7 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
   function formatCurrency(value: string): string {
     const options = { minimumFractionDigits: 2 }
     const result = new Intl.NumberFormat('pt-BR', options).format(parseFloat(value) / 100)
-    onChangeValue?.(+value / 100)
+    onChangeValue?.(centsToCurrency(+value))
     if (result === 'NaN') {
       return '0,00'
     }
@@ -78,11 +79,11 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
               rounded='xl'
               inputMode='numeric'
               fontWeight={500}
-              value={formatCurrency((+value * 100).toString())}
+              value={formatCurrency(currencyToCents(+value).toString())}
               onChange={async (event) => {
                 const { value } = event.target
                 const onlyNumbers = value.replace('.', '').replace(',', '').replace(/\D/g, '')
-                onChange(+onlyNumbers / 100)
+                onChange(centsToCurrency(+onlyNumbers))
               }}
               {...field}
               {...rest}

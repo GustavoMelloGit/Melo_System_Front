@@ -12,13 +12,12 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
-import currency from 'currency.js'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { CoffeeTypeHasBebida } from '../../../../../../../../lib/constants/coffee'
 import { validationErrors } from '../../../../../../../../lib/errors'
-import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
+import { currencyToCents, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import objectEntries from '../../../../../../../../lib/utils/objectEntries'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
@@ -79,7 +78,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
       onSubmit={handleSubmit(async ({ valuePerBag, brook, complement, ...values }) => {
         await onSubmit({
           ...values,
-          valuePerBag: currency(valuePerBag).multiply(100).value,
+          valuePerBag: currencyToCents(valuePerBag),
           ...(pickupCoffee && {
             complement,
             brook,
@@ -163,7 +162,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               id='totalValue'
               variant='filled'
               rounded='xl'
-              value={formatCurrency(totalValue * 100)}
+              value={formatCurrency(currencyToCents(totalValue))}
             />
           </FormControl>
         </GridItem>
