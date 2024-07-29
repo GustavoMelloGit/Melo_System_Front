@@ -2,9 +2,9 @@ import { HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-
 import { useMemo } from 'react'
 import { shallow } from 'zustand/shallow'
 import {
-    centsToCurrency,
-    dateToFormat,
-    formatCurrency,
+  centsToCurrency,
+  dateToFormat,
+  formatCurrency,
 } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'

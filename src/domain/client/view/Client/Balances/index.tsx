@@ -1,11 +1,11 @@
 import { Divider, Flex, Heading, Stack, Text } from '@chakra-ui/layout'
 import {
-    Accordion,
-    AccordionButton,
-    AccordionIcon,
-    AccordionItem,
-    AccordionPanel,
-    Skeleton,
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Skeleton,
 } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { Fragment } from 'react'
