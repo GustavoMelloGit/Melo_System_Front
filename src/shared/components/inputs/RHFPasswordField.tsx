@@ -30,7 +30,6 @@ export type FormInputProps<TFormValues extends FieldValues> = {
 
 const RHFPasswordField = <TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   register,
   errors,
   label,
@@ -53,7 +52,7 @@ const RHFPasswordField = <TFormValues extends Record<string, unknown>>({
           rounded='xl'
           type={isVisible ? 'text' : 'password'}
           fontWeight={500}
-          {...register(name, rules)}
+          {...register(name)}
           {...rest}
         />
         <InputRightElement>

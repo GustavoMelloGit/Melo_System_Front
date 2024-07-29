@@ -26,7 +26,6 @@ export type RHFTextFieldProps<TFormValues extends FieldValues> = {
 
 export default function RHFTextField<TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   register,
   errors,
   leftIcon,
@@ -44,7 +43,7 @@ export default function RHFTextField<TFormValues extends Record<string, unknown>
           variant='filled'
           rounded='xl'
           fontWeight={500}
-          {...register(name, rules)}
+          {...register(name)}
           {...rest}
         />
       </InputGroup>

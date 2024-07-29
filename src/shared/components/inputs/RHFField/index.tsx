@@ -30,7 +30,6 @@ export type FormInputProps<TFormValues extends FieldValues> = {
 
 const RHFField = <TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   register,
   errors,
   leftIcon,
@@ -50,7 +49,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
           variant='filled'
           rounded='xl'
           fontWeight={500}
-          {...register(name, rules)}
+          {...register(name)}
           {...rest}
         />
         {rightIcon && <InputRightElement>{rightIcon}</InputRightElement>}

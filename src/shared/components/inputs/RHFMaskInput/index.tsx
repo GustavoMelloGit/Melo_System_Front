@@ -29,7 +29,6 @@ export type RHFMaskInputProps<TFormValues extends FieldValues> = {
 
 export default function RHFMaskInput<TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   register,
   errors,
   leftIcon,
@@ -49,8 +48,8 @@ export default function RHFMaskInput<TFormValues extends Record<string, unknown>
           variant='filled'
           rounded='xl'
           fontWeight={500}
-          {...register(name, rules)}
-          inputRef={register(name, rules).ref}
+          {...register(name)}
+          inputRef={register(name).ref}
           onAccept={(value: string) => {
             setValue?.(value)
           }}

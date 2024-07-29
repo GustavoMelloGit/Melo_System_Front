@@ -31,7 +31,6 @@ export type FormInputProps<TFormValues extends FieldValues> = {
 
 export default function RHFCurrencyInput<TFormValues extends Record<string, unknown>>({
   name,
-  rules,
   control,
   leftIcon,
   rightIcon,
@@ -58,7 +57,6 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
     <Controller
       name={name}
       control={control}
-      rules={rules}
       render={({ field: { onChange, value, ...field }, fieldState: { invalid, error } }) => (
         <FormControl isInvalid={invalid}>
           {label && (
