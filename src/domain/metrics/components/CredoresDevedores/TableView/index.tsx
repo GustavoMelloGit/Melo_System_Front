@@ -1,5 +1,9 @@
 import { Td, Tr } from '@chakra-ui/react'
-import { formatCurrency } from '../../../../../lib/utils/formatters'
+import {
+  centsToCurrency,
+  currencyToCents,
+  formatCurrency,
+} from '../../../../../lib/utils/formatters'
 import CurrencyInput from '../../../../../shared/components/inputs/CurrencyInput'
 import Table from '../../../../../shared/components/table/Table'
 import {
@@ -68,9 +72,9 @@ const searchForOptions: SearchForOption = {
       return (
         <CurrencyInput
           {...field}
-          initialValue={Number(value) / 100}
+          initialValue={centsToCurrency(Number(value))}
           setValue={(value) => {
-            onChange(String(value * 100))
+            onChange(String(currencyToCents(value)))
           }}
         />
       )

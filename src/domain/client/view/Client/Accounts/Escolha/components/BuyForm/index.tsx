@@ -112,7 +112,7 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
               id='totalValue'
               variant='filled'
               rounded='xl'
-              value={formatCurrency(totalValue * 100)}
+              value={formatCurrency(currencyToCents(totalValue))}
             />
           </FormControl>
         </GridItem>
