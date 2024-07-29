@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast'
 import {
-  currencyValueCorrection,
-  formatBagsIntoWeight,
+    centsToCurrency,
+    formatBagsIntoWeight,
 } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
@@ -19,7 +19,7 @@ const useBuyCoffeeView = ({ clientId }: Props): UseBuyCoffeeView => {
 
   async function handleBuyCoffee(formValues: BuyCoffeeFormValues): Promise<void> {
     const { bags, weight, ...values } = formValues
-    const totalValue = currencyValueCorrection(
+    const totalValue = centsToCurrency(
       calculateCoffeeTotalValue(bags, weight, values.valuePerBag),
     )
     const { error } = await buyCoffeeService({
