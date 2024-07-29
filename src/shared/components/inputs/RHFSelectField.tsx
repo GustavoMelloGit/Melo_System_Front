@@ -32,6 +32,7 @@ export type RHFSelectFieldProps<TFormValues extends FieldValues> = {
 
 export default function RHFSelectField<TFormValues extends Record<string, unknown>>({
   name,
+  rules,
   register,
   errors,
   leftIcon,
@@ -46,7 +47,7 @@ export default function RHFSelectField<TFormValues extends Record<string, unknow
       {label && <FormLabel>{label}</FormLabel>}
       <InputGroup>
         {leftIcon && <InputLeftElement pointerEvents='none'>{leftIcon}</InputLeftElement>}
-        <Select variant='filled' rounded='xl' fontWeight={500} {...register(name)} {...rest}>
+        <Select variant='filled' rounded='xl' fontWeight={500} {...register(name, rules)} {...rest}>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
