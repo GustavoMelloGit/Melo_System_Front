@@ -2,11 +2,7 @@ import { Td, Tr } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { format } from 'date-fns'
 import { Routes } from '../../../../../lib/routes'
-import {
-  centsToCurrency,
-  formatClientName,
-  formatCurrency,
-} from '../../../../../lib/utils/formatters'
+import { formatClientName, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Link from '../../../../../shared/components/Link'
 import { type CoffeePriceMetrics } from '../../../types/buyCoffeeMetrics'
@@ -24,7 +20,7 @@ export default function CoffeePriceMetricsTableViewRow({ metric }: Props): JSX.E
       </Td>
       <Td>{capitalCase(coffeeType)}</Td>
       <Td>{capitalCase(bebida)}</Td>
-      <Td>{formatCurrency(centsToCurrency(valuePerBag))}</Td>
+      <Td>{formatCurrency(valuePerBag)}</Td>
       <Td>{getNumberOfBags(weight)}</Td>
     </Tr>
   )

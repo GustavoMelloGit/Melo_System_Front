@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { format } from 'date-fns'
-import { centsToCurrency, formatCurrency } from '../../../../../../../../lib/utils/formatters'
+import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import PDFContainer from '../../../../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../../../../shared/components/PDF/PDFTable'
@@ -72,10 +72,10 @@ export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.El
                 <Text>{metric.description}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem style={{ maxWidth: 80 }}>
-                <Text>{formatCurrency(centsToCurrency(metric.type.value))}</Text>
+                <Text>{formatCurrency(metric.type.value)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem style={{ maxWidth: 80 }}>
-                <Text>{formatCurrency(centsToCurrency(metric.clientBalance))}</Text>
+                <Text>{formatCurrency(metric.clientBalance)}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}

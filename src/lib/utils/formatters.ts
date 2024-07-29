@@ -30,7 +30,9 @@ export function formatDate(unformattedDate: string, showTime: boolean = true): s
  * @returns {string} a string with the value formatted to BRL currency.
  */
 export function formatCurrency(value: number | undefined): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value ?? 0)
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
+    value ? value / 100 : 0,
+  )
 }
 
 /**
@@ -63,31 +65,9 @@ export function formatBagsIntoWeight(bags: number, weight?: number): number {
   return Number(bags * GlobalConfig.weightPerBag + (weight ?? 0))
 }
 
-/**
- * The function `centsToCurrency` converts a value in cents to a currency value.
- * @param {number} valueInCents - The `valueInCents` parameter represents an amount of money in cents
- * that you want to convert to a currency value. The `centsToCurrency` function takes this value in
- * cents and converts it to a currency value by dividing it by 100. The result is then returned as the
- * correct currency
- * @returns The function `centsToCurrency` is returning the value of `correctValueInCents`, which is
- * the input `valueInCents` converted to a currency value.
- */
-export function centsToCurrency(valueInCents: number): number {
-  const correctValueInCents = currency(valueInCents).divide(100).value
+export function currencyValueCorrection(valueInCents: number): number {
+  const correctValueInCents = currency(valueInCents).divide(100).intValue
   return correctValueInCents
-}
-
-/**
- * The function `currencyToCents` converts a currency value to cents by multiplying it by 100.
- * @param {number} valueInCurrency - The `valueInCurrency` parameter represents a monetary value in a
- * specific currency format. The `currencyToCents` function takes this value and converts it into cents
- * by multiplying it by 100. The result is then returned as an integer representing the value in cents.
- * @returns The function `currencyToCents` takes a value in currency as input, converts it to cents,
- * and returns the value in cents.
- */
-export function currencyToCents(valueInCurrency: number): number {
-  const correctValueInCurrency = currency(valueInCurrency).multiply(100).value
-  return correctValueInCurrency
 }
 
 export function formatRequestParams(

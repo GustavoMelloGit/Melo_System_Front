@@ -23,7 +23,6 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
-import { currencyToCents } from '../../../../../../../../lib/utils/formatters'
 import Modal from '../../../../../../../../shared/components/Modal'
 import ControllerAutocomplete from '../../../../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
@@ -81,7 +80,7 @@ const SellFertilizerView = ({ onClose, initialValues, onSubmit }: Props): JSX.El
                 ...values,
                 ...(shouldDelivery && { brook, complement }),
                 bags: Number(bags),
-                pricePerBag: currencyToCents(pricePerBag),
+                pricePerBag: pricePerBag * 100,
                 deliveryDate: dateInputToApiDate(deliveryDate),
               }),
             )}

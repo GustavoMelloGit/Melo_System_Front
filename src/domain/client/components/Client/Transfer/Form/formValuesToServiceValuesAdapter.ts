@@ -1,4 +1,7 @@
-import { currencyToCents, formatBagsIntoWeight } from '../../../../../../lib/utils/formatters'
+import {
+  currencyValueCorrection,
+  formatBagsIntoWeight,
+} from '../../../../../../lib/utils/formatters'
 import {
   type ServiceTransferType,
   type TransferBetweenClientsReferralData,
@@ -19,7 +22,7 @@ const getValueBasedOnType = (referralData: ReferralTransfer): number => {
       value = formatBagsIntoWeight(Number(referralData.bags), Number(referralData.weight))
       break
     case 'currency':
-      value = currencyToCents(Number(referralData.value))
+      value = currencyValueCorrection(Number(referralData.value) * 100)
       break
     default:
       value = 0

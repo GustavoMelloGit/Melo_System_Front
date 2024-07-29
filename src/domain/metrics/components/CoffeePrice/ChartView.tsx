@@ -1,7 +1,7 @@
 import { type ApexOptions } from 'apexcharts'
+import currency from 'currency.js'
 import { format } from 'date-fns'
 import Chart from 'react-apexcharts'
-import { centsToCurrency } from '../../../../lib/utils/formatters'
 import { type GetTransactionMetricsResponse } from '../../types/transactionMetrics'
 
 type Props = {
@@ -19,7 +19,9 @@ export default function ChartView({ data }: Props): JSX.Element {
   const series: ApexAxisChartSeries | ApexNonAxisChartSeries = [
     {
       name: 'test',
-      data: data.data.map((transaction) => centsToCurrency(transaction.props.type.value)),
+      data: data.data.map(
+        (transaction) => currency(transaction.props.type.value).divide(100).value,
+      ),
     },
   ]
   return <Chart options={options} series={series} />
