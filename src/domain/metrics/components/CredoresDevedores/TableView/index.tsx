@@ -41,7 +41,9 @@ export default function CredoresDevedoresMetricsTableView({ data, isLoading }: P
             <Td>TOTAL</Td>
             <Td></Td>
             <Td></Td>
-            <Td>{formatCurrency(data.reduce((acc, curr) => acc + curr.balance, 0))}</Td>
+            <Td>
+              {formatCurrency(centsToCurrency(data.reduce((acc, curr) => acc + curr.balance, 0)))}
+            </Td>
           </Tr>
         ) : null
       }

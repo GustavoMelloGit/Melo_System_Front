@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
-import { formatCurrency } from '../../../../../lib/utils/formatters'
+import { centsToCurrency, formatCurrency } from '../../../../../lib/utils/formatters'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../shared/components/PDF/PDFTable'
@@ -74,7 +74,7 @@ export default function CredoresDevedoresMetricsTemplate({ data }: Props): JSX.E
                 <Text>{metric.address?.brook}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{formatCurrency(metric.balance)}</Text>
+                <Text>{formatCurrency(centsToCurrency(metric.balance))}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}
@@ -85,7 +85,9 @@ export default function CredoresDevedoresMetricsTemplate({ data }: Props): JSX.E
             <PDFTableRowItem></PDFTableRowItem>
             <PDFTableRowItem></PDFTableRowItem>
             <PDFTableRowItem>
-              <Text>{formatCurrency(data.reduce((acc, curr) => acc + curr.balance, 0))}</Text>
+              <Text>
+                {formatCurrency(centsToCurrency(data.reduce((acc, curr) => acc + curr.balance, 0)))}
+              </Text>
             </PDFTableRowItem>
           </PDFTableRow>
         </View>

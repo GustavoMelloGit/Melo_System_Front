@@ -1,7 +1,11 @@
 import { HStack, Td, Tr, useColorModeValue, type TableCellProps } from '@chakra-ui/react'
 import { useMemo } from 'react'
 import { shallow } from 'zustand/shallow'
-import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
+import {
+  centsToCurrency,
+  dateToFormat,
+  formatCurrency,
+} from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import MoreInfoTooltip from '../../../../../../../../shared/components/MoreInfoTooltip'
 import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
@@ -56,14 +60,14 @@ export default function TransactionsListRow({
         whiteSpace='nowrap'
         textAlign='center'
       >
-        {formatCurrency(transaction.type.value)}
+        {formatCurrency(centsToCurrency(transaction.type.value))}
       </Td>
       <Td
         {...selectableColumnsProps(transaction.clientBalance)}
         whiteSpace='nowrap'
         textAlign='center'
       >
-        {formatCurrency(transaction.clientBalance)}
+        {formatCurrency(centsToCurrency(transaction.clientBalance))}
       </Td>
       <Td>
         <HStack w='full' justify='center'>

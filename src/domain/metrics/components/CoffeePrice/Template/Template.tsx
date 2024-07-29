@@ -1,7 +1,11 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { capitalCase } from 'change-case'
 import { format } from 'date-fns'
-import { formatClientName, formatCurrency } from '../../../../../lib/utils/formatters'
+import {
+  centsToCurrency,
+  formatClientName,
+  formatCurrency,
+} from '../../../../../lib/utils/formatters'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
@@ -86,7 +90,7 @@ export default function CoffeePriceMetricsTemplate({ data }: Props): JSX.Element
                 <Text>{capitalCase(metric.bebida)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{formatCurrency(metric.valuePerBag)}</Text>
+                <Text>{formatCurrency(centsToCurrency(metric.valuePerBag))}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
                 <Text>{getNumberOfBags(metric.weight)}</Text>
