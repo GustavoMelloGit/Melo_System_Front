@@ -8,6 +8,7 @@ import {
   type InputProps,
 } from '@chakra-ui/react'
 import { forwardRef, useState } from 'react'
+import { Currency } from '../../../../lib/utils/Currency'
 
 type CurrencyInputProps = Omit<InputProps, 'value'> & {
   leftIcon?: React.ReactNode
@@ -43,7 +44,7 @@ const CurrencyInput = forwardRef<HTMLDivElement, CurrencyInputProps>(
             rounded='xl'
             inputMode='numeric'
             fontWeight={500}
-            value={formatCurrency(String(inputValue * 100))}
+            value={formatCurrency(String(Currency.currencyToCents(inputValue)))}
             onChange={async (event) => {
               const { value } = event.target
               const onlyNumbers = value.replace('.', '').replace(',', '').replace(/\D/g, '')

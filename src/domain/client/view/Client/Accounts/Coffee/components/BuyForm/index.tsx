@@ -18,6 +18,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { CoffeeTypeHasBebida } from '../../../../../../../../lib/constants/coffee'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import { Currency } from '../../../../../../../../lib/utils/Currency'
 import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import objectEntries from '../../../../../../../../lib/utils/objectEntries'
@@ -163,7 +164,7 @@ const BuyCoffeeFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
               id='totalValue'
               variant='filled'
               rounded='xl'
-              value={formatCurrency(totalValue * 100)}
+              value={formatCurrency(Currency.currencyToCents(totalValue))}
             />
           </FormControl>
         </GridItem>

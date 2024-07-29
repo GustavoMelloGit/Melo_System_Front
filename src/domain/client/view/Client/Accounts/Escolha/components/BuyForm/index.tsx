@@ -16,6 +16,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import { Currency } from '../../../../../../../../lib/utils/Currency'
 import { formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeValuePerWeight } from '../../../../../../../../lib/utils/math'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
@@ -113,7 +114,7 @@ const BuyEscolhaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => 
               id='totalValue'
               variant='filled'
               rounded='xl'
-              value={formatCurrency(totalValue * 100)}
+              value={formatCurrency(Currency.currencyToCents(totalValue))}
             />
           </FormControl>
         </GridItem>

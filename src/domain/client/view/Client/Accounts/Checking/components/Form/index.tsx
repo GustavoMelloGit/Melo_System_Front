@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { validationErrors } from '../../../../../../../../lib/errors'
+import { Currency } from '../../../../../../../../lib/utils/Currency'
 import ControllerField from '../../../../../../../../shared/components/inputs/ControllerField'
 import RHFCurrencyInput from '../../../../../../../../shared/components/inputs/RHFCurrencyInput'
 import { type CheckingAccountFormValues } from '../../../../../../types/model/CheckingAccount'
@@ -38,7 +39,7 @@ export default function CheckingAccountForm({
   return (
     <form
       onSubmit={handleSubmit(async ({ value, ...values }) => {
-        const valueInCents = Math.round(value * 100)
+        const valueInCents = Currency.currencyToCents(value)
         const convertedValue = isDebit ? -valueInCents : valueInCents
         await onSubmit({ ...values, value: convertedValue })
       })}
