@@ -69,7 +69,7 @@ const searchForOptions: SearchForOption = {
       return (
         <CurrencyInput
           {...field}
-          initialValue={Number(value) / 100}
+          initialValue={Currency.centsToCurrency(Number(value))}
           setValue={(value) => {
             onChange(String(Currency.currencyToCents(value)))
           }}
