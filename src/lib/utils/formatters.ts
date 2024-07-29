@@ -65,9 +65,14 @@ export function formatBagsIntoWeight(bags: number, weight?: number): number {
   return Number(bags * GlobalConfig.weightPerBag + (weight ?? 0))
 }
 
-export function currencyValueCorrection(valueInCents: number): number {
+export function centsToCurrency(valueInCents: number): number {
   const correctValueInCents = currency(valueInCents).divide(100).intValue
   return correctValueInCents
+}
+
+export function currencyToCents(valueInCurrency: number): number {
+  const correctValueInCurrency = currency(valueInCurrency).multiply(100).intValue
+  return correctValueInCurrency
 }
 
 export function formatRequestParams(

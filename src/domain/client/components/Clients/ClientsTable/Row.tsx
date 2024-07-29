@@ -2,7 +2,7 @@ import { Avatar, HStack, Td } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Routes } from '../../../../../lib/routes'
-import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
+import { centsToCurrency, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import IconButton from '../../../../../shared/components/IconButton'
 import LinkRow from '../../../../../shared/components/table/LinkRow'
@@ -17,7 +17,7 @@ export default function ClientsTableRow({ client, onRemove }: ClientsTableRowPro
   function handleToggleBalance(): void {
     setShowBalance((prev) => !prev)
   }
-  const clientBalance = currencyValueCorrection(client.balance)
+  const clientBalance = centsToCurrency(client.balance)
 
   return (
     <LinkRow>
