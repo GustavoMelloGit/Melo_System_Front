@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer'
 import { capitalCase } from 'change-case'
-import { centsToCurrency, formatCurrency } from '../../../../../lib/utils/formatters'
+import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import PDFContainer from '../../../../../shared/components/PDF/PDFContainer'
 import PDFPaddingElement from '../../../../../shared/components/PDF/PDFPaddingElement'
@@ -67,7 +67,7 @@ export default function BuyCoffeeMetricsTemplate({ data }: Props): JSX.Element {
                 <Text>{capitalCase(metric.type)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{formatCurrency(centsToCurrency(metric.value))}</Text>
+                <Text>{formatCurrency(metric.value)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
                 <Text>{getNumberOfBags(metric.weight)}</Text>
@@ -79,9 +79,7 @@ export default function BuyCoffeeMetricsTemplate({ data }: Props): JSX.Element {
               <Text>TOTAL</Text>
             </PDFTableRowItem>
             <PDFTableRowItem>
-              <Text>
-                {formatCurrency(centsToCurrency(data.reduce((acc, curr) => acc + curr.value, 0)))}
-              </Text>
+              <Text>{formatCurrency(data.reduce((acc, curr) => acc + curr.value, 0))}</Text>
             </PDFTableRowItem>
             <PDFTableRowItem>
               <Text>{getNumberOfBags(data.reduce((acc, curr) => acc + curr.weight, 0))}</Text>

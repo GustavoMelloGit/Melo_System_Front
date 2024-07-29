@@ -17,11 +17,7 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { shallow } from 'zustand/shallow'
 import { dateInputToApiDate } from '../../../../../../../../lib/utils/date'
-import {
-  centsToCurrency,
-  dateToFormat,
-  formatCurrency,
-} from '../../../../../../../../lib/utils/formatters'
+import { dateToFormat, formatCurrency } from '../../../../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../../../../lib/utils/getColorByValue'
 import {
   calculateCompoundInterest,
@@ -127,15 +123,13 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
                       <Tr key={transaction.id}>
                         <Td>{dateToFormat(transaction.date, 'dd/MM/yyyy')}</Td>
                         <Td color={getColorByValue(transaction.amount)}>
-                          {formatCurrency(centsToCurrency(transaction.amount))}
+                          {formatCurrency(transaction.amount)}
                         </Td>
                         <Td color={getColorByValue(interestByIndex[index])}>
-                          {formatCurrency(
-                            centsToCurrency(interestByIndex[index] - transaction.amount),
-                          )}
+                          {formatCurrency(interestByIndex[index] - transaction.amount)}
                         </Td>
                         <Td color={getColorByValue(interestByIndex[index])}>
-                          {formatCurrency(centsToCurrency(interestByIndex[index]))}
+                          {formatCurrency(interestByIndex[index])}
                         </Td>
                       </Tr>
                     ))}
@@ -144,13 +138,13 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
                     <Tr fontWeight={700}>
                       <Th fontSize='md'>Total</Th>
                       <Th fontSize='md' color={getColorByValue(totalWithoutInterest)}>
-                        {formatCurrency(centsToCurrency(totalWithoutInterest))}
+                        {formatCurrency(totalWithoutInterest)}
                       </Th>
                       <Th fontSize='md' color={getColorByValue(totalOfInterest)}>
-                        {formatCurrency(centsToCurrency(totalOfInterest))}
+                        {formatCurrency(totalOfInterest)}
                       </Th>
                       <Th fontSize='md' color={getColorByValue(totalAmountWithInterest)}>
-                        {formatCurrency(centsToCurrency(totalAmountWithInterest))}
+                        {formatCurrency(totalAmountWithInterest)}
                       </Th>
                     </Tr>
                   </Tfoot>
@@ -168,7 +162,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
               }}
             >
               {totalAmountWithInterest > 0 ? 'Creditar' : 'Debitar'}{' '}
-              {formatCurrency(centsToCurrency(Math.abs(valueToTransactionBeCreated)))}
+              {formatCurrency(Math.abs(valueToTransactionBeCreated))}
             </Button>
           </VStack>
         </Modal.Body>

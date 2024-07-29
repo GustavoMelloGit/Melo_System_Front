@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { capitalCase } from 'change-case'
 import { Fragment } from 'react'
-import { centsToCurrency, formatCurrency } from '../../../../../lib/utils/formatters'
+import { currencyValueCorrection, formatCurrency } from '../../../../../lib/utils/formatters'
 import { getColorByValue } from '../../../../../lib/utils/getColorByValue'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Modal from '../../../../../shared/components/Modal'
@@ -31,7 +31,7 @@ const ClientBalancesView = ({ clientUuid }: Props): JSX.Element => {
     details: 'Detalhes',
   }
 
-  const currencyBalance = centsToCurrency(data?.balances.currency ?? 0)
+  const currencyBalance = currencyValueCorrection(data?.balances.currency ?? 0)
 
   return (
     <Modal isOpen={true} isCentered onClose={closeModal}>

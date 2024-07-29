@@ -1,9 +1,5 @@
 import { Td, Tr } from '@chakra-ui/react'
-import {
-  centsToCurrency,
-  currencyToCents,
-  formatCurrency,
-} from '../../../../../lib/utils/formatters'
+import { formatCurrency } from '../../../../../lib/utils/formatters'
 import CurrencyInput from '../../../../../shared/components/inputs/CurrencyInput'
 import Table from '../../../../../shared/components/table/Table'
 import {
@@ -41,9 +37,7 @@ export default function CredoresDevedoresMetricsTableView({ data, isLoading }: P
             <Td>TOTAL</Td>
             <Td></Td>
             <Td></Td>
-            <Td>
-              {formatCurrency(centsToCurrency(data.reduce((acc, curr) => acc + curr.balance, 0)))}
-            </Td>
+            <Td>{formatCurrency(data.reduce((acc, curr) => acc + curr.balance, 0))}</Td>
           </Tr>
         ) : null
       }
@@ -74,9 +68,9 @@ const searchForOptions: SearchForOption = {
       return (
         <CurrencyInput
           {...field}
-          initialValue={centsToCurrency(Number(value))}
+          initialValue={Number(value) / 100}
           setValue={(value) => {
-            onChange(String(currencyToCents(value)))
+            onChange(String(value * 100))
           }}
         />
       )

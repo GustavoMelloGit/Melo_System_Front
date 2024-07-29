@@ -1,5 +1,5 @@
 import { Td, Tr } from '@chakra-ui/react'
-import { centsToCurrency, formatCurrency } from '../../../../../lib/utils/formatters'
+import { formatCurrency } from '../../../../../lib/utils/formatters'
 import { getNumberOfBags } from '../../../../../lib/utils/getNumberOfBags'
 import Table from '../../../../../shared/components/table/Table'
 import { type TableHeaderColumns } from '../../../../../shared/components/table/types'
@@ -11,7 +11,6 @@ type Props = {
   isLoading: boolean
 }
 export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): JSX.Element {
-  const totalValue = data?.data.reduce((acc, curr) => acc + curr.value, 0)
   return (
     <Table
       header={{
@@ -30,7 +29,7 @@ export default function BuyCoffeeMetricsTableView({ data, isLoading }: Props): J
         data.data.length ? (
           <Tr>
             <Td>TOTAL</Td>
-            <Td>{formatCurrency(centsToCurrency(totalValue))}</Td>
+            <Td>{formatCurrency(data.data.reduce((acc, curr) => acc + curr.value, 0))}</Td>
             <Td>{getNumberOfBags(data.data.reduce((acc, curr) => acc + curr.weight, 0))}</Td>
           </Tr>
         ) : null
