@@ -2,13 +2,13 @@ import { useParams } from 'react-router-dom'
 import { type KeyedMutator } from 'swr'
 import { useModal } from '../../../../../shared/hooks/useModal'
 import useURLSearchParams from '../../../../../shared/hooks/useURLSearchParams'
-import { getClientService } from '../../../service'
+import { useGetClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientDetailsView(): UseClientDetailsView {
   const openModal = useModal((state) => state.openModal)
   const { uuid } = useParams()
-  const { data, isLoading, mutate } = getClientService(uuid ?? '')
+  const { data, isLoading, mutate } = useGetClientService(uuid ?? '')
   const { getParam } = useURLSearchParams()
   const currentTab = Number(getParam('tab')) ?? 0
 

@@ -5,7 +5,7 @@ import {
 } from '../../../../../../../../lib/utils/formatters'
 import { calculateCoffeeTotalValue } from '../../../../../../../../lib/utils/math'
 import { useModal } from '../../../../../../../../shared/hooks/useModal'
-import { getClientService } from '../../../../../../service'
+import { useGetClientService } from '../../../../../../service'
 import { CoffeeAccountEmitter } from '../../events/CoffeeAccountEmitter'
 import { buyCoffeeService } from '../../service/post'
 import { type BuyCoffeeFormValues } from '../../types'
@@ -15,7 +15,7 @@ type Props = {
 }
 const useBuyCoffeeView = ({ clientId }: Props): UseBuyCoffeeView => {
   const closeModal = useModal((state) => state.closeModal)
-  const { data } = getClientService(clientId)
+  const { data } = useGetClientService(clientId)
 
   async function handleBuyCoffee(formValues: BuyCoffeeFormValues): Promise<void> {
     const { bags, weight, ...values } = formValues

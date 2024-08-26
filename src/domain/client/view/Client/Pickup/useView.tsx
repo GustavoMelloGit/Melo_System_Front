@@ -4,13 +4,13 @@ import { type GetListResponse } from '../../../../../shared/types/service/GetLis
 import { PickupEmitter } from '../../../../coffee/events/pickup'
 import { getPickupOrdersService } from '../../../../coffee/services/Pickup/get'
 import { type PickupCoffeeModel } from '../../../../coffee/types/model/pickup'
-import { getClientService } from '../../../service'
+import { useGetClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientPickupView(): UseClientPickupView {
   const { uuid } = useParams()
   const { data: pickupData, isLoading, mutate } = getPickupOrdersService(`clientId=${uuid ?? ''}`)
-  const { data: client } = getClientService(uuid ?? '')
+  const { data: client } = useGetClientService(uuid ?? '')
 
   const refetchData = useCallback(async () => {
     await mutate()

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import DownloadButton from '../../../../../../../../shared/components/buttons/DownloadButton'
-import { getClientService } from '../../../../../../service'
+import { useGetClientService } from '../../../../../../service'
 import { type ProductTransactionModel } from '../../../../../../types/model/Transaction'
 import { ProductAccountEmitter } from '../../events/ProductAccountEmitter'
 import CoffeePriceMetricsTemplate from './Template'
@@ -11,7 +11,7 @@ type Props = {
 }
 export default function DownloadSaleButton({ transaction }: Props): JSX.Element {
   const { uuid } = useParams<'uuid'>()
-  const { data: client, mutate } = getClientService(uuid ?? '')
+  const { data: client, mutate } = useGetClientService(uuid ?? '')
 
   const refetchData = useCallback(async () => {
     await mutate()

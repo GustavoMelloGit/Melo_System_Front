@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { Routes } from '../../../../lib/routes'
 import useURLSearchParams from '../../../../shared/hooks/useURLSearchParams'
-import { getClientService } from '../../../client/service'
+import { useGetClientService } from '../../../client/service'
 import { sellFertilizerService } from '../../../client/view/Client/Accounts/Product/services/post'
 import {
   type ProductFormValues,
@@ -13,7 +13,7 @@ const useSellProductView = (): UseSellFertilizerView => {
   const { allSearchParams } = useURLSearchParams()
   const { client } = allSearchParams
   const navigate = useNavigate()
-  const { data } = getClientService(client)
+  const { data } = useGetClientService(client)
 
   async function handleSellFertilizer(values: SellProductFormValues): Promise<void> {
     if (!client) return
