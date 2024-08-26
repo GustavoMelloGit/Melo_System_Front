@@ -4,7 +4,7 @@ import { normalize } from '../../../../../lib/utils/normalize'
 import ControllerAutocomplete from '../../../../../shared/components/inputs/ControllerAutocomplete'
 import ControllerField from '../../../../../shared/components/inputs/ControllerField'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
-import { getClientsService } from '../../../../client/service/getClientsService'
+import { useGetClientsService } from '../../../../client/service'
 import { type SheetFormValues } from '../../../types/model/sheet'
 
 type Props = {
@@ -17,7 +17,7 @@ export default function SheetFormSheetDetails({ control, isDisabled }: Props): J
     name: 'clientName',
   })
   const debouncedClientName = useDebounce(clientName, 250)
-  const { data, isLoading } = getClientsService(
+  const { data, isLoading } = useGetClientsService(
     debouncedClientName ? `searchableName=${normalize(debouncedClientName)}&limit=10` : '',
     {
       revalidateOnFocus: false,

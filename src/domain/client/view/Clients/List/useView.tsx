@@ -1,8 +1,7 @@
 import { toast } from 'react-hot-toast'
 import { PaginationParams } from '../../../../../lib/constants/pagination'
 import useServiceParams from '../../../../../shared/hooks/useServiceParams'
-import { ClientService } from '../../../service'
-import { getClientsService } from '../../../service/getClientsService'
+import { ClientService, useGetClientsService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
 export default function useClientsListView(): ClientsListView {
@@ -10,7 +9,7 @@ export default function useClientsListView(): ClientsListView {
     [PaginationParams.sortBy]: 'createdAt',
     [PaginationParams.sortOrder]: 'desc',
   })
-  const { data, error, isLoading, mutate } = getClientsService(params)
+  const { data, error, isLoading, mutate } = useGetClientsService(params)
 
   async function handleRemoveClient(id: string): Promise<void> {
     const { error } = await ClientService.deleteClient(id)

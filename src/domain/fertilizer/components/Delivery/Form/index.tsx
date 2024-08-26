@@ -12,7 +12,7 @@ import ControllerField from '../../../../../shared/components/inputs/ControllerF
 import Modal from '../../../../../shared/components/Modal'
 import useDebounce from '../../../../../shared/hooks/useDebounce'
 import { useModal } from '../../../../../shared/hooks/useModal'
-import { getClientsService } from '../../../../client/service/getClientsService'
+import { useGetClientsService } from '../../../../client/service'
 import { getFertilizersService } from '../../../services/get'
 import { type FertilizerDeliveryFormValues } from '../../../types/model/Delivery'
 
@@ -48,7 +48,7 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
   const debouncedClientName = useDebounce(clientName, 300)
   const searchableName = normalize(ClientNameParser.removeNickname(debouncedClientName))
   const clientNickname = ClientNameParser.getNickname(debouncedClientName)
-  const { data: clients, isLoading: isLoadingClients } = getClientsService(
+  const { data: clients, isLoading: isLoadingClients } = useGetClientsService(
     `searchableName=${searchableName}${
       clientNickname ? `&nickname=${clientNickname ?? ''}` : ''
     }&limit=10`,
