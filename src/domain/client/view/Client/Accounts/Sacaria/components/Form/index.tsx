@@ -51,7 +51,7 @@ const SacariaFormView = ({ onSubmit, initialValues }: Props): JSX.Element => {
     >
       <Stack spacing={6}>
         <Grid gridTemplateColumns='repeat(auto-fit, minmax(150px, 1fr))' gap={2}>
-          <GridItem colSpan={[1, 2]}>
+          <GridItem colSpan={2}>
             <RadioGroup
               value={isDebit ? 'true' : 'false'}
               onChange={(value) => {
