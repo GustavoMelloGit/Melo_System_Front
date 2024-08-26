@@ -5,12 +5,12 @@ import Page from '../../../../../shared/components/Page'
 import ClientTransferForm from '../../../components/Client/Transfer/Form'
 import { formValuesToServiceValuesAdapter } from '../../../components/Client/Transfer/Form/formValuesToServiceValuesAdapter'
 import { type ClientTransferFormValues } from '../../../components/Client/Transfer/Form/types'
-import { transferBetweenClientsService } from '../../../service'
+import { ClientService } from '../../../service'
 
 export default function ClientTransferView(): JSX.Element {
   async function handleSubmitTransfer(values: ClientTransferFormValues): Promise<void> {
     const serviceData = formValuesToServiceValuesAdapter(values)
-    const { error } = await transferBetweenClientsService(serviceData)
+    const { error } = await ClientService.transferBetweenClients(serviceData)
     if (error) {
       toast.error(error)
       return
