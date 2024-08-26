@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 type Props = {
   data: ProductTransactionModel[]
 }
-export default function DownloadCheckingAccountTemplate({ data }: Props): JSX.Element {
+export default function DownloadProductAccountTemplate({ data }: Props): JSX.Element {
   return (
     <PDFContainer>
       <PDFPaddingElement />

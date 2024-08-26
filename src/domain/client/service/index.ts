@@ -1,3 +1,6 @@
+export * from './ClientService'
+export * from './ClientService.dto'
+export * from './ClientService.hooks'
 export * from './get'
 export * from './post'
 export * from './put'

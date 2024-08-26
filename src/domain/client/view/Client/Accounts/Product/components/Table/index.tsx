@@ -7,8 +7,9 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
+import DownloadAccountButton from '../../../../../../components/Client/DownloadAccountButton'
 import { type ProductTransactionModel } from '../../../../../../types/model/Transaction'
-import DownloadProductAccountButton from '../Template/DownloadButton'
+import DownloadProductAccountTemplate from '../Template/Template'
 import FertilizerAccountTableRow from './Row'
 
 type Props = CustomTableComponentProps<ProductTransactionModel[]> & {
@@ -38,7 +39,12 @@ export default function FertilizerAccountTable({
         searchForOptions,
         actions: (
           <>
-            <DownloadProductAccountButton />
+            <DownloadAccountButton
+              account='fertilizer'
+              template={(data) => {
+                return <DownloadProductAccountTemplate data={data} />
+              }}
+            />
             <IconButton
               as={Link}
               // @ts-expect-error this property does exist

@@ -5,8 +5,9 @@ import {
   type SearchForOption,
   type TableHeaderColumns,
 } from '../../../../../../../../shared/components/table/types'
+import DownloadAccountButton from '../../../../../../components/Client/DownloadAccountButton'
 import { type CurrencyTransactionModel } from '../../../../../../types/model/Transaction'
-import DownloadCheckingAccountButton from '../Template/DownloadButton'
+import DownloadCheckingAccountTemplate from '../Template/Template'
 import TransactionsListRow from './Row'
 import useTransactionTable from './useView'
 
@@ -40,7 +41,12 @@ export default function TransactionsTable({
         searchForOptions,
         actions: (
           <HStack spacing={0.5}>
-            <DownloadCheckingAccountButton />
+            <DownloadAccountButton
+              account='currency'
+              template={(data) => {
+                return <DownloadCheckingAccountTemplate data={data} />
+              }}
+            />
             <IconButton
               icon='fee'
               onClick={handleClickFee}
