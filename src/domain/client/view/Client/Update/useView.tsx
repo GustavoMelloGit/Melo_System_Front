@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { removeEmptyProperties } from '../../../../../lib/utils/utils'
 import { type ClientFormValues } from '../../../components/Client/Form/types'
-import { updateClientService, useGetClientService } from '../../../service'
+import { ClientService, useGetClientService } from '../../../service'
 
 export default function useUpdateClientView(): UseUpdateClientView {
   const { uuid } = useParams()
@@ -16,7 +16,7 @@ export default function useUpdateClientView(): UseUpdateClientView {
       return
     }
     const cleanValues = removeEmptyProperties(values) as ClientFormValues
-    const { error } = await updateClientService(uuid, cleanValues)
+    const { error } = await ClientService.updateClient(uuid, cleanValues)
     if (error) {
       toast.error(error)
       return
