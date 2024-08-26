@@ -20,7 +20,8 @@
     "react/display-name": "off",
     "@typescript-eslint/consistent-type-assertions": "off",
     "no-new": "off",
-    "@typescript-eslint/prefer-nullish-coalescing": "warn"
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/no-extraneous-class": "off"
   },
   "ignorePatterns": ["cypress"],
   "parser": "@typescript-eslint/parser",
