@@ -61,6 +61,8 @@ const validationErrors = {
   costIsInvalid: 'Por favor, informe um custo válido',
   saleIsRequired: 'Por favor, informe a venda',
   saleIsInvalid: 'Por favor, informe uma venda válida',
+  fieldIsRequired: 'Campo obrigatório',
+  endDateShouldBeAfterStartDate: 'A data final deve ser posterior à data inicial',
 }
 
 export default validationErrors

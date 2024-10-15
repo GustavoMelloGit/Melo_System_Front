@@ -1,10 +1,11 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 import IconButton from '../../../../../shared/components/IconButton'
+import { useModal } from '../../../../../shared/hooks/useModal'
 import useRenderPDF from '../../../../../shared/hooks/useRenderPDF'
-import { type ClientAccount, type ResponseByClientAccount } from '../../../service'
-import { ClientService } from '../../../service/ClientService'
+import { ClientService, type ClientAccount, type ResponseByClientAccount } from '../../../service'
+import PickDateModal, { type PickDateFormValues } from './PickDateModal'
 
 type Props<T extends ClientAccount> = {
   account: T
@@ -15,26 +16,38 @@ export default function DownloadAccountButton<T extends ClientAccount>({
   template,
 }: Props<T>): JSX.Element {
   const { uuid } = useParams<'uuid'>()
-  const [isLoading, setIsLoading] = useState(false)
+  const openModal = useModal((state) => state.openModal)
+  const closeModal = useModal((state) => state.closeModal)
   const { render } = useRenderPDF()
 
-  const renderPDF = useCallback(async () => {
-    setIsLoading(true)
-    const { data, error } = await ClientService.getTransactionsFromClient(account, uuid ?? '')
-    setIsLoading(false)
-    if (error ?? !data) {
-      toast.error('Erro ao baixar o extrato')
-      return
-    }
-    await render(template(data))
-  }, [account, render, template, uuid])
+  const renderPDF = useCallback(
+    async ({ hasDateRange, ...dates }: PickDateFormValues) => {
+      const searchParams = new URLSearchParams()
+      if (hasDateRange) {
+        searchParams.append('startDate', dates.startDate)
+        searchParams.append('endDate', dates.endDate)
+      }
+      const { data, error } = await ClientService.getTransactionsFromClient(
+        account,
+        uuid ?? '',
+        searchParams.toString(),
+      )
+      if (error ?? !data) {
+        toast.error('Erro ao baixar o extrato')
+        return
+      }
+      await render(template(data))
+    },
+    [account, closeModal, render, template, uuid],
+  )
 
   return (
     <IconButton
       aria-label='Baixar extrato'
       icon='printer'
-      onClick={renderPDF}
-      isLoading={isLoading}
+      onClick={() => {
+        openModal(<PickDateModal onSubmit={renderPDF} />)
+      }}
     />
   )
 }
