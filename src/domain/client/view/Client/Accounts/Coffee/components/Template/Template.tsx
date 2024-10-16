@@ -1,29 +1,18 @@
-import { StyleSheet, Text, View } from '@react-pdf/renderer'
+import { Text, View } from '@react-pdf/renderer'
 import { dateToFormat } from '../../../../../../../../lib/utils/formatters'
 import { getNumberOfBags } from '../../../../../../../../lib/utils/getNumberOfBags'
 import PDFContainer from '../../../../../../../../shared/components/PDF/PDFContainer'
-import PDFPaddingElement from '../../../../../../../../shared/components/PDF/PDFPaddingElement'
 import PDFTable from '../../../../../../../../shared/components/PDF/PDFTable'
 import PDFTableHeader from '../../../../../../../../shared/components/PDF/PDFTableHeader'
 import PDFTableRow from '../../../../../../../../shared/components/PDF/PDFTableRow'
 import PDFTableRowItem from '../../../../../../../../shared/components/PDF/PDFTableRowItem'
-import { boldText } from '../../../../../../../../shared/components/PDF/styles'
 import {
   CoffeeBebidasLabel,
   type CoffeeTypes,
 } from '../../../../../../../coffee/types/model/coffee'
+import AccountTemplateHeader from '../../../../../../components/Client/Template/AccountTemplateHeader'
 import { type CoffeeTransactionModel } from '../../../../../../types/model/Transaction'
 import { getFullDescriptionFromCoffeeTransaction } from '../../utils/getFullDescriptionFromCoffeeTransaction'
-
-const styles = StyleSheet.create({
-  header: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-})
 
 type Props = {
   data: CoffeeTransactionModel[]
@@ -38,27 +27,7 @@ export default function DownloadCoffeeAccountTemplate({ data }: Props): JSX.Elem
 
   return (
     <PDFContainer>
-      <PDFPaddingElement />
-
-      <View style={styles.header}>
-        <Text
-          style={{
-            ...boldText,
-            fontSize: 16,
-          }}
-        >
-          Movimentações Conta Café
-        </Text>
-        <Text
-          style={{
-            fontSize: 10,
-          }}
-        >
-          {new Date().toLocaleString('pt-BR', {
-            timeZone: 'America/Sao_Paulo',
-          })}
-        </Text>
-      </View>
+      <AccountTemplateHeader title='Movimentações Conta Café' />
       <PDFTable>
         <PDFTableHeader>
           <PDFTableRowItem style={{ maxWidth: 60 }}>
