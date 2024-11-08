@@ -17,6 +17,7 @@ import {
   type Path,
   type RegisterOptions,
 } from 'react-hook-form'
+import { Currency } from '../../../../lib/utils/Currency'
 
 export type FormInputProps<TFormValues extends FieldValues> = {
   name: Path<TFormValues>
@@ -78,7 +79,7 @@ export default function RHFCurrencyInput<TFormValues extends Record<string, unkn
               rounded='xl'
               inputMode='numeric'
               fontWeight={500}
-              value={formatCurrency((+value * 100).toString())}
+              value={formatCurrency(String(Currency.currencyToCents(+value)))}
               onChange={async (event) => {
                 const { value } = event.target
                 const onlyNumbers = value.replace('.', '').replace(',', '').replace(/\D/g, '')
