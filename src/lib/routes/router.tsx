@@ -62,7 +62,10 @@ Sentry.init({
       createRoutesFromChildren,
       matchRoutes,
     }),
-    Sentry.replayIntegration(),
+    Sentry.replayIntegration({
+      maskAllText: false,
+      maskAllInputs: false,
+    }),
   ],
 
   // Set tracesSampleRate to 1.0 to capture 100%
