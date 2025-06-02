@@ -3,6 +3,7 @@ import { BiTransferAlt } from 'react-icons/bi'
 import { CiCoffeeBean } from 'react-icons/ci'
 import { FaSearchDollar } from 'react-icons/fa'
 import { GiCoffeeBeans } from 'react-icons/gi'
+import { MdMoneyOff } from 'react-icons/md'
 import { TbDatabaseDollar, TbShoppingCart } from 'react-icons/tb'
 import { Routes } from '../../../../lib/routes'
 import Page from '../../../../shared/components/Page'
@@ -69,6 +70,12 @@ export default function MetricsHubView(): JSX.Element {
             title='Credores e Devedores de Café - Saldo'
             subtitle='Consulte o saldo de café dos clientes.'
             url={Routes.credoresDevedoresCafeMetrics}
+          />
+          <MetricsHubOption
+            icon={<MdMoneyOff size={34} />}
+            title='Lista de Inadimplentes'
+            subtitle='Consulte os clientes inadimplentes.'
+            url={Routes.inadimplentesMetrics}
           />
         </Stack>
       </Container>

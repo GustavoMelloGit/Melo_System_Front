@@ -28,4 +28,5 @@ export const Routes = {
   credoresDevedoresMetrics: '/relatorios/credores-e-devedores',
   credoresDevedoresBebidaMetrics: '/relatorios/credores-devedores-cafe-bebida',
   credoresDevedoresCafeMetrics: '/relatorios/credores-devedores-cafe',
+  inadimplentesMetrics: '/relatorios/inadimplentes',
 } as const
