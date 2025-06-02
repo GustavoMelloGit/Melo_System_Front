@@ -18,7 +18,10 @@ export default function useBirthdayPopupView(): UseBirthdayPopupView {
   const manager = StorageManager<number>('birthday-popup')
 
   const todayBirthdays = data?.filter(isClientBirthdayToday)
-  const hasPopupBeenDisplayedToday = hasPopupAlreadyBeenDisplayedToday(manager.getValue())
+  const lastDisplayedDate = manager.getValue()
+  const hasPopupBeenDisplayedToday = lastDisplayedDate
+    ? hasPopupAlreadyBeenDisplayedToday(lastDisplayedDate)
+    : false
   const displayBirthdayPopup = !isLoading && !!todayBirthdays?.length && !hasPopupBeenDisplayedToday
 
   const closeModalHandler = useCallback(() => {
