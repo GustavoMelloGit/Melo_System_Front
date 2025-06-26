@@ -42,7 +42,7 @@ export type ClientModel = {
   nickname?: string
   balance: number
   personType: LegalPerson | NaturalPerson
-  address: Address
+  address: Address | null
   contact: ClientContact
   description?: string
 } & Timestamp

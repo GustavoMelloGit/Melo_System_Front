@@ -18,8 +18,8 @@ const SellFertilizer = ({ clientId }: Props): JSX.Element => {
         description: '',
         bags: 0,
         pricePerBag: 0,
-        brook: data?.address.brook ?? '',
-        complement: data?.address.complement ?? '',
+        brook: data?.address?.brook ?? '',
+        complement: data?.address?.complement ?? '',
         deliveryDate: new Date().toISOString().split('T')[0],
       }}
       onSubmit={async (values) => {

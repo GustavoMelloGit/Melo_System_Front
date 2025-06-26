@@ -68,8 +68,8 @@ export default function FertilizerDeliveryForm({ onSubmit, initialValues }: Prop
     if (clients.data.length === 1) {
       const [client] = clients.data
       const { address } = client
-      setValue('brook', address.brook ?? '')
-      setValue('complement', address.complement ?? '')
+      setValue('brook', address?.brook ?? '')
+      setValue('complement', address?.complement ?? '')
     }
   }, [clients, initialValues?.brook, initialValues?.complement, setValue])
 
