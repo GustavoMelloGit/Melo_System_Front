@@ -39,8 +39,8 @@ export default function usePickupForm({ initialValues }: Props): UsePickupForm {
     if (data.data.length === 1) {
       const [client] = data.data
       const { address } = client
-      form.setValue('brook', address.brook ?? '')
-      form.setValue('complement', address.complement ?? '')
+      form.setValue('brook', address?.brook ?? '')
+      form.setValue('complement', address?.complement ?? '')
     }
   }, [data, form, initialValues?.brook, initialValues?.complement])
 
