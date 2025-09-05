@@ -1,6 +1,5 @@
 import { usePDF } from '@react-pdf/renderer'
 import { useCallback, useEffect } from 'react'
-import { formatClientName } from '../../../../../lib/utils/formatters'
 import { normalize } from '../../../../../lib/utils/normalize'
 import { sortObjectProperties } from '../../../../../lib/utils/sortObjectProperties'
 import IconButton from '../../../../../shared/components/IconButton'
@@ -8,6 +7,7 @@ import { PickupEmitter } from '../../../events/pickup'
 import { useGetPickupOrdersService } from '../../../services/Pickup'
 import PickupPDFTemplate from './Template'
 import { type PickupPDFData } from './types'
+import { ClientNameParser } from '../../../../../lib/utils/ClientNameParser'
 
 export default function PickupPDFDownloadButton(): JSX.Element {
   const { data, isLoading, mutate } = useGetPickupOrdersService('status=inProgress&limit=10000')
@@ -21,8 +21,9 @@ export default function PickupPDFDownloadButton(): JSX.Element {
     const templateData: PickupPDFData = {}
     data.data.forEach((order) => {
       const formattedBrook = normalize(order.brook).toUpperCase()
+      const { name, nickname, code } = order.client
       const formattedOrder = {
-        client: formatClientName(order.client),
+        client: ClientNameParser.addCode(ClientNameParser.addNickname(name, nickname), code),
         address: order.complement,
         bags: order.bags,
         id: order.id,
