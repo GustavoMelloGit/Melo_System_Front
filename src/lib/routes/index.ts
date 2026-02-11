@@ -29,4 +29,5 @@ export const Routes = {
   credoresDevedoresBebidaMetrics: '/relatorios/credores-devedores-cafe-bebida',
   credoresDevedoresCafeMetrics: '/relatorios/credores-devedores-cafe',
   inadimplentesMetrics: '/relatorios/inadimplentes',
+  owingCurrencyWithPositiveCoffeeMetrics: '/relatorios/devendo-conta-corrente-saldo-cafe',
 } as const

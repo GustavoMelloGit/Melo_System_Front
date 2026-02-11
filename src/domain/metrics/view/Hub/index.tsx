@@ -77,6 +77,12 @@ export default function MetricsHubView(): JSX.Element {
             subtitle='Consulte os clientes inadimplentes.'
             url={Routes.inadimplentesMetrics}
           />
+          <MetricsHubOption
+            icon={<CiCoffeeBean size={34} />}
+            title='Devendo conta corrente com saldo café'
+            subtitle='Clientes devendo na conta corrente e com saldo positivo na conta café.'
+            url={Routes.owingCurrencyWithPositiveCoffeeMetrics}
+          />
         </Stack>
       </Container>
     </Page>
