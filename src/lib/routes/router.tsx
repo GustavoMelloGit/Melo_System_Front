@@ -15,6 +15,7 @@ import clientsRoutes from '../../domain/client/routes'
 import coffeeRoutes from '../../domain/coffee/routes'
 import NotFoundPage from '../../domain/error/view/404'
 import fertilizerRoutes from '../../domain/fertilizer/routes'
+import coffeeProofRoutes from '../../domain/coffeeProof/routes'
 import metricsRoutes from '../../domain/metrics/routes'
 import systemRoutes from '../../domain/system/routes'
 import PageLayout from '../../shared/components/layout'
@@ -38,6 +39,7 @@ export const protectedRoutes: RouteObject = {
     ...fertilizerRoutes,
     ...systemRoutes,
     ...metricsRoutes,
+    ...coffeeProofRoutes,
   ],
 }
 

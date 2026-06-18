@@ -30,4 +30,5 @@ export const Routes = {
   credoresDevedoresCafeMetrics: '/relatorios/credores-devedores-cafe',
   inadimplentesMetrics: '/relatorios/inadimplentes',
   owingCurrencyWithPositiveCoffeeMetrics: '/relatorios/devendo-conta-corrente-saldo-cafe',
+  coffeeProof: '/prova-cafe',
 } as const
