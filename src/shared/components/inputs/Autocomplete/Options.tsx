@@ -46,6 +46,7 @@ export default function OptionsBox({ onSelect, options, showOptions }: Props): J
           wordBreak='break-word'
           title={String(option.label)}
           textAlign='left'
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => {
             handleOnClick(option)
           }}

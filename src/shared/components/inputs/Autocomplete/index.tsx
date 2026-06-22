@@ -65,7 +65,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, Props>(
         value: option.value,
         label: option.label,
       })
-      if (handleChange) handleChange(String(option.value))
+      if (handleChange) handleChange(String(option.label))
     }
 
     useEffect(() => {
