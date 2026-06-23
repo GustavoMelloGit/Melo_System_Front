@@ -3,7 +3,7 @@ import { BiCake, BiUser } from 'react-icons/bi'
 import { BsTruck } from 'react-icons/bs'
 import { CgArrowsExchange } from 'react-icons/cg'
 import { HiOutlineDocumentReport } from 'react-icons/hi'
-import { MdOutlineMonitorWeight } from 'react-icons/md'
+import { MdOutlineLocalCafe, MdOutlineMonitorWeight } from 'react-icons/md'
 import { TbPlant, TbTruckLoading } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import useAuth from '../../../../../domain/auth/hooks/useAuth'
@@ -102,6 +102,17 @@ const listItem: Record<
       Boolean(
         permissions.find(
           (permission) => permission.method === 'GET' && permission.route.startsWith('/birthdays'),
+        ),
+      ),
+  },
+  [Routes.coffeeProof]: {
+    label: 'Prova de Café',
+    icon: <MdOutlineLocalCafe size={20} />,
+    hasPermission: (permissions) =>
+      Boolean(
+        permissions.find(
+          (permission) =>
+            permission.method === 'GET' && permission.route.startsWith('/coffee-proof'),
         ),
       ),
   },
