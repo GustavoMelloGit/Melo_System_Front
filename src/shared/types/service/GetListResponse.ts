@@ -3,4 +3,5 @@ export type GetListResponse<T> = {
   limit: number
   page: number
   total: number
+  totalBags?: number
 }

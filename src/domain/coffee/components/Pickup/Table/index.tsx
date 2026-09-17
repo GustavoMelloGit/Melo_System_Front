@@ -8,8 +8,9 @@ type Props = {
   data: PickupCoffeeModel[] | undefined
   isLoading: boolean
   total: number
+  totalBags: number
 }
-export default function PickupTable({ data, isLoading, total }: Props): JSX.Element {
+export default function PickupTable({ data, isLoading, total, totalBags }: Props): JSX.Element {
   const { onClickCheck, onClickUncheck, onClickUpdate, handleChangeStatus, currentStatus } =
     usePickupTableView()
   return (
@@ -36,6 +37,7 @@ export default function PickupTable({ data, isLoading, total }: Props): JSX.Elem
         data={data}
         isLoading={isLoading}
         totalPickups={total}
+        totalBags={totalBags}
         onClickUpdate={onClickUpdate}
         onClickCheck={onClickCheck}
         onClickUncheck={onClickUncheck}
