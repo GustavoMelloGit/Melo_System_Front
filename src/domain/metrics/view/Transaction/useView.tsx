@@ -19,10 +19,12 @@ export default function useTransactionMetricsView(): UseTransactionMetricsView {
     startDate: formatStartDate(initialDateInputValue),
     endDate: formatEndDate(initialDateInputValue),
   })
-  const { data: unsortedData, isLoading } = useGetTransactionMetrics(queryParam)
-  const data: GetTransactionMetricsResponse | undefined = unsortedData && {
-    ...unsortedData,
-    data: [...unsortedData.data].sort((a, b) => a.props.date - b.props.date),
+  const { data: rawData, isLoading } = useGetTransactionMetrics(queryParam)
+  const data: GetTransactionMetricsResponse | undefined = rawData && {
+    ...rawData,
+    data: rawData.data
+      .filter((transaction) => isWithinFilledDateRange(transaction.props.date, allSearchParams))
+      .sort((a, b) => a.props.date - b.props.date),
   }
 
   const handleSubmitFilters = (values: TransactionMetricsFilterOptions): void => {
@@ -59,4 +61,20 @@ type UseTransactionMetricsView = {
   isLoading: boolean
   defaultValues: TransactionMetricsFilterOptions
   handleSubmitFilters: (values: TransactionMetricsFilterOptions) => void
+}
+
+/**
+ * The API filters transactions by when they were recorded, not by the
+ * transaction's filled-in date, so a transaction filled with yesterday's
+ * date but recorded today can be returned for a "today" filter. Re-filter
+ * client-side by the actual filled-in date to match the selected range.
+ */
+function isWithinFilledDateRange(date: number, searchParams: Record<string, string>): boolean {
+  const { startDate, endDate } = searchParams
+  if (!startDate || !endDate) return true
+
+  const startTime = new Date(startDate).getTime()
+  const endTime = new Date(endDate).getTime()
+
+  return date >= startTime && date <= endTime
 }
