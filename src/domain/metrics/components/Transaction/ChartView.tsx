@@ -13,15 +13,13 @@ export default function ChartView({ data }: Props): JSX.Element {
       id: 'basic-bar',
     },
     xaxis: {
-      categories: data.data.map((transaction) => format(transaction.props.createdAt, 'dd/MM/yyyy')),
+      categories: data.data.map((transaction) => format(transaction.createdAt, 'dd/MM/yyyy')),
     },
   }
   const series: ApexAxisChartSeries | ApexNonAxisChartSeries = [
     {
       name: 'test',
-      data: data.data.map(
-        (transaction) => currency(transaction.props.type.value).divide(100).value,
-      ),
+      data: data.data.map((transaction) => currency(transaction.type.value).divide(100).value),
     },
   ]
   return <Chart options={options} series={series} />
