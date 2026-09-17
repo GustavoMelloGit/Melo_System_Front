@@ -68,20 +68,16 @@ export default function TransactionsMetricsTemplate({ data }: Props): JSX.Elemen
           {data.map((metric) => (
             <PDFTableRow key={metric.id} wrap={false}>
               <PDFTableRowItem>
-                <Text>{format(metric.props.date, 'dd/MM/yyyy')}</Text>
+                <Text>{format(metric.date, 'dd/MM/yyyy')}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{formatClientName(metric.props.client)}</Text>
+                <Text>{formatClientName(metric.client)}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>{labelByTransactionTypeName[metric.props.type.name]}</Text>
+                <Text>{labelByTransactionTypeName[metric.type.name]}</Text>
               </PDFTableRowItem>
               <PDFTableRowItem>
-                <Text>
-                  {formatterByTransactionTypeName[metric.props.type.name]?.(
-                    metric.props.type.value,
-                  )}
-                </Text>
+                <Text>{formatterByTransactionTypeName[metric.type.name]?.(metric.type.value)}</Text>
               </PDFTableRowItem>
             </PDFTableRow>
           ))}

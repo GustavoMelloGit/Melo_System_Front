@@ -2,11 +2,11 @@ import { type WithId } from '../../../shared/types/WithId'
 import { type ClientModel } from '../../client/types/model/Client'
 import { type AllTransactions } from '../../client/types/model/Transaction'
 
-export type TransactionMetrics = WithId<{
-  props: AllTransactions & {
+export type TransactionMetrics = WithId<
+  AllTransactions & {
     client: ClientModel
   }
-}>
+>
 
 export type GetTransactionMetricsResponse = {
   data: TransactionMetrics[]

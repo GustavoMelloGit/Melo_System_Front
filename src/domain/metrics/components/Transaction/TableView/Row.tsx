@@ -11,7 +11,7 @@ type Props = {
   metric: TransactionMetrics
 }
 export default function TransactionMetricsTableViewRow({ metric }: Props): JSX.Element {
-  const { client, date, type } = metric.props
+  const { client, date, type } = metric
   return (
     <Tr>
       <Td>{format(date, 'dd/MM/yyyy')}</Td>
