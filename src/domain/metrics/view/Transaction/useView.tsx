@@ -19,7 +19,11 @@ export default function useTransactionMetricsView(): UseTransactionMetricsView {
     startDate: formatStartDate(initialDateInputValue),
     endDate: formatEndDate(initialDateInputValue),
   })
-  const { data, isLoading } = useGetTransactionMetrics(queryParam)
+  const { data: unsortedData, isLoading } = useGetTransactionMetrics(queryParam)
+  const data: GetTransactionMetricsResponse | undefined = unsortedData && {
+    ...unsortedData,
+    data: [...unsortedData.data].sort((a, b) => a.props.date - b.props.date),
+  }
 
   const handleSubmitFilters = (values: TransactionMetricsFilterOptions): void => {
     const { endDate, startDate, type } = values
