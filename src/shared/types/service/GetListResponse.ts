@@ -1,7 +1,7 @@
-export type GetListResponse<T> = {
+export type GetListResponse<T, M = undefined> = {
   data: T
   limit: number
   page: number
   total: number
-  totalBags?: number
+  meta?: M
 }
