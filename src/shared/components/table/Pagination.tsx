@@ -22,6 +22,7 @@ import { type TablePaginationProps } from './types'
 export default function TablePagination({
   totalLength,
   showPagination = true,
+  summaryText,
 }: TablePaginationProps): JSX.Element {
   const bg = useColorModeValue('gray.200', 'gray.700')
   const { handleAddParam, getParam, handleRemoveParam } = useURLSearchParams()
@@ -63,6 +64,7 @@ export default function TablePagination({
     >
       <Show above='sm'>
         <Text>
+          {summaryText && `${summaryText} | `}
           {totalLength} {totalLength === 1 ? 'Item' : 'Items'}
         </Text>
       </Show>

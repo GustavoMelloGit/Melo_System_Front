@@ -6,7 +6,11 @@ import { type GetListResponse } from '../../../../shared/types/service/GetListRe
 import { type SWRServiceResponse } from '../../../../shared/types/service/SWRServiceResponse'
 import { PickupEmitter } from '../../events/pickup'
 import { useGetPickupOrdersService } from '../../services/Pickup'
-import { PickupCoffeeStatuses, type PickupCoffeeModel } from '../../types/model/pickup'
+import {
+  PickupCoffeeStatuses,
+  type PickupCoffeeModel,
+  type PickupOrdersMeta,
+} from '../../types/model/pickup'
 
 const initialStatus = PickupCoffeeStatuses.PENDING
 
@@ -54,5 +58,5 @@ export default function usePickupView(): UsePickupView {
 
 type UsePickupView = {
   handleOpenForm: () => Promise<void>
-  order: SWRServiceResponse<GetListResponse<PickupCoffeeModel[]>>
+  order: SWRServiceResponse<GetListResponse<PickupCoffeeModel[], PickupOrdersMeta>>
 }

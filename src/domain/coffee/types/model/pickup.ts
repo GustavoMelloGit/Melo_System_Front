@@ -12,6 +12,10 @@ export type PickupCoffeeModel = {
   updatedAt: number
 }
 
+export type PickupOrdersMeta = {
+  totalBags: number
+}
+
 export type PickupFormValues = {
   clientId: string
   clientName: string

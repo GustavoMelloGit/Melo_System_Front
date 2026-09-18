@@ -31,6 +31,7 @@ export default function ClientPickupView(): JSX.Element {
         data={pickupData?.data}
         isLoading={isLoading}
         totalPickups={pickupData?.total ?? 0}
+        totalBags={pickupData?.meta?.totalBags ?? 0}
         onClickCheck={onClickCheck}
         onClickUncheck={onClickUncheck}
         onClickUpdate={onClickUpdate}

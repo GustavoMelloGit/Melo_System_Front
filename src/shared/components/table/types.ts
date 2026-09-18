@@ -35,6 +35,7 @@ export type TableHeaderProps = {
 export type TablePaginationProps = {
   totalLength: number
   showPagination?: boolean
+  summaryText?: string
 }
 
 // -------------------------------- Filter Properties --------------------------------

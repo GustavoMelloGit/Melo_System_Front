@@ -37,6 +37,7 @@ export default function CoffeePickup(): JSX.Element {
         data={order.data?.data}
         isLoading={order.isLoading}
         total={order.data?.total ?? 0}
+        totalBags={order.data?.meta?.totalBags ?? 0}
       />
     </Page>
   )

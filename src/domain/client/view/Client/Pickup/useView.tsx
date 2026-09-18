@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { PickupEmitter } from '../../../../coffee/events/pickup'
 import { useGetPickupOrdersService } from '../../../../coffee/services/Pickup'
-import { type PickupCoffeeModel } from '../../../../coffee/types/model/pickup'
+import {
+  type PickupCoffeeModel,
+  type PickupOrdersMeta,
+} from '../../../../coffee/types/model/pickup'
 import { useGetClientService } from '../../../service'
 import { type ClientModel } from '../../../types/model/Client'
 
@@ -43,7 +46,7 @@ export default function useClientPickupView(): UseClientPickupView {
 }
 
 type UseClientPickupView = {
-  pickupData: GetListResponse<PickupCoffeeModel[]> | undefined
+  pickupData: GetListResponse<PickupCoffeeModel[], PickupOrdersMeta> | undefined
   isLoading: boolean
   client: ClientModel | undefined
   clientId: string

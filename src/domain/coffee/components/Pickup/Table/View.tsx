@@ -10,6 +10,7 @@ type Props = {
   data: PickupCoffeeModel[] | undefined
   isLoading: boolean
   totalPickups: number
+  totalBags: number
   onClickUpdate: (pickup: PickupCoffeeModel) => Promise<void>
   onClickCheck: (pickup: PickupCoffeeModel) => Promise<void>
   onClickUncheck: (pickup: PickupCoffeeModel) => Promise<void>
@@ -18,6 +19,7 @@ export default function PickupTableView({
   data,
   isLoading,
   totalPickups,
+  totalBags,
   onClickUpdate,
   onClickCheck,
   onClickUncheck,
@@ -34,6 +36,7 @@ export default function PickupTableView({
       }}
       pagination={{
         totalLength: totalPickups,
+        summaryText: `Total: ${totalBags} sacos`,
       }}
       table={{
         'data-cy': 'pickupCoffee-table',
