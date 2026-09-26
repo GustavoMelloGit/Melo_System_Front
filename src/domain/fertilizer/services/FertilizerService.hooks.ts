@@ -1,7 +1,7 @@
 import useFetch, { type FetchConfig } from '../../../shared/hooks/useFetch'
 import { type GetListResponse } from '../../../shared/types/service/GetListResponse'
 import { type SWRServiceResponse } from '../../../shared/types/service/SWRServiceResponse'
-import { type FertilizerDeliveryModel } from '../types/model/Delivery'
+import { type FertilizerDeliveryMeta, type FertilizerDeliveryModel } from '../types/model/Delivery'
 import { type FertilizerModel } from '../types/model/Fertilizer'
 
 export function useGetFertilizersService(
@@ -18,8 +18,8 @@ export function useGetFertilizersService(
 
 export function useGetFertilizersDeliveryService(
   params?: string,
-): SWRServiceResponse<GetListResponse<FertilizerDeliveryModel[]>> {
-  const response = useFetch<GetListResponse<FertilizerDeliveryModel[]>>(
+): SWRServiceResponse<GetListResponse<FertilizerDeliveryModel[], FertilizerDeliveryMeta>> {
+  const response = useFetch<GetListResponse<FertilizerDeliveryModel[], FertilizerDeliveryMeta>>(
     `/fertilizers/delivery?${params ?? ''}`,
   )
 

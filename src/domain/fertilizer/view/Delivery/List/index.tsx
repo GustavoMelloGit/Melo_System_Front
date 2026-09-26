@@ -18,6 +18,7 @@ export default function FertilizerDeliveryView(): JSX.Element {
     handleCheckPickup,
     handleUncheckPickup,
     handleOpenCreateDeliveryForm,
+    handleOpenTotalsModal,
   } = useFertilizerDeliveryView()
 
   return (
@@ -31,6 +32,15 @@ export default function FertilizerDeliveryView(): JSX.Element {
         ]}
         actions={
           <Flex gap={3}>
+            <IconButton
+              aria-label='Ver total por adubo'
+              icon='list'
+              colorScheme='blue'
+              variant='outline'
+              data-cy='fertilizer-delivery-totals-button'
+              title='Ver total por adubo'
+              onClick={handleOpenTotalsModal}
+            />
             <FertilizerDeliveryPDFDownloadButton />
             <IconButton
               aria-label='Adicionar café a buscar'

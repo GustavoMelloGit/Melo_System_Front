@@ -12,6 +12,16 @@ export type FertilizerDeliveryModel = {
   date: number
 }
 
+export type FertilizerDeliveryTotal = {
+  fertilizerId: string
+  name: string
+  amount: number
+}
+
+export type FertilizerDeliveryMeta = {
+  totalsByFertilizer: FertilizerDeliveryTotal[]
+}
+
 export type FertilizerDeliveryFormValues = {
   clientName: string
   clientId: string

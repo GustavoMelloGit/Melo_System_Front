@@ -7,6 +7,7 @@ import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
 import { FertilizerService, useGetFertilizersDeliveryService } from '../../../services'
 import {
   FertilizerDeliveryStatuses,
+  type FertilizerDeliveryMeta,
   type FertilizerDeliveryModel,
 } from '../../../types/model/Delivery'
 
@@ -57,6 +58,11 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
     openModal(<CreateFertilizerDelivery refetch={async () => mutate()} />)
   }
 
+  async function handleOpenTotalsModal(): Promise<void> {
+    const FertilizerDeliveryTotals = (await import('../../../components/Delivery/Totals')).default
+    openModal(<FertilizerDeliveryTotals totals={data?.meta?.totalsByFertilizer} />)
+  }
+
   return {
     currentStatus,
     handleChangeStatus,
@@ -66,16 +72,18 @@ export default function useFertilizerDeliveryView(): UseFertilizerDeliveryView {
     handleCheckPickup,
     handleUncheckPickup,
     handleOpenCreateDeliveryForm,
+    handleOpenTotalsModal,
   }
 }
 
 type UseFertilizerDeliveryView = {
   currentStatus: FertilizerDeliveryStatuses | null
   handleChangeStatus: (status: FertilizerDeliveryStatuses) => void
-  data: GetListResponse<FertilizerDeliveryModel[]> | undefined
+  data: GetListResponse<FertilizerDeliveryModel[], FertilizerDeliveryMeta> | undefined
   isLoading: boolean
   handleOpenUpdateForm: (pickup: FertilizerDeliveryModel) => Promise<void>
   handleCheckPickup: (pickup: FertilizerDeliveryModel) => Promise<void>
   handleUncheckPickup: (pickup: FertilizerDeliveryModel) => Promise<void>
   handleOpenCreateDeliveryForm: () => Promise<void>
+  handleOpenTotalsModal: () => Promise<void>
 }
