@@ -1,6 +1,6 @@
 import { IconButton as ChakraIconButton, type IconButtonProps } from '@chakra-ui/react'
 import { cloneElement, forwardRef, useState, type MouseEvent } from 'react'
-import { AiOutlineLock, AiOutlinePrinter } from 'react-icons/ai'
+import { AiOutlineLock, AiOutlinePrinter, AiOutlineUnorderedList } from 'react-icons/ai'
 import { BiBlock, BiDollarCircle, BiFilter, BiSearchAlt } from 'react-icons/bi'
 import { BsCheckCircle, BsPeople, BsTrash, BsZoomIn } from 'react-icons/bs'
 import { HiArrowTopRightOnSquare } from 'react-icons/hi2'
@@ -29,6 +29,7 @@ const buttonIcons = {
   people: <BsPeople size={20} />,
   search: <BiSearchAlt size={24} />,
   close: <IoClose size={24} />,
+  list: <AiOutlineUnorderedList size={22} />,
 } as const
 
 const shouldConfirmAction: Array<keyof typeof buttonIcons> = ['remove']

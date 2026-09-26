@@ -6,15 +6,18 @@ import IconButton from '../../../../../shared/components/IconButton'
 import { type GetListResponse } from '../../../../../shared/types/service/GetListResponse'
 import { DeliveryEmitter } from '../../../events/DeliveryEmitter'
 import { useGetFertilizersDeliveryService } from '../../../services'
-import { type FertilizerDeliveryModel } from '../../../types/model/Delivery'
+import {
+  type FertilizerDeliveryMeta,
+  type FertilizerDeliveryModel,
+} from '../../../types/model/Delivery'
 import PickupPDFTemplate from './Template'
 import { type FertilizerDeliveryPDFData, type FertilizerDeliveryPDFItem } from './types'
 
 const today = new Date(`${new Date().toISOString().split('T')[0]}T23:59:59`).getTime()
 
 function parseData(
-  data: GetListResponse<FertilizerDeliveryModel[]> | undefined,
-): GetListResponse<FertilizerDeliveryModel[]> {
+  data: GetListResponse<FertilizerDeliveryModel[], FertilizerDeliveryMeta> | undefined,
+): GetListResponse<FertilizerDeliveryModel[], FertilizerDeliveryMeta> {
   if (!data) {
     return {
       data: [],
