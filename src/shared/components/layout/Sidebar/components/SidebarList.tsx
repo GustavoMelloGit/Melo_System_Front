@@ -4,12 +4,14 @@ import { BsTruck } from 'react-icons/bs'
 import { CgArrowsExchange } from 'react-icons/cg'
 import { HiOutlineDocumentReport } from 'react-icons/hi'
 import { MdOutlineMonitorWeight } from 'react-icons/md'
-import { TbPlant, TbTruckLoading } from 'react-icons/tb'
+import { TbCalculator, TbPlant, TbTruckLoading } from 'react-icons/tb'
 import { useLocation } from 'react-router-dom'
 import useAuth from '../../../../../domain/auth/hooks/useAuth'
 import { type UserPermission } from '../../../../../domain/auth/types/user'
 import { Routes } from '../../../../../lib/routes'
 import { protectedRoutes } from '../../../../../lib/routes/router'
+import { useModal } from '../../../../hooks/useModal'
+import InterestCalculator from '../../../InterestCalculator'
 import SidebarListItem from './SidebarListItem'
 
 const listItem: Record<
@@ -115,6 +117,7 @@ export default function SidebarList(): JSX.Element {
   const { user } = useAuth()
   const currentPathname = useLocation().pathname
   const basePath = currentPathname.split('/')[1]
+  const openModal = useModal((state) => state.openModal)
 
   return (
     <Box as='nav' flexGrow={1} overflowY='auto'>
@@ -143,6 +146,13 @@ export default function SidebarList(): JSX.Element {
             />
           )
         })}
+        <SidebarListItem
+          label='Calculadora de Juros'
+          icon={<TbCalculator size={20} />}
+          onClick={() => {
+            openModal(<InterestCalculator />)
+          }}
+        />
       </VStack>
     </Box>
   )
