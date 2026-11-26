@@ -19,6 +19,7 @@ import {
 import { BiTrash } from 'react-icons/bi'
 import { shallow } from 'zustand/shallow'
 import {
+  HISTORY_LIMIT,
   type InterestCalculation,
   useInterestCalculatorStore,
 } from '../../../lib/stores/InterestCalculatorStore'
@@ -48,7 +49,13 @@ export default function InterestCalculatorHistoryDrawer({
       <DrawerOverlay />
       <DrawerContent data-cy='interest-calculator-history'>
         <DrawerCloseButton />
-        <DrawerHeader>Histórico de cálculos</DrawerHeader>
+        <DrawerHeader>
+          Histórico de cálculos
+          <Text fontSize='sm' fontWeight={400} color='gray.500' mt={1}>
+            Somente os últimos {HISTORY_LIMIT} cálculos ficam salvos neste navegador. Ao passar
+            desse limite, os mais antigos são removidos automaticamente.
+          </Text>
+        </DrawerHeader>
         <DrawerBody>
           {history.length ? (
             <Stack spacing={3}>

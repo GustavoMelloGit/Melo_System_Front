@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
-const HISTORY_LIMIT = 20
+export const HISTORY_LIMIT = 20
 
 export type InterestCalculatorFormValues = {
   /** Value in currency (R$), not in cents */
