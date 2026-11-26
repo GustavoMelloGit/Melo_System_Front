@@ -23,7 +23,7 @@
     "@hookform/resolvers": "^2.9.10",
     "@react-pdf/renderer": "^3.1.12",
     "@sentry/react": "^8.9.2",
-    "@sentry/vite-plugin": "^2.10.2",
+    "@sentry/vite-plugin": "^11.19.0",
     "apexcharts": "^3.41.0",
     "axios": "^1.2.6",
     "change-case": "^5.4.0",
