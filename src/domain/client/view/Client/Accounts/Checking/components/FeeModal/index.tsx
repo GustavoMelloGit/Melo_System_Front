@@ -31,13 +31,17 @@ import { CheckingAccountEmitter } from '../../events/CheckingAccountEmitter'
 import { useFeeStore } from '../../stores/useFeeStore'
 import FeeModalForm, { initialValues } from './Form'
 
+function getDaysBetween(date: number, targetDate: number): number {
+  return Math.floor((targetDate - date) / (1000 * 3600 * 24))
+}
+
 function calculateInterest(
   date: number,
   amount: number,
   interestRate: number,
   targetDate: number,
 ): number {
-  const days = Math.floor((targetDate - date) / (1000 * 3600 * 24))
+  const days = getDaysBetween(date, targetDate)
   const dailyInterestRate = convertMonthlyInterestRateToDaily(interestRate)
   return calculateCompoundInterest(days, amount, dailyInterestRate)
 }
@@ -73,6 +77,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
     handleCloseModal()
   }
 
+  const targetDate = new Date(interestParams.date).getTime()
   let totalWithoutInterest = 0
   let totalAmountWithInterest = 0
   let totalOfInterest = 0
@@ -81,7 +86,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
       transaction.date,
       transaction.amount,
       interestParams.interestRate,
-      new Date(interestParams.date).getTime(),
+      targetDate,
     )
     totalWithoutInterest = Math.floor(transaction.amount + totalWithoutInterest)
     totalAmountWithInterest = Math.floor(interest + totalAmountWithInterest)
@@ -113,6 +118,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
                   <Thead>
                     <Tr>
                       <Th>Data</Th>
+                      <Th>Dias</Th>
                       <Th>Valor</Th>
                       <Th>Juros</Th>
                       <Th>Total</Th>
@@ -122,6 +128,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
                     {selectedTransactions.map((transaction, index) => (
                       <Tr key={transaction.id}>
                         <Td>{dateToFormat(transaction.date, 'dd/MM/yyyy')}</Td>
+                        <Td>{getDaysBetween(transaction.date, targetDate)}</Td>
                         <Td color={getColorByValue(transaction.amount)}>
                           {formatCurrency(transaction.amount)}
                         </Td>
@@ -137,6 +144,7 @@ export default function FeeModal({ clientId }: Props): JSX.Element {
                   <Tfoot>
                     <Tr fontWeight={700}>
                       <Th fontSize='md'>Total</Th>
+                      <Th />
                       <Th fontSize='md' color={getColorByValue(totalWithoutInterest)}>
                         {formatCurrency(totalWithoutInterest)}
                       </Th>
