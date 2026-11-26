@@ -13,7 +13,6 @@ dist-ssr
 *.local
 yarn.lock
 cypress.env.json
-package-lock.json
 yarn.lock
 
 

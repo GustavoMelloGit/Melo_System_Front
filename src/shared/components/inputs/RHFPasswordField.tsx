@@ -37,7 +37,7 @@ const RHFPasswordField = <TFormValues extends Record<string, unknown>>({
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false)
-  const errorMessages = get(errors, name)
+  const errorMessages: FieldError | undefined = get(errors, name)
   const hasError = !!(errors && errorMessages)
 
   const handleTogglePasswordVisibility = (): void => {

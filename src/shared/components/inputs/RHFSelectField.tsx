@@ -40,7 +40,7 @@ export default function RHFSelectField<TFormValues extends Record<string, unknow
   options,
   ...rest
 }: RHFSelectFieldProps<TFormValues>): JSX.Element {
-  const errorMessages = get(errors, name)
+  const errorMessages: FieldError | undefined = get(errors, name)
   const hasError = !!(errors && errorMessages)
   return (
     <FormControl isInvalid={hasError}>
