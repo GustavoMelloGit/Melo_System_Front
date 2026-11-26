@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import {
   get,
+  type FieldError,
   type FieldValues,
   type Path,
   type RegisterOptions,
@@ -39,7 +40,7 @@ const RHFField = <TFormValues extends Record<string, unknown>>({
   inputGroupProps,
   ...rest
 }: FormInputProps<TFormValues>): JSX.Element => {
-  const errorMessages = get(errors, name)
+  const errorMessages: FieldError | undefined = get(errors, name)
   const hasError = !!(errors && errorMessages)
   return (
     <FormControl isInvalid={hasError}>

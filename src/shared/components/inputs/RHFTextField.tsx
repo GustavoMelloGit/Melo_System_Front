@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import {
   get,
+  type FieldError,
   type FieldValues,
   type Path,
   type RegisterOptions,
@@ -33,7 +34,7 @@ export default function RHFTextField<TFormValues extends Record<string, unknown>
   label,
   ...rest
 }: RHFTextFieldProps<TFormValues>): JSX.Element {
-  const errorMessages = get(errors, name)
+  const errorMessages: FieldError | undefined = get(errors, name)
   const hasError = !!(errors && errorMessages)
   return (
     <FormControl isInvalid={hasError}>
